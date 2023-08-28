@@ -4,27 +4,27 @@ const Testimonial = () => {
   const testimonialsData = [
     {
       id: "1",
-      name: "Albert Cole",
-      role: "Designer",
+      name: "Rajesh Kumar",
+      role: "Delivery Rider",
       imageSrc: "/images/testimonial/1.jpg",
       quote:
-        "I believe in lifelong learning and Voiture is a great place to learn from experts. I've learned a lot and recommend it to all my friends. Programs are available in fall, spring, and summer semesters. Many fall and spring programs offer similar shorter programs in the summer, and some may be combined for a full academic year.",
+      "Over 30 years and Perniagaan Motor Kekal still sets the gold standard for motorcycle shops in Johor Bahru. Top-notch service every time!",
     },
     {
       id: "2",
-      name: "Alison Dawn",
-      role: "WordPress Developer",
+      name: "Chen Siew Fong",
+      role: "Entrepreneur",
       imageSrc: "/images/testimonial/2.jpg",
       quote:
-        "I believe in lifelong learning and Voiture is a great place to learn from experts. I've learned a lot and recommend it to all my friends. Programs are available in fall, spring, and summer semesters. Many fall and spring programs offer similar shorter programs in the summer, and some may be combined for a full academic year.",
+      "From rare parts to expert advice, Motor Kekal in Johor Bahru is unmatched. They've been my go-to for years!",
     },
     {
       id: "3",
-      name: "Daniel Parker",
-      role: "Front-end Developer",
+      name: "Sharifah Amina",
+      role: "Outdoor Enthusiast",
       imageSrc: "/images/testimonial/3.jpg",
       quote:
-        "I believe in lifelong learning and Voiture is a great place to learn from experts. I've learned a lot and recommend it to all my friends. Programs are available in fall, spring, and summer semesters. Many fall and spring programs offer similar shorter programs in the summer, and some may be combined for a full academic year.",
+      "Perniagaan Motor Kekal is a treasure in Johor Bahru. Their dedication and passion for bikes are evident in every service. Cheers to 30 years and more!",
     },
   ];
 

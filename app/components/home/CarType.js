@@ -4,40 +4,33 @@ import Link from "next/link";
 const CarType = () => {
   const listings = [
     {
-      imgSrc: "/images/listing/browse1.jpg",
-      title: "Compact",
-      numListings: "59 Listings",
-      colClasses: "col-md-6",
+      imgSrc: "/images/listing/YamahaLogo.png",
+      title: "Yamaha",
+      numListings: "12 Listings",
+      colClasses: "col-md-6 col-lg-4",
       delay: "100",
     },
     {
-      imgSrc: "/images/listing/browse2.jpg",
-      title: "Sedan",
-      numListings: "8912 Listings",
+      imgSrc: "/images/listing/HondaLogo.png",
+      title: "Honda",
+      numListings: "59 Listings",
       colClasses: "col-md-6",
       delay: "200",
     },
     {
-      imgSrc: "/images/listing/browse3.jpg",
-      title: "SUV",
-      numListings: "775 Listings",
-      colClasses: "col-md-6 col-lg-4",
+      imgSrc: "/images/listing/suzukiLogo.png",
+      title: "Suzuki",
+      numListings: "8912 Listings",
+      colClasses: "col-md-6",
       delay: "300",
     },
     {
-      imgSrc: "/images/listing/browse4.jpg",
-      title: "Convertible",
-      numListings: "12 Listings",
+      imgSrc: "/images/listing/SYMLogo.png",
+      title: "SUV",
+      numListings: "775 Listings",
       colClasses: "col-md-6 col-lg-4",
       delay: "400",
-    },
-    {
-      imgSrc: "/images/listing/browse5.jpg",
-      title: "Coupe",
-      numListings: "45 Listings",
-      colClasses: "col-md-6 col-lg-4",
-      delay: "500",
-    },
+    }
   ];
 
   return (
@@ -55,9 +48,7 @@ const CarType = () => {
                 width={450}
                 height={303}
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
+                  objectFit: "contain",
                 }}
                 priority
                 src={listing.imgSrc}
