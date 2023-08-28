@@ -2,9 +2,9 @@ const saleBanners = [
   {
     id: 1,
     icon: "flaticon-car-1",
-    title: "Are You looking for a car?",
+    title: "Looking for a motorbike?",
     description:
-      "Search your car in our Inventory and request a quote on the vehicle of your choosing.",
+      "Search your motorbike in our Inventory and request a quote on the vehicle of your choosing.",
     dataAosDelay: "100",
     className: "col-md-6 col-xxl-5",
     iconClassName: "icon me-2 wobble-horizontal",
@@ -15,9 +15,9 @@ const saleBanners = [
   {
     id: 2,
     icon: "flaticon-car-2",
-    title: "Want to drive so long?",
+    title: "Want to ride so long?",
     description:
-      "Request search your car in our Inventory and a quote on the vehicle of your choosing.",
+      "Request search your motorbike in our Inventory and a quote on the vehicle of your choosing.",
     dataAosDelay: "200",
     className: "col-md-6 col-xxl-5 offset-xxl-2",
     styleClassName: "iconbox_home2 style2 text-center text-md-end",

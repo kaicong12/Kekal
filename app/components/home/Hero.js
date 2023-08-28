@@ -6,16 +6,23 @@ import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import styles from './Hero.module.css';
 
 const Hero = () => {
   const carSlides = [
     {
+      // bright background banner
       image: "/images/shop/storefront.jpg",
-      title: "Perniagaan Motor Kekal",
+      title: "YOUR ONE STOP MOTORCYCLE DEALER IN JOHOR BAHRU",
+      className: styles.titleBrightBg,
+      subtitleClass: styles.subtitleBright,
     },
     {
+      // dark background banner
       image: "/images/home/repairWorker.jpg",
-      title: "Years of Experience",
+      title: "CELEBRATING 30 YEARS OF RIDING EXCELLENCE",
+      className: styles.titleDarkBg,
+      subtitleClass: styles.subtitleDark
     },
   ];
 
@@ -44,11 +51,11 @@ const Hero = () => {
                 <div className="container">
                   <div className="row home-content-home2-style">
                     <div className="col-lg-12 p0">
-                      <h2 className="banner-title">
+                      <h2 className={slide.className}>
                         {slide.title}
                         <br />
                       </h2>
-                      <small>Your one stop authorised motorcycle dealer in Johor Bahru</small>
+                      <h3 className={slide.subtitleClass}>Ride with Confidence, Ride with Us. Serving Johor Bahru's Riders for Over 30 Years</h3>
                       <h3 className="banner_top_title text-thm d-flex align-items-baseline">
                         <span className="aminated-object1">
                           <Image

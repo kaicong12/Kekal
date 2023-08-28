@@ -3,12 +3,12 @@ const FooterItems = () => {
         <div className="row">
             <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
                 <div className="footer_about_widget home2">
-                    <h5 className="title">OFFICE</h5>
+                    <h5 className="title">SHOWROOM</h5>
                     <p>
-                        Germany —<br />
-                        329 Queensberry Street,
+                        5, Jalan Seroja, 49<br />
+                        Taman Johor Jaya,
                         <br />
-                        North Melbourne VIC 3051
+                        81100 Johor Bahru, Johor
                     </p>
                 </div>
             </div>
@@ -17,8 +17,8 @@ const FooterItems = () => {
             <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
                 <div className="footer_contact_widget home2">
                     <h5 className="title">NEED HELP</h5>
-                    <div className="footer_phone">+1 670 936 46 70</div>
-                    <p>hello@voiture.com</p>
+                    <div className="footer_phone">+60127126128</div>
+                    <p>motorkekal@gmail.com</p>
                 </div>
             </div>
             {/* End .col */}
@@ -27,11 +27,9 @@ const FooterItems = () => {
                 <div className="footer_contact_widget home2">
                     <h5 className="title">OPENING HOURS</h5>
                     <p>
-                        Monday – Friday: 09:00AM – 09:00PM
+                        Monday – Sunday: 09:00AM – 07:00PM
                         <br />
-                        Saturday: 09:00AM – 07:00PM
-                        <br />
-                        Sunday: Closed
+                        Friday: Closed
                     </p>
                 </div>
             </div>

@@ -67,13 +67,13 @@ const PopularListings = () => {
                   <div className="thmb_cntnt2">
                     <ul className="mb0">
                       <li className="list-inline-item">
-                        <a className="text-white" href="@/app/components/home-2/PopularListings#">
+                        <a className="text-white" href="@/app/components/home/PopularListings#">
                           <span className="flaticon-photo-camera mr3" />{" "}
                           {listing.photosCount}
                         </a>
                       </li>
                       <li className="list-inline-item">
-                        <a className="text-white" href="@/app/components/home-2/PopularListings#">
+                        <a className="text-white" href="@/app/components/home/PopularListings#">
                           <span className="flaticon-play-button mr3" />{" "}
                           {listing.videosCount}
                         </a>
@@ -83,12 +83,12 @@ const PopularListings = () => {
                   <div className="thmb_cntnt3">
                     <ul className="mb0">
                       <li className="list-inline-item">
-                        <a href="@/app/components/home-2/PopularListings#">
+                        <a href="@/app/components/home/PopularListings#">
                           <span className="flaticon-shuffle-arrows" />
                         </a>
                       </li>
                       <li className="list-inline-item">
-                        <a href="@/app/components/home-2/PopularListings#">
+                        <a href="@/app/components/home/PopularListings#">
                           <span className="flaticon-heart" />
                         </a>
                       </li>
@@ -105,13 +105,13 @@ const PopularListings = () => {
                       <ul className="mb0">
                         {[...Array(5)].map((_, index) => (
                           <li key={index} className="list-inline-item">
-                            <a href="@/app/components/home-2/PopularListings#">
+                            <a href="@/app/components/home/PopularListings#">
                               <i className="fa fa-star" />
                             </a>
                           </li>
                         ))}
                         <li className="list-inline-item">
-                          <a href="@/app/components/home-2/PopularListings#">{listing.rating}</a>
+                          <a href="@/app/components/home/PopularListings#">{listing.rating}</a>
                         </li>
                         <li className="list-inline-item">
                           ({listing.reviewsCount} reviews)

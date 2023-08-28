@@ -119,7 +119,7 @@ const Home = () => {
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="main-title text-center">
-                <h2>Browse By Type</h2>
+                <h2>Browse By Brand</h2>
               </div>
             </div>
           </div>
@@ -134,34 +134,34 @@ const Home = () => {
       {/* End Our CarType  */}
 
       {/* Our Popular Listing */}
-      <section className="popular-listing pb80 pt0  overflow-hidden">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 offset-lg-3">
-              <div className="main-title text-center">
-                <h2>Popular Listings</h2>
-              </div>
-            </div>
-          </div>
-          {/* End .row */}
+      {/*<section className="popular-listing pb80 pt0  overflow-hidden">*/}
+      {/*  <div className="container">*/}
+      {/*    <div className="row">*/}
+      {/*      <div className="col-lg-6 offset-lg-3">*/}
+      {/*        <div className="main-title text-center">*/}
+      {/*          <h2>Popular Listings</h2>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*    /!* End .row *!/*/}
 
-          <div className="row">
-            <div className="col-lg-12" data-aos="fade" data-aos-delay="100">
-              <div className="home1_popular_listing home2_style">
-                <div className="listing_item_4grid_slider dots_none">
-                  <PopularListings />
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* End .row */}
-        </div>
-        {/* End .container */}
-      </section>
+      {/*    <div className="row">*/}
+      {/*      <div className="col-lg-12" data-aos="fade" data-aos-delay="100">*/}
+      {/*        <div className="home1_popular_listing home2_style">*/}
+      {/*          <div className="listing_item_4grid_slider dots_none">*/}
+      {/*            <PopularListings />*/}
+      {/*          </div>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*    /!* End .row *!/*/}
+      {/*  </div>*/}
+      {/*  /!* End .container *!/*/}
+      {/*</section>*/}
       {/* End Our Popular Listing */}
 
       {/* Sale Banner */}
-      <section className="home2_img_divider bg-img2">
+      <section className="home2_img_divider">
         <div className="container">
           <div className="row">
             <SaleBanner />
