@@ -1,6 +1,6 @@
 "use client";
-import menuItems from "@/data/menuItems";
-import { isParentActive } from "@/utils/isMenuActive";
+// import menuItems from "@/data/menuItems";
+// import { isParentActive } from "@/utils/isMenuActive";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -47,6 +47,13 @@ const MobileMenu = () => {
             text: "Mon - Thurs 8:30 - 19:30",
         },
     ];
+
+    const menuItems = [
+        { label: "Listing", path: "/listing-v5" },
+        { label: "Blogs", path: "/blog-grid" },
+        { label: "Shop", path: "/shop" },
+        { label: "About Us", path: "/about-us" },
+      ];
 
     return (
         <>
@@ -120,79 +127,15 @@ const MobileMenu = () => {
                         >
                             <Menu>
                                 {menuItems.map((item, index) => (
-                                    <SubMenu
+                                    <MenuItem
                                         key={index}
-                                        className={
-                                            isParentActive(item.subMenu, path)
-                                                ? "active"
-                                                : ""
+                                        className={item.path === path ? "active" : ""}
+                                        component={
+                                            <Link href={item.path} />
                                         }
-                                        label={item.label}
                                     >
-                                        {item.subMenu.map((subItem, subIndex) =>
-                                            subItem.subMenu ? (
-                                                <SubMenu
-                                                    key={subIndex}
-                                                    label={subItem.label}
-                                                    className={
-                                                        isParentActive(
-                                                            subItem.subMenu,
-                                                            path
-                                                        )
-                                                            ? "active"
-                                                            : ""
-                                                    }
-                                                >
-                                                    {subItem.subMenu.map(
-                                                        (
-                                                            nestedItem,
-                                                            nestedIndex
-                                                        ) => (
-                                                            <MenuItem
-                                                                key={
-                                                                    nestedIndex
-                                                                }
-                                                                component={
-                                                                    <Link
-                                                                        className={
-                                                                            nestedItem.path ===
-                                                                            path
-                                                                                ? "active"
-                                                                                : ""
-                                                                        }
-                                                                        href={
-                                                                            nestedItem.path
-                                                                        }
-                                                                    />
-                                                                }
-                                                            >
-                                                                {
-                                                                    nestedItem.label
-                                                                }
-                                                            </MenuItem>
-                                                        )
-                                                    )}
-                                                </SubMenu>
-                                            ) : (
-                                                <MenuItem
-                                                    key={subIndex}
-                                                    component={
-                                                        <Link
-                                                            className={
-                                                                subItem.path ==
-                                                                path
-                                                                    ? "active"
-                                                                    : ""
-                                                            }
-                                                            href={subItem.path}
-                                                        />
-                                                    }
-                                                >
-                                                    {subItem.label}
-                                                </MenuItem>
-                                            )
-                                        )}
-                                    </SubMenu>
+                                    {item.label}
+                                    </MenuItem>
                                 ))}
                             </Menu>
                         </Sidebar>

@@ -47,9 +47,6 @@ const CarType = () => {
               <Image
                 width={450}
                 height={303}
-                style={{
-                  objectFit: "contain",
-                }}
                 priority
                 src={listing.imgSrc}
                 alt={listing.title}

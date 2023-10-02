@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import styles from './Hero.module.css';
+import styles from "./Hero.module.css";
 
 const Hero = () => {
   const carSlides = [
@@ -55,7 +55,7 @@ const Hero = () => {
                         {slide.title}
                         <br />
                       </h2>
-                      <h3 className={slide.subtitleClass}>Ride with Confidence, Ride with Us. Serving Johor Bahru's Riders for Over 30 Years</h3>
+                      <h3 className={slide.subtitleClass}>Ride with Confidence, Ride with Us. Serving Johor Bahru&apos;s Riders for Over 30 Years</h3>
                       <h3 className="banner_top_title text-thm d-flex align-items-baseline">
                         <span className="aminated-object1">
                           <Image

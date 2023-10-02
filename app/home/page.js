@@ -114,7 +114,7 @@ const Home = () => {
       {/* End Featured Product  */}
 
       {/* Our CarType  */}
-      <section className="popular-listing pb80 pt0 ">
+      {/* <section className="popular-listing pb80 pt0 ">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
@@ -123,14 +123,12 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* End .row */}
 
           <div className="row">
             <CarType />
           </div>
-          {/* End .row */}
         </div>
-      </section>
+      </section> */}
       {/* End Our CarType  */}
 
       {/* Our Popular Listing */}
