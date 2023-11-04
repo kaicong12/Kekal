@@ -1,5 +1,5 @@
 import {getDownloadURL, ref} from "firebase/storage"
-import {collection, getDocs} from "firebase/firestore";
+import {collection, getDocs, doc, getDoc } from "firebase/firestore";
 import {db, storage} from "@/utils/firebase";
 
 const retrieveImageUrl = (path) => {
@@ -21,4 +21,18 @@ export const listMotorcycles = async () => {
 
         return res
     }));
+}
+
+export const getMotorcycleById = async (motorcycleId) => {
+    try {
+        const docRef = doc(db, "motorcycles", motorcycleId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          return docSnap.data();
+        } else {
+          return null;
+        }
+      } catch (error) {
+        console.error("Error fetching document: ", error);
+    }
 }

@@ -5,7 +5,7 @@ const BreadCrumb = () => {
         <a href="#">Home</a>
       </li>
       <li className="breadcrumb-item active" aria-current="page">
-        Cars for Sale
+        Motorcycles
       </li>
     </ol>
   );
