@@ -26,6 +26,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+motorkekal-18db6-firebase-adminsdk-xuq7j-3a60bf57e8.json
 
 # vercel
 .vercel
@@ -33,3 +34,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/.idea/
