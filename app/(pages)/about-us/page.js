@@ -7,11 +7,17 @@ import AboutTextBlock from "@/app/components/pages/about-us/AboutTextBlock";
 import WhyChoose from "@/app/components/common/WhyChoose";
 import Team from "@/app/components/common/Team";
 import Testimonial from "@/app/components/common/Testimonial";
-import Partner from "@/app/components/common/Partner";
 import LoginSignupModal from "@/app/components/common/login-signup";
+import Map from "@/app/components/common/Map";
+import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
 
 export const metadata = {
-  title: "About Us || Voiture - Automotive & Car Dealer NextJS Template",
+  title: "Perniagaan Motor Kekal",
+  description: "Authorized motorcycle dealer in Johor Jaya, Johor Bahru",
+  keywords: [
+      'kedai motor', 'motor shop', 'motorcycle', 'yamaha dealer', 'kawasaki dealer',
+      'motor repair', 'LC135', 'motor shop johor jaya', 'kedai motor johor bahru'
+  ]
 };
 
 const AboutUs = () => {
@@ -49,7 +55,7 @@ const AboutUs = () => {
                 <p className="subtitle">About Us</p>
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="/#">Home</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
                     <a href="#">About Us</a>
@@ -141,27 +147,32 @@ const AboutUs = () => {
       </section>
       {/* End Testimonials  */}
 
-      {/* Our Partners */}
-      <section className="our-partner pb100">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 offset-lg-3">
-              <div className="main-title text-center">
-                <h2>Popular Makes</h2>
-              </div>
-            </div>
-          </div>
-          {/* End .row */}
-
-          <div className="partner_divider">
-            <div className="row">
-              <Partner />
-            </div>
-            {/* End .row */}
+      <div className="user_profile_location">
+        <h4 className="title">Location</h4>
+        <div className="property_sp_map mb40">
+          <div className="h400 bdrs8 map_in" id="map-canvas">
+            <Map />
           </div>
         </div>
-      </section>
-      {/* End  Our Partners */}
+        <div className="upl_content d-block d-md-flex">
+          <p className="float-start fn-sm mb20-sm">
+            <span className="fas fa-map-marker-alt pr10 vam" />
+            5, Jln Seroja 49, Taman Johor Jaya, 81100 Johor Bahru, Johor
+          </p>
+            <a 
+              href="https://maps.app.goo.gl/a9Fs6RkRSR8dnnsE9" 
+              className="btn location_btn" 
+              style={{ display: "flex", alignItems: "center", justifyContent: "center" }} 
+              target="_blank"
+              >
+                Get Direction
+            </a>
+        </div>
+      </div>
+      {/* End Location */}
+
+      <ReviewBox />
+      {/* End ReviewBox */}
 
       {/* Our Footer */}
       <Footer />

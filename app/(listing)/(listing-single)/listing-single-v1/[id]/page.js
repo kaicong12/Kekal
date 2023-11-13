@@ -8,9 +8,6 @@ import BreadCrumb from "@/app/components/listing/listing-single/BreadCrumb";
 import ProductGallery from "@/app/components/listing/listing-single/listing-single-v1/ProductGallery";
 import Overview from "@/app/components/listing/listing-single/Overview";
 import Features from "@/app/components/listing/listing-single/Features";
-import Map from "@/app/components/common/Map";
-import ConsumerReviews from "@/app/components/listing/listing-single/ConsumerReviews";
-import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
 import ContactSeller from "@/app/components/listing/listing-single/sidebar/ContactSeller";
 import Link from "next/link";
 import ReleatedCar from "@/app/components/listing/listing-single/ReleatedCar";
@@ -137,29 +134,6 @@ const ListingSingleV1 = async ({ params }) => {
                 </div>
               </div>
               {/* End user profile service */}
-
-              <div className="user_profile_location">
-                <h4 className="title">Location</h4>
-                <div className="property_sp_map mb40">
-                  <div className="h400 bdrs8 map_in" id="map-canvas">
-                    <Map />
-                  </div>
-                </div>
-                <div className="upl_content d-block d-md-flex">
-                  <p className="float-start fn-sm mb20-sm">
-                    <span className="fas fa-map-marker-alt pr10 vam" />
-                    3891 Ranchview Dr. Richardson, California 62639
-                  </p>
-                  <button className="btn location_btn">Get Direction</button>
-                </div>
-              </div>
-              {/* End Location */}
-
-              <ConsumerReviews />
-              {/* End ConsumerReviews */}
-
-              <ReviewBox />
-              {/* End ReviewBox */}
             </div>
             {/* End .col-xl-8 */}
 
