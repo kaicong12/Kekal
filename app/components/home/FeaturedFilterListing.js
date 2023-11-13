@@ -76,22 +76,7 @@ const FeaturedFilterListing = () => {
                   src={listing.imageUrl}
                   alt={listing.model}
                 />
-                {/*<div className="thmb_cntnt2">*/}
-                {/*  <ul className="mb0">*/}
-                {/*    <li className="list-inline-item">*/}
-                {/*      <a className="text-white" href="@/app/components/home/FeaturedFilterListing#">*/}
-                {/*        <span className="flaticon-photo-camera mr3" />{" "}*/}
-                {/*        {listing.photosCount}*/}
-                {/*      </a>*/}
-                {/*    </li>*/}
-                {/*    <li className="list-inline-item">*/}
-                {/*      <a className="text-white" href="@/app/components/home/FeaturedFilterListing#">*/}
-                {/*        <span className="flaticon-play-button mr3" />{" "}*/}
-                {/*        {listing.videosCount}*/}
-                {/*      </a>*/}
-                {/*    </li>*/}
-                {/*  </ul>*/}
-                {/*</div>*/}
+                
                 <div className="thmb_cntnt3">
                   <ul className="mb0">
                     <li className="list-inline-item">
@@ -111,7 +96,7 @@ const FeaturedFilterListing = () => {
                 <div className="wrapper">
                   <h5 className="price">${listing.price}</h5>
                   <h6 className="title">
-                    <Link href="/listing-single-v1">{listing.brand} {listing.model}</Link>
+                    <Link href={`/listing-single-v1/${listing.id}`}>{listing.brand} {listing.model}</Link>
                   </h6>
                   <div className="listign_review">
                     <ul className="mb0">

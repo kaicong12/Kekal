@@ -34,5 +34,6 @@ export const getMotorcycleById = async (motorcycleId) => {
         }
       } catch (error) {
         console.error("Error fetching document: ", error);
+        return null
     }
 }

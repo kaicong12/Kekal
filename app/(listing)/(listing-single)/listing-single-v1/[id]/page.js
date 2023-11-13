@@ -5,25 +5,30 @@ import HeaderTop from "@/app/components/common/HeaderTop";
 import MobileMenu from "@/app/components/common/MobileMenu";
 import LoginSignupModal from "@/app/components/common/login-signup";
 import BreadCrumb from "@/app/components/listing/listing-single/BreadCrumb";
-import ShareMeta from "../../../components/listing/listing-single/ShareMeta";
 import ProductGallery from "@/app/components/listing/listing-single/listing-single-v1/ProductGallery";
 import Overview from "@/app/components/listing/listing-single/Overview";
-import Descriptions from "@/app/components/listing/listing-single/Descriptions";
 import Features from "@/app/components/listing/listing-single/Features";
 import Map from "@/app/components/common/Map";
 import ConsumerReviews from "@/app/components/listing/listing-single/ConsumerReviews";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
 import ContactSeller from "@/app/components/listing/listing-single/sidebar/ContactSeller";
-import SellerDetail from "@/app/components/listing/listing-single/sidebar/SellerDetail";
 import Link from "next/link";
 import ReleatedCar from "@/app/components/listing/listing-single/ReleatedCar";
 
+import { getMotorcycleById } from "@/utils/db";
+
 export const metadata = {
-  title:
-    "Listing Single V1 || Voiture - Automotive & Car Dealer NextJS Template",
+  title: "Perniagaan Motor Kekal",
+  description: "Authorized motorcycle dealer in Johor Jaya",
+  keywords: [
+      'kedai motor', 'motor shop', 'motorcycle', 'yamaha dealer', 'kawasaki dealer',
+      'motor repair', 'LC135', 'motor shop johor jaya', 'kedai motor johor bahru'
+  ]
 };
 
-const ListingSingleV1 = () => {
+const ListingSingleV1 = async ({ params }) => {
+  const motorcycleData = await getMotorcycleById(params.id)
+
   return (
     <div className="wrapper">
       <div
@@ -68,19 +73,8 @@ const ListingSingleV1 = () => {
                     <li className="list-inline-item">
                       <a href="#">BRAND NEW - IN STOCK</a>
                     </li>
-                    <li className="list-inline-item">
-                      <a href="#">
-                        <span className="flaticon-clock-1 vam" />1 years ago
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="#">
-                        <span className="flaticon-eye vam" />
-                        13102
-                      </a>
-                    </li>
                   </ul>
-                  <h2 className="title">Volvo XC 90</h2>
+                  <h2 className="title">{motorcycleData.brand} {motorcycleData.model}</h2>
                   <p className="para">
                     2.0h T8 11.6kWh Polestar Engineered Auto AWD (s/s) 5dr
                   </p>
@@ -91,16 +85,13 @@ const ListingSingleV1 = () => {
 
             <div className="col-lg-5 col-xl-4">
               <div className="single_page_heading_content text-start text-lg-end">
-                <div className="share_content">
-                  <ShareMeta />
-                </div>
                 <div className="price_content">
                   <div className="price mt60 mb10 mt10-md">
                     <h3>
                       <small className="mr15">
                         <del>$92,480</del>
                       </small>
-                      $89,480
+                      RM{motorcycleData.price}
                     </h3>
                   </div>
                 </div>
@@ -118,7 +109,7 @@ const ListingSingleV1 = () => {
               <div className="opening_hour_widgets p30 mt30">
                 <div className="wrapper">
                   <h4 className="title">Overview</h4>
-                  <Overview />
+                  <Overview productSpecification={motorcycleData.specification} />
                 </div>
               </div>
               {/* End opening_hour_widgets */}
@@ -126,9 +117,11 @@ const ListingSingleV1 = () => {
               <div className="listing_single_description mt30">
                 <h4 className="mb30">
                   Description{" "}
-                  <span className="float-end body-color fz13">ID #9535</span>
+                  <span className="float-end body-color fz13">{motorcycleData.brand} {motorcycleData.model}</span>
                 </h4>
-                <Descriptions />
+                <p className="first-para">
+                  {motorcycleData.description}
+                </p>
               </div>
               {/* End car descriptions */}
 
@@ -171,27 +164,10 @@ const ListingSingleV1 = () => {
             {/* End .col-xl-8 */}
 
             <div className="col-lg-4 col-xl-4">
-              <div className="offer_btns">
-                <div className="text-end">
-                  <button className="btn btn-thm ofr_btn1 btn-block mt0 mb20">
-                    <span className="flaticon-coin mr10 fz18 vam" />
-                    Make an Offer Price
-                  </button>
-                  <button className="btn ofr_btn2 btn-block mt0 mb20">
-                    <span className="flaticon-profit-report mr10 fz18 vam" />
-                    View VIN Report
-                  </button>
-                </div>
-              </div>
-              {/* End offer_btn
-               */}
               <div className="sidebar_seller_contact">
-                <SellerDetail />
                 <h4 className="mb30">Contact Seller</h4>
                 <ContactSeller />
               </div>
-
-              {/* End .col-xl-4 */}
             </div>
           </div>
           {/* End .row */}
