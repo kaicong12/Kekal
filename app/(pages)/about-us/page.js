@@ -7,13 +7,13 @@ import AboutTextBlock from "@/app/components/pages/about-us/AboutTextBlock";
 import WhyChoose from "@/app/components/common/WhyChoose";
 import Team from "@/app/components/common/Team";
 import Testimonial from "@/app/components/common/Testimonial";
-import LoginSignupModal from "@/app/components/common/login-signup";
 import Map from "@/app/components/common/Map";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
 
+
 export const metadata = {
-  title: "Perniagaan Motor Kekal",
-  description: "Authorized motorcycle dealer in Johor Jaya, Johor Bahru",
+  title: "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, Johor Bahru",
+  description: "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
   keywords: [
       'kedai motor', 'motor shop', 'motorcycle', 'yamaha dealer', 'kawasaki dealer',
       'motor repair', 'LC135', 'motor shop johor jaya', 'kedai motor johor bahru'
@@ -127,11 +127,11 @@ const AboutUs = () => {
       {/* End Our Team */}
 
       {/* Testimonials  */}
-      <section className="our-testimonials-home1 pt120 pb120">
+      <section className="our-testimonials-home1 pt120">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8">
-              <div className="main-title text-center">
+              <div className="main-title text-center pt50">
                 <h2>Testimonials</h2>
               </div>
             </div>
@@ -177,19 +177,6 @@ const AboutUs = () => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
-
-      {/* Modal */}
-      <div
-        className="sign_up_modal modal fade"
-        id="logInModal"
-        data-backdrop="static"
-        data-keyboard="false"
-        tabIndex={-1}
-        aria-hidden="true"
-      >
-        <LoginSignupModal />
-      </div>
-      {/* End Modal */}
     </div>
     // End wrapper
   );

@@ -76,8 +76,9 @@ const Hero = () => {
                         {/*</small>*/}
                       </h3>
                       <Link
-                        href="/listing-single-v1"
+                        href="https://wa.me/60127126128?text=I'm%20interested%20in%20learning%20more%20about%20your%20services" // Replace 'yourphonenumber' with your actual phone number
                         className="btn banner-btn"
+                        target="_blank"
                       >
                         Contact Us
                       </Link>

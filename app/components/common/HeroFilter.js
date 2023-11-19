@@ -11,17 +11,10 @@ const HeroFilter = () => {
       label: "Make",
       options: [
         "Select Makes",
-        "Audi",
-        "Bentley",
-        "BMW",
-        "Ford",
         "Honda",
-        "Mercedes",
+        "Yamaha",
+        "SYM"
       ],
-    },
-    {
-      label: "Models",
-      options: ["Select Models", "A3 Sportback", "A4", "A6", "Q5"],
     },
     {
       label: "Price",
@@ -59,7 +52,7 @@ const HeroFilter = () => {
             className={`nav-link ${selectedStatus === "Used Cars" && "active"}`}
             onClick={() => handleStatusClick("Used Cars")}
           >
-            Used Cars
+            Used Bikes
           </button>
         </li>
         <li className="nav-item" role="presentation">
@@ -67,7 +60,7 @@ const HeroFilter = () => {
             className={`nav-link ${selectedStatus === "New Cars" && "active"}`}
             onClick={() => handleStatusClick("New Cars")}
           >
-            New Cars
+            New Bikes
           </button>
         </li>
       </ul>
@@ -97,7 +90,7 @@ const HeroFilter = () => {
             <li className="list-inline-item">
               <div className="d-block">
                 <button
-                  onClick={() => router.push("/listing-v4")}
+                  onClick={() => router.push("/listing-v1")}
                   className="btn btn-thm advnc_search_form_btn"
                 >
                   <span className="flaticon-magnifiying-glass" />

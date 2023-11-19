@@ -10,8 +10,13 @@ import ListGridFilter from "@/app/components/listing/ListGridFilter";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
 
 export const metadata = {
-    title: "Listing V1 || Voiture - Automotive & Car Dealer NextJS Template",
-};
+    title: "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, Johor Bahru",
+    description: "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
+    keywords: [
+        'kedai motor', 'motor shop', 'motorcycle', 'yamaha dealer', 'kawasaki dealer',
+        'motor repair', 'LC135', 'motor shop johor jaya', 'kedai motor johor bahru'
+    ]
+  };
 
 const ListingV1 = () => {
     return (

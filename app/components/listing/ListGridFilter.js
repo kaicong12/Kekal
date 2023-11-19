@@ -1,10 +1,10 @@
 const ListGridFilter = () => {
   const options = [
-    "Date: newest First",
-    "Most Recent",
-    "Recent",
-    "Best Selling",
-    "Old Review",
+    "Year: newest First",
+    "Year: oldest First",
+    "Price: highest first",
+    "Price: lowest first",
+    // "Best Selling",
   ];
 
   const selectOptions = options.map((option, index) => (
