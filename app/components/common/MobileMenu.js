@@ -8,8 +8,7 @@ import {
     ProSidebarProvider,
     Sidebar,
     Menu,
-    MenuItem,
-    SubMenu,
+    MenuItem
 } from "react-pro-sidebar";
 
 const MobileMenu = () => {
@@ -49,7 +48,7 @@ const MobileMenu = () => {
     ];
 
     const menuItems = [
-        { label: "Listing", path: "/listing-v5" },
+        { label: "Listing", path: "/listing" },
         { label: "Blogs", path: "/blog-grid" },
         { label: "Shop", path: "/shop" },
         { label: "About Us", path: "/about-us" },

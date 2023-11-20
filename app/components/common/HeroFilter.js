@@ -90,7 +90,7 @@ const HeroFilter = () => {
             <li className="list-inline-item">
               <div className="d-block">
                 <button
-                  onClick={() => router.push("/listing-v1")}
+                  onClick={() => router.push("/listing")}
                   className="btn btn-thm advnc_search_form_btn"
                 >
                   <span className="flaticon-magnifiying-glass" />

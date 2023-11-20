@@ -5,7 +5,7 @@ import MobileMenu from "@/app/components/common/MobileMenu";
 import LoginSignupModal from "@/app/components/common/login-signup";
 import CarItems from "@/app/components/listing/listing-map/listing-map-v3/CarItems";
 import Map from "@/app/components/common/Map";
-import ListGridFilter3 from "@/app/components/listing/ListGridFilter3";
+import ListGridFilter from "@/app/components/listing/ListGridFilter";
 import SidebarAdvnaceFilter from "@/app/components/listing/SidebarAdvanceFilter";
 
 export const metadata = {
@@ -49,7 +49,7 @@ const ListingMapV3 = () => {
             <div className="col-xl-6 col-xxl-5">
               <div className="row">
                 <div className="listing_filter_row db-767 mt50 pb0 pl20 pr20 mb20">
-                  <ListGridFilter3 />
+                  <ListGridFilter />
                 </div>
               </div>
               {/* End .row */}

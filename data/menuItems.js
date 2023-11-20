@@ -40,7 +40,7 @@ module.exports = [
         subMenu: [
           {
             label: "Listing v1",
-            path: "/listing-v1",
+            path: "/listing",
           },
           {
             label: "Listing v2",

@@ -4,7 +4,7 @@ const Navigation = () => {
   const links = [
     { label: "Home", path: "/" },
     { label: "About Us", path: "/about-us" },
-    { label: "Listings", path: "/listing-v1" },
+    { label: "Listings", path: "/listing" },
     { label: "Blog", path: "/blog" },
     { label: "User", path: "/user-profile" },
     { label: "Service", path: "/service" },

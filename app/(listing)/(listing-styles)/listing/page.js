@@ -1,24 +1,26 @@
+'use client'
+
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "@/app/components/common/DefaultHeader";
-import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import HeaderTop from "@/app/components/common/HeaderTop";
+import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import MobileMenu from "@/app/components/common/MobileMenu";
-import LoginSignupModal from "@/app/components/common/login-signup";
 import AdvanceFilter from "@/app/components/listing/advance-filter";
 import Pagination from "@/app/components/common/Pagination";
 import ListGridFilter from "@/app/components/listing/ListGridFilter";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
 
-export const metadata = {
-    title: "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, Johor Bahru",
-    description: "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
-    keywords: [
-        'kedai motor', 'motor shop', 'motorcycle', 'yamaha dealer', 'kawasaki dealer',
-        'motor repair', 'LC135', 'motor shop johor jaya', 'kedai motor johor bahru'
-    ]
-  };
+import { useState} from "react";
 
 const ListingV1 = () => {
+    console.log("etner listing v1")
+    const [filterOptions, setFilterOptions] = useState('')
+    console.log(filterOptions, "filter options")
+
+    const onChangeFilter = (newOptions) => {
+        setFilterOptions(newOptions)
+    }
+
     return (
         <div className="wrapper">
             <div
@@ -60,7 +62,7 @@ const ListingV1 = () => {
                                 <h2 className="breadcrumb_title">
                                     Used Vehicles For Sale
                                 </h2>
-                                <p className="subtitle">Listing-v1</p>
+                                <p className="subtitle">Listing</p>
                                 <ol className="breadcrumb fn-sm mt15-sm">
                                     <li className="breadcrumb-item">
                                         <a href="#">Home</a>
@@ -69,7 +71,7 @@ const ListingV1 = () => {
                                         className="breadcrumb-item active"
                                         aria-current="page"
                                     >
-                                        Listing-v1
+                                        Listing
                                     </li>
                                 </ol>
                             </div>
@@ -83,7 +85,7 @@ const ListingV1 = () => {
             <section className="our-listing pt0 bgc-f9 pb30-991">
                 <div className="container">
                     <div className="row">
-                        <ListGridFilter />
+                        <ListGridFilter handleFilterChange={onChangeFilter} />
                     </div>
                     {/* End .row */}
 
@@ -107,19 +109,6 @@ const ListingV1 = () => {
             {/* Our Footer */}
             <Footer />
             {/* End Our Footer */}
-
-            {/* Modal */}
-            <div
-                className="sign_up_modal modal fade"
-                id="logInModal"
-                data-backdrop="static"
-                data-keyboard=""
-                tabIndex={-1}
-                aria-hidden="true"
-            >
-                <LoginSignupModal />
-            </div>
-            {/* End Modal */}
         </div>
         // End wrapper
     );
