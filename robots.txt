@@ -1,0 +1,7 @@
+User-agent: *
+
+# Allow crawling of important pages
+Allow: /
+Allow: /listing/
+Allow: /listing-single-v1/
+Allow: /about-us/

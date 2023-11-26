@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const AboutTextBlock = () => {
   return (
@@ -30,17 +31,18 @@ const AboutTextBlock = () => {
         <div className="about_content">
           <h2 className="title">Welcome To Perniagaan Motor Kekal</h2>
           <p className="mb30">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor. Aenean massa. Cum sociis Theme natoque
-            penatibus et magnis dis parturient montes, nascetur.
+            Perniagaan Motor Kekal is a renowned business based in Johor Bahru, Malaysia, celebrated for its dedication and passion for motorcycles. This business has been an integral part of the motorcycle community in <strong>Johor</strong> since its incorporation on <strong>July 13, 1992</strong>.
           </p>
           <p className="mb50">
-            Vel illum dolore eu feugiat nulla facilisis at vero eros et accu qui
-            blandit praesent luptatum zzril delenit.
+            Perniagaan Motor Kekal operates as dealers, retailers, distributors, and repairers of various kinds of motorcycles, as well as auto spare parts and accessories. The business is particularly noted for its commitment to providing quality services and products, contributing to its status as a valued and reputable entity in the Johor motor industry​
           </p>
-          <a className="btn btn-thm about-btn" href="#">
-            Learn More
-          </a>
+          <Link
+            href="https://wa.me/60127126128?text=I'm%20interested%20in%20learning%20more%20about%20your%20services" // Replace 'yourphonenumber' with your actual phone number
+            className="btn btn-thm about-btn"
+            target="_blank"
+          >
+            Contact Us
+          </Link>
         </div>
       </div>
       {/* End .col */}

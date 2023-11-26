@@ -1,20 +1,22 @@
-import listingCar from "@/data/listingCar";
 import Image from "next/image";
 import Link from "next/link";
+import { listMotorcycles } from "@/utils/db";
 
-const CarItems = () => {
+const CarItems = async () => {
+  const motorcycles = await listMotorcycles()
+
   return (
     <>
-      {listingCar.map((listing) => (
-        <div className="col-sm-6 col-lg-4 col-xl-3" key={listing.id}>
+      {motorcycles.map((motorcycle) => (
+        <div className="col-sm-6 col-lg-4 col-xl-3" key={motorcycle.id}>
           <div className="car-listing">
             <div className="thumb">
-              {listing.featured ? (
+              {motorcycle.featured ? (
                 <>
                   <div className="tag">FEATURED</div>
                 </>
               ) : undefined}
-              {!listing.featured ? (
+              {!motorcycle.featured ? (
                 <>
                   <div className="tag blue">SPECIAL</div>
                 </>
@@ -29,25 +31,10 @@ const CarItems = () => {
                   objectFit: "cover",
                 }}
                 priority
-                src={listing.image}
-                alt={listing.title}
+                src={motorcycle.imageUrl}
+                alt={motorcycle.model}
               />
-              <div className="thmb_cntnt2">
-                <ul className="mb0">
-                  <li className="list-inline-item">
-                    <a className="text-white" href="#">
-                      <span className="flaticon-photo-camera mr3" />{" "}
-                      {listing.photosCount}
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="text-white" href="#">
-                      <span className="flaticon-play-button mr3" />{" "}
-                      {listing.videosCount}
-                    </a>
-                  </li>
-                </ul>
-              </div>
+
               <div className="thmb_cntnt3">
                 <ul className="mb0">
                   <li className="list-inline-item">
@@ -65,43 +52,26 @@ const CarItems = () => {
             </div>
             <div className="details">
               <div className="wrapper">
-                <h5 className="price">${listing.price}</h5>
+                <h5 className="price">${motorcycle.price}</h5>
                 <h6 className="title">
-                  <Link href="/listing-single-v1">{listing.title}</Link>
+                  <Link href="/listing-single-v1">{motorcycle.model}</Link>
                 </h6>
-                <div className="listign_review">
-                  <ul className="mb0">
-                    {[...Array(5)].map((_, index) => (
-                      <li key={index} className="list-inline-item">
-                        <a href="#">
-                          <i className="fa fa-star" />
-                        </a>
-                      </li>
-                    ))}
-                    <li className="list-inline-item">
-                      <a href="#">{listing.rating}</a>
-                    </li>
-                    <li className="list-inline-item">
-                      ({listing.reviewsCount} reviews)
-                    </li>
-                  </ul>
-                </div>
               </div>
               {/* End wrapper */}
 
               <div className="listing_footer">
                 <ul className="mb0">
                   <li className="list-inline-item">
-                    <span className="flaticon-road-perspective me-2" />
-                    {listing.mileage}
+                    <span className="flaticon-sedan-car-model me-2" />
+                    {motorcycle.engine}
                   </li>
                   <li className="list-inline-item">
-                    <span className="flaticon-gas-station me-2" />
-                    {listing.fuelType}
+                    <span className="flaticon-coin me-2" />
+                    {motorcycle.price}
                   </li>
                   <li className="list-inline-item">
                     <span className="flaticon-gear me-2" />
-                    {listing.transmission}
+                    {motorcycle.gear}
                   </li>
                 </ul>
               </div>
