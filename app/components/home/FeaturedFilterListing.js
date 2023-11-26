@@ -98,23 +98,6 @@ const FeaturedFilterListing = () => {
                   <h6 className="title">
                     <Link href={`/listing-single-v1/${listing.id}`}>{listing.brand} {listing.model}</Link>
                   </h6>
-                  <div className="listign_review">
-                    <ul className="mb0">
-                      {[...Array(5)].map((_, index) => (
-                        <li key={index} className="list-inline-item">
-                          <a href="@/app/components/home/FeaturedFilterListing#">
-                            <i className="fa fa-star" />
-                          </a>
-                        </li>
-                      ))}
-                      <li className="list-inline-item">
-                        <a href="@/app/components/home/FeaturedFilterListing#">{listing.rating}</a>
-                      </li>
-                      {/*<li className="list-inline-item">*/}
-                      {/*  ({listing.reviewsCount} reviews)*/}
-                      {/*</li>*/}
-                    </ul>
-                  </div>
                 </div>{" "}
                 <div className="listing_footer">
                   <ul className="mb0">

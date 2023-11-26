@@ -44,7 +44,7 @@ const HeroFilter = () => {
             }`}
             onClick={() => handleStatusClick("All Status")}
           >
-            All Status
+            All Bike
           </button>
         </li>
         <li className="nav-item" role="presentation">
@@ -52,7 +52,7 @@ const HeroFilter = () => {
             className={`nav-link ${selectedStatus === "Used Cars" && "active"}`}
             onClick={() => handleStatusClick("Used Cars")}
           >
-            Used Bikes
+            Used Bike
           </button>
         </li>
         <li className="nav-item" role="presentation">
@@ -60,7 +60,7 @@ const HeroFilter = () => {
             className={`nav-link ${selectedStatus === "New Cars" && "active"}`}
             onClick={() => handleStatusClick("New Cars")}
           >
-            New Bikes
+            New Bike
           </button>
         </li>
       </ul>

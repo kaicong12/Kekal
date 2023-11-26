@@ -7,7 +7,7 @@ import LoginSignupModal from "@/app/components/common/login-signup";
 import BreadCrumb from "@/app/components/listing/listing-single/BreadCrumb";
 import ProductGallery from "@/app/components/listing/listing-single/listing-single-v1/ProductGallery";
 import Overview from "@/app/components/listing/listing-single/Overview";
-import Features from "@/app/components/listing/listing-single/Features";
+import LoanCalculator from "@/app/components/listing/LoanCalculator";
 import ContactSeller from "@/app/components/listing/listing-single/sidebar/ContactSeller";
 import Link from "next/link";
 import ReleatedCar from "@/app/components/listing/listing-single/ReleatedCar";
@@ -72,9 +72,6 @@ const ListingSingleV1 = async ({ params }) => {
                     </li>
                   </ul>
                   <h2 className="title">{motorcycleData.brand} {motorcycleData.model}</h2>
-                  <p className="para">
-                    2.0h T8 11.6kWh Polestar Engineered Auto AWD (s/s) 5dr
-                  </p>
                 </div>
               </div>
             </div>
@@ -122,18 +119,10 @@ const ListingSingleV1 = async ({ params }) => {
               </div>
               {/* End car descriptions */}
 
-              <div className="user_profile_service">
-                <Features />
-                <hr />
-                <div className="row">
-                  <div className="col-lg-12">
-                    <a className="fz12 tdu color-blue" href="#">
-                      View all features
-                    </a>
-                  </div>
-                </div>
+              {/* Loan Calculator */}
+              <div className="loanCalculator col-lg-4 col-xl-4">
+                <LoanCalculator />
               </div>
-              {/* End user profile service */}
             </div>
             {/* End .col-xl-8 */}
 
