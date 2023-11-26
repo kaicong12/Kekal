@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.18.0-alpha.5",
     "@faker-js/faker": "^8.0.2",
     "@popperjs/core": "^2.11.7",
+    "antd": "^5.11.4",
     "aos": "^2.3.4",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.3.0",

@@ -120,8 +120,8 @@ const ListingSingleV1 = async ({ params }) => {
               {/* End car descriptions */}
 
               {/* Loan Calculator */}
-              <div className="loanCalculator col-lg-4 col-xl-4">
-                <LoanCalculator />
+              <div className="loanCalculator mt30">
+                <LoanCalculator motorcycle={motorcycleData} />
               </div>
             </div>
             {/* End .col-xl-8 */}
