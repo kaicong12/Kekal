@@ -1,21 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import {listMotorcycles} from "@/utils/db";
+import { useState } from "react";
+import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
 
 const FeaturedFilterListing = () => {
   const [filter, setFilter] = useState("*");
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchMotorcycles = async () => {
-      let motorcycles = await listMotorcycles()
-      setData(motorcycles)
-    }
-
-    fetchMotorcycles();
-  }, [])
+  const [data, setData] = useMotorcycles()
 
   const filteredItems =
     filter === "*"
