@@ -1,7 +1,9 @@
 "use client"
+import styles from './LoanCalculator.module.css'
 import { useDebounce } from "@/utils/hooks/useDebounce"
 import { useCallback, useState, useEffect } from "react"
 import { Col, InputNumber, Row, Slider, Select } from 'antd';
+
 
 const IntegerStep = ({ title, inputValue, onChange }) => {
     return (
@@ -89,6 +91,22 @@ const LoanCalculator = ({ motorcycle }) => {
             </p>
             <IntegerStep title="Downpayment (%)" inputValue={downPayment} onChange={setDownPayment} />
             <SelectLoanPeriod title="Loan Period (Years)" handleChangeSelect={setLoanYear} />
+
+            <div className={styles.displayContainer}>
+                <div className={styles.displayDiv}>
+                    <strong style={{display: 'block', fontSize: '20px'}}>RM{motorcycle.price * downPayment / 100}</strong>
+                    <span style={{ fontSize: '13px'}}>Down Payment</span>
+                </div>
+
+                <div className={styles.displayDiv}>
+                    <strong style={{display: 'block', fontSize: '20px', marginTop: '20px'}}>RM{Math.round(monthlyPayment * 100)/100}</strong>
+                    <span style={{ fontSize: '13px'}}>Monthly Repayment</span>
+                </div>
+
+                <button type="submit" className={`btn btn-block btn-thm mt30 mb20 ${styles.loanEnquiryButton}`}>
+                    Apply Loan
+                </button>
+            </div>
         </>
     )
 }
