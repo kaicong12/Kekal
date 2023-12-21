@@ -4,4 +4,7 @@ User-agent: *
 Allow: /
 Allow: /listing/
 Allow: /listing-single-v1/
+Allow: /contact/
+Allow: /service/
 Allow: /about-us/
+Sitemap: https://www.motorkekal.com/sitemap.xml

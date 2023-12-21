@@ -49,8 +49,8 @@ const MobileMenu = () => {
 
     const menuItems = [
         { label: "Listing", path: "/listing" },
-        { label: "Blogs", path: "/blog-grid" },
-        { label: "Shop", path: "/shop" },
+        { label: "Our Services", path: "/service" },
+        { label: "Contact", path: "/contact" },
         { label: "About Us", path: "/about-us" },
       ];
 

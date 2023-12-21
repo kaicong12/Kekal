@@ -13,14 +13,6 @@ import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItem
 import { useState} from "react";
 
 const ListingV1 = () => {
-    console.log("etner listing v1")
-    const [filterOptions, setFilterOptions] = useState('')
-    console.log(filterOptions, "filter options")
-
-    const onChangeFilter = (newOptions) => {
-        setFilterOptions(newOptions)
-    }
-
     return (
         <div className="wrapper">
             <div
@@ -85,7 +77,7 @@ const ListingV1 = () => {
             <section className="our-listing pt0 bgc-f9 pb30-991">
                 <div className="container">
                     <div className="row">
-                        <ListGridFilter handleFilterChange={onChangeFilter} />
+                        <ListGridFilter />
                     </div>
                     {/* End .row */}
 

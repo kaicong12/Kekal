@@ -51,9 +51,6 @@ const ContactSeller = () => {
         {/* End .col-12 */}
 
         <div className="col-md-12">
-          <button type="submit" className="btn btn-block btn-thm mt10 mb20">
-            Send Message
-          </button>
           <button type="submit" className="btn btn-block btn-whatsapp mb0">
             <span className="flaticon-whatsapp mr10 text-white" />
             WhatsApp
