@@ -97,7 +97,10 @@ const ListingSingleV1 = async ({ params }) => {
 
           <div className="row">
             <div className="col-lg-8 col-xl-8">
-              <ProductGallery />
+              <ProductGallery 
+                brand={motorcycleData.brand.toLowerCase()} 
+                modelName={motorcycleData.model.replace(/ /g, "_").toLowerCase()} 
+              />
               {/* End Car Gallery */}
 
               <div className="opening_hour_widgets p30 mt30">
