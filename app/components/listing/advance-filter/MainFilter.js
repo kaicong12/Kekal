@@ -1,9 +1,9 @@
 const MainFilter = () => {
   const filterOptions = [
-    {
-      label: "Condition",
-      values: ["Most Recent", "Recent", "Best Selling", "Old Review"],
-    },
+    // {
+    //   label: "Condition",
+    //   values: ["Most Recent", "Recent", "Best Selling", "Old Review"],
+    // },
     {
       label: "Select Makes",
       values: ["Audi", "Bentley", "BMW", "Ford", "Honda", "Mercedes"],
@@ -11,10 +11,6 @@ const MainFilter = () => {
     {
       label: "Select Models",
       values: ["A3 Sportback", "A4", "A6", "Q5"],
-    },
-    {
-      label: "Select Type",
-      values: ["Convertible", "Coupe", "Hatchback", "Sedan", "SUV"],
     },
   ];
 

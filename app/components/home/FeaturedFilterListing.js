@@ -6,7 +6,7 @@ import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
 
 const FeaturedFilterListing = () => {
   const [filter, setFilter] = useState("*");
-  const [data, setData] = useMotorcycles()
+  const { motorcycles: data, setMotorcycles: setData } = useMotorcycles()
 
   const filteredItems =
     filter === "*"

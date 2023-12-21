@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { listMotorcycles } from "@/utils/db";
 
-const CarItems = async () => {
-  const motorcycles = await listMotorcycles()
-
+const CarItems = ({ motorcycles }) => {
   return (
     <>
       {motorcycles.map((motorcycle) => (
