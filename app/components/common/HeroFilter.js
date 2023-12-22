@@ -6,6 +6,9 @@ const HeroFilter = () => {
   const router = useRouter();
 
   const [selectedStatus, setSelectedStatus] = useState("All Status");
+  const [brandFilter, setBrandFilter] = useState(0)
+  const [priceFilter, setPriceFilter] = useState(0)
+
   const filters = [
     {
       label: "Make",
@@ -21,11 +24,10 @@ const HeroFilter = () => {
       options: [
         "All Price",
         "No max Price",
-        "$2,000",
-        "$5,000",
-        "$10,000",
-        "$15,000",
-        "$6,000",
+        "Less than $2,000",
+        "Less than $5,000",
+        "Less than $10,000",
+        "Less than $15,000",
       ],
     },
   ];
@@ -33,6 +35,14 @@ const HeroFilter = () => {
   const handleStatusClick = (status) => {
     setSelectedStatus(status);
   };
+
+  const handleBrandChange = (event) => {
+    setBrandFilter(Number(event.target.value))
+  }
+
+  const handlePriceFilterChange = (event) => {
+    setPriceFilter(Number(event.target.value))
+  }
 
   return (
     <div className="col-lg-12">
@@ -76,9 +86,9 @@ const HeroFilter = () => {
                   <div className="select-boxes">
                     <div className="car_brand">
                       <h6 className="title">{filter.label}</h6>
-                      <select className="form-select">
-                        {filter.options.map((option) => (
-                          <option key={option}>{option}</option>
+                      <select className="form-select" value={brandFilter} onChange={handleBrandChange}>
+                        {filter.options.map((option, index) => (
+                          <option key={option} value={index}>{option}</option>
                         ))}
                       </select>
                     </div>

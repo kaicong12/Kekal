@@ -1345,10 +1345,6 @@
 	.erro_code h2 {
 		font-size: 120px;
 	}
-	.service_include,
-	.service_include2 {
-		margin-top: 50px;
-	}
 	/*.checkout_form .checkout_coupon form button{padding: 0 35px;}*/
 	.single_product_grid.user_profile .single_product_slider.vertical_style.owl-theme .owl-dots .owl-dot span {
 		height: 80px;
@@ -3192,6 +3188,12 @@
 	}
 	.advance_search_panel .home1_advance_search_wrapper li {
 		width: 100%;
+		margin-top: 10px
+	}
+
+	.advance_search_panel .home1_advance_search_wrapper li:last-child {
+		width: 100%;
+		margin-top: 30px
 	}
 
 	.home_content.home1_style .home-text .title {

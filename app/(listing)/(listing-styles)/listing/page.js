@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from 'next/navigation'
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "@/app/components/common/DefaultHeader";
 import HeaderTop from "@/app/components/common/HeaderTop";
@@ -13,6 +14,10 @@ import MainFilter from "@/app/components/listing/advance-filter/MainFilter";
 import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
 
 const ListingV1 = () => {
+    const searchParams = useSearchParams()
+    const brandFilter = searchParams.get('make')
+    const priceFilter = searchParams.get('price')
+
     const {
         sortOptions,
         brandOptions,
@@ -21,7 +26,7 @@ const ListingV1 = () => {
         onFilterOptionChange,
         onBrandOptionChange,
         motorcycles 
-    } = useMotorcycles()
+    } = useMotorcycles(brandFilter, priceFilter)
 
     return (
         <div className="wrapper">
@@ -62,7 +67,7 @@ const ListingV1 = () => {
                         <div className="col-xl-12">
                             <div className="breadcrumb_content style2">
                                 <h2 className="breadcrumb_title">
-                                    Used Vehicles For Sale
+                                    Vehicles For Sale
                                 </h2>
                                 <p className="subtitle">Listing</p>
                                 <ol className="breadcrumb fn-sm mt15-sm">

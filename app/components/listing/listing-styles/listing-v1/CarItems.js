@@ -51,7 +51,7 @@ const CarItems = ({ motorcycles }) => {
               <div className="wrapper">
                 <h5 className="price">${motorcycle.price}</h5>
                 <h6 className="title">
-                  <Link href="/listing-single-v1">{motorcycle.model}</Link>
+                  <Link href={`/listing-single-v1/${motorcycle.id}`}>{motorcycle.model}</Link>
                 </h6>
               </div>
               {/* End wrapper */}

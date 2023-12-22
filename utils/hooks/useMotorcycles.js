@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react'
 import { queryMotorcycle } from "@/utils/db";
 
 
-export const useMotorcycles = () => {
+export const useMotorcycles = (makeFilter, priceFilter) => {
     const [motorcycles, setMotorcycles] = useState([]);
     const [selectedSortIdx, setSelectedFilterIdx] = useState(0)
     const [selectedBrandIdx, setSelectedBrandIdx] = useState(0)

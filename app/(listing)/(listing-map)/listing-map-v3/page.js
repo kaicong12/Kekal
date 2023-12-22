@@ -1,3 +1,5 @@
+"use client"
+
 import DefaultHeader from "@/app/components/common/DefaultHeader";
 import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import HeaderTop from "@/app/components/common/HeaderTop";
@@ -7,12 +9,19 @@ import CarItems from "@/app/components/listing/listing-map/listing-map-v3/CarIte
 import Map from "@/app/components/common/Map";
 import ListGridFilter from "@/app/components/listing/ListGridFilter";
 import SidebarAdvnaceFilter from "@/app/components/listing/SidebarAdvanceFilter";
-
-export const metadata = {
-  title: "Listing Map V3 || Voiture - Automotive & Car Dealer NextJS Template",
-};
+import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
 
 const ListingMapV3 = () => {
+  const {
+    sortOptions,
+    brandOptions,
+    selectedFilterIdx,
+    selectedBrandIdx,
+    onFilterOptionChange,
+    onBrandOptionChange,
+    motorcycles 
+} = useMotorcycles()
+
   return (
     <div className="wrapper">
       <div
@@ -49,7 +58,18 @@ const ListingMapV3 = () => {
             <div className="col-xl-6 col-xxl-5">
               <div className="row">
                 <div className="listing_filter_row db-767 mt50 pb0 pl20 pr20 mb20">
-                  <ListGridFilter />
+                <ListGridFilter
+                    label={'Sort By: '}
+                    sortOptions={sortOptions}
+                    selectedFilterIdx={selectedFilterIdx}
+                    onFilterOptionChange={onFilterOptionChange}
+                />
+                <ListGridFilter
+                    label={'Brand: '}
+                    sortOptions={brandOptions}
+                    selectedFilterIdx={selectedBrandIdx}
+                    onFilterOptionChange={onBrandOptionChange}
+                />
                 </div>
               </div>
               {/* End .row */}

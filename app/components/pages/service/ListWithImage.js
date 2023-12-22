@@ -2,27 +2,21 @@ import Image from "next/image";
 
 const ListWithImage = () => {
     const serviceItems = [
-        { text: "General Automotive Repair", link: "#" },
-        { text: "Preventative Car Maintenance", link: "#" },
-        { text: "Air Conditioning and Heater Service", link: "#" },
-        { text: "Cooling System and Radiator Repair", link: "#" },
-        { text: "Synthetic Motor Oil Replacement", link: "#" },
-        { text: "Oil Filter Replacement", link: "#" },
-        { text: "Brake Repair", link: "#" },
-        { text: "Engine Diagnostic", link: "#" },
-        { text: "Belts, Hoses, Fluids", link: "#" },
-        { text: "Transmission Services", link: "#" },
+        { text: "General Motorcycle Repair", link: "#" },
+        { text: "Preventative Motorcycle Maintenance", link: "#" },
+        { text: "Insurance Claim Assistance", link: "#" },
+        { text: "Battery Maintenance and Replacement", link: "#" },
+        { text: "Performance Upgrades", link: "#" },
+        { text: "Customizations and Modifications", link: "#" },
     ];
 
     return (
         <div className="row">
             <div className="col-lg-6 col-xl-5">
                 <div className="service_include">
-                    <h3 className="title">Our Service Include</h3>
+                    <h3 className="title">Premium Motorcycle Care and Expertise</h3>
                     <p className="para">
-                        Our CarSure experts inspect the car on over 200
-                        checkpoints so you get complete satisfaction and peace
-                        of mind before buying.
+                    At Perniagaan Motor Kekal, we specialize in providing top-notch services for all types of motorcycles. Our experienced technicians are passionate about motorcycles and committed to ensuring your ride is always in excellent condition.
                     </p>
                     <div className="row">
                         <div className="col-lg-7">

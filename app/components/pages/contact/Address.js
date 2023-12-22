@@ -3,17 +3,15 @@ const Address = () => {
     title: "Contact Details",
     address: (
       <>
-        Germany — <br /> 329 Queensberry Street,
-        <br /> North Melbourne VIC 3051
+        5, Jalan Seroja 49<br /> Taman Johor Jaya,
+        <br /> 81100 Johor Bahru
       </>
     ),
-    subtitle: "+1 670 936 46 70",
-    email: "hello@voiture.com",
+    subtitle: "+6 012 712 6128",
+    email: "motorkekal@gmail.com",
     socialIcons: [
-      { iconClass: "fab fa-facebook-f", link: "#" },
-      { iconClass: "fab fa-twitter", link: "#" },
-      { iconClass: "fab fa-instagram", link: "#" },
-      { iconClass: "fab fa-linkedin", link: "#" },
+      { iconClass: "fab fa-facebook-f", link: "https://www.facebook.com/PerniagaanMotorKekal" },
+      { iconClass: "fab fa-google", link: "https://g.co/kgs/sjKgCH" },
     ],
   };
 
