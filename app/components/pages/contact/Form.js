@@ -8,7 +8,7 @@ const Form = () => {
             <input
               className="form-control"
               type="text"
-              placeholder="TUF"
+              placeholder="First Name"
               required
             />
           </div>
@@ -21,7 +21,7 @@ const Form = () => {
             <input
               className="form-control"
               type="text"
-              placeholder="creativelayers088@gmail.com"
+              placeholder="Last Name"
               required
             />
           </div>
@@ -34,7 +34,7 @@ const Form = () => {
             <input
               className="form-control email"
               type="email"
-              placeholder="+59 9495 393 939 3"
+              placeholder="your-email@gmail.com"
               required
             />
           </div>

@@ -43,32 +43,6 @@ const ScheduleService = () => {
 
         <div className="col-md-6">
           <div className="mb-4">
-            <label className="form-label">Make/Model</label>
-            <input
-              className="form-control"
-              required
-              placeholder="Model"
-              type="text"
-            />
-          </div>
-        </div>
-        {/* End .col */}
-
-        <div className="col-md-6">
-          <div className="mb-4">
-            <label className="form-label">Mileage (optional)</label>
-            <input
-              className="form-control"
-              required
-              placeholder="Mileage"
-              type="text"
-            />
-          </div>
-        </div>
-        {/* End .col */}
-
-        <div className="col-md-6">
-          <div className="mb-4">
             <label className="form-label">Best time</label>
             <input
               className="form-control"

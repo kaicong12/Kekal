@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { listMotorcycles } from "@/utils/db";
 
-const CarItems = async () => {
-  const motorcycles = await listMotorcycles()
-
+const CarItems = ({ motorcycles }) => {
   return (
     <>
       {motorcycles.map((motorcycle) => (
@@ -54,7 +51,7 @@ const CarItems = async () => {
               <div className="wrapper">
                 <h5 className="price">${motorcycle.price}</h5>
                 <h6 className="title">
-                  <Link href="/listing-single-v1">{motorcycle.model}</Link>
+                  <Link href={`/listing-single-v1/${motorcycle.id}`}>{motorcycle.model}</Link>
                 </h6>
               </div>
               {/* End wrapper */}

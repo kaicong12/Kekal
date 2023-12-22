@@ -1,18 +1,33 @@
 "use client";
 
+import { useSearchParams } from 'next/navigation'
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "@/app/components/common/DefaultHeader";
 import HeaderTop from "@/app/components/common/HeaderTop";
 import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import MobileMenu from "@/app/components/common/MobileMenu";
-import AdvanceFilter from "@/app/components/listing/advance-filter";
 import Pagination from "@/app/components/common/Pagination";
 import ListGridFilter from "@/app/components/listing/ListGridFilter";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
-
-import { useState} from "react";
+// import AdvanceFilter from "@/app/components/listing/advance-filter";
+import MainFilter from "@/app/components/listing/advance-filter/MainFilter";
+import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
 
 const ListingV1 = () => {
+    const searchParams = useSearchParams()
+    const brandFilter = searchParams.get('make')
+    const priceFilter = searchParams.get('price')
+
+    const {
+        sortOptions,
+        brandOptions,
+        selectedFilterIdx,
+        selectedBrandIdx,
+        onFilterOptionChange,
+        onBrandOptionChange,
+        motorcycles 
+    } = useMotorcycles(brandFilter, priceFilter)
+
     return (
         <div className="wrapper">
             <div
@@ -38,11 +53,11 @@ const ListingV1 = () => {
             {/* End Main Header Nav For Mobile */}
 
             {/* Advance_search_menu_sectn*/}
-            <section className="advance_search_menu_sectn bgc-thm2 pt20 pb0 mt70-992 filter-style_two">
-                <div className="container">
-                    <AdvanceFilter />
+            {/* <section className="advance_search_menu_sectn bgc-thm2 pt20 pb0 px20 mt70-992 filter-style_two">
+                <div className="row">
+                    <MainFilter />
                 </div>
-            </section>
+            </section> */}
             {/* End Advance_search_menu_sectn*/}
 
             {/* Inner Page Breadcrumb */}
@@ -52,7 +67,7 @@ const ListingV1 = () => {
                         <div className="col-xl-12">
                             <div className="breadcrumb_content style2">
                                 <h2 className="breadcrumb_title">
-                                    Used Vehicles For Sale
+                                    Vehicles For Sale
                                 </h2>
                                 <p className="subtitle">Listing</p>
                                 <ol className="breadcrumb fn-sm mt15-sm">
@@ -76,13 +91,31 @@ const ListingV1 = () => {
             {/* Listing Grid View */}
             <section className="our-listing pt0 bgc-f9 pb30-991">
                 <div className="container">
-                    <div className="row">
-                        <ListGridFilter />
+                    <div className="row mb15">
+                        <div className="col-md-4 mb5">
+                            <div className="page_control_shorting left_area tac-sm mb15-767 mt15">
+                            <p>
+                                We found <span className="heading-color fw600">{motorcycles.length}</span> Motorcycles for you
+                            </p>
+                            </div>
+                        </div>
+                        <ListGridFilter
+                            label={'Sort By: '}
+                            sortOptions={sortOptions}
+                            selectedFilterIdx={selectedFilterIdx}
+                            onFilterOptionChange={onFilterOptionChange}
+                        />
+                        <ListGridFilter
+                            label={'Brand: '}
+                            sortOptions={brandOptions}
+                            selectedFilterIdx={selectedBrandIdx}
+                            onFilterOptionChange={onBrandOptionChange}
+                        />
                     </div>
                     {/* End .row */}
 
                     <div className="row">
-                        <CarItems />
+                        <CarItems motorcycles={motorcycles} />
                     </div>
                     {/* End .row */}
 

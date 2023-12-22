@@ -1345,10 +1345,6 @@
 	.erro_code h2 {
 		font-size: 120px;
 	}
-	.service_include,
-	.service_include2 {
-		margin-top: 50px;
-	}
 	/*.checkout_form .checkout_coupon form button{padding: 0 35px;}*/
 	.single_product_grid.user_profile .single_product_slider.vertical_style.owl-theme .owl-dots .owl-dot span {
 		height: 80px;
@@ -1634,11 +1630,8 @@
 	.inner_page_breadcrumb.style2 {
 		margin-top: 70px !important;
 	}
-	.inner_page_breadcrumb.style2.inner_page_section_spacing {
-		margin-top: 0px !important;
-	}
 	.inner_page_breadcrumb.style2.no-top-filter.inner_page_section_spacing {
-		margin-top: 70px !important;
+		margin-top: 90px !important;
 	}
 
 	.home_iconbox_container {
@@ -2637,10 +2630,9 @@
 	}
 	/* ExTra Class End*/
 	/* Home Content*/
-	section,
 	.home2_img_divider,
 	.inner_page_breadcrumb.style2 {
-		padding: 0 0 50px !important;
+		padding: 20px 0 !important;
 	}
 	.main-title h2 {
 		font-size: 26px;
@@ -3196,6 +3188,12 @@
 	}
 	.advance_search_panel .home1_advance_search_wrapper li {
 		width: 100%;
+		margin-top: 10px
+	}
+
+	.advance_search_panel .home1_advance_search_wrapper li:last-child {
+		width: 100%;
+		margin-top: 30px
 	}
 
 	.home_content.home1_style .home-text .title {

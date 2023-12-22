@@ -1,12 +1,12 @@
 const ServiceHours = () => {
   const days = [
-    { day: "Sunday", schedule: "10:00 - 17:00" },
-    { day: "Monday", schedule: "10:00 - 17:00" },
-    { day: "Tuesday", schedule: "10:00 - 17:00" },
-    { day: "Wednesday", schedule: "10:00 - 17:00" },
-    { day: "Thursday", schedule: "10:00 - 17:00" },
-    { day: "Friday", schedule: "10:00 - 17:00" },
-    { day: "Saturday", schedule: "10:00 - 17:00" },
+    { day: "Sunday", schedule: "9:00 - 19:00" },
+    { day: "Monday", schedule: "9:00 - 19:00" },
+    { day: "Tuesday", schedule: "9:00 - 19:00" },
+    { day: "Wednesday", schedule: "9:00 - 19:00" },
+    { day: "Thursday", schedule: "9:00 - 19:00" },
+    { day: "Friday", schedule: "Closed" },
+    { day: "Saturday", schedule: "9:00 - 19:00" },
   ];
 
   return (
