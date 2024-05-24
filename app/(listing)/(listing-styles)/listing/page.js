@@ -12,6 +12,7 @@ import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItem
 // import AdvanceFilter from "@/app/components/listing/advance-filter";
 import MainFilter from "@/app/components/listing/advance-filter/MainFilter";
 import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
+import { Spin } from 'antd';
 
 const ListingV1 = () => {
     const searchParams = useSearchParams()
@@ -25,7 +26,8 @@ const ListingV1 = () => {
         selectedBrandIdx,
         onFilterOptionChange,
         onBrandOptionChange,
-        motorcycles 
+        motorcycles,
+        loading
     } = useMotorcycles(brandFilter, priceFilter)
 
     return (
@@ -114,9 +116,16 @@ const ListingV1 = () => {
                     </div>
                     {/* End .row */}
 
-                    <div className="row">
-                        <CarItems motorcycles={motorcycles} />
-                    </div>
+                    { loading ? (
+                        <div style={{ textAlign: "center"}}>
+                            <Spin color="#0000ff" size="large" />
+                        </div>
+                    ) : (
+                        <div className="row">
+                            <CarItems motorcycles={motorcycles} />
+                        </div>
+                    )}
+                    
                     {/* End .row */}
 
                     <div className="row">

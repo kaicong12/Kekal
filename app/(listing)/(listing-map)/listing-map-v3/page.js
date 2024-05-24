@@ -19,7 +19,7 @@ const ListingMapV3 = () => {
     selectedBrandIdx,
     onFilterOptionChange,
     onBrandOptionChange,
-    motorcycles 
+    loading 
 } = useMotorcycles()
 
   return (

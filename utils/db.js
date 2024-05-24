@@ -1,7 +1,6 @@
 import {getDownloadURL, ref} from "firebase/storage"
 import { collection, getDocs, doc, getDoc, query, orderBy, limit, where } from "firebase/firestore";
 import {db, storage} from "@/utils/firebase";
-import { filter, sort } from "@/data/menuItems";
 
 const retrieveImageUrl = (path) => {
     // getDownloadUrl will not work on empty path
