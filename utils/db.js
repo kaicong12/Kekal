@@ -4,12 +4,18 @@ import {db, storage} from "@/utils/firebase";
 
 const retrieveImageUrl = (path) => {
     // getDownloadUrl will not work on empty path
+    const notFoundPlaceholder = 'https://via.placeholder.com/150?text=Image+Not+Found'
     if (path === "") {
-        return null
+        return notFoundPlaceholder
     }
 
-    const storageRef = ref(storage, path);
-    return getDownloadURL(storageRef)
+    try {
+      const storageRef = ref(storage, path);
+      return getDownloadURL(storageRef)
+    } catch {
+      return notFoundPlaceholder
+    }
+    
 }
 
 export const listMotorcycles = async () => {

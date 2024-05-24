@@ -62,7 +62,6 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
           setLoading(true);
           try {
             let motorcycles = await queryMotorcycle(queryParams);
-            console.log('done query')
             setMotorcycles(motorcycles);
           } catch (error) {
             console.error('Failed to fetch motorcycles:', error);
