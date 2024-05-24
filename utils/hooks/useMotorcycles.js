@@ -4,6 +4,7 @@ import { queryMotorcycle } from "@/utils/db";
 
 export const useMotorcycles = (makeFilter, priceFilter) => {
     const [motorcycles, setMotorcycles] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [selectedSortIdx, setSelectedFilterIdx] = useState(0)
     const [selectedBrandIdx, setSelectedBrandIdx] = useState(0)
 
@@ -15,12 +16,14 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
       // "Best Selling",
     ]
 
-    const brandOptions = [
-      "All",
-      "Yamaha",
-      "Honda",
-      "SYM"
-    ]
+    const brandOptions = useMemo(() => (
+      [
+        "All",
+        "Yamaha",
+        "Honda",
+        "SYM"
+      ]
+    ), []);
 
     const onFilterOptionChange = useCallback((event) => {
       setSelectedFilterIdx(Number(event.target.value))
@@ -52,15 +55,19 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
       }
 
       return filterParams
-    }, [selectedSortIdx, selectedBrandIdx])
+    }, [selectedSortIdx, selectedBrandIdx, brandOptions])
 
     useEffect(() => {
         const fetchMotorcycles = async () => {
+          setLoading(true);
           try {
             let motorcycles = await queryMotorcycle(queryParams);
+            console.log('done query')
             setMotorcycles(motorcycles);
           } catch (error) {
             console.error('Failed to fetch motorcycles:', error);
+          } finally {
+            setLoading(false);
           }
         }
     
@@ -69,6 +76,7 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
 
     return {
       motorcycles,
+      loading,
       sortOptions,
       brandOptions,
       selectedSortIdx,
