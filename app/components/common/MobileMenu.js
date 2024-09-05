@@ -35,7 +35,7 @@ const MobileMenu = () => {
     const contactInfo = [
         {
             icon: "flaticon-map",
-            text: "5 Jalan Seroja 49, Taman Johor Jaya, 81100 Johor Bahru",
+            text: "5 Jalan Seroja 49, Taman Johor Bahru, 81100 Johor Bahru",
         },
         {
             icon: "flaticon-phone-call",

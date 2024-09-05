@@ -6,7 +6,7 @@ const FooterItems = () => {
                     <h5 className="title">SHOWROOM</h5>
                     <p>
                         5, Jalan Seroja, 49<br />
-                        Taman Johor Jaya,
+                        Taman Johor Bahru,
                         <br />
                         81100 Johor Bahru, Johor
                     </p>

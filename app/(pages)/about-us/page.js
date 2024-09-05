@@ -12,11 +12,11 @@ import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
 
 
 export const metadata = {
-  title: "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, Johor Bahru",
+  title: "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Bahru, Johor Bahru",
   description: "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
   keywords: [
       'kedai motor', 'motor shop', 'motorcycle', 'yamaha dealer', 'kawasaki dealer',
-      'motor repair', 'LC135', 'motor shop johor jaya', 'kedai motor johor bahru'
+      'motor repair', 'LC135', 'motor shop Johor Bahru', 'kedai motor johor bahru'
   ]
 };
 
@@ -157,7 +157,7 @@ const AboutUs = () => {
         <div className="upl_content d-block d-md-flex">
           <p className="float-start fn-sm mb20-sm">
             <span className="fas fa-map-marker-alt pr10 vam" />
-            5, Jln Seroja 49, Taman Johor Jaya, 81100 Johor Bahru, Johor
+            5, Jln Seroja 49, Taman Johor Bahru, 81100 Johor Bahru, Johor
           </p>
             <a 
               href="https://maps.app.goo.gl/a9Fs6RkRSR8dnnsE9" 

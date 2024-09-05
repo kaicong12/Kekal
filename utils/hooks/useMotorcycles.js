@@ -1,36 +1,47 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
-import { queryMotorcycle } from "@/utils/db";
+import { queryMotorcycle, fetchUniqueBrandSet } from "@/utils/db";
 
 
 export const useMotorcycles = (makeFilter, priceFilter) => {
     const [motorcycles, setMotorcycles] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [selectedSortIdx, setSelectedFilterIdx] = useState(0)
-    const [selectedBrandIdx, setSelectedBrandIdx] = useState(0)
+    const [selectedSort, setSelectedSort] = useState("Year: newest First")
+    const [selectedBrand, setSelectedBrand] = useState(makeFilter)
+    const [brandOptions, setBrandOptions] = useState([]); 
 
     const sortOptions = [
-      "Year: newest First",
-      "Year: oldest First",
-      "Price: highest first",
-      "Price: lowest first",
-      // "Best Selling",
+      { value: "Year: newest First", label: "Year: newest First" },
+      { value: "Year: oldest First", label: "Year: oldest First" },
+      { value: "Price: highest first", label: "Price: highest first" },
+      { value: "Price: lowest first", label: "Price: lowest first" }
     ]
 
-    const brandOptions = useMemo(() => (
-      [
-        "All",
-        "Yamaha",
-        "Honda",
-        "SYM"
-      ]
-    ), []);
+    useEffect(() => {
+      const fetchBrands = async () => {
+        const uniqueBrandSet = await fetchUniqueBrandSet();
+  
+        // Transform to react-select options format
+        const brandOptionsArray = Array.from(uniqueBrandSet).map((brand, index) => ({
+          value: index,
+          label: brand,
+        }));
+  
+        setBrandOptions(brandOptionsArray);
+      };
+  
+      fetchBrands();
+    }, []);
 
-    const onFilterOptionChange = useCallback((event) => {
-      setSelectedFilterIdx(Number(event.target.value))
+    const onSortOptionChange = useCallback((selectedOption) => {
+      if (selectedOption?.value) {
+        setSelectedSort(selectedOption.value)
+      }
     }, [])
 
-    const onBrandOptionChange = useCallback((event) => {
-      setSelectedBrandIdx(Number(event.target.value))
+    const onBrandOptionChange = useCallback((selectedOption) => {
+      if (selectedOption?.value) {
+        setSelectedBrand(selectedOption.value)
+      }
     }, [])
 
     const queryParams = useMemo(() => {
@@ -40,22 +51,22 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
         limitResult: null
       }
 
-      if (selectedSortIdx === 0) {
+      if (selectedSort === "Year: newest First") {
         filterParams.sortedBy = [{ fieldToSort: 'year', sortOrder: 'desc' }]
-      } else if (selectedSortIdx === 1) {
+      } else if (selectedSort === "Year: oldest First") {
         filterParams.sortedBy = [{ fieldToSort: 'year' }]
-      } else if (selectedSortIdx === 2) {
+      } else if (selectedSort === "Price: highest first") {
         filterParams.sortedBy = [{ fieldToSort: 'price', sortOrder: 'desc' }]
       } else {
         filterParams.sortedBy = [{ fieldToSort: 'price' }]
       }
 
-      if (selectedBrandIdx !== 0) {
-        filterParams.filterOpt = [{ fieldToFilter: 'brand', operator: '==', filterValue: brandOptions[selectedBrandIdx] }]
+      if (selectedBrand?.length) {
+        filterParams.filterOpt = [{ fieldToFilter: 'brand', operator: '==', filterValue: selectedBrand }]
       }
 
       return filterParams
-    }, [selectedSortIdx, selectedBrandIdx, brandOptions])
+    }, [selectedBrand, selectedSort])
 
     useEffect(() => {
         const fetchMotorcycles = async () => {
@@ -78,10 +89,10 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
       loading,
       sortOptions,
       brandOptions,
-      selectedSortIdx,
-      selectedBrandIdx,
+      selectedSort,
+      selectedBrand,
       useMotorcycles,
-      onFilterOptionChange,
+      onSortOptionChange,
       onBrandOptionChange,
     }
 }

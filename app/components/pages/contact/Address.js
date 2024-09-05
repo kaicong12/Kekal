@@ -3,7 +3,7 @@ const Address = () => {
     title: "Contact Details",
     address: (
       <>
-        5, Jalan Seroja 49<br /> Taman Johor Jaya,
+        5, Jalan Seroja 49<br /> Taman Johor Bahru,
         <br /> 81100 Johor Bahru
       </>
     ),

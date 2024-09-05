@@ -78,3 +78,17 @@ export const queryMotorcycle = async ({ sortedBy, filterOpt, limitResult }) => {
     return res
   }))
 }
+
+export const fetchUniqueBrandSet = async () => {
+  const brandSet = new Set();
+  const q = query(collection(db, "motorcycles"));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    if (data.brand) {
+      brandSet.add(data.brand); // Add unique brands
+    }
+  });
+
+  return brandSet;
+}

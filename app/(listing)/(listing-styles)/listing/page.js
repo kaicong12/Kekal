@@ -9,8 +9,7 @@ import MobileMenu from "@/app/components/common/MobileMenu";
 import Pagination from "@/app/components/common/Pagination";
 import ListGridFilter from "@/app/components/listing/ListGridFilter";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
-// import AdvanceFilter from "@/app/components/listing/advance-filter";
-import MainFilter from "@/app/components/listing/advance-filter/MainFilter";
+
 import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
 import { Spin } from 'antd';
 
@@ -22,9 +21,9 @@ const ListingV1 = () => {
     const {
         sortOptions,
         brandOptions,
-        selectedFilterIdx,
-        selectedBrandIdx,
-        onFilterOptionChange,
+        selectedSort,
+        selectedBrand,
+        onSortOptionChange,
         onBrandOptionChange,
         motorcycles,
         loading
@@ -74,7 +73,7 @@ const ListingV1 = () => {
                                 <p className="subtitle">Listing</p>
                                 <ol className="breadcrumb fn-sm mt15-sm">
                                     <li className="breadcrumb-item">
-                                        <a href="#">Home</a>
+                                        <a href="/">Home</a>
                                     </li>
                                     <li
                                         className="breadcrumb-item active"
@@ -103,15 +102,15 @@ const ListingV1 = () => {
                         </div>
                         <ListGridFilter
                             label={'Sort By: '}
-                            sortOptions={sortOptions}
-                            selectedFilterIdx={selectedFilterIdx}
-                            onFilterOptionChange={onFilterOptionChange}
+                            options={sortOptions}
+                            selectedOption={selectedSort}
+                            onOptionChange={onSortOptionChange}
                         />
                         <ListGridFilter
                             label={'Brand: '}
-                            sortOptions={brandOptions}
-                            selectedFilterIdx={selectedBrandIdx}
-                            onFilterOptionChange={onBrandOptionChange}
+                            options={brandOptions}
+                            selectedOption={selectedBrand}
+                            onOptionChange={onBrandOptionChange}
                         />
                     </div>
                     {/* End .row */}

@@ -1,22 +1,50 @@
-const ListGridFilter = ({ label, sortOptions, selectedSortIdx, onFilterOptionChange}) => {
+import { useMemo } from 'react';
+import Select from 'react-select';
 
-  const selectOptions = sortOptions.map((option, index) => (
-    <option key={index} value={index}>{option}</option>
-  ));
+const ListGridFilter = ({ label, options, selectedOption, onOptionChange }) => {
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      textAlign: 'center',
+      width: '300px',
+    }),
+  };
+
+  const reactSelectValue = useMemo(() => {
+    if (!selectedOption) {
+      return null
+    }
+
+    return {
+      value: selectedOption,
+      label: selectedOption
+    }
+  }, [selectedOption])
 
   return (
     <div className="listing_filter_row db-767">
       <div className="col-md-8">
         <div className="page_control_shorting right_area text-end tac-xsd">
-          <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <ul
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              paddingRight: "20px"
+            }}
+          >
             <li className="list-inline-item short_by_text listone">{label}</li>
             <li className="list-inline-item listwo">
-              <select 
-                className="form-select show-tick" 
-                onChange={onFilterOptionChange}
-                value={sortOptions[selectedSortIdx]}
-                style={{ width: '300px' }}
-              >{selectOptions}</select>
+              <Select
+                value={reactSelectValue}
+                onChange={onOptionChange}
+                options={options}
+                className="basic-single"
+                classNamePrefix="select"
+                isClearable={false} // Prevent clearing the selection (no cross icon)
+                styles={customStyles}
+              />
             </li>
           </ul>
         </div>

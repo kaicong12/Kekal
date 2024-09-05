@@ -16,10 +16,10 @@ import { getMotorcycleById } from "@/utils/db";
 
 export const metadata = {
   title: "Perniagaan Motor Kekal",
-  description: "Authorized motorcycle dealer in Johor Jaya",
+  description: "Authorized motorcycle dealer in Johor Bahru",
   keywords: [
       'kedai motor', 'motor shop', 'motorcycle', 'yamaha dealer', 'kawasaki dealer',
-      'motor repair', 'LC135', 'motor shop johor jaya', 'kedai motor johor bahru'
+      'motor repair', 'LC135', 'motor shop Johor Bahru', 'kedai motor johor bahru'
   ]
 };
 

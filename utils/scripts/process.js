@@ -1,11 +1,24 @@
-import fs from 'fs'
-import path from 'path'
-import https from 'https'
-import _ from 'lodash'
-import fb from '../../firebase/index.js'
-import ExcelJS from 'exceljs';
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+const _ = require('lodash');
+const ExcelJS = require('exceljs');
 
-import {getDownloadURL, ref} from "firebase/storage"
+const { initializeApp } = require('firebase/app')
+const { getFirestore, collection, getDocs, deleteDoc, updateDoc, doc, setDoc, query, where } = require('firebase/firestore')
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBPRtZD_5thDXzuDa1QMHuPR2Edux2WkyU",
+  authDomain: "motorkekal-18db6.firebaseapp.com",
+  projectId: "motorkekal-18db6",
+  storageBucket: "motorkekal-18db6.appspot.com",
+  messagingSenderId: "1052086365693",
+  appId: "1:1052086365693:web:a6da618e4cb5d615217d94",
+  measurementId: "G-2DSKNEB4VC"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 
 const getGsPathFromURL = (_url) => {
@@ -30,9 +43,8 @@ const downloadFilePromise = (url) => {
     return new Promise((res, rej) => {
         const gsPath = getGsPathFromURL(url)
 
-        const { ext: extension, name } = path.parse(gsPath)
-        const destination = path.join(tmpdir, name)
-        console.log(destination)
+        const { ext: extension, name } = path.parse(gsPath);
+        const destination = path.join(require('os').tmpdir(), name);
 
         const file = fs.createWriteStream(destination);
 
@@ -69,189 +81,106 @@ const parseExcelFile = async (excelFilePath) => {
 
     worksheets.forEach(worksheet => {
         worksheet.eachRow((row, rowIndex) => {
+            console.log(row.values)
             if (rowIndex === 1) {
                 return
             }
     
             const [
+                ,
+                brand,
                 description,
-                engineDisplacement,
-                maximumPower,
-                maximumTorque,
-                coolingSystem,
-                departmentCode,
-                category,
-                occupationDesc,
-                phone
-            ] = row.values
+                engine,
+                model,
+                gear,
+                path,
+                year,
+                specification,
+                featured
+            ] = row.values;
 
             result.push({
-                worksheetName: worksheet.name,
+                brand,
                 description,
-                specification: {
-
-                }
-                "specification": {
-                  "Engine Displacement": engineDisplacement,
-                  "Maximum Power": maximumPower,
-                  "Maximum Torque": maximumTorque,
-                  "Cooling System": coolingSystem,
-                  "Transmission": "6-Speed Manual",
-                  "Fuel Tank Capacity": "10 Litres",
-                  "Front Tyre": "100/80 R17",
-                  "Rear Tyre": "140/70 R17",
-                  "Braking System": "282mm Front Disc, 220mm Rear Rotor with Dual-Channel ABS",
-                  "Weight": "141 kg (Kerb)"
-                }
-            })
+                engine,
+                model,
+                gear,
+                path,
+                year,
+                specification: JSON.parse(specification),
+                featured
+            });
         });
     })
 
     return result
 }
 
+const deleteOldDatabase = async () => {
+    const motorcycleCollection = collection(db, 'motorcycle');
+    const snapshot = await getDocs(motorcycleCollection);
+
+    const batch = db.batch();
+    snapshot.forEach(doc => {
+        batch.delete(doc.ref);
+    });
+    await batch.commit();
+}
+
 const processExcelFile = async (excelFilePath) => {
     const data = await parseExcelFile(excelFilePath)
 
-    const newUsers = []
-    const noTMSCodeUsers = []
-    const noPhoneUsers = []
-    const noProfileUserId = []
-    const duplicateUsers = {
-        tmsCode: [],
-        phone: [],
-    }
+    console.log(data, 'data')
 
-    const groupBys = {
-        tmsCode: _.groupBy(data, "identifier"),
-        phone: _.groupBy(data, "phone"),
-    }
+    const updatePromises = data.map(async (motorcycle) => {
+        const docRef = doc(motorcycleCollection);
+        await setDoc(docRef, motorcycle);
+    });
 
-    const tmsCodes = _.map(data, "identifier")
-    const userIdsByIdentifiers = await getEntitiesByColumn("identifier", tmsCodes, org)
-    
-    const authorFromDB = await pgdb.db.any(`select * from user_details ud 
-    where organization = \${org}
-    and email ilike '%knownuggets.com%'
-    and is_admin = true`, { org })
-
-    const firstAuthor = authorFromDB[0]
-    const author = {
-        uuid: firstAuthor.uuid,
-        fullName: `${firstAuthor.firstName} ${firstAuthor.lastName}`,
-        organization: org,
-        organizationName: orgName,
-    }
-
-    const enableAutoGroupsQuery = 'select enable_auto_groups from organizations where id = ${org}'
-    const enableAutoGroupsResults = await pgdb.db.one(enableAutoGroupsQuery, { org })
-
-    const options = {
-        enableAutoGroups: enableAutoGroupsResults.enableAutoGroups,
-        organization: org,
-    }
-
-    data.forEach((user, uIndex) => {
-        const {
-            identifier,
-            phone,
-            ...rest
-        } = user
-
-        if (!phone) {
-            noPhoneUsers.push(uIndex)
-            return
-        }
-
-        if (!identifier) {
-            noTMSCodeUsers.push(uIndex)
-            return
-        }
-
-        // if there is existing tms_code or phone number for this user, skip and do nothing
-        if (groupBys.tmsCode[identifier].length > 1) {
-            duplicateUsers.tmsCode.push(identifier)
-            return
-        }
-
-        if (groupBys.phone[phone].length > 1) {
-            duplicateUsers.phone.push(phone)
-            return
-        }
-
-        const { userId } = userIdsByIdentifiers[identifier] || {}
-        if (!userId) {
-            newUsers.push({
-                ...rest,
-                identifier,
-                phone
-            })
-        }
-    })
-
-    const newUsersResults = await createNewUsers(newUsers, author, options, org, orgName)
-    const { Html, Subject } = generateEmailTemplate({ orgName, newUsersResults, noProfileUserId, noPhoneUsers, noTMSCodeUsers, duplicateUsers })
-    await sendResultAsEmail(org, Html, Subject)
-
-    return {
-        newUsersResults,
-        noProfileUserId,
-        duplicateUsers
-    }
+    await Promise.all(updatePromises)
 }
 
-const fileNode = process.env.FILE_NODE || 'productSyncFile'
-const fileCollectionRef = collection(db, fileNode);
-const excelFiles = await fb
-    .getRef(`clientOrganizations/${org}/${fileNode}`)
-    .orderByChild("isProcessed")
-    .equalTo(false)
-    .once('value')
-    .then(snap => snap.val())
-
-if (!excelFiles) {
-    console.log("No excel files configured")
-} else {
-    for (const fileId of _.keys(excelFiles)) {
+const main = async () => {
+    const fileNode = process.env.FILE_NODE || 'productSyncFile'
+    const fileCollectionRef = collection(db, fileNode);
+    const q = query(fileCollectionRef, where('isProcessed', '==', false));
+    const querySnapshot = await getDocs(q);
+    // await deleteOldDatabase()
+    for (const docSnap of querySnapshot.docs) {
+        const fileRef = doc(db, fileNode, docSnap.id);
         try {
-            const excelFileUrl = _.get(excelFiles, [fileId, "file", "url"])
+            const fileData = docSnap.data();
+            const excelFileUrl = fileData.file_url;
 
             if (!excelFileUrl) {
-                throw new Error("No file url")
+                throw new Error("No file url");
             }
 
-            const excelFile = await downloadFilePromise(excelFileUrl)
+            const excelFile = await downloadFilePromise(excelFileUrl);
 
             if (excelFile) {
-                await fb
-                    .getRef(`clientOrganizations/${org}/${fileNode}/${fileId}`)
-                    .update({
-                        status: 'processing'
-                    })
-                const results = await processExcelFile(excelFile)
+                await updateDoc(fileRef, {
+                    status: 'processing'
+                });
+                await processExcelFile(excelFile)
                 fs.unlinkSync(excelFile)
-                await fb
-                    .getRef(`clientOrganizations/${org}/${fileNode}/${fileId}`)
-                    .update({
-                        isProcessed: true,
-                        results,
-                        status: 'processed'
-                    })
+                // await updateDoc(fileRef, {
+                //     isProcessed: true,
+                //     status: 'processed'
+                // });
             }
             else {
                 throw new Error("No file to download")
             }
 
         } catch (err) {
-            console.log(`Error for ${fileId}`, err)
-            await fb
-                .getRef(`clientOrganizations/${org}/${fileNode}/${fileId}`)
-                .update({
-                    isProcessed: true,
-                    errors: err.message
-                })
+            console.log(`Error for ${docSnap.id}`, err);
+            // await updateDoc(fileRef, {
+            //     isProcessed: true,
+            //     errors: err.message
+            // });
         }
     }
 }
 
-process.exit(0)
+main().then(() => process.exit(0))
