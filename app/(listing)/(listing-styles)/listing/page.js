@@ -67,8 +67,8 @@ const ListingV1 = () => {
                     <div className="row">
                         <div className="col-xl-12">
                             <div className="breadcrumb_content style2">
-                                <h2 className="breadcrumb_title">
-                                    Vehicles For Sale
+                                <h2 className="breadcrumb_title" style={{ marginBottom: "16px" }}>
+                                    Motorcycles For Sale
                                 </h2>
                                 <p className="subtitle">Listing</p>
                                 <ol className="breadcrumb fn-sm mt15-sm">

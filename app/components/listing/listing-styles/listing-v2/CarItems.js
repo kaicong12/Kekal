@@ -66,7 +66,7 @@ const CarItems = () => {
 
             <div className="details">
               <div className="wrapper">
-                <h5 className="price">${listing.price}</h5>
+                <h5 className="price">{listing.price}</h5>
                 <h6 className="title">
                   <Link href="/listing-single-v2">{listing.title}</Link>
                 </h6>

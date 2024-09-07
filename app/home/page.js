@@ -97,8 +97,8 @@ const Home = () => {
           <div className="row mt20">
             <div className="col-lg-12">
               <div className="text-center">
-                <Link href="/listing-v3" className="more_listing">
-                  Show All Cars{" "}
+                <Link href="/listing" className="more_listing">
+                  Show All Motorcycles{" "}
                   <span className="icon">
                     <span className="fas fa-plus" />
                   </span>

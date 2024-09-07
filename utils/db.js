@@ -72,10 +72,15 @@ export const queryMotorcycle = async ({ sortedBy, filterOpt, limitResult }) => {
   const querySnapshot = await getDocs(q)
 
   return await Promise.all(querySnapshot.docs.map(async doc => {
-    const res = {id: doc.id, ...doc.data()};
-    res.imageUrl = await retrieveImageUrl(res.path)
+    const motorcycleData = doc.data();
+    // If thumbnail doesn't exist, use the first image and retrieve its URL
+    if (!motorcycleData.thumbnail && motorcycleData.images?.length) {
+      const firstImageUrl = motorcycleData.images[0];
+      const imageUrl = await retrieveImageUrl(firstImageUrl);
+      motorcycleData.imageUrl = imageUrl;
+    }
 
-    return res
+    return { id: doc.id, ...motorcycleData };
   }))
 }
 

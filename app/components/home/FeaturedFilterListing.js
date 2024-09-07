@@ -12,7 +12,7 @@ const FeaturedFilterListing = () => {
   const filteredItems =
     filter === "*"
       ? data.slice(0, 6)
-      : data.slice(0, 6).filter((item) => item.tags.includes(filter));
+      : data.slice(0, 6).filter((item) => item.tags?.includes(filter));
 
   return (
     <div className="popular_listing_sliders">
@@ -91,25 +91,30 @@ const FeaturedFilterListing = () => {
                 </div>
                 <div className="details">
                   <div className="wrapper">
-                    <h5 className="price">${listing.price}</h5>
+                    <h5 className="price">{listing.price}</h5>
                     <h6 className="title">
                       <Link href={`/listing-single-v1/${listing.id}`}>{listing.brand} {listing.model}</Link>
                     </h6>
                   </div>{" "}
+                  
                   <div className="listing_footer">
                     <ul className="mb0">
-                      <li className="list-inline-item">
-                        <span className="flaticon-sedan-car-model me-2" />
-                        {listing.engine}
-                      </li>
+                      { listing?.specifications?.Displacement ? (
+                        <li className="list-inline-item">
+                          <span className="flaticon-sedan-car-model me-2" />
+                          {listing?.specifications?.Displacement}
+                        </li>
+                      ): null }
                       <li className="list-inline-item">
                         <span className="flaticon-coin me-2" />
                         {listing.price}
                       </li>
-                      <li className="list-inline-item">
-                        <span className="flaticon-gear me-2" />
-                        {listing.gear}
-                      </li>
+                      { listing?.specifications?.["Maximum Power"] ? (
+                        <li className="list-inline-item">
+                          <span className="flaticon-gear me-2" />
+                          { listing?.specifications?.["Maximum Power"] }
+                        </li>
+                      ): null }
                     </ul>
                   </div>
                 </div>

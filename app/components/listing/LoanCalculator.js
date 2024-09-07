@@ -55,14 +55,21 @@ const SelectLoanPeriod = ({ title, handleChangeSelect }) => (
 )
 
 const LoanCalculator = ({ motorcycle }) => {
+    const { price: priceString } = motorcycle;
+    // Step 1: Split the string by ' - ' to isolate the first price
+    const priceRange = priceString.split(' - ')[0];
+    // Step 2: Remove 'RM' and commas
+    const numericPrice = priceRange.replace(/[^0-9.]/g, '')
+    const priceFloat = parseFloat(numericPrice);
+
     const [downPayment, setDownPayment] = useState(20)
     const [loanYear, setLoanYear] = useState(2) 
-    const [monthlyPayment, setMonthlyPayment] = useState(motorcycle.price ?? 0)
+    const [monthlyPayment, setMonthlyPayment] = useState(priceFloat ?? 0)
     const debouncedDownPaymentValue = useDebounce(downPayment, 500)
 
     const getMonthlyPayment = useCallback((downPaymentPercent, annualInterestRate, loanTermYears) => {
         // Principal loan amount
-        const principal = motorcycle.price * (100 - downPaymentPercent) / 100
+        const principal = priceFloat * (100 - downPaymentPercent) / 100
         // Convert annual rate to a monthly and percentage rate
         const monthlyInterestRate = annualInterestRate / 12 / 100
         // Total number of monthly payments
@@ -75,7 +82,7 @@ const LoanCalculator = ({ motorcycle }) => {
         
         const monthlyPayment = principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments)) / (Math.pow(1 + monthlyInterestRate, totalPayments) - 1);
         setMonthlyPayment(monthlyPayment)
-    }, [])
+    }, [priceFloat])
 
     useEffect(() => {
         getMonthlyPayment(debouncedDownPaymentValue, 4, loanYear)
@@ -93,7 +100,7 @@ const LoanCalculator = ({ motorcycle }) => {
 
             <div className={styles.displayContainer}>
                 <div className={styles.displayDiv}>
-                    <strong style={{display: 'block', fontSize: '20px'}}>RM{motorcycle.price * downPayment / 100}</strong>
+                    <strong style={{display: 'block', fontSize: '20px'}}>RM{priceFloat * downPayment / 100}</strong>
                     <span style={{ fontSize: '13px'}}>Down Payment</span>
                 </div>
 

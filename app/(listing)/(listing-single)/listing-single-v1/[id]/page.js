@@ -25,7 +25,7 @@ export const metadata = {
 
 const ListingSingleV1 = async ({ params }) => {
   const motorcycleData = await getMotorcycleById(params.id)
-
+  
   return (
     <div className="wrapper">
       <div
@@ -71,7 +71,7 @@ const ListingSingleV1 = async ({ params }) => {
                       <a href="#">BRAND NEW - IN STOCK</a>
                     </li>
                   </ul>
-                  <h2 className="title">{motorcycleData.brand} {motorcycleData.model}</h2>
+                  <h2 className="title" style={{ marginBottom: "0" }}>{motorcycleData.name}</h2>
                 </div>
               </div>
             </div>
@@ -80,13 +80,10 @@ const ListingSingleV1 = async ({ params }) => {
             <div className="col-lg-5 col-xl-4">
               <div className="single_page_heading_content text-start text-lg-end">
                 <div className="price_content">
-                  <div className="price mt60 mb10 mt10-md">
-                    <h3>
-                      <small className="mr15">
-                        <del>$92,480</del>
-                      </small>
-                      RM{motorcycleData.price}
-                    </h3>
+                  <div className="price">
+                    <small className="mr15" style={{ marginLeft: "4px", fontSize: "16px" }}>
+                      {motorcycleData.price}
+                    </small>
                   </div>
                 </div>
               </div>
@@ -98,15 +95,15 @@ const ListingSingleV1 = async ({ params }) => {
           <div className="row">
             <div className="col-lg-8 col-xl-8">
               <ProductGallery 
-                brand={motorcycleData.brand.toLowerCase()} 
-                modelName={motorcycleData.model.replace(/ /g, "_").toLowerCase()} 
+                brand={motorcycleData.brand} 
+                modelName={motorcycleData.name} 
               />
               {/* End Car Gallery */}
 
               <div className="opening_hour_widgets p30 mt30">
                 <div className="wrapper">
                   <h4 className="title">Overview</h4>
-                  <Overview productSpecification={motorcycleData.specification} />
+                  <Overview productSpecification={motorcycleData.specifications} />
                 </div>
               </div>
               {/* End opening_hour_widgets */}
@@ -148,14 +145,14 @@ const ListingSingleV1 = async ({ params }) => {
           <div className="row">
             <div className="col-sm-6">
               <div className="main-title text-center text-md-start mb10-520">
-                <h2 className="title">Releated Best Car</h2>
+                <h2 className="title">Related Best Car</h2>
               </div>
             </div>
             {/* End .col-sm-6 */}
 
             <div className="col-sm-6">
               <div className="text-center text-md-end mb30-520">
-                <Link href="/page-list-v1" className="more_listing">
+                <Link href="/listing" className="more_listing">
                   Show All Cars
                   <span className="icon">
                     <span className="fas fa-plus" />
@@ -173,7 +170,7 @@ const ListingSingleV1 = async ({ params }) => {
               data-aos-delay="100"
             >
               <div className="listing_item_4grid_slider nav_none">
-                <ReleatedCar />
+                <ReleatedCar currentMotorcycle={motorcycleData} currentMotorId={params.id} />
               </div>
             </div>
           </div>

@@ -5,13 +5,11 @@ import { queryMotorcycle, fetchUniqueBrandSet } from "@/utils/db";
 export const useMotorcycles = (makeFilter, priceFilter) => {
     const [motorcycles, setMotorcycles] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [selectedSort, setSelectedSort] = useState("Year: newest First")
+    const [selectedSort, setSelectedSort] = useState("Price: lowest first")
     const [selectedBrand, setSelectedBrand] = useState(makeFilter)
     const [brandOptions, setBrandOptions] = useState([]); 
 
     const sortOptions = [
-      { value: "Year: newest First", label: "Year: newest First" },
-      { value: "Year: oldest First", label: "Year: oldest First" },
       { value: "Price: highest first", label: "Price: highest first" },
       { value: "Price: lowest first", label: "Price: lowest first" }
     ]
@@ -51,11 +49,7 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
         limitResult: null
       }
 
-      if (selectedSort === "Year: newest First") {
-        filterParams.sortedBy = [{ fieldToSort: 'year', sortOrder: 'desc' }]
-      } else if (selectedSort === "Year: oldest First") {
-        filterParams.sortedBy = [{ fieldToSort: 'year' }]
-      } else if (selectedSort === "Price: highest first") {
+      if (selectedSort === "Price: highest first") {
         filterParams.sortedBy = [{ fieldToSort: 'price', sortOrder: 'desc' }]
       } else {
         filterParams.sortedBy = [{ fieldToSort: 'price' }]

@@ -29,7 +29,7 @@ const CarItems = ({ motorcycles }) => {
                 }}
                 priority
                 src={motorcycle.imageUrl}
-                alt={motorcycle.model}
+                alt={motorcycle.name}
               />
 
               <div className="thmb_cntnt3">
@@ -49,27 +49,31 @@ const CarItems = ({ motorcycles }) => {
             </div>
             <div className="details">
               <div className="wrapper">
-                <h5 className="price">${motorcycle.price}</h5>
+                <h5 className="price">{motorcycle.price}</h5>
                 <h6 className="title">
-                  <Link href={`/listing-single-v1/${motorcycle.id}`}>{motorcycle.model}</Link>
+                  <Link href={`/listing-single-v1/${motorcycle.id}`}>{motorcycle.name}</Link>
                 </h6>
               </div>
               {/* End wrapper */}
 
               <div className="listing_footer">
                 <ul className="mb0">
-                  <li className="list-inline-item">
-                    <span className="flaticon-sedan-car-model me-2" />
-                    {motorcycle.engine}
-                  </li>
+                  { motorcycle?.specifications?.Displacement ? (
+                    <li className="list-inline-item">
+                      <span className="flaticon-sedan-car-model me-2" />
+                      {motorcycle?.specifications?.Displacement}
+                    </li>
+                  ): null }
                   <li className="list-inline-item">
                     <span className="flaticon-coin me-2" />
                     {motorcycle.price}
                   </li>
-                  <li className="list-inline-item">
-                    <span className="flaticon-gear me-2" />
-                    {motorcycle.gear}
-                  </li>
+                  { motorcycle?.specifications?.["Maximum Power"] ? (
+                    <li className="list-inline-item">
+                      <span className="flaticon-gear me-2" />
+                      { motorcycle?.specifications?.["Maximum Power"] }
+                    </li>
+                  ): null }
                 </ul>
               </div>
             </div>

@@ -14,10 +14,10 @@ const HeroFilter = () => {
   const priceOptions = [
     { value: 0, label: "All Price" },
     { value: 1, label: "No max Price" },
-    { value: 2, label: "Less than $2,000" },
-    { value: 3, label: "Less than $5,000" },
-    { value: 4, label: "Less than $10,000" },
-    { value: 5, label: "Less than $15,000" },
+    { value: 2, label: "Less than RM2,000" },
+    { value: 3, label: "Less than RM5,000" },
+    { value: 4, label: "Less than RM10,000" },
+    { value: 5, label: "Less than RM15,000" },
   ];
 
   useEffect(() => {

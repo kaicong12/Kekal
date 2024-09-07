@@ -2,25 +2,16 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
-import { useListingImages } from "@/utils/hooks/useListingImages";
-// import ModalVideo from "react-modal-video";
-// import "react-modal-video/scss/modal-video.scss";
 
-// import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import Image from "next/image";
+
+import { useListingImages } from "@/utils/hooks/useListingImages";
 
 
 export default function ProductGallery({ brand, modelName }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [listingImagesLinks, setListingImagesLinks] = useListingImages(brand, modelName)
-  // const [isOpen, setOpen] = useState(false);
-  // const [videoId, setVideoId] = useState("");
-
-  // const openModal = (id) => {
-  //   setVideoId(id);
-  //   setOpen(true);
-  // };
+  const { listingImages } = useListingImages(brand, modelName)
 
   return (
     <>
@@ -37,7 +28,7 @@ export default function ProductGallery({ brand, modelName }) {
             modules={[FreeMode, Navigation, Thumbs]}
             className="mySwiper2 sps_content single_product_grid user_profile "
           >
-            {listingImagesLinks.map((slide, index) => (
+            {listingImages.map((slide, index) => (
               <SwiperSlide key={index}>
                 <div className="item">
                   <Image
@@ -73,7 +64,7 @@ export default function ProductGallery({ brand, modelName }) {
             modules={[FreeMode, Navigation, Thumbs]}
             className="mySwiper mt-2 thumb-gallery-opacity"
           >
-            {listingImagesLinks.map((slide, index) => (
+            {listingImages.map((slide, index) => (
               <SwiperSlide key={index}>
                 <Image
                   width={163}

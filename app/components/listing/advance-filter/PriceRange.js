@@ -21,8 +21,8 @@ const PriceRange = () => {
                 onChange={(value) => handleOnChange(value)}
                 id="slider"
             />
-            <span id="slider-range-value1">${price.value.min}</span>
-            <span id="slider-range-value2">${price.value.max}</span>
+            <span id="slider-range-value1">RM{price.value.min}</span>
+            <span id="slider-range-value2">RM{price.value.max}</span>
         </div>
     );
 };
