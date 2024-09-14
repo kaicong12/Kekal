@@ -96,42 +96,24 @@ def scrape_motorcycle_data(driver, link, current_model, motorcycle_data):
         driver.quit()
 
 
-def get_motorcycle_data(url, stop_idx):
-    driver = open_browser()
-    driver.get(url)
-    time.sleep(3)  # Wait for the page to load
-
-    # List to store the individual motorcycle page links
-    motorcycle_links = []
-    links = driver.find_elements(By.CSS_SELECTOR, 'a.vh-name')
-    for link in links:
-        href = link.get_attribute('href')
-        motorcycle_links.append(href)
-    
-    # Close the browser after collecting links
-    driver.quit()
-
+def get_motorcycle_data(url):
     motorcycle_data = []
-    current_model = url.split('/')[-1].capitalize()
-    for idx, link in enumerate(motorcycle_links):
-        if stop_idx != -1 and idx == stop_idx:
-            break
+    current_model = url.split('/')[-2].capitalize()
 
-        # Open a new browser for each motorcycle link
-        driver = open_browser()
+    # Open a new browser for each motorcycle link
+    driver = open_browser()
 
-        # Run the scraping in a separate thread
-        scrape_thread = threading.Thread(target=scrape_motorcycle_data, args=(driver, link, current_model, motorcycle_data))
-        scrape_thread.start()
+    # Run the scraping in a separate thread
+    scrape_thread = threading.Thread(target=scrape_motorcycle_data, args=(driver, url, current_model, motorcycle_data))
+    scrape_thread.start()
 
-        # Wait for the thread to finish, with a maximum timeout of 5 minutes (300 seconds)
-        scrape_thread.join(TIMEOUT)
+    # Wait for the thread to finish, with a maximum timeout of 5 minutes (300 seconds)
+    scrape_thread.join(TIMEOUT)
 
-         # If the thread is still alive after the timeout, skip to the next motorcycle
-        if scrape_thread.is_alive():
-            print(f"Timeout occurred for motorcycle {link}, skipping to the next.")
-            driver.quit()  # Ensure the browser is closed
-            continue
-        
+    # If the thread is still alive after the timeout, skip to the next motorcycle
+    if scrape_thread.is_alive():
+        print(f"Timeout occurred for motorcycle {url}, skipping to the next.")
+        driver.quit()  # Ensure the browser is closed
+        return
 
     return motorcycle_data

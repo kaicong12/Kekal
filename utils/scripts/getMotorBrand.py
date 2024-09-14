@@ -2,15 +2,17 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-# Initialize the Selenium WebDriver (using Chrome in this case)
-chromedriver_path = '/opt/homebrew/bin/chromedriver'
-driver = webdriver.Chrome()  # Adjust the path to your chromedriver
-driver.maximize_window()
+def open_browser():
+    chromedriver_path = '/opt/homebrew/bin/chromedriver'
+    driver = webdriver.Chrome() 
+    driver.maximize_window()
+    return driver
 
 # Step 1: Navigate to the page with the motorcycle brands
 url = 'https://www.zigwheels.my/new-motorcycles'
 
 def get_urls(STOP_IDX):
+    driver = open_browser()
     driver.get(url)
 
     # Step 2: Locate the brand list using the selector for the <ul> element
@@ -28,3 +30,31 @@ def get_urls(STOP_IDX):
     driver.quit()
 
     return brand_links
+
+def get_models(STOP_IDX):
+    urls = get_urls(STOP_IDX)
+    print(urls)
+
+    results = []
+    for url in urls:
+        driver = open_browser()
+        driver.get(url)
+        time.sleep(3)  # Wait for the page to load
+
+        # List to store the individual motorcycle page links
+        motorcycle_links = []
+        links = driver.find_elements(By.CSS_SELECTOR, 'a.vh-name')
+        for link in links:
+            href = link.get_attribute('href')
+            motorcycle_links.append(href)
+        
+        results.extend(motorcycle_links)
+        # Close the browser after collecting links
+        driver.quit()
+    
+    return results
+
+
+if __name__ == "__main__":
+    brand_links = get_models(1)
+    print(brand_links)

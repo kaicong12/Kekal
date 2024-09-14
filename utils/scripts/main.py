@@ -1,18 +1,18 @@
 import time
 import pandas as pd
 
-from getMotorBrand import get_urls
+from getMotorBrand import get_models
 from getMotorCycleData import get_motorcycle_data
-from uploadFirebase import upload_file
+from firestoreDb import upload_file
 
 STOP_IDX = -1
 # URL of the motorcycle listing page
-urls = get_urls(STOP_IDX)
+urls = get_models(STOP_IDX)
 excel_data = []
 for idx, url in enumerate(urls):
     print(f'----- Scraping {url} start -----')
     # get motorcycle data for this brand
-    current_motorcycle_data = get_motorcycle_data(url, STOP_IDX)
+    current_motorcycle_data = get_motorcycle_data(url)
     excel_data.extend(current_motorcycle_data)
     print(f'----- Scraping {url} end -----')
 

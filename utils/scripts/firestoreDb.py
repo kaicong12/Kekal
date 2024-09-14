@@ -7,8 +7,8 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 # Step 1: Initialize Firebase app with the credentials
-firebase_credentials_path = '/Users/kaicong12/Downloads/motorkekal-18db6-firebase-adminsdk-xuq7j-36fad52c55.json'  # Replace with your Firebase JSON credentials
-google_credential_path = '/Users/kaicong12/Downloads/motorkekal-18db6-31a99cf31bfa-google.json'
+firebase_credentials_path = '/Users/kaicong12/Kekal/keys/motorkekal-18db6-firebase-adminsdk-xuq7j-36fad52c55.json'  # Replace with your Firebase JSON credentials
+google_credential_path = '/Users/kaicong12/Kekal/keys/motorkekal-18db6-31a99cf31bfa-google.json'
 cred = credentials.Certificate(firebase_credentials_path)
 firebase_admin.initialize_app(cred)
 
