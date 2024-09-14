@@ -5,7 +5,7 @@ from getMotorBrand import get_models
 from getMotorCycleData import get_motorcycle_data
 from firestoreDb import upload_file
 
-STOP_IDX = -1
+STOP_IDX = 2
 # URL of the motorcycle listing page
 urls = get_models(STOP_IDX)
 excel_data = []

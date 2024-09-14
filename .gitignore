@@ -38,3 +38,6 @@ next-env.d.ts
 /.idea/
 
 keys/*.json
+
+# python virtual env
+.env

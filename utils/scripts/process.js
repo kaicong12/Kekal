@@ -8,7 +8,7 @@ const { initializeApp } = require('firebase/app')
 const { getFirestore, collection, getDocs, updateDoc, doc, setDoc, query, where, writeBatch } = require('firebase/firestore')
 const { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } = require('firebase/storage'); 
 
-const firebaseConfig = require('../../firebaseConfig.json');
+const firebaseConfig = require('../../keys/firebaseConfig.json');
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app); 
@@ -212,6 +212,7 @@ const main = async () => {
 
         } catch (err) {
             console.log(`Error for ${docSnap.id}`, err);
+            fs.unlinkSync(excelFile)
             // await updateDoc(fileRef, {
             //     isProcessed: true,
             //     errors: err.message
