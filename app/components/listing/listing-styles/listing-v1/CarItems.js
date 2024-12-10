@@ -49,7 +49,7 @@ const CarItems = ({ motorcycles }) => {
             </div>
             <div className="details">
               <div className="wrapper">
-                <h5 className="price">{motorcycle.price}</h5>
+                <h5 className="price">RM {motorcycle.price}</h5>
                 <h6 className="title">
                   <Link href={`/listing-single-v1/${motorcycle.id}`}>{motorcycle.name}</Link>
                 </h6>

@@ -62,7 +62,7 @@ const HeroFilter = () => {
 
   return (
     <div className="col-lg-12">
-      <ul className="nav nav-pills justify-content-center">
+      {/* <ul className="nav nav-pills justify-content-center">
         <li className="nav-item" role="presentation">
           <button
             className={`nav-link ${
@@ -89,7 +89,7 @@ const HeroFilter = () => {
             New Bike
           </button>
         </li>
-      </ul>
+      </ul> */}
 
       {/* Filter Tabs */}
       <div className="adss_bg_stylehome1">

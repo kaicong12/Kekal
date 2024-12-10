@@ -82,7 +82,7 @@ const ListingSingleV1 = async ({ params }) => {
                 <div className="price_content">
                   <div className="price">
                     <small className="mr15" style={{ marginLeft: "4px", fontSize: "16px" }}>
-                      {motorcycleData.price}
+                      RM {motorcycleData.price}
                     </small>
                   </div>
                 </div>
@@ -145,7 +145,7 @@ const ListingSingleV1 = async ({ params }) => {
           <div className="row">
             <div className="col-sm-6">
               <div className="main-title text-center text-md-start mb10-520">
-                <h2 className="title">Related Best Car</h2>
+                <h2 className="title">Related Best Bikes</h2>
               </div>
             </div>
             {/* End .col-sm-6 */}
@@ -153,7 +153,7 @@ const ListingSingleV1 = async ({ params }) => {
             <div className="col-sm-6">
               <div className="text-center text-md-end mb30-520">
                 <Link href="/listing" className="more_listing">
-                  Show All Cars
+                  Show All Bikes
                   <span className="icon">
                     <span className="fas fa-plus" />
                   </span>

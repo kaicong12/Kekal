@@ -85,7 +85,7 @@ const ListingContent = () => {
                       <h6 className="title">
                         <a href="page-car-single-v1.html">{`${car.make} ${car.model} - ${car.year}`}</a>
                       </h6>
-                      <h5 className="price">{car.price}</h5>
+                      <h5 className="price">RM {car.price}</h5>
                     </div>
                   </div>
                 </th>

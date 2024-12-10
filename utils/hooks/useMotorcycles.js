@@ -4,11 +4,15 @@ import { queryMotorcycle, fetchUniqueBrandSet } from "@/utils/db";
 
 export const useMotorcycles = (makeFilter, priceFilter) => {
     const [motorcycles, setMotorcycles] = useState([]);
+    const [paginatedMotorcycles, setPaginatedMotorcycles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedSort, setSelectedSort] = useState("Price: lowest first")
     const [selectedBrand, setSelectedBrand] = useState(makeFilter)
     const [brandOptions, setBrandOptions] = useState([]); 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
+    const itemsPerPage = 10;
     const sortOptions = [
       { value: "Price: highest first", label: "Price: highest first" },
       { value: "Price: lowest first", label: "Price: lowest first" }
@@ -45,8 +49,7 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
     const queryParams = useMemo(() => {
       const filterParams = {
         sortedBy: [],
-        filterOpt: [],
-        limitResult: null
+        filterOpt: []
       }
 
       if (selectedSort === "Price: highest first") {
@@ -66,8 +69,9 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
         const fetchMotorcycles = async () => {
           setLoading(true);
           try {
-            let motorcycles = await queryMotorcycle(queryParams);
+            const { motorcycles, total } = await queryMotorcycle(queryParams);
             setMotorcycles(motorcycles);
+            setTotalPages(Math.ceil(total / itemsPerPage))
           } catch (error) {
             console.error('Failed to fetch motorcycles:', error);
           } finally {
@@ -78,8 +82,17 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
         fetchMotorcycles();
     }, [queryParams])
 
+    useEffect(() => {
+      if (motorcycles.length) {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const paginatedData = motorcycles.slice(startIndex, startIndex + itemsPerPage);
+        setPaginatedMotorcycles(paginatedData)
+      }
+    }, [currentPage, itemsPerPage, motorcycles])
+
     return {
       motorcycles,
+      paginatedMotorcycles,
       loading,
       sortOptions,
       brandOptions,
@@ -88,5 +101,8 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
       useMotorcycles,
       onSortOptionChange,
       onBrandOptionChange,
+      currentPage,
+      totalPages,
+      setCurrentPage
     }
 }

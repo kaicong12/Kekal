@@ -91,7 +91,7 @@ const FeaturedFilterListing = () => {
                 </div>
                 <div className="details">
                   <div className="wrapper">
-                    <h5 className="price">{listing.price}</h5>
+                    <h5 className="price">RM {listing.price}</h5>
                     <h6 className="title">
                       <Link href={`/listing-single-v1/${listing.id}`}>{listing.brand} {listing.model}</Link>
                     </h6>
@@ -107,7 +107,7 @@ const FeaturedFilterListing = () => {
                       ): null }
                       <li className="list-inline-item">
                         <span className="flaticon-coin me-2" />
-                        {listing.price}
+                        RM {listing.price}
                       </li>
                       { listing?.specifications?.["Maximum Power"] ? (
                         <li className="list-inline-item">

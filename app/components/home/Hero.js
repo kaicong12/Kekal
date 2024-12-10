@@ -51,10 +51,10 @@ const Hero = () => {
                 <div className="container">
                   <div className="row home-content-home2-style">
                     <div className="col-lg-12 p0">
-                      <h2 className={slide.className}>
+                      <h1 className={slide.className}>
                         {slide.title}
                         <br />
-                      </h2>
+                      </h1>
                       <h3 className={slide.subtitleClass}>Ride with Confidence, Ride with Us. Serving Johor Bahru&apos;s Riders for Over 30 Years</h3>
                       <h3 className="banner_top_title text-thm d-flex align-items-baseline">
                         <span className="aminated-object1">
