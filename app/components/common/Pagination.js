@@ -1,37 +1,56 @@
-"use client";
-import { useState } from "react";
-
-const Pagination = () => {
-  const [currentPage, setCurrentPage] = useState(2);
-  const totalPages = 3;
+const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
   const pages = [];
-
-  const handleClick = (page) => {
-    setCurrentPage(page);
+  const buttonsToShow = 3
+  const getVisiblePages = () => {
+    let pages = [];
+    if (totalPages <= 3) {
+      // If total pages are less than or equal to 3, show all
+      pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+    } else {
+      if (currentPage === 1) {
+        // Show the first three pages
+        pages = [1, 2, 3];
+      } else if (currentPage === totalPages) {
+        // Show the last three pages
+        pages = [totalPages - 2, totalPages - 1, totalPages];
+      } else {
+        // Show one page before and after the current page
+        pages = [currentPage - 1, currentPage, currentPage + 1];
+      }
+    }
+    return pages;
   };
 
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(
-      <li
-        role="button"
-        key={i}
-        className={`page-item ${i === currentPage ? "active" : ""}`}
-        onClick={() => handleClick(i)}
-      >
-        <span className="page-link">{i}</span>
-      </li>
-    );
-  }
+  const visiblePages = getVisiblePages();
 
   return (
     <ul className="page_navigation">
-      <li role="button" className="page-item">
+      <li
+        role="button"
+        className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}
+        onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+      >
         <span className="page-link">
           <span className="fa fa-arrow-left" />
         </span>
       </li>
-      {pages}
-      <li role="button" className="page-item">
+
+      {visiblePages.map((page) => (
+        <li
+          role="button"
+          key={page}
+          className={`page-item ${page === currentPage ? 'active' : ''}`}
+          onClick={() => setCurrentPage(page)}
+        >
+          <span className="page-link">{page}</span>
+        </li>
+      ))}
+
+      <li
+        role="button"
+        className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}
+        onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
+      >
         <span className="page-link">
           <span className="fa fa-arrow-right" />
         </span>

@@ -55,11 +55,7 @@ const SelectLoanPeriod = ({ title, handleChangeSelect }) => (
 )
 
 const LoanCalculator = ({ motorcycle }) => {
-    const { price: priceString } = motorcycle;
-    // Step 1: Split the string by ' - ' to isolate the first price
-    const priceRange = priceString.split(' - ')[0];
-    // Step 2: Remove 'RM' and commas
-    const numericPrice = priceRange.replace(/[^0-9.]/g, '')
+    const { price: numericPrice } = motorcycle;
     const priceFloat = parseFloat(numericPrice);
 
     const [downPayment, setDownPayment] = useState(20)
@@ -100,7 +96,7 @@ const LoanCalculator = ({ motorcycle }) => {
 
             <div className={styles.displayContainer}>
                 <div className={styles.displayDiv}>
-                    <strong style={{display: 'block', fontSize: '20px'}}>RM{priceFloat * downPayment / 100}</strong>
+                    <strong style={{display: 'block', fontSize: '20px'}}>RM {priceFloat * downPayment / 100}</strong>
                     <span style={{ fontSize: '13px'}}>Down Payment</span>
                 </div>
 

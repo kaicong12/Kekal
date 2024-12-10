@@ -26,7 +26,11 @@ const ListingV1 = () => {
         onSortOptionChange,
         onBrandOptionChange,
         motorcycles,
-        loading
+        paginatedMotorcycles,
+        loading,
+        currentPage,
+        totalPages,
+        setCurrentPage
     } = useMotorcycles(brandFilter, priceFilter)
 
     return (
@@ -121,7 +125,7 @@ const ListingV1 = () => {
                         </div>
                     ) : (
                         <div className="row">
-                            <CarItems motorcycles={motorcycles} />
+                            <CarItems motorcycles={paginatedMotorcycles} />
                         </div>
                     )}
                     
@@ -130,7 +134,11 @@ const ListingV1 = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="mbp_pagination mt10">
-                                <Pagination />
+                                <Pagination 
+                                    currentPage={currentPage}
+                                    totalPages={totalPages}
+                                    setCurrentPage={setCurrentPage}
+                                />
                             </div>
                         </div>
                     </div>

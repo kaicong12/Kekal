@@ -55,7 +55,7 @@ export const queryMotorcycle = async ({ sortedBy, filterOpt, limitResult }) => {
       queryParams.push(sortQuery)
     })
   }
-
+  
   if (filterOpt.length) {
     filterOpt.forEach(filterOption => {
       const { fieldToFilter, operator, filterValue } = filterOption
@@ -64,6 +64,7 @@ export const queryMotorcycle = async ({ sortedBy, filterOpt, limitResult }) => {
     })
   }
 
+  const totalCount = await getDocs(query(dbRef)).then((snapshot) => snapshot.size);
   if (limitResult) {
     queryParams.push(limit(limitResult))
   }
@@ -71,7 +72,7 @@ export const queryMotorcycle = async ({ sortedBy, filterOpt, limitResult }) => {
   const q = query(dbRef, ...queryParams)
   const querySnapshot = await getDocs(q)
 
-  return await Promise.all(querySnapshot.docs.map(async doc => {
+  const motorcycles = await Promise.all(querySnapshot.docs.map(async doc => {
     const motorcycleData = doc.data();
     // If thumbnail doesn't exist, use the first image and retrieve its URL
     if (!motorcycleData.thumbnail && motorcycleData.images?.length) {
@@ -82,6 +83,8 @@ export const queryMotorcycle = async ({ sortedBy, filterOpt, limitResult }) => {
 
     return { id: doc.id, ...motorcycleData };
   }))
+
+  return { motorcycles, total: totalCount }
 }
 
 export const fetchUniqueBrandSet = async () => {
