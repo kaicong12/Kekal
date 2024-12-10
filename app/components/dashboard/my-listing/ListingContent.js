@@ -1,39 +1,6 @@
 import Image from "next/image";
 
-const ListingContent = () => {
-  const carListings = [
-    {
-      id: 1,
-      make: "Volvo",
-      model: "XC90",
-      year: 2020,
-      transmission: "Automatic",
-      fuelType: "Diesel",
-      price: "$129",
-      imageSrc: "/images/listing/1.jpg",
-    },
-    {
-      id: 2,
-      make: "Audi",
-      model: "A8 L 55",
-      year: 2021,
-      transmission: "Automatic",
-      fuelType: "Diesel",
-      price: "$129",
-      imageSrc: "/images/listing/5.jpg",
-    },
-    {
-      id: 3,
-      make: "Bentley",
-      model: "Bentayga V8",
-      year: 2020,
-      transmission: "Automatic",
-      fuelType: "Diesel",
-      price: "$129",
-      imageSrc: "/images/listing/7.jpg",
-    },
-  ];
-
+const ListingContent = ( { carListings }) => {
   return (
     <div className="col-lg-12">
       <div className="table-responsive my_lisging_table">

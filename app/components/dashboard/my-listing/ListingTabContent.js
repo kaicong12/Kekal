@@ -1,7 +1,47 @@
+
+"use client"
+
 import Pagination from "../../common/Pagination";
 import ListingContent from "./ListingContent";
+import { useState } from "react";
 
 const ListingTabContent = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const carListings = [
+    {
+      id: 1,
+      make: "Volvo",
+      model: "XC90",
+      year: 2020,
+      transmission: "Automatic",
+      fuelType: "Diesel",
+      price: "$129",
+      imageSrc: "/images/listing/1.jpg",
+    },
+    {
+      id: 2,
+      make: "Audi",
+      model: "A8 L 55",
+      year: 2021,
+      transmission: "Automatic",
+      fuelType: "Diesel",
+      price: "$129",
+      imageSrc: "/images/listing/5.jpg",
+    },
+    {
+      id: 3,
+      make: "Bentley",
+      model: "Bentayga V8",
+      year: 2020,
+      transmission: "Automatic",
+      fuelType: "Diesel",
+      price: "$129",
+      imageSrc: "/images/listing/7.jpg",
+    },
+  ];
+
   return (
     <>
       <div className="row">
@@ -53,7 +93,7 @@ const ListingTabContent = () => {
               role="tabpanel"
               aria-labelledby="nav-home-tab"
             >
-              <ListingContent />
+              <ListingContent carListings={carListings} />
             </div>
             {/* End tab-content */}
 
@@ -63,7 +103,7 @@ const ListingTabContent = () => {
               role="tabpanel"
               aria-labelledby="nav-shopping-tab"
             >
-              <ListingContent />
+              <ListingContent carListings={carListings} />
             </div>
             {/* End tab-content */}
 
@@ -73,13 +113,17 @@ const ListingTabContent = () => {
               role="tabpanel"
               aria-labelledby="nav-hotels-tab"
             >
-              <ListingContent />
+              <ListingContent carListings={carListings} />
             </div>
           </div>
           {/* End tab-content */}
 
           <div className="mbp_pagination mt10">
-            <Pagination />
+            <Pagination 
+              currentPage={currentPage}
+              totalPages={totalPages} 
+              setCurrentPage={setCurrentPage} 
+            />
           </div>
           {/* Pagination */}
         </div>

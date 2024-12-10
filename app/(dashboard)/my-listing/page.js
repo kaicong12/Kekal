@@ -8,7 +8,7 @@ import LoginSignupModal from "@/app/components/common/login-signup";
 import ListingTabContent from "@/app/components/dashboard/my-listing/ListingTabContent";
 
 export const metadata = {
-  title: "My Listing || Voiture - Automotive & Car Dealer NextJS Template",
+  title: "My Listing || Perniagaan Motor Kekal - Automotive & Motorcycle Dealer in Johor Bahru",
 };
 
 const MyListing = () => {

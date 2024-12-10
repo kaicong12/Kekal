@@ -1,9 +1,8 @@
 const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
-  const pages = [];
   const buttonsToShow = 3
   const getVisiblePages = () => {
     let pages = [];
-    if (totalPages <= 3) {
+    if (totalPages <= buttonsToShow) {
       // If total pages are less than or equal to 3, show all
       pages = Array.from({ length: totalPages }, (_, i) => i + 1);
     } else {
