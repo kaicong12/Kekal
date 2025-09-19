@@ -72,15 +72,12 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
       let maxPrice;
       switch (priceFilter) {
         case 2:
-          maxPrice = 2000;
-          break;
-        case 3:
           maxPrice = 5000;
           break;
-        case 4:
+        case 3:
           maxPrice = 10000;
           break;
-        case 5:
+        case 4:
           maxPrice = 15000;
           break;
         default:

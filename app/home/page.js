@@ -5,7 +5,6 @@ import FeaturedFilterListing from "@/app/components/home/FeaturedFilterListing";
 import Footer from "@/app/components/home/Footer";
 import Header from "@/app/components/home/Header";
 import Hero from "@/app/components/home/Hero";
-import SaleBanner from "@/app/components/home/SaleBanner";
 import Testimonial from "@/app/components/home/Testimonial";
 import Link from "next/link";
 
@@ -99,16 +98,6 @@ const Home = () => {
         </div>
       </section>
       {/* End Featured Product  */}
-
-      {/* Sale Banner */}
-      <section className="home2_img_divider">
-        <div className="container">
-          <div className="row">
-            <SaleBanner />
-          </div>
-        </div>
-      </section>
-      {/* End Sale Banner */}
 
       {/* Our Testimonials */}
       <section className="our-testimonial">

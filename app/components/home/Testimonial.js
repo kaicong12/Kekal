@@ -5,26 +5,26 @@ const Testimonial = () => {
     {
       id: "1",
       name: "Rajesh Kumar",
-      role: "Delivery Rider",
+      role: "Professional Rider",
       imageSrc: "/images/testimonial/1.jpg",
       quote:
-      "Over 30 years and Perniagaan Motor Kekal still sets the gold standard for motorcycle shops in Johor Bahru. Top-notch service every time!",
+        "As a professional delivery rider, I depend on my motorcycle daily. This shop has kept my Honda Wave running perfectly for over 3 years. Their maintenance service is exceptional and they always use genuine parts. The team understands the demands of commercial riding!",
     },
     {
       id: "2",
       name: "Chen Siew Fong",
-      role: "Entrepreneur",
+      role: "Motorcycle Collector",
       imageSrc: "/images/testimonial/2.jpg",
       quote:
-      "From rare parts to expert advice, Motor Kekal in Johor Bahru is unmatched. They've been my go-to for years!",
+        "I own several vintage motorcycles and finding the right parts can be challenging. This shop has an incredible network and always manages to source exactly what I need. Their expertise with classic bikes is unmatched - they've restored my 1985 Kawasaki Ninja to perfection!",
     },
     {
       id: "3",
       name: "Sharifah Amina",
-      role: "Outdoor Enthusiast",
+      role: "Adventure Rider",
       imageSrc: "/images/testimonial/3.jpg",
       quote:
-      "Perniagaan Motor Kekal is a treasure in Johor Bahru. Their dedication and passion for bikes are evident in every service. Cheers to 30 years and more!",
+        "Before my long-distance touring trips, I always bring my BMW GS here for a complete check-up. Their attention to detail gives me confidence on the road. They've equipped my bike with the best touring accessories and their advice on gear selection is invaluable for adventure riding!",
     },
   ];
 
