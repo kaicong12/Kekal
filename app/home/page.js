@@ -1,4 +1,3 @@
-import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import HeroFilter from "@/app/components/common/HeroFilter";
 import MobileMenu from "@/app/components/common/MobileMenu";
 import WhyChoose from "@/app/components/common/WhyChoose";
@@ -13,16 +12,6 @@ import Link from "next/link";
 const Home = () => {
   return (
     <div className="body_home2_style">
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel"
-      >
-        <HeaderSidebar />
-      </div>
-      {/* Sidebar Panel End */}
-
       {/* Main Header Nav */}
       <Header />
       {/* End Main Header Nav */}

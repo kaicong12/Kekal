@@ -1,9 +1,7 @@
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "@/app/components/common/DefaultHeader";
-import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import HeaderTop from "@/app/components/common/HeaderTop";
 import MobileMenu from "@/app/components/common/MobileMenu";
-import LoginSignupModal from "@/app/components/common/login-signup";
 import BreadCrumb from "@/app/components/listing/listing-single/BreadCrumb";
 import ProductGallery from "@/app/components/listing/listing-single/listing-single-v1/ProductGallery";
 import Overview from "@/app/components/listing/listing-single/Overview";
@@ -18,26 +16,23 @@ export const metadata = {
   title: "Perniagaan Motor Kekal",
   description: "Authorized motorcycle dealer in Johor Bahru",
   keywords: [
-      'kedai motor', 'motor shop', 'motorcycle', 'yamaha dealer', 'kawasaki dealer',
-      'motor repair', 'LC135', 'motor shop Johor Bahru', 'kedai motor johor bahru'
-  ]
+    "kedai motor",
+    "motor shop",
+    "motorcycle",
+    "yamaha dealer",
+    "kawasaki dealer",
+    "motor repair",
+    "LC135",
+    "motor shop Johor Bahru",
+    "kedai motor johor bahru",
+  ],
 };
 
 const ListingSingleV1 = async ({ params }) => {
-  const motorcycleData = await getMotorcycleById(params.id)
-  
+  const motorcycleData = await getMotorcycleById(params.id);
+
   return (
     <div className="wrapper">
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel"
-      >
-        <HeaderSidebar />
-      </div>
-      {/* Sidebar Panel End */}
-
       {/* header top */}
       <HeaderTop />
       {/* End header top */}
@@ -71,7 +66,9 @@ const ListingSingleV1 = async ({ params }) => {
                       <a href="#">BRAND NEW - IN STOCK</a>
                     </li>
                   </ul>
-                  <h2 className="title" style={{ marginBottom: "0" }}>{motorcycleData.name}</h2>
+                  <h2 className="title" style={{ marginBottom: "0" }}>
+                    {motorcycleData.name}
+                  </h2>
                 </div>
               </div>
             </div>
@@ -81,7 +78,10 @@ const ListingSingleV1 = async ({ params }) => {
               <div className="single_page_heading_content text-start text-lg-end">
                 <div className="price_content">
                   <div className="price">
-                    <small className="mr15" style={{ marginLeft: "4px", fontSize: "16px" }}>
+                    <small
+                      className="mr15"
+                      style={{ marginLeft: "4px", fontSize: "16px" }}
+                    >
                       RM {motorcycleData.price}
                     </small>
                   </div>
@@ -94,16 +94,18 @@ const ListingSingleV1 = async ({ params }) => {
 
           <div className="row">
             <div className="col-lg-8 col-xl-8">
-              <ProductGallery 
-                brand={motorcycleData.brand} 
-                modelName={motorcycleData.name} 
+              <ProductGallery
+                brand={motorcycleData.brand}
+                modelName={motorcycleData.name}
               />
               {/* End Car Gallery */}
 
               <div className="opening_hour_widgets p30 mt30">
                 <div className="wrapper">
                   <h4 className="title">Overview</h4>
-                  <Overview productSpecification={motorcycleData.specifications} />
+                  <Overview
+                    productSpecification={motorcycleData.specifications}
+                  />
                 </div>
               </div>
               {/* End opening_hour_widgets */}
@@ -111,11 +113,11 @@ const ListingSingleV1 = async ({ params }) => {
               <div className="listing_single_description mt30">
                 <h4 className="mb30">
                   Description{" "}
-                  <span className="float-end body-color fz13">{motorcycleData.brand} {motorcycleData.model}</span>
+                  <span className="float-end body-color fz13">
+                    {motorcycleData.brand} {motorcycleData.model}
+                  </span>
                 </h4>
-                <p className="first-para">
-                  {motorcycleData.description}
-                </p>
+                <p className="first-para">{motorcycleData.description}</p>
               </div>
               {/* End car descriptions */}
 
@@ -170,7 +172,10 @@ const ListingSingleV1 = async ({ params }) => {
               data-aos-delay="100"
             >
               <div className="listing_item_4grid_slider nav_none">
-                <ReleatedCar currentMotorcycle={motorcycleData} currentMotorId={params.id} />
+                <ReleatedCar
+                  currentMotorcycle={motorcycleData}
+                  currentMotorId={params.id}
+                />
               </div>
             </div>
           </div>
@@ -183,19 +188,6 @@ const ListingSingleV1 = async ({ params }) => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
-
-      {/* Modal */}
-      <div
-        className="sign_up_modal modal fade"
-        id="logInModal"
-        data-backdrop="static"
-        data-keyboard=""
-        tabIndex={-1}
-        aria-hidden="true"
-      >
-        <LoginSignupModal />
-      </div>
-      {/* End Modal */}
     </div>
     // End wrapper
   );

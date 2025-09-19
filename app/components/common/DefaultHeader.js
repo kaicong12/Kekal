@@ -39,19 +39,6 @@ const DefaultHeader = () => {
             data-menu-style="horizontal"
           >
             <MainMenu />
-            <li className="add_listing">
-              <Link href="/add-listings">+ Add Listing</Link>
-            </li>
-            <li
-              className="sidebar_panel"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasRight"
-              aria-controls="offcanvasRight"
-            >
-              <a className="sidebar_switch pt0" role="button">
-                <span />
-              </a>
-            </li>
           </ul>
         </div>
       </nav>

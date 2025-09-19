@@ -39,16 +39,6 @@ const Header = () => {
             data-menu-style="horizontal"
           >
             <MainMenu />
-            <li
-              className="sidebar_panel"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasRight"
-              aria-controls="offcanvasRight"
-            >
-              <a className="sidebar_switch pt0" role="button">
-                <span />
-              </a>
-            </li>
           </ul>
         </div>
       </nav>

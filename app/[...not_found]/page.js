@@ -1,28 +1,21 @@
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "../components/common/DefaultHeader";
-import HeaderSidebar from "../components/common/HeaderSidebar";
 import HeaderTop from "../components/common/HeaderTop";
 import MobileMenu from "../components/common/MobileMenu";
-import LoginSignupModal from "@/app/components/common/login-signup";
 import Link from "next/link";
 
 export const metadata = {
-  title: "404 || Voiture - Automotive & Car Dealer NextJS Template",
+  title:
+    "Perniagan Motor Kekal - 404 Not found Page || Motorcycle Shop in Johor Bahru",
+  description:
+    "Looking for a motorcycle dealer in Johor Bahru? Visit our service page for the best motorcycle in JB. Find kedai motor near me for top-notch services.",
+  keywords:
+    "kedai motor near me, kedia jual motor near me, yamaha shop near me, kedai motor johor jaya, kedai motor johor bahru, yamaha johor bahru, kedai motor, motorcycle shop johor bahru",
 };
 
 const NotFound = () => {
   return (
     <div className="wrapper">
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel"
-      >
-        <HeaderSidebar />
-      </div>
-      {/* Sidebar Panel End */}
-
       {/* header top */}
       <HeaderTop />
       {/* End header top */}
@@ -60,19 +53,6 @@ const NotFound = () => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
-
-      {/* Modal */}
-      <div
-        className="sign_up_modal modal fade"
-        id="logInModal"
-        data-backdrop="static"
-        data-keyboard="false"
-        tabIndex={-1}
-        aria-hidden="true"
-      >
-        <LoginSignupModal />
-      </div>
-      {/* End Modal */}
     </div>
     // End wrapper
   );
