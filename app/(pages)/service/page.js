@@ -1,19 +1,20 @@
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "../../components/common/DefaultHeader";
-import HeaderSidebar from "../../components/common/HeaderSidebar";
 import HeaderTop from "../../components/common/HeaderTop";
 import MobileMenu from "../../components/common/MobileMenu";
-import LoginSignupModal from "@/app/components/common/login-signup";
 import ListWithImage from "@/app/components/pages/service/ListWithImage";
 import ServiceBlock from "@/app/components/pages/service/ServiceBlock";
 import ScheduleService from "@/app/components/pages/service/ScheduleService";
 import ServiceHours from "@/app/components/pages/service/ServiceHours";
-import Head from 'next/head';
+import Head from "next/head";
 
 export const metadata = {
-  title: "Perniagan Motor Kekal - Service Page || Motorcycle Shop in Johor Bahru",
-  description: "Looking for a motorcycle dealer in Johor Bahru? Visit our service page for the best motorcycle in JB. Find kedai motor near me for top-notch services.",
-  keywords: "kedai motor near me, kedia jual motor near me, yamaha shop near me, kedai motor johor jaya, kedai motor johor bahru, yamaha johor bahru, kedai motor, motorcycle shop johor bahru",
+  title:
+    "Perniagan Motor Kekal - Service Page || Motorcycle Shop in Johor Bahru",
+  description:
+    "Looking for a motorcycle dealer in Johor Bahru? Visit our service page for the best motorcycle in JB. Find kedai motor near me for top-notch services.",
+  keywords:
+    "kedai motor near me, kedia jual motor near me, yamaha shop near me, kedai motor johor jaya, kedai motor johor bahru, yamaha johor bahru, kedai motor, motorcycle shop johor bahru",
 };
 
 const Service = () => {
@@ -24,16 +25,6 @@ const Service = () => {
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
       </Head>
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel"
-      >
-        <HeaderSidebar />
-      </div>
-      {/* Sidebar Panel End */}
-
       {/* header top */}
       <HeaderTop />
       {/* End header top */}
@@ -52,7 +43,9 @@ const Service = () => {
           <div className="row">
             <div className="col-xl-12">
               <div className="breadcrumb_content style2">
-                <h2 className="breadcrumb_title">Motorcycle Service in Johor Bahru</h2>
+                <h2 className="breadcrumb_title">
+                  Motorcycle Service in Johor Bahru
+                </h2>
                 <p className="subtitle">Your trusted motorcycle dealer in JB</p>
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
@@ -73,7 +66,11 @@ const Service = () => {
       <section className="our-service bgc-f9 pb90 pt0">
         <div className="container">
           <ListWithImage />
-          <p>Find the best motorcycle dealer in Johor Bahru. We offer top-quality motorcycle services in JB. Visit our kedai motor near you for excellent service.</p>
+          <p>
+            Find the best motorcycle dealer in Johor Bahru. We offer top-quality
+            motorcycle services in JB. Visit our kedai motor near you for
+            excellent service.
+          </p>
         </div>
       </section>
       {/* End Service Section Area */}
@@ -117,19 +114,6 @@ const Service = () => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
-
-      {/* Modal */}
-      <div
-        className="sign_up_modal modal fade"
-        id="logInModal"
-        data-backdrop="static"
-        data-keyboard="false"
-        tabIndex={-1}
-        aria-hidden="true"
-      >
-        <LoginSignupModal />
-      </div>
-      {/* End Modal */}
     </div>
     // End wrapper
   );

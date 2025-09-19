@@ -4,7 +4,6 @@ import { useSearchParams } from "next/navigation";
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "@/app/components/common/DefaultHeader";
 import HeaderTop from "@/app/components/common/HeaderTop";
-import HeaderSidebar from "@/app/components/common/HeaderSidebar";
 import MobileMenu from "@/app/components/common/MobileMenu";
 import Pagination from "@/app/components/common/Pagination";
 import ListGridFilter from "@/app/components/listing/ListGridFilter";
@@ -58,16 +57,6 @@ const ListingV1 = () => {
 
   return (
     <div className="wrapper">
-      <div
-        className="offcanvas offcanvas-end"
-        tabIndex="-1"
-        id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel"
-      >
-        <HeaderSidebar />
-      </div>
-      {/* Sidebar Panel End */}
-
       {/* header top */}
       <HeaderTop />
       {/* End header top */}
@@ -79,14 +68,6 @@ const ListingV1 = () => {
       {/* Main Header Nav For Mobile */}
       <MobileMenu />
       {/* End Main Header Nav For Mobile */}
-
-      {/* Advance_search_menu_sectn*/}
-      {/* <section className="advance_search_menu_sectn bgc-thm2 pt20 pb0 px20 mt70-992 filter-style_two">
-                <div className="row">
-                    <MainFilter />
-                </div>
-            </section> */}
-      {/* End Advance_search_menu_sectn*/}
 
       {/* Inner Page Breadcrumb */}
       <section className="inner_page_breadcrumb style2 inner_page_section_spacing">

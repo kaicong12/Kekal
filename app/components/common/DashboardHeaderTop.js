@@ -21,15 +21,15 @@ const DashboardHeaderTop = () => {
   const contactData = [
     {
       icon: "flaticon-phone-call",
-      text: "1-800-458-56987",
+      text: "+6012-712-6128",
     },
     {
       icon: "flaticon-map",
-      text: "47 Bakery Street, London, UK",
+      text: "5, Jln Seroja 49, Taman Johor Bahru, 81100 Johor Bahru, Johor",
     },
     {
       icon: "flaticon-clock",
-      text: "Mon - Fri 8:00 - 18:00",
+      text: "Mon - Sun 8:00 - 18:00",
     },
   ];
 
