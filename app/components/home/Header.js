@@ -16,21 +16,21 @@ const Header = () => {
               <span className="icon-bar" />
             </button>
           </div>
-          <Link href="/voiture/app/components/pages" className="navbar_brand float-start dn-md">
-            <Image
-              width={140}
-              height={45}
-              className="logo1 img-fluid"
-              src="/images/header-logo2.svg"
-              alt="header-logo.svg"
-            />
-            <Image
-              width={140}
-              height={45}
-              className="logo2 img-fluid"
-              src="/images/header-logo2.svg"
-              alt="header-logo2.svg"
-            />
+          <Link href="/" className="navbar_brand float-start dn-md">
+            <div
+              className="brand-text"
+              style={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                color: "#333",
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                height: "45px",
+              }}
+            >
+              Perniagaan Motor Kekal
+            </div>
           </Link>
           {/* Responsive Menu Structure*/}
           <ul
@@ -39,9 +39,6 @@ const Header = () => {
             data-menu-style="horizontal"
           >
             <MainMenu />
-            <li className="add_listing">
-              <Link href="/add-listings">+ Add Listing</Link>
-            </li>
             <li
               className="sidebar_panel"
               data-bs-toggle="offcanvas"

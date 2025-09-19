@@ -2,12 +2,13 @@ import Image from "next/image";
 
 const ListWithImage = () => {
     const serviceItems = [
-        { text: "General Motorcycle Repair", link: "#" },
-        { text: "Preventative Motorcycle Maintenance", link: "#" },
-        { text: "Insurance Claim Assistance", link: "#" },
-        { text: "Battery Maintenance and Replacement", link: "#" },
-        { text: "Performance Upgrades", link: "#" },
-        { text: "Customizations and Modifications", link: "#" },
+        { text: "General Motorcycle Repair", link: "#general-motorcycle-repair" },
+        { text: "Preventative Motorcycle Maintenance", link: "#preventative-maintenance" },
+        { text: "Insurance Claim Assistance", link: "#insurance-claim-assistance" },
+        { text: "Battery Maintenance and Replacement", link: "#battery-maintenance" },
+        { text: "Customizations and Modifications", link: "#customizations-modifications" },
+        { text: "Motorcycle Trading", link: "#motorcycle-trading" },
+        { text: "Administrative Assistance", link: "#administrative-assistance" },
     ];
 
     return (
@@ -16,14 +17,14 @@ const ListWithImage = () => {
                 <div className="service_include">
                     <h3 className="title">Premium Motorcycle Care and Expertise</h3>
                     <p className="para">
-                    At Perniagaan Motor Kekal, we specialize in providing top-notch services for all types of motorcycles. Our experienced technicians are passionate about motorcycles and committed to ensuring your ride is always in excellent condition.
+                        At Perniagaan Motor Kekal, we specialize in providing top-notch services for all types of motorcycles. Our experienced technicians are passionate about motorcycles and committed to ensuring your ride is always in excellent condition.
                     </p>
                     <div className="row">
                         <div className="col-lg-7">
                             <div className="si_list">
                                 <ul className="mb0 order_list list-style-check-circle check_theme_color">
                                     {serviceItems
-                                        .slice(0, 5)
+                                        .slice(0, 4)
                                         .map((item, index) => (
                                             <li key={index}>
                                                 <a href={item.link}>
@@ -40,7 +41,7 @@ const ListWithImage = () => {
                             <div className="si_list">
                                 <ul className="mb0 order_list list-style-check-circle check_theme_color">
                                     {serviceItems
-                                        .slice(5, 10)
+                                        .slice(4, 7)
                                         .map((item, index) => (
                                             <li key={index}>
                                                 <a href={item.link}>
@@ -66,7 +67,7 @@ const ListWithImage = () => {
                         height={667}
                         layout="responsive"
                         src="/images/service/1.jpg"
-                        alt="1.jpg"
+                        alt="Motorcycle Services"
                     />
                 </div>
             </div>

@@ -8,14 +8,22 @@ import ListWithImage from "@/app/components/pages/service/ListWithImage";
 import ServiceBlock from "@/app/components/pages/service/ServiceBlock";
 import ScheduleService from "@/app/components/pages/service/ScheduleService";
 import ServiceHours from "@/app/components/pages/service/ServiceHours";
+import Head from 'next/head';
 
 export const metadata = {
-  title: "Service || Voiture - Automotive & Car Dealer NextJS Template",
+  title: "Perniagan Motor Kekal - Service Page || Motorcycle Shop in Johor Bahru",
+  description: "Looking for a motorcycle dealer in Johor Bahru? Visit our service page for the best motorcycle in JB. Find kedai motor near me for top-notch services.",
+  keywords: "kedai motor near me, kedia jual motor near me, yamaha shop near me, kedai motor johor jaya, kedai motor johor bahru, yamaha johor bahru, kedai motor, motorcycle shop johor bahru",
 };
 
 const Service = () => {
   return (
     <div className="wrapper">
+      <Head>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <meta name="keywords" content={metadata.keywords} />
+      </Head>
       <div
         className="offcanvas offcanvas-end"
         tabIndex="-1"
@@ -44,14 +52,14 @@ const Service = () => {
           <div className="row">
             <div className="col-xl-12">
               <div className="breadcrumb_content style2">
-                <h2 className="breadcrumb_title">Service</h2>
-                <p className="subtitle">Service</p>
+                <h2 className="breadcrumb_title">Motorcycle Service in Johor Bahru</h2>
+                <p className="subtitle">Your trusted motorcycle dealer in JB</p>
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
                     <a href="#">Home</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    Service
+                    Motorcycle Service
                   </li>
                 </ol>
               </div>
@@ -65,6 +73,7 @@ const Service = () => {
       <section className="our-service bgc-f9 pb90 pt0">
         <div className="container">
           <ListWithImage />
+          <p>Find the best motorcycle dealer in Johor Bahru. We offer top-quality motorcycle services in JB. Visit our kedai motor near you for excellent service.</p>
         </div>
       </section>
       {/* End Service Section Area */}

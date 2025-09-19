@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
-const PriceRange = () => {
+const PriceRange = ({ onPriceChange }) => {
   const [price, setPrice] = useState({ value: { min: 5000, max: 15000 } });
 
   // price range handler
   const handleOnChange = (value) => {
     setPrice({ value });
+    if (onPriceChange) {
+      onPriceChange(value);
+    }
   };
 
   return (

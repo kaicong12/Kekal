@@ -1,8 +1,69 @@
+import { useState } from "react";
 import RangeSlider from "./RangeSlider";
 import SearchBox from "./SearchBox";
 import SelectFilter from "./SelectFilter";
 
-const SidebarAdvnaceFilter = () => {
+const SidebarAdvnaceFilter = ({ onFiltersChange }) => {
+  const [filters, setFilters] = useState({
+    searchTerm: "",
+    selectFilters: {},
+    priceRange: { min: 5000, max: 15000 },
+    mileage: { min: "", max: "" },
+    fuelType: [],
+    transmission: [],
+    features: [],
+  });
+
+  const handleSearchChange = (searchTerm) => {
+    const newFilters = { ...filters, searchTerm };
+    setFilters(newFilters);
+    if (onFiltersChange) onFiltersChange(newFilters);
+  };
+
+  const handleSelectFilterChange = (selectFilters) => {
+    const newFilters = { ...filters, selectFilters };
+    setFilters(newFilters);
+    if (onFiltersChange) onFiltersChange(newFilters);
+  };
+
+  const handlePriceRangeChange = (priceRange) => {
+    const newFilters = { ...filters, priceRange };
+    setFilters(newFilters);
+    if (onFiltersChange) onFiltersChange(newFilters);
+  };
+
+  const handleMileageChange = (field, value) => {
+    const newMileage = { ...filters.mileage, [field]: value };
+    const newFilters = { ...filters, mileage: newMileage };
+    setFilters(newFilters);
+    if (onFiltersChange) onFiltersChange(newFilters);
+  };
+
+  const handleCheckboxChange = (category, value, checked) => {
+    const currentValues = filters[category] || [];
+    const newValues = checked
+      ? [...currentValues, value]
+      : currentValues.filter((item) => item !== value);
+
+    const newFilters = { ...filters, [category]: newValues };
+    setFilters(newFilters);
+    if (onFiltersChange) onFiltersChange(newFilters);
+  };
+
+  const handleResetFilters = () => {
+    const resetFilters = {
+      searchTerm: "",
+      selectFilters: {},
+      priceRange: { min: 5000, max: 15000 },
+      mileage: { min: "", max: "" },
+      fuelType: [],
+      transmission: [],
+      features: [],
+    };
+    setFilters(resetFilters);
+    if (onFiltersChange) onFiltersChange(resetFilters);
+  };
+
   return (
     <div className="sidebar_widgets">
       <div className="sidebar_widgets_wrapper">
@@ -10,11 +71,11 @@ const SidebarAdvnaceFilter = () => {
           <h4 className="title">Search Filters</h4>
           <ul className="sasw_list mb0">
             <li className="search_area">
-              <SearchBox />
+              <SearchBox onSearch={handleSearchChange} />
             </li>
             {/* End .search_area */}
 
-            <SelectFilter />
+            <SelectFilter onFilterChange={handleSelectFilterChange} />
             {/* End li select filter */}
 
             <li>
@@ -22,12 +83,24 @@ const SidebarAdvnaceFilter = () => {
             </li>
             <li className="min_area list-inline-item">
               <div className="form-group">
-                <input type="text" className="form-control" placeholder="Min" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Min"
+                  value={filters.mileage.min}
+                  onChange={(e) => handleMileageChange("min", e.target.value)}
+                />
               </div>
             </li>
             <li className="max_area list-inline-item">
               <div className="form-group">
-                <input type="text" className="form-control" placeholder="Max" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Max"
+                  value={filters.mileage.max}
+                  onChange={(e) => handleMileageChange("max", e.target.value)}
+                />
               </div>
             </li>
             {/* End milage */}
@@ -36,7 +109,7 @@ const SidebarAdvnaceFilter = () => {
               <h5 className="subtitle">Price</h5>
             </li>
             <li>
-              <RangeSlider />
+              <RangeSlider onPriceChange={handlePriceRangeChange} />
             </li>
             {/* End range price slider */}
 
@@ -47,47 +120,75 @@ const SidebarAdvnaceFilter = () => {
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    defaultValue
                     id="flexCheckPetrol"
+                    checked={filters.fuelType.includes("Petrol")}
+                    onChange={(e) =>
+                      handleCheckboxChange(
+                        "fuelType",
+                        "Petrol",
+                        e.target.checked
+                      )
+                    }
                   />
                   <label className="form-check-label" htmlFor="flexCheckPetrol">
-                    Petrol (676)
+                    Petrol
                   </label>
                 </div>
                 <div className="form-check mb20">
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    defaultValue
                     id="flexCheckDiesel"
+                    checked={filters.fuelType.includes("Diesel")}
+                    onChange={(e) =>
+                      handleCheckboxChange(
+                        "fuelType",
+                        "Diesel",
+                        e.target.checked
+                      )
+                    }
                   />
                   <label className="form-check-label" htmlFor="flexCheckDiesel">
-                    Diesel (9,784)
+                    Diesel
                   </label>
                 </div>
                 <div className="form-check mb20">
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    defaultValue
                     id="flexCheckElectric"
+                    checked={filters.fuelType.includes("Electric")}
+                    onChange={(e) =>
+                      handleCheckboxChange(
+                        "fuelType",
+                        "Electric",
+                        e.target.checked
+                      )
+                    }
                   />
                   <label
                     className="form-check-label"
                     htmlFor="flexCheckElectric"
                   >
-                    Electric (6.584)
+                    Electric
                   </label>
                 </div>
                 <div className="form-check mb30">
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    defaultValue
                     id="flexCheckHybrid"
+                    checked={filters.fuelType.includes("Hybrid")}
+                    onChange={(e) =>
+                      handleCheckboxChange(
+                        "fuelType",
+                        "Hybrid",
+                        e.target.checked
+                      )
+                    }
                   />
                   <label className="form-check-label" htmlFor="flexCheckHybrid">
-                    Hyrbid (97)
+                    Hybrid
                   </label>
                 </div>
               </div>
@@ -99,25 +200,39 @@ const SidebarAdvnaceFilter = () => {
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    defaultValue
                     id="flexCheckAutometic"
+                    checked={filters.transmission.includes("Automatic")}
+                    onChange={(e) =>
+                      handleCheckboxChange(
+                        "transmission",
+                        "Automatic",
+                        e.target.checked
+                      )
+                    }
                   />
                   <label
                     className="form-check-label"
                     htmlFor="flexCheckAutometic"
                   >
-                    Automatic (6,676)
+                    Automatic
                   </label>
                 </div>
                 <div className="form-check mb30">
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    defaultValue
                     id="flexCheckManual"
+                    checked={filters.transmission.includes("Manual")}
+                    onChange={(e) =>
+                      handleCheckboxChange(
+                        "transmission",
+                        "Manual",
+                        e.target.checked
+                      )
+                    }
                   />
                   <label className="form-check-label" htmlFor="flexCheckManual">
-                    Manual (9,784)
+                    Manual
                   </label>
                 </div>
               </div>
@@ -243,15 +358,29 @@ const SidebarAdvnaceFilter = () => {
             </li>
             <li>
               <div className="search_option_button">
-                <button type="submit" className="btn btn-block btn-thm">
+                <button
+                  type="button"
+                  className="btn btn-block btn-thm"
+                  onClick={() => onFiltersChange && onFiltersChange(filters)}
+                >
                   <span className="flaticon-magnifiying-glass mr10" /> Search
                 </button>
               </div>
             </li>
             <li className="text-center">
-              <a className="reset-filter" href="#">
+              <button
+                className="reset-filter"
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "inherit",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                }}
+                onClick={handleResetFilters}
+              >
                 Reset Filter
-              </a>
+              </button>
             </li>
           </ul>
         </div>

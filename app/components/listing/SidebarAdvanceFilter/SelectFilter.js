@@ -1,26 +1,52 @@
-const SelectFilter = () => {
+import { useState, useEffect } from "react";
+import { fetchUniqueBrandSet } from "@/utils/db";
+
+const SelectFilter = ({ onFilterChange }) => {
+  const [selectedValues, setSelectedValues] = useState({});
+  const [brandOptions, setBrandOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      const uniqueBrandSet = await fetchUniqueBrandSet();
+      setBrandOptions(Array.from(uniqueBrandSet));
+    };
+    fetchBrands();
+  }, []);
+
   const selectOptions = [
     {
       label: "Condition",
-      options: ["Most Recent", "Recent", "Best Selling", "Old Review"],
+      key: "condition",
+      options: ["New", "Used", "Certified Pre-Owned"],
     },
     {
       label: "Select Makes",
-      options: ["Audi", "Bentley", "BMW", "Ford", "Honda", "Mercedes"],
-    },
-    {
-      label: "Select Models",
-      options: ["A3 Sportback", "A4", "A6", "Q5"],
+      key: "brand",
+      options: brandOptions,
     },
     {
       label: "Select Type",
-      options: ["Convertible", "Coupe", "Hatchback", "Sedan", "SUV"],
+      key: "type",
+      options: ["Scooter", "Sport", "Cruiser", "Touring", "Off-Road"],
     },
     {
       label: "Year",
-      options: ["1967", "1990", "2000", "2002", "2005", "2010", "2015", "2020"],
+      key: "year",
+      options: ["2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017"],
     },
   ];
+
+  const handleSelectChange = (key, value) => {
+    const newSelectedValues = {
+      ...selectedValues,
+      [key]: value === `Select ${key}` ? "" : value,
+    };
+    setSelectedValues(newSelectedValues);
+
+    if (onFilterChange) {
+      onFilterChange(newSelectedValues);
+    }
+  };
 
   return (
     <>
@@ -29,10 +55,18 @@ const SelectFilter = () => {
           <div className="search_option_two">
             <div className="candidate_revew_select">
               <div className="dropdown bootstrap-select w100 show-tick">
-                <select className="form-select dropdown-toggle w100 show-tick">
-                  <option>{option.label}</option>
-                  {option.options.map((value, index) => (
-                    <option key={index}>{value}</option>
+                <select
+                  className="form-select dropdown-toggle w100 show-tick"
+                  value={selectedValues[option.key] || option.label}
+                  onChange={(e) =>
+                    handleSelectChange(option.key, e.target.value)
+                  }
+                >
+                  <option value="">{option.label}</option>
+                  {option.options.map((value, optionIndex) => (
+                    <option key={optionIndex} value={value}>
+                      {value}
+                    </option>
                   ))}
                 </select>
               </div>

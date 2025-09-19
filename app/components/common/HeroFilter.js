@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import Select from 'react-select';
+import Select from "react-select";
 import { useState, useEffect } from "react";
 import { fetchUniqueBrandSet } from "@/utils/db";
 
@@ -9,15 +9,14 @@ const HeroFilter = () => {
   const [selectedStatus, setSelectedStatus] = useState("All Status");
   const [brandFilter, setBrandFilter] = useState(null);
   const [priceFilter, setPriceFilter] = useState(null);
-  const [brandOptions, setBrandOptions] = useState([]); 
+  const [brandOptions, setBrandOptions] = useState([]);
 
   const priceOptions = [
     { value: 0, label: "All Price" },
     { value: 1, label: "No max Price" },
-    { value: 2, label: "Less than RM2,000" },
-    { value: 3, label: "Less than RM5,000" },
-    { value: 4, label: "Less than RM10,000" },
-    { value: 5, label: "Less than RM15,000" },
+    { value: 2, label: "Less than RM5,000" },
+    { value: 3, label: "Less than RM10,000" },
+    { value: 4, label: "Less than RM15,000" },
   ];
 
   useEffect(() => {
@@ -25,10 +24,12 @@ const HeroFilter = () => {
       const uniqueBrandSet = await fetchUniqueBrandSet();
 
       // Transform to react-select options format
-      const brandOptionsArray = Array.from(uniqueBrandSet).map((brand, index) => ({
-        value: index,
-        label: brand,
-      }));
+      const brandOptionsArray = Array.from(uniqueBrandSet).map(
+        (brand, index) => ({
+          value: index,
+          label: brand,
+        })
+      );
 
       setBrandOptions(brandOptionsArray);
     };
@@ -39,7 +40,7 @@ const HeroFilter = () => {
   const handleStatusClick = (status) => {
     setSelectedStatus(status);
   };
-  
+
   const handleBrandChange = (selectedOption) => {
     if (selectedOption?.label) {
       setBrandFilter(selectedOption.label);
@@ -47,15 +48,15 @@ const HeroFilter = () => {
   };
 
   const handlePriceFilterChange = (selectedOption) => {
-    if (selectedOption?.value) {
-      setPriceFilter(selectedOption.value);
+    if (selectedOption?.value !== undefined) {
+      setPriceFilter(selectedOption.value === 0 ? null : selectedOption.value);
     }
   };
 
   const handleSearchClick = () => {
     const queryParams = new URLSearchParams();
-    if (brandFilter) queryParams.set('make', brandFilter);
-    if (priceFilter) queryParams.set('price', priceFilter);
+    if (brandFilter) queryParams.set("make", brandFilter);
+    if (priceFilter) queryParams.set("price", priceFilter.toString());
 
     router.push(`/listing?${queryParams.toString()}`);
   };

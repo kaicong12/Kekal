@@ -63,24 +63,6 @@ const HeaderTop = () => {
                     </a>
                   </li>
                 ))}
-                <li className="list-inline-item">
-                  <a
-                    href="#"
-                    data-bs-toggle="modal"
-                    data-bs-target="#logInModal"
-                  >
-                    Login
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a
-                    href="#"
-                    data-bs-toggle="modal"
-                    data-bs-target="#logInModal"
-                  >
-                    Register
-                  </a>
-                </li>
               </ul>
             </div>
           </div>
