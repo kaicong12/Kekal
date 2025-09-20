@@ -16,21 +16,14 @@ const Header = () => {
               <span className="icon-bar" />
             </button>
           </div>
-          <Link href="/" className="navbar_brand float-start dn-md">
-            <div
-              className="brand-text"
-              style={{
-                fontSize: "24px",
-                fontWeight: "bold",
-                color: "#333",
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-                height: "45px",
-              }}
-            >
-              Perniagaan Motor Kekal
-            </div>
+          <Link href="/">
+            <Image
+              width={350}
+              height={150}
+              priority
+              src="/images/logoBlack.svg"
+              alt="brand"
+            />
           </Link>
           {/* Responsive Menu Structure*/}
           <ul

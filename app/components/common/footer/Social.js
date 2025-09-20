@@ -2,19 +2,15 @@ const Social = () => {
   const socialIcons = [
     {
       icon: "fab fa-facebook-f",
-      link: "#",
+      link: "https://www.facebook.com/PerniagaanMotorKekal/",
     },
     {
-      icon: "fab fa-twitter",
-      link: "#",
+      icon: "fab fa-google",
+      link: "https://share.google/OohDB8ee58dGsIflS",
     },
     {
-      icon: "fab fa-instagram",
-      link: "#",
-    },
-    {
-      icon: "fab fa-linkedin",
-      link: "#",
+      icon: "fab fa-whatsapp",
+      link: "https://wa.me/60127126128",
     },
   ];
 

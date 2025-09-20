@@ -8625,6 +8625,7 @@ form.listing_page_v9 {
 .our-testimonial {
   background-size: cover;
   background-position: center;
+  padding-top: 40px;
 }
 .our-testimonials {
   background-color: #f5f7fc;
@@ -11127,12 +11128,6 @@ form.listing_page_v9 {
 .our_partner {
   text-align: center;
 }
-.start-partners.home1 {
-  /* background-image: url(../images/pattern/3.png); */
-  background-position: center;
-  background-size: cover;
-}
-
 /*== Our Newslatters ==*/
 .our-newslatters {
   background-color: #f9fafc;
@@ -19439,46 +19434,6 @@ span.ui-slider-handle.ui-corner-all.ui-state-default:focus-visible,
   background-position: center center;
   height: 860px;
 }
-.bg-ptrn1 {
-  background-attachment: scroll;
-  background-image: url("../images/pattern/1.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-.bg-ptrn2 {
-  background-attachment: scroll;
-  background-image: url("../images/pattern/2.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-.bg-ptrn3 {
-  background-attachment: scroll;
-  /* background-image: url("../images/pattern/3.png"); */
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-.bg-ptrn4 {
-  background-attachment: scroll;
-  background-image: url("../images/pattern/4.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-.bg-ptrn5 {
-  background-attachment: scroll;
-  /* background-image: url("../images/pattern/bg-pattern.jpg"); */
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
 section {
   padding: 120px 0;
   position: relative;
@@ -24138,18 +24093,6 @@ canvas#myChart {
 }
 .single_product_slider.owl-theme .owl-dots .owl-dot.active span {
   opacity: 1;
-}
-.single_product_slider.owl-theme .owl-dots .owl-dot:nth-child(6) span {
-  background-image: url(../images/listing/12.jpg);
-  background-position: center center;
-  background-size: cover;
-  margin-bottom: 12px;
-}
-.single_product_slider.owl-theme .owl-dots .owl-dot:nth-child(7) span {
-  background-image: url(../images/listing/9.jpg);
-  background-position: center center;
-  background-size: cover;
-  margin-bottom: 12px;
 }
 .single_product_slider.vertical_style .sps_content {
   border: none;

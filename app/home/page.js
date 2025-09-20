@@ -64,7 +64,7 @@ const Home = () => {
       {/* End How It Works with filter */}
 
       {/* Featured Product  */}
-      <section className="featured-product pt0">
+      <div className="featured-product">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8">
@@ -96,11 +96,11 @@ const Home = () => {
           </div>
           {/* End .row */}
         </div>
-      </section>
+      </div>
       {/* End Featured Product  */}
 
       {/* Our Testimonials */}
-      <section className="our-testimonial">
+      <div className="our-testimonial">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
@@ -119,7 +119,7 @@ const Home = () => {
           {/* End .row */}
         </div>
         {/* End .container */}
-      </section>
+      </div>
       {/* End Our Testimonials */}
 
       {/* Our Footer */}

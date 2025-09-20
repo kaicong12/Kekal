@@ -5,6 +5,9 @@ import MobileMenu from "../../components/common/MobileMenu";
 import Map from "@/app/components/common/Map";
 import Address from "@/app/components/pages/contact/Address";
 import Form from "@/app/components/pages/contact/Form";
+import ImmediateAssistance from "@/app/components/pages/contact/ImmediateAssistance";
+import BusinessHours from "@/app/components/pages/contact/BusinessHours";
+import { Divider } from "antd";
 
 export const metadata = {
   title:
@@ -45,29 +48,75 @@ const Contact = () => {
       {/* <!-- End Our Contact --> */}
 
       {/* Our Contact */}
-      <section className="our-contact  bgc-f9">
+      <div className="our-contact bgc-f9">
         <div className="container">
           <div className="row">
-            <div className="col-md-4">
-              <Address />
+            <div className="col-lg-12">
+              <div className="main_title text-center mb50">
+                <h2>Get In Touch With Us</h2>
+                <p className="text">
+                  We&apos;re here to help you find the perfect motorcycle or
+                  answer any questions you may have.
+                </p>
+              </div>
             </div>
-            {/* End .col-md-4 */}
+          </div>
 
-            <div className="col-md-8">
+          <div className="row">
+            <div className="col-lg-4">
+              <Address />
+
+              {/* Location Section */}
+              <div className="contact_location mt40">
+                <h4 className="mb20">Visit Our Showroom</h4>
+                <div className="location_info">
+                  <p className="mb15">
+                    <i className="fas fa-map-marker-alt text-thm me-2"></i>
+                    <strong>Address:</strong>
+                    <br />
+                    5, Jalan Seroja 49
+                    <br />
+                    Taman Johor Bahru,
+                    <br />
+                    81100 Johor Bahru, Johor
+                  </p>
+                  <p className="mb0">
+                    <i className="fas fa-parking text-thm me-2"></i>
+                    <strong>Parking:</strong> Free parking available in front of
+                    our showroom.
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* End .col-lg-4 */}
+
+            <div className="col-lg-8">
               <div className="form_grid">
                 <div className="wrapper">
-                  <h3 className="title mb20">Contact Form</h3>
+                  <h3 className="title mb20 mt40 mt-lg-0">Send Us A Message</h3>
                   <Form />
                 </div>
               </div>
             </div>
-            {/* End .col-md-8 */}
+            {/* End .col-lg-8 */}
           </div>
           {/* End .row */}
         </div>
         {/* End .container */}
-      </section>
+      </div>
       {/* End Our Contact */}
+
+      {/* Immediate Assistance Section */}
+      <div className="immediate-assistance bgc-f9">
+        <ImmediateAssistance />
+      </div>
+      {/* End Immediate Assistance */}
+
+      {/* Business Hours Section */}
+      <div className="business-hours bgc-f9">
+        <BusinessHours />
+      </div>
+      {/* End Business Hours */}
 
       {/* Our Footer */}
       <Footer />

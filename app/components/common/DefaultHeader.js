@@ -16,20 +16,13 @@ const DefaultHeader = () => {
               <span className="icon-bar" />
             </button>
           </div>
-          <Link href="/" className="navbar_brand float-start dn-md">
+          <Link href="/">
             <Image
-              width={140}
-              height={45}
-              className="logo1 img-fluid"
-              src="/images/header-logo2.svg"
-              alt="header-logo.svg"
-            />
-            <Image
-              width={140}
-              height={45}
-              className="logo2 img-fluid"
-              src="/images/header-logo2.svg"
-              alt="header-logo2.svg"
+              width={350}
+              height={100}
+              priority
+              src="/images/logoBlack.svg"
+              alt="brand"
             />
           </Link>
           {/* Responsive Menu Structure*/}

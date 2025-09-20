@@ -3,15 +3,23 @@ const Address = () => {
     title: "Contact Details",
     address: (
       <>
-        5, Jalan Seroja 49<br /> Taman Johor Bahru,
+        5, Jalan Seroja 49
+        <br /> Taman Johor Bahru,
         <br /> 81100 Johor Bahru
       </>
     ),
     subtitle: "+6 012 712 6128",
     email: "motorkekal@gmail.com",
     socialIcons: [
-      { iconClass: "fab fa-facebook-f", link: "https://www.facebook.com/PerniagaanMotorKekal" },
-      { iconClass: "fab fa-google", link: "https://g.co/kgs/sjKgCH" },
+      {
+        iconClass: "fab fa-facebook-f",
+        link: "https://www.facebook.com/PerniagaanMotorKekal/",
+      },
+      {
+        iconClass: "fab fa-google",
+        link: "https://share.google/OohDB8ee58dGsIflS",
+      },
+      { iconClass: "fab fa-whatsapp", link: "https://wa.me/60127126128" },
     ],
   };
 
