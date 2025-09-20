@@ -1,13 +1,10 @@
-import CopyRight from "./footer/CopyRight";
 import FooterItems from "./footer/FooterItems";
 import Navigation from "./footer/Navigation";
 
-
 const Footer = () => {
   return (
-    <section className="footer_one home2_style pt50 pb25 ">
-      <hr className="hr" />
-      <div style={{marginLeft: "15px"}} className="text-md-end mt15">
+    <section className="footer_one home2_style p25">
+      <div style={{ marginLeft: "15px" }} className="text-md-end mt15">
         <ul>
           <Navigation />
         </ul>
@@ -17,7 +14,6 @@ const Footer = () => {
         {/* End .row */}
       </div>
       {/* End .container */}
-      <CopyRight />
     </section>
   );
 };

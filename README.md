@@ -1,6 +1,6 @@
-# Kekal - Next.js Motorcycle Ecommerce Template
+# Kekal - Next.js Motorcycle Ecommerce Marketplace
 
-A modern, responsive Next.js ecommerce template specifically designed for motorcycle dealerships and automotive businesses. Built for "Perniagaan Motor Kekal" - a leading motorcycle dealer in Johor Bahru, Malaysia.
+A modern, responsive Next.js ecommerce marketplace specifically built for "Perniagaan Motor Kekal" - a leading motorcycle dealer in Johor Bahru, Malaysia.
 
 ## 🏍️ Features
 
@@ -34,7 +34,7 @@ A modern, responsive Next.js ecommerce template specifically designed for motorc
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-username/kekal.git
+   git clone https://github.com/kaicong12/Kekal.git
    cd kekal
    ```
 

@@ -12,8 +12,8 @@ const AboutTextBlock = () => {
             priority
             style={{ objectFit: "cover" }}
             className="thumb1"
-            src="/images/about/1.jpg"
-            alt="1.jpg"
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxtb3RvcmN5Y2xlJTIwcmVwYWlyJTIwd29ya3Nob3B8ZW58MXx8fHwxNzU4Mjc1OTgxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Motorcycle repair workshop"
           />
           <Image
             width={365}
@@ -21,8 +21,8 @@ const AboutTextBlock = () => {
             priority
             style={{ objectFit: "cover" }}
             className="img-fluid thumb2"
-            src="/images/about/2.jpg"
-            alt="2.jpg"
+            src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxtb3RvcmN5Y2xlJTIwc2hvcCUyMGRlYWxlcnNoaXB8ZW58MXx8fHwxNzU4Mjc1OTgxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Motorcycle dealership showroom"
           />
         </div>
       </div>
@@ -31,10 +31,19 @@ const AboutTextBlock = () => {
         <div className="about_content">
           <h2 className="title">Welcome To Perniagaan Motor Kekal</h2>
           <p className="mb30">
-            Perniagaan Motor Kekal is a renowned business based in Johor Bahru, Malaysia, celebrated for its dedication and passion for motorcycles. This business has been an integral part of the motorcycle community in <strong>Johor</strong> since its incorporation on <strong>July 13, 1992</strong>.
+            Perniagaan Motor Kekal is a renowned business based in Johor Bahru,
+            Malaysia, celebrated for its dedication and passion for motorcycles.
+            This business has been an integral part of the motorcycle community
+            in <strong>Johor</strong> since its incorporation on{" "}
+            <strong>July 13, 1992</strong>.
           </p>
           <p className="mb50">
-            Perniagaan Motor Kekal operates as dealers, retailers, distributors, and repairers of various kinds of motorcycles, as well as auto spare parts and accessories. The business is particularly noted for its commitment to providing quality services and products, contributing to its status as a valued and reputable entity in the Johor motor industry​
+            Perniagaan Motor Kekal operates as dealers, retailers, distributors,
+            and repairers of various kinds of motorcycles, as well as auto spare
+            parts and accessories. The business is particularly noted for its
+            commitment to providing quality services and products, contributing
+            to its status as a valued and reputable entity in the Johor motor
+            industry​
           </p>
           <Link
             href="https://wa.me/60127126128?text=I'm%20interested%20in%20learning%20more%20about%20your%20services" // Replace 'yourphonenumber' with your actual phone number

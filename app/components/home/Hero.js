@@ -11,18 +11,20 @@ import styles from "./Hero.module.css";
 const Hero = () => {
   const carSlides = [
     {
-      // bright background banner
-      image: "/images/shop/storefront.jpg",
+      // dark motorcycle dealership showroom
+      image:
+        "https://images.unsplash.com/photo-1694274855681-1b12cd585066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3RvcmN5Y2xlJTIwZGVhbGVyc2hpcCUyMHNob3dyb29tfGVufDF8fHx8MTc1ODI3NTk4MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
       title: "YOUR ONE STOP MOTORCYCLE DEALER IN JOHOR BAHRU",
       className: styles.titleBrightBg,
-      subtitleClass: styles.subtitleBright,
+      subtitleClass: styles.subtitleDark,
     },
     {
-      // dark background banner
-      image: "/images/home/repairWorker.jpg",
+      // dark repair workshop
+      image:
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxtb3RvcmN5Y2xlJTIwcmVwYWlyJTIwd29ya3Nob3B8ZW58MXx8fHwxNzU4Mjc1OTgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       title: "CELEBRATING 30 YEARS OF RIDING EXCELLENCE",
-      className: styles.titleDarkBg,
-      subtitleClass: styles.subtitleDark
+      className: styles.titleBrightBg,
+      subtitleClass: styles.subtitleDark,
     },
   ];
 
@@ -55,7 +57,10 @@ const Hero = () => {
                         {slide.title}
                         <br />
                       </h1>
-                      <h3 className={slide.subtitleClass}>Ride with Confidence, Ride with Us. Serving Johor Bahru&apos;s Riders for Over 30 Years</h3>
+                      <h3 className={slide.subtitleClass}>
+                        Ride with Confidence, Ride with Us. Serving Johor
+                        Bahru&apos;s Riders for Over 30 Years
+                      </h3>
                       <h3 className="banner_top_title text-thm d-flex align-items-baseline">
                         <span className="aminated-object1">
                           <Image

@@ -16,29 +16,6 @@ const FeaturedFilterListing = () => {
 
   return (
     <div className="popular_listing_sliders">
-      {/* Nav tabs */}
-      <div className="nav nav-tabs  justify-content-center">
-        <button
-          className={filter === "*" ? "active nav-link" : "nav-link"}
-          onClick={() => setFilter("*")}
-        >
-          All Status
-        </button>
-
-        <button
-          className={filter === "new" ? "active nav-link" : "nav-link"}
-          onClick={() => setFilter("new")}
-        >
-          New Cars
-        </button>
-        <button
-          className={filter === "used" ? "active nav-link" : "nav-link"}
-          onClick={() => setFilter("used")}
-        >
-          Used Cars
-        </button>
-      </div>
-
       {/* Tab panes */}
       <div className="row">
         {loading ? (

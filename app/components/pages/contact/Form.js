@@ -12,6 +12,8 @@ const Form = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,12 +54,52 @@ const Form = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Handle form submission here
-      console.log("Form submitted:", formData);
-      // You can add your form submission logic here
+      setIsSubmitting(true);
+      setSubmitStatus(null);
+
+      try {
+        const response = await fetch("/api/email/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          setSubmitStatus({
+            type: "success",
+            message: "Thank you for your message! We'll get back to you soon.",
+          });
+          // Reset form
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            topic: "",
+            message: "",
+          });
+          setErrors({});
+        } else {
+          setSubmitStatus({
+            type: "error",
+            message:
+              result.error || "Failed to send message. Please try again.",
+          });
+        }
+      } catch (error) {
+        setSubmitStatus({
+          type: "error",
+          message: "Network error. Please check your connection and try again.",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -167,16 +209,45 @@ const Form = () => {
                 onChange={handleInputChange}
                 placeholder="Tell us how we can help you..."
                 required
+                disabled={isSubmitting}
               />
               {errors.message && (
                 <div className="invalid-feedback">{errors.message}</div>
               )}
             </div>
 
+            {/* Submit Status */}
+            {submitStatus && (
+              <div
+                className={`alert ${
+                  submitStatus.type === "success"
+                    ? "alert-success"
+                    : "alert-danger"
+                } mb-3`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
+
             {/* CTA Button */}
             <div className="form-group mb0">
-              <button type="submit" className="btn btn-thm">
-                Send Message
+              <button
+                type="submit"
+                className="btn btn-thm"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span
+                      className="spinner-border spinner-border-sm me-2"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Sending...
+                  </>
+                ) : (
+                  "Send Message"
+                )}
               </button>
             </div>
           </div>

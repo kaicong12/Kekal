@@ -1,5 +1,3 @@
-import Image from "next/image";
-import CopyRight from "./footer/CopyRight";
 import FooterItems from "./footer/FooterItems";
 import Navigation from "./footer/Navigation";
 
@@ -8,7 +6,6 @@ const Footer = () => {
     <section className="footer_one pt50 pb25">
       <div className="container">
         <div className="row">
-
           <div className="col-md-8 col-xl-5">
             <div className="footer_menu_widget text-start text-md-end mt15">
               <ul>
@@ -26,7 +23,6 @@ const Footer = () => {
         {/* End .row */}
       </div>
       {/* End .container */}
-      <CopyRight />
     </section>
   );
 };
