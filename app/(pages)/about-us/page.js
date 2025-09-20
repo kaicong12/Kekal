@@ -4,10 +4,10 @@ import HeaderTop from "../../components/common/HeaderTop";
 import MobileMenu from "../../components/common/MobileMenu";
 import AboutTextBlock from "@/app/components/pages/about-us/AboutTextBlock";
 import WhyChoose from "@/app/components/common/WhyChoose";
-import Team from "@/app/components/common/Team";
 import Testimonial from "@/app/components/common/Testimonial";
 import Map from "@/app/components/common/Map";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
+import ReviewSection from "@/app/components/pages/about-us/ReviewSection";
 
 export const metadata = {
   title:
@@ -92,37 +92,6 @@ const AboutUs = () => {
       </section>
       {/* End Why Chose Us */}
 
-      {/* Our Team */}
-      <section className="our-team pb90 pt0">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 offset-lg-3">
-              <div className="main-title text-center">
-                <h2>Our Team</h2>
-              </div>
-            </div>
-          </div>
-          {/* End .row */}
-
-          <div className="row">
-            <div className="col-lg-12">
-              <div
-                className="home1_popular_listing home2_style"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                <div className="listing_item_4grid_slider dots_none">
-                  <Team />
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* End .row */}
-        </div>
-        {/* End .container */}
-      </section>
-      {/* End Our Team */}
-
       {/* Testimonials  */}
       <section className="our-testimonials-home1 pt120">
         <div className="container">
@@ -174,6 +143,10 @@ const AboutUs = () => {
 
       <ReviewBox />
       {/* End ReviewBox */}
+
+      {/* Review Section */}
+      <ReviewSection />
+      {/* End Review Section */}
 
       {/* Our Footer */}
       <Footer />

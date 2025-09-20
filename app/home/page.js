@@ -100,7 +100,10 @@ const Home = () => {
       {/* End Featured Product  */}
 
       {/* Our Testimonials */}
-      <div className="our-testimonial">
+      <div
+        className="our-testimonial"
+        style={{ marginTop: "30px", marginBottom: "30px" }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
