@@ -6,6 +6,8 @@ import "aos/dist/aos.css";
 import "../public/scss/main.scss";
 import ScrollToTop from "./components/common/ScrollTop";
 import styled from "styled-components";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -32,6 +34,8 @@ export default function RootLayout({ children }) {
       <Body cz-shortcut-listen="false">
         {children}
         <ScrollToTop />
+        <Analytics />
+        <SpeedInsights />
       </Body>
     </html>
   );
