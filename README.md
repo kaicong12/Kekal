@@ -90,24 +90,6 @@ Use the utility scripts in `/utils/scripts/`:
 - `getMotorCycleData.py` - Scrape motorcycle information
 - `process.js` - Process and format data
 
-### Database Schema
-
-Motorcycles are stored in Firestore with the following structure:
-
-```javascript
-{
-  id: "unique_id",
-  brand: "Yamaha",
-  model: "LC135",
-  price: 5000,
-  year: 2023,
-  mileage: "10,000 km",
-  images: ["url1", "url2"],
-  description: "Motorcycle description",
-  // ... other fields
-}
-```
-
 ## 🤝 Contributing
 
 1. Fork the repository

@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { queryMotorcycle, fetchUniqueBrandSet } from "@/utils/db";
+import Fuse from "fuse.js";
 
-export const useMotorcycles = (makeFilter, priceFilter) => {
+export const useMotorcycles = (makeFilter, priceFilter, searchTerm) => {
   const [motorcycles, setMotorcycles] = useState([]);
   const [paginatedMotorcycles, setPaginatedMotorcycles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -96,13 +97,39 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
     return filterParams;
   }, [selectedBrand, selectedSort, priceFilter]);
 
+  // Fuse.js configuration for fuzzy search
+  const fuseOptions = {
+    keys: [
+      { name: "brand", weight: 0.3 },
+      { name: "model", weight: 0.3 },
+      { name: "year", weight: 0.2 },
+      { name: "engineCapacity", weight: 0.1 },
+      { name: "color", weight: 0.1 },
+    ],
+    threshold: 0.4, // Lower threshold = more strict matching
+    includeScore: true,
+    minMatchCharLength: 2,
+  };
+
   useEffect(() => {
     const fetchMotorcycles = async () => {
       setLoading(true);
       try {
-        const { motorcycles, total } = await queryMotorcycle(queryParams);
-        setMotorcycles(motorcycles);
-        setTotalPages(Math.ceil(total / itemsPerPage));
+        const { motorcycles: rawMotorcycles, total } = await queryMotorcycle(
+          queryParams
+        );
+
+        let filteredMotorcycles = rawMotorcycles;
+
+        // Apply fuzzy search if search term exists
+        if (searchTerm && searchTerm.trim()) {
+          const fuse = new Fuse(rawMotorcycles, fuseOptions);
+          const searchResults = fuse.search(searchTerm.trim());
+          filteredMotorcycles = searchResults.map((result) => result.item);
+        }
+
+        setMotorcycles(filteredMotorcycles);
+        setTotalPages(Math.ceil(filteredMotorcycles.length / itemsPerPage));
       } catch (error) {
         console.error("Failed to fetch motorcycles:", error);
       } finally {
@@ -111,7 +138,7 @@ export const useMotorcycles = (makeFilter, priceFilter) => {
     };
 
     fetchMotorcycles();
-  }, [queryParams]);
+  }, [queryParams, searchTerm]);
 
   useEffect(() => {
     if (motorcycles.length) {

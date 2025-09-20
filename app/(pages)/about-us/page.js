@@ -7,7 +7,6 @@ import WhyChoose from "@/app/components/common/WhyChoose";
 import Testimonial from "@/app/components/common/Testimonial";
 import Map from "@/app/components/common/Map";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
-import ReviewSection from "@/app/components/pages/about-us/ReviewSection";
 
 export const metadata = {
   title:
@@ -143,10 +142,6 @@ const AboutUs = () => {
 
       <ReviewBox />
       {/* End ReviewBox */}
-
-      {/* Review Section */}
-      <ReviewSection />
-      {/* End Review Section */}
 
       {/* Our Footer */}
       <Footer />
