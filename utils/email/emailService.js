@@ -16,12 +16,16 @@ class EmailService {
    */
   initializeTransporter() {
     // Example configuration for Gmail
-    // You'll need to set these environment variables
     this.transporter = nodemailer.createTransport({
       service: "gmail", // or 'outlook', 'yahoo', etc.
+      port: 465,
+      secure: true,
       auth: {
-        user: process.env.EMAIL_USER, // Your email address
-        pass: process.env.EMAIL_PASSWORD, // Your email password or app password
+        type: "OAuth2",
+        user: process.env.EMAIL_USER,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
       },
     });
   }

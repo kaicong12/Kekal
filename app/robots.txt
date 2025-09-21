@@ -1,10 +1,20 @@
 User-agent: *
-
-# Allow crawling of important pages
 Allow: /
-Allow: /listing/
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Allow important pages
+Allow: /listing
 Allow: /listing-single-v1/
-Allow: /contact/
-Allow: /service/
-Allow: /about-us/
-Sitemap: https://www.motorkekal.com/sitemap.xml
+Allow: /contact
+Allow: /service
+Allow: /about-us
+
+# Crawl delay to be respectful
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://motorkekal.com/sitemap.xml

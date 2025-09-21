@@ -12,21 +12,62 @@ import ReleatedCar from "@/app/components/listing/listing-single/ReleatedCar";
 
 import { getMotorcycleById } from "@/utils/db";
 
-export const metadata = {
-  title: "Perniagaan Motor Kekal",
-  description: "Authorized motorcycle dealer in Johor Bahru",
-  keywords: [
-    "kedai motor",
-    "motor shop",
-    "motorcycle",
-    "yamaha dealer",
-    "kawasaki dealer",
-    "motor repair",
-    "LC135",
-    "motor shop Johor Bahru",
-    "kedai motor johor bahru",
-  ],
-};
+export async function generateMetadata({ params }) {
+  try {
+    const motorcycleData = await getMotorcycleById(params.id);
+
+    if (!motorcycleData) {
+      return {
+        title: "Motorcycle Not Found - Perniagaan Motor Kekal",
+        description: "The requested motorcycle listing could not be found.",
+      };
+    }
+
+    return {
+      title: `${motorcycleData.name} - RM${motorcycleData.price} | Perniagaan Motor Kekal`,
+      description: `${motorcycleData.name} for sale at RM${
+        motorcycleData.price
+      }. ${
+        motorcycleData.description ||
+        "Quality motorcycle from trusted dealer in Johor Bahru, Johor Jaya."
+      }`,
+      keywords: [
+        motorcycleData.brand,
+        motorcycleData.model,
+        motorcycleData.name,
+        "kedai motor",
+        "motor shop",
+        "motorcycle",
+        "motor shop Johor Bahru",
+        "motor shop Johor Jaya",
+        "kedai motor johor bahru",
+        "kedai motor johor jaya",
+        `${motorcycleData.brand} dealer`,
+      ],
+      openGraph: {
+        title: `${motorcycleData.name} - RM${motorcycleData.price}`,
+        description: `${motorcycleData.name} for sale at RM${motorcycleData.price}`,
+        url: `https://motorkekal.com/listing-single-v1/${params.id}`,
+        siteName: "Perniagaan Motor Kekal",
+        type: "website",
+      },
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+        },
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: "Perniagaan Motor Kekal - Motorcycle Dealer",
+      description: "Authorized motorcycle dealer in Johor Bahru",
+    };
+  }
+}
 
 const ListingSingleV1 = async ({ params }) => {
   const motorcycleData = await getMotorcycleById(params.id);
