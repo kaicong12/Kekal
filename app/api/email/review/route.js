@@ -4,20 +4,12 @@ import { processReviewSubmission } from "@/utils/email/reviewEmails";
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, email, rating, title, review } = body;
+    const { name, email, title, review } = body;
 
     // Validate required fields
-    if (!rating || !review) {
+    if (!review) {
       return NextResponse.json(
-        { error: "Rating and review content are required" },
-        { status: 400 }
-      );
-    }
-
-    // Validate rating range
-    if (rating < 1 || rating > 5) {
-      return NextResponse.json(
-        { error: "Rating must be between 1 and 5" },
+        { error: "Review content is required" },
         { status: 400 }
       );
     }
@@ -26,7 +18,6 @@ export async function POST(request) {
     const result = await processReviewSubmission({
       name,
       email,
-      rating: parseInt(rating),
       title,
       review,
     });

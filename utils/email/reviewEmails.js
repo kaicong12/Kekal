@@ -11,7 +11,7 @@ const emailService = require("./emailService");
  * @returns {Promise<Object>} - Email sending result
  */
 async function sendReviewToAdmin(reviewData) {
-  const { name, email, rating, title, review } = reviewData;
+  const { name, email, title, review } = reviewData;
   const adminEmail = process.env.ADMIN_EMAIL || "kaicong12@gmail.com";
 
   const htmlTemplate = `
@@ -32,14 +32,6 @@ async function sendReviewToAdmin(reviewData) {
               <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #007bff;">${
     email || "Not provided"
   }</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #555;">Rating:</td>
-              <td style="padding: 8px 0;">
-                <div style="color: #ffc107; font-size: 18px;">
-                  ${"★".repeat(rating)}${"☆".repeat(5 - rating)} (${rating}/5)
-                </div>
-              </td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #555;">Title:</td>
@@ -70,7 +62,7 @@ async function sendReviewToAdmin(reviewData) {
   return await emailService.sendEmail(
     adminEmail,
     htmlTemplate,
-    `New Review: ${rating}★ - ${title || "Customer Feedback"} - ${
+    `New Review: ${title || "Customer Feedback"} - ${
       name || "Anonymous"
     }`
   );
