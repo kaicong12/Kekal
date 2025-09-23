@@ -1,17 +1,17 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "@/app/components/common/DefaultHeader";
 import HeaderTop from "@/app/components/common/HeaderTop";
 import MobileMenu from "@/app/components/common/MobileMenu";
 import Pagination from "@/app/components/common/Pagination";
-import ListGridFilter from "@/app/components/listing/ListGridFilter";
+import SearchAndFilters from "@/app/components/listing/SearchAndFilters";
+import EmptyState from "@/app/components/listing/EmptyState";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
 
 import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
 import { Spin } from "antd";
-import { useRouter } from "next/navigation";
 
 const ListingV1 = () => {
   const router = useRouter();
@@ -41,12 +41,13 @@ const ListingV1 = () => {
   };
 
   const {
-    sortOptions,
     brandOptions,
     selectedSort,
     selectedBrand,
+    searchTerm,
     onSortOptionChange,
     onBrandOptionChange,
+    onSearchChange,
     motorcycles,
     paginatedMotorcycles,
     loading,
@@ -141,29 +142,32 @@ const ListingV1 = () => {
       <section className="our-listing pt0 bgc-f9 pb30-991">
         <div className="container">
           <div className="row mb15">
-            <div className="col-md-4 mb5">
+            <div className="col-12">
               <div className="page_control_shorting left_area tac-sm mb15-767 mt15">
                 <p>
                   We found{" "}
                   <span className="heading-color fw600">
                     {motorcycles.length}
                   </span>{" "}
-                  Motorcycles for you
+                  motorcycles for you.
                 </p>
               </div>
             </div>
-            <ListGridFilter
-              label={"Sort By: "}
-              options={sortOptions}
-              selectedOption={selectedSort}
-              onOptionChange={onSortOptionChange}
-            />
-            <ListGridFilter
-              label={"Brand: "}
-              options={brandOptions}
-              selectedOption={selectedBrand}
-              onOptionChange={onBrandOptionChange}
-            />
+          </div>
+
+          {/* Search and Filters */}
+          <div className="row mb30">
+            <div className="col-12">
+              <SearchAndFilters
+                searchTerm={searchTerm}
+                onSearchChange={onSearchChange}
+                selectedSort={selectedSort}
+                onSortChange={onSortOptionChange}
+                brandOptions={brandOptions}
+                selectedBrand={selectedBrand}
+                onBrandChange={onBrandOptionChange}
+              />
+            </div>
           </div>
           {/* End .row */}
 
@@ -171,6 +175,8 @@ const ListingV1 = () => {
             <div style={{ textAlign: "center" }}>
               <Spin color="#0000ff" size="large" />
             </div>
+          ) : motorcycles.length === 0 ? (
+            <EmptyState searchTerm={searchTerm} selectedBrand={selectedBrand} />
           ) : (
             <div className="row">
               <CarItems motorcycles={paginatedMotorcycles} />
