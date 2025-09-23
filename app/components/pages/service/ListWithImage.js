@@ -54,23 +54,19 @@ const ListWithImage = () => {
             {/* End .col */}
           </div>
           {/* End .row */}
+        </div>
 
-          <div className="service_contact_info mt30">
-            <div className="row">
-              <div className="col-sm-6">
-                <div className="contact_info_item">
-                  <h6 className="mb10">📍 Location</h6>
-                  <p className="text mb0">Johor Bahru, Malaysia</p>
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="contact_info_item">
-                  <h6 className="mb10">🏍️ Specialization</h6>
-                  <p className="text mb0">All Motorcycle Brands</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="service_include">
+          <h3 className="title">Motorcycle Sales</h3>
+          <p className="para">
+            At Perniagaan Motor Kekal, we pride ourselves on offering an
+            extensive selection of motorcycles to suit every rider&apos;s needs
+            and budget. Our showroom in Johor Bahru features the latest models
+            from renowned brands including Yamaha, Honda, Kawasaki, and Suzuki.
+            Whether you&apos;re a beginner looking for your first motorcycle or
+            an experienced rider seeking a high-performance machine, our
+            knowledgeable sales team will help you find the perfect match.
+          </p>
         </div>
         {/* End service_include */}
       </div>

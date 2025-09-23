@@ -1,9 +1,11 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useMemo, useCallback, useEffect } from "react";
 import Select from "react-select";
 import PropTypes from "prop-types";
 import { useDebounce } from "@/utils/hooks/useDebounce";
 
 const SearchAndFilters = ({
+  localSearchTerm,
+  setLocalSearchTerm,
   searchTerm = "",
   onSearchChange,
   selectedSort = "Price: lowest first",
@@ -12,8 +14,6 @@ const SearchAndFilters = ({
   selectedBrand = null,
   onBrandChange,
 }) => {
-  const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm || "");
-
   // Debounce search term to avoid excessive API calls
   const debouncedSearchTerm = useDebounce(localSearchTerm, 300);
 
@@ -169,6 +169,8 @@ const SearchAndFilters = ({
 };
 
 SearchAndFilters.propTypes = {
+  localSearchTerm: PropTypes.string,
+  setLocalSearchTerm: PropTypes.func.isRequired,
   searchTerm: PropTypes.string,
   onSearchChange: PropTypes.func.isRequired,
   selectedSort: PropTypes.string,
