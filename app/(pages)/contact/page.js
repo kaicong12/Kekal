@@ -48,7 +48,7 @@ const Contact = () => {
       {/* <!-- End Our Contact --> */}
 
       {/* Our Contact */}
-      <div className="our-contact bgc-f9">
+      <div className="our-contact bgc-f9" style={{ paddingTop: "50px" }}>
         <div className="container">
           <div className="row">
             <div className="col-lg-12">

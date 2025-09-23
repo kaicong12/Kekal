@@ -9,7 +9,7 @@ export const useMotorcycles = (makeFilter, priceFilter, initialSearchTerm) => {
   const [selectedSort, setSelectedSort] = useState("Price: lowest first");
   const [selectedBrand, setSelectedBrand] = useState(makeFilter);
   const [brandOptions, setBrandOptions] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(initialSearchTerm || "");
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm ?? "");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 

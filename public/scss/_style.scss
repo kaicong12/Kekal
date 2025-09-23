@@ -7768,9 +7768,7 @@ form.listing_page_v9 {
   padding-right: 5px;
 }
 .single_property_title.multicolor_style h2,
-.single_property_title.multicolor_style p,
-.single_property_social_share_content.multicolor_style h2,
-.single_property_social_share_content.multicolor_style h2 small {
+.single_property_title.multicolor_style p {
   color: #ffffff;
 }
 .agency_profile_contact li {
@@ -7803,9 +7801,6 @@ form.listing_page_v9 {
 .single_property_title.psp_v6 {
   margin-top: -180px;
 }
-.single_property_social_share_content.psp_v6 {
-  margin-top: -150px;
-}
 .sidebar_agent_search_widget.psp_v6 {
   background-color: #fff;
   margin-top: -140px;
@@ -7823,16 +7818,8 @@ form.listing_page_v9 {
 }
 .single_property_title.psp_v6 .media .media-body h3,
 .single_property_title.psp_v6 .media .media-body p,
-.single_property_title.psp_v6 .media .media-body a,
-.single_property_social_share_content.psp_v6 h3,
-.single_property_social_share_content.psp_v6 h3 small,
-.single_property_social_share_content.psp_v6 .spss.style2 ul li a,
-.single_property_social_share_content.psp_v6 p {
+.single_property_title.psp_v6 .media .media-body a {
   color: #fff;
-}
-.single_property_social_share_content.psp_v6 .spss.style2 li.icon {
-  background-color: transparent;
-  border: 1px solid #fff;
 }
 .sspd_review.listing_single_v1 li .price_range {
   background-color: transparent;
@@ -7842,36 +7829,10 @@ form.listing_page_v9 {
   padding: 10px 12px;
   text-align: center;
 }
-.single_property_social_share_content h2 {
-  font-size: 30px;
-  font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 0;
-}
-.single_property_social_share_content h3 small {
-  color: #5f6973;
-  font-size: 12px;
-}
-.single_property_social_share_content.style2 {
-  position: absolute;
-  right: 30px;
-}
 .spss.style2.listing_single_v1 ul li.icon {
   background-color: rgba(255, 255, 255, 0.1);
 }
 .spss.style2.listing_single_v1 ul li.icon a {
-  color: #ffffff;
-}
-.single_property_social_share_content .price.listing_single_v1 .spr_btn {
-  background: #fff;
-  border: 1px solid #ffffff;
-  color: #1947e2;
-}
-.single_property_social_share_content .price.listing_single_v1 .spr_btn:hover,
-.single_property_social_share_content .price.listing_single_v1 .spr_btn:active,
-.single_property_social_share_content .price.listing_single_v1 .spr_btn:focus {
-  background: linear-gradient(297.21deg, #0061df 0%, #4567d5 92.82%);
-  border: 1px solid #ffffff;
   color: #ffffff;
 }
 .spss ul li {
@@ -7898,9 +7859,6 @@ form.listing_page_v9 {
   height: 35px;
   line-height: 35px;
   width: 35px;
-}
-.single_property_social_share_content.psp_v7 .spss.style2 ul li.icon {
-  background-color: #fff;
 }
 .spss.style2 ul li:nth-child(2) {
   margin-right: 25px;
@@ -22952,8 +22910,7 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
 .car_single_content_wrapper .car_info li {
   margin-right: 25px;
 }
-.car_single_content_wrapper .car_info li:last-child,
-.single_page_heading_content .share_content ul li:last-child {
+.car_single_content_wrapper .car_info li:last-child {
   margin-right: 0;
 }
 .car_single_content_wrapper .car_info li:first-child {
@@ -22985,23 +22942,6 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
   margin-right: 7px;
   vertical-align: middle;
 }
-.single_page_heading_content .share_content ul li {
-  margin-right: 30px;
-}
-.share_content ul li a {
-  color: #5f6973;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0em;
-  text-transform: uppercase;
-}
-.share_content ul li a span {
-  font-size: 14px;
-  margin-right: 5px;
-  vertical-align: middle;
-}
 .price_content .price {
   font-size: 26px;
   font-style: normal;
@@ -23030,4 +22970,7 @@ textarea::placeholder,
 select::placeholder {
   color: #5f6973;
   font-size: 13px;
+}
+.map_in iframe {
+  height: 100%;
 }

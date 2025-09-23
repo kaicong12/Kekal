@@ -17,6 +17,8 @@ const ListingV1 = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const brandFilter = searchParams.get("make");
+  const searchFromHome = searchParams.get("search");
+  console.log("Search Term from URL:", searchFromHome);
   const priceFilter = searchParams.get("price")
     ? parseInt(searchParams.get("price"))
     : null;
@@ -54,7 +56,7 @@ const ListingV1 = () => {
     currentPage,
     totalPages,
     setCurrentPage,
-  } = useMotorcycles(brandFilter, priceFilter);
+  } = useMotorcycles(brandFilter, priceFilter, searchFromHome);
 
   return (
     <div className="wrapper">
