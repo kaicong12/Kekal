@@ -2,13 +2,14 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { queryMotorcycle, fetchUniqueBrandSet } from "@/utils/db";
 import Fuse from "fuse.js";
 
-export const useMotorcycles = (makeFilter, priceFilter, searchTerm) => {
+export const useMotorcycles = (makeFilter, priceFilter, initialSearchTerm) => {
   const [motorcycles, setMotorcycles] = useState([]);
   const [paginatedMotorcycles, setPaginatedMotorcycles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSort, setSelectedSort] = useState("Price: lowest first");
   const [selectedBrand, setSelectedBrand] = useState(makeFilter);
   const [brandOptions, setBrandOptions] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm ?? "");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -45,7 +46,15 @@ export const useMotorcycles = (makeFilter, priceFilter, searchTerm) => {
   const onBrandOptionChange = useCallback((selectedOption) => {
     if (selectedOption?.label) {
       setSelectedBrand(selectedOption.label);
+    } else {
+      // Handle "All Brands" selection or clearing
+      setSelectedBrand(null);
     }
+  }, []);
+
+  const onSearchChange = useCallback((newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+    setCurrentPage(1); // Reset to first page when searching
   }, []);
 
   const queryParams = useMemo(() => {
@@ -97,7 +106,6 @@ export const useMotorcycles = (makeFilter, priceFilter, searchTerm) => {
     return filterParams;
   }, [selectedBrand, selectedSort, priceFilter]);
 
-  // Fuse.js configuration for fuzzy search
   const fuseOptions = {
     keys: [
       { name: "brand", weight: 0.3 },
@@ -122,10 +130,11 @@ export const useMotorcycles = (makeFilter, priceFilter, searchTerm) => {
         let filteredMotorcycles = rawMotorcycles;
 
         // Apply fuzzy search if search term exists
-        if (searchTerm && searchTerm.trim()) {
+        if (searchTerm?.trim()) {
           const fuse = new Fuse(rawMotorcycles, fuseOptions);
           const searchResults = fuse.search(searchTerm.trim());
           filteredMotorcycles = searchResults.map((result) => result.item);
+          console.log({ rawMotorcycles, searchResults, filteredMotorcycles });
         }
 
         setMotorcycles(filteredMotorcycles);
@@ -148,6 +157,8 @@ export const useMotorcycles = (makeFilter, priceFilter, searchTerm) => {
         startIndex + itemsPerPage
       );
       setPaginatedMotorcycles(paginatedData);
+    } else {
+      setPaginatedMotorcycles([]);
     }
   }, [currentPage, itemsPerPage, motorcycles]);
 
@@ -159,9 +170,10 @@ export const useMotorcycles = (makeFilter, priceFilter, searchTerm) => {
     brandOptions,
     selectedSort,
     selectedBrand,
-    useMotorcycles,
+    searchTerm,
     onSortOptionChange,
     onBrandOptionChange,
+    onSearchChange,
     currentPage,
     totalPages,
     setCurrentPage,

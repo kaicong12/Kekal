@@ -48,20 +48,8 @@ const Contact = () => {
       {/* <!-- End Our Contact --> */}
 
       {/* Our Contact */}
-      <div className="our-contact bgc-f9">
+      <div className="our-contact bgc-f9" style={{ paddingTop: "50px" }}>
         <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="main_title text-center mb50">
-                <h2>Get In Touch With Us</h2>
-                <p className="text">
-                  We&apos;re here to help you find the perfect motorcycle or
-                  answer any questions you may have.
-                </p>
-              </div>
-            </div>
-          </div>
-
           <div className="row">
             <div className="col-lg-4">
               <Address />

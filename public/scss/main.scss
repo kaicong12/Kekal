@@ -1,9 +1,6 @@
 :root {
-    --primary-color: #f5c34b;
+  --primary-color: #f5c34b;
 }
 @import "~bootstrap/scss/bootstrap";
-@import "./custom_voiture";
-@import "./swiper_custom";
-@import "./file_uploader";
 @import "./style";
 @import "./responsive.scss";

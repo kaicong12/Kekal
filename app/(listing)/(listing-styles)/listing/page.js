@@ -1,25 +1,45 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Footer from "@/app/components/common/Footer";
 import DefaultHeader from "@/app/components/common/DefaultHeader";
 import HeaderTop from "@/app/components/common/HeaderTop";
 import MobileMenu from "@/app/components/common/MobileMenu";
 import Pagination from "@/app/components/common/Pagination";
-import ListGridFilter from "@/app/components/listing/ListGridFilter";
+import SearchAndFilters from "@/app/components/listing/SearchAndFilters";
+import EmptyState from "@/app/components/listing/EmptyState";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
 
 import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
 import { Spin } from "antd";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const ListingV1 = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const brandFilter = searchParams.get("make");
+  const searchFromHome = searchParams.get("search");
+
   const priceFilter = searchParams.get("price")
     ? parseInt(searchParams.get("price"))
     : null;
+
+  const {
+    brandOptions,
+    selectedSort,
+    selectedBrand,
+    searchTerm,
+    onSortOptionChange,
+    onBrandOptionChange,
+    onSearchChange,
+    motorcycles,
+    paginatedMotorcycles,
+    loading,
+    currentPage,
+    totalPages,
+    setCurrentPage,
+  } = useMotorcycles(brandFilter, priceFilter, searchFromHome);
+  const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm || "");
 
   const getPriceLabel = (priceValue) => {
     switch (priceValue) {
@@ -35,25 +55,12 @@ const ListingV1 = () => {
   };
 
   const removeFilter = (filterType) => {
+    onSearchChange("");
+    setLocalSearchTerm("");
     const newParams = new URLSearchParams(searchParams);
     newParams.delete(filterType);
     router.push(`/listing?${newParams.toString()}`);
   };
-
-  const {
-    sortOptions,
-    brandOptions,
-    selectedSort,
-    selectedBrand,
-    onSortOptionChange,
-    onBrandOptionChange,
-    motorcycles,
-    paginatedMotorcycles,
-    loading,
-    currentPage,
-    totalPages,
-    setCurrentPage,
-  } = useMotorcycles(brandFilter, priceFilter);
 
   return (
     <div className="wrapper">
@@ -98,13 +105,25 @@ const ListingV1 = () => {
       {/* End Inner Page Breadcrumb */}
 
       {/* Active Filters Display */}
-      {(brandFilter || priceFilter) && (
+      {(brandFilter || priceFilter || searchFromHome) && (
         <section className="active-filters-section pt20 pb20">
           <div className="container">
             <div className="row">
               <div className="col-12">
                 <div className="active-filters">
                   <span className="filter-label me-3">Active Filters:</span>
+                  {searchFromHome && (
+                    <span className="filter-badge badge bg-info me-2">
+                      Search: &ldquo;{searchFromHome}&rdquo;
+                      <button
+                        type="button"
+                        className="btn-close btn-close-white ms-2"
+                        aria-label="Remove search filter"
+                        onClick={() => removeFilter("search")}
+                        style={{ fontSize: "10px" }}
+                      ></button>
+                    </span>
+                  )}
                   {brandFilter && (
                     <span className="filter-badge badge bg-primary me-2">
                       Make: {brandFilter}
@@ -141,29 +160,33 @@ const ListingV1 = () => {
       <section className="our-listing pt0 bgc-f9 pb30-991">
         <div className="container">
           <div className="row mb15">
-            <div className="col-md-4 mb5">
+            <div className="col-12">
               <div className="page_control_shorting left_area tac-sm mb15-767 mt15">
                 <p>
                   We found{" "}
                   <span className="heading-color fw600">
                     {motorcycles.length}
                   </span>{" "}
-                  Motorcycles for you
+                  motorcycles for you.
                 </p>
               </div>
             </div>
-            <ListGridFilter
-              label={"Sort By: "}
-              options={sortOptions}
-              selectedOption={selectedSort}
-              onOptionChange={onSortOptionChange}
-            />
-            <ListGridFilter
-              label={"Brand: "}
-              options={brandOptions}
-              selectedOption={selectedBrand}
-              onOptionChange={onBrandOptionChange}
-            />
+          </div>
+
+          {/* Search and Filters */}
+          <div className="row mb30">
+            <div className="col-12">
+              <SearchAndFilters
+                localSearchTerm={localSearchTerm}
+                setLocalSearchTerm={setLocalSearchTerm}
+                onSearchChange={onSearchChange}
+                selectedSort={selectedSort}
+                onSortChange={onSortOptionChange}
+                brandOptions={brandOptions}
+                selectedBrand={selectedBrand}
+                onBrandChange={onBrandOptionChange}
+              />
+            </div>
           </div>
           {/* End .row */}
 
@@ -171,6 +194,8 @@ const ListingV1 = () => {
             <div style={{ textAlign: "center" }}>
               <Spin color="#0000ff" size="large" />
             </div>
+          ) : motorcycles.length === 0 ? (
+            <EmptyState searchTerm={searchTerm} selectedBrand={selectedBrand} />
           ) : (
             <div className="row">
               <CarItems motorcycles={paginatedMotorcycles} />

@@ -74,22 +74,6 @@ A modern, responsive Next.js ecommerce marketplace specifically built for "Perni
 - **Firestore** - NoSQL database
 - **Firebase Admin** - Server-side Firebase SDK
 
-### Development Tools
-
-- **ESLint** - Code linting
-- **Babel** - JavaScript compiler
-- **ExcelJS** - Excel file processing
-
-## 📊 Data Management
-
-### Adding Motorcycles
-
-Use the utility scripts in `/utils/scripts/`:
-
-- `uploadFirebase.py` - Bulk upload motorcycle data
-- `getMotorCycleData.py` - Scrape motorcycle information
-- `process.js` - Process and format data
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -100,6 +84,6 @@ Use the utility scripts in `/utils/scripts/`:
 
 ## 🙏 Acknowledgments
 
-- Built for Perniagaan Motor Kekal, Johor Bahru
+- Built for [Perniagaan Motor Kekal, Johor Bahru](https://www.motorkekal.com)
 - Inspired by modern automotive websites
 - Thanks to the Next.js and React communities

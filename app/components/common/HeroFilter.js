@@ -6,9 +6,9 @@ import { fetchUniqueBrandSet } from "@/utils/db";
 
 const HeroFilter = () => {
   const router = useRouter();
-  const [selectedStatus, setSelectedStatus] = useState("All Status");
   const [brandFilter, setBrandFilter] = useState(null);
   const [priceFilter, setPriceFilter] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [brandOptions, setBrandOptions] = useState([]);
 
   const priceOptions = [
@@ -37,10 +37,6 @@ const HeroFilter = () => {
     fetchBrands();
   }, []);
 
-  const handleStatusClick = (status) => {
-    setSelectedStatus(status);
-  };
-
   const handleBrandChange = (selectedOption) => {
     if (selectedOption?.label) {
       setBrandFilter(selectedOption.label);
@@ -53,8 +49,13 @@ const HeroFilter = () => {
     }
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const handleSearchClick = () => {
     const queryParams = new URLSearchParams();
+    if (searchTerm.trim()) queryParams.set("search", searchTerm.trim());
     if (brandFilter) queryParams.set("make", brandFilter);
     if (priceFilter) queryParams.set("price", priceFilter.toString());
 
@@ -63,39 +64,33 @@ const HeroFilter = () => {
 
   return (
     <div className="col-lg-12">
-      {/* <ul className="nav nav-pills justify-content-center">
-        <li className="nav-item" role="presentation">
-          <button
-            className={`nav-link ${
-              selectedStatus === "All Status" && "active"
-            }`}
-            onClick={() => handleStatusClick("All Status")}
-          >
-            All Bike
-          </button>
-        </li>
-        <li className="nav-item" role="presentation">
-          <button
-            className={`nav-link ${selectedStatus === "Used Cars" && "active"}`}
-            onClick={() => handleStatusClick("Used Cars")}
-          >
-            Used Bike
-          </button>
-        </li>
-        <li className="nav-item" role="presentation">
-          <button
-            className={`nav-link ${selectedStatus === "New Cars" && "active"}`}
-            onClick={() => handleStatusClick("New Cars")}
-          >
-            New Bike
-          </button>
-        </li>
-      </ul> */}
-
       {/* Filter Tabs */}
       <div className="adss_bg_stylehome1">
         <div className="home1_advance_search_wrapper">
           <ul className="mb0 text-center">
+            <li className="list-inline-item">
+              <div className="select-boxes">
+                <div className="search_area">
+                  <h6 className="title">Search</h6>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search motorcycles..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    style={{
+                      height: "38px",
+                      border: "1px solid hsl(0, 0%, 80%)",
+                      borderRadius: "8px",
+                      padding: "0 16px",
+                      fontSize: "14px",
+                      minWidth: "250px",
+                    }}
+                  />
+                </div>
+              </div>
+            </li>
+
             <li className="list-inline-item">
               <div className="select-boxes">
                 <div className="car_brand">

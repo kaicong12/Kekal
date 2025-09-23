@@ -66,21 +66,14 @@ const Service = () => {
       <section className="our-service bgc-f9 pb90 pt0">
         <div className="container">
           <ListWithImage />
-          <p>
-            Find the best motorcycle dealer in Johor Bahru. We offer top-quality
-            motorcycle services in JB. Visit our kedai motor near you for
-            excellent service.
-          </p>
         </div>
       </section>
       {/* End Service Section Area */}
 
       {/* Service Section Area */}
-      <section className="our-service">
-        <div className="container">
-          <ServiceBlock />
-        </div>
-      </section>
+      <div className="our-service">
+        <ServiceBlock />
+      </div>
       {/* Service Section Area */}
 
       {/* Service Forms Section Area */}

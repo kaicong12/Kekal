@@ -1,24 +1,66 @@
 import Image from "next/image";
 
+// Individual Service Section Component
+const ServiceSection = ({
+  isOdd,
+  service,
+  isFirst = false,
+  isReversed = false,
+}) => {
+  return (
+    <div
+      className={`service-section ${!isFirst ? "pt90 pb90" : "pb90"} ${
+        isOdd ? "bgc-f9" : ""
+      }`}
+      id={service.id}
+    >
+      <div className="container">
+        <div className="row align-items-center">
+          <div
+            className={`col-md-6 col-xl-5 ${isReversed ? "order-md-2" : ""}`}
+          >
+            <div className="service_thumb mb30-sm">
+              <Image
+                width={526}
+                height={354}
+                priority={isFirst}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
+                src={service.image}
+                alt={service.title}
+              />
+            </div>
+          </div>
+          <div
+            className={`col-md-6 col-xl-5 ${
+              isReversed ? "offset-xl-1 order-md-1" : "offset-xl-1"
+            }`}
+          >
+            <div className="service_include2 mt0-md">
+              <h3 className="title">{service.title}</h3>
+              <p className="para">{service.detailedDescription}</p>
+              <div className="service_features mt20">
+                <h5 className="mb15">Our {service.title} includes:</h5>
+                <ul className="list-style-check-circle check_theme_color mb0">
+                  {service.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="mb10">
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ServiceBlock = () => {
   const services = [
-    {
-      id: "motorcycle-sales",
-      title: "Motorcycle Sales",
-      description:
-        "Wide selection of new and pre-owned motorcycles from trusted brands",
-      image:
-        "https://images.unsplash.com/photo-1694274855681-1b12cd585066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3RvcmN5Y2xlJTIwZGVhbGVyc2hpcCUyMHNob3dyb29tfGVufDF8fHx8MTc1ODI3NTk4MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      detailedDescription:
-        "At Perniagaan Motor Kekal, we pride ourselves on offering an extensive selection of motorcycles to suit every rider&apos;s needs and budget. Our showroom in Johor Bahru features the latest models from renowned brands including Yamaha, Honda, Kawasaki, and Suzuki. Whether you&apos;re a beginner looking for your first motorcycle or an experienced rider seeking a high-performance machine, our knowledgeable sales team will help you find the perfect match.",
-      features: [
-        "New motorcycles with full manufacturer warranty",
-        "Certified pre-owned motorcycles with quality guarantee",
-        "Competitive pricing and flexible financing options",
-        "Trade-in services for your current motorcycle",
-        "Complete documentation and registration assistance",
-      ],
-    },
     {
       id: "repair-maintenance",
       title: "Repair & Maintenance",
@@ -61,7 +103,7 @@ const ServiceBlock = () => {
       description:
         "Reliable distribution network for motorcycle dealers across the region",
       image:
-        "https://images.unsplash.com/photo-1694274855681-1b12cd585066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3RvcmN5Y2xlJTIwZGVhbGVyc2hpcCUyMHNob3dyb29tfGVufDF8fHx8MTc1ODI3NTk4MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        "https://images.unsplash.com/photo-1645850551039-19b16d2156cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1vdG9yY3ljbGUlMjBzYWxlc3xlbnwwfHwwfHx8MA%3D%3D",
       detailedDescription:
         "As an established distributor in the Johor region, Perniagaan Motor Kekal serves as a reliable partner for motorcycle dealers throughout Malaysia. Our efficient distribution network ensures timely delivery of motorcycles, parts, and accessories to our dealer partners, supporting their business growth and customer satisfaction.",
       features: [
@@ -78,108 +120,14 @@ const ServiceBlock = () => {
   return (
     <>
       {services.map((service, index) => (
-        <div
+        <ServiceSection
+          isOdd={index % 2 !== 0}
           key={service.id}
-          className={`row ${index > 0 ? "mt120 mt50-sm" : ""}`}
-          id={service.id}
-        >
-          <div className="col-md-6 col-xl-5">
-            <div className="service_thumb mb30-sm">
-              <Image
-                width={526}
-                height={354}
-                priority={index === 0}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                }}
-                src={service.image}
-                alt={service.title}
-              />
-            </div>
-          </div>
-          <div className="col-md-6 col-xl-5 offset-xl-1">
-            <div className="service_include2 mt0-md">
-              <h3 className="title">{service.title}</h3>
-              <p className="para">{service.detailedDescription}</p>
-              <div className="service_features mt20">
-                <h5 className="mb15">Our {service.title} includes:</h5>
-                <ul className="list-style-check-circle check_theme_color mb0">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="mb10">
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+          service={service}
+          isFirst={index === 0}
+          isReversed={index % 2 === 1}
+        />
       ))}
-      {/* End services mapping */}
-
-      {/* Additional Business Information Section */}
-      <div className="row mt120 mt50-sm">
-        <div className="col-xl-12">
-          <div className="service_about_company">
-            <div className="text-center mb60">
-              <h3 className="title">About Perniagaan Motor Kekal</h3>
-              <p className="subtitle">
-                Your Trusted Motorcycle Partner in Johor Bahru
-              </p>
-            </div>
-            <div className="row">
-              <div className="col-lg-6">
-                <div className="about_content">
-                  <h4 className="mb20">
-                    Established Excellence in Johor Bahru
-                  </h4>
-                  <p className="para">
-                    Located in the heart of Johor Bahru, Perniagaan Motor Kekal
-                    has been serving the motorcycle community in Malaysia with
-                    dedication and expertise. As a leading motorcycle business
-                    in JB, we understand the unique needs of Malaysian riders
-                    and provide tailored solutions that exceed expectations.
-                  </p>
-                  <p className="para">
-                    Our commitment to quality service, competitive pricing, and
-                    customer satisfaction has made us the preferred choice for
-                    motorcycle enthusiasts throughout Johor and the surrounding
-                    regions.
-                  </p>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="about_content">
-                  <h4 className="mb20">Why Choose Perniagaan Motor Kekal?</h4>
-                  <ul className="list-style-check-circle check_theme_color mb0">
-                    <li className="mb10">
-                      Over years of experience in the motorcycle industry
-                    </li>
-                    <li className="mb10">
-                      Certified technicians and professional staff
-                    </li>
-                    <li className="mb10">
-                      Comprehensive warranty on all services
-                    </li>
-                    <li className="mb10">
-                      Competitive pricing and transparent billing
-                    </li>
-                    <li className="mb10">Convenient location in Johor Bahru</li>
-                    <li className="mb10">
-                      Strong relationships with major motorcycle brands
-                    </li>
-                    <li className="mb10">
-                      Commitment to customer satisfaction
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* End Additional Business Information */}
     </>
   );
 };
