@@ -3,10 +3,6 @@ import "aos/dist/aos.css";
 import "../public/scss/main.scss";
 import ClientLayout from "./components/ClientLayout";
 
-if (typeof window !== "undefined") {
-  import("bootstrap");
-}
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

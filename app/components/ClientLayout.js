@@ -6,6 +6,10 @@ import styled from "styled-components";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+if (typeof window !== "undefined") {
+  import("bootstrap");
+}
+
 const StyledDiv = styled.div`
   margin: 0;
   padding: 0;
