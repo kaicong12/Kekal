@@ -1,13 +1,7 @@
-"use client";
-import Aos from "aos";
-import { useEffect } from "react";
 import { Inter } from "next/font/google";
 import "aos/dist/aos.css";
 import "../public/scss/main.scss";
-import ScrollToTop from "./components/common/ScrollTop";
-import styled from "styled-components";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import ClientLayout from "./components/ClientLayout";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -15,28 +9,86 @@ if (typeof window !== "undefined") {
 
 const inter = Inter({ subsets: ["latin"] });
 
-const Body = styled.body`
-  font-family: ${inter.family};
-  font-size: ${inter.fontSize};
-  margin: 0;
-  padding: 0;
-`;
+export const metadata = {
+  title: {
+    default:
+      "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, JB",
+    template: "%s | Perniagaan Motor Kekal",
+  },
+  description:
+    "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
+  keywords: [
+    "kedai motor",
+    "motor shop",
+    "motorcycle",
+    "yamaha dealer",
+    "kawasaki dealer",
+    "motor repair",
+    "LC135",
+    "motor shop Johor Bahru",
+    "kedai motor johor bahru",
+    "kedai motor johor jaya",
+    "kedai jual motor Johor Bahru",
+    "kedai motor near me",
+    "yamaha shop near me",
+  ],
+  authors: [{ name: "Perniagaan Motor Kekal" }],
+  creator: "Perniagaan Motor Kekal",
+  publisher: "Perniagaan Motor Kekal",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://www.motorkekal.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title:
+      "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, JB",
+    description:
+      "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
+    url: "https://www.motorkekal.com",
+    siteName: "Perniagaan Motor Kekal",
+    images: [
+      {
+        url: "/images/background/website-screenshot.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Perniagaan Motor Kekal - Motorcycle Dealer Storefront",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, JB",
+    description:
+      "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
+    images: ["/images/background/website-screenshot.jpeg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
 
 export default function RootLayout({ children }) {
-  useEffect(() => {
-    Aos.init({
-      duration: 1200,
-    });
-  }, []);
-
   return (
     <html lang="en">
-      <Body cz-shortcut-listen="false">
-        {children}
-        <ScrollToTop />
-        <Analytics />
-        <SpeedInsights />
-      </Body>
+      <body className={inter.className} cz-shortcut-listen="false">
+        <ClientLayout>{children}</ClientLayout>
+      </body>
     </html>
   );
 }
