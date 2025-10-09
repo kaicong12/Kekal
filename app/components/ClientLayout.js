@@ -5,6 +5,7 @@ import ScrollToTop from "./common/ScrollTop";
 import styled from "styled-components";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AuthProvider } from "./auth/AuthProvider";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -24,10 +25,12 @@ export default function ClientLayout({ children }) {
 
   return (
     <StyledDiv>
-      {children}
-      <ScrollToTop />
-      <Analytics />
-      <SpeedInsights />
+      <AuthProvider>
+        {children}
+        <ScrollToTop />
+        <Analytics />
+        <SpeedInsights />
+      </AuthProvider>
     </StyledDiv>
   );
 }

@@ -8,10 +8,9 @@ import Image from "next/image";
 
 import { useListingImages } from "@/utils/hooks/useListingImages";
 
-
 export default function ProductGallery({ brand, modelName }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const { listingImages } = useListingImages(brand, modelName)
+  const { listingImages } = useListingImages(brand, modelName);
 
   return (
     <>
@@ -38,7 +37,9 @@ export default function ProductGallery({ brand, modelName }) {
                     style={{ objectFit: "cover" }}
                     className="w-100 h-100"
                     src={slide.imageSrc}
-                    alt="motorcycle image"
+                    alt={`${brand} ${modelName} motorcycle - Image ${
+                      index + 1
+                    }`}
                   />
 
                   {/* <div className="overlay_icon">
@@ -72,7 +73,9 @@ export default function ProductGallery({ brand, modelName }) {
                   priority
                   style={{ objectFit: "cover" }}
                   src={slide.imageSrc}
-                  alt="thum motorcycle"
+                  alt={`${brand} ${modelName} motorcycle thumbnail ${
+                    index + 1
+                  }`}
                 />
               </SwiperSlide>
             ))}
