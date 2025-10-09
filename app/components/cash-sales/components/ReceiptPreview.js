@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   Modal,
   Card,
@@ -12,6 +12,7 @@ import {
   Space,
   Tag,
   Descriptions,
+  message,
 } from "antd";
 import {
   ArrowLeftOutlined,
@@ -20,12 +21,174 @@ import {
   MailOutlined,
   StarFilled,
 } from "@ant-design/icons";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 const { Title, Text, Paragraph } = Typography;
 
 const ReceiptPreview = React.memo(
   ({ open, onClose, receiptData, calculateTotal }) => {
+    const receiptRef = useRef(null);
+    const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+    const [isSendingEmail, setIsSendingEmail] = useState(false);
+
     if (!receiptData) return null;
+
+    // Download PDF function
+    const handleDownloadPdf = async () => {
+      if (!receiptRef.current) return;
+
+      try {
+        setIsGeneratingPdf(true);
+        message.loading("Generating PDF...", 0);
+
+        // Hide the action buttons temporarily
+        const actionButtons =
+          receiptRef.current.querySelector(".receipt-actions");
+        if (actionButtons) {
+          actionButtons.style.display = "none";
+        }
+
+        const canvas = await html2canvas(receiptRef.current, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: "#ffffff",
+        });
+
+        // Show the action buttons again
+        if (actionButtons) {
+          actionButtons.style.display = "block";
+        }
+
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF();
+
+        const imgWidth = 210;
+        const pageHeight = 295;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+
+        let position = 0;
+
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+
+        pdf.save(`Receipt-${receiptData.receiptNumber}.pdf`);
+        message.success("PDF downloaded successfully!");
+      } catch (error) {
+        console.error("Error generating PDF:", error);
+        message.error("Failed to generate PDF. Please try again.");
+      } finally {
+        setIsGeneratingPdf(false);
+        message.destroy();
+      }
+    };
+
+    // Print function
+    const handlePrint = () => {
+      const printContent = receiptRef.current;
+      if (!printContent) return;
+
+      const printWindow = window.open("", "", "width=800,height=600");
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Receipt ${receiptData.receiptNumber}</title>
+            <style>
+              body { font-family: Arial, sans-serif; margin: 20px; }
+              .receipt-actions { display: none !important; }
+              @media print {
+                .receipt-actions { display: none !important; }
+                body { margin: 0; }
+              }
+            </style>
+          </head>
+          <body>
+            ${printContent.innerHTML}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 250);
+    };
+
+    // Send Email function
+    const handleSendEmail = async () => {
+      if (!receiptData.customer.email) {
+        message.error("Customer email is required to send receipt.");
+        return;
+      }
+
+      try {
+        setIsSendingEmail(true);
+        message.loading("Sending email...", 0);
+
+        // Hide action buttons for screenshot
+        const actionButtons =
+          receiptRef.current.querySelector(".receipt-actions");
+        if (actionButtons) {
+          actionButtons.style.display = "none";
+        }
+
+        // Generate canvas for email attachment
+        const canvas = await html2canvas(receiptRef.current, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: "#ffffff",
+        });
+
+        // Show action buttons again
+        if (actionButtons) {
+          actionButtons.style.display = "block";
+        }
+
+        const imgData = canvas.toDataURL("image/png");
+
+        const emailData = {
+          to: receiptData.customer.email,
+          customerName: receiptData.customer.name,
+          receiptNumber: receiptData.receiptNumber,
+          receiptDate: receiptData.purchaseDate.format("DD MMM YYYY"),
+          total: calculateTotal().toFixed(2),
+          receiptImage: imgData,
+        };
+
+        const response = await fetch("/api/email/receipt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(emailData),
+        });
+
+        if (response.ok) {
+          message.success(
+            `Receipt sent successfully to ${receiptData.customer.email}!`
+          );
+        } else {
+          throw new Error("Failed to send email");
+        }
+      } catch (error) {
+        console.error("Error sending email:", error);
+        message.error("Failed to send email. Please try again.");
+      } finally {
+        setIsSendingEmail(false);
+        message.destroy();
+      }
+    };
 
     return (
       <Modal
@@ -35,7 +198,7 @@ const ReceiptPreview = React.memo(
         footer={null}
         styles={{ body: { padding: 0 } }}
       >
-        <div style={{ padding: "40px" }}>
+        <div ref={receiptRef} style={{ padding: "40px" }}>
           {/* Header */}
           <div style={{ marginBottom: "24px" }}>
             <Button
@@ -234,12 +397,28 @@ const ReceiptPreview = React.memo(
 
           {/* Action Buttons */}
           <Divider />
-          <Space style={{ width: "100%", justifyContent: "center" }}>
-            <Button type="primary" icon={<DownloadOutlined />}>
+          <Space
+            className="receipt-actions"
+            style={{ width: "100%", justifyContent: "center" }}
+          >
+            <Button
+              type="primary"
+              icon={<DownloadOutlined />}
+              loading={isGeneratingPdf}
+              onClick={handleDownloadPdf}
+            >
               Download PDF
             </Button>
-            <Button icon={<PrinterOutlined />}>Print</Button>
-            <Button icon={<MailOutlined />}>Send Email</Button>
+            <Button icon={<PrinterOutlined />} onClick={handlePrint}>
+              Print
+            </Button>
+            <Button
+              icon={<MailOutlined />}
+              loading={isSendingEmail}
+              onClick={handleSendEmail}
+            >
+              Send Email
+            </Button>
           </Space>
 
           {/* Footer */}

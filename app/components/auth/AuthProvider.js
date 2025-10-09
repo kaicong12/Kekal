@@ -97,17 +97,10 @@ export function AuthProvider({ children }) {
         setUser(firebaseUser);
         setIsAuthenticated(true);
 
-        // Check authorization
-        if (authorizedEmails.length === 0) {
-          const emails = await fetchAuthorizedEmails();
-          setAuthorizedEmails(emails);
-        }
+        // Always fetch fresh authorized emails for authorization check
+        const emails = await fetchAuthorizedEmails();
 
-        const isUserAuthorized = checkAuthorization(
-          firebaseUser.email,
-          authorizedEmails
-        );
-        console.log({ isUserAuthorized, userEmail: firebaseUser.email });
+        const isUserAuthorized = checkAuthorization(firebaseUser.email, emails);
         setIsAuthorized(isUserAuthorized);
 
         if (!isUserAuthorized) {
@@ -123,9 +116,6 @@ export function AuthProvider({ children }) {
 
       setLoading(false);
     });
-
-    // Fetch authorized emails on component mount
-    fetchAuthorizedEmails();
 
     return () => unsubscribe();
   }, []);
