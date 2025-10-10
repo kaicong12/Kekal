@@ -10,7 +10,7 @@ const SellerDetail2 = () => {
             height={60}
             className="mr-3 author_img w60"
             src="/images/team/seller.png"
-            alt="author.png"
+            alt="Motorcycle dealer representative"
           />
         </div>
 

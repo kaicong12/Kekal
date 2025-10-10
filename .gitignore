@@ -41,3 +41,5 @@ firebaseConfig.json
 keys
 
 .env
+.venv
+__pycache__
