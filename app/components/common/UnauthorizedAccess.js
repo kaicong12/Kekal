@@ -1,5 +1,4 @@
 "use client";
-import { useAuth } from "../../components/auth/AuthProvider";
 import { useState } from "react";
 import {
   Spin,
@@ -15,15 +14,19 @@ import {
   UserDeleteOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
-import CashSalesInterface from "../../components/cash-sales/CashSalesInterface";
-import Footer from "../../components/common/Footer";
-import DefaultHeader from "../../components/common/DefaultHeader";
-import HeaderTop from "../../components/common/HeaderTop";
-import MobileMenu from "../../components/common/MobileMenu";
+import { useAuth } from "../auth/AuthProvider";
+import Footer from "./Footer";
+import DefaultHeader from "./DefaultHeader";
+import HeaderTop from "./HeaderTop";
+import MobileMenu from "./MobileMenu";
 
 const { Title, Text } = Typography;
 
-export default function CashSalesPage() {
+export default function UnauthorizedAccess({
+  pageTitle = "Admin Access",
+  pageSubtitle = "System Access Required",
+  systemName = "Admin System",
+}) {
   const {
     user,
     isAuthenticated,
@@ -43,8 +46,7 @@ export default function CashSalesPage() {
         if (result.error === "UNAUTHORIZED") {
           notification.error({
             message: "Access Denied",
-            description:
-              "You are not authorized to access the cash sales system. Please contact the administrator for access.",
+            description: `You are not authorized to access the ${systemName.toLowerCase()}. Please contact the administrator for access.`,
             duration: 5,
             placement: "topRight",
           });
@@ -111,14 +113,14 @@ export default function CashSalesPage() {
             <div className="row">
               <div className="col-xl-12">
                 <div className="breadcrumb_content">
-                  <h2 className="breadcrumb_title">Cash Sales System</h2>
-                  <p className="subtitle">Invoice Generator</p>
+                  <h2 className="breadcrumb_title">{pageTitle}</h2>
+                  <p className="subtitle">{pageSubtitle}</p>
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
                       <a href="/#">Home</a>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
-                      <a href="#">Cash Sales</a>
+                      <a href="#">{pageTitle}</a>
                     </li>
                   </ol>
                 </div>
@@ -154,11 +156,11 @@ export default function CashSalesPage() {
                         📋
                       </div>
                       <Title level={3} style={{ marginBottom: "8px" }}>
-                        Cash Sales System
+                        {systemName}
                       </Title>
                       <Text type="secondary">
                         Please sign in with your authorized Google account to
-                        access the cash sales invoice generator.
+                        access the {systemName.toLowerCase()}.
                       </Text>
                     </div>
 
@@ -208,7 +210,7 @@ export default function CashSalesPage() {
                       <a href="/#">Home</a>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
-                      <a href="#">Cash Sales</a>
+                      <a href="#">Access Denied</a>
                     </li>
                   </ol>
                 </div>
@@ -224,7 +226,9 @@ export default function CashSalesPage() {
                 <Result
                   icon={<UserDeleteOutlined style={{ color: "#ff4d4f" }} />}
                   title="Access Denied"
-                  subTitle={`Your email address (${user?.email}) is not authorized to access the cash sales system. Please contact the administrator for access.`}
+                  subTitle={`Your email address (${
+                    user?.email
+                  }) is not authorized to access the ${systemName.toLowerCase()}. Please contact the administrator for access.`}
                   extra={[
                     <Button key="signout" onClick={signOut}>
                       Sign Out
@@ -241,8 +245,8 @@ export default function CashSalesPage() {
                   >
                     <Text type="secondary" style={{ fontSize: "12px" }}>
                       <strong>Note:</strong> Only pre-authorized email addresses
-                      can access the cash sales system. If you believe you
-                      should have access, please contact the system
+                      can access the {systemName.toLowerCase()}. If you believe
+                      you should have access, please contact the system
                       administrator.
                     </Text>
                   </Card>
@@ -257,16 +261,6 @@ export default function CashSalesPage() {
     );
   }
 
-  // Authorized user - return the interface
-  return (
-    <div className="wrapper">
-      <HeaderTop />
-      <DefaultHeader />
-      <MobileMenu />
-
-      <CashSalesInterface />
-
-      <Footer />
-    </div>
-  );
+  // This should not happen in normal flow, but return null as fallback
+  return null;
 }

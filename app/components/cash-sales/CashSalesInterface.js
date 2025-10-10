@@ -4,6 +4,12 @@ import { message } from "antd";
 import { Card, Row, Col, Button, Divider } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+import weekday from "dayjs/plugin/weekday";
+import localeData from "dayjs/plugin/localeData";
+
+// Extend dayjs with required plugins
+dayjs.extend(weekday);
+dayjs.extend(localeData);
 
 // Import components
 import ReceiptHeader from "./components/ReceiptHeader";
@@ -12,6 +18,12 @@ import CustomerDetailsForm from "./components/CustomerDetailsForm";
 import ItemsTable from "./components/ItemsTable";
 import PaymentNotesForm from "./components/PaymentNotesForm";
 import ReceiptPreview from "./components/ReceiptPreview";
+
+// Import utilities
+import {
+  generateReceiptNumber,
+  validateReceiptForPreview,
+} from "@/utils/receiptUtils";
 
 export default function CashSalesInterface() {
   const [receiptData, setReceiptData] = useState({
@@ -38,15 +50,6 @@ export default function CashSalesInterface() {
   });
 
   const [showPreview, setShowPreview] = useState(false);
-
-  function generateReceiptNumber() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-    const randomNum = Math.floor(Math.random() * 9000) + 1000;
-    return `RCP-${year}${month}${day}-${randomNum}`;
-  }
 
   const updateCustomer = useCallback((field, value) => {
     setReceiptData((prev) => ({
@@ -111,99 +114,81 @@ export default function CashSalesInterface() {
   }, [receiptData.items]);
 
   const generatePreview = useCallback(() => {
-    if (!receiptData.customer.name) {
-      message.error("Please enter customer name before generating preview");
-      return;
-    }
+    const validation = validateReceiptForPreview(receiptData);
 
-    const hasValidItems = receiptData.items.some(
-      (item) =>
-        item.description.trim() && item.quantity > 0 && item.unitPrice > 0
-    );
-
-    if (!hasValidItems) {
-      message.error(
-        "Please add at least one valid item with description, quantity, and price"
-      );
+    if (!validation.success) {
+      message.error(validation.message);
       return;
     }
 
     setShowPreview(true);
-  }, [receiptData.customer.name, receiptData.items]);
+  }, [receiptData]);
 
   const handleClosePreview = useCallback(() => {
     setShowPreview(false);
   }, []);
 
   return (
-    <div>
-      <ReceiptHeader />
-      {/* Header */}
+    <div style={{ padding: "24px" }}>
+      <Row gutter={24}>
+        <Col span={24}>
+          <Card>
+            {/* Receipt Details */}
+            <ReceiptDetailsForm
+              receiptData={receiptData}
+              setReceiptData={setReceiptData}
+            />
 
-      <div
-        className="container"
-        style={{ minHeight: "100vh", background: "#f5f5f5", padding: "24px" }}
-      >
-        <Row gutter={24}>
-          <Col span={24}>
-            <Card>
-              {/* Receipt Details */}
-              <ReceiptDetailsForm
-                receiptData={receiptData}
-                setReceiptData={setReceiptData}
-              />
+            <Divider />
 
-              <Divider />
+            {/* Customer Details */}
+            <CustomerDetailsForm
+              receiptData={receiptData}
+              updateCustomer={updateCustomer}
+            />
 
-              {/* Customer Details */}
-              <CustomerDetailsForm
-                receiptData={receiptData}
-                updateCustomer={updateCustomer}
-              />
+            <Divider />
 
-              <Divider />
+            {/* Purchased Items */}
+            <ItemsTable
+              receiptData={receiptData}
+              updateItem={updateItem}
+              addItem={addItem}
+              removeItem={removeItem}
+              calculateTotal={calculateTotal}
+            />
 
-              {/* Purchased Items */}
-              <ItemsTable
-                receiptData={receiptData}
-                updateItem={updateItem}
-                addItem={addItem}
-                removeItem={removeItem}
-                calculateTotal={calculateTotal}
-              />
+            <Divider />
 
-              <Divider />
+            {/* Payment & Notes */}
+            <PaymentNotesForm
+              receiptData={receiptData}
+              setReceiptData={setReceiptData}
+            />
 
-              {/* Payment & Notes */}
-              <PaymentNotesForm
-                receiptData={receiptData}
-                setReceiptData={setReceiptData}
-              />
+            {/* Generate Button */}
+            <Row justify="end">
+              <Col>
+                <Button
+                  type="primary"
+                  size="large"
+                  icon={<FileTextOutlined />}
+                  onClick={generatePreview}
+                >
+                  Generate Receipt Preview
+                </Button>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
 
-              {/* Generate Button */}
-              <Row justify="end">
-                <Col>
-                  <Button
-                    type="primary"
-                    size="large"
-                    icon={<FileTextOutlined />}
-                    onClick={generatePreview}
-                  >
-                    Generate Receipt Preview
-                  </Button>
-                </Col>
-              </Row>
-            </Card>
-          </Col>
-        </Row>
-
-        <ReceiptPreview
-          open={showPreview}
-          onClose={handleClosePreview}
-          receiptData={receiptData}
-          calculateTotal={calculateTotal}
-        />
-      </div>
+      <ReceiptPreview
+        open={showPreview}
+        onClose={handleClosePreview}
+        receiptData={receiptData}
+        calculateTotal={calculateTotal}
+      />
     </div>
   );
 }

@@ -20,17 +20,21 @@ import {
   PrinterOutlined,
   MailOutlined,
   StarFilled,
+  SaveOutlined,
 } from "@ant-design/icons";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { saveReceiptToFirebase } from "@/utils/receiptUtils";
 
 const { Title, Text, Paragraph } = Typography;
 
 const ReceiptPreview = React.memo(
-  ({ open, onClose, receiptData, calculateTotal }) => {
+  ({ open, onClose, receiptData, calculateTotal, isManagement = false }) => {
     const receiptRef = useRef(null);
     const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
     const [isSendingEmail, setIsSendingEmail] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const [showSaveConfirmation, setShowSaveConfirmation] = useState(false);
 
     if (!receiptData) return null;
 
@@ -188,6 +192,95 @@ const ReceiptPreview = React.memo(
         setIsSendingEmail(false);
         message.destroy();
       }
+    };
+
+    // Show save warning first
+    const handleSaveReceipt = () => {
+      Modal.confirm({
+        title: "Save Receipt",
+        content: (
+          <div>
+            <p>Are you sure you want to save this receipt?</p>
+            <p style={{ color: "#ff4d4f", fontWeight: "bold" }}>
+              ⚠️ Warning: Saved receipts cannot be modified.
+            </p>
+          </div>
+        ),
+        okText: "Save Receipt",
+        cancelText: "Cancel",
+        onOk: performSaveReceipt,
+      });
+    };
+
+    // Actual save function
+    const performSaveReceipt = async () => {
+      if (!receiptRef.current) return;
+
+      try {
+        setIsSaving(true);
+        message.loading("Saving receipt...", 0);
+
+        // Hide action buttons for PDF generation
+        const actionButtons =
+          receiptRef.current.querySelector(".receipt-actions");
+        if (actionButtons) {
+          actionButtons.style.display = "none";
+        }
+
+        // Generate PDF
+        const canvas = await html2canvas(receiptRef.current, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: "#ffffff",
+        });
+
+        // Show action buttons again
+        if (actionButtons) {
+          actionButtons.style.display = "block";
+        }
+
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF();
+
+        const imgWidth = 210;
+        const pageHeight = 295;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+
+        let position = 0;
+
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+
+        // Convert PDF to blob
+        const pdfBlob = pdf.output("blob");
+
+        // Use the utility function to save to Firebase
+        await saveReceiptToFirebase(receiptData, pdfBlob);
+
+        message.destroy();
+        setShowSaveConfirmation(true);
+      } catch (error) {
+        console.error("Error saving receipt:", error);
+        message.error("Failed to save receipt. Please try again.");
+      } finally {
+        setIsSaving(false);
+        message.destroy();
+      }
+    };
+
+    // Handle save confirmation
+    const handleSaveConfirmation = () => {
+      setShowSaveConfirmation(false);
+      onClose(); // This will close the modal properly
     };
 
     return (
@@ -397,29 +490,56 @@ const ReceiptPreview = React.memo(
 
           {/* Action Buttons */}
           <Divider />
-          <Space
-            className="receipt-actions"
-            style={{ width: "100%", justifyContent: "center" }}
-          >
-            <Button
-              type="primary"
-              icon={<DownloadOutlined />}
-              loading={isGeneratingPdf}
-              onClick={handleDownloadPdf}
+          <div className="receipt-actions">
+            <Space
+              style={{
+                width: "100%",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                gap: "8px",
+              }}
             >
-              Download PDF
-            </Button>
-            <Button icon={<PrinterOutlined />} onClick={handlePrint}>
-              Print
-            </Button>
-            <Button
-              icon={<MailOutlined />}
-              loading={isSendingEmail}
-              onClick={handleSendEmail}
-            >
-              Send Email
-            </Button>
-          </Space>
+              <Button
+                type="primary"
+                icon={<DownloadOutlined />}
+                loading={isGeneratingPdf}
+                onClick={handleDownloadPdf}
+                style={{ minWidth: "140px" }}
+              >
+                Download PDF
+              </Button>
+              <Button
+                icon={<PrinterOutlined />}
+                onClick={handlePrint}
+                style={{ minWidth: "100px" }}
+              >
+                Print
+              </Button>
+              <Button
+                icon={<MailOutlined />}
+                loading={isSendingEmail}
+                onClick={handleSendEmail}
+                style={{ minWidth: "120px" }}
+              >
+                Send Email
+              </Button>
+              {!isManagement && (
+                <Button
+                  type="primary"
+                  icon={<SaveOutlined />}
+                  loading={isSaving}
+                  onClick={handleSaveReceipt}
+                  style={{
+                    backgroundColor: "#52c41a",
+                    borderColor: "#52c41a",
+                    minWidth: "130px",
+                  }}
+                >
+                  Save Receipt
+                </Button>
+              )}
+            </Space>
+          </div>
 
           {/* Footer */}
           <Divider />
@@ -435,6 +555,36 @@ const ReceiptPreview = React.memo(
             </Text>
           </div>
         </div>
+
+        {/* Save Confirmation Modal */}
+        <Modal
+          open={showSaveConfirmation}
+          title="Receipt Saved Successfully"
+          onOk={handleSaveConfirmation}
+          onCancel={handleSaveConfirmation}
+          okText="Continue"
+          cancelButtonProps={{ style: { display: "none" } }}
+        >
+          <div style={{ textAlign: "center", padding: "20px 0" }}>
+            <div
+              style={{
+                fontSize: "48px",
+                color: "#52c41a",
+                marginBottom: "16px",
+              }}
+            >
+              ✅
+            </div>
+            <Typography.Title level={4} style={{ marginBottom: "8px" }}>
+              Receipt Saved!
+            </Typography.Title>
+            <Typography.Text type="secondary">
+              Receipt {receiptData?.receiptNumber} has been saved successfully.
+              <br />
+              <strong>Note:</strong> Saved receipts cannot be modified.
+            </Typography.Text>
+          </div>
+        </Modal>
       </Modal>
     );
   }
