@@ -329,15 +329,6 @@ export default function ReceiptManagementInterface() {
                 <span>Receipts ({filteredReceipts.length})</span>
               </Space>
             }
-            extra={
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                onClick={() => router.push("/cash-sales")}
-              >
-                Create New Receipt
-              </Button>
-            }
           >
             {/* Filters & Search */}
             <Row gutter={16} style={{ marginBottom: "16px" }}>

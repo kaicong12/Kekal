@@ -7,8 +7,8 @@ export default function CustomerDetailsForm({ receiptData, updateCustomer }) {
   return (
     <div style={{ marginBottom: "32px" }}>
       <Title level={4}>Customer Details</Title>
-      <Row gutter={[24, 12]}>
-        <Col span={12}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12}>
           <label>
             Customer Name <span style={{ color: "red" }}>*</span>
           </label>
@@ -19,7 +19,7 @@ export default function CustomerDetailsForm({ receiptData, updateCustomer }) {
             style={{ marginTop: "8px" }}
           />
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={12}>
           <label>Email</label>
           <Input
             type="email"
@@ -29,7 +29,7 @@ export default function CustomerDetailsForm({ receiptData, updateCustomer }) {
             style={{ marginTop: "8px" }}
           />
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={12}>
           <label>Address</label>
           <Input
             placeholder="Street address"
@@ -38,7 +38,7 @@ export default function CustomerDetailsForm({ receiptData, updateCustomer }) {
             style={{ marginTop: "8px" }}
           />
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={12}>
           <label>City & Postal Code</label>
           <Input
             placeholder="City, State, Postal Code"
@@ -47,7 +47,7 @@ export default function CustomerDetailsForm({ receiptData, updateCustomer }) {
             style={{ marginTop: "8px" }}
           />
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={12}>
           <label>Phone Number</label>
           <Input
             placeholder="+60 12-345 6789"

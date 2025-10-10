@@ -7,8 +7,8 @@ export default function ReceiptDetailsForm({ receiptData, setReceiptData }) {
   return (
     <div style={{ marginBottom: "32px" }}>
       <Title level={4}>Receipt Details</Title>
-      <Row gutter={16}>
-        <Col span={12}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12}>
           <label>Receipt Number</label>
           <Input
             value={receiptData.receiptNumber}
@@ -16,7 +16,7 @@ export default function ReceiptDetailsForm({ receiptData, setReceiptData }) {
             style={{ marginTop: "8px" }}
           />
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={12}>
           <label>Purchase Date</label>
           <DatePicker
             value={receiptData.purchaseDate}

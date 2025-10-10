@@ -87,6 +87,16 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // Initialize authorized emails on app load
+  useEffect(() => {
+    const initializeAuth = async () => {
+      // Fetch authorized emails immediately when the app loads
+      await fetchAuthorizedEmails();
+    };
+
+    initializeAuth();
+  }, []);
+
   // Listen to auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -97,8 +107,11 @@ export function AuthProvider({ children }) {
         setUser(firebaseUser);
         setIsAuthenticated(true);
 
-        // Always fetch fresh authorized emails for authorization check
-        const emails = await fetchAuthorizedEmails();
+        // Use already loaded authorized emails, or fetch fresh if not available
+        let emails = authorizedEmails;
+        if (emails.length === 0) {
+          emails = await fetchAuthorizedEmails();
+        }
 
         const isUserAuthorized = checkAuthorization(firebaseUser.email, emails);
         setIsAuthorized(isUserAuthorized);
@@ -118,7 +131,7 @@ export function AuthProvider({ children }) {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [authorizedEmails]);
 
   return (
     <AuthContext.Provider

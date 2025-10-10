@@ -8,8 +8,10 @@ import {
   InputNumber,
   Typography,
   Descriptions,
+  Card,
 } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useState, useEffect } from "react";
 
 const { Title, Text } = Typography;
 
@@ -20,6 +22,18 @@ export default function ItemsTable({
   removeItem,
   calculateTotal,
 }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   const columns = [
     {
       title: "Description *",
@@ -81,6 +95,90 @@ export default function ItemsTable({
     },
   ];
 
+  const renderMobileCards = () => {
+    return receiptData.items.map((item, index) => (
+      <Card
+        key={index}
+        style={{ marginBottom: "16px" }}
+        bodyStyle={{ padding: "16px" }}
+      >
+        <Row
+          justify="space-between"
+          align="top"
+          style={{ marginBottom: "16px" }}
+        >
+          <Col>
+            <Text strong>Description *</Text>
+          </Col>
+          <Col>
+            {receiptData.items.length > 1 && (
+              <Button
+                type="text"
+                danger
+                icon={<DeleteOutlined />}
+                onClick={() => removeItem(index)}
+                size="small"
+              />
+            )}
+          </Col>
+        </Row>
+
+        <Input
+          placeholder="Item description"
+          value={item.description}
+          onChange={(e) => updateItem(index, "description", e.target.value)}
+          style={{ marginBottom: "16px" }}
+        />
+
+        <Row gutter={[8, 16]}>
+          <Col xs={12}>
+            <Text strong>Quantity</Text>
+            <InputNumber
+              min={1}
+              value={item.quantity}
+              onChange={(val) => updateItem(index, "quantity", val || 0)}
+              style={{ width: "100%", marginTop: "8px" }}
+            />
+          </Col>
+          <Col xs={12}>
+            <Text strong>Unit Price (RM)</Text>
+            <InputNumber
+              min={0}
+              precision={2}
+              value={item.unitPrice}
+              onChange={(val) => updateItem(index, "unitPrice", val || 0)}
+              style={{ width: "100%", marginTop: "8px" }}
+            />
+          </Col>
+        </Row>
+
+        <div style={{ marginTop: "16px" }}>
+          <Text strong>Amount</Text>
+          <Input
+            value={`RM ${item.amount.toFixed(2)}`}
+            disabled
+            style={{ marginTop: "8px" }}
+          />
+        </div>
+      </Card>
+    ));
+  };
+
+  const renderDesktopTable = () => {
+    return (
+      <Table
+        dataSource={receiptData.items.map((item, index) => ({
+          ...item,
+          key: index,
+        }))}
+        columns={columns}
+        pagination={false}
+        scroll={{ x: 800 }}
+        size="small"
+      />
+    );
+  };
+
   return (
     <div style={{ marginBottom: "32px" }}>
       <Row
@@ -100,18 +198,11 @@ export default function ItemsTable({
         </Col>
       </Row>
 
-      <Table
-        dataSource={receiptData.items.map((item, index) => ({
-          ...item,
-          key: index,
-        }))}
-        columns={columns}
-        pagination={false}
-      />
+      {isMobile ? renderMobileCards() : renderDesktopTable()}
 
       {/* Total */}
       <Row justify="end" style={{ marginTop: "24px" }}>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Descriptions column={1} size="small" bordered>
             <Descriptions.Item
               label={

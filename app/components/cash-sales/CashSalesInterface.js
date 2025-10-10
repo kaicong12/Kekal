@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { message } from "antd";
 import { Card, Row, Col, Button, Divider } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
@@ -50,6 +50,22 @@ export default function CashSalesInterface() {
   });
 
   const [showPreview, setShowPreview] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Check on mount
+    checkScreenSize();
+
+    // Add event listener for resize
+    window.addEventListener("resize", checkScreenSize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   const updateCustomer = useCallback((field, value) => {
     setReceiptData((prev) => ({
@@ -129,10 +145,10 @@ export default function CashSalesInterface() {
   }, []);
 
   return (
-    <div style={{ padding: "24px" }}>
+    <div style={{ padding: isMobile ? "16px" : "24px" }}>
       <Row gutter={24}>
         <Col span={24}>
-          <Card>
+          <Card style={{ margin: 0 }}>
             {/* Receipt Details */}
             <ReceiptDetailsForm
               receiptData={receiptData}
@@ -167,13 +183,18 @@ export default function CashSalesInterface() {
             />
 
             {/* Generate Button */}
-            <Row justify="end">
-              <Col>
+            <Row justify="center" style={{ marginTop: "24px" }}>
+              <Col xs={24} sm="auto">
                 <Button
                   type="primary"
                   size="large"
                   icon={<FileTextOutlined />}
                   onClick={generatePreview}
+                  block={isMobile}
+                  style={{
+                    width: isMobile ? "100%" : "auto",
+                    minWidth: !isMobile ? "200px" : "auto",
+                  }}
                 >
                   Generate Receipt Preview
                 </Button>

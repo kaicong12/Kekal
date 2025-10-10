@@ -8,8 +8,8 @@ export default function PaymentNotesForm({ receiptData, setReceiptData }) {
   return (
     <div style={{ marginBottom: "32px" }}>
       <Title level={4}>Payment & Notes</Title>
-      <Row gutter={16}>
-        <Col span={12}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12}>
           <label>Payment Method</label>
           <Select
             value={receiptData.paymentMethod}
