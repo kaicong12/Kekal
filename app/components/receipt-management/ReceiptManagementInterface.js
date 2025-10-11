@@ -310,8 +310,7 @@ export default function ReceiptManagementInterface() {
           <Card>
             <Statistic
               title="Total Revenue"
-              value={`RM ${stats.totalRevenue}`}
-              precision={2}
+              value={`RM ${stats.totalRevenue.toFixed(2)}`}
               prefix={<DollarOutlined style={{ color: "#52c41a" }} />}
               valueStyle={{ color: "#52c41a" }}
             />
