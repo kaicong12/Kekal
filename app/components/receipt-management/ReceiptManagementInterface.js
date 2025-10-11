@@ -12,7 +12,6 @@ import {
   Space,
   Tag,
   Statistic,
-  DatePicker,
   message,
   Modal,
 } from "antd";
@@ -23,23 +22,18 @@ import {
   DownloadOutlined,
   FileTextOutlined,
   DollarOutlined,
-  CalendarOutlined,
-  PlusOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import ReceiptPreview from "@/app/components/cash-sales/components/ReceiptPreview";
-import { useRouter } from "next/navigation";
 import {
   loadReceiptsFromFirebase,
   deleteReceiptFromFirebase,
   calculateReceiptTotal,
 } from "@/utils/receiptUtils";
 
-const { Title, Text } = Typography;
-const { RangePicker } = DatePicker;
+const { Text } = Typography;
 
 export default function ReceiptManagementInterface() {
-  const router = useRouter();
   const [receipts, setReceipts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filteredReceipts, setFilteredReceipts] = useState([]);
