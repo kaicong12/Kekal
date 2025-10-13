@@ -1,6 +1,6 @@
 "use client";
 import { useState, useCallback, useEffect } from "react";
-import { message } from "antd";
+import { message, Modal } from "antd";
 import { Card, Row, Col, Button, Divider } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
@@ -12,7 +12,6 @@ dayjs.extend(weekday);
 dayjs.extend(localeData);
 
 // Import components
-import ReceiptHeader from "./components/ReceiptHeader";
 import ReceiptDetailsForm from "./components/ReceiptDetailsForm";
 import CustomerDetailsForm from "./components/CustomerDetailsForm";
 import ItemsTable from "./components/ItemsTable";
@@ -23,6 +22,7 @@ import ReceiptPreview from "./components/ReceiptPreview";
 import {
   generateReceiptNumber,
   validateReceiptForPreview,
+  checkReceiptNumberExists,
 } from "@/utils/receiptUtils";
 
 export default function CashSalesInterface() {
@@ -50,6 +50,7 @@ export default function CashSalesInterface() {
   });
 
   const [showPreview, setShowPreview] = useState(false);
+  const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -129,7 +130,8 @@ export default function CashSalesInterface() {
     return receiptData.items.reduce((sum, item) => sum + item.amount, 0);
   }, [receiptData.items]);
 
-  const generatePreview = useCallback(() => {
+  const generatePreview = useCallback(async () => {
+    setIsGeneratingPreview(true);
     const validation = validateReceiptForPreview(receiptData);
 
     if (!validation.success) {
@@ -137,7 +139,53 @@ export default function CashSalesInterface() {
       return;
     }
 
-    setShowPreview(true);
+    // Check if receipt number already exists
+    try {
+      const receiptExists = await checkReceiptNumberExists(
+        receiptData.receiptNumber
+      );
+
+      if (receiptExists) {
+        Modal.confirm({
+          title: "Receipt Number Already Exists",
+          content: (
+            <div>
+              <p>
+                The receipt number <strong>{receiptData.receiptNumber}</strong>{" "}
+                has already been used.
+              </p>
+              <p>
+                You can still continue to generate this receipt. It will be
+                saved as a separate record in the system with a unique document
+                ID.
+              </p>
+              <p style={{ color: "#fa8c16", fontWeight: "bold" }}>
+                ⚠️ Do you wish to continue with this receipt number?
+              </p>
+            </div>
+          ),
+          okText: "Continue Anyway",
+          cancelText: "Go Back",
+          onOk: () => {
+            setShowPreview(true);
+          },
+          onCancel: () => {
+            // Do nothing, just close the modal
+          },
+        });
+      } else {
+        setShowPreview(true);
+      }
+    } catch (error) {
+      console.error("Error checking receipt number:", error);
+      // If there's an error checking, still allow preview generation
+      message.warning(
+        "Unable to verify receipt number uniqueness, continuing anyway..."
+      );
+      setShowPreview(true);
+    } finally {
+      setIsGeneratingPreview(false);
+    }
   }, [receiptData]);
 
   const handleClosePreview = useCallback(() => {
@@ -189,6 +237,7 @@ export default function CashSalesInterface() {
                   type="primary"
                   size="large"
                   icon={<FileTextOutlined />}
+                  loading={isGeneratingPreview}
                   onClick={generatePreview}
                   block={isMobile}
                   style={{

@@ -8,6 +8,8 @@ import {
   deleteDoc,
   doc,
   serverTimestamp,
+  where,
+  limit,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { message } from "antd";
@@ -111,6 +113,62 @@ export const generateReceiptNumber = () => {
   const day = String(now.getDate()).padStart(2, "0");
   const randomNum = Math.floor(Math.random() * 9000) + 1000;
   return `RCP-${year}${month}${day}-${randomNum}`;
+};
+
+/**
+ * Generate next receipt number based on latest receipt in Firebase
+ * @returns {string} - Next receipt number
+ */
+export const generateNextReceiptNumber = async () => {
+  try {
+    const receiptsCollection = collection(db, "generatedReceipts");
+    const q = query(receiptsCollection, orderBy("createdAt", "desc"), limit(1));
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+      const latestReceipt = snapshot.docs[0].data();
+      const latestReceiptNumber = latestReceipt.receiptNumber;
+
+      // Extract the suffix from the latest receipt number (e.g., "RCP-20251011-6114" -> "6114")
+      const parts = latestReceiptNumber.split("-");
+      if (parts.length === 3) {
+        const suffix = parseInt(parts[2]);
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        const newSuffix = String(suffix + 1).padStart(4, "0");
+        return `RCP-${year}${month}${day}-${newSuffix}`;
+      }
+    }
+
+    // If no receipts found or format is unexpected, generate a new one
+    return generateReceiptNumber();
+  } catch (error) {
+    console.error("Error generating next receipt number:", error);
+    // Fallback to random generation
+    return generateReceiptNumber();
+  }
+};
+
+/**
+ * Check if receipt number already exists in Firebase
+ * @param {string} receiptNumber - Receipt number to check
+ * @returns {boolean} - True if exists, false otherwise
+ */
+export const checkReceiptNumberExists = async (receiptNumber) => {
+  try {
+    const receiptsCollection = collection(db, "generatedReceipts");
+    const q = query(
+      receiptsCollection,
+      where("receiptNumber", "==", receiptNumber)
+    );
+    const snapshot = await getDocs(q);
+    return !snapshot.empty;
+  } catch (error) {
+    console.error("Error checking receipt number:", error);
+    return false;
+  }
 };
 
 /**
