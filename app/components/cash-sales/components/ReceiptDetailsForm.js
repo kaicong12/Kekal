@@ -1,9 +1,12 @@
 "use client";
-import { Row, Col, Input, DatePicker, Typography } from "antd";
+import { Row, Col, Checkbox, Input, DatePicker, Typography } from "antd";
+import { useState } from "react";
 
 const { Title } = Typography;
 
 export default function ReceiptDetailsForm({ receiptData, setReceiptData }) {
+  const [isCustomId, setIsCustomId] = useState(false);
+  
   return (
     <div style={{ marginBottom: "32px" }}>
       <Title level={4}>Receipt Details</Title>
@@ -12,9 +15,10 @@ export default function ReceiptDetailsForm({ receiptData, setReceiptData }) {
           <label>Receipt Number</label>
           <Input
             value={receiptData.receiptNumber}
-            disabled
-            style={{ marginTop: "8px" }}
+            disabled={!isCustomId}
+            style={{ marginTop: "8px", marginBottom: "8px" }}
           />
+          <Checkbox onChange={(e) => setIsCustomId(e.target.checked)}>Custom Receipt Number</Checkbox>
         </Col>
         <Col xs={24} sm={12}>
           <label>Purchase Date</label>
