@@ -9,10 +9,7 @@ import {
   message,
 } from "antd";
 import { useState, useEffect } from "react";
-import {
-  generateNextReceiptNumber,
-  checkReceiptNumberExists,
-} from "@/utils/receiptUtils";
+import { generateNextReceiptNumber } from "@/utils/receiptUtils";
 
 const { Title } = Typography;
 

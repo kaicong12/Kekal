@@ -19,17 +19,25 @@ import {
   DownloadOutlined,
   PrinterOutlined,
   MailOutlined,
-  StarFilled,
   SaveOutlined,
 } from "@ant-design/icons";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { saveReceiptToFirebase } from "@/utils/receiptUtils";
+import Image from "next/image";
+import { antDesignCSS } from "./AntDesignCss";
 
 const { Title, Text, Paragraph } = Typography;
 
 const ReceiptPreview = React.memo(
-  ({ open, onClose, receiptData, calculateTotal, isManagement = false }) => {
+  ({
+    open,
+    onClose,
+    receiptData,
+    calculateTotal,
+    isManagement = false,
+    onResetFields,
+  }) => {
     const receiptRef = useRef(null);
     const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
     const [isSendingEmail, setIsSendingEmail] = useState(false);
@@ -69,7 +77,7 @@ const ReceiptPreview = React.memo(
         const pdf = new jsPDF();
 
         const imgWidth = 210;
-        const pageHeight = 295;
+        const pageHeight = 300;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
         let heightLeft = imgHeight;
 
@@ -106,13 +114,10 @@ const ReceiptPreview = React.memo(
         <html>
           <head>
             <title>Receipt ${receiptData.receiptNumber}</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd@5.12.8/dist/reset.css">
             <style>
-              body { font-family: Arial, sans-serif; margin: 20px; }
               .receipt-actions { display: none !important; }
-              @media print {
-                .receipt-actions { display: none !important; }
-                body { margin: 0; }
-              }
+              ${antDesignCSS}
             </style>
           </head>
           <body>
@@ -281,6 +286,11 @@ const ReceiptPreview = React.memo(
     const handleSaveConfirmation = () => {
       setShowSaveConfirmation(false);
       onClose(); // This will close the modal properly
+
+      // Reset all fields in the invoice create interface after successful save
+      if (onResetFields) {
+        onResetFields();
+      }
     };
 
     return (
@@ -344,21 +354,21 @@ const ReceiptPreview = React.memo(
               <Row justify="space-between" align="middle">
                 <Col>
                   <Space align="center">
-                    <div
+                    <Image
+                      src="/images/icon/letterk_icon.svg"
+                      alt="Company Logo"
+                      width={60}
+                      height={60}
                       style={{
-                        width: 50,
-                        height: 50,
                         background: "#faad14",
                         borderRadius: "50%",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        height: "60px",
+                        width: "60px",
                       }}
-                    >
-                      <StarFilled
-                        style={{ fontSize: "24px", color: "#1f2937" }}
-                      />
-                    </div>
+                    />
                     <div>
                       <Title level={4} style={{ margin: 0 }}>
                         永恒摩托贸易公司
@@ -384,55 +394,55 @@ const ReceiptPreview = React.memo(
               </Row>
             </Card>
 
-          {/* From and Bill To */}
-          <Row gutter={24} style={{ marginBottom: "24px" }}>
-            <Col span={12}>
-              <Card
-                title={
-                  <Tag color="gold" style={{ fontWeight: "bold" }}>
-                    FROM
-                  </Tag>
-                }
-                size="small"
-              >
-                <div>
-                  <Text strong>Perniagaan Motor Kekal</Text>
-                </div>
-                <div>永恒摩托贸易公司</div>
-                <div>5, Jalan Seroja, 49</div>
-                <div>Taman Johor Jaya</div>
-                <div>81100, Johor Bahru, Johor</div>
-                <div>Tel: +60127126128</div>
-                <div>Email: motorkekal@gmail.com</div>
-              </Card>
-            </Col>
-            <Col span={12}>
-              <Card
-                title={
-                  <Tag color="gold" style={{ fontWeight: "bold" }}>
-                    BILL TO
-                  </Tag>
-                }
-                size="small"
-              >
-                <div>
-                  <Text strong>{receiptData.customer.name}</Text>
-                </div>
-                {receiptData.customer.address && (
-                  <div>{receiptData.customer.address}</div>
-                )}
-                {receiptData.customer.cityPostal && (
-                  <div>{receiptData.customer.cityPostal}</div>
-                )}
-                {receiptData.customer.email && (
-                  <div>{receiptData.customer.email}</div>
-                )}
-                {receiptData.customer.phone && (
-                  <div>{receiptData.customer.phone}</div>
-                )}
-              </Card>
-            </Col>
-          </Row>
+            {/* From and Bill To */}
+            <Row gutter={24} style={{ marginBottom: "24px" }}>
+              <Col span={12}>
+                <Card
+                  title={
+                    <Tag color="gold" style={{ fontWeight: "bold" }}>
+                      FROM
+                    </Tag>
+                  }
+                  size="small"
+                >
+                  <div>
+                    <Text strong>Perniagaan Motor Kekal</Text>
+                  </div>
+                  <div>永恒摩托贸易公司</div>
+                  <div>5, Jalan Seroja, 49</div>
+                  <div>Taman Johor Jaya</div>
+                  <div>81100, Johor Bahru, Johor</div>
+                  <div>Tel: +60127126128</div>
+                  <div>Email: motorkekal@gmail.com</div>
+                </Card>
+              </Col>
+              <Col span={12}>
+                <Card
+                  title={
+                    <Tag color="gold" style={{ fontWeight: "bold" }}>
+                      BILL TO
+                    </Tag>
+                  }
+                  size="small"
+                >
+                  <div>
+                    <Text strong>{receiptData.customer.name}</Text>
+                  </div>
+                  {receiptData.customer.address && (
+                    <div>{receiptData.customer.address}</div>
+                  )}
+                  {receiptData.customer.cityPostal && (
+                    <div>{receiptData.customer.cityPostal}</div>
+                  )}
+                  {receiptData.customer.email && (
+                    <div>{receiptData.customer.email}</div>
+                  )}
+                  {receiptData.customer.phone && (
+                    <div>{receiptData.customer.phone}</div>
+                  )}
+                </Card>
+              </Col>
+            </Row>
 
             {/* Items Table */}
             <Card style={{ marginBottom: "24px" }}>

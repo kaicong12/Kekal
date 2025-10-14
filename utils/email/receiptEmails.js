@@ -7,7 +7,7 @@ const generateReceiptEmailHTML = ({
   total,
   receiptImage,
 }) => {
-    const htmlTemplate = `
+  const htmlTemplate = `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -23,10 +23,17 @@ const generateReceiptEmailHTML = ({
                     margin: 0 auto;
                     padding: 20px;
                 }
-                .header {
+                .header-container {
                     background: linear-gradient(135deg, #faad14, #ffa940);
+                    display: flex;
+                    justify-content: center;
+                }
+                .header-container img {
+                    width: 120px;
+                }
+                .header {
                     color: #1f2937;
-                    padding: 20px;
+                    padding: 20px 0;
                     text-align: center;
                     border-radius: 8px 8px 0 0;
                 }
@@ -96,9 +103,16 @@ const generateReceiptEmailHTML = ({
             </style>
         </head>
         <body>
-            <div class="header">
-                <h1>永恒摩托贸易公司</h1>
-                <p>Perniagaan Motor Kekal</p>
+            <div class="header-container">
+                <img src="../../public/images/icon/letterk_icon.svg" alt="Company Logo" />
+                <div class="header">
+                    <h1>永恒摩托贸易公司</h1>
+                    <p>Perniagaan Motor Kekal</p>
+                </div>
+                <img
+                    src="../../public/images/icon/motorcycle_icon.svg"
+                    alt="Company Logo"
+                />
             </div>
             
             <div class="content">
@@ -140,8 +154,8 @@ const generateReceiptEmailHTML = ({
         </html>
             `;
 
-    return htmlTemplate;
-}
+  return htmlTemplate;
+};
 
 /**
  * Send receipt email to customer
@@ -186,5 +200,6 @@ async function sendReceiptEmail({
 }
 
 module.exports = {
-    generateReceiptEmailHTML, sendReceiptEmail,
+  generateReceiptEmailHTML,
+  sendReceiptEmail,
 };

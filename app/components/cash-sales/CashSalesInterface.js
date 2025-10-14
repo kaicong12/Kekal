@@ -192,6 +192,31 @@ export default function CashSalesInterface() {
     setShowPreview(false);
   }, []);
 
+  const resetAllFields = useCallback(() => {
+    setReceiptData({
+      receiptNumber: generateReceiptNumber(),
+      purchaseDate: dayjs(),
+      customer: {
+        name: "",
+        email: "",
+        address: "",
+        cityPostal: "",
+        phone: "",
+      },
+      items: [
+        {
+          id: 1,
+          description: "",
+          quantity: 1,
+          unitPrice: 0,
+          amount: 0,
+        },
+      ],
+      paymentMethod: "Cash",
+      additionalNotes: "Thank you for your purchase!",
+    });
+  }, []);
+
   return (
     <div style={{ padding: isMobile ? "16px" : "24px" }}>
       <Row gutter={24}>
@@ -258,6 +283,7 @@ export default function CashSalesInterface() {
         onClose={handleClosePreview}
         receiptData={receiptData}
         calculateTotal={calculateTotal}
+        onResetFields={resetAllFields}
       />
     </div>
   );
