@@ -1,19 +1,10 @@
-const emailService = require("./emailService");
 
-const generateReceiptEmailHTML = ({
-  customerName,
-  receiptNumber,
-  receiptDate,
-  total,
-  receiptImage,
-}) => {
-    const htmlTemplate = `
         <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Receipt ${receiptNumber}</title>
+            <title>Receipt undefined</title>
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -102,19 +93,19 @@ const generateReceiptEmailHTML = ({
             </div>
             
             <div class="content">
-                <h2>Dear ${customerName},</h2>
+                <h2>Dear John Doe,</h2>
                 
                 <p>Thank you for your purchase! Your receipt is ready and attached below.</p>
                 
                 <div class="receipt-info">
                     <h3>Receipt Details</h3>
-                    <p><strong>Receipt Number:</strong> ${receiptNumber}</p>
-                    <p><strong>Date:</strong> ${receiptDate}</p>
-                    <p><strong>Total Amount:</strong> RM ${total}</p>
+                    <p><strong>Receipt Number:</strong> undefined</p>
+                    <p><strong>Date:</strong> undefined</p>
+                    <p><strong>Total Amount:</strong> RM undefined</p>
                 </div>
                 
                 <div class="receipt-image">
-                    <img src="${receiptImage}" alt="Receipt ${receiptNumber}" />
+                    <img src="undefined" alt="Receipt undefined" />
                 </div>
                 
                 <div class="thank-you">
@@ -138,53 +129,4 @@ const generateReceiptEmailHTML = ({
             </div>
         </body>
         </html>
-            `;
-
-    return htmlTemplate;
-}
-
-/**
- * Send receipt email to customer
- * @param {Object} receiptData - Receipt data object
- * @param {string} receiptData.to - Customer email
- * @param {string} receiptData.customerName - Customer name
- * @param {string} receiptData.receiptNumber - Receipt number
- * @param {string} receiptData.receiptDate - Receipt date
- * @param {string} receiptData.total - Total amount
- * @param {string} receiptData.receiptImage - Base64 encoded receipt image
- * @returns {Promise<Object>} - Email sending result
- */
-async function sendReceiptEmail({
-  to,
-  customerName,
-  receiptNumber,
-  receiptDate,
-  total,
-  receiptImage,
-}) {
-  try {
-    const subject = `Receipt ${receiptNumber} - Perniagaan Motor Kekal`;
-
-    const htmlTemplate = generateReceiptEmailHTML({
-      customerName,
-      receiptNumber,
-      receiptDate,
-      total,
-      receiptImage,
-    });
-
-    const result = await emailService.sendEmail(to, htmlTemplate, subject);
-
-    return result;
-  } catch (error) {
-    console.error("Error sending receipt email:", error);
-    return {
-      success: false,
-      error: error.message || "Failed to send receipt email",
-    };
-  }
-}
-
-module.exports = {
-    generateReceiptEmailHTML, sendReceiptEmail,
-};
+            

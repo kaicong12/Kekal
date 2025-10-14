@@ -384,55 +384,55 @@ const ReceiptPreview = React.memo(
               </Row>
             </Card>
 
-            {/* From and Bill To */}
-            <Row gutter={24} style={{ marginBottom: "24px" }}>
-              <Col span={12}>
-                <Card
-                  title={
-                    <Tag color="gold" style={{ fontWeight: "bold" }}>
-                      FROM
-                    </Tag>
-                  }
-                  size="small"
-                >
-                  <div>
-                    <Text strong>Perniagaan Motor Kekal</Text>
-                  </div>
-                  <div>永恒摩托贸易公司</div>
-                  <div>No. 123, Jalan Dato Sulaiman</div>
-                  <div>Taman Abad, 80250</div>
-                  <div>Johor Bahru, Johor</div>
-                  <div>Tel: +60 7-123 4567</div>
-                  <div>Email: info@motorkekal.com</div>
-                </Card>
-              </Col>
-              <Col span={12}>
-                <Card
-                  title={
-                    <Tag color="gold" style={{ fontWeight: "bold" }}>
-                      BILL TO
-                    </Tag>
-                  }
-                  size="small"
-                >
-                  <div>
-                    <Text strong>{receiptData.customer.name}</Text>
-                  </div>
-                  {receiptData.customer.address && (
-                    <div>{receiptData.customer.address}</div>
-                  )}
-                  {receiptData.customer.cityPostal && (
-                    <div>{receiptData.customer.cityPostal}</div>
-                  )}
-                  {receiptData.customer.email && (
-                    <div>{receiptData.customer.email}</div>
-                  )}
-                  {receiptData.customer.phone && (
-                    <div>{receiptData.customer.phone}</div>
-                  )}
-                </Card>
-              </Col>
-            </Row>
+          {/* From and Bill To */}
+          <Row gutter={24} style={{ marginBottom: "24px" }}>
+            <Col span={12}>
+              <Card
+                title={
+                  <Tag color="gold" style={{ fontWeight: "bold" }}>
+                    FROM
+                  </Tag>
+                }
+                size="small"
+              >
+                <div>
+                  <Text strong>Perniagaan Motor Kekal</Text>
+                </div>
+                <div>永恒摩托贸易公司</div>
+                <div>5, Jalan Seroja, 49</div>
+                <div>Taman Johor Jaya</div>
+                <div>81100, Johor Bahru, Johor</div>
+                <div>Tel: +60127126128</div>
+                <div>Email: motorkekal@gmail.com</div>
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card
+                title={
+                  <Tag color="gold" style={{ fontWeight: "bold" }}>
+                    BILL TO
+                  </Tag>
+                }
+                size="small"
+              >
+                <div>
+                  <Text strong>{receiptData.customer.name}</Text>
+                </div>
+                {receiptData.customer.address && (
+                  <div>{receiptData.customer.address}</div>
+                )}
+                {receiptData.customer.cityPostal && (
+                  <div>{receiptData.customer.cityPostal}</div>
+                )}
+                {receiptData.customer.email && (
+                  <div>{receiptData.customer.email}</div>
+                )}
+                {receiptData.customer.phone && (
+                  <div>{receiptData.customer.phone}</div>
+                )}
+              </Card>
+            </Col>
+          </Row>
 
             {/* Items Table */}
             <Card style={{ marginBottom: "24px" }}>
