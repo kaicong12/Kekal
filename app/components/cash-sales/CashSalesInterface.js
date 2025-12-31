@@ -144,6 +144,33 @@ export default function CashSalesInterface() {
     setShowPreview(false);
   }, []);
 
+  // Reset form after actions in ReceiptPreview
+  const handleResetForm = useCallback(() => {
+    setReceiptData({
+      receiptNumber: generateReceiptNumber(),
+      purchaseDate: dayjs(),
+      customer: {
+        name: "",
+        email: "",
+        address: "",
+        cityPostal: "",
+        phone: "",
+      },
+      items: [
+        {
+          id: 1,
+          description: "",
+          quantity: 1,
+          unitPrice: 0,
+          amount: 0,
+        },
+      ],
+      paymentMethod: "Cash",
+      additionalNotes: "Thank you for your purchase!",
+    });
+    setShowPreview(false);
+  }, []);
+
   return (
     <div style={{ padding: isMobile ? "16px" : "24px" }}>
       <Row gutter={24}>
@@ -207,6 +234,7 @@ export default function CashSalesInterface() {
       <ReceiptPreview
         open={showPreview}
         onClose={handleClosePreview}
+        onResetForm={handleResetForm}
         receiptData={receiptData}
         calculateTotal={calculateTotal}
       />

@@ -17,7 +17,6 @@ import {
 import {
   ArrowLeftOutlined,
   DownloadOutlined,
-  PrinterOutlined,
   MailOutlined,
   StarFilled,
   SaveOutlined,
@@ -29,14 +28,12 @@ import { saveReceiptToFirebase } from "@/utils/receiptUtils";
 const { Title, Text, Paragraph } = Typography;
 
 const ReceiptPreview = React.memo(
-  ({ open, onClose, receiptData, calculateTotal, isManagement = false }) => {
+  ({ open, onClose, onResetForm, receiptData, calculateTotal, isManagement = false }) => {
     const receiptRef = useRef(null);
     const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
     const [isSendingEmail, setIsSendingEmail] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [showSaveConfirmation, setShowSaveConfirmation] = useState(false);
-
-    console.log({ showSaveConfirmation})
 
     if (!receiptData) return null;
 
@@ -48,11 +45,17 @@ const ReceiptPreview = React.memo(
         setIsGeneratingPdf(true);
         message.loading("Generating PDF...", 0);
 
-        // Hide the action buttons temporarily
+        // Hide the action buttons and back button temporarily
         const actionButtons =
           receiptRef.current.querySelector(".receipt-actions");
+        const backButton =
+          receiptRef.current.querySelector(".back-to-edit-button");
+        
         if (actionButtons) {
           actionButtons.style.display = "none";
+        }
+        if (backButton) {
+          backButton.style.display = "none";
         }
 
         const canvas = await html2canvas(receiptRef.current, {
@@ -62,9 +65,12 @@ const ReceiptPreview = React.memo(
           backgroundColor: "#ffffff",
         });
 
-        // Show the action buttons again
+        // Show the action buttons and back button again
         if (actionButtons) {
           actionButtons.style.display = "block";
+        }
+        if (backButton) {
+          backButton.style.display = "block";
         }
 
         const imgData = canvas.toDataURL("image/png");
@@ -89,6 +95,11 @@ const ReceiptPreview = React.memo(
 
         pdf.save(`Receipt-${receiptData.receiptNumber}.pdf`);
         message.success("PDF downloaded successfully!");
+        
+        // Reset form after successful download if onResetForm is provided
+        if (onResetForm) {
+          setTimeout(() => onResetForm(), 1000);
+        }
       } catch (error) {
         console.error("Error generating PDF:", error);
         message.error("Failed to generate PDF. Please try again.");
@@ -98,37 +109,6 @@ const ReceiptPreview = React.memo(
       }
     };
 
-    // Print function
-    const handlePrint = () => {
-      const printContent = receiptRef.current;
-      if (!printContent) return;
-
-      const printWindow = window.open("", "", "width=800,height=600");
-      printWindow.document.write(`
-        <html>
-          <head>
-            <title>Receipt ${receiptData.receiptNumber}</title>
-            <style>
-              body { font-family: Arial, sans-serif; margin: 20px; }
-              .receipt-actions { display: none !important; }
-              @media print {
-                .receipt-actions { display: none !important; }
-                body { margin: 0; }
-              }
-            </style>
-          </head>
-          <body>
-            ${printContent.innerHTML}
-          </body>
-        </html>
-      `);
-      printWindow.document.close();
-      printWindow.focus();
-      setTimeout(() => {
-        printWindow.print();
-        printWindow.close();
-      }, 250);
-    };
 
     // Send Email function
     const handleSendEmail = async () => {
@@ -141,11 +121,17 @@ const ReceiptPreview = React.memo(
         setIsSendingEmail(true);
         message.loading("Sending email...", 0);
 
-        // Hide action buttons for screenshot
+        // Hide action buttons and back button for screenshot
         const actionButtons =
           receiptRef.current.querySelector(".receipt-actions");
+        const backButton =
+          receiptRef.current.querySelector(".back-to-edit-button");
+        
         if (actionButtons) {
           actionButtons.style.display = "none";
+        }
+        if (backButton) {
+          backButton.style.display = "none";
         }
 
         // Generate canvas for email attachment
@@ -156,9 +142,12 @@ const ReceiptPreview = React.memo(
           backgroundColor: "#ffffff",
         });
 
-        // Show action buttons again
+        // Show action buttons and back button again
         if (actionButtons) {
           actionButtons.style.display = "block";
+        }
+        if (backButton) {
+          backButton.style.display = "block";
         }
 
         const imgData = canvas.toDataURL("image/png");
@@ -184,6 +173,11 @@ const ReceiptPreview = React.memo(
           message.success(
             `Receipt sent successfully to ${receiptData.customer.email}!`
           );
+          
+          // Reset form after successful email send if onResetForm is provided
+          if (onResetForm) {
+            setTimeout(() => onResetForm(), 1000);
+          }
         } else {
           throw new Error("Failed to send email");
         }
@@ -222,11 +216,17 @@ const ReceiptPreview = React.memo(
         setIsSaving(true);
         message.loading("Saving receipt...", 0);
 
-        // Hide action buttons for PDF generation
+        // Hide action buttons and back button for PDF generation
         const actionButtons =
           receiptRef.current.querySelector(".receipt-actions");
+        const backButton =
+          receiptRef.current.querySelector(".back-to-edit-button");
+          
         if (actionButtons) {
           actionButtons.style.display = "none";
+        }
+        if (backButton) {
+          backButton.style.display = "none";
         }
 
         // Generate PDF
@@ -237,9 +237,12 @@ const ReceiptPreview = React.memo(
           backgroundColor: "#ffffff",
         });
 
-        // Show action buttons again
+        // Show action buttons and back button again
         if (actionButtons) {
           actionButtons.style.display = "block";
+        }
+        if (backButton) {
+          backButton.style.display = "block";
         }
 
         const imgData = canvas.toDataURL("image/png");
@@ -283,7 +286,13 @@ const ReceiptPreview = React.memo(
     const handleSaveConfirmation = (e) => {
       e.stopPropagation();
       setShowSaveConfirmation(false);
-      onClose(); // This will close the modal properly
+      
+      // Reset form after successful save if onResetForm is provided
+      if (onResetForm) {
+        onResetForm();
+      } else {
+        onClose(); // Fallback to just closing the modal
+      }
     };
 
     return (
@@ -331,6 +340,7 @@ const ReceiptPreview = React.memo(
                 type="link"
                 icon={<ArrowLeftOutlined />}
                 onClick={onClose}
+                className="back-to-edit-button"
                 style={{ padding: 0, marginBottom: "16px" }}
               >
                 Back to Edit
@@ -540,13 +550,6 @@ const ReceiptPreview = React.memo(
                   style={{ minWidth: "140px" }}
                 >
                   Download PDF
-                </Button>
-                <Button
-                  icon={<PrinterOutlined />}
-                  onClick={handlePrint}
-                  style={{ minWidth: "100px" }}
-                >
-                  Print
                 </Button>
                 <Button
                   icon={<MailOutlined />}
