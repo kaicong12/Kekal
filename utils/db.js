@@ -1,21 +1,31 @@
-import {getDownloadURL, ref} from "firebase/storage"
+import {getDownloadURL, ref, listAll} from "firebase/storage"
 import { collection, getDocs, doc, getDoc, query, orderBy, limit, where } from "firebase/firestore";
 import {db, storage} from "@/utils/firebase";
 
-const retrieveImageUrl = (path) => {
-    // getDownloadUrl will not work on empty path
-    const notFoundPlaceholder = 'https://via.placeholder.com/150?text=Image+Not+Found'
-    if (path === "") {
+const notFoundPlaceholder = 'https://via.placeholder.com/150?text=Image+Not+Found'
+
+// Retrieves the first image URL from a brand/model folder
+const retrieveImageUrl = async (brand, modelName) => {
+    if (!brand || !modelName) {
         return notFoundPlaceholder
     }
 
     try {
-      const storageRef = ref(storage, path);
-      return getDownloadURL(storageRef)
-    } catch {
-      return notFoundPlaceholder
+      const storageRef = ref(storage, `/${brand}/${modelName}`);
+      const allImages = await listAll(storageRef);
+      
+      // If folder is empty, return placeholder
+      if (allImages.items.length === 0) {
+        return notFoundPlaceholder;
+      }
+      
+      // Get the first image URL
+      const firstImageUrl = await getDownloadURL(allImages.items[0]);
+      return firstImageUrl;
+    } catch (error) {
+      console.error(`Error retrieving image for ${brand}/${modelName}:`, error);
+      return notFoundPlaceholder;
     }
-    
 }
 
 export const listMotorcycles = async () => {
@@ -23,7 +33,8 @@ export const listMotorcycles = async () => {
     const motorcycleSnapshot = await getDocs(motorcycleCollection);
     return await Promise.all(motorcycleSnapshot.docs.map(async doc => {
         const res = {id: doc.id, ...doc.data()};
-        res.imageUrl = await retrieveImageUrl(res.path)
+        // Use brand and model to retrieve first image from folder as thumbnail
+        res.imageUrl = await retrieveImageUrl(res.brand, res.name)
 
         return res
     }));
@@ -74,12 +85,8 @@ export const queryMotorcycle = async ({ sortedBy, filterOpt, limitResult }) => {
 
   const motorcycles = await Promise.all(querySnapshot.docs.map(async doc => {
     const motorcycleData = doc.data();
-    // If thumbnail doesn't exist, use the first image and retrieve its URL
-    if (!motorcycleData.thumbnail && motorcycleData.images?.length) {
-      const firstImageUrl = motorcycleData.images[0];
-      const imageUrl = await retrieveImageUrl(firstImageUrl);
-      motorcycleData.imageUrl = imageUrl;
-    }
+    // Use brand and model to retrieve first image from folder as thumbnail
+    motorcycleData.imageUrl = await retrieveImageUrl(motorcycleData.brand, motorcycleData.name);
 
     return { id: doc.id, ...motorcycleData };
   }))
