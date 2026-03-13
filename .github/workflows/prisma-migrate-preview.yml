@@ -24,6 +24,7 @@ jobs:
         with:
           project_id: ${{ secrets.NEON_PROJECT_ID }}
           branch_name: preview/${{ github.head_ref }}
+          database: verceldb
           api_key: ${{ secrets.NEON_API_KEY }}
 
       - run: npm ci
