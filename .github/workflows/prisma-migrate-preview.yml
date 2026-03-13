@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: "yarn"
 
       - name: Get Neon branch database URL
         id: neon
@@ -27,7 +27,7 @@ jobs:
           database: verceldb
           api_key: ${{ secrets.NEON_API_KEY }}
 
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
 
       - name: Apply migrations to preview branch database
         run: npx prisma migrate deploy

@@ -24,7 +24,7 @@ model Motorcycle {
   name           String
   model          String
   year           String
-  price          Float
+  price          Decimal
   engine         String
   engineCapacity Int
   gear           String
@@ -59,7 +59,7 @@ model GeneratedReceipt {
   purchaseDate     DateTime
   paymentMethod    String
   additionalNotes  String?
-  total            Float
+  total            Decimal
   pdfUrl           String
   createdAt        DateTime @default(now())
 
@@ -87,8 +87,8 @@ model ReceiptItem {
   id          String @id @default(cuid())
   description String
   quantity    Int
-  unitPrice   Float
-  amount      Float
+  unitPrice   Decimal
+  amount      Decimal
 
   receiptId String
   receipt   GeneratedReceipt @relation(fields: [receiptId], references: [id], onDelete: Cascade)
