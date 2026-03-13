@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AuthorizedReceiptEmail {
+  email String @id
+
+  @@map("authorizedReceiptEmails")
+}
+
+model Motorcycle {
+  id             String  @id @default(cuid())
+  brand          String
+  name           String
+  model          String
+  year           String
+  price          Decimal
+  engine         String
+  engineCapacity Int
+  gear           String
+  color          String
+  featured       Boolean @default(false)
+  tags           String?
+  description    String?
+  specification  Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  images MotorcycleImage[]
+
+  @@map("motorcycles")
+}
+
+model MotorcycleImage {
+  id           String @id @default(cuid())
+  url          String
+  displayOrder Int    @default(0)
+
+  motorcycleId String
+  motorcycle   Motorcycle @relation(fields: [motorcycleId], references: [id], onDelete: Cascade)
+
+  @@map("motorcycleImages")
+}
+
+model GeneratedReceipt {
+  id               String   @id @default(cuid())
+  receiptNumber    String   @unique
+  purchaseDate     DateTime
+  paymentMethod    String
+  additionalNotes  String?
+  total            Decimal
+  pdfUrl           String
+  createdAt        DateTime @default(now())
+
+  customer   ReceiptCustomer?
+  items      ReceiptItem[]
+
+  @@map("generatedReceipts")
+}
+
+model ReceiptCustomer {
+  id         String  @id @default(cuid())
+  name       String
+  email      String?
+  address    String?
+  cityPostal String?
+  phone      String?
+
+  receiptId String           @unique
+  receipt   GeneratedReceipt @relation(fields: [receiptId], references: [id], onDelete: Cascade)
+
+  @@map("receiptCustomers")
+}
+
+model ReceiptItem {
+  id          String @id @default(cuid())
+  description String
+  quantity    Int
+  unitPrice   Decimal
+  amount      Decimal
+
+  receiptId String
+  receipt   GeneratedReceipt @relation(fields: [receiptId], references: [id], onDelete: Cascade)
+
+  @@map("receiptItems")
+}

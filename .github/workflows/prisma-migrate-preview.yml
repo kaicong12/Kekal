@@ -1,0 +1,35 @@
+name: Prisma Migrate (Preview Branch)
+
+on:
+  pull_request:
+    paths:
+      - "prisma/**"
+
+jobs:
+  migrate-preview:
+    name: Run Prisma Migrations on Neon Branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Get Neon branch database URL
+        id: neon
+        uses: neondatabase/create-branch-action@v5
+        with:
+          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          branch_name: preview/${{ github.head_ref }}
+          database: verceldb
+          api_key: ${{ secrets.NEON_API_KEY }}
+
+      - run: yarn install --frozen-lockfile
+
+      - name: Apply migrations to preview branch database
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
