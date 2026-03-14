@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { queryMotorcycle, fetchUniqueBrandSet } from "@/utils/db";
-import Fuse from "fuse.js";
 
-export const useMotorcycles = (makeFilter, priceFilter, initialSearchTerm) => {
+export const useMotorcyclesPg = (makeFilter, priceFilter, initialSearchTerm) => {
   const [motorcycles, setMotorcycles] = useState([]);
   const [paginatedMotorcycles, setPaginatedMotorcycles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,17 +19,17 @@ export const useMotorcycles = (makeFilter, priceFilter, initialSearchTerm) => {
 
   useEffect(() => {
     const fetchBrands = async () => {
-      const uniqueBrandSet = await fetchUniqueBrandSet();
-
-      // Transform to react-select options format
-      const brandOptionsArray = Array.from(uniqueBrandSet).map(
-        (brand, index) => ({
+      try {
+        const res = await fetch("/api/motorcycles/brands");
+        const data = await res.json();
+        const brandOptionsArray = data.brands.map((brand, index) => ({
           value: index,
           label: brand,
-        })
-      );
-
-      setBrandOptions(brandOptionsArray);
+        }));
+        setBrandOptions(brandOptionsArray);
+      } catch (error) {
+        console.error("Failed to fetch brands:", error);
+      }
     };
 
     fetchBrands();
@@ -47,37 +45,30 @@ export const useMotorcycles = (makeFilter, priceFilter, initialSearchTerm) => {
     if (selectedOption?.label) {
       setSelectedBrand(selectedOption.label);
     } else {
-      // Handle "All Brands" selection or clearing
       setSelectedBrand(null);
     }
   }, []);
 
   const onSearchChange = useCallback((newSearchTerm) => {
     setSearchTerm(newSearchTerm);
-    setCurrentPage(1); // Reset to first page when searching
+    setCurrentPage(1);
   }, []);
 
   const queryParams = useMemo(() => {
-    const filterParams = {
-      sortedBy: [],
-      filterOpt: [],
-    };
+    const params = new URLSearchParams();
 
     if (selectedSort === "Price: highest first") {
-      filterParams.sortedBy = [{ fieldToSort: "price", sortOrder: "desc" }];
+      params.set("sortField", "price");
+      params.set("sortOrder", "desc");
     } else {
-      filterParams.sortedBy = [{ fieldToSort: "price" }];
+      params.set("sortField", "price");
+      params.set("sortOrder", "asc");
     }
 
     if (selectedBrand?.length) {
-      filterParams.filterOpt.push({
-        fieldToFilter: "brand",
-        operator: "==",
-        filterValue: selectedBrand,
-      });
+      params.set("brand", selectedBrand);
     }
 
-    // Handle price filter
     if (priceFilter && priceFilter !== 0) {
       let maxPrice;
       switch (priceFilter) {
@@ -93,52 +84,27 @@ export const useMotorcycles = (makeFilter, priceFilter, initialSearchTerm) => {
         default:
           maxPrice = null;
       }
-
       if (maxPrice) {
-        filterParams.filterOpt.push({
-          fieldToFilter: "price",
-          operator: "<=",
-          filterValue: maxPrice,
-        });
+        params.set("maxPrice", maxPrice);
       }
     }
 
-    return filterParams;
-  }, [selectedBrand, selectedSort, priceFilter]);
+    if (searchTerm?.trim()) {
+      params.set("search", searchTerm.trim());
+    }
 
-  const fuseOptions = {
-    keys: [
-      { name: "brand", weight: 0.3 },
-      { name: "model", weight: 0.3 },
-      { name: "year", weight: 0.2 },
-      { name: "engineCapacity", weight: 0.1 },
-      { name: "color", weight: 0.1 },
-    ],
-    threshold: 0.4, // Lower threshold = more strict matching
-    includeScore: true,
-    minMatchCharLength: 2,
-  };
+    return params.toString();
+  }, [selectedBrand, selectedSort, priceFilter, searchTerm]);
 
   useEffect(() => {
     const fetchMotorcycles = async () => {
       setLoading(true);
       try {
-        const { motorcycles: rawMotorcycles, total } = await queryMotorcycle(
-          queryParams
-        );
+        const res = await fetch(`/api/motorcycles?${queryParams}`);
+        const data = await res.json();
 
-        let filteredMotorcycles = rawMotorcycles;
-
-        // Apply fuzzy search if search term exists
-        if (searchTerm?.trim()) {
-          const fuse = new Fuse(rawMotorcycles, fuseOptions);
-          const searchResults = fuse.search(searchTerm.trim());
-          filteredMotorcycles = searchResults.map((result) => result.item);
-          console.log({ rawMotorcycles, searchResults, filteredMotorcycles });
-        }
-
-        setMotorcycles(filteredMotorcycles);
-        setTotalPages(Math.ceil(filteredMotorcycles.length / itemsPerPage));
+        setMotorcycles(data.motorcycles);
+        setTotalPages(Math.ceil(data.motorcycles.length / itemsPerPage));
       } catch (error) {
         console.error("Failed to fetch motorcycles:", error);
       } finally {
@@ -147,7 +113,7 @@ export const useMotorcycles = (makeFilter, priceFilter, initialSearchTerm) => {
     };
 
     fetchMotorcycles();
-  }, [queryParams, searchTerm]);
+  }, [queryParams]);
 
   useEffect(() => {
     if (motorcycles.length) {

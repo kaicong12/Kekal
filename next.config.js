@@ -3,6 +3,15 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/listing-single-v1/:id",
+        destination: "/motorcycle/:id",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

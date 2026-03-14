@@ -4,8 +4,11 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider               = "prisma-client-js"
+  output                 = "../app/generated/prisma"
+  moduleFormat           = "cjs"
+  generatedFileExtension = "js"
+  importFileExtension    = "js"
 }
 
 datasource db {
@@ -39,7 +42,17 @@ model Motorcycle {
 
   images MotorcycleImage[]
 
+  @@unique([brand, name, year])
   @@map("motorcycles")
+}
+
+model ProductSyncFile {
+  id          String   @id @default(cuid())
+  filePath    String   @unique
+  isProcessed Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@map("productSyncFiles")
 }
 
 model MotorcycleImage {
