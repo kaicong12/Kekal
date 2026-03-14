@@ -11,9 +11,11 @@ function formatMotorcycle(motorcycle) {
   };
 }
 
-export const listMotorcyclesPg = async () => {
+export const listMotorcyclesPg = async ({ includeImages = false } = {}) => {
   const motorcycles = await prisma.motorcycle.findMany({
-    include: { images: { orderBy: { displayOrder: "asc" } } },
+    include: includeImages
+      ? { images: { orderBy: { displayOrder: "asc" } } }
+      : undefined,
   });
   return motorcycles.map(formatMotorcycle);
 };
@@ -76,7 +78,7 @@ export const queryMotorcyclePg = async ({
       where,
       orderBy: orderBy.length ? orderBy : undefined,
       take: limitResult || undefined,
-      include: { images: { orderBy: { displayOrder: "asc" } } },
+      include: { images: { orderBy: { displayOrder: "asc" }, take: 1 } },
     }),
     prisma.motorcycle.count({ where }),
   ]);

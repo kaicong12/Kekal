@@ -21,6 +21,7 @@ export const useMotorcyclesPg = (makeFilter, priceFilter, initialSearchTerm) => 
     const fetchBrands = async () => {
       try {
         const res = await fetch("/api/motorcycles/brands");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         const brandOptionsArray = data.brands.map((brand, index) => ({
           value: index,
@@ -101,10 +102,11 @@ export const useMotorcyclesPg = (makeFilter, priceFilter, initialSearchTerm) => 
       setLoading(true);
       try {
         const res = await fetch(`/api/motorcycles?${queryParams}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
-        setMotorcycles(data.motorcycles);
-        setTotalPages(Math.ceil(data.motorcycles.length / itemsPerPage));
+        setMotorcycles(data.motorcycles ?? []);
+        setTotalPages(Math.ceil((data.total ?? data.motorcycles?.length ?? 0) / itemsPerPage));
       } catch (error) {
         console.error("Failed to fetch motorcycles:", error);
       } finally {

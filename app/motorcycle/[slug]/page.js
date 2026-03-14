@@ -8,6 +8,7 @@ import Overview from "@/app/components/listing/listing-single/Overview";
 import LoanCalculator from "@/app/components/listing/LoanCalculator";
 import ContactSeller from "@/app/components/listing/listing-single/sidebar/ContactSeller";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import ReleatedCar from "@/app/components/listing/listing-single/ReleatedCar";
 
 import { getMotorcycleByIdPg as getMotorcycleById } from "@/utils/dbPg";
@@ -16,6 +17,12 @@ import { extractIdFromSlug, toMotorcycleSlug } from "@/utils/slug";
 export async function generateMetadata({ params }) {
   try {
     const id = extractIdFromSlug(params.slug);
+    if (!id) {
+      return {
+        title: "Motorcycle Not Found - Perniagaan Motor Kekal",
+        description: "The requested motorcycle listing could not be found.",
+      };
+    }
     const motorcycleData = await getMotorcycleById(id);
 
     if (!motorcycleData) {
@@ -75,7 +82,9 @@ export async function generateMetadata({ params }) {
 
 const MotorcyclePage = async ({ params }) => {
   const id = extractIdFromSlug(params.slug);
+  if (!id) notFound();
   const motorcycleData = await getMotorcycleById(id);
+  if (!motorcycleData) notFound();
 
   return (
     <div className="wrapper">

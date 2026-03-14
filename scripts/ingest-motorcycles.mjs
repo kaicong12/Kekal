@@ -1,15 +1,42 @@
 import "dotenv/config";
 import { createRequire } from "module";
 import fs from "fs";
+import path from "path";
+import { initializeApp, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
 const require = createRequire(import.meta.url);
 const { prisma } = require("../prisma/client.js");
 
-async function ingestFile(syncFile) {
-  console.log(`\nProcessing: ${syncFile.filePath}`);
+const isProd = process.env.NODE_ENV === "production";
+const serviceAccountPath = isProd
+  ? path.resolve("utils/keys/prod_privateKey.json")
+  : path.resolve("utils/keys/sandbox_privateKey.json");
+const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf-8"));
+initializeApp({ credential: cert(serviceAccount) });
+const firestoreDb = getFirestore();
 
-  if (!fs.existsSync(syncFile.filePath)) {
-    console.warn(`  File not found: ${syncFile.filePath}, marking as processed`);
+async function ingestFile(syncFile) {
+  const docName = syncFile.filePath;
+  console.log(`\nProcessing: ${docName}`);
+
+  let motorcycles;
+  try {
+    const doc = await firestoreDb.collection("productSyncFiles").doc(docName).get();
+    if (!doc.exists) {
+      console.warn(`  Firestore doc not found: ${docName}, marking as processed`);
+      await prisma.productSyncFile.update({
+        where: { id: syncFile.id },
+        data: { isProcessed: true },
+      });
+      return { upserted: 0, skipped: 0 };
+    }
+    motorcycles = doc.data().data;
+    if (!Array.isArray(motorcycles)) {
+      throw new Error("Invalid data format: expected array");
+    }
+  } catch (err) {
+    console.error(`  Error reading sync data for ${docName}: ${err.message}`);
     await prisma.productSyncFile.update({
       where: { id: syncFile.id },
       data: { isProcessed: true },
@@ -17,8 +44,7 @@ async function ingestFile(syncFile) {
     return { upserted: 0, skipped: 0 };
   }
 
-  const motorcycles = JSON.parse(fs.readFileSync(syncFile.filePath, "utf-8"));
-  console.log(`  Found ${motorcycles.length} motorcycles in file`);
+  console.log(`  Found ${motorcycles.length} motorcycles in sync data`);
 
   let upserted = 0;
   let skipped = 0;

@@ -6,8 +6,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/listing-single-v1/:id",
-        destination: "/motorcycle/:id",
+        source: "/listing-single-v1/:slug",
+        destination: "/motorcycle/:slug",
         permanent: true,
       },
     ];
@@ -17,6 +17,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.motomalaysia.com",
       },
       {
         protocol: "https",

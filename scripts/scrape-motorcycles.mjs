@@ -3,14 +3,23 @@ import * as cheerio from "cheerio";
 import { createRequire } from "module";
 import fs from "fs";
 import path from "path";
+import { initializeApp, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
 const require = createRequire(import.meta.url);
 const { prisma } = require("../prisma/client.js");
 
+const isProd = process.env.NODE_ENV === "production";
+const serviceAccountPath = isProd
+  ? path.resolve("utils/keys/prod_privateKey.json")
+  : path.resolve("utils/keys/sandbox_privateKey.json");
+const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf-8"));
+initializeApp({ credential: cert(serviceAccount) });
+const firestoreDb = getFirestore();
+
 const BASE_URL =
   "https://www.motomalaysia.com/category/new-motorcycle-bike-price-list-malaysia/";
 const DELAY_MS = 1000;
-const DATA_DIR = path.resolve("data");
 const MAX_PAGES = process.argv.includes("--test") ? 1 : Infinity;
 
 function sleep(ms) {
@@ -244,19 +253,20 @@ async function main() {
   const motorcycles = await scrapeAllPages();
   console.log(`\nTotal motorcycles scraped: ${motorcycles.length}`);
 
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const filename = `motorcycles-${timestamp}.json`;
-  const filePath = path.join(DATA_DIR, filename);
+  const docName = `motorcycles-${timestamp}`;
 
-  fs.writeFileSync(filePath, JSON.stringify(motorcycles, null, 2));
-  console.log(`Saved to: ${filePath}`);
+  // Store scraped data in Firestore for cross-machine access
+  await firestoreDb.collection("productSyncFiles").doc(docName).set({
+    data: motorcycles,
+    isProcessed: false,
+    createdAt: new Date().toISOString(),
+  });
+  console.log(`Uploaded to Firestore: productSyncFiles/${docName}`);
 
   await prisma.productSyncFile.create({
     data: {
-      filePath,
+      filePath: docName,
       isProcessed: false,
     },
   });
