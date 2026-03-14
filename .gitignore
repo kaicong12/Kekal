@@ -43,4 +43,3 @@ keys
 .env
 .venv
 __pycache__
-/app/generated/prisma

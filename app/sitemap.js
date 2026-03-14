@@ -1,4 +1,5 @@
-import { listMotorcycles } from "@/utils/db";
+import { listMotorcyclesPg as listMotorcycles } from "@/utils/dbPg";
+import { toMotorcycleSlug } from "@/utils/slug";
 
 const URL = "https://motorkekal.com";
 
@@ -6,8 +7,8 @@ export default async function sitemap() {
   try {
     const motorcycleData = await listMotorcycles();
 
-    const motorcycles = motorcycleData.map(({ id }) => ({
-      url: `${URL}/listing-single-v1/${id}`,
+    const motorcycles = motorcycleData.map((motorcycle) => ({
+      url: `${URL}/motorcycle/${toMotorcycleSlug(motorcycle)}`,
       lastModified: new Date().toISOString(),
       changeFrequency: "weekly",
       priority: 0.8,

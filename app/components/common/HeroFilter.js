@@ -2,8 +2,6 @@
 import { useRouter } from "next/navigation";
 import Select from "react-select";
 import { useState, useEffect } from "react";
-import { fetchUniqueBrandSet } from "@/utils/db";
-
 const HeroFilter = () => {
   const router = useRouter();
   const [brandFilter, setBrandFilter] = useState(null);
@@ -21,17 +19,17 @@ const HeroFilter = () => {
 
   useEffect(() => {
     const fetchBrands = async () => {
-      const uniqueBrandSet = await fetchUniqueBrandSet();
-
-      // Transform to react-select options format
-      const brandOptionsArray = Array.from(uniqueBrandSet).map(
-        (brand, index) => ({
+      try {
+        const res = await fetch("/api/motorcycles/brands");
+        const data = await res.json();
+        const brandOptionsArray = data.brands.map((brand, index) => ({
           value: index,
           label: brand,
-        })
-      );
-
-      setBrandOptions(brandOptionsArray);
+        }));
+        setBrandOptions(brandOptionsArray);
+      } catch (error) {
+        console.error("Failed to fetch brands:", error);
+      }
     };
 
     fetchBrands();

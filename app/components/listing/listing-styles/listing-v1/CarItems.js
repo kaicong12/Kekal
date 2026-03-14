@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { toMotorcycleSlug } from "@/utils/slug";
 
 const CarItems = ({ motorcycles }) => {
   return (
@@ -7,7 +8,7 @@ const CarItems = ({ motorcycles }) => {
       {motorcycles.map((motorcycle) => (
         <div className="col-sm-6 col-lg-4 col-xl-3" key={motorcycle.id}>
           <Link
-            href={`/listing-single-v1/${motorcycle.id}`}
+            href={`/motorcycle/${toMotorcycleSlug(motorcycle)}`}
             className="text-decoration-none"
           >
             <div className="car-listing" style={{ cursor: "pointer" }}>
