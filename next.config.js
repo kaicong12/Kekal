@@ -2,6 +2,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: ["cheerio", "undici", "firebase-admin"],
   },
   async redirects() {
     return [

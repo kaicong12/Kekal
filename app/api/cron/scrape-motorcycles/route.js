@@ -1,41 +1,35 @@
-import "dotenv/config";
+import { NextResponse } from "next/server";
 import * as cheerio from "cheerio";
-import { createRequire } from "module";
-import fs from "fs";
-import path from "path";
-import { initializeApp, cert } from "firebase-admin/app";
+import { initializeApp, cert, getApps } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
+import prisma from "@/utils/prisma";
 
-const require = createRequire(import.meta.url);
-const { prisma } = require("../prisma/client.js");
-
-const isProd = process.env.NODE_ENV === "production";
-const serviceAccountPath = isProd
-  ? path.resolve("utils/keys/prod_privateKey.json")
-  : path.resolve("utils/keys/sandbox_privateKey.json");
-const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf-8"));
-initializeApp({ credential: cert(serviceAccount) });
-const firestoreDb = getFirestore();
+export const maxDuration = 300;
+export const dynamic = "force-dynamic";
 
 const BASE_URL =
   "https://www.motomalaysia.com/category/new-motorcycle-bike-price-list-malaysia/";
 const DELAY_MS = 1000;
-const MAX_PAGES = process.argv.includes("--test") ? 1 : Infinity;
-const MAX_MOTORCYCLES = process.argv.includes("--test-one") ? 1 : Infinity;
+
+function getFirestoreAdmin() {
+  if (getApps().length === 0) {
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    initializeApp({ credential: cert(serviceAccount) });
+  }
+  return getFirestore();
+}
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function fetchPage(url) {
-  console.log(`Fetching: ${url}`);
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
   return cheerio.load(await res.text());
 }
 
 function parseTitleParts(title) {
-  // "Honda Vario 160 (2025)" → brand="Honda", name="Vario 160", year="2025"
   const yearMatch = title.match(/\((\d{4})\)/);
   const year = yearMatch ? yearMatch[1] : "";
   const withoutYear = title.replace(/\s*\(\d{4}\)\s*$/, "").trim();
@@ -61,7 +55,6 @@ function extractListingData($, article) {
   const title = titleLink.text().trim();
   const detailUrl = titleLink.attr("href") || "";
 
-  // Parse spec fields: each spec block is a div with exactly one child div (label)
   const specs = {};
   el.find("div")
     .filter(function () {
@@ -76,7 +69,6 @@ function extractListingData($, article) {
       }
     });
 
-  // Extract price: the "/ Month" label entry has the price as its value
   let priceText = "";
   for (const [key, value] of Object.entries(specs)) {
     if (key.includes("/ Month")) {
@@ -109,7 +101,6 @@ async function scrapeDetailPage(url) {
   await sleep(DELAY_MS);
   const $ = await fetchPage(url);
 
-  // Extract images
   const images = [];
   $("a[href*='/wp-content/uploads/']").each((_i, el) => {
     const href = $(el).attr("href");
@@ -118,7 +109,6 @@ async function scrapeDetailPage(url) {
     }
   });
 
-  // Extract description from overview section
   const descParagraphs = [];
   $("table")
     .filter(function () {
@@ -131,7 +121,6 @@ async function scrapeDetailPage(url) {
     });
   const description = descParagraphs.join("\n\n");
 
-  // Extract full specification table
   const specification = {};
   let currentSection = "General";
   $("table")
@@ -161,7 +150,6 @@ async function scrapeDetailPage(url) {
       }
     });
 
-  // Extract colors
   const colors = [];
   $("tr")
     .filter(function () {
@@ -189,10 +177,9 @@ async function scrapeAllPages() {
     if (!isNaN(num) && num > totalPages) totalPages = num;
   });
 
-  const pagesToScrape = Math.min(totalPages, MAX_PAGES);
-  console.log(`Scraping ${pagesToScrape} of ${totalPages} pages`);
+  console.log(`Scraping ${totalPages} pages`);
 
-  for (let page = 1; page <= pagesToScrape; page++) {
+  for (let page = 1; page <= totalPages; page++) {
     const url = page === 1 ? BASE_URL : `${BASE_URL}page/${page}/`;
     const $ = await fetchPage(url);
 
@@ -200,7 +187,6 @@ async function scrapeAllPages() {
     console.log(`Page ${page}: found ${articles.length} motorcycles`);
 
     for (const article of articles) {
-      if (allMotorcycles.length >= MAX_MOTORCYCLES) break;
       const listing = extractListingData($, article);
       if (!listing.title || !listing.detailUrl) continue;
 
@@ -213,7 +199,6 @@ async function scrapeAllPages() {
 
       const { brand, name, year } = parseTitleParts(listing.title);
 
-      // Engine capacity: prefer listing CC, fall back to detail page Displacement
       let engineCapacity = parseCC(listing.cc);
       if (engineCapacity === 0 && detail.specification?.Performance?.Displacement) {
         engineCapacity = parseCC(detail.specification.Performance.Displacement);
@@ -222,7 +207,7 @@ async function scrapeAllPages() {
       const engine = listing.engine || detail.specification?.Performance?.Engine || "";
       const gear = listing.transmission || detail.specification?.Performance?.Transmission || "";
 
-      const motorcycle = {
+      allMotorcycles.push({
         brand,
         name,
         model: name,
@@ -234,53 +219,144 @@ async function scrapeAllPages() {
         color: detail.colors.length > 0 ? detail.colors.join(", ") : "",
         tags: listing.type,
         description: detail.description || null,
-        specification: Object.keys(detail.specification).length > 0 ? detail.specification : null,
+        specification:
+          Object.keys(detail.specification).length > 0 ? detail.specification : null,
         images: detail.images,
         sourceUrl: listing.detailUrl,
-      };
-
-      console.log(`  Scraped: ${listing.title} (${detail.images.length} images)`);
-      allMotorcycles.push(motorcycle);
+      });
     }
 
-    if (allMotorcycles.length >= MAX_MOTORCYCLES) break;
-    if (page < pagesToScrape) await sleep(DELAY_MS);
+    if (page < totalPages) await sleep(DELAY_MS);
   }
 
   return allMotorcycles;
 }
 
-async function main() {
-  console.log("Starting motorcycle scrape...");
+async function ingestMotorcycles(motorcycles) {
+  let upserted = 0;
+  let skipped = 0;
 
-  const motorcycles = await scrapeAllPages();
-  console.log(`\nTotal motorcycles scraped: ${motorcycles.length}`);
+  for (const moto of motorcycles) {
+    if (!moto.brand || !moto.name || !moto.year) {
+      skipped++;
+      continue;
+    }
 
-  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const docName = `motorcycles-${timestamp}`;
+    try {
+      const result = await prisma.motorcycle.upsert({
+        where: {
+          brand_name_year: {
+            brand: moto.brand,
+            name: moto.name,
+            year: moto.year,
+          },
+        },
+        update: {
+          model: moto.model,
+          price: moto.price,
+          engine: moto.engine,
+          engineCapacity: moto.engineCapacity,
+          gear: moto.gear,
+          color: moto.color,
+          tags: moto.tags || null,
+          description: moto.description || null,
+          specification: moto.specification || null,
+        },
+        create: {
+          brand: moto.brand,
+          name: moto.name,
+          model: moto.model,
+          year: moto.year,
+          price: moto.price,
+          engine: moto.engine,
+          engineCapacity: moto.engineCapacity,
+          gear: moto.gear,
+          color: moto.color,
+          tags: moto.tags || null,
+          description: moto.description || null,
+          specification: moto.specification || null,
+        },
+      });
 
-  // Store scraped data in Firestore for cross-machine access
-  await firestoreDb.collection("productSyncFiles").doc(docName).set({
-    data: motorcycles,
-    isProcessed: false,
-    createdAt: new Date().toISOString(),
-  });
-  console.log(`Uploaded to Firestore: productSyncFiles/${docName}`);
+      await prisma.motorcycleImage.deleteMany({
+        where: { motorcycleId: result.id },
+      });
 
-  await prisma.productSyncFile.create({
-    data: {
-      filePath: docName,
-      isProcessed: false,
-    },
-  });
-  console.log("Created ProductSyncFile entry (isProcessed: false)");
+      if (moto.images && moto.images.length > 0) {
+        await prisma.motorcycleImage.createMany({
+          data: moto.images.map((url, index) => ({
+            url,
+            displayOrder: index,
+            motorcycleId: result.id,
+          })),
+        });
+      }
 
-  await prisma.$disconnect();
-  console.log("Done!");
+      upserted++;
+    } catch (err) {
+      console.error(`  Error upserting ${moto.brand} ${moto.name} (${moto.year}): ${err.message}`);
+      skipped++;
+    }
+  }
+
+  return { upserted, skipped };
 }
 
-main().catch(async (err) => {
-  console.error(err);
-  await prisma.$disconnect();
-  process.exit(1);
-});
+export async function GET(request) {
+  // Verify the request is from Vercel Cron
+  const authHeader = request.headers.get("authorization");
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const firestoreDb = getFirestoreAdmin();
+
+    // Step 1: Scrape
+    const motorcycles = await scrapeAllPages();
+    console.log(`Scraped ${motorcycles.length} motorcycles`);
+
+    // Step 2: Upload to Firestore as backup
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const docName = `motorcycles-${timestamp}`;
+    await firestoreDb.collection("productSyncFiles").doc(docName).set({
+      data: motorcycles,
+      isProcessed: false,
+      createdAt: new Date().toISOString(),
+    });
+
+    // Step 3: Create sync file record
+    await prisma.productSyncFile.create({
+      data: {
+        filePath: docName,
+        isProcessed: false,
+      },
+    });
+
+    // Step 4: Ingest into database
+    const { upserted, skipped } = await ingestMotorcycles(motorcycles);
+
+    // Step 5: Mark sync file as processed
+    await prisma.productSyncFile.update({
+      where: { filePath: docName },
+      data: { isProcessed: true },
+    });
+
+    const result = {
+      success: true,
+      scraped: motorcycles.length,
+      upserted,
+      skipped,
+      syncFile: docName,
+    };
+
+    console.log("Cron complete:", result);
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error("Cron scrape-motorcycles failed:", error);
+    return NextResponse.json(
+      { error: "Scrape failed", message: error.message },
+      { status: 500 }
+    );
+  }
+}
