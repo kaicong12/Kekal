@@ -2,7 +2,7 @@ import "dotenv/config";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
-const { prisma } = require("../prisma/client.js");
+const { prisma } = require("../../prisma/client.js");
 
 async function ingestFile(syncFile) {
   const fileUrl = syncFile.filePath;

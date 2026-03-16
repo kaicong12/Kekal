@@ -111,18 +111,6 @@
   height: 50px;
 }
 
-// testi pagination
-.white-pagination {
-  .swiper-pagination-bullet {
-    background: #fff;
-    opacity: var(--swiper-pagination-bullet-inactive-opacity, 0.72);
-  }
-  .swiper-pagination-bullet-active {
-    background: var(--primary-color) !important;
-    opacity: var(--swiper-pagination-bullet-inactive-opacity, 0.99);
-  }
-}
-
 // map
 .map_in iframe {
   height: 100%;
@@ -135,33 +123,6 @@
   &.react-tabs__tab--selected {
     color: #1947e2;
     outline: none;
-  }
-}
-.large-thumb-user_profile {
-  padding-left: 0;
-  @media (max-width: 767px) {
-    padding-left: 15px;
-  }
-}
-// car slider gallery thumb
-.custom_thumb-gallery {
-  height: 467px;
-
-  @media (max-width: 1400px) {
-    height: 385px;
-  }
-  @media (max-width: 1199px) {
-    height: 337px;
-  }
-  @media (max-width: 991px) {
-    height: 380px;
-  }
-  @media (max-width: 767px) {
-    height: 60px;
-    .swiper-slide img {
-      height: 100%;
-      object-fit: cover;
-    }
   }
 }
 .thumb-gallery-opacity {
@@ -179,9 +140,6 @@
 .font-600 {
   font-weight: 600;
 }
-.pointer {
-  cursor: pointer;
-}
 // react input range
 .input-range__slider {
   background: #fff !important;
@@ -198,13 +156,6 @@
   cursor: not-allowed;
   pointer-events: none;
 }
-.number-pag-wrapper {
-  margin-left: 25.5%;
-  @media (max-width: 991px) {
-    margin-left: 0;
-  }
-}
-
 // home 7
 .home7_style .home1_advance_search_wrapper {
   li {
@@ -249,28 +200,9 @@
   }
 }
 
-.sidebar_advanced_search_widget .bootstrap-select > .dropdown-toggle {
-  background-color: #fff;
-}
-// list v5 v6 sidebar mobile close icon
-.mb-cls-btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  z-index: 9;
-  font-size: 30px;
-  display: flex;
-  cursor: pointer;
-}
-
 .single_product_grid.single_page1 {
   @media (max-width: 991px) {
     margin-bottom: 25px;
   }
 }
 
-.new_property_form {
-  .form-select {
-    height: 50px;
-  }
-}
