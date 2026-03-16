@@ -1,47 +1,64 @@
+"use client";
+import { useState } from "react";
+
+const SECTION_ORDER = ["General", "Performance", "Chassis"];
+
+const HIDDEN_KEYS = ["color available", "colour available", "color", "colour"];
+
+const SpecTable = ({ specs }) => {
+  if (!specs || typeof specs !== "object") return null;
+  return (
+    <ul className="list-group">
+      {Object.entries(specs)
+        .filter(([key]) => !HIDDEN_KEYS.includes(key.toLowerCase()))
+        .sort()
+        .map(([key, value]) => (
+          <li
+            className="list-group-item spec-row"
+            key={key}
+          >
+            <span className="spec-label">{key}</span>
+            <span className="spec-value">{String(value)}</span>
+          </li>
+        ))}
+    </ul>
+  );
+};
+
 const Overview = ({ productSpecification }) => {
   if (!productSpecification) return null;
 
+  const sections = SECTION_ORDER.filter(
+    (s) =>
+      productSpecification[s] &&
+      typeof productSpecification[s] === "object"
+  );
+
+  // If no recognized sections, render flat list
+  if (sections.length === 0) {
+    return <SpecTable specs={productSpecification} />;
+  }
+
+  const [activeTab, setActiveTab] = useState(sections[0]);
+
   return (
-    <ul className="list-group">
-      {Object.entries(productSpecification)
-        .sort()
-        .flatMap(([specName, specValue]) => {
-          if (typeof specValue === "object" && specValue !== null) {
-            return [
-              <li
-                className="list-group-item fw-bold bg-light"
-                key={`section-${specName}`}
-              >
-                {specName}
-              </li>,
-              ...Object.entries(specValue)
-                .sort()
-                .map(([nestedName, nestedValue]) => (
-                  <li
-                    className="list-group-item d-flex justify-content-between align-items-start"
-                    key={`${specName}-${nestedName}`}
-                  >
-                    <div className="me-auto">
-                      <div className="day">{nestedName}</div>
-                    </div>
-                    <span className="schedule">{String(nestedValue)}</span>
-                  </li>
-                )),
-            ];
-          }
-          return (
-            <li
-              className="list-group-item d-flex justify-content-between align-items-start"
-              key={specName}
-            >
-              <div className="me-auto">
-                <div className="day">{specName}</div>
-              </div>
-              <span className="schedule">{String(specValue)}</span>
-            </li>
-          );
-        })}
-    </ul>
+    <div className="spec-tabs">
+      <div className="spec-tabs-nav">
+        {sections.map((section) => (
+          <button
+            key={section}
+            className={`spec-tab-btn${activeTab === section ? " active" : ""}`}
+            onClick={() => setActiveTab(section)}
+            type="button"
+          >
+            {section}
+          </button>
+        ))}
+      </div>
+      <div className="spec-tabs-content">
+        <SpecTable specs={productSpecification[activeTab]} />
+      </div>
+    </div>
   );
 };
 

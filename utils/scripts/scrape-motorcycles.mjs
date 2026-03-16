@@ -7,16 +7,21 @@ import { initializeApp, cert } from "firebase-admin/app";
 import { getStorage } from "firebase-admin/storage";
 
 const require = createRequire(import.meta.url);
-const { prisma } = require("../prisma/client.js");
+const { prisma } = require("../../prisma/client.js");
 
 const isProd = process.env.NODE_ENV === "production";
 const serviceAccountPath = isProd
-  ? path.resolve("utils/keys/prod_privateKey.json")
-  : path.resolve("utils/keys/sandbox_privateKey.json");
+  ? path.resolve("../keys/prod_privateKey.json")
+  : path.resolve("../keys/sandbox_privateKey.json");
+  
 const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf-8"));
+const storageBucket = isProd
+  ? "motorkekal-18db6.appspot.com"
+  : "kekalsandbox.firebasestorage.app";
+
 initializeApp({
   credential: cert(serviceAccount),
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  storageBucket,
 });
 
 const BASE_URL =
