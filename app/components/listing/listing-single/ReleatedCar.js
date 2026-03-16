@@ -48,10 +48,7 @@ const ReleatedCar = ({ currentMotorcycle, currentMotorId }) => {
                 className="text-decoration-none"
               >
                 <div className="car-listing" style={{ cursor: "pointer" }}>
-                  <div
-                    className="thumb"
-                    style={{ aspectRatio: "284 / 183", overflow: "hidden" }}
-                  >
+                  <div className="thumb">
                     <Image
                       width={284}
                       height={183}
