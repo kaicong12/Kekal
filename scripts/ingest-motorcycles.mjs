@@ -1,42 +1,23 @@
 import "dotenv/config";
 import { createRequire } from "module";
-import fs from "fs";
-import path from "path";
-import { initializeApp, cert } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
 
 const require = createRequire(import.meta.url);
 const { prisma } = require("../prisma/client.js");
 
-const isProd = process.env.NODE_ENV === "production";
-const serviceAccountPath = isProd
-  ? path.resolve("utils/keys/prod_privateKey.json")
-  : path.resolve("utils/keys/sandbox_privateKey.json");
-const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf-8"));
-initializeApp({ credential: cert(serviceAccount) });
-const firestoreDb = getFirestore();
-
 async function ingestFile(syncFile) {
-  const docName = syncFile.filePath;
-  console.log(`\nProcessing: ${docName}`);
+  const fileUrl = syncFile.filePath;
+  console.log(`\nProcessing: ${fileUrl}`);
 
   let motorcycles;
   try {
-    const doc = await firestoreDb.collection("productSyncFiles").doc(docName).get();
-    if (!doc.exists) {
-      console.warn(`  Firestore doc not found: ${docName}, marking as processed`);
-      await prisma.productSyncFile.update({
-        where: { id: syncFile.id },
-        data: { isProcessed: true },
-      });
-      return { upserted: 0, skipped: 0 };
-    }
-    motorcycles = doc.data().data;
+    const res = await fetch(fileUrl);
+    if (!res.ok) throw new Error(`Failed to download: ${res.status}`);
+    motorcycles = await res.json();
     if (!Array.isArray(motorcycles)) {
       throw new Error("Invalid data format: expected array");
     }
   } catch (err) {
-    console.error(`  Error reading sync data for ${docName}: ${err.message}`);
+    console.error(`  Error reading sync data from ${fileUrl}: ${err.message}`);
     await prisma.productSyncFile.update({
       where: { id: syncFile.id },
       data: { isProcessed: true },

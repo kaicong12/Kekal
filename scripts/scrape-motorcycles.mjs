@@ -4,7 +4,7 @@ import { createRequire } from "module";
 import fs from "fs";
 import path from "path";
 import { initializeApp, cert } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import { getStorage } from "firebase-admin/storage";
 
 const require = createRequire(import.meta.url);
 const { prisma } = require("../prisma/client.js");
@@ -14,8 +14,10 @@ const serviceAccountPath = isProd
   ? path.resolve("utils/keys/prod_privateKey.json")
   : path.resolve("utils/keys/sandbox_privateKey.json");
 const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf-8"));
-initializeApp({ credential: cert(serviceAccount) });
-const firestoreDb = getFirestore();
+initializeApp({
+  credential: cert(serviceAccount),
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+});
 
 const BASE_URL =
   "https://www.motomalaysia.com/category/new-motorcycle-bike-price-list-malaysia/";
@@ -259,17 +261,20 @@ async function main() {
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
   const docName = `motorcycles-${timestamp}`;
 
-  // Store scraped data in Firestore for cross-machine access
-  await firestoreDb.collection("productSyncFiles").doc(docName).set({
-    data: motorcycles,
-    isProcessed: false,
-    createdAt: new Date().toISOString(),
+  // Upload scraped data as JSON file to Firebase Storage
+  const bucket = getStorage().bucket();
+  const storagePath = `productSyncFiles/${docName}.json`;
+  const file = bucket.file(storagePath);
+  await file.save(JSON.stringify(motorcycles), {
+    contentType: "application/json",
   });
-  console.log(`Uploaded to Firestore: productSyncFiles/${docName}`);
+  await file.makePublic();
+  const publicUrl = `https://storage.googleapis.com/${bucket.name}/${storagePath}`;
+  console.log(`Uploaded to Firebase Storage: ${publicUrl}`);
 
   await prisma.productSyncFile.create({
     data: {
-      filePath: docName,
+      filePath: publicUrl,
       isProcessed: false,
     },
   });

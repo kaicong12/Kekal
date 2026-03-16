@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import * as cheerio from "cheerio";
 import { initializeApp, cert, getApps } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import { getStorage } from "firebase-admin/storage";
 import prisma from "@/utils/prisma";
 
 export const maxDuration = 300;
@@ -11,12 +11,14 @@ const BASE_URL =
   "https://www.motomalaysia.com/category/new-motorcycle-bike-price-list-malaysia/";
 const DELAY_MS = 1000;
 
-function getFirestoreAdmin() {
+function initFirebaseAdmin() {
   if (getApps().length === 0) {
     const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    initializeApp({ credential: cert(serviceAccount) });
+    initializeApp({
+      credential: cert(serviceAccount),
+      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    });
   }
-  return getFirestore();
 }
 
 function sleep(ms) {
@@ -310,25 +312,28 @@ export async function GET(request) {
   }
 
   try {
-    const firestoreDb = getFirestoreAdmin();
+    initFirebaseAdmin();
 
     // Step 1: Scrape
     const motorcycles = await scrapeAllPages();
     console.log(`Scraped ${motorcycles.length} motorcycles`);
 
-    // Step 2: Upload to Firestore as backup
+    // Step 2: Upload JSON to Firebase Storage
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
     const docName = `motorcycles-${timestamp}`;
-    await firestoreDb.collection("productSyncFiles").doc(docName).set({
-      data: motorcycles,
-      isProcessed: false,
-      createdAt: new Date().toISOString(),
+    const bucket = getStorage().bucket();
+    const storagePath = `productSyncFiles/${docName}.json`;
+    const file = bucket.file(storagePath);
+    await file.save(JSON.stringify(motorcycles), {
+      contentType: "application/json",
     });
+    await file.makePublic();
+    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${storagePath}`;
 
-    // Step 3: Create sync file record
+    // Step 3: Create sync file record with direct URL
     await prisma.productSyncFile.create({
       data: {
-        filePath: docName,
+        filePath: publicUrl,
         isProcessed: false,
       },
     });
@@ -347,7 +352,7 @@ export async function GET(request) {
       scraped: motorcycles.length,
       upserted,
       skipped,
-      syncFile: docName,
+      syncFile: publicUrl,
     };
 
     console.log("Cron complete:", result);
