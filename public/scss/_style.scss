@@ -14172,6 +14172,13 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
   gap: 0;
   border-bottom: 2px solid #eaeaea;
   margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+}
+.spec-tabs-nav::-webkit-scrollbar {
+  display: none;
 }
 .spec-tabs-nav .spec-tab-btn {
   padding: 10px 24px;
@@ -14184,6 +14191,8 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .spec-tabs-nav .spec-tab-btn:hover {
   color: #1a3760;
@@ -14191,6 +14200,24 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
 .spec-tabs-nav .spec-tab-btn.active {
   color: #d4a76a;
   border-bottom-color: #d4a76a;
+}
+/* Specification Row - Horizontal Scroll */
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-wrap: nowrap;
+}
+.spec-row .spec-label {
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.spec-row .spec-value {
+  text-align: right;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 /* Contact Seller Sidebar - WhatsApp Button */
 .sidebar_seller_contact .btn-whatsapp {

@@ -3,21 +3,22 @@ import { useState } from "react";
 
 const SECTION_ORDER = ["General", "Performance", "Chassis"];
 
+const HIDDEN_KEYS = ["color available", "colour available", "color", "colour"];
+
 const SpecTable = ({ specs }) => {
   if (!specs || typeof specs !== "object") return null;
   return (
     <ul className="list-group">
       {Object.entries(specs)
+        .filter(([key]) => !HIDDEN_KEYS.includes(key.toLowerCase()))
         .sort()
         .map(([key, value]) => (
           <li
-            className="list-group-item d-flex justify-content-between align-items-start"
+            className="list-group-item spec-row"
             key={key}
           >
-            <div className="me-auto">
-              <div className="day">{key}</div>
-            </div>
-            <span className="schedule">{String(value)}</span>
+            <span className="spec-label">{key}</span>
+            <span className="spec-value">{String(value)}</span>
           </li>
         ))}
     </ul>
