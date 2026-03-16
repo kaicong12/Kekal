@@ -43,50 +43,45 @@ const ReleatedCar = ({ currentMotorcycle, currentMotorId }) => {
         {motorcyclesWithoutCurrent.slice(0, 6).map(motorcycle => (
           <SwiperSlide key={motorcycle.id}>
             <div className="item">
-              <div className="car-listing">
-                <div className="thumb">
-                  <Image
-                    width={284}
-                    height={183}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    priority
-                    src={motorcycle.imageUrl}
-                    alt={motorcycle.name}
-                  />
-                </div>
-                <div className="details">
-                  <div className="wrapper">
-                    <h5 className="price">RM {motorcycle.price}</h5>
-                    <h6 className="title">
-                      <Link href={`/motorcycle/${toMotorcycleSlug(motorcycle)}`}>{motorcycle.name}</Link>
-                    </h6>
-                  </div>{" "}
-                  <div className="listing_footer">
-                    <ul className="mb0">
-                      { motorcycle?.specifications?.Displacement ? (
-                        <li className="list-inline-item">
-                          <span className="flaticon-sedan-car-model me-2" />
-                          {motorcycle?.specifications?.Displacement}
-                        </li>
-                      ): null }
-                      <li className="list-inline-item">
-                        <span className="flaticon-coin me-2" />
-                        {motorcycle.price}
-                      </li>
-                      { motorcycle?.specifications?.["Maximum Power"] ? (
-                        <li className="list-inline-item">
-                          <span className="flaticon-gear me-2" />
-                          { motorcycle?.specifications?.["Maximum Power"] }
-                        </li>
-                      ): null }
-                    </ul>
+              <Link
+                href={`/motorcycle/${toMotorcycleSlug(motorcycle)}`}
+                className="text-decoration-none"
+              >
+                <div className="car-listing" style={{ cursor: "pointer" }}>
+                  <div className="thumb">
+                    <Image
+                      width={284}
+                      height={183}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                      priority
+                      src={motorcycle.imageUrl}
+                      alt={motorcycle.name}
+                    />
+                  </div>
+                  <div className="details">
+                    <h6 className="card-title">{motorcycle.name}</h6>
+                    <div className="spec-grid">
+                      <div className="spec-item">
+                        <span className="spec-label">ENGINE</span>
+                        <span className="spec-value">
+                          {motorcycle.engineCapacity
+                            ? `${motorcycle.engineCapacity}cc${motorcycle.engine ? ` ${motorcycle.engine}` : ""}`
+                            : motorcycle.engine || "-"}
+                        </span>
+                      </div>
+                      <div className="spec-item">
+                        <span className="spec-label">PRICE</span>
+                        <span className="spec-value">RM {motorcycle.price?.toLocaleString()}</span>
+                      </div>
+                    </div>
+                    <div className="view-details-btn">View Details</div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </SwiperSlide>
         ))}

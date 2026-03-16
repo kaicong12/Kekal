@@ -198,7 +198,7 @@ const ListingV1 = () => {
           ) : motorcycles.length === 0 ? (
             <EmptyState searchTerm={searchTerm} selectedBrand={selectedBrand} />
           ) : (
-            <div className="row">
+            <div className="row car-listing-grid">
               <CarItems motorcycles={paginatedMotorcycles} />
             </div>
           )}

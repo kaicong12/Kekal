@@ -6,24 +6,13 @@ const CarItems = ({ motorcycles }) => {
   return (
     <>
       {motorcycles.map((motorcycle) => (
-        <div className="col-sm-6 col-lg-4 col-xl-3" key={motorcycle.id}>
+        <div className="col-sm-6 col-lg-4" key={motorcycle.id}>
           <Link
             href={`/motorcycle/${toMotorcycleSlug(motorcycle)}`}
             className="text-decoration-none"
           >
             <div className="car-listing" style={{ cursor: "pointer" }}>
               <div className="thumb">
-                {motorcycle.featured ? (
-                  <>
-                    <div className="tag">FEATURED</div>
-                  </>
-                ) : undefined}
-                {!motorcycle.featured ? (
-                  <>
-                    <div className="tag blue">SPECIAL</div>
-                  </>
-                ) : undefined}
-
                 <Image
                   width={284}
                   height={183}
@@ -36,49 +25,24 @@ const CarItems = ({ motorcycles }) => {
                   src={motorcycle.imageUrl}
                   alt={motorcycle.name}
                 />
-
-                <div className="thmb_cntnt3">
-                  <ul className="mb0">
-                    <li className="list-inline-item">
-                      <a href="#" onClick={(e) => e.stopPropagation()}>
-                        <span className="flaticon-shuffle-arrows" />
-                      </a>
-                    </li>
-                    <li className="list-inline-item">
-                      <a href="#" onClick={(e) => e.stopPropagation()}>
-                        <span className="flaticon-heart" />
-                      </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
               <div className="details">
-                <div className="wrapper">
-                  <h5 className="price">RM {motorcycle.price}</h5>
-                  <h6 className="title">{motorcycle.name}</h6>
+                <h6 className="card-title">{motorcycle.name}</h6>
+                <div className="spec-grid">
+                  <div className="spec-item">
+                    <span className="spec-label">ENGINE</span>
+                    <span className="spec-value">
+                      {motorcycle.engineCapacity
+                        ? `${motorcycle.engineCapacity}cc${motorcycle.engine ? ` ${motorcycle.engine}` : ""}`
+                        : motorcycle.engine || "-"}
+                    </span>
+                  </div>
+                  <div className="spec-item">
+                    <span className="spec-label">PRICE</span>
+                    <span className="spec-value">RM {motorcycle.price?.toLocaleString()}</span>
+                  </div>
                 </div>
-                {/* End wrapper */}
-
-                <div className="listing_footer">
-                  <ul className="mb0">
-                    {motorcycle?.specifications?.Displacement ? (
-                      <li className="list-inline-item">
-                        <span className="flaticon-sedan-car-model me-2" />
-                        {motorcycle?.specifications?.Displacement}
-                      </li>
-                    ) : null}
-                    <li className="list-inline-item">
-                      <span className="flaticon-coin me-2" />
-                      {motorcycle.price}
-                    </li>
-                    {motorcycle?.specifications?.["Maximum Power"] ? (
-                      <li className="list-inline-item">
-                        <span className="flaticon-gear me-2" />
-                        {motorcycle?.specifications?.["Maximum Power"]}
-                      </li>
-                    ) : null}
-                  </ul>
-                </div>
+                <div className="view-details-btn">View Details</div>
               </div>
             </div>
           </Link>
