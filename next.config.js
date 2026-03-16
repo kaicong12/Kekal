@@ -2,12 +2,26 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: ["cheerio", "undici", "firebase-admin"],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/listing-single-v1/:slug",
+        destination: "/motorcycle/:slug",
+        permanent: true,
+      },
+    ];
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.motomalaysia.com",
       },
       {
         protocol: "https",

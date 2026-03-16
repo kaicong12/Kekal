@@ -2,7 +2,7 @@ name: Prisma Migrate (Production)
 
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
     paths:
       - "prisma/**"
 
@@ -21,7 +21,7 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
-      - name: Apply migrations to production database
+      - name: Apply migrations to database
         run: npx prisma migrate deploy
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL: ${{ github.ref_name == 'staging' && secrets.STAGING_DATABASE_URL || secrets.DATABASE_URL }}

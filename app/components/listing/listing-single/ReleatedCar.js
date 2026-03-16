@@ -5,7 +5,8 @@ import "swiper/swiper-bundle.css";
 import Link from "next/link";
 import Image from "next/image";
 
-import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
+import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
+import { toMotorcycleSlug } from "@/utils/slug";
 
 const ReleatedCar = ({ currentMotorcycle, currentMotorId }) => {
   const { brand: makeFilter } = currentMotorcycle
@@ -61,7 +62,7 @@ const ReleatedCar = ({ currentMotorcycle, currentMotorId }) => {
                   <div className="wrapper">
                     <h5 className="price">RM {motorcycle.price}</h5>
                     <h6 className="title">
-                      <Link href={`/listing-single-v1/${motorcycle.id}`}>{motorcycle.name}</Link>
+                      <Link href={`/motorcycle/${toMotorcycleSlug(motorcycle)}`}>{motorcycle.name}</Link>
                     </h6>
                   </div>{" "}
                   <div className="listing_footer">

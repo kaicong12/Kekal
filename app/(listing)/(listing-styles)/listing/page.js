@@ -10,7 +10,7 @@ import SearchAndFilters from "@/app/components/listing/SearchAndFilters";
 import EmptyState from "@/app/components/listing/EmptyState";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
 
-import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
+import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
 import { Spin } from "antd";
 import { useState } from "react";
 
@@ -179,6 +179,7 @@ const ListingV1 = () => {
               <SearchAndFilters
                 localSearchTerm={localSearchTerm}
                 setLocalSearchTerm={setLocalSearchTerm}
+                searchTerm={searchTerm}
                 onSearchChange={onSearchChange}
                 selectedSort={selectedSort}
                 onSortChange={onSortOptionChange}

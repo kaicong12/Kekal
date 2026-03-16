@@ -2,7 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useMotorcycles } from "@/utils/hooks/useMotorcycles";
+import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
+import { toMotorcycleSlug } from "@/utils/slug";
 import { Spin } from "antd";
 
 const FeaturedFilterListing = () => {
@@ -26,7 +27,7 @@ const FeaturedFilterListing = () => {
           filteredItems.map((listing) => (
             <div className="col-sm-6 col-xl-6" key={listing.id}>
               <Link
-                href={`/listing-single-v1/${listing.id}`}
+                href={`/motorcycle/${toMotorcycleSlug(listing)}`}
                 className="text-decoration-none"
               >
                 <div

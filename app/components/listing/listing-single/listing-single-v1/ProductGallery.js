@@ -6,11 +6,9 @@ import "swiper/swiper-bundle.css";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import Image from "next/image";
 
-import { useListingImages } from "@/utils/hooks/useListingImages";
-
-export default function ProductGallery({ brand, modelName }) {
+export default function ProductGallery({ brand, modelName, images = [] }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const { listingImages } = useListingImages(brand, modelName);
+  const listingImages = images.map((img) => ({ imageSrc: img.url }));
 
   return (
     <>
