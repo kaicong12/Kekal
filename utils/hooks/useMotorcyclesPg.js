@@ -11,7 +11,7 @@ export const useMotorcyclesPg = (makeFilter, priceFilter, initialSearchTerm) => 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 9;
   const sortOptions = [
     { value: "Price: highest first", label: "Price: highest first" },
     { value: "Price: lowest first", label: "Price: lowest first" },
