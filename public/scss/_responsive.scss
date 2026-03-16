@@ -9,8 +9,6 @@
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
-@media only screen and (max-width: 1700px) {
-}
 @media only screen and (max-width: 1600px) {
   .h1ads_1st_list.half_style li.custome_fields_half:nth-child(2) {
     width: 65%;
@@ -532,11 +530,6 @@
   }
 }
 /*  (min-width:1200px)+++ */
-@media only screen and (min-width: 1200px) {
-  .mt30-xl {
-    margin-top: 30px !important;
-  }
-}
 /*  (max-width:1200px)+++ */
 @media only screen and (max-width: 1200px) {
   .pl300-1200 {
