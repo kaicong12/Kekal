@@ -73,7 +73,7 @@ const MobileMenu = () => {
                 height={45}
                 priority
                 src="/images/logoBlack.svg"
-                alt="brand"
+                alt="Perniagaan Motor Kekal logo"
               />
             </div>
             {/* End .mobile_menu_main_logo */}
@@ -99,7 +99,7 @@ const MobileMenu = () => {
                 height={45}
                 priority
                 src="/images/logoBlack.svg"
-                alt="brand"
+                alt="Perniagaan Motor Kekal logo"
               />
             </Link>
             <div

@@ -5,12 +5,12 @@ import MobileMenu from "../components/common/MobileMenu";
 import Link from "next/link";
 
 export const metadata = {
-  title:
-    "Perniagan Motor Kekal - 404 Not found Page || Motorcycle Shop in Johor Bahru",
-  description:
-    "Looking for a motorcycle dealer in Johor Bahru? Visit our service page for the best motorcycle in JB. Find kedai motor near me for top-notch services.",
-  keywords:
-    "kedai motor near me, kedia jual motor near me, yamaha shop near me, kedai motor johor jaya, kedai motor johor bahru, yamaha johor bahru, kedai motor, motorcycle shop johor bahru",
+  title: "Page Not Found - Perniagaan Motor Kekal",
+  description: "The page you are looking for could not be found.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const NotFound = () => {

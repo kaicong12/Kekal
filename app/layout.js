@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import "aos/dist/aos.css";
 import "../public/scss/main.scss";
 import ClientLayout from "./components/ClientLayout";
+import LocalBusinessSchema from "./components/seo/LocalBusinessSchema";
+import WebSiteSchema from "./components/seo/WebSiteSchema";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,7 +57,7 @@ export const metadata = {
         alt: "Perniagaan Motor Kekal - Motorcycle Dealer Storefront",
       },
     ],
-    locale: "en_US",
+    locale: "en_MY",
     type: "website",
   },
   twitter: {
@@ -82,6 +84,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <LocalBusinessSchema />
+        <WebSiteSchema />
+      </head>
       <body className={inter.className} cz-shortcut-listen="false">
         <ClientLayout>{children}</ClientLayout>
       </body>

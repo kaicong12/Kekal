@@ -9,21 +9,20 @@ import Map from "@/app/components/common/Map";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
 
 export const metadata = {
-  title:
-    "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Bahru, Johor Bahru",
+  title: "About Us - Perniagaan Motor Kekal",
   description:
-    "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
+    "Learn about Perniagaan Motor Kekal, Johor Bahru's trusted motorcycle dealer for over 30 years. We offer sales, repairs, and accessories for Yamaha, Kawasaki, Honda, and more.",
   keywords: [
-    "kedai motor",
-    "motor shop",
-    "motorcycle",
-    "yamaha dealer",
-    "kawasaki dealer",
-    "motor repair",
-    "LC135",
-    "motor shop Johor Bahru",
-    "kedai motor johor bahru",
+    "about perniagaan motor kekal",
+    "motorcycle dealer johor bahru",
+    "kedai motor johor jaya",
+    "yamaha dealer JB",
+    "kawasaki dealer JB",
+    "motor shop history",
   ],
+  alternates: {
+    canonical: "/about-us",
+  },
 };
 
 const AboutUs = () => {

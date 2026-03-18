@@ -6,25 +6,28 @@ import ListWithImage from "@/app/components/pages/service/ListWithImage";
 import ServiceBlock from "@/app/components/pages/service/ServiceBlock";
 import ScheduleService from "@/app/components/pages/service/ScheduleService";
 import ServiceHours from "@/app/components/pages/service/ServiceHours";
-import Head from "next/head";
 
 export const metadata = {
-  title:
-    "Perniagan Motor Kekal - Service Page || Motorcycle Shop in Johor Bahru",
+  title: "Motorcycle Service & Repairs in Johor Bahru",
   description:
-    "Looking for a motorcycle dealer in Johor Bahru? Visit our service page for the best motorcycle in JB. Find kedai motor near me for top-notch services.",
-  keywords:
-    "kedai motor near me, kedia jual motor near me, yamaha shop near me, kedai motor johor jaya, kedai motor johor bahru, yamaha johor bahru, kedai motor, motorcycle shop johor bahru",
+    "Professional motorcycle servicing, repairs, and maintenance at Perniagaan Motor Kekal. Experienced mechanics for all brands. Book your service in Johor Bahru today.",
+  keywords: [
+    "motorcycle service johor bahru",
+    "servis motor JB",
+    "motorcycle repair near me",
+    "kedai motor servis",
+    "yamaha service johor",
+    "kawasaki service johor",
+    "motorcycle maintenance JB",
+  ],
+  alternates: {
+    canonical: "/service",
+  },
 };
 
 const Service = () => {
   return (
     <div className="wrapper">
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-      </Head>
       {/* header top */}
       <HeaderTop />
       {/* End header top */}
