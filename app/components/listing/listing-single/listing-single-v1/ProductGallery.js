@@ -18,6 +18,7 @@ export default function ProductGallery({ brand, modelName, images = [] }) {
             style={{
               "--swiper-navigation-color": "#fff",
               "--swiper-pagination-color": "#fff",
+              aspectRatio: "856 / 554",
             }}
             spaceBetween={10}
             navigation={true}
@@ -62,6 +63,7 @@ export default function ProductGallery({ brand, modelName, images = [] }) {
             watchSlidesProgress={true}
             modules={[FreeMode, Navigation, Thumbs]}
             className="mySwiper mt-2 thumb-gallery-opacity"
+            style={{ minHeight: "106px" }}
           >
             {listingImages.map((slide, index) => (
               <SwiperSlide key={index}>

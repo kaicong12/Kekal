@@ -73,7 +73,10 @@ const ListWithImage = () => {
       {/* End col-6 */}
 
       <div className="col-lg-6 col-xl-6 offset-xl-1">
-        <div className="service_thumb">
+        <div
+          className="service_thumb"
+          style={{ aspectRatio: "636 / 667", overflow: "hidden" }}
+        >
           <Image
             width={636}
             height={667}

@@ -29,7 +29,10 @@ const Hero = () => {
   ];
 
   return (
-    <div className="main-banner-wrapper home2_main_slider mb30-md">
+    <div
+      className="main-banner-wrapper home2_main_slider mb30-md"
+      style={{ minHeight: "750px" }}
+    >
       <div className="banner-style-one">
         <Swiper
           spaceBetween={0}

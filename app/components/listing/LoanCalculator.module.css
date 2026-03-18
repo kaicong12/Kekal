@@ -5,7 +5,8 @@
     background-color: #FFF5CD;
     margin-top: 30px;
     padding: 10px 25px 10px 25px;
-    border-radius: 10px
+    border-radius: 10px;
+    min-height: 220px;
 }
 
 .displayDiv {
