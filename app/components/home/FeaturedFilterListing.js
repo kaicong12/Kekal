@@ -19,7 +19,7 @@ const FeaturedFilterListing = () => {
     <div className="popular_listing_sliders">
       <div className="row car-listing-grid">
         {loading ? (
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", minHeight: "400px", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Spin size="large" />
           </div>
         ) : (
@@ -30,7 +30,10 @@ const FeaturedFilterListing = () => {
                 className="text-decoration-none"
               >
                 <div className="car-listing" style={{ cursor: "pointer" }}>
-                  <div className="thumb">
+                  <div
+                    className="thumb"
+                    style={{ aspectRatio: "284 / 183", overflow: "hidden" }}
+                  >
                     <Image
                       width={284}
                       height={183}

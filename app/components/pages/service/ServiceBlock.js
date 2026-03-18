@@ -19,7 +19,10 @@ const ServiceSection = ({
           <div
             className={`col-md-6 col-xl-5 ${isReversed ? "order-md-2" : ""}`}
           >
-            <div className="service_thumb mb30-sm">
+            <div
+              className="service_thumb mb30-sm"
+              style={{ aspectRatio: "526 / 354", overflow: "hidden" }}
+            >
               <Image
                 width={526}
                 height={354}

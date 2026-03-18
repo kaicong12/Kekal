@@ -15,7 +15,7 @@ export const metadata = {
 
 const NotFound = () => {
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       {/* header top */}
       <HeaderTop />
       {/* End header top */}
@@ -29,19 +29,28 @@ const NotFound = () => {
       {/* End Main Header Nav For Mobile */}
 
       {/* Error Page */}
-      <section className="our-error bgc-f9">
+      <section className="our-error bgc-f9" style={{ flex: 1 }}>
         <div className="container">
           <div className="row">
             <div className="col-xl-6 offset-xl-3 text-center">
-              <div className="error_page footer_apps_widget">
-                <h3 className="subtitle">The Page Could Not Be Found!</h3>
+              <div className="error_page">
                 <div className="erro_code">
                   <h2>
                     4<span className="text-thm">0</span>4
                   </h2>
                 </div>
+                <h3
+                  className="subtitle"
+                  style={{ marginBottom: "12px", fontWeight: 700 }}
+                >
+                  Page Not Found
+                </h3>
+                <p style={{ color: "#5f6973", marginBottom: "35px" }}>
+                  The page you are looking for might have been removed or is
+                  temporarily unavailable.
+                </p>
               </div>
-              <Link className="btn_error btn-thm" href="/">
+              <Link className="btn_error" href="/">
                 Back to Home
               </Link>
             </div>
