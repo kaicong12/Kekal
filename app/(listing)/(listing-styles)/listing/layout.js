@@ -1,24 +1,26 @@
 export const metadata = {
-  title: "Motorcycles For Sale in Johor Bahru",
+  title: "Jual Motor Baru Johor Bahru - Yamaha, Kawasaki, Honda, KTM",
   description:
-    "Browse our full range of new motorcycles for sale at Perniagaan Motor Kekal. Yamaha, Kawasaki, Honda, KTM and more. Best prices in Johor Bahru.",
+    "Senarai motor baru untuk dijual di Perniagaan Motor Kekal, Johor Jaya. Yamaha, Kawasaki, Honda, KTM, Modenas & lain-lain. Harga motor murah, loan kedai tersedia. Kedai motor JB.",
   keywords: [
-    "motorcycle for sale",
-    "motor murah",
-    "beli motor",
+    "kedai jual motor johor bahru",
+    "kedai jual motor near me",
+    "motor murah johor",
+    "yamaha johor jaya",
     "kedai motor johor bahru",
-    "yamaha for sale JB",
-    "kawasaki for sale JB",
-    "honda motorcycle johor",
-    "motorcycle listing",
+    "motorcycle shop johor bahru",
+    "motor loan kedai jb",
+    "beli motor johor bahru",
+    "kedai motor yamaha near me",
+    "best motorcycle shop in jb",
   ],
   alternates: {
     canonical: "/listing",
   },
   openGraph: {
-    title: "Motorcycles For Sale - Perniagaan Motor Kekal",
+    title: "Jual Motor Baru - Perniagaan Motor Kekal, Johor Bahru",
     description:
-      "Browse our full range of new motorcycles. Yamaha, Kawasaki, Honda, KTM and more at the best prices in Johor Bahru.",
+      "Senarai motor baru Yamaha, Kawasaki, Honda, KTM. Harga terbaik di Johor Bahru. Loan kedai tersedia.",
     url: "https://www.motorkekal.com/listing",
     type: "website",
   },

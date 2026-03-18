@@ -9,16 +9,16 @@ import Map from "@/app/components/common/Map";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
 
 export const metadata = {
-  title: "About Us - Perniagaan Motor Kekal",
+  title: "Tentang Kami - Kedai Motor Johor Jaya | Perniagaan Motor Kekal",
   description:
-    "Learn about Perniagaan Motor Kekal, Johor Bahru's trusted motorcycle dealer for over 30 years. We offer sales, repairs, and accessories for Yamaha, Kawasaki, Honda, and more.",
+    "Perniagaan Motor Kekal, kedai motor di Johor Jaya yang dipercayai lebih 30 tahun. Yamaha dealer, Kawasaki dealer, Honda, KTM. Kedai motor terbaik di Johor Bahru.",
   keywords: [
-    "about perniagaan motor kekal",
-    "motorcycle dealer johor bahru",
+    "perniagaan motor kekal",
     "kedai motor johor jaya",
-    "yamaha dealer JB",
-    "kawasaki dealer JB",
-    "motor shop history",
+    "motorcycle dealer johor bahru",
+    "yamaha dealer johor bahru",
+    "kawasaki dealer johor bahru",
+    "kedai jual motor johor bahru",
   ],
   alternates: {
     canonical: "/about-us",

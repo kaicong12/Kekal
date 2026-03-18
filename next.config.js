@@ -8,7 +8,7 @@ const nextConfig = {
     return [
       {
         source: "/listing-single-v1/:slug",
-        destination: "/motorcycle/:slug",
+        destination: "/listing",
         permanent: true,
       },
     ];

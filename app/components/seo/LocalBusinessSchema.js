@@ -2,8 +2,9 @@ const localBusinessData = {
   "@context": "https://schema.org",
   "@type": "MotorcycleDealer",
   name: "Perniagaan Motor Kekal",
+  alternateName: "Kedai Motor Kekal Johor Jaya",
   description:
-    "Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki. Serving riders for over 30 years.",
+    "Kedai motor di Johor Jaya, Johor Bahru yang dipercayai lebih 30 tahun. Jual motor baru Yamaha, Kawasaki, Honda, KTM, Modenas. Servis, repair & aksesori motor.",
   url: "https://www.motorkekal.com",
   telephone: "+60127126128",
   address: {
@@ -19,6 +20,10 @@ const localBusinessData = {
     latitude: 1.4927,
     longitude: 103.7732,
   },
+  areaServed: {
+    "@type": "City",
+    name: "Johor Bahru",
+  },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -33,8 +38,10 @@ const localBusinessData = {
       closes: "19:00",
     },
   ],
-  image: "https://www.motorkekal.com/images/background/website-screenshot.jpeg",
+  image:
+    "https://www.motorkekal.com/images/background/website-screenshot.jpeg",
   priceRange: "RM",
+  hasMap: "https://maps.app.goo.gl/a9Fs6RkRSR8dnnsE9",
   sameAs: ["https://www.facebook.com/PerniagaanMotorKekal/"],
 };
 

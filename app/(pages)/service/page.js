@@ -8,17 +8,19 @@ import ScheduleService from "@/app/components/pages/service/ScheduleService";
 import ServiceHours from "@/app/components/pages/service/ServiceHours";
 
 export const metadata = {
-  title: "Motorcycle Service & Repairs in Johor Bahru",
+  title: "Servis Motor Johor Bahru - Yamaha, Kawasaki Service Center",
   description:
-    "Professional motorcycle servicing, repairs, and maintenance at Perniagaan Motor Kekal. Experienced mechanics for all brands. Book your service in Johor Bahru today.",
+    "Pusat servis motor di Johor Jaya, JB. Kawasaki service center, Yamaha service center, bengkel motor untuk semua jenama. Servis berkualiti, harga berpatutan. Book sekarang.",
   keywords: [
-    "motorcycle service johor bahru",
-    "servis motor JB",
-    "motorcycle repair near me",
-    "kedai motor servis",
-    "yamaha service johor",
-    "kawasaki service johor",
-    "motorcycle maintenance JB",
+    "kawasaki service center johor bahru",
+    "yamaha service center johor bahru",
+    "servis motor johor bahru",
+    "bengkel motor johor jaya",
+    "motorcycle service near me",
+    "service motor",
+    "bengkel motor near me",
+    "jb motorcycle service center",
+    "servis motor yamaha near me",
   ],
   alternates: {
     canonical: "/service",

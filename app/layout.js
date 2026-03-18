@@ -10,25 +10,24 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: {
     default:
-      "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, JB",
+      "Kedai Motor Johor Jaya | Perniagaan Motor Kekal - Motorcycle Dealer JB",
     template: "%s | Perniagaan Motor Kekal",
   },
   description:
-    "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
+    "Kedai motor Johor Jaya & Johor Bahru yang dipercayai lebih 30 tahun. Jual motor baru Yamaha, Kawasaki, Honda, KTM. Servis, repair & aksesori. Harga terbaik di JB.",
   keywords: [
-    "kedai motor",
-    "motor shop",
-    "motorcycle",
-    "yamaha dealer",
-    "kawasaki dealer",
-    "motor repair",
-    "LC135",
-    "motor shop Johor Bahru",
-    "kedai motor johor bahru",
     "kedai motor johor jaya",
-    "kedai jual motor Johor Bahru",
+    "kedai motor johor bahru",
     "kedai motor near me",
-    "yamaha shop near me",
+    "kedai jual motor johor bahru",
+    "motorcycle shop johor bahru",
+    "yamaha johor jaya",
+    "yamaha dealer johor bahru",
+    "kawasaki service center johor bahru",
+    "kedai motor",
+    "motor shop near me",
+    "kedai motor jb",
+    "motorbike shop johor bahru",
   ],
   authors: [{ name: "Perniagaan Motor Kekal" }],
   creator: "Perniagaan Motor Kekal",
@@ -44,9 +43,9 @@ export const metadata = {
   },
   openGraph: {
     title:
-      "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, JB",
+      "Kedai Motor Johor Jaya | Perniagaan Motor Kekal - Motorcycle Dealer JB",
     description:
-      "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
+      "Kedai motor Johor Jaya & Johor Bahru yang dipercayai. Jual motor baru Yamaha, Kawasaki, Honda, KTM. Servis & repair. Harga terbaik di JB.",
     url: "https://www.motorkekal.com",
     siteName: "Perniagaan Motor Kekal",
     images: [
@@ -63,9 +62,9 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Perniagaan Motor Kekal - Leading Motorcycle Dealer in Johor Jaya, JB",
+      "Kedai Motor Johor Jaya | Perniagaan Motor Kekal - Motorcycle Dealer JB",
     description:
-      "Perniagaan Motor Kekal is Johor Bahru's trusted motorcycle dealer offering sales, repairs, and accessories for brands like Yamaha and Kawasaki.",
+      "Kedai motor Johor Jaya & Johor Bahru yang dipercayai. Jual motor baru Yamaha, Kawasaki, Honda, KTM. Servis & repair. Harga terbaik di JB.",
     images: ["/images/background/website-screenshot.jpeg"],
   },
   robots: {
