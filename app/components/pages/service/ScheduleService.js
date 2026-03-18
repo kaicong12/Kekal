@@ -154,8 +154,8 @@ const ScheduleService = () => {
         </div>
         {/* End .col */}
 
-        {submitStatus && (
-          <div className="col-md-12">
+        <div className="col-md-12" style={{ minHeight: submitStatus ? "auto" : 0 }}>
+          {submitStatus && (
             <div
               className={`alert ${
                 submitStatus.type === "success"
@@ -165,14 +165,15 @@ const ScheduleService = () => {
             >
               {submitStatus.message}
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         <div className="col-md-12">
           <div className="mb-0">
             <button
               type="submit"
               className="btn btn-thm"
+              style={{ minWidth: "160px" }}
               disabled={
                 isSubmitting || !formData.name.trim() || !formData.email.trim()
               }
