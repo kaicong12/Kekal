@@ -13,6 +13,8 @@ import ReleatedCar from "@/app/components/listing/listing-single/ReleatedCar";
 
 import { getMotorcycleByIdPg as getMotorcycleById } from "@/utils/dbPg";
 import { extractIdFromSlug, toMotorcycleSlug } from "@/utils/slug";
+import ProductSchema from "@/app/components/seo/ProductSchema";
+import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
 
 export async function generateMetadata({ params }) {
   try {
@@ -34,8 +36,10 @@ export async function generateMetadata({ params }) {
 
     const slug = toMotorcycleSlug(motorcycleData);
 
+    const firstImage = motorcycleData.images?.[0]?.url;
+
     return {
-      title: `${motorcycleData.name} - RM${motorcycleData.price} | Perniagaan Motor Kekal`,
+      title: `${motorcycleData.name} - RM${motorcycleData.price}`,
       description: `${motorcycleData.name} for sale at RM${
         motorcycleData.price
       }. ${
@@ -55,12 +59,25 @@ export async function generateMetadata({ params }) {
         "kedai motor johor jaya",
         `${motorcycleData.brand} dealer`,
       ],
+      alternates: {
+        canonical: `/motorcycle/${slug}`,
+      },
       openGraph: {
         title: `${motorcycleData.name} - RM${motorcycleData.price}`,
-        description: `${motorcycleData.name} for sale at RM${motorcycleData.price}`,
-        url: `https://motorkekal.com/motorcycle/${slug}`,
+        description: `${motorcycleData.name} for sale at RM${motorcycleData.price}. Trusted motorcycle dealer in Johor Bahru.`,
+        url: `https://www.motorkekal.com/motorcycle/${slug}`,
         siteName: "Perniagaan Motor Kekal",
-        type: "website",
+        type: "product",
+        ...(firstImage
+          ? {
+              images: [
+                {
+                  url: firstImage,
+                  alt: `${motorcycleData.name} motorcycle`,
+                },
+              ],
+            }
+          : {}),
       },
       robots: {
         index: true,
@@ -88,6 +105,14 @@ const MotorcyclePage = async ({ params }) => {
 
   return (
     <div className="wrapper">
+      <ProductSchema motorcycle={motorcycleData} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://www.motorkekal.com" },
+          { name: "Listing", url: "https://www.motorkekal.com/listing" },
+          { name: motorcycleData.name },
+        ]}
+      />
       {/* header top */}
       <HeaderTop />
       {/* End header top */}
@@ -121,9 +146,9 @@ const MotorcyclePage = async ({ params }) => {
                       <a href="#">BRAND NEW - IN STOCK</a>
                     </li>
                   </ul>
-                  <h2 className="title" style={{ marginBottom: "0" }}>
+                  <h1 className="title" style={{ marginBottom: "0" }}>
                     {motorcycleData.name}
-                  </h2>
+                  </h1>
                 </div>
               </div>
             </div>

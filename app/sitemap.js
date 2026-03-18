@@ -1,7 +1,7 @@
 import { listMotorcyclesPg as listMotorcycles } from "@/utils/dbPg";
 import { toMotorcycleSlug } from "@/utils/slug";
 
-const URL = "https://motorkekal.com";
+const URL = "https://www.motorkekal.com";
 
 export default async function sitemap() {
   try {
@@ -9,7 +9,9 @@ export default async function sitemap() {
 
     const motorcycles = motorcycleData.map((motorcycle) => ({
       url: `${URL}/motorcycle/${toMotorcycleSlug(motorcycle)}`,
-      lastModified: new Date().toISOString(),
+      lastModified: motorcycle.updatedAt
+        ? new Date(motorcycle.updatedAt).toISOString()
+        : new Date().toISOString(),
       changeFrequency: "weekly",
       priority: 0.8,
     }));

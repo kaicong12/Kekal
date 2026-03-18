@@ -10,12 +10,19 @@ import BusinessHours from "@/app/components/pages/contact/BusinessHours";
 import { Divider } from "antd";
 
 export const metadata = {
-  title:
-    "Perniagan Motor Kekal - Contact Us Page || Motorcycle Shop in Johor Bahru",
+  title: "Hubungi Kami - Kedai Motor Johor Jaya | Perniagaan Motor Kekal",
   description:
-    "Looking for a motorcycle dealer in Johor Bahru? Visit our service page for the best motorcycle in JB. Find kedai motor near me for top-notch services.",
-  keywords:
-    "kedai motor near me, kedia jual motor near me, yamaha shop near me, kedai motor johor jaya, kedai motor johor bahru, yamaha johor bahru, kedai motor, motorcycle shop johor bahru",
+    "Hubungi Perniagaan Motor Kekal di Jalan Seroja 49, Johor Jaya. Tel: +60127126128. Kedai motor buka Isnin-Ahad. Parking percuma. Kedai motor near me di Johor Bahru.",
+  keywords: [
+    "kedai motor johor jaya",
+    "kedai motor near me",
+    "motorcycle shop johor bahru",
+    "perniagaan motor kekal address",
+    "kedai motor near me open now",
+  ],
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 const Contact = () => {

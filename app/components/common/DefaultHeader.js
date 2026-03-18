@@ -22,7 +22,7 @@ const DefaultHeader = () => {
               height={100}
               priority
               src="/images/logoBlack.svg"
-              alt="brand"
+              alt="Perniagaan Motor Kekal logo"
             />
           </Link>
           {/* Responsive Menu Structure*/}

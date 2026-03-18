@@ -8,7 +8,7 @@ Disallow: /admin/
 
 # Allow important pages
 Allow: /listing
-Allow: /listing-single-v1/
+Allow: /motorcycle/
 Allow: /contact
 Allow: /service
 Allow: /about-us
@@ -17,4 +17,4 @@ Allow: /about-us
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://motorkekal.com/sitemap.xml
+Sitemap: https://www.motorkekal.com/sitemap.xml
