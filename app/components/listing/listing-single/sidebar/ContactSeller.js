@@ -75,7 +75,8 @@ Thank you!`;
         <textarea
           className="form-control"
           name="message"
-          rows={4}
+          rows={6}
+          style={{ minHeight: "120px" }}
           value={formData.message}
           onChange={handleInputChange}
           required

@@ -67,7 +67,7 @@ export async function generateMetadata({ params }) {
         description: `${motorcycleData.name} for sale at RM${motorcycleData.price}. Trusted motorcycle dealer in Johor Bahru.`,
         url: `https://www.motorkekal.com/motorcycle/${slug}`,
         siteName: "Perniagaan Motor Kekal",
-        type: "product",
+        type: "website",
         ...(firstImage
           ? {
               images: [
@@ -223,7 +223,7 @@ const MotorcyclePage = async ({ params }) => {
       {/* End Agent Single Grid View */}
 
       {/* Car For Rent */}
-      <section className="car-for-rent bb1">
+      <section className="car-for-rent bb1 pt50 pb50">
         <div className="container">
           <div className="row">
             <div className="col-sm-6">

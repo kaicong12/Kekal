@@ -11350,10 +11350,11 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
   font-size: 14px;
   font-weight: 600;
   color: #1a3760;
+  white-space: nowrap;
 }
 .car-listing .view-details-btn {
-  background-color: #d4a76a;
-  color: #fff;
+  background-color: #f5c34b;
+  color: #1a3760;
   text-align: center;
   padding: 12px;
   border-radius: 8px;
@@ -11364,7 +11365,12 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
   margin-top: auto;
 }
 .car-listing .view-details-btn:hover {
-  background-color: #c4974a;
+  background-color: #e0b03e;
+}
+/* Related Best Bikes section */
+section.car-for-rent {
+  padding-top: 50px !important;
+  padding-bottom: 50px;
 }
 /* Pagination */
 .page_navigation {
@@ -11430,8 +11436,8 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
 /* Show All Motorcycles Button */
 .more_listing {
   display: inline-block;
-  background-color: #d4a76a;
-  color: #fff;
+  background-color: #f5c34b;
+  color: #1a3760;
   padding: 12px 30px;
   border-radius: 8px;
   font-size: 15px;
@@ -11440,8 +11446,8 @@ input.quantity-num[type="number"]::-webkit-outer-spin-button {
   transition: background-color 0.3s ease;
 }
 .more_listing:hover {
-  background-color: #c4974a;
-  color: #fff;
+  background-color: #e0b03e;
+  color: #1a3760;
 }
 .more_listing .icon {
   margin-left: 6px;
