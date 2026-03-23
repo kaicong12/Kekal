@@ -97,3 +97,35 @@ export const fetchUniqueBrandSetPg = async () => {
   });
   return new Set(brands.map((b) => b.brand));
 };
+
+export const createMotorcyclePg = async (data) => {
+  const { images, ...fields } = data;
+  const motorcycle = await prisma.motorcycle.create({
+    data: {
+      ...fields,
+      images: images?.length ? { create: images } : undefined,
+    },
+    include: { images: { orderBy: { displayOrder: "asc" } } },
+  });
+  return formatMotorcycle(motorcycle);
+};
+
+export const updateMotorcyclePg = async (id, data) => {
+  const { images, ...fields } = data;
+  const [, motorcycle] = await prisma.$transaction([
+    prisma.motorcycleImage.deleteMany({ where: { motorcycleId: id } }),
+    prisma.motorcycle.update({
+      where: { id },
+      data: {
+        ...fields,
+        images: images?.length ? { create: images } : undefined,
+      },
+      include: { images: { orderBy: { displayOrder: "asc" } } },
+    }),
+  ]);
+  return formatMotorcycle(motorcycle);
+};
+
+export const deleteMotorcyclePg = async (id) => {
+  return prisma.motorcycle.delete({ where: { id } });
+};
