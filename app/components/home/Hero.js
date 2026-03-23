@@ -31,7 +31,6 @@ const Hero = () => {
   return (
     <div
       className="main-banner-wrapper home2_main_slider mb30-md"
-      style={{ minHeight: "750px" }}
     >
       <div className="banner-style-one">
         <Swiper
@@ -50,7 +49,6 @@ const Hero = () => {
                 className="slide slide_image"
                 style={{
                   backgroundImage: `url(${slide.image})`,
-                  height: "750px",
                 }}
               >
                 <div className="container">
