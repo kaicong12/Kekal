@@ -202,8 +202,8 @@ const MotorcyclePage = async ({ params }) => {
               </div>
               {/* End car descriptions */}
 
-              {/* Loan Calculator */}
-              <div className="loanCalculator mt30">
+              {/* Financing Calculator */}
+              <div className="mt30">
                 <LoanCalculator motorcycle={motorcycleData} />
               </div>
             </div>

@@ -1,28 +1,241 @@
-.displayContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #FFF5CD;
-    margin-top: 30px;
-    padding: 10px 25px 10px 25px;
-    border-radius: 10px;
-    min-height: 220px;
+.calculator {
+  display: flex;
+  gap: 0;
+  background: #f8f8f8;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-.displayDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    padding-top: 10px
+.calculatorMain {
+  flex: 1;
+  padding: 40px;
 }
 
-.loanEnquiryButton {
-	border-radius: 8px;
-	font-size: 13px;
-	font-style: normal;
-	font-weight: 600;
-	height: 50px;
-	line-height: 16px;
-	letter-spacing: 0em;
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.sliderSection {
+  margin-bottom: 28px;
+}
+
+.sliderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sliderLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.sliderValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #8b7339;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #8b7339;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #8b7339;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.termSection {
+  margin-bottom: 0;
+}
+
+.termHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.termLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.termValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #8b7339;
+}
+
+.termButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.termButton {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.termButton:hover {
+  border-color: #8b7339;
+  color: #8b7339;
+}
+
+.termButtonActive {
+  background: #8b7339;
+  border-color: #8b7339;
+  color: #fff;
+}
+
+.termButtonActive:hover {
+  background: #7a6530;
+  color: #fff;
+}
+
+.resultPanel {
+  width: 320px;
+  min-width: 320px;
+  background: #f2f2f2;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.resultContent {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.resultLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #666;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.resultAmount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.rmPrefix {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.amountValue {
+  font-size: 48px;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.amountSuffix {
+  font-size: 18px;
+  font-weight: 400;
+  color: #666;
+}
+
+.resultDisclaimer {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.applyButton {
+  width: 100%;
+  padding: 14px 24px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.applyButton:hover {
+  background: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calculator {
+    flex-direction: column;
+  }
+
+  .calculatorMain {
+    padding: 24px;
+  }
+
+  .resultPanel {
+    width: 100%;
+    min-width: unset;
+    padding: 24px;
+  }
+
+  .amountValue {
+    font-size: 36px;
+  }
+
+  .termButtons {
+    flex-wrap: wrap;
+  }
 }
