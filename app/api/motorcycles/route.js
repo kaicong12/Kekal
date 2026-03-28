@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { queryMotorcyclePg } from "@/utils/dbPg";
+import { queryMotorcyclePg, createMotorcyclePg } from "@/utils/dbPg";
 
 export async function GET(request) {
   try {
@@ -48,6 +48,67 @@ export async function GET(request) {
     console.error("Error fetching motorcycles:", error);
     return NextResponse.json(
       { error: "Failed to fetch motorcycles" },
+      { status: 500 }
+    );
+  }
+}
+
+const REQUIRED_FIELDS = [
+  "brand",
+  "name",
+  "model",
+  "year",
+  "price",
+  "engine",
+  "engineCapacity",
+  "gear",
+  "color",
+];
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+
+    const missing = REQUIRED_FIELDS.filter((f) => body[f] == null || body[f] === "");
+    if (missing.length) {
+      return NextResponse.json(
+        { error: `Missing required fields: ${missing.join(", ")}` },
+        { status: 400 }
+      );
+    }
+
+    const data = {
+      brand: body.brand,
+      name: body.name,
+      model: body.model,
+      year: String(body.year),
+      price: Number(body.price),
+      engine: body.engine,
+      engineCapacity: parseInt(body.engineCapacity, 10),
+      gear: body.gear,
+      color: body.color,
+      featured: body.featured ?? false,
+      tags: body.tags || null,
+      description: body.description || null,
+      specification: body.specification || null,
+      images: body.images?.map((img, i) => ({
+        url: img.url,
+        displayOrder: img.displayOrder ?? i,
+      })),
+    };
+
+    const motorcycle = await createMotorcyclePg(data);
+    return NextResponse.json(motorcycle, { status: 201 });
+  } catch (error) {
+    if (error.code === "P2002") {
+      return NextResponse.json(
+        { error: "A motorcycle with this brand, name, and year already exists" },
+        { status: 409 }
+      );
+    }
+    console.error("Error creating motorcycle:", error);
+    return NextResponse.json(
+      { error: "Failed to create motorcycle" },
       { status: 500 }
     );
   }

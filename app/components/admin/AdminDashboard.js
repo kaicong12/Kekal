@@ -10,10 +10,12 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   MenuOutlined,
+  CarOutlined,
 } from "@ant-design/icons";
 import { useAuth } from "../auth/AuthProvider";
 import CashSalesInterface from "../cash-sales/CashSalesInterface";
 import ReceiptManagementInterface from "../receipt-management/ReceiptManagementInterface";
+import MotorcycleManagement from "./motorcycle/MotorcycleManagement";
 import Footer from "../common/Footer";
 import DefaultHeader from "../common/DefaultHeader";
 import HeaderTop from "../common/HeaderTop";
@@ -54,6 +56,12 @@ const AdminDashboard = () => {
       icon: <UnorderedListOutlined />,
       label: "Receipt List",
       component: <ReceiptManagementInterface />,
+    },
+    {
+      key: "motorcycles",
+      icon: <CarOutlined />,
+      label: "Motorcycles",
+      component: <MotorcycleManagement />,
     },
   ];
 
@@ -267,7 +275,7 @@ const AdminDashboard = () => {
         </section>
       )}
 
-      <div className="container-fluid">
+      <div className="container-fluid" style={{ paddingTop: 24, paddingBottom: 24 }}>
         <div className="row" style={{ margin: "0 -15px" }}>
           {!isMobile && (
             <div
