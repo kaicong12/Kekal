@@ -112,17 +112,27 @@ export const createMotorcyclePg = async (data) => {
 
 export const updateMotorcyclePg = async (id, data) => {
   const { images, ...fields } = data;
-  const [, motorcycle] = await prisma.$transaction([
-    prisma.motorcycleImage.deleteMany({ where: { motorcycleId: id } }),
-    prisma.motorcycle.update({
-      where: { id },
-      data: {
-        ...fields,
-        images: images?.length ? { create: images } : undefined,
-      },
-      include: { images: { orderBy: { displayOrder: "asc" } } },
-    }),
-  ]);
+
+  if (images !== undefined) {
+    const [, motorcycle] = await prisma.$transaction([
+      prisma.motorcycleImage.deleteMany({ where: { motorcycleId: id } }),
+      prisma.motorcycle.update({
+        where: { id },
+        data: {
+          ...fields,
+          images: images.length ? { create: images } : undefined,
+        },
+        include: { images: { orderBy: { displayOrder: "asc" } } },
+      }),
+    ]);
+    return formatMotorcycle(motorcycle);
+  }
+
+  const motorcycle = await prisma.motorcycle.update({
+    where: { id },
+    data: fields,
+    include: { images: { orderBy: { displayOrder: "asc" } } },
+  });
   return formatMotorcycle(motorcycle);
 };
 
