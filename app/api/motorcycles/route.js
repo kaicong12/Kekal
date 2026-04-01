@@ -87,7 +87,6 @@ export async function POST(request) {
       engineCapacity: parseInt(body.engineCapacity, 10),
       gear: body.gear,
       color: body.color,
-      featured: body.featured ?? false,
       tags: body.tags || null,
       description: body.description || null,
       specification: body.specification || null,

@@ -51,7 +51,6 @@ export async function PUT(request, { params }) {
       data.engineCapacity = parseInt(body.engineCapacity, 10);
     if (body.gear !== undefined) data.gear = body.gear;
     if (body.color !== undefined) data.color = body.color;
-    if (body.featured !== undefined) data.featured = body.featured;
     if (body.tags !== undefined) data.tags = body.tags || null;
     if (body.description !== undefined)
       data.description = body.description || null;

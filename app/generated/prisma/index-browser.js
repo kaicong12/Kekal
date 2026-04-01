@@ -135,7 +135,6 @@ exports.Prisma.MotorcycleScalarFieldEnum = {
   engineCapacity: 'engineCapacity',
   gear: 'gear',
   color: 'color',
-  featured: 'featured',
   tags: 'tags',
   description: 'description',
   specification: 'specification',

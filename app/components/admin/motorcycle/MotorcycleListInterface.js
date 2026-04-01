@@ -10,7 +10,6 @@ import {
   Col,
   Typography,
   Space,
-  Tag,
   Statistic,
   message,
   Modal,
@@ -22,7 +21,6 @@ import {
   SearchOutlined,
   PlusOutlined,
   CarOutlined,
-  StarOutlined,
 } from "@ant-design/icons";
 
 const { Text } = Typography;
@@ -95,8 +93,6 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
     });
   };
 
-  const featuredCount = motorcycles.filter((m) => m.featured).length;
-
   const columns = [
     {
       title: "Image",
@@ -151,18 +147,6 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
       render: (price) => `RM ${Number(price).toLocaleString()}`,
     },
     {
-      title: "Featured",
-      dataIndex: "featured",
-      key: "featured",
-      width: 90,
-      render: (featured) =>
-        featured ? (
-          <Tag color="green">Featured</Tag>
-        ) : (
-          <Tag>No</Tag>
-        ),
-    },
-    {
       title: "Actions",
       key: "actions",
       width: 120,
@@ -194,15 +178,6 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
               title="Total Motorcycles"
               value={total}
               prefix={<CarOutlined style={{ color: "#1890ff" }} />}
-            />
-          </Card>
-        </Col>
-        <Col xs={12} sm={8}>
-          <Card size="small">
-            <Statistic
-              title="Featured"
-              value={featuredCount}
-              prefix={<StarOutlined style={{ color: "#faad14" }} />}
             />
           </Card>
         </Col>
