@@ -26,20 +26,22 @@ const SpecTable = ({ specs }) => {
 };
 
 const Overview = ({ productSpecification }) => {
-  if (!productSpecification) return null;
+  const sections = productSpecification
+    ? SECTION_ORDER.filter(
+        (s) =>
+          productSpecification[s] &&
+          typeof productSpecification[s] === "object"
+      )
+    : [];
 
-  const sections = SECTION_ORDER.filter(
-    (s) =>
-      productSpecification[s] &&
-      typeof productSpecification[s] === "object"
-  );
+  const [activeTab, setActiveTab] = useState(sections[0]);
+
+  if (!productSpecification) return null;
 
   // If no recognized sections, render flat list
   if (sections.length === 0) {
     return <SpecTable specs={productSpecification} />;
   }
-
-  const [activeTab, setActiveTab] = useState(sections[0]);
 
   return (
     <div className="spec-tabs">

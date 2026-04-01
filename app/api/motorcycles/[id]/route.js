@@ -4,6 +4,7 @@ import {
   updateMotorcyclePg,
   deleteMotorcyclePg,
 } from "@/utils/dbPg";
+import { verifyAuthToken } from "@/utils/firebaseAdmin";
 
 export async function GET(request, { params }) {
   try {
@@ -28,6 +29,9 @@ export async function GET(request, { params }) {
 }
 
 export async function PUT(request, { params }) {
+  const auth = await verifyAuthToken(request);
+  if (auth.error) return auth.error;
+
   try {
     const body = await request.json();
     const { id } = await params;
@@ -82,6 +86,9 @@ export async function PUT(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
+  const auth = await verifyAuthToken(request);
+  if (auth.error) return auth.error;
+
   try {
     const { id } = await params;
 
