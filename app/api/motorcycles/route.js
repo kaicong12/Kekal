@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { queryMotorcyclePg, createMotorcyclePg } from "@/utils/dbPg";
+import { verifyAuthToken } from "@/utils/firebaseAdmin";
 
 export async function GET(request) {
   try {
@@ -66,6 +67,9 @@ const REQUIRED_FIELDS = [
 ];
 
 export async function POST(request) {
+  const auth = await verifyAuthToken(request);
+  if (auth.error) return auth.error;
+
   try {
     const body = await request.json();
 
