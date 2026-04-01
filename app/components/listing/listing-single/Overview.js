@@ -26,6 +26,8 @@ const SpecTable = ({ specs }) => {
 };
 
 const Overview = ({ productSpecification }) => {
+  const [activeTab, setActiveTab] = useState(sections[0]);
+  
   if (!productSpecification) return null;
 
   const sections = SECTION_ORDER.filter(
@@ -39,7 +41,6 @@ const Overview = ({ productSpecification }) => {
     return <SpecTable specs={productSpecification} />;
   }
 
-  const [activeTab, setActiveTab] = useState(sections[0]);
 
   return (
     <div className="spec-tabs">
