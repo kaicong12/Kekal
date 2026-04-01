@@ -25,6 +25,7 @@ import {
   ArrowDownOutlined,
 } from "@ant-design/icons";
 import { uploadMotorcycleImage } from "@/utils/motorcycleImageUpload";
+import { auth } from "@/utils/firebase";
 
 const { TextArea } = Input;
 const { Text } = Typography;
@@ -173,9 +174,13 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
         : "/api/motorcycles";
       const method = isEdit ? "PUT" : "POST";
 
+      const token = await auth.currentUser?.getIdToken();
       const res = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(body),
       });
 

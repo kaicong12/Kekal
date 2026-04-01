@@ -22,6 +22,7 @@ import {
   PlusOutlined,
   CarOutlined,
 } from "@ant-design/icons";
+import { auth } from "@/utils/firebase";
 
 const { Text } = Typography;
 
@@ -80,8 +81,10 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
       okType: "danger",
       onOk: async () => {
         try {
+          const token = await auth.currentUser?.getIdToken();
           const res = await fetch(`/api/motorcycles/${motorcycle.id}`, {
             method: "DELETE",
+            headers: { Authorization: `Bearer ${token}` },
           });
           if (!res.ok) throw new Error();
           message.success("Motorcycle deleted successfully");

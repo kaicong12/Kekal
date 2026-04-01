@@ -107,7 +107,7 @@ const MobileMenu = () => {
               data-bs-dismiss="offcanvas"
               aria-label="Close"
             >
-              <i className="fa-light fa-circle-xmark"></i>
+              <i className="fa-solid fa-circle-xmark"></i>
             </div>
           </div>
           {/* End pro-header */}
