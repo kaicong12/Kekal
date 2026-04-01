@@ -32,7 +32,6 @@ model Motorcycle {
   engineCapacity Int
   gear           String
   color          String
-  featured       Boolean @default(false)
   tags           String?
   description    String?
   specification  Json?

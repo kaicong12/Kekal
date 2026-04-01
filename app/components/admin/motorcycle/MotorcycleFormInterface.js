@@ -6,7 +6,6 @@ import {
   Input,
   InputNumber,
   Select,
-  Switch,
   Button,
   Row,
   Col,
@@ -75,7 +74,6 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
           engineCapacity: data.engineCapacity,
           gear: data.gear,
           color: data.color,
-          featured: data.featured,
           tags: data.tags || "",
           description: data.description || "",
           specification: data.specification
@@ -161,7 +159,6 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
         engineCapacity: values.engineCapacity,
         gear: values.gear,
         color: values.color,
-        featured: values.featured || false,
         tags: values.tags || null,
         description: values.description || null,
         specification,
@@ -222,7 +219,7 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
         form={form}
         layout="vertical"
         onFinish={handleSubmit}
-        initialValues={{ featured: false }}
+        initialValues={{}}
       >
         {/* Basic Info */}
         <Card
@@ -289,11 +286,6 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
                   parser={(v) => v.replace(/\$\s?|(,*)/g, "")}
                   placeholder="e.g. 5800"
                 />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Form.Item name="featured" label="Featured" valuePropName="checked">
-                <Switch />
               </Form.Item>
             </Col>
           </Row>

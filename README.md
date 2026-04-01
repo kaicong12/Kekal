@@ -1,89 +1,60 @@
-# Kekal - Next.js Motorcycle Ecommerce Marketplace
+# Kekal
 
-A modern, responsive Next.js ecommerce marketplace specifically built for "Perniagaan Motor Kekal" - a leading motorcycle dealer in Johor Bahru, Malaysia.
+Motorcycle ecommerce platform for Perniagaan Motor Kekal, a motorcycle dealer in Johor Bahru, Malaysia.
 
-## 🏍️ Features
+## Tech Stack
 
-### Core Functionality
+- **Framework:** Next.js 13 (App Router)
+- **Database:** PostgreSQL via Prisma
+- **Auth & Storage:** Firebase (Google Auth, Cloud Storage, Firestore)
+- **Styling:** Bootstrap 5, Ant Design, SCSS, Styled Components
+- **Deployment:** Vercel
 
-- **Motorcycle Listings**: Browse and filter motorcycles by brand, price, and other criteria
-- **Advanced Search & Filtering**: Multi-parameter search with sorting options
-- **Individual Product Pages**: Detailed motorcycle specifications and images
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **SEO Optimized**: Built-in SEO features with proper meta tags and structured data
-
-### Business Features
-
-- **Featured Listings**: Highlight premium motorcycles on the homepage
-- **Brand Management**: Support for multiple motorcycle brands (Yamaha, Kawasaki, etc.)
-- **Price Filtering**: Filter by price ranges (Under RM2K, RM2K-5K, RM5K-10K, etc.)
-- **Testimonials**: Customer review section
-- **Contact & Service Pages**: Business information and service offerings
-- **Loan Calculator**: Built-in financing calculator for customers
-
-## 🚀 Quick Start
+## Getting Started
 
 ### Prerequisites
 
-- Node.js 16.x or higher
-- npm or yarn package manager
-- Firebase account (for database functionality)
+- Node.js 16+
+- Yarn
+- PostgreSQL database
+- Firebase project
 
-### Installation
+### Setup
 
-1. **Clone the repository**
+```bash
+git clone https://github.com/kaicong12/Kekal.git
+cd Kekal
+yarn install
+cp .env.example .env   # Fill in Firebase config, DATABASE_URL, Gmail OAuth credentials
+npx prisma generate
+npx prisma migrate dev
+yarn dev                # http://localhost:3000
+```
 
-   ```bash
-   git clone https://github.com/kaicong12/Kekal.git
-   cd kekal
-   ```
+## Scripts
 
-2. **Install dependencies**
+```bash
+yarn dev               # Dev server
+yarn build             # Production build
+yarn start             # Start production server
+yarn lint              # ESLint
+npx prisma generate    # Generate Prisma client
+npx prisma migrate dev # Run migrations
+npx prisma studio      # Database GUI
+```
 
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+## Project Structure
 
-3. **Run the development server**
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 🛠️ Technologies Used
-
-### Frontend
-
-- **Next.js 13.4.5** - React framework with App Router
-- **React 18.2.0** - UI library
-- **Bootstrap 5.2.3** - CSS framework
-- **Ant Design 5.11.4** - UI component library
-- **SCSS/Sass** - CSS preprocessor
-- **Styled Components** - CSS-in-JS styling
-
-### Backend & Database
-
-- **Firebase 10.1.0** - Backend-as-a-Service
-- **Firestore** - NoSQL database
-- **Firebase Admin** - Server-side Firebase SDK
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 🙏 Acknowledgments
-
-- Built for [Perniagaan Motor Kekal, Johor Bahru](https://www.motorkekal.com)
-- Inspired by modern automotive websites
-- Thanks to the Next.js and React communities
+```
+app/
+  home/                # Landing page
+  (listing)/           # Motorcycle listing (filters, pagination)
+  motorcycle/[slug]/   # Motorcycle detail page
+  (pages)/admin/       # Admin dashboard (auth-protected)
+  api/                 # REST API (motorcycles, email)
+  components/          # Shared UI components
+  generated/           # Generated Prisma client
+prisma/                # Schema and migrations
+utils/                 # DB helpers, hooks, email service, slug utils
+public/                # Static assets and SCSS
+```

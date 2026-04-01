@@ -2454,7 +2454,6 @@ export namespace Prisma {
     engineCapacity: number | null
     gear: string | null
     color: string | null
-    featured: boolean | null
     tags: string | null
     description: string | null
     createdAt: Date | null
@@ -2472,7 +2471,6 @@ export namespace Prisma {
     engineCapacity: number | null
     gear: string | null
     color: string | null
-    featured: boolean | null
     tags: string | null
     description: string | null
     createdAt: Date | null
@@ -2490,7 +2488,6 @@ export namespace Prisma {
     engineCapacity: number
     gear: number
     color: number
-    featured: number
     tags: number
     description: number
     specification: number
@@ -2521,7 +2518,6 @@ export namespace Prisma {
     engineCapacity?: true
     gear?: true
     color?: true
-    featured?: true
     tags?: true
     description?: true
     createdAt?: true
@@ -2539,7 +2535,6 @@ export namespace Prisma {
     engineCapacity?: true
     gear?: true
     color?: true
-    featured?: true
     tags?: true
     description?: true
     createdAt?: true
@@ -2557,7 +2552,6 @@ export namespace Prisma {
     engineCapacity?: true
     gear?: true
     color?: true
-    featured?: true
     tags?: true
     description?: true
     specification?: true
@@ -2663,7 +2657,6 @@ export namespace Prisma {
     engineCapacity: number
     gear: string
     color: string
-    featured: boolean
     tags: string | null
     description: string | null
     specification: JsonValue | null
@@ -2701,7 +2694,6 @@ export namespace Prisma {
     engineCapacity?: boolean
     gear?: boolean
     color?: boolean
-    featured?: boolean
     tags?: boolean
     description?: boolean
     specification?: boolean
@@ -2722,7 +2714,6 @@ export namespace Prisma {
     engineCapacity?: boolean
     gear?: boolean
     color?: boolean
-    featured?: boolean
     tags?: boolean
     description?: boolean
     specification?: boolean
@@ -2741,7 +2732,6 @@ export namespace Prisma {
     engineCapacity?: boolean
     gear?: boolean
     color?: boolean
-    featured?: boolean
     tags?: boolean
     description?: boolean
     specification?: boolean
@@ -2760,7 +2750,6 @@ export namespace Prisma {
     engineCapacity?: boolean
     gear?: boolean
     color?: boolean
-    featured?: boolean
     tags?: boolean
     description?: boolean
     specification?: boolean
@@ -2768,7 +2757,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type MotorcycleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "brand" | "name" | "model" | "year" | "price" | "engine" | "engineCapacity" | "gear" | "color" | "featured" | "tags" | "description" | "specification" | "createdAt" | "updatedAt", ExtArgs["result"]["motorcycle"]>
+  export type MotorcycleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "brand" | "name" | "model" | "year" | "price" | "engine" | "engineCapacity" | "gear" | "color" | "tags" | "description" | "specification" | "createdAt" | "updatedAt", ExtArgs["result"]["motorcycle"]>
   export type MotorcycleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     images?: boolean | Motorcycle$imagesArgs<ExtArgs>
     _count?: boolean | MotorcycleCountOutputTypeDefaultArgs<ExtArgs>
@@ -2792,7 +2781,6 @@ export namespace Prisma {
       engineCapacity: number
       gear: string
       color: string
-      featured: boolean
       tags: string | null
       description: string | null
       specification: Prisma.JsonValue | null
@@ -3232,7 +3220,6 @@ export namespace Prisma {
     readonly engineCapacity: FieldRef<"Motorcycle", 'Int'>
     readonly gear: FieldRef<"Motorcycle", 'String'>
     readonly color: FieldRef<"Motorcycle", 'String'>
-    readonly featured: FieldRef<"Motorcycle", 'Boolean'>
     readonly tags: FieldRef<"Motorcycle", 'String'>
     readonly description: FieldRef<"Motorcycle", 'String'>
     readonly specification: FieldRef<"Motorcycle", 'Json'>
@@ -9154,7 +9141,6 @@ export namespace Prisma {
     engineCapacity: 'engineCapacity',
     gear: 'gear',
     color: 'color',
-    featured: 'featured',
     tags: 'tags',
     description: 'description',
     specification: 'specification',
@@ -9313,13 +9299,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -9344,6 +9323,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -9410,7 +9396,6 @@ export namespace Prisma {
     engineCapacity?: IntFilter<"Motorcycle"> | number
     gear?: StringFilter<"Motorcycle"> | string
     color?: StringFilter<"Motorcycle"> | string
-    featured?: BoolFilter<"Motorcycle"> | boolean
     tags?: StringNullableFilter<"Motorcycle"> | string | null
     description?: StringNullableFilter<"Motorcycle"> | string | null
     specification?: JsonNullableFilter<"Motorcycle">
@@ -9430,7 +9415,6 @@ export namespace Prisma {
     engineCapacity?: SortOrder
     gear?: SortOrder
     color?: SortOrder
-    featured?: SortOrder
     tags?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     specification?: SortOrderInput | SortOrder
@@ -9454,7 +9438,6 @@ export namespace Prisma {
     engineCapacity?: IntFilter<"Motorcycle"> | number
     gear?: StringFilter<"Motorcycle"> | string
     color?: StringFilter<"Motorcycle"> | string
-    featured?: BoolFilter<"Motorcycle"> | boolean
     tags?: StringNullableFilter<"Motorcycle"> | string | null
     description?: StringNullableFilter<"Motorcycle"> | string | null
     specification?: JsonNullableFilter<"Motorcycle">
@@ -9474,7 +9457,6 @@ export namespace Prisma {
     engineCapacity?: SortOrder
     gear?: SortOrder
     color?: SortOrder
-    featured?: SortOrder
     tags?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     specification?: SortOrderInput | SortOrder
@@ -9501,7 +9483,6 @@ export namespace Prisma {
     engineCapacity?: IntWithAggregatesFilter<"Motorcycle"> | number
     gear?: StringWithAggregatesFilter<"Motorcycle"> | string
     color?: StringWithAggregatesFilter<"Motorcycle"> | string
-    featured?: BoolWithAggregatesFilter<"Motorcycle"> | boolean
     tags?: StringNullableWithAggregatesFilter<"Motorcycle"> | string | null
     description?: StringNullableWithAggregatesFilter<"Motorcycle"> | string | null
     specification?: JsonNullableWithAggregatesFilter<"Motorcycle">
@@ -9849,7 +9830,6 @@ export namespace Prisma {
     engineCapacity: number
     gear: string
     color: string
-    featured?: boolean
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -9869,7 +9849,6 @@ export namespace Prisma {
     engineCapacity: number
     gear: string
     color: string
-    featured?: boolean
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -9889,7 +9868,6 @@ export namespace Prisma {
     engineCapacity?: IntFieldUpdateOperationsInput | number
     gear?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    featured?: BoolFieldUpdateOperationsInput | boolean
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -9909,7 +9887,6 @@ export namespace Prisma {
     engineCapacity?: IntFieldUpdateOperationsInput | number
     gear?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    featured?: BoolFieldUpdateOperationsInput | boolean
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -9929,7 +9906,6 @@ export namespace Prisma {
     engineCapacity: number
     gear: string
     color: string
-    featured?: boolean
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -9948,7 +9924,6 @@ export namespace Prisma {
     engineCapacity?: IntFieldUpdateOperationsInput | number
     gear?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    featured?: BoolFieldUpdateOperationsInput | boolean
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -9967,7 +9942,6 @@ export namespace Prisma {
     engineCapacity?: IntFieldUpdateOperationsInput | number
     gear?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    featured?: BoolFieldUpdateOperationsInput | boolean
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -10355,11 +10329,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -10441,7 +10410,6 @@ export namespace Prisma {
     engineCapacity?: SortOrder
     gear?: SortOrder
     color?: SortOrder
-    featured?: SortOrder
     tags?: SortOrder
     description?: SortOrder
     specification?: SortOrder
@@ -10465,7 +10433,6 @@ export namespace Prisma {
     engineCapacity?: SortOrder
     gear?: SortOrder
     color?: SortOrder
-    featured?: SortOrder
     tags?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
@@ -10483,7 +10450,6 @@ export namespace Prisma {
     engineCapacity?: SortOrder
     gear?: SortOrder
     color?: SortOrder
-    featured?: SortOrder
     tags?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
@@ -10525,14 +10491,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10593,6 +10551,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type ProductSyncFileCountOrderByAggregateInput = {
     id?: SortOrder
     filePath?: SortOrder
@@ -10612,6 +10575,14 @@ export namespace Prisma {
     filePath?: SortOrder
     isProcessed?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type MotorcycleScalarRelationFilter = {
@@ -10812,10 +10783,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -10850,6 +10817,10 @@ export namespace Prisma {
     update?: MotorcycleImageUpdateWithWhereUniqueWithoutMotorcycleInput | MotorcycleImageUpdateWithWhereUniqueWithoutMotorcycleInput[]
     updateMany?: MotorcycleImageUpdateManyWithWhereWithoutMotorcycleInput | MotorcycleImageUpdateManyWithWhereWithoutMotorcycleInput[]
     deleteMany?: MotorcycleImageScalarWhereInput | MotorcycleImageScalarWhereInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type MotorcycleCreateNestedOneWithoutImagesInput = {
@@ -11021,11 +10992,6 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -11094,14 +11060,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -11167,6 +11125,19 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type MotorcycleImageCreateWithoutMotorcycleInput = {
     id?: string
     url: string
@@ -11226,7 +11197,6 @@ export namespace Prisma {
     engineCapacity: number
     gear: string
     color: string
-    featured?: boolean
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -11245,7 +11215,6 @@ export namespace Prisma {
     engineCapacity: number
     gear: string
     color: string
-    featured?: boolean
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -11280,7 +11249,6 @@ export namespace Prisma {
     engineCapacity?: IntFieldUpdateOperationsInput | number
     gear?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    featured?: BoolFieldUpdateOperationsInput | boolean
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
@@ -11299,7 +11267,6 @@ export namespace Prisma {
     engineCapacity?: IntFieldUpdateOperationsInput | number
     gear?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    featured?: BoolFieldUpdateOperationsInput | boolean
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
