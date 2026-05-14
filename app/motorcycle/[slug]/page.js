@@ -15,6 +15,7 @@ import { getMotorcycleByIdPg as getMotorcycleById } from "@/utils/dbPg";
 import { extractIdFromSlug, toMotorcycleSlug } from "@/utils/slug";
 import ProductSchema from "@/app/components/seo/ProductSchema";
 import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
+import StickyDetailCTA from "@/app/components/listing/listing-single/StickyDetailCTA";
 
 export async function generateMetadata({ params }) {
   try {
@@ -269,6 +270,9 @@ const MotorcyclePage = async ({ params }) => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
+
+      {/* Sticky Price + WhatsApp CTA */}
+      <StickyDetailCTA motorcycle={motorcycleData} />
     </div>
     // End wrapper
   );
