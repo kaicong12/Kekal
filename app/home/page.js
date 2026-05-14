@@ -1,10 +1,11 @@
-import HeroFilter from "@/app/components/common/HeroFilter";
 import MobileMenu from "@/app/components/common/MobileMenu";
 import WhyChoose from "@/app/components/common/WhyChoose";
 import FeaturedFilterListing from "@/app/components/home/FeaturedFilterListing";
 import Footer from "@/app/components/home/Footer";
 import Header from "@/app/components/home/Header";
 import Hero from "@/app/components/home/Hero";
+import QuickQuote from "@/app/components/home/QuickQuote";
+import StickyHomeCTA from "@/app/components/home/StickyHomeCTA";
 import Testimonial from "@/app/components/home/Testimonial";
 import Link from "next/link";
 
@@ -31,20 +32,21 @@ const Home = () => {
       </section>
       {/* End Hero Section */}
 
-      {/* How It Works with filter */}
-      <section className="whychose_us pb70 pt0">
+      {/* Quick Quote Wizard */}
+      <section className="pt30 pb70">
         <div className="container">
-          <div className="row mb20">
-            <div className="col-lg-10 m-auto">
-              <div className="advance_search_panel home2_style">
-                <div className="row">
-                  <HeroFilter />
-                </div>
-              </div>
+          <div className="row justify-content-center">
+            <div className="col-lg-8 col-md-10">
+              <QuickQuote />
             </div>
           </div>
-          {/* End .row */}
+        </div>
+      </section>
+      {/* End Quick Quote Wizard */}
 
+      {/* Why Choose Us */}
+      <section className="whychose_us pb70 pt0">
+        <div className="container">
           <div className="row mt100 justify-content-center">
             <div className="col-lg-8">
               <div className="main-title text-center">
@@ -128,6 +130,9 @@ const Home = () => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
+
+      {/* Sticky CTA */}
+      <StickyHomeCTA />
     </div>
     // End .body_home2_style
   );

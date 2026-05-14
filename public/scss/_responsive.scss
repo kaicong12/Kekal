@@ -4611,3 +4611,9 @@
     right: -15px;
   }
 }
+
+@media (max-width: 767px) {
+  .scrollToHome {
+    display: none;
+  }
+}

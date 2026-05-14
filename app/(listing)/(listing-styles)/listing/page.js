@@ -24,6 +24,9 @@ const ListingV1 = () => {
     ? parseInt(searchParams.get("price"))
     : null;
 
+  const maxPrice = searchParams.get("maxPrice") || null;
+  const minPrice = searchParams.get("minPrice") || null;
+
   const {
     brandOptions,
     selectedSort,
@@ -38,7 +41,7 @@ const ListingV1 = () => {
     currentPage,
     totalPages,
     setCurrentPage,
-  } = useMotorcycles(brandFilter, priceFilter, searchFromHome);
+  } = useMotorcycles(brandFilter, priceFilter, searchFromHome, { maxPrice, minPrice });
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm || "");
 
   return (

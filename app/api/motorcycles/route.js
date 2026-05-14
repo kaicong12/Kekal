@@ -12,6 +12,7 @@ export async function GET(request) {
     const sortOrder = searchParams.get("sortOrder") === "desc" ? "desc" : "asc";
     const brand = searchParams.get("brand");
     const maxPrice = searchParams.get("maxPrice");
+    const minPrice = searchParams.get("minPrice");
     const limitResult = searchParams.get("limit");
     const search = searchParams.get("search");
 
@@ -36,6 +37,18 @@ export async function GET(request) {
         });
       }
     }
+
+    if (minPrice) {
+      const parsedMinPrice = Number(minPrice);
+      if (Number.isFinite(parsedMinPrice) && parsedMinPrice > 0) {
+        filterOpt.push({
+          fieldToFilter: "price",
+          operator: ">=",
+          filterValue: parsedMinPrice,
+        });
+      }
+    }
+
 
     const result = await queryMotorcyclePg({
       sortedBy,
