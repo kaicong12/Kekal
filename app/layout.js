@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "aos/dist/aos.css";
 import "../public/scss/main.scss";
 import ClientLayout from "./components/ClientLayout";
@@ -6,6 +6,11 @@ import LocalBusinessSchema from "./components/seo/LocalBusinessSchema";
 import WebSiteSchema from "./components/seo/WebSiteSchema";
 
 const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata = {
   title: {
@@ -87,7 +92,7 @@ export default function RootLayout({ children }) {
         <LocalBusinessSchema />
         <WebSiteSchema />
       </head>
-      <body className={inter.className} cz-shortcut-listen="false">
+      <body className={`${inter.className} ${spaceGrotesk.variable}`} cz-shortcut-listen="false">
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

@@ -35,4 +35,13 @@ module.exports = [
       },
     ],
   },
+  {
+    label: "FAQ",
+    subMenu: [
+      {
+        label: "FAQ",
+        path: "/faq",
+      },
+    ],
+  },
 ];

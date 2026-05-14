@@ -47,6 +47,7 @@ const MobileMenu = () => {
     { label: "Our Services", path: "/service" },
     { label: "Contact", path: "/contact" },
     { label: "About Us", path: "/about-us" },
+    { label: "FAQ", path: "/faq" },
   ];
 
   return (

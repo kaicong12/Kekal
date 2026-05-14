@@ -1,0 +1,83 @@
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 28px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.headerLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  letter-spacing: 0.5px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.stepLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #999;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1.5px solid #E0E0E0;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.chip:hover {
+  border-color: #999;
+}
+
+.chipActive {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+
+.ctaButton {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: #FF5722;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  margin-top: 4px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ctaButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

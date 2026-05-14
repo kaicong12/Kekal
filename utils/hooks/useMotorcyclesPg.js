@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 
-export const useMotorcyclesPg = (makeFilter, priceFilter, initialSearchTerm) => {
+export const useMotorcyclesPg = (makeFilter, priceFilter, initialSearchTerm, { maxPrice: directMaxPrice, minPrice: directMinPrice } = {}) => {
   const [motorcycles, setMotorcycles] = useState([]);
   const [paginatedMotorcycles, setPaginatedMotorcycles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -70,7 +70,9 @@ export const useMotorcyclesPg = (makeFilter, priceFilter, initialSearchTerm) => 
       params.set("brand", selectedBrand);
     }
 
-    if (priceFilter && priceFilter !== 0) {
+    if (directMaxPrice) {
+      params.set("maxPrice", directMaxPrice);
+    } else if (priceFilter && priceFilter !== 0) {
       let maxPrice;
       switch (priceFilter) {
         case 2:
@@ -90,12 +92,16 @@ export const useMotorcyclesPg = (makeFilter, priceFilter, initialSearchTerm) => 
       }
     }
 
+    if (directMinPrice) {
+      params.set("minPrice", directMinPrice);
+    }
+
     if (searchTerm?.trim()) {
       params.set("search", searchTerm.trim());
     }
 
     return params.toString();
-  }, [selectedBrand, selectedSort, priceFilter, searchTerm]);
+  }, [selectedBrand, selectedSort, priceFilter, searchTerm, directMaxPrice, directMinPrice]);
 
   useEffect(() => {
     const fetchMotorcycles = async () => {
