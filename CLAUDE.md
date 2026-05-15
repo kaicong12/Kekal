@@ -61,3 +61,15 @@ Hybrid: Bootstrap 5 (grid/utilities), Ant Design (admin components), SCSS (`publ
 ## Environment Variables
 
 See `.env.example` for required variables: Firebase config, DATABASE_URL, Gmail OAuth credentials.
+
+## Playwright / Dev Server Verification
+
+When verifying UI changes with Playwright:
+
+1. **Check if a dev server is already running** before starting one. Use `lsof -ti:3000` to check port 3000. If it's already up, use that session — do not start a new one.
+2. **Only start `yarn dev` if no server is running.** If you do start one, you must kill it when done:
+   ```bash
+   lsof -ti:3000 | xargs kill -9 2>/dev/null; lsof -ti:3001 | xargs kill -9 2>/dev/null
+   ```
+3. **Never leave behind a dev server you started.** If the server was already running before your task, leave it running. Only clean up what you spawned.
+4. **Clean up screenshot files** generated during verification (remove any `.png`/`.jpeg` files created in the project root).

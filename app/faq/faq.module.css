@@ -1,6 +1,6 @@
 .faqSection {
   background: #F7F4EE;
-  padding: 60px 0 80px;
+  padding: 100px 0 80px;
   min-height: 60vh;
 }
 
@@ -171,7 +171,7 @@
 
 @media (max-width: 767px) {
   .faqSection {
-    padding: 30px 0 60px;
+    padding: 80px 0 60px;
   }
 
   .heading {

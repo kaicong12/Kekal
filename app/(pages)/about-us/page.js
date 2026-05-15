@@ -7,6 +7,7 @@ import WhyChoose from "@/app/components/common/WhyChoose";
 import Testimonial from "@/app/components/common/Testimonial";
 import Map from "@/app/components/common/Map";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
+import styles from "./about.module.css";
 
 export const metadata = {
   title: "Tentang Kami - Kedai Motor Johor Jaya | Perniagaan Motor Kekal",
@@ -27,7 +28,7 @@ export const metadata = {
 
 const AboutUs = () => {
   return (
-    <div className="wrapper">
+    <div className={`wrapper ${styles.aboutPage}`}>
       {/* header top */}
       <HeaderTop />
       {/* End header top */}
@@ -40,31 +41,9 @@ const AboutUs = () => {
       <MobileMenu />
       {/* End Main Header Nav For Mobile */}
 
-      {/* Inner Page Breadcrumb */}
-      <section className="inner_page_breadcrumb">
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="breadcrumb_content">
-                <h2 className="breadcrumb_title">About Us</h2>
-                <p className="subtitle">About Us</p>
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="/#">Home</a>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    <a href="#">About Us</a>
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Inner Page Breadcrumb */}
 
       {/* About Text Content */}
-      <section className="about-section pb130">
+      <section className="about-section pb130 bgc-f9">
         <div className="container">
           <div className="row">
             <AboutTextBlock />
@@ -91,7 +70,7 @@ const AboutUs = () => {
       {/* End Why Chose Us */}
 
       {/* Testimonials  */}
-      <section className="our-testimonials-home1 pt120">
+      <section className="our-testimonials-home1 pt120 bgc-f9">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8">
@@ -111,35 +90,41 @@ const AboutUs = () => {
       </section>
       {/* End Testimonials  */}
 
-      <div className="user_profile_location">
-        <h4 className="title">Location</h4>
-        <div className="property_sp_map mb40">
-          <div className="h400 bdrs8 map_in" id="map-canvas">
-            <Map />
+      <section className="user_profile_location">
+        <div className="container">
+          <h4 className="title">Location</h4>
+          <div className="property_sp_map mb40">
+            <div className="h400 bdrs8 map_in" id="map-canvas">
+              <Map />
+            </div>
+          </div>
+          <div className="upl_content d-block d-md-flex">
+            <p className="float-start fn-sm mb20-sm">
+              <span className="fas fa-map-marker-alt pr10 vam" />
+              5, Jln Seroja 49, Taman Johor Bahru, 81100 Johor Bahru, Johor
+            </p>
+            <a
+              href="https://maps.app.goo.gl/a9Fs6RkRSR8dnnsE9"
+              className="btn location_btn"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              target="_blank"
+            >
+              Get Direction
+            </a>
           </div>
         </div>
-        <div className="upl_content d-block d-md-flex">
-          <p className="float-start fn-sm mb20-sm">
-            <span className="fas fa-map-marker-alt pr10 vam" />
-            5, Jln Seroja 49, Taman Johor Bahru, 81100 Johor Bahru, Johor
-          </p>
-          <a
-            href="https://maps.app.goo.gl/a9Fs6RkRSR8dnnsE9"
-            className="btn location_btn"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            target="_blank"
-          >
-            Get Direction
-          </a>
-        </div>
-      </div>
+      </section>
       {/* End Location */}
 
-      <ReviewBox />
+      <section className="bgc-f9">
+        <div className="container">
+          <ReviewBox />
+        </div>
+      </section>
       {/* End ReviewBox */}
 
       {/* Our Footer */}
