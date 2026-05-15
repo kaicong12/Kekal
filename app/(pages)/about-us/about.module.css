@@ -1,0 +1,15 @@
+.aboutPage :global(h2),
+.aboutPage :global(h4),
+.aboutPage :global(.about_content .title) {
+  font-family: var(--font-display), sans-serif;
+}
+
+.aboutPage :global(.about-section) {
+  padding-top: 80px;
+}
+
+@media (max-width: 767px) {
+  .aboutPage :global(.about-section) {
+    padding-top: 60px;
+  }
+}
