@@ -2396,6 +2396,10 @@
   .inner_page_breadcrumb.style2 {
     padding: 20px 0 !important;
   }
+  .inner_page_breadcrumb .breadcrumb_content .breadcrumb {
+    float: none;
+    margin-top: 10px;
+  }
   .main-title h2 {
     font-size: 26px;
   }
