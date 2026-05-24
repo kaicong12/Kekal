@@ -8,16 +8,17 @@ on:
 
 jobs:
   scrape:
-    name: Scrape & ingest (${{ matrix.environment }})
+    name: Scrape catalog (once)
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        environment: [staging, production]
+    outputs:
+      sync_file_url: ${{ steps.run-scrape.outputs.url }}
 
+    # Scrape runs against the staging DB + sandbox Firebase bucket. It
+    # uploads the JSON snapshot, registers a ProductSyncFile row in staging,
+    # and exposes the public URL so the prod ingest can reuse the same file.
     env:
-      DATABASE_URL: ${{ matrix.environment == 'staging' && secrets.STAGING_DATABASE_URL || secrets.DATABASE_URL }}
-      NODE_ENV: ${{ matrix.environment == 'production' && 'production' || 'development' }}
+      DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+      NODE_ENV: development
 
     steps:
       - uses: actions/checkout@v4
@@ -28,32 +29,57 @@ jobs:
           cache: "yarn"
 
       - run: yarn install --frozen-lockfile
+      - run: npx prisma generate
 
-      - name: Generate Prisma client
-        run: npx prisma generate
-
-      - name: Write Firebase service account JSON
+      - name: Write Firebase sandbox service account
         env:
           FIREBASE_SANDBOX_KEY_JSON: ${{ secrets.FIREBASE_SANDBOX_KEY_JSON }}
-          FIREBASE_PROD_KEY_JSON: ${{ secrets.FIREBASE_PROD_KEY_JSON }}
         run: |
           mkdir -p utils/keys
-          if [ "${{ matrix.environment }}" = "production" ]; then
-            printf '%s' "$FIREBASE_PROD_KEY_JSON" > utils/keys/prod_privateKey.json
-          else
-            printf '%s' "$FIREBASE_SANDBOX_KEY_JSON" > utils/keys/sandbox_privateKey.json
-          fi
+          printf '%s' "$FIREBASE_SANDBOX_KEY_JSON" > utils/keys/sandbox_privateKey.json
 
-      # cd into utils/scripts/ so the script's CWD-relative
-      # `../keys/...` path resolves to repo's utils/keys/
-      - name: Scrape catalog and upload snapshot
+      # `working-directory` makes the script's CWD-relative `../keys/...`
+      # path resolve to `utils/keys/`.
+      - id: run-scrape
+        name: Scrape and upload snapshot
         working-directory: utils/scripts
-        run: node scrape-motorcycles.mjs
+        run: |
+          node scrape-motorcycles.mjs | tee scrape.log
+          URL=$(grep -oE 'https://storage\.googleapis\.com/[^ ]+\.json' scrape.log | tail -1)
+          if [ -z "$URL" ]; then
+            echo "Failed to capture uploaded URL from scrape output" >&2
+            exit 1
+          fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Captured sync file URL: $URL"
 
-      - name: Ingest snapshot into database
+      - if: always()
+        run: rm -f utils/keys/sandbox_privateKey.json
+
+  ingest:
+    name: Ingest (${{ matrix.environment }})
+    needs: scrape
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: [staging, production]
+
+    env:
+      DATABASE_URL: ${{ matrix.environment == 'staging' && secrets.STAGING_DATABASE_URL || secrets.DATABASE_URL }}
+      SYNC_FILE_URL: ${{ needs.scrape.outputs.sync_file_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - run: yarn install --frozen-lockfile
+      - run: npx prisma generate
+
+      - name: Ingest snapshot
         working-directory: utils/scripts
         run: node ingest-motorcycles.mjs
-
-      - name: Cleanup service account files
-        if: always()
-        run: rm -f utils/keys/prod_privateKey.json utils/keys/sandbox_privateKey.json

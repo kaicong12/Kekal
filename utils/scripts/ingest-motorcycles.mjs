@@ -116,6 +116,30 @@ async function ingestFile(syncFile) {
 async function main() {
   console.log("Starting motorcycle ingestion...");
 
+  // If SYNC_FILE_URL is provided (e.g. from CI), register/re-queue it so the
+  // same scrape output can be ingested into multiple databases without
+  // re-scraping. filePath is unique, so upsert-by-find handles repeats.
+  const externalUrl = process.env.SYNC_FILE_URL;
+  if (externalUrl) {
+    const existing = await prisma.productSyncFile.findUnique({
+      where: { filePath: externalUrl },
+    });
+    if (!existing) {
+      await prisma.productSyncFile.create({
+        data: { filePath: externalUrl, isProcessed: false },
+      });
+      console.log(`Registered sync file: ${externalUrl}`);
+    } else if (existing.isProcessed) {
+      await prisma.productSyncFile.update({
+        where: { id: existing.id },
+        data: { isProcessed: false },
+      });
+      console.log(`Re-queued sync file: ${externalUrl}`);
+    } else {
+      console.log(`Sync file already pending: ${externalUrl}`);
+    }
+  }
+
   const unprocessed = await prisma.productSyncFile.findMany({
     where: { isProcessed: false },
     orderBy: { createdAt: "asc" },
