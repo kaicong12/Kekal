@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { createRequire } from "module";
+import { resolveEngineCapacity } from "./lib/engineCapacity.mjs";
 
 const require = createRequire(import.meta.url);
 const { prisma } = require("../../prisma/client.js");
@@ -43,6 +44,9 @@ async function ingestFile(syncFile) {
       continue;
     }
 
+    // Validate engineCapacity: spec.Performance.Displacement wins over the scraped field
+    const engineCapacity = resolveEngineCapacity(moto.specification, moto.engineCapacity);
+
     try {
       // Upsert motorcycle — idempotent via unique constraint (brand, name, year)
       const result = await prisma.motorcycle.upsert({
@@ -57,7 +61,7 @@ async function ingestFile(syncFile) {
           model: moto.model,
           price: moto.price,
           engine: moto.engine,
-          engineCapacity: moto.engineCapacity,
+          engineCapacity,
           gear: moto.gear,
           color: moto.color,
           tags: moto.tags || null,
@@ -71,7 +75,7 @@ async function ingestFile(syncFile) {
           year: moto.year,
           price: moto.price,
           engine: moto.engine,
-          engineCapacity: moto.engineCapacity,
+          engineCapacity,
           gear: moto.gear,
           color: moto.color,
           tags: moto.tags || null,

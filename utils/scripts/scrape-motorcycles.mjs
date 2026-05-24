@@ -3,16 +3,19 @@ import * as cheerio from "cheerio";
 import { createRequire } from "module";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { initializeApp, cert } from "firebase-admin/app";
 import { getStorage } from "firebase-admin/storage";
+import { resolveEngineCapacity } from "./lib/engineCapacity.mjs";
 
 const require = createRequire(import.meta.url);
 const { prisma } = require("../../prisma/client.js");
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === "production";
 const serviceAccountPath = isProd
-  ? path.resolve("../keys/prod_privateKey.json")
-  : path.resolve("../keys/sandbox_privateKey.json");
+  ? path.resolve(__dirname, "../keys/prod_privateKey.json")
+  : path.resolve(__dirname, "../keys/sandbox_privateKey.json");
   
 const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf-8"));
 const storageBucket = isProd
@@ -220,11 +223,8 @@ async function scrapeAllPages() {
 
       const { brand, name, year } = parseTitleParts(listing.title);
 
-      // Engine capacity: prefer listing CC, fall back to detail page Displacement
-      let engineCapacity = parseCC(listing.cc);
-      if (engineCapacity === 0 && detail.specification?.Performance?.Displacement) {
-        engineCapacity = parseCC(detail.specification.Performance.Displacement);
-      }
+      // Engine capacity: spec.Performance.Displacement is source of truth; fall back to listing CC
+      const engineCapacity = resolveEngineCapacity(detail.specification, parseCC(listing.cc));
 
       const engine = listing.engine || detail.specification?.Performance?.Engine || "";
       const gear = listing.transmission || detail.specification?.Performance?.Transmission || "";
