@@ -1,0 +1,59 @@
+name: Scrape & Ingest Motorcycle Catalog
+
+on:
+  schedule:
+    # Weekly on Sunday 00:00 UTC (08:00 Asia/Singapore Sunday morning)
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    name: Scrape & ingest (${{ matrix.environment }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: [staging, production]
+
+    env:
+      DATABASE_URL: ${{ matrix.environment == 'staging' && secrets.STAGING_DATABASE_URL || secrets.DATABASE_URL }}
+      NODE_ENV: ${{ matrix.environment == 'production' && 'production' || 'development' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - run: yarn install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Write Firebase service account JSON
+        env:
+          FIREBASE_SANDBOX_KEY_JSON: ${{ secrets.FIREBASE_SANDBOX_KEY_JSON }}
+          FIREBASE_PROD_KEY_JSON: ${{ secrets.FIREBASE_PROD_KEY_JSON }}
+        run: |
+          mkdir -p utils/keys
+          if [ "${{ matrix.environment }}" = "production" ]; then
+            printf '%s' "$FIREBASE_PROD_KEY_JSON" > utils/keys/prod_privateKey.json
+          else
+            printf '%s' "$FIREBASE_SANDBOX_KEY_JSON" > utils/keys/sandbox_privateKey.json
+          fi
+
+      # cd into utils/scripts/ so the script's CWD-relative
+      # `../keys/...` path resolves to repo's utils/keys/
+      - name: Scrape catalog and upload snapshot
+        working-directory: utils/scripts
+        run: node scrape-motorcycles.mjs
+
+      - name: Ingest snapshot into database
+        working-directory: utils/scripts
+        run: node ingest-motorcycles.mjs
+
+      - name: Cleanup service account files
+        if: always()
+        run: rm -f utils/keys/prod_privateKey.json utils/keys/sandbox_privateKey.json
