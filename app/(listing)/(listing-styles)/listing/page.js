@@ -7,6 +7,7 @@ import HeaderTop from "@/app/components/common/HeaderTop";
 import MobileMenu from "@/app/components/common/MobileMenu";
 import Pagination from "@/app/components/common/Pagination";
 import SearchAndFilters from "@/app/components/listing/SearchAndFilters";
+import FilterPills from "@/app/components/listing/FilterPills";
 import EmptyState from "@/app/components/listing/EmptyState";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
 
@@ -26,6 +27,8 @@ const ListingV1 = () => {
 
   const maxPrice = searchParams.get("maxPrice") || null;
   const minPrice = searchParams.get("minPrice") || null;
+  const minCC = searchParams.get("minCC") || null;
+  const maxCC = searchParams.get("maxCC") || null;
 
   const {
     brandOptions,
@@ -41,7 +44,7 @@ const ListingV1 = () => {
     currentPage,
     totalPages,
     setCurrentPage,
-  } = useMotorcycles(brandFilter, priceFilter, searchFromHome, { maxPrice, minPrice });
+  } = useMotorcycles(brandFilter, priceFilter, searchFromHome, { maxPrice, minPrice, minCC, maxCC });
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm || "");
 
   return (
@@ -92,6 +95,7 @@ const ListingV1 = () => {
         <div className="container">
           <div className="row mb15">
             <div className="col-12">
+              <FilterPills />
               <div className="page_control_shorting left_area tac-sm mb15-767 mt15">
                 <p>
                   We found{" "}
