@@ -13,6 +13,8 @@ export async function GET(request) {
     const brand = searchParams.get("brand");
     const maxPrice = searchParams.get("maxPrice");
     const minPrice = searchParams.get("minPrice");
+    const maxCC = searchParams.get("maxCC");
+    const minCC = searchParams.get("minCC");
     const limitResult = searchParams.get("limit");
     const search = searchParams.get("search");
 
@@ -49,6 +51,27 @@ export async function GET(request) {
       }
     }
 
+    if (maxCC) {
+      const parsedMaxCC = Number(maxCC);
+      if (Number.isFinite(parsedMaxCC) && parsedMaxCC > 0) {
+        filterOpt.push({
+          fieldToFilter: "engineCapacity",
+          operator: "<",
+          filterValue: parsedMaxCC,
+        });
+      }
+    }
+
+    if (minCC) {
+      const parsedMinCC = Number(minCC);
+      if (Number.isFinite(parsedMinCC) && parsedMinCC > 0) {
+        filterOpt.push({
+          fieldToFilter: "engineCapacity",
+          operator: ">=",
+          filterValue: parsedMinCC,
+        });
+      }
+    }
 
     const result = await queryMotorcyclePg({
       sortedBy,

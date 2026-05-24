@@ -10,9 +10,29 @@ const BUDGET_OPTIONS = [
   { label: "RM 30k+", minPrice: 30000 },
 ];
 
+const LICENSE_OPTIONS = [
+  { label: "All" },
+  { label: "B Full", minCC: 500 },
+  { label: "B2", maxCC: 500 },
+];
+
+function buildFilterParams(budget, license) {
+  const params = new URLSearchParams();
+  if (budget) {
+    if (budget.maxPrice) params.set("maxPrice", budget.maxPrice);
+    if (budget.minPrice) params.set("minPrice", budget.minPrice);
+  }
+  if (license) {
+    if (license.minCC) params.set("minCC", license.minCC);
+    if (license.maxCC) params.set("maxCC", license.maxCC);
+  }
+  return params;
+}
+
 export default function QuickQuote() {
   const router = useRouter();
   const [selectedBudget, setSelectedBudget] = useState(null);
+  const [selectedLicense, setSelectedLicense] = useState(0);
   const [matchCount, setMatchCount] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -24,10 +44,10 @@ export default function QuickQuote() {
 
     const fetchCount = async () => {
       setLoading(true);
-      const params = new URLSearchParams();
-      const budget = BUDGET_OPTIONS[selectedBudget];
-      if (budget.maxPrice) params.set("maxPrice", budget.maxPrice);
-      if (budget.minPrice) params.set("minPrice", budget.minPrice);
+      const params = buildFilterParams(
+        BUDGET_OPTIONS[selectedBudget],
+        LICENSE_OPTIONS[selectedLicense]
+      );
 
       try {
         const res = await fetch(`/api/motorcycles/count?${params.toString()}`);
@@ -41,15 +61,13 @@ export default function QuickQuote() {
     };
 
     fetchCount();
-  }, [selectedBudget]);
+  }, [selectedBudget, selectedLicense]);
 
   const handleSeeMatches = () => {
-    const params = new URLSearchParams();
-    if (selectedBudget !== null) {
-      const budget = BUDGET_OPTIONS[selectedBudget];
-      if (budget.maxPrice) params.set("maxPrice", budget.maxPrice);
-      if (budget.minPrice) params.set("minPrice", budget.minPrice);
-    }
+    const params = buildFilterParams(
+      selectedBudget !== null ? BUDGET_OPTIONS[selectedBudget] : null,
+      LICENSE_OPTIONS[selectedLicense]
+    );
     router.push(`/listing?${params.toString()}`);
   };
 
@@ -67,6 +85,21 @@ export default function QuickQuote() {
               key={opt.label}
               onClick={() => setSelectedBudget(i === selectedBudget ? null : i)}
               className={`${styles.chip} ${selectedBudget === i ? styles.chipActive : ""}`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <p className={styles.stepLabel}>LICENSE</p>
+        <div className={styles.chipRow}>
+          {LICENSE_OPTIONS.map((opt, i) => (
+            <button
+              key={opt.label}
+              onClick={() => setSelectedLicense(i)}
+              className={`${styles.chip} ${selectedLicense === i ? styles.chipActive : ""}`}
             >
               {opt.label}
             </button>

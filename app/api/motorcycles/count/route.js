@@ -6,6 +6,8 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const maxPrice = searchParams.get("maxPrice");
     const minPrice = searchParams.get("minPrice");
+    const minCC = searchParams.get("minCC");
+    const maxCC = searchParams.get("maxCC");
 
     const where = {};
 
@@ -13,6 +15,12 @@ export async function GET(request) {
       where.price = {};
       if (maxPrice) where.price.lte = Number(maxPrice);
       if (minPrice) where.price.gte = Number(minPrice);
+    }
+
+    if (minCC || maxCC) {
+      where.engineCapacity = {};
+      if (minCC) where.engineCapacity.gte = Number(minCC);
+      if (maxCC) where.engineCapacity.lt = Number(maxCC);
     }
 
     const count = await prisma.motorcycle.count({ where });

@@ -43,6 +43,38 @@ npx prisma migrate dev # Run migrations
 npx prisma studio      # Database GUI
 ```
 
+## Motorcycle catalog: scrape & ingest
+
+The catalog is populated by a two-step pipeline. The scraper writes a snapshot
+to Firebase Storage and records a `ProductSyncFile` row; the ingester reads
+unprocessed files and upserts them into Postgres.
+
+Prerequisites:
+
+- `DATABASE_URL` set in `.env`
+- Firebase service account JSON at `utils/keys/sandbox_privateKey.json`
+  (or `utils/keys/prod_privateKey.json` when `NODE_ENV=production`)
+
+Run both commands from the project root:
+
+```bash
+# 1. Scrape motomalaysia.com and upload a JSON snapshot to Firebase Storage.
+#    Flags:
+#      --test       only scrape the first listing page
+#      --test-one   only scrape a single motorcycle (smoke test)
+node utils/scripts/scrape-motorcycles.mjs
+node utils/scripts/scrape-motorcycles.mjs --test-one
+
+# 2. Ingest every unprocessed sync file into Postgres (idempotent upsert
+#    keyed on brand+name+year). Marks files as processed when done.
+node utils/scripts/ingest-motorcycles.mjs
+```
+
+`engineCapacity` is resolved from `specification.Performance.Displacement` and
+only falls back to the listing CC when displacement is unavailable — the
+listing field has been observed to contain truncated values. The same
+validation runs in both the scraper and the ingester.
+
 ## Project Structure
 
 ```
