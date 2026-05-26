@@ -67,6 +67,21 @@ const FAQ_DATA = {
 
 const CATEGORIES = Object.keys(FAQ_DATA);
 
+const faqSchemaData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: Object.values(FAQ_DATA)
+    .flat()
+    .map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+};
+
 export default function FAQPage() {
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0]);
   const [openIndex, setOpenIndex] = useState(0);
@@ -75,6 +90,10 @@ export default function FAQPage() {
 
   return (
     <div className="wrapper">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }}
+      />
       <HeaderTop />
       <DefaultHeader />
       <MobileMenu />
