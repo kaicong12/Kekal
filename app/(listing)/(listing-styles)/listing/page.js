@@ -10,6 +10,7 @@ import SearchAndFilters from "@/app/components/listing/SearchAndFilters";
 import FilterPills from "@/app/components/listing/FilterPills";
 import EmptyState from "@/app/components/listing/EmptyState";
 import CarItems from "@/app/components/listing/listing-styles/listing-v1/CarItems";
+import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 
 import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
 import { Spin } from "antd";
@@ -159,6 +160,9 @@ const ListingV1 = () => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
+
+      {/* Sticky CTA */}
+      <StickyHomeCTA />
     </div>
     // End wrapper
   );

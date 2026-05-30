@@ -4,6 +4,7 @@ import DefaultHeader from "@/app/components/common/DefaultHeader";
 import HeaderTop from "@/app/components/common/HeaderTop";
 import MobileMenu from "@/app/components/common/MobileMenu";
 import Footer from "@/app/components/common/Footer";
+import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 import styles from "./faq.module.css";
 
 const FAQ_DATA = {
@@ -153,6 +154,9 @@ export default function FAQPage() {
       </section>
 
       <Footer />
+
+      {/* Sticky CTA */}
+      <StickyHomeCTA />
     </div>
   );
 }
