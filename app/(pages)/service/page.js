@@ -6,6 +6,7 @@ import ListWithImage from "@/app/components/pages/service/ListWithImage";
 import ServiceBlock from "@/app/components/pages/service/ServiceBlock";
 import ScheduleService from "@/app/components/pages/service/ScheduleService";
 import ServiceHours from "@/app/components/pages/service/ServiceHours";
+import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 
 export const metadata = {
   title: "Servis Motor Johor Bahru - Yamaha, Kawasaki Service Center",
@@ -112,6 +113,9 @@ const Service = () => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
+
+      {/* Sticky CTA */}
+      <StickyHomeCTA />
     </div>
     // End wrapper
   );

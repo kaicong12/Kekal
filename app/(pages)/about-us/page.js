@@ -7,6 +7,7 @@ import WhyChoose from "@/app/components/common/WhyChoose";
 import Testimonial from "@/app/components/common/Testimonial";
 import Map from "@/app/components/common/Map";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
+import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 import styles from "./about.module.css";
 
 export const metadata = {
@@ -130,6 +131,9 @@ const AboutUs = () => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
+
+      {/* Sticky CTA */}
+      <StickyHomeCTA />
     </div>
     // End wrapper
   );
