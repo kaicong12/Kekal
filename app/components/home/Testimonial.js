@@ -1,32 +1,9 @@
-import Image from "next/image";
+import InitialsAvatar from "@/app/components/common/InitialsAvatar";
+import StarRating from "@/app/components/common/StarRating";
+import reviewsData from "@/app/data/testimonials.json";
 
 const Testimonial = () => {
-  const testimonialsData = [
-    {
-      id: "1",
-      name: "Rajesh Kumar",
-      role: "Professional Rider",
-      imageSrc: "/images/testimonial/avatar-rk.svg",
-      quote:
-        "As a professional delivery rider, I depend on my motorcycle daily. This shop has kept my Honda Wave running perfectly for over 3 years. Their maintenance service is exceptional and they always use genuine parts. The team understands the demands of commercial riding!",
-    },
-    {
-      id: "2",
-      name: "Chen Siew Fong",
-      role: "Motorcycle Collector",
-      imageSrc: "/images/testimonial/avatar-cs.svg",
-      quote:
-        "I own several vintage motorcycles and finding the right parts can be challenging. This shop has an incredible network and always manages to source exactly what I need. Their expertise with classic bikes is unmatched - they've restored my 1985 Kawasaki Ninja to perfection!",
-    },
-    {
-      id: "3",
-      name: "Sharifah Amina",
-      role: "Adventure Rider",
-      imageSrc: "/images/testimonial/avatar-sa.svg",
-      quote:
-        "Before my long-distance touring trips, I always bring my BMW GS here for a complete check-up. Their attention to detail gives me confidence on the road. They've equipped my bike with the best touring accessories and their advice on gear selection is invaluable for adventure riding!",
-    },
-  ];
+  const testimonialsData = reviewsData.reviews;
 
   return (
     <>
@@ -36,19 +13,37 @@ const Testimonial = () => {
         data-aos-delay="100"
       >
         <div className="tab-content" id="pills-tabContent2">
-          {testimonialsData.map((testimonial) => (
+          {testimonialsData.map((testimonial, i) => (
             <div
-              key={testimonial.id}
-              className={`tab-pane fade ${
-                testimonial.id === "2" ? "show active" : ""
-              }`}
-              id={`pills-${testimonial.id}`}
+              key={i}
+              className={`tab-pane fade ${i === 0 ? "show active" : ""}`}
+              id={`pills-${i}`}
               role="tabpanel"
-              aria-labelledby={`pills-${testimonial.id}-tab`}
+              aria-labelledby={`pills-${i}-tab`}
             >
               <div className="testimonial_post_home2 text-center">
                 <div className="details">
-                  <p>{testimonial.quote}</p>
+                  <div className="mb15">
+                    <StarRating rating={testimonial.rating} />
+                  </div>
+                  <p lang={testimonial.languageCode}>{testimonial.text}</p>
+                  <a
+                    href={testimonial.reviewUri || reviewsData.googleMapsUri}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                      fontSize: 13,
+                      color: "#6b7280",
+                    }}
+                  >
+                    <span className="fab fa-google" /> Posted on Google
+                    {testimonial.relativeTime
+                      ? ` · ${testimonial.relativeTime}`
+                      : ""}
+                  </a>
                 </div>
               </div>
             </div>
@@ -61,30 +56,30 @@ const Testimonial = () => {
           id="pills-tab2"
           role="tablist"
         >
-          {testimonialsData.map((testimonial) => (
-            <li className="nav-item" role="presentation" key={testimonial.id}>
+          {testimonialsData.map((testimonial, i) => (
+            <li className="nav-item" role="presentation" key={i}>
               <a
-                className={`nav-link ${testimonial.id === "2" ? "active" : ""}`}
-                id={`pills-${testimonial.id}-tab`}
+                className={`nav-link ${i === 0 ? "active" : ""}`}
+                id={`pills-${i}-tab`}
                 data-bs-toggle="pill"
-                href={`#pills-${testimonial.id}`}
+                href={`#pills-${i}`}
                 role="tab"
-                aria-controls={`pills-${testimonial.id}`}
-                aria-selected={testimonial.id === "2" ? "true" : "false"}
+                aria-controls={`pills-${i}`}
+                aria-selected={i === 0 ? "true" : "false"}
               >
-                <div className="thumb d-inline-flex">
-                  <Image
-                    width={70}
-                    height={70}
-                    priority
-                    className="rounded-circle"
-                    src={testimonial.imageSrc}
-                    alt={testimonial.name}
+                <div
+                  className="thumb d-inline-flex"
+                  style={{ alignItems: "center", gap: 16, textAlign: "left" }}
+                >
+                  <InitialsAvatar
+                    name={testimonial.author}
+                    initials={testimonial.initials}
                   />
-                  <h4 className="title">
-                    {testimonial.name}
-                    <br />
-                    <small>{testimonial.role}</small>
+                  <h4 className="title" style={{ margin: 0 }}>
+                    {testimonial.author}
+                    <span style={{ display: "block", marginTop: 4 }}>
+                      <small>{testimonial.relativeTime}</small>
+                    </span>
                   </h4>
                 </div>
               </a>

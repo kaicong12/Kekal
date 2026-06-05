@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test:e2e": "playwright test",
+    "reviews:fetch": "node utils/scripts/fetch-reviews.mjs",
     "prepare": "husky"
   },
   "dependencies": {

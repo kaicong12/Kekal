@@ -1,0 +1,61 @@
+{
+  "placeId": "ChIJfZsu_RRs2jER3pOUeexSuSQ",
+  "placeName": "Perniagaan Motor Kekal",
+  "rating": 4.3,
+  "userRatingCount": 31,
+  "googleMapsUri": "https://maps.google.com/?cid=2646237431662416862&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+  "fetchedAt": "2026-06-05T09:13:28.230Z",
+  "source": "Google Places API",
+  "reviews": [
+    {
+      "author": "Haikal Carlos",
+      "initials": "HC",
+      "rating": 5,
+      "text": "I've got a nice ride from this shop",
+      "languageCode": "en",
+      "textEn": "I've got a nice ride from this shop",
+      "relativeTime": "4 years ago",
+      "reviewUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURXbXZDeHJBRRAB!2m1!1s0x31da6c14fd2e9b7d:0x24b952ec799493de"
+    },
+    {
+      "author": "Norhisham Hassan",
+      "initials": "NH",
+      "rating": 4,
+      "text": "Senang berurusan.. Loan motor baru mudah lulus",
+      "languageCode": "ms",
+      "textEn": "Easy to deal with.. New motor loan is easy to pass",
+      "relativeTime": "4 years ago",
+      "reviewUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURhcHQtc3p3RRAB!2m1!1s0x31da6c14fd2e9b7d:0x24b952ec799493de"
+    },
+    {
+      "author": "zamri zamri",
+      "initials": "ZZ",
+      "rating": 5,
+      "text": "Layanan dengan costemer bagus",
+      "languageCode": "ms",
+      "textEn": "Good customer service",
+      "relativeTime": "6 years ago",
+      "reviewUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUNrNmR5Rmp3RRAB!2m1!1s0x31da6c14fd2e9b7d:0x24b952ec799493de"
+    },
+    {
+      "author": "MIOW KIUM LEE",
+      "initials": "MK",
+      "rating": 4,
+      "text": "服務好。",
+      "languageCode": "zh-Hant",
+      "textEn": "Good service.",
+      "relativeTime": "7 years ago",
+      "reviewUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUNvODhHXzlnRRAB!2m1!1s0x31da6c14fd2e9b7d:0x24b952ec799493de"
+    },
+    {
+      "author": "kit lee",
+      "initials": "KL",
+      "rating": 5,
+      "text": "很好说话的老板",
+      "languageCode": "zh",
+      "textEn": "A very easy-going boss",
+      "relativeTime": "4 years ago",
+      "reviewUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURXM3FIWDZBRRAB!2m1!1s0x31da6c14fd2e9b7d:0x24b952ec799493de"
+    }
+  ]
+}
