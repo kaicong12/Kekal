@@ -2,38 +2,11 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/swiper-bundle.css";
-import Image from "next/image";
+import InitialsAvatar from "./InitialsAvatar";
+import StarRating from "./StarRating";
+import reviewsData from "@/app/data/testimonials.json";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Ahmad Fauzi",
-    title: "Motorcycle Enthusiast",
-    text: "Outstanding service and genuine parts! I've been riding for 15 years and this is the best motorcycle shop I've ever dealt with. They helped me find the perfect exhaust system for my Yamaha R1 and the installation was flawless.",
-    image: "/images/testimonial/avatar-af.svg",
-  },
-  {
-    id: 2,
-    name: "Nurul Aina",
-    title: "Daily Commuter",
-    text: "My Honda CB650R needed urgent repairs and they had me back on the road the same day. The staff really knows their motorcycles and the prices are very reasonable. I wouldn't trust my bike with anyone else!",
-    image: "/images/testimonial/avatar-na.svg",
-  },
-  {
-    id: 3,
-    name: "Raj Kumar Selvam",
-    title: "Motorcycle Enthusiast",
-    text: "Incredible selection of motorcycle gear and accessories! From helmets to riding jackets, they have everything a rider needs. The quality is top-notch and their advice on safety gear is invaluable.",
-    image: "/images/testimonial/avatar-rs.svg",
-  },
-  {
-    id: 4,
-    name: "Tan Mei Ling",
-    title: "Daily Commuter",
-    text: "Fast shipping and excellent customer service. Ordered brake pads online and they arrived within 2 days. The online store is easy to navigate and they have detailed product descriptions that helped me choose the right parts.",
-    image: "/images/testimonial/avatar-tm.svg",
-  },
-];
+const testimonials = reviewsData.reviews;
 
 const Testimonial = () => {
   return (
@@ -64,27 +37,44 @@ const Testimonial = () => {
           },
         }}
       >
-        {testimonials.map((testimonial) => (
-          <SwiperSlide key={testimonial.id}>
+        {testimonials.map((testimonial, i) => (
+          <SwiperSlide key={i}>
             <div className="testimonial_box">
-              <div className="thumb">
-                <Image
-                  width={70}
-                  height={70}
-                  className="rounded-circle"
-                  src={testimonial.image}
-                  alt={testimonial.name}
+              <div
+                className="thumb"
+                style={{ display: "flex", alignItems: "center", gap: 16 }}
+              >
+                <InitialsAvatar
+                  name={testimonial.author}
+                  initials={testimonial.initials}
                 />
-                <h4 className="title">
-                  {testimonial.name} <br />
-                  <small>{testimonial.title}</small>
+                <h4 className="title" style={{ margin: 0 }}>
+                  {testimonial.author}
+                  <span style={{ display: "block", marginTop: 6 }}>
+                    <StarRating rating={testimonial.rating} />
+                  </span>
                 </h4>
               </div>
               <div className="details">
                 <div className="icon">
                   <span className="fa fa-quote-left" />
                 </div>
-                <p>{testimonial.text}</p>
+                <p lang={testimonial.languageCode}>{testimonial.text}</p>
+                <a
+                  href={testimonial.reviewUri || reviewsData.googleMapsUri}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    fontSize: 13,
+                    color: "#6b7280",
+                  }}
+                >
+                  <span className="fab fa-google" /> Posted on Google
+                  {testimonial.relativeTime ? ` · ${testimonial.relativeTime}` : ""}
+                </a>
               </div>
             </div>
           </SwiperSlide>
