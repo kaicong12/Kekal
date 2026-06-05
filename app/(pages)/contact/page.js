@@ -7,6 +7,7 @@ import Address from "@/app/components/pages/contact/Address";
 import Form from "@/app/components/pages/contact/Form";
 import ImmediateAssistance from "@/app/components/pages/contact/ImmediateAssistance";
 import BusinessHours from "@/app/components/pages/contact/BusinessHours";
+import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 import { Divider } from "antd";
 
 export const metadata = {
@@ -116,6 +117,9 @@ const Contact = () => {
       {/* Our Footer */}
       <Footer />
       {/* End Our Footer */}
+
+      {/* Sticky CTA */}
+      <StickyHomeCTA />
     </div>
     // End wrapper
   );

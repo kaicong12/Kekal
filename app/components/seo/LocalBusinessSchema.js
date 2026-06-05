@@ -40,9 +40,13 @@ const localBusinessData = {
   ],
   image:
     "https://www.motorkekal.com/images/background/website-screenshot.jpeg",
+  foundingDate: "1992-07-13",
   priceRange: "RM",
   hasMap: "https://maps.app.goo.gl/a9Fs6RkRSR8dnnsE9",
-  sameAs: ["https://www.facebook.com/PerniagaanMotorKekal/"],
+  sameAs: [
+    "https://www.facebook.com/PerniagaanMotorKekal/",
+    "https://maps.app.goo.gl/a9Fs6RkRSR8dnnsE9",
+  ],
 };
 
 const LocalBusinessSchema = () => {

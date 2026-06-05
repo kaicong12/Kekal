@@ -33,6 +33,8 @@ export const metadata = {
     "motor shop near me",
     "kedai motor jb",
     "motorbike shop johor bahru",
+    "motor jb",
+    "jual motor jb",
   ],
   authors: [{ name: "Perniagaan Motor Kekal" }],
   creator: "Perniagaan Motor Kekal",

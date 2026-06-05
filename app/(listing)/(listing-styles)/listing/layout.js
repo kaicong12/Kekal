@@ -1,3 +1,5 @@
+import ItemListSchema from "@/app/components/seo/ItemListSchema";
+
 export const metadata = {
   title: "Jual Motor Baru Johor Bahru - Yamaha, Kawasaki, Honda, KTM",
   description:
@@ -26,6 +28,11 @@ export const metadata = {
   },
 };
 
-export default function ListingLayout({ children }) {
-  return children;
+export default async function ListingLayout({ children }) {
+  return (
+    <>
+      <ItemListSchema />
+      {children}
+    </>
+  );
 }

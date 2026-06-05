@@ -5,7 +5,7 @@ import Footer from "@/app/components/home/Footer";
 import Header from "@/app/components/home/Header";
 import Hero from "@/app/components/home/Hero";
 import QuickQuote from "@/app/components/home/QuickQuote";
-import StickyHomeCTA from "@/app/components/home/StickyHomeCTA";
+import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 import Testimonial from "@/app/components/home/Testimonial";
 import Link from "next/link";
 
