@@ -1,13 +1,15 @@
 import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "../../components/common/DefaultHeader";
-import HeaderTop from "../../components/common/HeaderTop";
-import MobileMenu from "../../components/common/MobileMenu";
+import DefaultHeader from "@/app/components/common/DefaultHeader";
+import HeaderTop from "@/app/components/common/HeaderTop";
+import MobileMenu from "@/app/components/common/MobileMenu";
 import AboutTextBlock from "@/app/components/pages/about-us/AboutTextBlock";
 import WhyChoose from "@/app/components/common/WhyChoose";
 import Testimonial from "@/app/components/common/Testimonial";
 import Map from "@/app/components/common/Map";
 import ReviewBox from "@/app/components/listing/listing-single/ReviewBox";
 import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
+import { setRequestLocale } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import styles from "./about.module.css";
 
 export const metadata = {
@@ -27,7 +29,9 @@ export const metadata = {
   },
 };
 
-const AboutUs = () => {
+const AboutUs = ({ params: { locale } }) => {
+  setRequestLocale(locale);
+  const t = useTranslations();
   return (
     <div className={`wrapper ${styles.aboutPage}`}>
       {/* header top */}
@@ -59,7 +63,7 @@ const AboutUs = () => {
           <div className="row justify-content-center">
             <div className="col-lg-8">
               <div className="main-title text-center">
-                <h2>Why Choose Us?</h2>
+                <h2>{t("whyChoose.heading")}</h2>
               </div>
             </div>
           </div>
@@ -76,7 +80,7 @@ const AboutUs = () => {
           <div className="row justify-content-center">
             <div className="col-lg-8">
               <div className="main-title text-center pt50">
-                <h2>Testimonials</h2>
+                <h2>{t("about.testimonialsHeading")}</h2>
               </div>
             </div>
           </div>
@@ -93,7 +97,7 @@ const AboutUs = () => {
 
       <section className="user_profile_location">
         <div className="container">
-          <h4 className="title">Location</h4>
+          <h4 className="title">{t("about.locationHeading")}</h4>
           <div className="property_sp_map mb40">
             <div className="h400 bdrs8 map_in" id="map-canvas">
               <Map />
@@ -114,7 +118,7 @@ const AboutUs = () => {
               }}
               target="_blank"
             >
-              Get Direction
+              {t("about.getDirection")}
             </a>
           </div>
         </div>

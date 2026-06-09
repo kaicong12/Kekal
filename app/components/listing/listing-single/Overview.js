@@ -1,7 +1,13 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const SECTION_ORDER = ["General", "Performance", "Chassis"];
+const SECTION_LABEL_KEYS = {
+  General: "specGeneral",
+  Performance: "specPerformance",
+  Chassis: "specChassis",
+};
 
 const HIDDEN_KEYS = ["color available", "colour available", "color", "colour"];
 
@@ -26,6 +32,7 @@ const SpecTable = ({ specs }) => {
 };
 
 const Overview = ({ productSpecification }) => {
+  const t = useTranslations("detail");
   const sections = productSpecification
     ? SECTION_ORDER.filter(
         (s) =>
@@ -53,7 +60,7 @@ const Overview = ({ productSpecification }) => {
             onClick={() => setActiveTab(section)}
             type="button"
           >
-            {section}
+            {t(SECTION_LABEL_KEYS[section])}
           </button>
         ))}
       </div>

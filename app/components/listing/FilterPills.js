@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 import styles from "./FilterPills.module.css";
 
 function formatRM(amount) {
@@ -10,24 +11,25 @@ function formatRM(amount) {
   return n >= 1000 ? `RM ${(n / 1000).toFixed(0)}k` : `RM ${n}`;
 }
 
-function budgetLabel(minPrice, maxPrice) {
+function budgetLabel(minPrice, maxPrice, t) {
   if (minPrice && maxPrice) return `${formatRM(minPrice)} – ${formatRM(maxPrice)}`;
-  if (maxPrice) return `Under ${formatRM(maxPrice)}`;
+  if (maxPrice) return t("under", { value: formatRM(maxPrice) });
   if (minPrice) return `${formatRM(minPrice)}+`;
   return null;
 }
 
-function licenseLabel(minCC, maxCC) {
+function licenseLabel(minCC, maxCC, t) {
   // Recognize the QuickQuote conventions: B Full ≥500cc, B2 <500cc
-  if (minCC === "500" && !maxCC) return "B Full (≥500cc)";
-  if (maxCC === "500" && !minCC) return "B2 (<500cc)";
+  if (minCC === "500" && !maxCC) return t("bFull");
+  if (maxCC === "500" && !minCC) return t("b2");
   if (minCC && maxCC) return `${minCC}–${maxCC}cc`;
   if (minCC) return `${minCC}cc+`;
-  if (maxCC) return `Under ${maxCC}cc`;
+  if (maxCC) return t("under", { value: `${maxCC}cc` });
   return null;
 }
 
 export default function FilterPills() {
+  const t = useTranslations("filterPills");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -38,24 +40,24 @@ export default function FilterPills() {
 
   const pills = useMemo(() => {
     const list = [];
-    const budget = budgetLabel(minPrice, maxPrice);
+    const budget = budgetLabel(minPrice, maxPrice, t);
     if (budget) {
       list.push({
         key: "budget",
-        label: `Budget: ${budget}`,
+        label: t("budget", { value: budget }),
         clearKeys: ["minPrice", "maxPrice"],
       });
     }
-    const license = licenseLabel(minCC, maxCC);
+    const license = licenseLabel(minCC, maxCC, t);
     if (license) {
       list.push({
         key: "license",
-        label: `License: ${license}`,
+        label: t("license", { value: license }),
         clearKeys: ["minCC", "maxCC"],
       });
     }
     return list;
-  }, [minPrice, maxPrice, minCC, maxCC]);
+  }, [minPrice, maxPrice, minCC, maxCC, t]);
 
   if (pills.length === 0) return null;
 
@@ -77,7 +79,7 @@ export default function FilterPills() {
 
   return (
     <div className={styles.row} aria-label="Active filters">
-      <span className={styles.label}>From Quick Quote:</span>
+      <span className={styles.label}>{t("fromQuickQuote")}</span>
       {pills.map((pill) => (
         <span key={pill.key} className={styles.pill}>
           <span className={styles.pillText}>{pill.label}</span>
@@ -93,7 +95,7 @@ export default function FilterPills() {
       ))}
       {pills.length > 1 && (
         <button type="button" onClick={clearAll} className={styles.clearAll}>
-          Clear all
+          {t("clearAll")}
         </button>
       )}
     </div>

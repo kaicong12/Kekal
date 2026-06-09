@@ -1,7 +1,7 @@
 "use client";
-import { useAuth } from "../../components/auth/AuthProvider";
-import UnauthorizedAccess from "../../components/common/UnauthorizedAccess";
-import AdminDashboard from "../../components/admin/AdminDashboard";
+import { useAuth } from "@/app/components/auth/AuthProvider";
+import UnauthorizedAccess from "@/app/components/common/UnauthorizedAccess";
+import AdminDashboard from "@/app/components/admin/AdminDashboard";
 
 export default function AdminPage() {
   const { isAuthenticated, isAuthorized } = useAuth();

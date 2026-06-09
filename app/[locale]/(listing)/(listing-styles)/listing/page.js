@@ -15,8 +15,10 @@ import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
 import { Spin } from "antd";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const ListingV1 = () => {
+  const t = useTranslations("listing");
   const router = useRouter();
   const searchParams = useSearchParams();
   const brandFilter = searchParams.get("make");
@@ -72,15 +74,15 @@ const ListingV1 = () => {
                   className="breadcrumb_title"
                   style={{ marginBottom: "16px" }}
                 >
-                  Motorcycles For Sale
+                  {t("breadcrumbTitle")}
                 </h2>
-                <p className="subtitle">Listing</p>
+                <p className="subtitle">{t("breadcrumbSubtitle")}</p>
                 <ol className="breadcrumb fn-sm mt15-sm">
                   <li className="breadcrumb-item">
-                    <a href="/">Home</a>
+                    <a href="/">{t("breadcrumbHome")}</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    Listing
+                    {t("breadcrumbCurrent")}
                   </li>
                 </ol>
               </div>
@@ -99,11 +101,12 @@ const ListingV1 = () => {
               <FilterPills />
               <div className="page_control_shorting left_area tac-sm mb15-767 mt15">
                 <p>
-                  We found{" "}
-                  <span className="heading-color fw600">
-                    {motorcycles.length}
-                  </span>{" "}
-                  motorcycles for you.
+                  {t.rich("foundCount", {
+                    count: motorcycles.length,
+                    highlight: (chunks) => (
+                      <span className="heading-color fw600">{chunks}</span>
+                    ),
+                  })}
                 </p>
               </div>
             </div>

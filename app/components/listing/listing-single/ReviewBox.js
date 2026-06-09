@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const ReviewBox = () => {
+  const t = useTranslations("detail");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -9,6 +11,7 @@ const ReviewBox = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +25,7 @@ const ReviewBox = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setMessage("");
+    setIsSuccess(false);
 
     try {
       const response = await fetch("/api/email/review", {
@@ -41,13 +45,14 @@ const ReviewBox = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("Review submitted successfully!");
+        setMessage(t("reviewSuccess"));
+        setIsSuccess(true);
         setFormData({ name: "", email: "", review: "" });
       } else {
-        setMessage(data.error || "Failed to submit review. Please try again.");
+        setMessage(data.error || t("reviewFail"));
       }
     } catch (error) {
-      setMessage("An error occurred. Please try again.");
+      setMessage(t("reviewError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -56,7 +61,7 @@ const ReviewBox = () => {
   return (
     <div className="user_review_form">
       <div className="bsp_reveiw_wrt">
-        <h4 className="mt10">Write a Review</h4>
+        <h4 className="mt10">{t("writeReview")}</h4>
         <form className="comments_form" onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-6">
@@ -65,7 +70,7 @@ const ReviewBox = () => {
                   type="text"
                   name="name"
                   className="form-control"
-                  placeholder="Your Name"
+                  placeholder={t("reviewNamePlaceholder")}
                   value={formData.name}
                   onChange={handleInputChange}
                   required
@@ -81,7 +86,7 @@ const ReviewBox = () => {
                   type="email"
                   name="email"
                   className="form-control"
-                  placeholder="Email"
+                  placeholder={t("reviewEmailPlaceholder")}
                   value={formData.email}
                   onChange={handleInputChange}
                   required
@@ -97,7 +102,7 @@ const ReviewBox = () => {
                   name="review"
                   className="form-control"
                   rows={9}
-                  placeholder="Message"
+                  placeholder={t("reviewMessagePlaceholder")}
                   value={formData.review}
                   onChange={handleInputChange}
                   required
@@ -111,9 +116,7 @@ const ReviewBox = () => {
               <div className="col-md-12">
                 <div
                   className={`alert ${
-                    message.includes("successfully")
-                      ? "alert-success"
-                      : "alert-danger"
+                    isSuccess ? "alert-success" : "alert-danger"
                   }`}
                 >
                   {message}
@@ -127,7 +130,7 @@ const ReviewBox = () => {
                 className="btn btn-thm"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Sending..." : "Send Your Review"}
+                {isSubmitting ? t("sending") : t("sendReview")}
               </button>
             </div>
             {/* End .col-md-12 */}

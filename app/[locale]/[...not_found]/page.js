@@ -1,8 +1,10 @@
 import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "../components/common/DefaultHeader";
-import HeaderTop from "../components/common/HeaderTop";
-import MobileMenu from "../components/common/MobileMenu";
-import Link from "next/link";
+import DefaultHeader from "@/app/components/common/DefaultHeader";
+import HeaderTop from "@/app/components/common/HeaderTop";
+import MobileMenu from "@/app/components/common/MobileMenu";
+import { Link } from "@/i18n/navigation";
+import { setRequestLocale } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 export const metadata = {
   title: "Page Not Found - Perniagaan Motor Kekal",
@@ -13,7 +15,9 @@ export const metadata = {
   },
 };
 
-const NotFound = () => {
+const NotFound = ({ params: { locale } }) => {
+  setRequestLocale(locale);
+  const t = useTranslations("notFound");
   return (
     <div className="wrapper" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       {/* header top */}
@@ -43,15 +47,14 @@ const NotFound = () => {
                   className="subtitle"
                   style={{ marginBottom: "12px", fontWeight: 700 }}
                 >
-                  Page Not Found
+                  {t("title")}
                 </h3>
                 <p style={{ color: "#5f6973", marginBottom: "35px" }}>
-                  The page you are looking for might have been removed or is
-                  temporarily unavailable.
+                  {t("description")}
                 </p>
               </div>
               <Link className="btn_error" href="/">
-                Back to Home
+                {t("backHome")}
               </Link>
             </div>
           </div>

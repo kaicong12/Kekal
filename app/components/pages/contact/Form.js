@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import styles from "./Form.module.css";
 
 const Form = () => {
+  const t = useTranslations("contactForm");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -35,19 +37,19 @@ const Form = () => {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = t("nameRequired");
     }
 
     if (!formData.email.trim() && !formData.phone.trim()) {
-      newErrors.contact = "Either email or phone number is required";
+      newErrors.contact = t("contactRequired");
     }
 
     if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = t("emailInvalid");
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
+      newErrors.message = t("messageRequired");
     }
 
     setErrors(newErrors);
@@ -74,7 +76,7 @@ const Form = () => {
         if (response.ok) {
           setSubmitStatus({
             type: "success",
-            message: "Thank you for your message! We'll get back to you soon.",
+            message: t("success"),
           });
           // Reset form
           setFormData({
@@ -88,14 +90,13 @@ const Form = () => {
         } else {
           setSubmitStatus({
             type: "error",
-            message:
-              result.error || "Failed to send message. Please try again.",
+            message: result.error || t("sendFail"),
           });
         }
       } catch (error) {
         setSubmitStatus({
           type: "error",
-          message: "Network error. Please check your connection and try again.",
+          message: t("networkError"),
         });
       } finally {
         setIsSubmitting(false);
@@ -107,11 +108,7 @@ const Form = () => {
     <div className={`contact_form_wrapper ${styles.contactFormWrapper}`}>
       {/* Short Intro Text */}
       <div className={`contact_intro mb30 ${styles.contactIntro}`}>
-        <p className="text-muted">
-          Have questions about our motorcycles? We&apos;re here to help! Reach
-          out to us for inquiries about our bikes, services, or anything else
-          you need.
-        </p>
+        <p className="text-muted">{t("intro")}</p>
       </div>
 
       <form className="contact_form" onSubmit={handleSubmit}>
@@ -119,14 +116,14 @@ const Form = () => {
           {/* Name Field */}
           <div className="col-md-12">
             <div className="form-group">
-              <label className="form-label">Name*</label>
+              <label className="form-label">{t("name")}</label>
               <input
                 className={`form-control ${errors.name ? "is-invalid" : ""}`}
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="Your Name"
+                placeholder={t("namePlaceholder")}
                 required
               />
               {errors.name && (
@@ -138,7 +135,7 @@ const Form = () => {
           {/* Email Field */}
           <div className="col-md-6">
             <div className="form-group">
-              <label className="form-label">Email</label>
+              <label className="form-label">{t("email")}</label>
               <input
                 className={`form-control ${errors.email ? "is-invalid" : ""}`}
                 type="email"
@@ -156,7 +153,7 @@ const Form = () => {
           {/* Phone Field */}
           <div className="col-md-6">
             <div className="form-group">
-              <label className="form-label">Phone</label>
+              <label className="form-label">{t("phone")}</label>
               <input
                 className="form-control"
                 type="tel"
@@ -180,19 +177,19 @@ const Form = () => {
           {/* Topic Dropdown */}
           <div className="col-md-12">
             <div className="form-group">
-              <label className="form-label">Topic</label>
+              <label className="form-label">{t("topic")}</label>
               <select
                 className="form-control"
                 name="topic"
                 value={formData.topic}
                 onChange={handleInputChange}
               >
-                <option value="">Select a topic (optional)</option>
-                <option value="order-support">Order Support</option>
-                <option value="dealer-inquiry">Dealer Inquiry</option>
-                <option value="sell-your-bike">Sell Your Bike</option>
-                <option value="service-inquiry">Service Inquiry</option>
-                <option value="general-inquiry">General Inquiry</option>
+                <option value="">{t("topicSelect")}</option>
+                <option value="order-support">{t("topicOrderSupport")}</option>
+                <option value="dealer-inquiry">{t("topicDealerInquiry")}</option>
+                <option value="sell-your-bike">{t("topicSellBike")}</option>
+                <option value="service-inquiry">{t("topicServiceInquiry")}</option>
+                <option value="general-inquiry">{t("topicGeneralInquiry")}</option>
               </select>
             </div>
           </div>
@@ -200,14 +197,14 @@ const Form = () => {
           {/* Message Field */}
           <div className="col-md-12">
             <div className="form-group">
-              <label className="form-label">Message*</label>
+              <label className="form-label">{t("message")}</label>
               <textarea
                 name="message"
                 className={`form-control ${errors.message ? "is-invalid" : ""}`}
                 rows={6}
                 value={formData.message}
                 onChange={handleInputChange}
-                placeholder="Tell us how we can help you..."
+                placeholder={t("messagePlaceholder")}
                 required
                 disabled={isSubmitting}
               />
@@ -243,10 +240,10 @@ const Form = () => {
                       role="status"
                       aria-hidden="true"
                     ></span>
-                    Sending...
+                    {t("sending")}
                   </>
                 ) : (
-                  "Send Message"
+                  t("send")
                 )}
               </button>
             </div>

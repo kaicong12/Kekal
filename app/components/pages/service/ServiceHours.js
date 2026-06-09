@@ -1,12 +1,15 @@
+import { useTranslations } from "next-intl";
+
 const ServiceHours = () => {
+  const t = useTranslations("serviceHours");
   const days = [
-    { day: "Sunday", schedule: "9:00 - 19:00" },
-    { day: "Monday", schedule: "9:00 - 19:00" },
-    { day: "Tuesday", schedule: "9:00 - 19:00" },
-    { day: "Wednesday", schedule: "9:00 - 19:00" },
-    { day: "Thursday", schedule: "9:00 - 19:00" },
-    { day: "Friday", schedule: "Closed" },
-    { day: "Saturday", schedule: "9:00 - 19:00" },
+    { day: t("sunday"), schedule: "9:00 - 19:00" },
+    { day: t("monday"), schedule: "9:00 - 19:00" },
+    { day: t("tuesday"), schedule: "9:00 - 19:00" },
+    { day: t("wednesday"), schedule: "9:00 - 19:00" },
+    { day: t("thursday"), schedule: "9:00 - 19:00" },
+    { day: t("friday"), schedule: t("closed") },
+    { day: t("saturday"), schedule: "9:00 - 19:00" },
   ];
 
   return (
