@@ -7,9 +7,15 @@ import Hero from "@/app/components/home/Hero";
 import QuickQuote from "@/app/components/home/QuickQuote";
 import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 import Testimonial from "@/app/components/home/Testimonial";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 
-const Home = () => {
+const Home = ({ params }) => {
+  // When rendered as the /[locale]/home route, opt into static rendering.
+  // When composed inside app/[locale]/page.js, the parent already sets it.
+  if (params?.locale) setRequestLocale(params.locale);
+  const t = useTranslations();
   return (
     <div className="body_home2_style">
       {/* Main Header Nav */}
@@ -50,7 +56,7 @@ const Home = () => {
           <div className="row mt100 justify-content-center">
             <div className="col-lg-8">
               <div className="main-title text-center">
-                <h2>Why Choose Us?</h2>
+                <h2>{t("whyChoose.heading")}</h2>
               </div>
             </div>
           </div>
@@ -71,7 +77,7 @@ const Home = () => {
           <div className="row justify-content-center">
             <div className="col-lg-8">
               <div className="main-title text-center">
-                <h2>Featured Listings</h2>
+                <h2>{t("home.featuredListings")}</h2>
               </div>
             </div>
           </div>
@@ -88,7 +94,7 @@ const Home = () => {
             <div className="col-lg-12">
               <div className="text-center">
                 <Link href="/listing" className="more_listing">
-                  Show All Motorcycles{" "}
+                  {t("home.showAllMotorcycles")}{" "}
                   <span className="icon">
                     <span className="fas fa-plus" />
                   </span>
@@ -110,7 +116,7 @@ const Home = () => {
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="main-title text-center">
-                <h2>Our Testimonials</h2>
+                <h2>{t("home.ourTestimonials")}</h2>
               </div>
             </div>
           </div>

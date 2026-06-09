@@ -2,6 +2,7 @@
 import styles from "./LoanCalculator.module.css";
 import { useCallback, useState, useEffect } from "react";
 import { message } from "antd";
+import { useTranslations } from "next-intl";
 
 const LOAN_TERMS = [
   { value: 2, label: "24m" },
@@ -11,6 +12,7 @@ const LOAN_TERMS = [
 ];
 
 const LoanCalculator = ({ motorcycle }) => {
+  const t = useTranslations("loanCalculator");
   const { price: numericPrice } = motorcycle;
   const priceFloat = parseFloat(numericPrice);
 
@@ -47,16 +49,13 @@ const LoanCalculator = ({ motorcycle }) => {
   return (
     <div className={styles.calculator}>
       <div className={styles.calculatorMain}>
-        <h4 className={styles.title}>Financing Calculator</h4>
-        <p className={styles.subtitle}>
-          Own your dream ride with flexible monthly installments tailored to your
-          budget.
-        </p>
+        <h4 className={styles.title}>{t("title")}</h4>
+        <p className={styles.subtitle}>{t("subtitle")}</p>
 
         <div className={styles.sliderSection}>
           <div className={styles.sliderHeader}>
             <span className={styles.sliderLabel}>
-              Down Payment ({downPaymentPercent}%)
+              {t("downPayment", { percent: downPaymentPercent })}
             </span>
             <span className={styles.sliderValue}>
               RM {downPaymentAmount.toLocaleString()}
@@ -74,9 +73,9 @@ const LoanCalculator = ({ motorcycle }) => {
 
         <div className={styles.termSection}>
           <div className={styles.termHeader}>
-            <span className={styles.termLabel}>Loan Term</span>
+            <span className={styles.termLabel}>{t("loanTerm")}</span>
             <span className={styles.termValue}>
-              {loanYear * 12} Months
+              {t("months", { count: loanYear * 12 })}
             </span>
           </div>
           <div className={styles.termButtons}>
@@ -98,18 +97,15 @@ const LoanCalculator = ({ motorcycle }) => {
 
       <div className={styles.resultPanel}>
         <div className={styles.resultContent}>
-          <span className={styles.resultLabel}>ESTIMATED MONTHLY</span>
+          <span className={styles.resultLabel}>{t("estimatedMonthly")}</span>
           <div className={styles.resultAmount}>
             <span className={styles.rmPrefix}>RM</span>
             <span className={styles.amountValue}>
               {Math.round(monthlyPayment).toLocaleString()}
             </span>
-            <span className={styles.amountSuffix}>/mo</span>
+            <span className={styles.amountSuffix}>{t("perMonth")}</span>
           </div>
-          <p className={styles.resultDisclaimer}>
-            Calculated at 3.5% interest rate. Final amount may vary based on
-            credit profile and insurance.
-          </p>
+          <p className={styles.resultDisclaimer}>{t("disclaimer")}</p>
         </div>
 
         <button
@@ -130,10 +126,10 @@ Could you help me with the loan application process?`;
             const encodedMessage = encodeURIComponent(whatsappMessage);
             const whatsappUrl = `https://wa.me/60127126128?text=${encodedMessage}`;
             window.open(whatsappUrl, "_blank");
-            message.success("Redirecting to WhatsApp for loan application...");
+            message.success(t("redirecting"));
           }}
         >
-          Apply for Loan
+          {t("apply")}
         </button>
       </div>
     </div>

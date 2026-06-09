@@ -1,6 +1,9 @@
+import { useTranslations } from "next-intl";
+
 const Address = () => {
+  const t = useTranslations("contactDetails");
   const addressData = {
-    title: "Contact Details",
+    title: t("title"),
     address: (
       <>
         5, Jalan Seroja 49

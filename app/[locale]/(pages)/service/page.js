@@ -1,12 +1,14 @@
 import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "../../components/common/DefaultHeader";
-import HeaderTop from "../../components/common/HeaderTop";
-import MobileMenu from "../../components/common/MobileMenu";
+import DefaultHeader from "@/app/components/common/DefaultHeader";
+import HeaderTop from "@/app/components/common/HeaderTop";
+import MobileMenu from "@/app/components/common/MobileMenu";
 import ListWithImage from "@/app/components/pages/service/ListWithImage";
 import ServiceBlock from "@/app/components/pages/service/ServiceBlock";
 import ScheduleService from "@/app/components/pages/service/ScheduleService";
 import ServiceHours from "@/app/components/pages/service/ServiceHours";
 import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
+import { setRequestLocale } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 export const metadata = {
   title: "Servis Motor Johor Bahru - Yamaha, Kawasaki Service Center",
@@ -28,7 +30,9 @@ export const metadata = {
   },
 };
 
-const Service = () => {
+const Service = ({ params: { locale } }) => {
+  setRequestLocale(locale);
+  const t = useTranslations("service");
   return (
     <div className="wrapper">
       {/* header top */}
@@ -49,16 +53,14 @@ const Service = () => {
           <div className="row">
             <div className="col-xl-12">
               <div className="breadcrumb_content style2">
-                <h2 className="breadcrumb_title">
-                  Motorcycle Service in Johor Bahru
-                </h2>
-                <p className="subtitle">Your trusted motorcycle dealer in JB</p>
+                <h2 className="breadcrumb_title">{t("breadcrumbTitle")}</h2>
+                <p className="subtitle">{t("breadcrumbSubtitle")}</p>
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="#">{t("breadcrumbHome")}</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    Motorcycle Service
+                    {t("breadcrumbCurrent")}
                   </li>
                 </ol>
               </div>
@@ -88,7 +90,7 @@ const Service = () => {
           <div className="row">
             <div className="col-md-7 col-xl-8">
               <div className="service_form mb30-sm">
-                <h5 className="title">Schedule Service</h5>
+                <h5 className="title">{t("scheduleService")}</h5>
                 <ScheduleService />
               </div>
             </div>
@@ -97,7 +99,7 @@ const Service = () => {
             <div className="col-md-5 col-xl-4">
               <div className="opening_hour_widgets">
                 <div className="wrapper">
-                  <h4 className="title">Opening hours</h4>
+                  <h4 className="title">{t("openingHours")}</h4>
                   <ServiceHours />
                 </div>
               </div>

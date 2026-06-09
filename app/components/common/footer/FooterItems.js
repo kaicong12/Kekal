@@ -1,11 +1,13 @@
 import NewsletterSignup from "./NewsletterSignup";
+import { useTranslations } from "next-intl";
 
 const FooterItems = () => {
+  const t = useTranslations("footer");
   return (
     <div className="row">
       <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_about_widget">
-          <h5 className="title">SHOWROOM</h5>
+          <h5 className="title">{t("showroom")}</h5>
           <p>
             5, Jalan Seroja, 49
             <br />
@@ -19,7 +21,7 @@ const FooterItems = () => {
 
       <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_contact_widget">
-          <h5 className="title">NEED HELP</h5>
+          <h5 className="title">{t("needHelp")}</h5>
           <div className="footer_phone">+60127126128</div>
           <p>motorkekal@gmail.com</p>
         </div>
@@ -28,11 +30,11 @@ const FooterItems = () => {
 
       <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_contact_widget">
-          <h5 className="title">OPENING HOURS</h5>
+          <h5 className="title">{t("openingHours")}</h5>
           <p>
-            Monday – Sunday: 09:00AM – 07:00PM
+            {t("openingHoursValue")}
             <br />
-            Friday: Closed
+            {t("fridayClosed")}
           </p>
         </div>
       </div>

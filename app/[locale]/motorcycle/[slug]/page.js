@@ -7,8 +7,9 @@ import ProductGallery from "@/app/components/listing/listing-single/listing-sing
 import Overview from "@/app/components/listing/listing-single/Overview";
 import LoanCalculator from "@/app/components/listing/LoanCalculator";
 import ContactSeller from "@/app/components/listing/listing-single/sidebar/ContactSeller";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import ReleatedCar from "@/app/components/listing/listing-single/ReleatedCar";
 
 import { getMotorcycleByIdPg as getMotorcycleById } from "@/utils/dbPg";
@@ -99,6 +100,8 @@ export async function generateMetadata({ params }) {
 }
 
 const MotorcyclePage = async ({ params }) => {
+  setRequestLocale(params.locale);
+  const t = await getTranslations("detail");
   const id = extractIdFromSlug(params.slug);
   if (!id) notFound();
   const motorcycleData = await getMotorcycleById(id);
@@ -144,7 +147,7 @@ const MotorcyclePage = async ({ params }) => {
                 <div className="car_single_content_wrapper">
                   <ul className="car_info mb20-md">
                     <li className="list-inline-item">
-                      <a href="#">BRAND NEW - IN STOCK</a>
+                      <a href="#">{t("inStock")}</a>
                     </li>
                   </ul>
                   <h1 className="title" style={{ marginBottom: "0" }}>
@@ -184,7 +187,7 @@ const MotorcyclePage = async ({ params }) => {
 
               <div className="opening_hour_widgets p30 mt30">
                 <div className="wrapper">
-                  <h4 className="title">Overview</h4>
+                  <h4 className="title">{t("overview")}</h4>
                   <Overview
                     productSpecification={motorcycleData.specification}
                   />
@@ -194,7 +197,7 @@ const MotorcyclePage = async ({ params }) => {
 
               <div className="listing_single_description mt30">
                 <h4 className="mb30">
-                  Description{" "}
+                  {t("description")}{" "}
                   <span className="float-end body-color fz13">
                     {motorcycleData.brand} {motorcycleData.model}
                   </span>
@@ -212,7 +215,7 @@ const MotorcyclePage = async ({ params }) => {
 
             <div className="col-lg-4 col-xl-4">
               <div className="sidebar_seller_contact">
-                <h4 className="mb30">Contact Seller</h4>
+                <h4 className="mb30">{t("contactSeller")}</h4>
                 <ContactSeller />
               </div>
             </div>
@@ -229,7 +232,7 @@ const MotorcyclePage = async ({ params }) => {
           <div className="row">
             <div className="col-sm-6">
               <div className="main-title text-center text-md-start mb10-520">
-                <h2 className="title">Related Best Bikes</h2>
+                <h2 className="title">{t("relatedBikes")}</h2>
               </div>
             </div>
             {/* End .col-sm-6 */}
@@ -237,7 +240,7 @@ const MotorcyclePage = async ({ params }) => {
             <div className="col-sm-6">
               <div className="text-center text-md-end mb30-520">
                 <Link href="/listing" className="more_listing">
-                  Show All Bikes
+                  {t("showAllBikes")}
                   <span className="icon">
                     <span className="fas fa-plus" />
                   </span>

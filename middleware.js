@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
+
+const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request) {
-  const { hostname, pathname, search } = request.nextUrl;
+  const { hostname } = request.nextUrl;
 
   // Redirect non-www to www in production
   if (
@@ -15,18 +19,14 @@ export function middleware(request) {
     return NextResponse.redirect(url, 301);
   }
 
-  return NextResponse.next();
+  // Delegate locale detection / prefixing to next-intl
+  return intlMiddleware(request);
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization)
-     * - favicon.ico
-     */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
-  ],
+  // Match all pathnames except for:
+  // - API routes (/api)
+  // - Next.js internals (/_next, /_vercel)
+  // - files with an extension (e.g. /sitemap.xml, /favicon.ico, images)
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };

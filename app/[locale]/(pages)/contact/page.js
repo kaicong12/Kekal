@@ -1,7 +1,7 @@
 import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "../../components/common/DefaultHeader";
-import HeaderTop from "../../components/common/HeaderTop";
-import MobileMenu from "../../components/common/MobileMenu";
+import DefaultHeader from "@/app/components/common/DefaultHeader";
+import HeaderTop from "@/app/components/common/HeaderTop";
+import MobileMenu from "@/app/components/common/MobileMenu";
 import Map from "@/app/components/common/Map";
 import Address from "@/app/components/pages/contact/Address";
 import Form from "@/app/components/pages/contact/Form";
@@ -9,6 +9,8 @@ import ImmediateAssistance from "@/app/components/pages/contact/ImmediateAssista
 import BusinessHours from "@/app/components/pages/contact/BusinessHours";
 import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
 import { Divider } from "antd";
+import { setRequestLocale } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 export const metadata = {
   title: "Hubungi Kami - Kedai Motor Johor Jaya | Perniagaan Motor Kekal",
@@ -26,7 +28,9 @@ export const metadata = {
   },
 };
 
-const Contact = () => {
+const Contact = ({ params: { locale } }) => {
+  setRequestLocale(locale);
+  const t = useTranslations("contact");
   return (
     <div className="wrapper">
       {/* header top */}
@@ -64,11 +68,11 @@ const Contact = () => {
 
               {/* Location Section */}
               <div className="contact_location mt40">
-                <h4 className="mb20">Visit Our Showroom</h4>
+                <h4 className="mb20">{t("visitShowroom")}</h4>
                 <div className="location_info">
                   <p className="mb15">
                     <i className="fas fa-map-marker-alt text-thm me-2"></i>
-                    <strong>Address:</strong>
+                    <strong>{t("addressLabel")}</strong>
                     <br />
                     5, Jalan Seroja 49
                     <br />
@@ -78,8 +82,7 @@ const Contact = () => {
                   </p>
                   <p className="mb0">
                     <i className="fas fa-parking text-thm me-2"></i>
-                    <strong>Parking:</strong> Free parking available in front of
-                    our showroom.
+                    <strong>{t("parkingLabel")}</strong> {t("parkingValue")}
                   </p>
                 </div>
               </div>
@@ -89,7 +92,7 @@ const Contact = () => {
             <div className="col-lg-8">
               <div className="form_grid">
                 <div className="wrapper">
-                  <h3 className="title mb20 mt40 mt-lg-0">Send Us A Message</h3>
+                  <h3 className="title mb20 mt40 mt-lg-0">{t("sendMessage")}</h3>
                   <Form />
                 </div>
               </div>

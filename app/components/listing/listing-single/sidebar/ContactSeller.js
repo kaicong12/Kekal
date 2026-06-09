@@ -1,13 +1,14 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const ContactSeller = () => {
+  const t = useTranslations("detail");
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
-    message:
-      "I am interested in a price quote on this vehicle. Please contact me at your earliest convenience with your best price for this vehicle.",
+    message: t("csDefaultMessage"),
   });
 
   const handleInputChange = (e) => {
@@ -43,7 +44,7 @@ Thank you!`;
           className="form-control"
           type="text"
           name="name"
-          placeholder="Your Name"
+          placeholder={t("csNamePlaceholder")}
           value={formData.name}
           onChange={handleInputChange}
           required
@@ -54,7 +55,7 @@ Thank you!`;
           className="form-control"
           type="text"
           name="phone"
-          placeholder="Phone Number"
+          placeholder={t("csPhonePlaceholder")}
           value={formData.phone}
           onChange={handleInputChange}
           required
@@ -65,7 +66,7 @@ Thank you!`;
           className="form-control"
           type="email"
           name="email"
-          placeholder="Email Address"
+          placeholder={t("csEmailPlaceholder")}
           value={formData.email}
           onChange={handleInputChange}
           required
@@ -84,7 +85,7 @@ Thank you!`;
       </div>
       <button type="submit" className="btn btn-whatsapp w-100">
         <span className="flaticon-whatsapp me-2" />
-        WhatsApp
+        {t("whatsapp")}
       </button>
     </form>
   );

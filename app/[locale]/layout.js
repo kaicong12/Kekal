@@ -1,9 +1,13 @@
 import { Inter, Space_Grotesk } from "next/font/google";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import "aos/dist/aos.css";
-import "../public/scss/main.scss";
-import ClientLayout from "./components/ClientLayout";
-import LocalBusinessSchema from "./components/seo/LocalBusinessSchema";
-import WebSiteSchema from "./components/seo/WebSiteSchema";
+import "@/public/scss/main.scss";
+import ClientLayout from "@/app/components/ClientLayout";
+import LocalBusinessSchema from "@/app/components/seo/LocalBusinessSchema";
+import WebSiteSchema from "@/app/components/seo/WebSiteSchema";
+import { routing } from "@/i18n/routing";
 
 const inter = Inter({ subsets: ["latin"] });
 const spaceGrotesk = Space_Grotesk({
@@ -11,6 +15,13 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   display: "swap",
 });
+
+// OpenGraph locale codes keyed by our locale slugs.
+const OG_LOCALE = { en: "en_MY", ms: "ms_MY", zh: "zh_MY" };
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export const metadata = {
   title: {
@@ -47,6 +58,12 @@ export const metadata = {
   metadataBase: new URL("https://www.motorkekal.com"),
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      ms: "/ms",
+      zh: "/zh",
+      "x-default": "/",
+    },
   },
   openGraph: {
     title:
@@ -87,15 +104,29 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children, params: { locale } }) {
+  // Validate the incoming locale and opt into static rendering.
+  if (!routing.locales.includes(locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
+
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <LocalBusinessSchema />
         <WebSiteSchema />
+        <meta property="og:locale" content={OG_LOCALE[locale]} />
       </head>
-      <body className={`${inter.className} ${spaceGrotesk.variable}`} cz-shortcut-listen="false">
-        <ClientLayout>{children}</ClientLayout>
+      <body
+        className={`${inter.className} ${spaceGrotesk.variable}`}
+        cz-shortcut-listen="false"
+      >
+        <NextIntlClientProvider messages={messages}>
+          <ClientLayout>{children}</ClientLayout>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

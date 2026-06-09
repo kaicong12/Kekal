@@ -3,39 +3,40 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/swiper-bundle.css";
 import Image from "next/image";
-
-const testimonials = [
-  {
-    id: 1,
-    name: "Ahmad Fauzi",
-    title: "Motorcycle Enthusiast",
-    text: "Outstanding service and genuine parts! I've been riding for 15 years and this is the best motorcycle shop I've ever dealt with. They helped me find the perfect exhaust system for my Yamaha R1 and the installation was flawless.",
-    image: "/images/testimonial/avatar-af.svg",
-  },
-  {
-    id: 2,
-    name: "Nurul Aina",
-    title: "Daily Commuter",
-    text: "My Honda CB650R needed urgent repairs and they had me back on the road the same day. The staff really knows their motorcycles and the prices are very reasonable. I wouldn't trust my bike with anyone else!",
-    image: "/images/testimonial/avatar-na.svg",
-  },
-  {
-    id: 3,
-    name: "Raj Kumar Selvam",
-    title: "Motorcycle Enthusiast",
-    text: "Incredible selection of motorcycle gear and accessories! From helmets to riding jackets, they have everything a rider needs. The quality is top-notch and their advice on safety gear is invaluable.",
-    image: "/images/testimonial/avatar-rs.svg",
-  },
-  {
-    id: 4,
-    name: "Tan Mei Ling",
-    title: "Daily Commuter",
-    text: "Fast shipping and excellent customer service. Ordered brake pads online and they arrived within 2 days. The online store is easy to navigate and they have detailed product descriptions that helped me choose the right parts.",
-    image: "/images/testimonial/avatar-tm.svg",
-  },
-];
+import { useTranslations } from "next-intl";
 
 const Testimonial = () => {
+  const t = useTranslations("commonTestimonials");
+  const testimonials = [
+    {
+      id: 1,
+      name: "Ahmad Fauzi",
+      title: t("enthusiast"),
+      text: t("text1"),
+      image: "/images/testimonial/avatar-af.svg",
+    },
+    {
+      id: 2,
+      name: "Nurul Aina",
+      title: t("commuter"),
+      text: t("text2"),
+      image: "/images/testimonial/avatar-na.svg",
+    },
+    {
+      id: 3,
+      name: "Raj Kumar Selvam",
+      title: t("enthusiast"),
+      text: t("text3"),
+      image: "/images/testimonial/avatar-rs.svg",
+    },
+    {
+      id: 4,
+      name: "Tan Mei Ling",
+      title: t("commuter"),
+      text: t("text4"),
+      image: "/images/testimonial/avatar-tm.svg",
+    },
+  ];
   return (
     <>
       <Swiper

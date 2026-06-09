@@ -1,0 +1,378 @@
+{
+  "nav": {
+    "home": "Laman Utama",
+    "listings": "Senarai Motor",
+    "allMotorcycles": "Semua Motosikal",
+    "aboutUs": "Tentang Kami",
+    "contact": "Hubungi Kami",
+    "service": "Servis",
+    "ourServices": "Servis Kami",
+    "faq": "Soalan Lazim",
+    "menu": "Menu"
+  },
+  "headerTop": {
+    "hours": "Isnin - Ahad 8:00 - 18:00",
+    "mobileHours": "Isnin - Khamis 8:30 - 19:30"
+  },
+  "languageSwitcher": {
+    "label": "Bahasa",
+    "en": "English",
+    "ms": "Bahasa Malaysia",
+    "zh": "中文"
+  },
+  "hero": {
+    "slide1Title": "PUSAT SEHENTI MOTOSIKAL ANDA DI JOHOR BAHRU",
+    "slide2Title": "MERAIKAN 30 TAHUN KECEMERLANGAN BERKENDERAAN",
+    "subtitle": "Berkenderaan dengan Yakin, Berkenderaan dengan Kami. Memberi Khidmat kepada Penunggang Johor Bahru Lebih 30 Tahun",
+    "contactUs": "Hubungi Kami"
+  },
+  "quickQuote": {
+    "badge": "SEBUT HARGA PANTAS · 30 SAAT",
+    "budget": "BAJET",
+    "license": "LESEN",
+    "all": "Semua",
+    "counting": "Mengira...",
+    "seeMatches": "Lihat padanan →",
+    "seeMatchesCount": "Lihat {count} padanan →"
+  },
+  "whyChoose": {
+    "heading": "Kenapa Pilih Kami?",
+    "bestPriceTitle": "Harga Terbaik",
+    "bestPriceDesc": "Bahagian kewangan kami yang bebas tekanan dapat mencari penyelesaian kewangan untuk menjimatkan wang anda.",
+    "trustedTitle": "Dipercayai Beribu-ribu",
+    "trustedDesc": "Lebih 30 tahun memberi khidmat kepada penunggang di seluruh Johor Bahru dengan nasihat jujur dan harga berpatutan.",
+    "wideRangeTitle": "Pelbagai Jenama",
+    "wideRangeDesc": "Yamaha, Kawasaki, Honda, KTM dan banyak lagi — semua di bawah satu bumbung di Johor Jaya."
+  },
+  "home": {
+    "featuredListings": "Senarai Pilihan",
+    "showAllMotorcycles": "Lihat Semua Motosikal",
+    "ourTestimonials": "Testimoni Kami"
+  },
+  "testimonials": {
+    "rider1Role": "Penunggang Profesional",
+    "rider1Quote": "Sebagai penunggang penghantaran profesional, saya bergantung pada motosikal saya setiap hari. Kedai ini telah memastikan Honda Wave saya berfungsi dengan sempurna lebih 3 tahun. Servis penyelenggaraan mereka sangat baik dan mereka sentiasa menggunakan alat ganti asli. Pasukan ini memahami tuntutan penunggangan komersial!",
+    "rider2Role": "Pengumpul Motosikal",
+    "rider2Quote": "Saya memiliki beberapa motosikal klasik dan mencari alat ganti yang betul boleh menjadi cabaran. Kedai ini mempunyai rangkaian yang luar biasa dan sentiasa berjaya mendapatkan apa yang saya perlukan. Kepakaran mereka dengan motosikal klasik tiada tandingan - mereka telah memulihkan Kawasaki Ninja 1985 saya dengan sempurna!",
+    "rider3Role": "Penunggang Pengembaraan",
+    "rider3Quote": "Sebelum perjalanan jauh saya, saya sentiasa membawa BMW GS saya ke sini untuk pemeriksaan lengkap. Perhatian mereka terhadap perincian memberi saya keyakinan di jalan raya. Mereka telah melengkapkan motosikal saya dengan aksesori pelancongan terbaik dan nasihat mereka tentang pemilihan kelengkapan sangat berharga untuk penunggangan pengembaraan!"
+  },
+  "footer": {
+    "showroom": "BILIK PAMERAN",
+    "needHelp": "PERLUKAN BANTUAN",
+    "openingHours": "WAKTU OPERASI",
+    "openingHoursValue": "Isnin – Ahad: 09:00AM – 07:00PM",
+    "fridayClosed": "Jumaat: Tutup",
+    "keepInTouch": "KEKAL BERHUBUNG",
+    "emailPlaceholder": "Masukkan e-mel anda...",
+    "go": "HANTAR",
+    "newsletterPrompt": "Dapatkan kemas kini dan tawaran terkini.",
+    "subscribeSuccess": "Berjaya melanggan surat berita!",
+    "subscribeFail": "Gagal melanggan. Sila cuba lagi.",
+    "subscribeError": "Ralat berlaku. Sila cuba lagi.",
+    "subscribeThankYou": "Terima kasih! Anda telah melanggan surat berita kami.",
+    "emailRequired": "Sila masukkan alamat e-mel anda",
+    "networkError": "Ralat rangkaian. Sila cuba lagi.",
+    "navHome": "Laman Utama",
+    "navListings": "Senarai Motor",
+    "navServices": "Servis Kami",
+    "navAbout": "Tentang Kami"
+  },
+  "stickyCta": {
+    "call": "Panggil",
+    "whatsapp": "WhatsApp"
+  },
+  "about": {
+    "metaTitle": "Tentang Kami - Kedai Motor Johor Jaya | Perniagaan Motor Kekal",
+    "welcome": "Selamat Datang Ke Perniagaan Motor Kekal",
+    "paragraph1": "Perniagaan Motor Kekal ialah sebuah perniagaan terkenal yang berpangkalan di Johor Bahru, Malaysia, terkenal dengan dedikasi dan minatnya terhadap motosikal. Perniagaan ini telah menjadi sebahagian penting daripada komuniti motosikal di Johor sejak ditubuhkan pada 13 Julai 1992.",
+    "paragraph2": "Perniagaan Motor Kekal beroperasi sebagai pengedar, peruncit, pengedar dan pembaik pelbagai jenis motosikal, serta alat ganti dan aksesori auto. Perniagaan ini terkenal dengan komitmennya untuk menyediakan perkhidmatan dan produk berkualiti, menyumbang kepada statusnya sebagai entiti yang dihormati dalam industri motor Johor.",
+    "contactUs": "Hubungi Kami",
+    "testimonialsHeading": "Testimoni",
+    "locationHeading": "Lokasi",
+    "getDirection": "Dapatkan Arah"
+  },
+  "contact": {
+    "visitShowroom": "Kunjungi Bilik Pameran Kami",
+    "addressLabel": "Alamat:",
+    "parkingLabel": "Tempat Letak Kereta:",
+    "parkingValue": "Tempat letak kenderaan percuma di hadapan bilik pameran kami.",
+    "sendMessage": "Hantar Mesej Kepada Kami"
+  },
+  "service": {
+    "breadcrumbTitle": "Servis Motosikal di Johor Bahru",
+    "breadcrumbSubtitle": "Pengedar motosikal anda yang dipercayai di JB",
+    "breadcrumbHome": "Laman Utama",
+    "breadcrumbCurrent": "Servis Motosikal",
+    "scheduleService": "Tempah Servis",
+    "openingHours": "Waktu operasi"
+  },
+  "contactDetails": {
+    "title": "Butiran Hubungan"
+  },
+  "businessHours": {
+    "heading": "Waktu Perniagaan",
+    "weekdays": "Isnin - Jumaat:",
+    "saturday": "Sabtu:",
+    "sunday": "Ahad:",
+    "closedNote": "Kami tutup pada cuti umum. Untuk hal segera, sila WhatsApp kami."
+  },
+  "immediate": {
+    "heading": "Perlukan Bantuan Segera?",
+    "callUs": "Hubungi Kami",
+    "emailUs": "E-mel Kami",
+    "whatsapp": "WhatsApp",
+    "chatWithUs": "Bersembang dengan kami"
+  },
+  "serviceHours": {
+    "sunday": "Ahad",
+    "monday": "Isnin",
+    "tuesday": "Selasa",
+    "wednesday": "Rabu",
+    "thursday": "Khamis",
+    "friday": "Jumaat",
+    "saturday": "Sabtu",
+    "closed": "Tutup"
+  },
+  "serviceBlock": {
+    "includesLabel": "{title} kami merangkumi:",
+    "repair": {
+      "title": "Pembaikan & Penyelenggaraan",
+      "detailedDescription": "Pusat servis kami yang canggih dilengkapi dengan alat diagnostik terkini dan dianggotai oleh juruteknik bertauliah dengan pengalaman bertahun-tahun. Kami menyediakan perkhidmatan pembaikan dan penyelenggaraan menyeluruh untuk memastikan motosikal anda berfungsi pada prestasi terbaik. Daripada tukar minyak rutin sehingga pembinaan semula enjin yang rumit, kami menguruskan semuanya dengan teliti dan berhati-hati.",
+      "features": [
+        "Diagnostik dan pembaikan enjin",
+        "Penyelenggaraan dan penggantian sistem brek",
+        "Servis transmisi dan klac",
+        "Penyelesaian masalah sistem elektrik",
+        "Program penyelenggaraan berjadual",
+        "Penyelarasan bantuan tepi jalan kecemasan"
+      ]
+    },
+    "parts": {
+      "title": "Alat Ganti & Aksesori",
+      "detailedDescription": "Jabatan alat ganti kami yang luas menyimpan alat ganti OEM tulen dan komponen pasaran ganti berkualiti tinggi untuk semua jenama motosikal utama. Kami juga membawa pelbagai aksesori untuk meningkatkan pengalaman menunggang anda, daripada naik taraf prestasi sehingga kelengkapan keselesaan dan keselamatan. Pakar alat ganti kami boleh membantu anda mencari apa yang anda perlukan.",
+      "features": [
+        "Alat ganti OEM tulen dengan waranti pengilang",
+        "Alternatif pasaran ganti berkualiti tinggi",
+        "Alat ganti peningkatan prestasi",
+        "Kelengkapan keselamatan dan perlindungan",
+        "Aksesori tersuai dan alat gaya",
+        "Tempahan pantas untuk permintaan khas"
+      ]
+    },
+    "distribution": {
+      "title": "Perkhidmatan Pengedaran",
+      "detailedDescription": "Sebagai pengedar yang mantap di rantau Johor, Perniagaan Motor Kekal bertindak sebagai rakan kongsi yang boleh dipercayai untuk pengedar motosikal di seluruh Malaysia. Rangkaian pengedaran kami yang cekap memastikan penghantaran motosikal, alat ganti dan aksesori tepat pada masanya kepada rakan pengedar kami, menyokong pertumbuhan perniagaan dan kepuasan pelanggan mereka.",
+      "features": [
+        "Pengedaran motosikal borong",
+        "Rantaian bekalan alat ganti dan aksesori",
+        "Program sokongan dan latihan pengedar",
+        "Bantuan pemasaran dan promosi",
+        "Terma pembayaran fleksibel untuk pengedar",
+        "Liputan serantau di seluruh Johor dan kawasan sekitar"
+      ]
+    }
+  },
+  "serviceList": {
+    "heading": "Penyelesaian Motosikal Menyeluruh di Johor Bahru",
+    "para1": "Perniagaan Motor Kekal ialah destinasi sehenti anda untuk semua keperluan motosikal di Johor Bahru, Malaysia. Daripada jualan ke servis, alat ganti ke pengedaran, kami menyediakan penyelesaian menyeluruh yang disokong oleh pengalaman dan kepakaran bertahun-tahun dalam industri motosikal.",
+    "para2": "Komitmen kami terhadap kecemerlangan dan kepuasan pelanggan telah menjadikan kami nama yang dipercayai dalam kalangan peminat motosikal dan pengedar di seluruh rantau ini.",
+    "itemSales": "Jualan Motosikal",
+    "itemRepair": "Pembaikan & Penyelenggaraan",
+    "itemParts": "Alat Ganti & Aksesori",
+    "itemDistribution": "Perkhidmatan Pengedaran",
+    "salesHeading": "Jualan Motosikal",
+    "salesPara": "Di Perniagaan Motor Kekal, kami berbangga menawarkan pilihan motosikal yang luas untuk memenuhi keperluan dan bajet setiap penunggang. Bilik pameran kami di Johor Bahru memaparkan model terkini daripada jenama terkenal termasuk Yamaha, Honda, Kawasaki dan Suzuki. Sama ada anda baru mencari motosikal pertama anda atau penunggang berpengalaman yang mencari mesin berprestasi tinggi, pasukan jualan kami yang berpengetahuan akan membantu anda mencari padanan yang sempurna."
+  },
+  "contactForm": {
+    "intro": "Ada soalan tentang motosikal kami? Kami sedia membantu! Hubungi kami untuk pertanyaan mengenai motosikal, servis, atau apa sahaja yang anda perlukan.",
+    "name": "Nama*",
+    "namePlaceholder": "Nama Anda",
+    "email": "E-mel",
+    "phone": "Telefon",
+    "topic": "Topik",
+    "topicSelect": "Pilih topik (pilihan)",
+    "topicOrderSupport": "Sokongan Pesanan",
+    "topicDealerInquiry": "Pertanyaan Pengedar",
+    "topicSellBike": "Jual Motosikal Anda",
+    "topicServiceInquiry": "Pertanyaan Servis",
+    "topicGeneralInquiry": "Pertanyaan Umum",
+    "message": "Mesej*",
+    "messagePlaceholder": "Beritahu kami bagaimana kami boleh membantu anda...",
+    "send": "Hantar Mesej",
+    "sending": "Menghantar...",
+    "nameRequired": "Nama diperlukan",
+    "contactRequired": "E-mel atau nombor telefon diperlukan",
+    "emailInvalid": "Sila masukkan alamat e-mel yang sah",
+    "messageRequired": "Mesej diperlukan",
+    "success": "Terima kasih atas mesej anda! Kami akan menghubungi anda tidak lama lagi.",
+    "sendFail": "Gagal menghantar mesej. Sila cuba lagi.",
+    "networkError": "Ralat rangkaian. Sila semak sambungan anda dan cuba lagi."
+  },
+  "scheduleForm": {
+    "name": "Nama *",
+    "namePlaceholder": "Nama Anda",
+    "email": "E-mel *",
+    "phone": "Telefon",
+    "bestTime": "Masa terbaik untuk dihubungi",
+    "bestTimePlaceholder": "cth: Pagi, Tengah hari, Petang",
+    "details": "Butiran Tambahan (Pilihan)",
+    "detailsPlaceholder": "Beritahu kami tentang motosikal anda, servis yang diperlukan, atau sebarang keperluan khusus...",
+    "submit": "Mohon Servis",
+    "submitting": "Menghantar...",
+    "success": "Permohonan servis berjaya dihantar! Kami akan menghubungi anda tidak lama lagi untuk menetapkan temu janji.",
+    "sendFail": "Gagal menghantar permohonan servis. Sila cuba lagi.",
+    "networkError": "Ralat rangkaian. Sila semak sambungan anda dan cuba lagi."
+  },
+  "detail": {
+    "inStock": "BAHARU - ADA STOK",
+    "overview": "Gambaran Keseluruhan",
+    "description": "Penerangan",
+    "contactSeller": "Hubungi Penjual",
+    "relatedBikes": "Motosikal Berkaitan Terbaik",
+    "showAllBikes": "Lihat Semua Motosikal",
+    "breadcrumbHome": "Laman Utama",
+    "breadcrumbListing": "Senarai",
+    "breadcrumbMotorcycles": "Motosikal",
+    "specGeneral": "Umum",
+    "specPerformance": "Prestasi",
+    "specChassis": "Casis",
+    "csNamePlaceholder": "Nama Anda",
+    "csPhonePlaceholder": "Nombor Telefon",
+    "csEmailPlaceholder": "Alamat E-mel",
+    "csDefaultMessage": "Saya berminat dengan sebut harga untuk kenderaan ini. Sila hubungi saya secepat mungkin dengan harga terbaik anda untuk kenderaan ini.",
+    "whatsapp": "WhatsApp",
+    "stickyFrom": "DARI",
+    "enquireWhatsApp": "Tanya melalui WhatsApp",
+    "writeReview": "Tulis Ulasan",
+    "reviewNamePlaceholder": "Nama Anda",
+    "reviewEmailPlaceholder": "E-mel",
+    "reviewMessagePlaceholder": "Mesej",
+    "sendReview": "Hantar Ulasan Anda",
+    "sending": "Menghantar...",
+    "reviewSuccess": "Ulasan berjaya dihantar!",
+    "reviewFail": "Gagal menghantar ulasan. Sila cuba lagi.",
+    "reviewError": "Ralat berlaku. Sila cuba lagi."
+  },
+  "commonTestimonials": {
+    "enthusiast": "Peminat Motosikal",
+    "commuter": "Penglaju Harian",
+    "text1": "Servis cemerlang dan alat ganti tulen! Saya telah menunggang selama 15 tahun dan ini adalah kedai motosikal terbaik yang pernah saya uruskan. Mereka membantu saya mencari sistem ekzos yang sempurna untuk Yamaha R1 saya dan pemasangannya sempurna.",
+    "text2": "Honda CB650R saya memerlukan pembaikan segera dan mereka memulihkannya pada hari yang sama. Kakitangan benar-benar mahir tentang motosikal dan harganya sangat berpatutan. Saya tidak akan mempercayai motosikal saya kepada sesiapa lagi!",
+    "text3": "Pilihan kelengkapan dan aksesori motosikal yang menakjubkan! Daripada topi keledar ke jaket menunggang, mereka mempunyai semua yang diperlukan penunggang. Kualitinya terbaik dan nasihat mereka tentang kelengkapan keselamatan sangat berharga.",
+    "text4": "Penghantaran pantas dan perkhidmatan pelanggan yang cemerlang. Menempah pad brek dalam talian dan ia tiba dalam masa 2 hari. Kedai dalam talian mudah dilayari dan mereka mempunyai penerangan produk terperinci yang membantu saya memilih alat ganti yang betul."
+  },
+  "filterPills": {
+    "fromQuickQuote": "Daripada Sebut Harga Pantas:",
+    "budget": "Bajet: {value}",
+    "license": "Lesen: {value}",
+    "under": "Bawah {value}",
+    "bFull": "B Penuh (≥500cc)",
+    "b2": "B2 (<500cc)",
+    "clearAll": "Kosongkan semua"
+  },
+  "loanCalculator": {
+    "title": "Kalkulator Pembiayaan",
+    "subtitle": "Miliki motosikal impian anda dengan ansuran bulanan fleksibel mengikut bajet anda.",
+    "downPayment": "Bayaran Pendahuluan ({percent}%)",
+    "loanTerm": "Tempoh Pinjaman",
+    "months": "{count} Bulan",
+    "estimatedMonthly": "ANGGARAN BULANAN",
+    "perMonth": "/bln",
+    "disclaimer": "Dikira pada kadar faedah 3.5%. Jumlah akhir mungkin berbeza bergantung pada profil kredit dan insurans.",
+    "apply": "Mohon Pinjaman",
+    "redirecting": "Mengalihkan ke WhatsApp untuk permohonan pinjaman..."
+  },
+  "faq": {
+    "heading": "Pembeli kali pertama?",
+    "headingLine2": "Mula di sini.",
+    "subtext": "Kami menerima soalan ini setiap hari. Jika ada yang tertinggal, WhatsApp kami — Faiz menjawab dalam ~5 minit.",
+    "categoryQuestions": "{category} · {count} SOALAN",
+    "stillQuestions": "Masih ada soalan?",
+    "stillQuestionsSubtext": "Faiz dari jualan membalas dalam ~5 minit pada waktu operasi (9–7 setiap hari)",
+    "categories": {
+      "Financing": "Pembiayaan",
+      "Delivery": "Penghantaran",
+      "Warranty": "Waranti"
+    },
+    "financing": [
+      {
+        "question": "Bolehkah pembeli kali pertama mendapat pinjaman motosikal?",
+        "answer": "Ya. Kami bekerjasama dengan MBSB, Hong Leong dan RHB — kesemuanya membiayai pembeli kali pertama bermula daripada pendapatan bulanan RM 1,800. Kelulusan biasanya 1–2 hari bekerja. Gunakan pra-kelayakan 60 saat kami terlebih dahulu untuk melihat peluang anda sebelum membuat keputusan."
+      },
+      {
+        "question": "Dokumen apakah yang saya perlukan?",
+        "answer": "Anda memerlukan IC (MyKad), slip gaji 3 bulan terkini atau penyata KWSP, dan penyata bank untuk 3 bulan lepas. Pembeli bekerja sendiri memerlukan pendaftaran SSM dan penyata bank 6 bulan."
+      },
+      {
+        "question": "Bolehkah saya mendapat diskaun untuk pembayaran tunai penuh?",
+        "answer": "Ya — pembeli tunai mendapat diskaun terus daripada harga tersenarai. Jumlah sebenar bergantung pada model. WhatsApp kami dengan motosikal yang anda mahukan dan kami akan beri sebut harga dengan segera."
+      },
+      {
+        "question": "Berapakah bayaran pendahuluan terendah yang boleh saya beri?",
+        "answer": "Kebanyakan bank menerima serendah 10% bayaran pendahuluan untuk pembeli bergaji. Sesetengah model layak untuk promosi tanpa bayaran pendahuluan — tanya kami yang mana sedang berjalan sekarang."
+      }
+    ],
+    "delivery": [
+      {
+        "question": "Berapa lama penghantaran mengambil masa?",
+        "answer": "Motosikal dalam stok sedia pada hari yang sama atau hari berikutnya. Jika kami perlu mendapatkannya dari cawangan lain, beri masa 3–5 hari bekerja. Kami akan kemas kini anda pada setiap langkah melalui WhatsApp."
+      },
+      {
+        "question": "Adakah anda menghantar di luar JB?",
+        "answer": "Ya, kami menghantar ke seluruh Johor dan Semenanjung Malaysia. Penghantaran dalam JB adalah percuma. Untuk penghantaran luar bandar, yuran pengangkutan dikenakan bergantung pada jarak — biasanya RM 100–300."
+      },
+      {
+        "question": "Bolehkah saya menunggang ujian sebelum membeli?",
+        "answer": "Sudah tentu. Kunjungi bilik pameran kami di Jalan Seroja 49, Taman Johor Jaya pada waktu operasi. Bawa lesen anda dan kami akan aturkan tunggangan ujian di tempat itu juga."
+      }
+    ],
+    "warranty": [
+      {
+        "question": "Apakah waranti yang saya dapat?",
+        "answer": "Semua motosikal baharu disertakan dengan waranti pengilang (biasanya 2 tahun atau 20,000 km, mana lebih dahulu). Kami juga menyediakan waranti pengedar 6 bulan kami sendiri yang merangkumi komponen elektrik dan enjin."
+      },
+      {
+        "question": "Apakah yang dilindungi oleh waranti?",
+        "answer": "Waranti pengilang melindungi kecacatan pembuatan pada enjin, rangka dan sistem elektrik. Waranti pengedar kami melindungi komponen utama tidak termasuk bahagian yang haus (pad brek, tayar, rantai, sproket)."
+      },
+      {
+        "question": "Bolehkah saya melanjutkan waranti saya?",
+        "answer": "Ya — kami menawarkan pakej waranti lanjutan untuk tambahan 1 atau 2 tahun. Tanya semasa pembelian untuk kadar terbaik. Lebih murah untuk menambahnya pada awal daripada kemudian."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Halaman Tidak Dijumpai",
+    "description": "Halaman yang anda cari mungkin telah dialih keluar atau tidak tersedia buat sementara waktu.",
+    "backHome": "Kembali ke Laman Utama"
+  },
+  "listing": {
+    "breadcrumbTitle": "Motosikal Untuk Dijual",
+    "breadcrumbSubtitle": "Senarai",
+    "breadcrumbHome": "Laman Utama",
+    "breadcrumbCurrent": "Senarai",
+    "viewDetails": "Lihat Butiran",
+    "engine": "ENJIN",
+    "price": "HARGA",
+    "foundCount": "Kami menemui <highlight>{count}</highlight> motosikal untuk anda.",
+    "searchPlaceholder": "Cari motosikal (cth: Yamaha, sport, 150cc)...",
+    "sortBy": "Susun mengikut",
+    "priceLowToHigh": "Harga (Rendah ke Tinggi)",
+    "priceHighToLow": "Harga (Tinggi ke Rendah)",
+    "allBrands": "Semua Jenama",
+    "empty": {
+      "title": "Tiada motosikal sepadan dengan carian anda",
+      "subtitle": "Kami tidak dapat menemui sebarang motosikal yang sepadan dengan kriteria anda.",
+      "searchedFor": "Dicari untuk:",
+      "brand": "Jenama:",
+      "tryThese": "Cuba cadangan ini:",
+      "removeFilters": "Alih keluar beberapa penapis",
+      "differentKeywords": "Cuba kata kunci berbeza",
+      "checkSpelling": "Semak ejaan",
+      "browseAll": "Lihat semua jenama",
+      "needHelp": "Perlukan bantuan mencari motosikal yang sesuai?",
+      "contactExperts": "Hubungi pakar kami"
+    }
+  }
+}

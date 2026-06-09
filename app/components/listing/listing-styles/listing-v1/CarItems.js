@@ -1,8 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { toMotorcycleSlug } from "@/utils/slug";
 
 const CarItems = ({ motorcycles }) => {
+  const t = useTranslations("listing");
   return (
     <>
       {motorcycles.map((motorcycle) => (
@@ -30,7 +32,7 @@ const CarItems = ({ motorcycles }) => {
                 <h6 className="card-title">{motorcycle.name}</h6>
                 <div className="spec-grid">
                   <div className="spec-item">
-                    <span className="spec-label">ENGINE</span>
+                    <span className="spec-label">{t("engine")}</span>
                     <span className="spec-value">
                       {motorcycle.engineCapacity
                         ? `${motorcycle.engineCapacity}cc${motorcycle.engine ? ` ${motorcycle.engine}` : ""}`
@@ -38,11 +40,11 @@ const CarItems = ({ motorcycles }) => {
                     </span>
                   </div>
                   <div className="spec-item">
-                    <span className="spec-label">PRICE</span>
+                    <span className="spec-label">{t("price")}</span>
                     <span className="spec-value">RM {motorcycle.price?.toLocaleString()}</span>
                   </div>
                 </div>
-                <div className="view-details-btn">View Details</div>
+                <div className="view-details-btn">{t("viewDetails")}</div>
               </div>
             </div>
           </Link>

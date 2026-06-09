@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import MainMenu from "./MainMenu";
+import LanguageSwitcher from "./LanguageSwitcher";
 import Image from "next/image";
 
 const DefaultHeader = () => {
@@ -32,6 +33,9 @@ const DefaultHeader = () => {
             data-menu-style="horizontal"
           >
             <MainMenu />
+            <li className="language-switcher-item">
+              <LanguageSwitcher />
+            </li>
           </ul>
         </div>
       </nav>

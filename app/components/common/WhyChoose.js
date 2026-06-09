@@ -1,26 +1,26 @@
+import { useTranslations } from "next-intl";
+
 const WhyChoose = () => {
+  const t = useTranslations("whyChoose");
   const reasons = [
     {
       iconClass: "flaticon-price-tag",
-      title: "Best Price",
-      description:
-        "Our stress-free finance department that can find financial solutions to save you money.",
+      title: t("bestPriceTitle"),
+      description: t("bestPriceDesc"),
       delay: 100,
       style: "style1",
     },
     {
       iconClass: "flaticon-car",
-      title: "Trusted By Thousands",
-      description:
-        "Our stress-free finance department that can find financial solutions to save you money.",
+      title: t("trustedTitle"),
+      description: t("trustedDesc"),
       delay: 200,
       style: "style2",
     },
     {
       iconClass: "flaticon-trust",
-      title: "Wide Range of Brands",
-      description:
-        "Our stress-free finance department that can find financial solutions to save you money.",
+      title: t("wideRangeTitle"),
+      description: t("wideRangeDesc"),
       delay: 300,
       style: "style3",
     },
