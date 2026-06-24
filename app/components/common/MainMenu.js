@@ -4,6 +4,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 
 const MENU_ITEMS = [
   { key: "listings", path: "/listing" },
+  { key: "promotions", path: "/promotions" },
   { key: "aboutUs", path: "/about-us" },
   { key: "contact", path: "/contact" },
   { key: "service", path: "/service" },

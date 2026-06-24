@@ -39,10 +39,35 @@ model Motorcycle {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  images MotorcycleImage[]
+  images     MotorcycleImage[]
+  promotions Promotion[]
 
   @@unique([brand, name, year])
   @@map("motorcycles")
+}
+
+model Promotion {
+  id              String   @id @default(cuid())
+  title           String
+  subtitle        String?
+  description     String?
+  imageUrl        String?
+  ctaText         String   @default("Claim this deal")
+  whatsappMessage String?
+  isFeatured      Boolean  @default(false)
+  isActive        Boolean  @default(true)
+  startDate       DateTime
+  endDate         DateTime
+  displayOrder    Int      @default(0)
+
+  motorcycleId String?
+  motorcycle   Motorcycle? @relation(fields: [motorcycleId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive, startDate, endDate])
+  @@map("promotions")
 }
 
 model ProductSyncFile {

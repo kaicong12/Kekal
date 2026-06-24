@@ -8,7 +8,8 @@
     "service": "Servis",
     "ourServices": "Servis Kami",
     "faq": "Soalan Lazim",
-    "menu": "Menu"
+    "menu": "Menu",
+    "promotions": "Promosi"
   },
   "headerTop": {
     "hours": "Isnin - Ahad 8:00 - 18:00",
@@ -76,7 +77,8 @@
     "navHome": "Laman Utama",
     "navListings": "Senarai Motor",
     "navServices": "Servis Kami",
-    "navAbout": "Tentang Kami"
+    "navAbout": "Tentang Kami",
+    "navPromotions": "Promosi"
   },
   "stickyCta": {
     "call": "Panggil",
@@ -374,5 +376,24 @@
       "needHelp": "Perlukan bantuan mencari motosikal yang sesuai?",
       "contactExperts": "Hubungi pakar kami"
     }
+  },
+  "promotions": {
+    "thisMonth": "Bulan Ini",
+    "headline": "Tawaran sedang berlangsung.",
+    "summary": "{count} tawaran sedang berjalan. Kebanyakannya walk-in sahaja — singgah showroom Johor Jaya untuk claim.",
+    "summaryEmpty": "Tiada tawaran aktif buat masa ini — nantikan tawaran seterusnya.",
+    "moreOffers": "Lebih banyak tawaran",
+    "emptyTitle": "Tiada promosi aktif buat masa ini",
+    "emptyBody": "Nantikan — tawaran baharu sentiasa ada. Atau WhatsApp kami untuk tawaran semasa.",
+    "pastDeals": "Tawaran lepas",
+    "days": "Hari",
+    "hrs": "Jam",
+    "min": "Min",
+    "endsInDays": "Tamat dalam {count} hari",
+    "endsToday": "Tamat hari ini",
+    "offerEnds": "Tawaran tamat {date}",
+    "endedOn": "Tamat {date}",
+    "claimDeal": "Claim tawaran ini",
+    "visitToClaim": "Datang untuk claim · Johor Jaya"
   }
 }

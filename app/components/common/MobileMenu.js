@@ -46,6 +46,7 @@ const MobileMenu = () => {
 
   const menuItems = [
     { label: t("listings"), path: "/listing" },
+    { label: t("promotions"), path: "/promotions" },
     { label: t("ourServices"), path: "/service" },
     { label: t("contact"), path: "/contact" },
     { label: t("aboutUs"), path: "/about-us" },

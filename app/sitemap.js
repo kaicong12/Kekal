@@ -30,6 +30,12 @@ export default async function sitemap() {
         priority: 0.9,
       },
       {
+        url: `${URL}/promotions`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily",
+        priority: 0.8,
+      },
+      {
         url: `${URL}/about-us`,
         lastModified: new Date().toISOString(),
         changeFrequency: "monthly",
@@ -65,6 +71,12 @@ export default async function sitemap() {
         lastModified: new Date().toISOString(),
         changeFrequency: "daily",
         priority: 0.9,
+      },
+      {
+        url: `${URL}/promotions`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily",
+        priority: 0.8,
       },
       {
         url: `${URL}/about-us`,
