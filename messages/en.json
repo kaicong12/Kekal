@@ -8,7 +8,8 @@
     "service": "Service",
     "ourServices": "Our Services",
     "faq": "FAQ",
-    "menu": "Menu"
+    "menu": "Menu",
+    "promotions": "Promotions"
   },
   "headerTop": {
     "hours": "Mon - Sun 8:00 - 18:00",
@@ -76,7 +77,8 @@
     "navHome": "Home",
     "navListings": "Listings",
     "navServices": "Our Services",
-    "navAbout": "About Us"
+    "navAbout": "About Us",
+    "navPromotions": "Promotions"
   },
   "stickyCta": {
     "call": "Call",
@@ -374,5 +376,24 @@
       "needHelp": "Need help finding the right motorcycle?",
       "contactExperts": "Contact our experts"
     }
+  },
+  "promotions": {
+    "thisMonth": "This Month",
+    "headline": "Deals are live.",
+    "summary": "{count} offers running now. Most are walk-in only — drop by the Johor Jaya showroom to claim.",
+    "summaryEmpty": "No active offers right now — check back soon for the next drop.",
+    "moreOffers": "More offers",
+    "emptyTitle": "No active promotions right now",
+    "emptyBody": "Check back soon — new deals drop regularly. Or message us on WhatsApp for current offers.",
+    "pastDeals": "Past deals",
+    "days": "Days",
+    "hrs": "Hrs",
+    "min": "Min",
+    "endsInDays": "Ends in {count} days",
+    "endsToday": "Ends today",
+    "offerEnds": "Offer ends {date}",
+    "endedOn": "Ended {date}",
+    "claimDeal": "Claim this deal",
+    "visitToClaim": "Visit us to claim · Johor Jaya"
   }
 }

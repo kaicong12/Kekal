@@ -6,6 +6,7 @@ const Navigation = () => {
   const links = [
     { label: t("navHome"), path: "/" },
     { label: t("navListings"), path: "/listing" },
+    { label: t("navPromotions"), path: "/promotions" },
     { label: t("navServices"), path: "/service" },
     { label: t("navAbout"), path: "/about-us" },
   ];

@@ -139,3 +139,92 @@ export const updateMotorcyclePg = async (id, data) => {
 export const deleteMotorcyclePg = async (id) => {
   return prisma.motorcycle.delete({ where: { id } });
 };
+
+/* -------------------------------------------------------------------------- */
+/*                                 Promotions                                 */
+/* -------------------------------------------------------------------------- */
+
+function formatPromotion(promotion) {
+  return {
+    ...promotion,
+    motorcycle: promotion.motorcycle
+      ? formatMotorcycle(promotion.motorcycle)
+      : null,
+  };
+}
+
+const promotionInclude = {
+  motorcycle: {
+    include: { images: { orderBy: { displayOrder: "asc" }, take: 1 } },
+  },
+};
+
+// Live = manually active AND within the start/end window.
+export const listLivePromotionsPg = async () => {
+  const now = new Date();
+  const promotions = await prisma.promotion.findMany({
+    where: {
+      isActive: true,
+      startDate: { lte: now },
+      endDate: { gte: now },
+    },
+    orderBy: [
+      { isFeatured: "desc" },
+      { displayOrder: "asc" },
+      { endDate: "asc" },
+    ],
+    include: promotionInclude,
+  });
+  return promotions.map(formatPromotion);
+};
+
+// Recently expired promos kept for the public "Past deals" SEO section.
+export const listPastPromotionsPg = async ({ limit = 6 } = {}) => {
+  const now = new Date();
+  const promotions = await prisma.promotion.findMany({
+    where: { endDate: { lt: now } },
+    orderBy: { endDate: "desc" },
+    take: limit,
+    include: promotionInclude,
+  });
+  return promotions.map(formatPromotion);
+};
+
+// Admin view: every promotion, newest first.
+export const listAllPromotionsPg = async () => {
+  const promotions = await prisma.promotion.findMany({
+    orderBy: { createdAt: "desc" },
+    include: promotionInclude,
+  });
+  return promotions.map(formatPromotion);
+};
+
+export const getPromotionByIdPg = async (id) => {
+  const promotion = await prisma.promotion.findUnique({
+    where: { id },
+    include: promotionInclude,
+  });
+  if (!promotion) return null;
+  return formatPromotion(promotion);
+};
+
+export const createPromotionPg = async (data) => {
+  const promotion = await prisma.promotion.create({
+    data,
+    include: promotionInclude,
+  });
+  return formatPromotion(promotion);
+};
+
+export const updatePromotionPg = async (id, data) => {
+  const promotion = await prisma.promotion.update({
+    where: { id },
+    data,
+    include: promotionInclude,
+  });
+  return formatPromotion(promotion);
+};
+
+export const deletePromotionPg = async (id) => {
+  return prisma.promotion.delete({ where: { id } });
+};

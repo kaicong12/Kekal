@@ -8,7 +8,8 @@
     "service": "维修服务",
     "ourServices": "我们的服务",
     "faq": "常见问题",
-    "menu": "菜单"
+    "menu": "菜单",
+    "promotions": "促销"
   },
   "headerTop": {
     "hours": "周一至周日 8:00 - 18:00",
@@ -76,7 +77,8 @@
     "navHome": "首页",
     "navListings": "车辆列表",
     "navServices": "我们的服务",
-    "navAbout": "关于我们"
+    "navAbout": "关于我们",
+    "navPromotions": "促销"
   },
   "stickyCta": {
     "call": "致电",
@@ -374,5 +376,24 @@
       "needHelp": "需要帮助找到合适的摩托车吗？",
       "contactExperts": "联系我们的专家"
     }
+  },
+  "promotions": {
+    "thisMonth": "本月",
+    "headline": "优惠进行中。",
+    "summary": "现有 {count} 项优惠。多数仅限到店——欢迎到 Johor Jaya 展厅领取。",
+    "summaryEmpty": "目前暂无优惠——敬请期待下一波活动。",
+    "moreOffers": "更多优惠",
+    "emptyTitle": "目前暂无促销活动",
+    "emptyBody": "敬请期待——我们经常推出新优惠。或通过 WhatsApp 联系我们了解当前优惠。",
+    "pastDeals": "往期优惠",
+    "days": "天",
+    "hrs": "时",
+    "min": "分",
+    "endsInDays": "{count} 天后结束",
+    "endsToday": "今日结束",
+    "offerEnds": "优惠截止 {date}",
+    "endedOn": "已于 {date} 结束",
+    "claimDeal": "领取优惠",
+    "visitToClaim": "到店领取 · Johor Jaya"
   }
 }
