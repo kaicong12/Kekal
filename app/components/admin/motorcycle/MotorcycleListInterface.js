@@ -14,6 +14,7 @@ import {
   message,
   Modal,
   Image,
+  Tag,
 } from "antd";
 import {
   EditOutlined,
@@ -21,12 +22,13 @@ import {
   SearchOutlined,
   PlusOutlined,
   CarOutlined,
+  RightOutlined,
 } from "@ant-design/icons";
 import { auth } from "@/utils/firebase";
 
 const { Text } = Typography;
 
-export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
+export default function MotorcycleListInterface({ onCreateNew, onEdit, isMobile }) {
   const [motorcycles, setMotorcycles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
@@ -172,6 +174,86 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
     },
   ];
 
+  if (isMobile) {
+    return (
+      <div>
+        <div style={{ display: "flex", gap: 10, marginBottom: 16, paddingTop: 8 }}>
+          <div style={mobileStyles.statCard}>
+            <div style={mobileStyles.statValue}>{total}</div>
+            <div style={mobileStyles.statLabel}>On site</div>
+          </div>
+          <div style={mobileStyles.statCard}>
+            <div style={mobileStyles.statValue}>
+              {brands.length}
+            </div>
+            <div style={mobileStyles.statLabel}>Brands</div>
+          </div>
+        </div>
+
+        <div style={{ marginBottom: 12 }}>
+          <Input
+            placeholder="Search bikes..."
+            prefix={<SearchOutlined style={{ color: "#bbb" }} />}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            allowClear
+            style={{ borderRadius: 8 }}
+          />
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {loading ? (
+            <div style={{ textAlign: "center", padding: 40, color: "#999" }}>Loading...</div>
+          ) : motorcycles.length === 0 ? (
+            <div style={{ textAlign: "center", padding: 40, color: "#999" }}>No motorcycles found</div>
+          ) : (
+            motorcycles.map((moto) => (
+              <div
+                key={moto.id}
+                onClick={() => onEdit(moto.id)}
+                style={mobileStyles.listCard}
+              >
+                <div style={mobileStyles.listCardImage}>
+                  <Image
+                    src={moto.imageUrl}
+                    alt={moto.name}
+                    width={56}
+                    height={42}
+                    style={{ objectFit: "cover", borderRadius: 6 }}
+                    fallback="/images/no-image.svg"
+                    preview={false}
+                  />
+                </div>
+                <div style={mobileStyles.listCardContent}>
+                  <Text strong style={{ fontSize: 14, display: "block" }}>
+                    {moto.brand} {moto.name}
+                  </Text>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
+                    <Text style={{ fontSize: 13, color: "#f5c34b", fontWeight: 600 }}>
+                      RM {Number(moto.price).toLocaleString()}
+                    </Text>
+                    <Text type="secondary" style={{ fontSize: 12 }}>
+                      {moto.year}
+                    </Text>
+                  </div>
+                </div>
+                <RightOutlined style={{ color: "#ccc", fontSize: 12 }} />
+              </div>
+            ))
+          )}
+        </div>
+
+        <button
+          onClick={onCreateNew}
+          style={mobileStyles.fab}
+        >
+          <PlusOutlined style={{ fontSize: 18 }} />
+          <span style={{ fontSize: 14, fontWeight: 500 }}>New</span>
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
@@ -244,3 +326,63 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
     </div>
   );
 }
+
+const mobileStyles = {
+  statCard: {
+    background: "#fff8e6",
+    borderRadius: 10,
+    padding: "12px 20px",
+    minWidth: 80,
+    textAlign: "center",
+    border: "1px solid #f5e6b8",
+  },
+  statValue: {
+    fontSize: 22,
+    fontWeight: 700,
+    color: "#333",
+  },
+  statLabel: {
+    fontSize: 11,
+    color: "#999",
+    marginTop: 2,
+  },
+  listCard: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    padding: "12px 14px",
+    background: "#fff",
+    borderRadius: 10,
+    border: "1px solid #f0f0f0",
+    cursor: "pointer",
+  },
+  listCardImage: {
+    flexShrink: 0,
+    width: 56,
+    height: 42,
+    borderRadius: 6,
+    overflow: "hidden",
+    background: "#f5f5f5",
+  },
+  listCardContent: {
+    flex: 1,
+    minWidth: 0,
+  },
+  fab: {
+    position: "fixed",
+    bottom: 80,
+    right: 20,
+    background: "#f5c34b",
+    color: "#000",
+    border: "none",
+    borderRadius: 28,
+    padding: "12px 20px",
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+    boxShadow: "0 4px 12px rgba(245, 195, 75, 0.4)",
+    cursor: "pointer",
+    zIndex: 50,
+    fontWeight: 500,
+  },
+};

@@ -3,7 +3,7 @@ import { useState } from "react";
 import PromotionListInterface from "./PromotionListInterface";
 import PromotionFormInterface from "./PromotionFormInterface";
 
-export default function PromotionManagement() {
+export default function PromotionManagement({ isMobile }) {
   const [view, setView] = useState("list");
   const [editPromotionId, setEditPromotionId] = useState(null);
 
@@ -27,6 +27,7 @@ export default function PromotionManagement() {
       <PromotionListInterface
         onCreateNew={handleCreateNew}
         onEdit={handleEdit}
+        isMobile={isMobile}
       />
     );
   }
@@ -35,6 +36,7 @@ export default function PromotionManagement() {
     <PromotionFormInterface
       promotionId={editPromotionId}
       onBack={handleBack}
+      isMobile={isMobile}
     />
   );
 }

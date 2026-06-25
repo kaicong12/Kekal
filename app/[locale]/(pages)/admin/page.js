@@ -6,7 +6,6 @@ import AdminDashboard from "@/app/components/admin/AdminDashboard";
 export default function AdminPage() {
   const { isAuthenticated, isAuthorized } = useAuth();
 
-  // If not authenticated or not authorized, show the common unauthorized access component
   if (!isAuthenticated || !isAuthorized) {
     return (
       <UnauthorizedAccess
@@ -17,6 +16,5 @@ export default function AdminPage() {
     );
   }
 
-  // If authenticated and authorized, show the admin dashboard
   return <AdminDashboard />;
 }

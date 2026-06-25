@@ -20,6 +20,8 @@ import {
   PlusOutlined,
   TagsOutlined,
   StarFilled,
+  RightOutlined,
+  CalendarOutlined,
 } from "@ant-design/icons";
 import { auth } from "@/utils/firebase";
 
@@ -43,7 +45,13 @@ const formatDate = (value) =>
     year: "numeric",
   });
 
-export default function PromotionListInterface({ onCreateNew, onEdit }) {
+const formatDateShort = (value) =>
+  new Date(value).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+  });
+
+export default function PromotionListInterface({ onCreateNew, onEdit, isMobile }) {
   const [promotions, setPromotions] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -93,6 +101,10 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
 
   const liveCount = promotions.filter(
     (p) => getPromotionStatus(p).label === "Live"
+  ).length;
+
+  const scheduledCount = promotions.filter(
+    (p) => getPromotionStatus(p).label === "Scheduled"
   ).length;
 
   const columns = [
@@ -176,6 +188,87 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
     },
   ];
 
+  if (isMobile) {
+    return (
+      <div>
+        <div style={{ display: "flex", gap: 10, marginBottom: 16, paddingTop: 8 }}>
+          <div style={mobileStyles.statCard}>
+            <div style={{ ...mobileStyles.statValue, color: "#52c41a" }}>{liveCount}</div>
+            <div style={mobileStyles.statLabel}>Live</div>
+          </div>
+          <div style={mobileStyles.statCard}>
+            <div style={mobileStyles.statValue}>{scheduledCount}</div>
+            <div style={mobileStyles.statLabel}>Scheduled</div>
+          </div>
+          <div style={mobileStyles.statCard}>
+            <div style={mobileStyles.statValue}>{promotions.length}</div>
+            <div style={mobileStyles.statLabel}>Total</div>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {loading ? (
+            <div style={{ textAlign: "center", padding: 40, color: "#999" }}>Loading...</div>
+          ) : promotions.length === 0 ? (
+            <div style={{ textAlign: "center", padding: 40, color: "#999" }}>No promotions yet</div>
+          ) : (
+            promotions.map((promo) => {
+              const status = getPromotionStatus(promo);
+              return (
+                <div
+                  key={promo.id}
+                  onClick={() => onEdit(promo.id)}
+                  style={mobileStyles.listCard}
+                >
+                  <div style={mobileStyles.listCardImage}>
+                    <Image
+                      src={promo.imageUrl || "/images/no-image.svg"}
+                      alt={promo.title}
+                      width={56}
+                      height={56}
+                      style={{ objectFit: "cover", borderRadius: 6 }}
+                      fallback="/images/no-image.svg"
+                      preview={false}
+                    />
+                  </div>
+                  <div style={mobileStyles.listCardContent}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
+                      <Tag
+                        color={status.color}
+                        style={{ margin: 0, fontSize: 11, lineHeight: "18px", padding: "0 6px" }}
+                      >
+                        {status.label}
+                      </Tag>
+                      {promo.isFeatured && <StarFilled style={{ color: "#faad14", fontSize: 12 }} />}
+                    </div>
+                    <Text strong style={{ fontSize: 14, display: "block" }}>
+                      {promo.title}
+                    </Text>
+                    <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 4 }}>
+                      <CalendarOutlined style={{ fontSize: 11, color: "#999" }} />
+                      <Text style={{ fontSize: 12, color: "#999" }}>
+                        Ends {formatDateShort(promo.endDate)}
+                      </Text>
+                    </div>
+                  </div>
+                  <RightOutlined style={{ color: "#ccc", fontSize: 12 }} />
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        <button
+          onClick={onCreateNew}
+          style={mobileStyles.fab}
+        >
+          <PlusOutlined style={{ fontSize: 18 }} />
+          <span style={{ fontSize: 14, fontWeight: 500 }}>New</span>
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
@@ -219,3 +312,63 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
     </div>
   );
 }
+
+const mobileStyles = {
+  statCard: {
+    background: "#fff8e6",
+    borderRadius: 10,
+    padding: "12px 20px",
+    minWidth: 80,
+    textAlign: "center",
+    border: "1px solid #f5e6b8",
+  },
+  statValue: {
+    fontSize: 22,
+    fontWeight: 700,
+    color: "#333",
+  },
+  statLabel: {
+    fontSize: 11,
+    color: "#999",
+    marginTop: 2,
+  },
+  listCard: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    padding: "12px 14px",
+    background: "#fff",
+    borderRadius: 10,
+    border: "1px solid #f0f0f0",
+    cursor: "pointer",
+  },
+  listCardImage: {
+    flexShrink: 0,
+    width: 56,
+    height: 56,
+    borderRadius: 6,
+    overflow: "hidden",
+    background: "#f5f5f5",
+  },
+  listCardContent: {
+    flex: 1,
+    minWidth: 0,
+  },
+  fab: {
+    position: "fixed",
+    bottom: 80,
+    right: 20,
+    background: "#f5c34b",
+    color: "#000",
+    border: "none",
+    borderRadius: 28,
+    padding: "12px 20px",
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+    boxShadow: "0 4px 12px rgba(245, 195, 75, 0.4)",
+    cursor: "pointer",
+    zIndex: 50,
+    fontWeight: 500,
+  },
+};

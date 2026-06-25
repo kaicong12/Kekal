@@ -3,7 +3,7 @@ import { useState } from "react";
 import MotorcycleListInterface from "./MotorcycleListInterface";
 import MotorcycleFormInterface from "./MotorcycleFormInterface";
 
-export default function MotorcycleManagement() {
+export default function MotorcycleManagement({ isMobile }) {
   const [view, setView] = useState("list");
   const [editMotorcycleId, setEditMotorcycleId] = useState(null);
 
@@ -27,6 +27,7 @@ export default function MotorcycleManagement() {
       <MotorcycleListInterface
         onCreateNew={handleCreateNew}
         onEdit={handleEdit}
+        isMobile={isMobile}
       />
     );
   }
@@ -35,6 +36,7 @@ export default function MotorcycleManagement() {
     <MotorcycleFormInterface
       motorcycleId={editMotorcycleId}
       onBack={handleBack}
+      isMobile={isMobile}
     />
   );
 }
