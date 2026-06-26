@@ -11,11 +11,13 @@ import {
   MenuUnfoldOutlined,
   MenuOutlined,
   CarOutlined,
+  TagsOutlined,
 } from "@ant-design/icons";
 import { useAuth } from "../auth/AuthProvider";
 import CashSalesInterface from "../cash-sales/CashSalesInterface";
 import ReceiptManagementInterface from "../receipt-management/ReceiptManagementInterface";
 import MotorcycleManagement from "./motorcycle/MotorcycleManagement";
+import PromotionManagement from "./promotions/PromotionManagement";
 import Footer from "../common/Footer";
 import DefaultHeader from "../common/DefaultHeader";
 import HeaderTop from "../common/HeaderTop";
@@ -62,6 +64,12 @@ const AdminDashboard = () => {
       icon: <CarOutlined />,
       label: "Motorcycles",
       component: <MotorcycleManagement />,
+    },
+    {
+      key: "promotions",
+      icon: <TagsOutlined />,
+      label: "Promotions",
+      component: <PromotionManagement />,
     },
   ];
 

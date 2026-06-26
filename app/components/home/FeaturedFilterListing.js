@@ -1,12 +1,14 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
 import { toMotorcycleSlug } from "@/utils/slug";
 import { Spin } from "antd";
 
 const FeaturedFilterListing = () => {
+  const t = useTranslations("listing");
   const [filter, setFilter] = useState("*");
   const { motorcycles: data, loading } = useMotorcycles();
 
@@ -48,7 +50,7 @@ const FeaturedFilterListing = () => {
                     <h6 className="card-title">{listing.name}</h6>
                     <div className="spec-grid">
                       <div className="spec-item">
-                        <span className="spec-label">ENGINE</span>
+                        <span className="spec-label">{t("engine")}</span>
                         <span className="spec-value">
                           {listing.engineCapacity
                             ? `${listing.engineCapacity}cc${listing.engine ? ` ${listing.engine}` : ""}`
@@ -56,11 +58,11 @@ const FeaturedFilterListing = () => {
                         </span>
                       </div>
                       <div className="spec-item">
-                        <span className="spec-label">PRICE</span>
+                        <span className="spec-label">{t("price")}</span>
                         <span className="spec-value">RM {listing.price?.toLocaleString()}</span>
                       </div>
                     </div>
-                    <div className="view-details-btn">View Details</div>
+                    <div className="view-details-btn">{t("viewDetails")}</div>
                   </div>
                 </div>
               </Link>

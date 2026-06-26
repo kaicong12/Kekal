@@ -1,31 +1,22 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const ListWithImage = () => {
+  const t = useTranslations("serviceList");
   const serviceItems = [
-    { text: "Motorcycle Sales", link: "#motorcycle-sales" },
-    { text: "Repair & Maintenance", link: "#repair-maintenance" },
-    { text: "Spare Parts & Accessories", link: "#spare-parts-accessories" },
-    { text: "Distribution Services", link: "#distribution-services" },
+    { text: t("itemSales"), link: "#motorcycle-sales" },
+    { text: t("itemRepair"), link: "#repair-maintenance" },
+    { text: t("itemParts"), link: "#spare-parts-accessories" },
+    { text: t("itemDistribution"), link: "#distribution-services" },
   ];
 
   return (
     <div className="row">
       <div className="col-lg-6 col-xl-5">
         <div className="service_include">
-          <h3 className="title">
-            Comprehensive Motorcycle Solutions in Johor Bahru
-          </h3>
-          <p className="para">
-            Perniagaan Motor Kekal is your one-stop destination for all
-            motorcycle needs in Johor Bahru, Malaysia. From sales to service,
-            parts to distribution, we provide comprehensive solutions backed by
-            years of experience and expertise in the motorcycle industry.
-          </p>
-          <p className="para mb30">
-            Our commitment to excellence and customer satisfaction has
-            established us as a trusted name among motorcycle enthusiasts and
-            dealers throughout the region.
-          </p>
+          <h3 className="title">{t("heading")}</h3>
+          <p className="para">{t("para1")}</p>
+          <p className="para mb30">{t("para2")}</p>
           <div className="row">
             <div className="col-lg-6">
               <div className="si_list">
@@ -57,16 +48,8 @@ const ListWithImage = () => {
         </div>
 
         <div className="service_include">
-          <h3 className="title">Motorcycle Sales</h3>
-          <p className="para">
-            At Perniagaan Motor Kekal, we pride ourselves on offering an
-            extensive selection of motorcycles to suit every rider&apos;s needs
-            and budget. Our showroom in Johor Bahru features the latest models
-            from renowned brands including Yamaha, Honda, Kawasaki, and Suzuki.
-            Whether you&apos;re a beginner looking for your first motorcycle or
-            an experienced rider seeking a high-performance machine, our
-            knowledgeable sales team will help you find the perfect match.
-          </p>
+          <h3 className="title">{t("salesHeading")}</h3>
+          <p className="para">{t("salesPara")}</p>
         </div>
         {/* End service_include */}
       </div>

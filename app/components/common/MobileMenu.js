@@ -2,12 +2,14 @@
 // import menuItems from "@/data/menuItems";
 // import { isParentActive } from "@/utils/isMenuActive";
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { ProSidebarProvider, Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 const MobileMenu = () => {
   const path = usePathname();
+  const t = useTranslations("nav");
+  const tHeader = useTranslations("headerTop");
 
   const socialLinks = [
     {
@@ -38,16 +40,17 @@ const MobileMenu = () => {
     },
     {
       icon: "flaticon-clock",
-      text: "Mon - Thurs 8:30 - 19:30",
+      text: tHeader("mobileHours"),
     },
   ];
 
   const menuItems = [
-    { label: "Listing", path: "/listing" },
-    { label: "Our Services", path: "/service" },
-    { label: "Contact", path: "/contact" },
-    { label: "About Us", path: "/about-us" },
-    { label: "FAQ", path: "/faq" },
+    { label: t("listings"), path: "/listing" },
+    { label: t("promotions"), path: "/promotions" },
+    { label: t("ourServices"), path: "/service" },
+    { label: t("contact"), path: "/contact" },
+    { label: t("aboutUs"), path: "/about-us" },
+    { label: t("faq"), path: "/faq" },
   ];
 
   return (
@@ -62,7 +65,7 @@ const MobileMenu = () => {
                 data-bs-target="#mobileMenu"
                 aria-controls="mobileMenu"
               >
-                <small>Menu</small>
+                <small>{t("menu")}</small>
                 <span />
               </a>
             </div>

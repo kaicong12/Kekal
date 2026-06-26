@@ -1,6 +1,7 @@
 import { useMemo, useCallback, useEffect } from "react";
 import Select from "react-select";
 import PropTypes from "prop-types";
+import { useTranslations } from "next-intl";
 import { useDebounce } from "@/utils/hooks/useDebounce";
 
 const SearchAndFilters = ({
@@ -14,6 +15,7 @@ const SearchAndFilters = ({
   selectedBrand = null,
   onBrandChange,
 }) => {
+  const t = useTranslations("listing");
   // Debounce search term to avoid excessive API calls
   const debouncedSearchTerm = useDebounce(localSearchTerm, 300);
 
@@ -31,31 +33,31 @@ const SearchAndFilters = ({
 
   const sortSelectValue = useMemo(() => {
     if (!selectedSort) {
-      return { value: "Price: lowest first", label: "Price (Low to High)" };
+      return { value: "Price: lowest first", label: t("priceLowToHigh") };
     }
 
     // Map internal sort values to display labels
     const sortLabel =
       selectedSort === "Price: highest first"
-        ? "Price (High to Low)"
-        : "Price (Low to High)";
+        ? t("priceHighToLow")
+        : t("priceLowToHigh");
 
     return {
       value: selectedSort,
       label: sortLabel,
     };
-  }, [selectedSort]);
+  }, [selectedSort, t]);
 
   const brandSelectValue = useMemo(() => {
     if (!selectedBrand) {
-      return { value: null, label: "All Brands" };
+      return { value: null, label: t("allBrands") };
     }
 
     const brandOption = brandOptions.find(
       (option) => option.label === selectedBrand
     );
-    return brandOption || { value: null, label: "All Brands" };
-  }, [selectedBrand, brandOptions]);
+    return brandOption || { value: null, label: t("allBrands") };
+  }, [selectedBrand, brandOptions, t]);
 
   const customSelectStyles = {
     control: (provided, state) => ({
@@ -111,7 +113,7 @@ const SearchAndFilters = ({
             <input
               type="text"
               className="form-control search-input"
-              placeholder="Search motorcycles (e.g., Yamaha, sport, 150cc)..."
+              placeholder={t("searchPlaceholder")}
               value={localSearchTerm}
               onChange={handleSearchChange}
               style={searchInputStyles}
@@ -125,14 +127,14 @@ const SearchAndFilters = ({
             value={sortSelectValue}
             onChange={onSortChange}
             options={[
-              { value: "Price: lowest first", label: "Price (Low to High)" },
-              { value: "Price: highest first", label: "Price (High to Low)" },
+              { value: "Price: lowest first", label: t("priceLowToHigh") },
+              { value: "Price: highest first", label: t("priceHighToLow") },
             ]}
             className="sort-select"
             classNamePrefix="select"
             isSearchable={false}
             styles={customSelectStyles}
-            placeholder="Sort by"
+            placeholder={t("sortBy")}
           />
         </div>
 
@@ -141,13 +143,13 @@ const SearchAndFilters = ({
           <Select
             value={brandSelectValue}
             onChange={onBrandChange}
-            options={[{ value: null, label: "All Brands" }, ...brandOptions]}
+            options={[{ value: null, label: t("allBrands") }, ...brandOptions]}
             className="brand-select"
             classNamePrefix="select"
             isSearchable={true}
             isClearable={true}
             styles={customSelectStyles}
-            placeholder="All Brands"
+            placeholder={t("allBrands")}
           />
         </div>
       </div>

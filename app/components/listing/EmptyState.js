@@ -1,60 +1,60 @@
 import PropTypes from "prop-types";
+import { useTranslations } from "next-intl";
 
 const EmptyState = ({ searchTerm, selectedBrand }) => {
+  const t = useTranslations("listing.empty");
   return (
     <div className="empty-state-container">
       <div className="empty-state-content">
         {/* Main Message */}
-        <h3 className="empty-state-title">No motorcycles match your search</h3>
-        <p className="empty-state-subtitle">
-          We couldn&apos;t find any motorcycles matching your criteria.
-        </p>
+        <h3 className="empty-state-title">{t("title")}</h3>
+        <p className="empty-state-subtitle">{t("subtitle")}</p>
 
         {/* Search Criteria */}
         <div className="search-criteria">
           {searchTerm && (
             <p className="criteria-item">
-              Searched for: <strong>&quot;{searchTerm}&quot;</strong>
+              {t("searchedFor")} <strong>&quot;{searchTerm}&quot;</strong>
             </p>
           )}
           {selectedBrand && (
             <p className="criteria-item">
-              Brand: <strong>{selectedBrand}</strong>
+              {t("brand")} <strong>{selectedBrand}</strong>
             </p>
           )}
         </div>
 
         {/* Suggestions */}
         <div className="suggestions-section">
-          <h4 className="suggestions-title">Try these suggestions:</h4>
+          <h4 className="suggestions-title">{t("tryThese")}</h4>
           <div className="suggestions-grid">
             <div className="suggestion-item">
               <i
                 className="fa fa-filter"
                 style={{ marginRight: "8px", color: "#6c757d" }}
               ></i>
-              Remove some filters
+              {t("removeFilters")}
             </div>
             <div className="suggestion-item">
               <i
                 className="fa fa-search"
                 style={{ marginRight: "8px", color: "#6c757d" }}
               ></i>
-              Try different keywords
+              {t("differentKeywords")}
             </div>
             <div className="suggestion-item">
               <i
                 className="fa fa-spell-check"
                 style={{ marginRight: "8px", color: "#6c757d" }}
               ></i>
-              Check spelling
+              {t("checkSpelling")}
             </div>
             <div className="suggestion-item">
               <i
                 className="fa fa-list"
                 style={{ marginRight: "8px", color: "#6c757d" }}
               ></i>
-              Browse all brands
+              {t("browseAll")}
             </div>
           </div>
         </div>
@@ -62,12 +62,11 @@ const EmptyState = ({ searchTerm, selectedBrand }) => {
         {/* Help Section */}
         <div className="help-section">
           <p className="help-text">
-            Need help finding the right motorcycle?
+            {t("needHelp")}
             <a href="/contact" className="help-link">
               {" "}
-              Contact our experts
-            </a>{" "}
-            for personalized recommendations.
+              {t("contactExperts")}
+            </a>
           </p>
         </div>
       </div>

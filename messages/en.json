@@ -1,0 +1,399 @@
+{
+  "nav": {
+    "home": "Home",
+    "listings": "Listings",
+    "allMotorcycles": "All Motorcycles",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "service": "Service",
+    "ourServices": "Our Services",
+    "faq": "FAQ",
+    "menu": "Menu",
+    "promotions": "Promotions"
+  },
+  "headerTop": {
+    "hours": "Mon - Sun 8:00 - 18:00",
+    "mobileHours": "Mon - Thurs 8:30 - 19:30"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "ms": "Bahasa Malaysia",
+    "zh": "中文"
+  },
+  "hero": {
+    "slide1Title": "YOUR ONE STOP MOTORCYCLE DEALER IN JOHOR BAHRU",
+    "slide2Title": "CELEBRATING 30 YEARS OF RIDING EXCELLENCE",
+    "subtitle": "Ride with Confidence, Ride with Us. Serving Johor Bahru's Riders for Over 30 Years",
+    "contactUs": "Contact Us"
+  },
+  "quickQuote": {
+    "badge": "QUICK QUOTE · 30 SEC",
+    "budget": "BUDGET",
+    "license": "LICENSE",
+    "all": "All",
+    "counting": "Counting...",
+    "seeMatches": "See matches →",
+    "seeMatchesCount": "See {count} matches →"
+  },
+  "whyChoose": {
+    "heading": "Why Choose Us?",
+    "bestPriceTitle": "Best Price",
+    "bestPriceDesc": "Our stress-free finance department that can find financial solutions to save you money.",
+    "trustedTitle": "Trusted By Thousands",
+    "trustedDesc": "Over 30 years of serving riders across Johor Bahru with honest advice and fair prices.",
+    "wideRangeTitle": "Wide Range of Brands",
+    "wideRangeDesc": "Yamaha, Kawasaki, Honda, KTM and more — all under one roof in Johor Jaya."
+  },
+  "home": {
+    "featuredListings": "Featured Listings",
+    "showAllMotorcycles": "Show All Motorcycles",
+    "ourTestimonials": "Our Testimonials"
+  },
+  "testimonials": {
+    "rider1Role": "Professional Rider",
+    "rider1Quote": "As a professional delivery rider, I depend on my motorcycle daily. This shop has kept my Honda Wave running perfectly for over 3 years. Their maintenance service is exceptional and they always use genuine parts. The team understands the demands of commercial riding!",
+    "rider2Role": "Motorcycle Collector",
+    "rider2Quote": "I own several vintage motorcycles and finding the right parts can be challenging. This shop has an incredible network and always manages to source exactly what I need. Their expertise with classic bikes is unmatched - they've restored my 1985 Kawasaki Ninja to perfection!",
+    "rider3Role": "Adventure Rider",
+    "rider3Quote": "Before my long-distance touring trips, I always bring my BMW GS here for a complete check-up. Their attention to detail gives me confidence on the road. They've equipped my bike with the best touring accessories and their advice on gear selection is invaluable for adventure riding!"
+  },
+  "footer": {
+    "showroom": "SHOWROOM",
+    "needHelp": "NEED HELP",
+    "openingHours": "OPENING HOURS",
+    "openingHoursValue": "Monday – Sunday: 09:00AM – 07:00PM",
+    "fridayClosed": "Friday: Closed",
+    "keepInTouch": "KEEP IN TOUCH",
+    "emailPlaceholder": "Enter your email...",
+    "go": "GO",
+    "newsletterPrompt": "Get latest updates and offers.",
+    "subscribeSuccess": "Successfully subscribed to newsletter!",
+    "subscribeFail": "Failed to subscribe. Please try again.",
+    "subscribeError": "An error occurred. Please try again.",
+    "subscribeThankYou": "Thank you! You've been subscribed to our newsletter.",
+    "emailRequired": "Please enter your email address",
+    "networkError": "Network error. Please try again.",
+    "navHome": "Home",
+    "navListings": "Listings",
+    "navServices": "Our Services",
+    "navAbout": "About Us",
+    "navPromotions": "Promotions"
+  },
+  "stickyCta": {
+    "call": "Call",
+    "whatsapp": "WhatsApp"
+  },
+  "about": {
+    "metaTitle": "About Us - Motorcycle Dealer Johor Jaya | Perniagaan Motor Kekal",
+    "welcome": "Welcome To Perniagaan Motor Kekal",
+    "paragraph1": "Perniagaan Motor Kekal is a renowned business based in Johor Bahru, Malaysia, celebrated for its dedication and passion for motorcycles. This business has been an integral part of the motorcycle community in Johor since its incorporation on July 13, 1992.",
+    "paragraph2": "Perniagaan Motor Kekal operates as dealers, retailers, distributors, and repairers of various kinds of motorcycles, as well as auto spare parts and accessories. The business is particularly noted for its commitment to providing quality services and products, contributing to its status as a valued and reputable entity in the Johor motor industry.",
+    "contactUs": "Contact Us",
+    "testimonialsHeading": "Testimonials",
+    "locationHeading": "Location",
+    "getDirection": "Get Direction"
+  },
+  "contact": {
+    "visitShowroom": "Visit Our Showroom",
+    "addressLabel": "Address:",
+    "parkingLabel": "Parking:",
+    "parkingValue": "Free parking available in front of our showroom.",
+    "sendMessage": "Send Us A Message"
+  },
+  "service": {
+    "breadcrumbTitle": "Motorcycle Service in Johor Bahru",
+    "breadcrumbSubtitle": "Your trusted motorcycle dealer in JB",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Motorcycle Service",
+    "scheduleService": "Schedule Service",
+    "openingHours": "Opening hours"
+  },
+  "contactDetails": {
+    "title": "Contact Details"
+  },
+  "businessHours": {
+    "heading": "Business Hours",
+    "weekdays": "Monday - Friday:",
+    "saturday": "Saturday:",
+    "sunday": "Sunday:",
+    "closedNote": "We're closed on public holidays. For urgent matters, please WhatsApp us."
+  },
+  "immediate": {
+    "heading": "Need Immediate Assistance?",
+    "callUs": "Call Us",
+    "emailUs": "Email Us",
+    "whatsapp": "WhatsApp",
+    "chatWithUs": "Chat with us"
+  },
+  "serviceHours": {
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "closed": "Closed"
+  },
+  "serviceBlock": {
+    "includesLabel": "Our {title} includes:",
+    "repair": {
+      "title": "Repair & Maintenance",
+      "detailedDescription": "Our state-of-the-art service center is equipped with the latest diagnostic tools and staffed by certified technicians with years of experience. We provide comprehensive repair and maintenance services to keep your motorcycle running at peak performance. From routine oil changes to complex engine rebuilds, we handle it all with precision and care.",
+      "features": [
+        "Engine diagnostics and repair",
+        "Brake system maintenance and replacement",
+        "Transmission and clutch services",
+        "Electrical system troubleshooting",
+        "Scheduled maintenance programs",
+        "Emergency roadside assistance coordination"
+      ]
+    },
+    "parts": {
+      "title": "Spare Parts & Accessories",
+      "detailedDescription": "Our extensive parts department stocks genuine OEM parts and high-quality aftermarket components for all major motorcycle brands. We also carry a wide range of accessories to enhance your riding experience, from performance upgrades to comfort and safety equipment. Our parts specialists can help you find exactly what you need.",
+      "features": [
+        "Genuine OEM parts with manufacturer warranty",
+        "High-quality aftermarket alternatives",
+        "Performance enhancement parts",
+        "Safety gear and protective equipment",
+        "Custom accessories and styling parts",
+        "Fast ordering for special requests"
+      ]
+    },
+    "distribution": {
+      "title": "Distribution Services",
+      "detailedDescription": "As an established distributor in the Johor region, Perniagaan Motor Kekal serves as a reliable partner for motorcycle dealers throughout Malaysia. Our efficient distribution network ensures timely delivery of motorcycles, parts, and accessories to our dealer partners, supporting their business growth and customer satisfaction.",
+      "features": [
+        "Wholesale motorcycle distribution",
+        "Parts and accessories supply chain",
+        "Dealer support and training programs",
+        "Marketing and promotional assistance",
+        "Flexible payment terms for dealers",
+        "Regional coverage across Johor and surrounding areas"
+      ]
+    }
+  },
+  "serviceList": {
+    "heading": "Comprehensive Motorcycle Solutions in Johor Bahru",
+    "para1": "Perniagaan Motor Kekal is your one-stop destination for all motorcycle needs in Johor Bahru, Malaysia. From sales to service, parts to distribution, we provide comprehensive solutions backed by years of experience and expertise in the motorcycle industry.",
+    "para2": "Our commitment to excellence and customer satisfaction has established us as a trusted name among motorcycle enthusiasts and dealers throughout the region.",
+    "itemSales": "Motorcycle Sales",
+    "itemRepair": "Repair & Maintenance",
+    "itemParts": "Spare Parts & Accessories",
+    "itemDistribution": "Distribution Services",
+    "salesHeading": "Motorcycle Sales",
+    "salesPara": "At Perniagaan Motor Kekal, we pride ourselves on offering an extensive selection of motorcycles to suit every rider's needs and budget. Our showroom in Johor Bahru features the latest models from renowned brands including Yamaha, Honda, Kawasaki, and Suzuki. Whether you're a beginner looking for your first motorcycle or an experienced rider seeking a high-performance machine, our knowledgeable sales team will help you find the perfect match."
+  },
+  "contactForm": {
+    "intro": "Have questions about our motorcycles? We're here to help! Reach out to us for inquiries about our bikes, services, or anything else you need.",
+    "name": "Name*",
+    "namePlaceholder": "Your Name",
+    "email": "Email",
+    "phone": "Phone",
+    "topic": "Topic",
+    "topicSelect": "Select a topic (optional)",
+    "topicOrderSupport": "Order Support",
+    "topicDealerInquiry": "Dealer Inquiry",
+    "topicSellBike": "Sell Your Bike",
+    "topicServiceInquiry": "Service Inquiry",
+    "topicGeneralInquiry": "General Inquiry",
+    "message": "Message*",
+    "messagePlaceholder": "Tell us how we can help you...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "nameRequired": "Name is required",
+    "contactRequired": "Either email or phone number is required",
+    "emailInvalid": "Please enter a valid email address",
+    "messageRequired": "Message is required",
+    "success": "Thank you for your message! We'll get back to you soon.",
+    "sendFail": "Failed to send message. Please try again.",
+    "networkError": "Network error. Please check your connection and try again."
+  },
+  "scheduleForm": {
+    "name": "Name *",
+    "namePlaceholder": "Your Name",
+    "email": "Email *",
+    "phone": "Phone",
+    "bestTime": "Best time to contact",
+    "bestTimePlaceholder": "e.g., Morning, Afternoon, Evening",
+    "details": "Additional Details (Optional)",
+    "detailsPlaceholder": "Tell us about your motorcycle, the service needed, or any specific requirements...",
+    "submit": "Request Service",
+    "submitting": "Submitting...",
+    "success": "Service request submitted successfully! We'll contact you soon to schedule your appointment.",
+    "sendFail": "Failed to submit service request. Please try again.",
+    "networkError": "Network error. Please check your connection and try again."
+  },
+  "detail": {
+    "inStock": "BRAND NEW - IN STOCK",
+    "overview": "Overview",
+    "description": "Description",
+    "contactSeller": "Contact Seller",
+    "relatedBikes": "Related Best Bikes",
+    "showAllBikes": "Show All Bikes",
+    "breadcrumbHome": "Home",
+    "breadcrumbListing": "Listing",
+    "breadcrumbMotorcycles": "Motorcycles",
+    "specGeneral": "General",
+    "specPerformance": "Performance",
+    "specChassis": "Chassis",
+    "csNamePlaceholder": "Your Name",
+    "csPhonePlaceholder": "Phone Number",
+    "csEmailPlaceholder": "Email Address",
+    "csDefaultMessage": "I am interested in a price quote on this vehicle. Please contact me at your earliest convenience with your best price for this vehicle.",
+    "whatsapp": "WhatsApp",
+    "stickyFrom": "FROM",
+    "enquireWhatsApp": "Enquire on WhatsApp",
+    "writeReview": "Write a Review",
+    "reviewNamePlaceholder": "Your Name",
+    "reviewEmailPlaceholder": "Email",
+    "reviewMessagePlaceholder": "Message",
+    "sendReview": "Send Your Review",
+    "sending": "Sending...",
+    "reviewSuccess": "Review submitted successfully!",
+    "reviewFail": "Failed to submit review. Please try again.",
+    "reviewError": "An error occurred. Please try again."
+  },
+  "commonTestimonials": {
+    "enthusiast": "Motorcycle Enthusiast",
+    "commuter": "Daily Commuter",
+    "text1": "Outstanding service and genuine parts! I've been riding for 15 years and this is the best motorcycle shop I've ever dealt with. They helped me find the perfect exhaust system for my Yamaha R1 and the installation was flawless.",
+    "text2": "My Honda CB650R needed urgent repairs and they had me back on the road the same day. The staff really knows their motorcycles and the prices are very reasonable. I wouldn't trust my bike with anyone else!",
+    "text3": "Incredible selection of motorcycle gear and accessories! From helmets to riding jackets, they have everything a rider needs. The quality is top-notch and their advice on safety gear is invaluable.",
+    "text4": "Fast shipping and excellent customer service. Ordered brake pads online and they arrived within 2 days. The online store is easy to navigate and they have detailed product descriptions that helped me choose the right parts."
+  },
+  "filterPills": {
+    "fromQuickQuote": "From Quick Quote:",
+    "budget": "Budget: {value}",
+    "license": "License: {value}",
+    "under": "Under {value}",
+    "bFull": "B Full (≥500cc)",
+    "b2": "B2 (<500cc)",
+    "clearAll": "Clear all"
+  },
+  "loanCalculator": {
+    "title": "Financing Calculator",
+    "subtitle": "Own your dream ride with flexible monthly installments tailored to your budget.",
+    "downPayment": "Down Payment ({percent}%)",
+    "loanTerm": "Loan Term",
+    "months": "{count} Months",
+    "estimatedMonthly": "ESTIMATED MONTHLY",
+    "perMonth": "/mo",
+    "disclaimer": "Calculated at 3.5% interest rate. Final amount may vary based on credit profile and insurance.",
+    "apply": "Apply for Loan",
+    "redirecting": "Redirecting to WhatsApp for loan application..."
+  },
+  "faq": {
+    "heading": "First-time buyer?",
+    "headingLine2": "Start here.",
+    "subtext": "We get these questions every day. If we miss one, WhatsApp us — Faiz answers in ~5 min.",
+    "categoryQuestions": "{category} · {count} QUESTIONS",
+    "stillQuestions": "Still got questions?",
+    "stillQuestionsSubtext": "Faiz from sales replies in ~5 min during business hours (9–7 daily)",
+    "categories": {
+      "Financing": "Financing",
+      "Delivery": "Delivery",
+      "Warranty": "Warranty"
+    },
+    "financing": [
+      {
+        "question": "Can first-time buyers get a bike loan?",
+        "answer": "Yes. We work with MBSB, Hong Leong, and RHB — all of which finance first-time buyers from RM 1,800 monthly income. Approval is usually 1–2 working days. Use our 60-second pre-qualifier first to see your odds before you commit."
+      },
+      {
+        "question": "What documents do I need?",
+        "answer": "You'll need your IC (MyKad), latest 3 months' pay slips or EPF statement, and bank statements for the past 3 months. Self-employed buyers need SSM registration and 6 months' bank statements."
+      },
+      {
+        "question": "Can I get a discount for paying full cash?",
+        "answer": "Yes — cash buyers get a direct discount off the listed price. The exact amount depends on the model. WhatsApp us with the bike you want and we'll quote you immediately."
+      },
+      {
+        "question": "What's the lowest down-payment I can put?",
+        "answer": "Most banks accept as low as 10% down-payment for salaried buyers. Some models qualify for zero down-payment promotions — ask us which ones are currently running."
+      }
+    ],
+    "delivery": [
+      {
+        "question": "How long does delivery take?",
+        "answer": "In-stock bikes are ready same day or next day. If we need to source from another branch, allow 3–5 working days. We'll update you at every step via WhatsApp."
+      },
+      {
+        "question": "Do you deliver outside JB?",
+        "answer": "Yes, we deliver across Johor and Peninsular Malaysia. Delivery within JB is free. For outstation delivery, a transport fee applies depending on distance — usually RM 100–300."
+      },
+      {
+        "question": "Can I test ride before buying?",
+        "answer": "Absolutely. Visit our showroom at Jalan Seroja 49, Taman Johor Jaya during opening hours. Bring your license and we'll set up a test ride on the spot."
+      }
+    ],
+    "warranty": [
+      {
+        "question": "What warranty do I get?",
+        "answer": "All new bikes come with manufacturer warranty (typically 2 years or 20,000 km, whichever comes first). We also provide our own 6-month dealer warranty on top covering electrical and engine components."
+      },
+      {
+        "question": "What does the warranty cover?",
+        "answer": "Manufacturer warranty covers manufacturing defects in engine, frame, and electrical systems. Our dealer warranty covers major components excluding wear parts (brake pads, tyres, chain, sprocket)."
+      },
+      {
+        "question": "Can I extend my warranty?",
+        "answer": "Yes — we offer extended warranty packages for an additional 1 or 2 years. Ask at the point of purchase for the best rate. It's cheaper to add it upfront than later."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for might have been removed or is temporarily unavailable.",
+    "backHome": "Back to Home"
+  },
+  "listing": {
+    "breadcrumbTitle": "Motorcycles For Sale",
+    "breadcrumbSubtitle": "Listing",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Listing",
+    "viewDetails": "View Details",
+    "engine": "ENGINE",
+    "price": "PRICE",
+    "foundCount": "We found <highlight>{count}</highlight> motorcycles for you.",
+    "searchPlaceholder": "Search motorcycles (e.g., Yamaha, sport, 150cc)...",
+    "sortBy": "Sort by",
+    "priceLowToHigh": "Price (Low to High)",
+    "priceHighToLow": "Price (High to Low)",
+    "allBrands": "All Brands",
+    "empty": {
+      "title": "No motorcycles match your search",
+      "subtitle": "We couldn't find any motorcycles matching your criteria.",
+      "searchedFor": "Searched for:",
+      "brand": "Brand:",
+      "tryThese": "Try these suggestions:",
+      "removeFilters": "Remove some filters",
+      "differentKeywords": "Try different keywords",
+      "checkSpelling": "Check spelling",
+      "browseAll": "Browse all brands",
+      "needHelp": "Need help finding the right motorcycle?",
+      "contactExperts": "Contact our experts"
+    }
+  },
+  "promotions": {
+    "thisMonth": "This Month",
+    "headline": "Deals are live.",
+    "summary": "{count} offers running now. Most are walk-in only — drop by the Johor Jaya showroom to claim.",
+    "summaryEmpty": "No active offers right now — check back soon for the next drop.",
+    "moreOffers": "More offers",
+    "emptyTitle": "No active promotions right now",
+    "emptyBody": "Check back soon — new deals drop regularly. Or message us on WhatsApp for current offers.",
+    "pastDeals": "Past deals",
+    "days": "Days",
+    "hrs": "Hrs",
+    "min": "Min",
+    "endsInDays": "Ends in {count} days",
+    "endsToday": "Ends today",
+    "offerEnds": "Offer ends {date}",
+    "endedOn": "Ended {date}",
+    "claimDeal": "Claim this deal",
+    "visitToClaim": "Visit us to claim · Johor Jaya"
+  }
+}

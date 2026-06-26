@@ -1,22 +1,24 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const Navigation = () => {
-    const links = [
-        { label: "Home", path: "/" },
-        { label: "Listings", path: "/listing" },
-        { label: "Our Services", path: "/service" },
-        { label: "About Us", path: "/about-us" },
-      ];
+  const t = useTranslations("footer");
+  const links = [
+    { label: t("navHome"), path: "/" },
+    { label: t("navListings"), path: "/listing" },
+    { label: t("navServices"), path: "/service" },
+    { label: t("navAbout"), path: "/about-us" },
+  ];
 
-    return (
-        <>
-            {links.map((link, index) => (
-                <li className="list-inline-item" key={index}>
-                    <Link href={link.path}>{link.label}</Link>
-                </li>
-            ))}
-        </>
-    );
+  return (
+    <>
+      {links.map((link, index) => (
+        <li className="list-inline-item" key={index}>
+          <Link href={link.path}>{link.label}</Link>
+        </li>
+      ))}
+    </>
+  );
 };
 
 export default Navigation;

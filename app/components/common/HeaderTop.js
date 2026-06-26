@@ -1,4 +1,7 @@
+import { useTranslations } from "next-intl";
+
 const HeaderTop = () => {
+  const t = useTranslations("headerTop");
   const socialData = [
     {
       icon: "fab fa-facebook-f",
@@ -25,7 +28,7 @@ const HeaderTop = () => {
     },
     {
       icon: "flaticon-clock",
-      text: "Mon - Sun 8:00 - 18:00",
+      text: t("hours"),
     },
   ];
 

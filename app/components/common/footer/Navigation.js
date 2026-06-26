@@ -1,11 +1,14 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const Navigation = () => {
+  const t = useTranslations("footer");
   const links = [
-    { label: "Home", path: "/" },
-    { label: "Listings", path: "/listing" },
-    { label: "Our Services", path: "/service" },
-    { label: "About Us", path: "/about-us" },
+    { label: t("navHome"), path: "/" },
+    { label: t("navListings"), path: "/listing" },
+    { label: t("navPromotions"), path: "/promotions" },
+    { label: t("navServices"), path: "/service" },
+    { label: t("navAbout"), path: "/about-us" },
   ];
 
   return (

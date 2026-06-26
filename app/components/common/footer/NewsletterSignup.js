@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const NewsletterSignup = () => {
+  const t = useTranslations("footer");
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -12,7 +14,7 @@ const NewsletterSignup = () => {
     if (!email.trim()) {
       setSubmitStatus({
         type: "error",
-        message: "Please enter your email address",
+        message: t("emailRequired"),
       });
       return;
     }
@@ -37,19 +39,19 @@ const NewsletterSignup = () => {
       if (response.ok) {
         setSubmitStatus({
           type: "success",
-          message: "Thank you! You've been subscribed to our newsletter.",
+          message: t("subscribeThankYou"),
         });
         setEmail("");
       } else {
         setSubmitStatus({
           type: "error",
-          message: result.error || "Failed to subscribe. Please try again.",
+          message: result.error || t("subscribeFail"),
         });
       }
     } catch (error) {
       setSubmitStatus({
         type: "error",
-        message: "Network error. Please try again.",
+        message: t("networkError"),
       });
     } finally {
       setIsSubmitting(false);
@@ -58,21 +60,21 @@ const NewsletterSignup = () => {
 
   return (
     <div className="footer_contact_widget">
-      <h5 className="title">KEEP IN TOUCH</h5>
+      <h5 className="title">{t("keepInTouch")}</h5>
       <form className="footer_mailchimp_form" onSubmit={handleSubmit}>
         <div className="wrapper">
           <div className="col-auto">
             <input
               type="email"
               className="form-control"
-              placeholder="Enter your email..."
+              placeholder={t("emailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isSubmitting}
               required
             />
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "..." : "GO"}
+              {isSubmitting ? "..." : t("go")}
             </button>
           </div>
         </div>
@@ -89,7 +91,7 @@ const NewsletterSignup = () => {
         </div>
       )}
 
-      <p>Get latest updates and offers.</p>
+      <p>{t("newsletterPrompt")}</p>
 
       <style jsx>{`
         .newsletter-status {

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import styles from "./QuickQuote.module.css";
 
 const BUDGET_OPTIONS = [
@@ -30,6 +31,7 @@ function buildFilterParams(budget, license) {
 }
 
 export default function QuickQuote() {
+  const t = useTranslations("quickQuote");
   const router = useRouter();
   const [selectedBudget, setSelectedBudget] = useState(null);
   const [selectedLicense, setSelectedLicense] = useState(0);
@@ -74,11 +76,11 @@ export default function QuickQuote() {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <span className={styles.headerLabel}>QUICK QUOTE · 30 SEC</span>
+        <span className={styles.headerLabel}>{t("badge")}</span>
       </div>
 
       <div className={styles.section}>
-        <p className={styles.stepLabel}>BUDGET</p>
+        <p className={styles.stepLabel}>{t("budget")}</p>
         <div className={styles.chipRow}>
           {BUDGET_OPTIONS.map((opt, i) => (
             <button
@@ -93,7 +95,7 @@ export default function QuickQuote() {
       </div>
 
       <div className={styles.section}>
-        <p className={styles.stepLabel}>LICENSE</p>
+        <p className={styles.stepLabel}>{t("license")}</p>
         <div className={styles.chipRow}>
           {LICENSE_OPTIONS.map((opt, i) => (
             <button
@@ -101,7 +103,7 @@ export default function QuickQuote() {
               onClick={() => setSelectedLicense(i)}
               className={`${styles.chip} ${selectedLicense === i ? styles.chipActive : ""}`}
             >
-              {opt.label}
+              {opt.label === "All" ? t("all") : opt.label}
             </button>
           ))}
         </div>
@@ -113,10 +115,10 @@ export default function QuickQuote() {
         className={styles.ctaButton}
       >
         {loading
-          ? "Counting..."
+          ? t("counting")
           : matchCount !== null
-          ? `See ${matchCount} matches →`
-          : "See matches →"}
+          ? t("seeMatchesCount", { count: matchCount })
+          : t("seeMatches")}
       </button>
     </div>
   );

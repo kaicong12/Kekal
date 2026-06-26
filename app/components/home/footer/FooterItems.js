@@ -1,15 +1,19 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const FooterItems = () => {
+  const t = useTranslations("footer");
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setMessage("");
+    setIsSuccess(false);
 
     try {
       const response = await fetch("/api/email/newsletter", {
@@ -26,13 +30,14 @@ const FooterItems = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("Successfully subscribed to newsletter!");
+        setMessage(t("subscribeSuccess"));
+        setIsSuccess(true);
         setEmail("");
       } else {
-        setMessage(data.error || "Failed to subscribe. Please try again.");
+        setMessage(data.error || t("subscribeFail"));
       }
     } catch (error) {
-      setMessage("An error occurred. Please try again.");
+      setMessage(t("subscribeError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -42,7 +47,7 @@ const FooterItems = () => {
     <div className="row">
       <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_about_widget home2">
-          <h5 className="title">SHOWROOM</h5>
+          <h5 className="title">{t("showroom")}</h5>
           <p>
             5, Jalan Seroja, 49
             <br />
@@ -56,7 +61,7 @@ const FooterItems = () => {
 
       <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_contact_widget home2">
-          <h5 className="title">NEED HELP</h5>
+          <h5 className="title">{t("needHelp")}</h5>
           <div className="footer_phone">+60127126128</div>
           <p>motorkekal@gmail.com</p>
         </div>
@@ -65,11 +70,11 @@ const FooterItems = () => {
 
       <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_contact_widget home2">
-          <h5 className="title">OPENING HOURS</h5>
+          <h5 className="title">{t("openingHours")}</h5>
           <p>
-            Monday – Sunday: 09:00AM – 07:00PM
+            {t("openingHoursValue")}
             <br />
-            Friday: Closed
+            {t("fridayClosed")}
           </p>
         </div>
       </div>
@@ -77,7 +82,7 @@ const FooterItems = () => {
 
       <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
         <div className="footer_contact_widget home2">
-          <h5 className="title">KEEP IN TOUCH</h5>
+          <h5 className="title">{t("keepInTouch")}</h5>
           <form
             className="footer_mailchimp_form"
             onSubmit={handleNewsletterSubmit}
@@ -87,30 +92,24 @@ const FooterItems = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="Enter your email..."
+                  placeholder={t("emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isSubmitting}
                 />
                 <button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "..." : "GO"}
+                  {isSubmitting ? "..." : t("go")}
                 </button>
               </div>
             </div>
           </form>
           {message && (
-            <p
-              className={
-                message.includes("Successfully")
-                  ? "text-success"
-                  : "text-danger"
-              }
-            >
+            <p className={isSuccess ? "text-success" : "text-danger"}>
               {message}
             </p>
           )}
-          <p>Get latest updates and offers.</p>
+          <p>{t("newsletterPrompt")}</p>
         </div>
       </div>
       {/* End .col */}

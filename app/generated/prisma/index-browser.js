@@ -142,6 +142,24 @@ exports.Prisma.MotorcycleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PromotionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  subtitle: 'subtitle',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  ctaText: 'ctaText',
+  whatsappMessage: 'whatsappMessage',
+  isFeatured: 'isFeatured',
+  isActive: 'isActive',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  displayOrder: 'displayOrder',
+  motorcycleId: 'motorcycleId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ProductSyncFileScalarFieldEnum = {
   id: 'id',
   filePath: 'filePath',
@@ -216,6 +234,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   AuthorizedReceiptEmail: 'AuthorizedReceiptEmail',
   Motorcycle: 'Motorcycle',
+  Promotion: 'Promotion',
   ProductSyncFile: 'ProductSyncFile',
   MotorcycleImage: 'MotorcycleImage',
   GeneratedReceipt: 'GeneratedReceipt',

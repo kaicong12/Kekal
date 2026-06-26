@@ -1,30 +1,29 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const Testimonial = () => {
+  const t = useTranslations("testimonials");
   const testimonialsData = [
     {
       id: "1",
       name: "Rajesh Kumar",
-      role: "Professional Rider",
+      role: t("rider1Role"),
       imageSrc: "/images/testimonial/avatar-rk.svg",
-      quote:
-        "As a professional delivery rider, I depend on my motorcycle daily. This shop has kept my Honda Wave running perfectly for over 3 years. Their maintenance service is exceptional and they always use genuine parts. The team understands the demands of commercial riding!",
+      quote: t("rider1Quote"),
     },
     {
       id: "2",
       name: "Chen Siew Fong",
-      role: "Motorcycle Collector",
+      role: t("rider2Role"),
       imageSrc: "/images/testimonial/avatar-cs.svg",
-      quote:
-        "I own several vintage motorcycles and finding the right parts can be challenging. This shop has an incredible network and always manages to source exactly what I need. Their expertise with classic bikes is unmatched - they've restored my 1985 Kawasaki Ninja to perfection!",
+      quote: t("rider2Quote"),
     },
     {
       id: "3",
       name: "Sharifah Amina",
-      role: "Adventure Rider",
+      role: t("rider3Role"),
       imageSrc: "/images/testimonial/avatar-sa.svg",
-      quote:
-        "Before my long-distance touring trips, I always bring my BMW GS here for a complete check-up. Their attention to detail gives me confidence on the road. They've equipped my bike with the best touring accessories and their advice on gear selection is invaluable for adventure riding!",
+      quote: t("rider3Quote"),
     },
   ];
 

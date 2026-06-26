@@ -1,0 +1,399 @@
+{
+  "nav": {
+    "home": "首页",
+    "listings": "车辆列表",
+    "allMotorcycles": "所有摩托车",
+    "aboutUs": "关于我们",
+    "contact": "联系我们",
+    "service": "维修服务",
+    "ourServices": "我们的服务",
+    "faq": "常见问题",
+    "menu": "菜单",
+    "promotions": "促销"
+  },
+  "headerTop": {
+    "hours": "周一至周日 8:00 - 18:00",
+    "mobileHours": "周一至周四 8:30 - 19:30"
+  },
+  "languageSwitcher": {
+    "label": "语言",
+    "en": "English",
+    "ms": "Bahasa Malaysia",
+    "zh": "中文"
+  },
+  "hero": {
+    "slide1Title": "您在新山的一站式摩托车经销商",
+    "slide2Title": "庆祝三十年卓越骑行历程",
+    "subtitle": "安心骑行，与我们同行。为新山骑士服务超过30年",
+    "contactUs": "联系我们"
+  },
+  "quickQuote": {
+    "badge": "快速报价 · 30秒",
+    "budget": "预算",
+    "license": "驾照",
+    "all": "全部",
+    "counting": "计算中...",
+    "seeMatches": "查看匹配 →",
+    "seeMatchesCount": "查看 {count} 个匹配 →"
+  },
+  "whyChoose": {
+    "heading": "为什么选择我们？",
+    "bestPriceTitle": "最优价格",
+    "bestPriceDesc": "我们轻松无压力的金融部门能够为您找到省钱的融资方案。",
+    "trustedTitle": "数千客户信赖",
+    "trustedDesc": "超过30年来以诚实的建议和公道的价格服务新山各地的骑士。",
+    "wideRangeTitle": "品牌齐全",
+    "wideRangeDesc": "Yamaha、Kawasaki、Honda、KTM 等众多品牌 — 尽在 Johor Jaya 一处。"
+  },
+  "home": {
+    "featuredListings": "精选车辆",
+    "showAllMotorcycles": "查看所有摩托车",
+    "ourTestimonials": "客户评价"
+  },
+  "testimonials": {
+    "rider1Role": "专业骑士",
+    "rider1Quote": "作为一名专业送货骑士，我每天都依赖我的摩托车。这家店让我的 Honda Wave 完美运行了超过3年。他们的保养服务非常出色，而且总是使用原厂配件。团队深知商业骑行的需求！",
+    "rider2Role": "摩托车收藏家",
+    "rider2Quote": "我拥有几辆复古摩托车，寻找合适的配件可能是个挑战。这家店拥有令人难以置信的人脉，总能找到我所需要的配件。他们对经典车型的专业知识无与伦比 — 他们将我1985年的 Kawasaki Ninja 修复得完美如初！",
+    "rider3Role": "探险骑士",
+    "rider3Quote": "在长途旅行之前，我总是把我的 BMW GS 带到这里做全面检查。他们对细节的关注让我在路上充满信心。他们为我的车配备了最好的旅行配件，他们关于装备选择的建议对探险骑行来说极为宝贵！"
+  },
+  "footer": {
+    "showroom": "展示厅",
+    "needHelp": "需要帮助",
+    "openingHours": "营业时间",
+    "openingHoursValue": "周一 – 周日：上午09:00 – 晚上07:00",
+    "fridayClosed": "周五：休息",
+    "keepInTouch": "保持联系",
+    "emailPlaceholder": "输入您的电子邮件...",
+    "go": "提交",
+    "newsletterPrompt": "获取最新动态和优惠。",
+    "subscribeSuccess": "已成功订阅电子报！",
+    "subscribeFail": "订阅失败，请重试。",
+    "subscribeError": "发生错误，请重试。",
+    "subscribeThankYou": "谢谢！您已成功订阅我们的电子报。",
+    "emailRequired": "请输入您的电子邮件地址",
+    "networkError": "网络错误，请重试。",
+    "navHome": "首页",
+    "navListings": "车辆列表",
+    "navServices": "我们的服务",
+    "navAbout": "关于我们",
+    "navPromotions": "促销"
+  },
+  "stickyCta": {
+    "call": "致电",
+    "whatsapp": "WhatsApp"
+  },
+  "about": {
+    "metaTitle": "关于我们 - 新山摩托车经销商 | Perniagaan Motor Kekal",
+    "welcome": "欢迎来到 Perniagaan Motor Kekal",
+    "paragraph1": "Perniagaan Motor Kekal 是一家位于马来西亚新山的知名企业，以对摩托车的奉献与热情而著称。自1992年7月13日成立以来，本企业一直是柔佛摩托车社群中不可或缺的一部分。",
+    "paragraph2": "Perniagaan Motor Kekal 经营各类摩托车以及汽车零件和配件的经销、零售、分销和维修业务。本企业尤其以致力于提供优质服务和产品而闻名，使其成为柔佛摩托车行业中备受重视和信赖的企业。",
+    "contactUs": "联系我们",
+    "testimonialsHeading": "客户评价",
+    "locationHeading": "位置",
+    "getDirection": "获取路线"
+  },
+  "contact": {
+    "visitShowroom": "参观我们的展示厅",
+    "addressLabel": "地址：",
+    "parkingLabel": "停车：",
+    "parkingValue": "展示厅前提供免费停车位。",
+    "sendMessage": "给我们发送信息"
+  },
+  "service": {
+    "breadcrumbTitle": "新山摩托车维修服务",
+    "breadcrumbSubtitle": "您在新山值得信赖的摩托车经销商",
+    "breadcrumbHome": "首页",
+    "breadcrumbCurrent": "摩托车维修",
+    "scheduleService": "预约维修",
+    "openingHours": "营业时间"
+  },
+  "contactDetails": {
+    "title": "联系方式"
+  },
+  "businessHours": {
+    "heading": "营业时间",
+    "weekdays": "周一至周五：",
+    "saturday": "周六：",
+    "sunday": "周日：",
+    "closedNote": "公共假期休息。如有紧急事项，请通过 WhatsApp 联系我们。"
+  },
+  "immediate": {
+    "heading": "需要即时协助？",
+    "callUs": "致电我们",
+    "emailUs": "发送邮件",
+    "whatsapp": "WhatsApp",
+    "chatWithUs": "与我们聊天"
+  },
+  "serviceHours": {
+    "sunday": "周日",
+    "monday": "周一",
+    "tuesday": "周二",
+    "wednesday": "周三",
+    "thursday": "周四",
+    "friday": "周五",
+    "saturday": "周六",
+    "closed": "休息"
+  },
+  "serviceBlock": {
+    "includesLabel": "我们的{title}包括：",
+    "repair": {
+      "title": "维修与保养",
+      "detailedDescription": "我们先进的服务中心配备最新的诊断工具，并由拥有多年经验的认证技师驻守。我们提供全面的维修和保养服务，让您的摩托车保持最佳性能。从日常换油到复杂的发动机重组，我们都以精准和细心处理。",
+      "features": [
+        "发动机诊断与维修",
+        "刹车系统保养与更换",
+        "变速箱与离合器服务",
+        "电气系统故障排查",
+        "定期保养计划",
+        "紧急道路救援协调"
+      ]
+    },
+    "parts": {
+      "title": "零件与配件",
+      "detailedDescription": "我们规模庞大的零件部门备有适用于所有主要摩托车品牌的原厂 OEM 零件和高品质副厂组件。我们还提供各种配件来提升您的骑行体验，从性能升级到舒适与安全装备。我们的零件专员可以帮您找到所需的一切。",
+      "features": [
+        "原厂 OEM 零件，附原厂保修",
+        "高品质副厂替代件",
+        "性能提升零件",
+        "安全装备与防护用品",
+        "定制配件与外观件",
+        "特殊需求快速订购"
+      ]
+    },
+    "distribution": {
+      "title": "分销服务",
+      "detailedDescription": "作为柔佛地区成熟的分销商，Perniagaan Motor Kekal 是马来西亚各地摩托车经销商值得信赖的合作伙伴。我们高效的分销网络确保及时将摩托车、零件和配件交付给经销商伙伴，支持他们的业务增长和客户满意度。",
+      "features": [
+        "摩托车批发分销",
+        "零件与配件供应链",
+        "经销商支持与培训计划",
+        "营销与推广协助",
+        "为经销商提供灵活付款条件",
+        "覆盖柔佛及周边地区"
+      ]
+    }
+  },
+  "serviceList": {
+    "heading": "新山全方位摩托车解决方案",
+    "para1": "Perniagaan Motor Kekal 是您在马来西亚新山满足所有摩托车需求的一站式之选。从销售到维修，从零件到分销，我们凭借在摩托车行业多年的经验和专业，提供全面的解决方案。",
+    "para2": "我们对卓越和客户满意度的承诺，使我们成为整个地区摩托车爱好者和经销商信赖的品牌。",
+    "itemSales": "摩托车销售",
+    "itemRepair": "维修与保养",
+    "itemParts": "零件与配件",
+    "itemDistribution": "分销服务",
+    "salesHeading": "摩托车销售",
+    "salesPara": "在 Perniagaan Motor Kekal，我们自豪地提供种类繁多的摩托车，以满足每位骑士的需求和预算。我们位于新山的展示厅陈列着 Yamaha、Honda、Kawasaki 和 Suzuki 等知名品牌的最新车型。无论您是寻找第一辆摩托车的新手，还是追求高性能机器的资深骑士，我们经验丰富的销售团队都将帮助您找到最合适的选择。"
+  },
+  "contactForm": {
+    "intro": "对我们的摩托车有疑问吗？我们随时为您提供帮助！如需咨询我们的车辆、服务或任何其他事项，请联系我们。",
+    "name": "姓名*",
+    "namePlaceholder": "您的姓名",
+    "email": "电子邮件",
+    "phone": "电话",
+    "topic": "主题",
+    "topicSelect": "选择主题（可选）",
+    "topicOrderSupport": "订单支持",
+    "topicDealerInquiry": "经销商咨询",
+    "topicSellBike": "出售您的摩托车",
+    "topicServiceInquiry": "维修咨询",
+    "topicGeneralInquiry": "一般咨询",
+    "message": "信息*",
+    "messagePlaceholder": "告诉我们如何为您提供帮助...",
+    "send": "发送信息",
+    "sending": "发送中...",
+    "nameRequired": "请填写姓名",
+    "contactRequired": "请至少填写电子邮件或电话号码",
+    "emailInvalid": "请输入有效的电子邮件地址",
+    "messageRequired": "请填写信息",
+    "success": "感谢您的留言！我们会尽快与您联系。",
+    "sendFail": "发送信息失败，请重试。",
+    "networkError": "网络错误。请检查您的网络连接并重试。"
+  },
+  "scheduleForm": {
+    "name": "姓名 *",
+    "namePlaceholder": "您的姓名",
+    "email": "电子邮件 *",
+    "phone": "电话",
+    "bestTime": "最佳联系时间",
+    "bestTimePlaceholder": "例如：上午、下午、傍晚",
+    "details": "其他详情（可选）",
+    "detailsPlaceholder": "告诉我们您的摩托车、所需的维修服务或任何特定要求...",
+    "submit": "申请维修",
+    "submitting": "提交中...",
+    "success": "维修申请提交成功！我们将尽快与您联系以安排预约。",
+    "sendFail": "提交维修申请失败，请重试。",
+    "networkError": "网络错误。请检查您的网络连接并重试。"
+  },
+  "detail": {
+    "inStock": "全新 - 现货",
+    "overview": "概览",
+    "description": "描述",
+    "contactSeller": "联系卖家",
+    "relatedBikes": "相关推荐车型",
+    "showAllBikes": "查看所有摩托车",
+    "breadcrumbHome": "首页",
+    "breadcrumbListing": "车辆列表",
+    "breadcrumbMotorcycles": "摩托车",
+    "specGeneral": "基本信息",
+    "specPerformance": "性能",
+    "specChassis": "底盘",
+    "csNamePlaceholder": "您的姓名",
+    "csPhonePlaceholder": "电话号码",
+    "csEmailPlaceholder": "电子邮件地址",
+    "csDefaultMessage": "我有兴趣了解这辆车的报价。请尽快与我联系，并提供您对这辆车的最优惠价格。",
+    "whatsapp": "WhatsApp",
+    "stickyFrom": "起价",
+    "enquireWhatsApp": "通过 WhatsApp 咨询",
+    "writeReview": "撰写评价",
+    "reviewNamePlaceholder": "您的姓名",
+    "reviewEmailPlaceholder": "电子邮件",
+    "reviewMessagePlaceholder": "信息",
+    "sendReview": "提交您的评价",
+    "sending": "发送中...",
+    "reviewSuccess": "评价提交成功！",
+    "reviewFail": "提交评价失败，请重试。",
+    "reviewError": "发生错误，请重试。"
+  },
+  "commonTestimonials": {
+    "enthusiast": "摩托车爱好者",
+    "commuter": "日常通勤者",
+    "text1": "出色的服务和原厂配件！我骑行已有15年，这是我打过交道的最好的摩托车店。他们帮我为 Yamaha R1 找到了完美的排气系统，安装也十分完美。",
+    "text2": "我的 Honda CB650R 需要紧急维修，他们当天就让我重新上路。员工非常了解摩托车，价格也很合理。我只信任他们来照顾我的车！",
+    "text3": "摩托车装备和配件的选择令人惊叹！从头盔到骑行夹克，骑士所需的一切应有尽有。品质一流，他们关于安全装备的建议也非常宝贵。",
+    "text4": "发货迅速，客户服务出色。在线订购刹车片，2天内就送到了。在线商店易于浏览，产品描述详尽，帮助我选到了合适的配件。"
+  },
+  "filterPills": {
+    "fromQuickQuote": "来自快速报价：",
+    "budget": "预算：{value}",
+    "license": "驾照：{value}",
+    "under": "低于 {value}",
+    "bFull": "B Full（≥500cc）",
+    "b2": "B2（<500cc）",
+    "clearAll": "清除全部"
+  },
+  "loanCalculator": {
+    "title": "贷款计算器",
+    "subtitle": "以贴合您预算的灵活月供，拥有您梦想中的座驾。",
+    "downPayment": "首付（{percent}%）",
+    "loanTerm": "贷款期限",
+    "months": "{count} 个月",
+    "estimatedMonthly": "预计月供",
+    "perMonth": "/月",
+    "disclaimer": "按3.5%利率计算。最终金额可能因信用状况和保险而有所不同。",
+    "apply": "申请贷款",
+    "redirecting": "正在跳转至 WhatsApp 办理贷款申请..."
+  },
+  "faq": {
+    "heading": "第一次购车？",
+    "headingLine2": "从这里开始。",
+    "subtext": "我们每天都会收到这些问题。如果有遗漏，请 WhatsApp 联系我们 — Faiz 约5分钟内回复。",
+    "categoryQuestions": "{category} · {count} 个问题",
+    "stillQuestions": "还有问题吗？",
+    "stillQuestionsSubtext": "销售部的 Faiz 在营业时间内（每天9–7点）约5分钟内回复",
+    "categories": {
+      "Financing": "贷款融资",
+      "Delivery": "交付",
+      "Warranty": "保修"
+    },
+    "financing": [
+      {
+        "question": "第一次购车者可以申请摩托车贷款吗？",
+        "answer": "可以。我们与 MBSB、Hong Leong 和 RHB 合作 — 它们都为月收入 RM 1,800 起的首次购车者提供融资。审批通常需要1–2个工作日。请先使用我们的60秒预审，在决定前了解您的通过几率。"
+      },
+      {
+        "question": "我需要哪些文件？",
+        "answer": "您需要身份证（MyKad）、最近3个月的工资单或公积金（EPF）结单，以及过去3个月的银行结单。自雇人士需要 SSM 注册和6个月的银行结单。"
+      },
+      {
+        "question": "全额现金付款可以享有折扣吗？",
+        "answer": "可以 — 现金购车者可在标价基础上获得直接折扣。具体金额视车型而定。请将您心仪的车型通过 WhatsApp 告知我们，我们会立即为您报价。"
+      },
+      {
+        "question": "我最低可以付多少首期？",
+        "answer": "大多数银行接受受薪购车者低至10%的首期。部分车型符合零首期促销资格 — 询问我们目前有哪些优惠正在进行。"
+      }
+    ],
+    "delivery": [
+      {
+        "question": "交付需要多长时间？",
+        "answer": "有现货的车辆当天或次日即可交付。如果需要从其他分行调货，请预留3–5个工作日。我们会通过 WhatsApp 在每个步骤更新您。"
+      },
+      {
+        "question": "你们提供新山以外的送货服务吗？",
+        "answer": "是的，我们可送货至整个柔佛和马来西亚半岛。新山境内送货免费。外坡送货将根据距离收取运输费 — 通常为 RM 100–300。"
+      },
+      {
+        "question": "购买前可以试骑吗？",
+        "answer": "当然可以。请在营业时间内到我们位于 Jalan Seroja 49, Taman Johor Jaya 的展示厅。带上您的驾照，我们会当场安排试骑。"
+      }
+    ],
+    "warranty": [
+      {
+        "question": "我能获得什么保修？",
+        "answer": "所有新车均附有原厂保修（通常为2年或20,000公里，以先到者为准）。我们还额外提供自家6个月经销商保修，涵盖电气和发动机部件。"
+      },
+      {
+        "question": "保修涵盖哪些内容？",
+        "answer": "原厂保修涵盖发动机、车架和电气系统的制造缺陷。我们的经销商保修涵盖主要部件，但不包括易损件（刹车片、轮胎、链条、链轮）。"
+      },
+      {
+        "question": "我可以延长保修期吗？",
+        "answer": "可以 — 我们提供额外1年或2年的延长保修套餐。请在购买时询问以获得最优惠的价格。提前购买比之后再加更划算。"
+      }
+    ]
+  },
+  "notFound": {
+    "title": "找不到页面",
+    "description": "您所查找的页面可能已被移除或暂时无法使用。",
+    "backHome": "返回首页"
+  },
+  "listing": {
+    "breadcrumbTitle": "待售摩托车",
+    "breadcrumbSubtitle": "车辆列表",
+    "breadcrumbHome": "首页",
+    "breadcrumbCurrent": "车辆列表",
+    "viewDetails": "查看详情",
+    "engine": "发动机",
+    "price": "价格",
+    "foundCount": "我们为您找到 <highlight>{count}</highlight> 辆摩托车。",
+    "searchPlaceholder": "搜索摩托车（例如：Yamaha、运动型、150cc）...",
+    "sortBy": "排序方式",
+    "priceLowToHigh": "价格（从低到高）",
+    "priceHighToLow": "价格（从高到低）",
+    "allBrands": "所有品牌",
+    "empty": {
+      "title": "没有摩托车符合您的搜索",
+      "subtitle": "我们找不到符合您条件的摩托车。",
+      "searchedFor": "搜索：",
+      "brand": "品牌：",
+      "tryThese": "试试这些建议：",
+      "removeFilters": "移除部分筛选",
+      "differentKeywords": "尝试不同的关键词",
+      "checkSpelling": "检查拼写",
+      "browseAll": "浏览所有品牌",
+      "needHelp": "需要帮助找到合适的摩托车吗？",
+      "contactExperts": "联系我们的专家"
+    }
+  },
+  "promotions": {
+    "thisMonth": "本月",
+    "headline": "优惠进行中。",
+    "summary": "现有 {count} 项优惠。多数仅限到店——欢迎到 Johor Jaya 展厅领取。",
+    "summaryEmpty": "目前暂无优惠——敬请期待下一波活动。",
+    "moreOffers": "更多优惠",
+    "emptyTitle": "目前暂无促销活动",
+    "emptyBody": "敬请期待——我们经常推出新优惠。或通过 WhatsApp 联系我们了解当前优惠。",
+    "pastDeals": "往期优惠",
+    "days": "天",
+    "hrs": "时",
+    "min": "分",
+    "endsInDays": "{count} 天后结束",
+    "endsToday": "今日结束",
+    "offerEnds": "优惠截止 {date}",
+    "endedOn": "已于 {date} 结束",
+    "claimDeal": "领取优惠",
+    "visitToClaim": "到店领取 · Johor Jaya"
+  }
+}

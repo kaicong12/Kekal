@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const ScheduleService = () => {
+  const t = useTranslations("scheduleForm");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,8 +41,7 @@ const ScheduleService = () => {
       if (response.ok) {
         setSubmitStatus({
           type: "success",
-          message:
-            "Service request submitted successfully! We'll contact you soon to schedule your appointment.",
+          message: t("success"),
         });
         // Reset form
         setFormData({
@@ -53,15 +54,13 @@ const ScheduleService = () => {
       } else {
         setSubmitStatus({
           type: "error",
-          message:
-            result.error ||
-            "Failed to submit service request. Please try again.",
+          message: result.error || t("sendFail"),
         });
       }
     } catch (error) {
       setSubmitStatus({
         type: "error",
-        message: "Network error. Please check your connection and try again.",
+        message: t("networkError"),
       });
     } finally {
       setIsSubmitting(false);
@@ -73,11 +72,11 @@ const ScheduleService = () => {
       <div className="row">
         <div className="col-md-6">
           <div className="mb-4">
-            <label className="form-label">Name *</label>
+            <label className="form-label">{t("name")}</label>
             <input
               className="form-control"
               required
-              placeholder="Your Name"
+              placeholder={t("namePlaceholder")}
               type="text"
               name="name"
               value={formData.name}
@@ -90,7 +89,7 @@ const ScheduleService = () => {
 
         <div className="col-md-6">
           <div className="mb-4">
-            <label className="form-label">Email *</label>
+            <label className="form-label">{t("email")}</label>
             <input
               className="form-control email"
               required
@@ -107,7 +106,7 @@ const ScheduleService = () => {
 
         <div className="col-md-6">
           <div className="mb-4">
-            <label className="form-label">Phone</label>
+            <label className="form-label">{t("phone")}</label>
             <input
               className="form-control"
               placeholder="+60 12 345 6789"
@@ -123,10 +122,10 @@ const ScheduleService = () => {
 
         <div className="col-md-6">
           <div className="mb-4">
-            <label className="form-label">Best time to contact</label>
+            <label className="form-label">{t("bestTime")}</label>
             <input
               className="form-control"
-              placeholder="e.g., Morning, Afternoon, Evening"
+              placeholder={t("bestTimePlaceholder")}
               type="text"
               name="bestTime"
               value={formData.bestTime}
@@ -139,12 +138,12 @@ const ScheduleService = () => {
 
         <div className="col-md-12">
           <div className="mb-4">
-            <label className="form-label">Additional Details (Optional)</label>
+            <label className="form-label">{t("details")}</label>
             <textarea
               className="form-control"
               style={{ padding: "0.375rem 0.75rem" }}
               rows="4"
-              placeholder="Tell us about your motorcycle, the service needed, or any specific requirements..."
+              placeholder={t("detailsPlaceholder")}
               name="message"
               value={formData.message}
               onChange={handleInputChange}
@@ -185,10 +184,10 @@ const ScheduleService = () => {
                     role="status"
                     aria-hidden="true"
                   ></span>
-                  Submitting...
+                  {t("submitting")}
                 </>
               ) : (
-                "Request Service"
+                t("submit")
               )}
             </button>
           </div>
