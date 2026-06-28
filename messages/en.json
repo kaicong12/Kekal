@@ -48,7 +48,10 @@
   "home": {
     "featuredListings": "Featured Listings",
     "showAllMotorcycles": "Show All Motorcycles",
-    "ourTestimonials": "Our Testimonials"
+    "ourTestimonials": "Our Testimonials",
+    "promotionsHeading": "Current Promotions",
+    "promotionsSubtitle": "Limited-time deals — claim them while they last",
+    "viewAllPromotions": "View All Promotions"
   },
   "testimonials": {
     "rider1Role": "Professional Rider",
@@ -394,6 +397,6 @@
     "offerEnds": "Offer ends {date}",
     "endedOn": "Ended {date}",
     "claimDeal": "Claim this deal",
-    "visitToClaim": "Visit us to claim · Johor Jaya"
+    "visitToClaim": "Visit Us"
   }
 }
