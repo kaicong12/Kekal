@@ -158,7 +158,9 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
       key: "actions",
       width: 120,
       render: (_, record) => (
-        <Space>
+        // Stop propagation so the buttons don't also trigger the row's
+        // onClick (which opens the edit page).
+        <Space onClick={(e) => e.stopPropagation()}>
           <Button
             type="primary"
             size="small"
@@ -214,6 +216,10 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
           loading={loading}
           pagination={{ pageSize: 10, showSizeChanger: true }}
           scroll={{ x: 700 }}
+          onRow={(record) => ({
+            onClick: () => onEdit(record.id),
+            style: { cursor: "pointer" },
+          })}
         />
       </Card>
     </div>

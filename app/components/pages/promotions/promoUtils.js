@@ -1,5 +1,9 @@
 export const WHATSAPP_PHONE = "60127126128";
 export const MAPS_URL = "https://maps.app.goo.gl/a9Fs6RkRSR8dnnsE9";
+// Opens Google Maps on the "Perniagaan Motor Kekal" business listing
+// (searches by business name rather than a raw address).
+export const BUSINESS_MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Perniagaan+Motor+Kekal";
 
 export function whatsappLink(promotion) {
   const text =

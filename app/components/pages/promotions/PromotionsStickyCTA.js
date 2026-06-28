@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { MAPS_URL } from "./promoUtils";
+import { BUSINESS_MAPS_URL } from "./promoUtils";
 import styles from "./Promotions.module.css";
 
 function PinIcon() {
@@ -17,7 +17,7 @@ export default function PromotionsStickyCTA() {
   return (
     <div className={styles.stickyBar}>
       <a
-        href={MAPS_URL}
+        href={BUSINESS_MAPS_URL}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.stickyBtn}

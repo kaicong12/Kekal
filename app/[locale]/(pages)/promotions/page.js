@@ -38,11 +38,13 @@ const Promotions = async ({ params: { locale } }) => {
     listPastPromotionsPg({ limit: 6 }).catch(() => []),
   ]);
 
-  const featured =
-    livePromotions.find((p) => p.isFeatured) || livePromotions[0] || null;
-  const rest = livePromotions.filter((p) => p.id !== featured?.id);
+  // All featured promos become hero cards; non-featured live promos go to
+  // "More offers". No fallback — if nothing is featured, no hero is shown.
+  const featuredPromotions = livePromotions.filter((p) => p.isFeatured);
+  const rest = livePromotions.filter((p) => !p.isFeatured);
 
-  const monthLabel = (featured ? new Date(featured.startDate) : new Date())
+  const labelPromotion = featuredPromotions[0] || livePromotions[0];
+  const monthLabel = (labelPromotion ? new Date(labelPromotion.startDate) : new Date())
     .toLocaleDateString(locale === "en" ? "en-US" : locale, {
       month: "short",
       year: "numeric",
@@ -68,9 +70,11 @@ const Promotions = async ({ params: { locale } }) => {
             : t("summaryEmpty")}
         </p>
 
-        {featured ? (
+        {livePromotions.length > 0 ? (
           <>
-            <FeaturedPromoCard promotion={featured} />
+            {featuredPromotions.map((promotion) => (
+              <FeaturedPromoCard key={promotion.id} promotion={promotion} />
+            ))}
 
             {rest.length > 0 && (
               <>

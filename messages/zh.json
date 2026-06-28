@@ -48,7 +48,10 @@
   "home": {
     "featuredListings": "精选车辆",
     "showAllMotorcycles": "查看所有摩托车",
-    "ourTestimonials": "客户评价"
+    "ourTestimonials": "客户评价",
+    "promotionsHeading": "最新优惠",
+    "promotionsSubtitle": "限时优惠 — 把握机会，先到先得",
+    "viewAllPromotions": "查看所有优惠"
   },
   "testimonials": {
     "rider1Role": "专业骑士",
@@ -394,6 +397,6 @@
     "offerEnds": "优惠截止 {date}",
     "endedOn": "已于 {date} 结束",
     "claimDeal": "领取优惠",
-    "visitToClaim": "到店领取 · Johor Jaya"
+    "visitToClaim": "到店参观"
   }
 }

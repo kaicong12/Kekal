@@ -1,6 +1,7 @@
 import MobileMenu from "@/app/components/common/MobileMenu";
 import WhyChoose from "@/app/components/common/WhyChoose";
 import FeaturedFilterListing from "@/app/components/home/FeaturedFilterListing";
+import FeaturedPromotions from "@/app/components/home/FeaturedPromotions";
 import Footer from "@/app/components/home/Footer";
 import Header from "@/app/components/home/Header";
 import Hero from "@/app/components/home/Hero";
@@ -49,6 +50,10 @@ const Home = ({ params }) => {
         </div>
       </section>
       {/* End Quick Quote Wizard */}
+
+      {/* Featured Promotions (renders nothing when none are featured) */}
+      <FeaturedPromotions />
+      {/* End Featured Promotions */}
 
       {/* Why Choose Us */}
       <section className="whychose_us pb70 pt0">

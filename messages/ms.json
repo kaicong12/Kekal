@@ -48,7 +48,10 @@
   "home": {
     "featuredListings": "Senarai Pilihan",
     "showAllMotorcycles": "Lihat Semua Motosikal",
-    "ourTestimonials": "Testimoni Kami"
+    "ourTestimonials": "Testimoni Kami",
+    "promotionsHeading": "Promosi Terkini",
+    "promotionsSubtitle": "Tawaran masa terhad — claim sebelum tamat",
+    "viewAllPromotions": "Lihat Semua Promosi"
   },
   "testimonials": {
     "rider1Role": "Penunggang Profesional",
@@ -394,6 +397,6 @@
     "offerEnds": "Tawaran tamat {date}",
     "endedOn": "Tamat {date}",
     "claimDeal": "Claim tawaran ini",
-    "visitToClaim": "Datang untuk claim · Johor Jaya"
+    "visitToClaim": "Lawati Kami"
   }
 }
