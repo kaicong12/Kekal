@@ -1,77 +1,34 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
-import {
-  Card,
-  Table,
-  Button,
-  Input,
-  Select,
-  Row,
-  Col,
-  Typography,
-  Space,
-  Statistic,
-  message,
-  Modal,
-  Image,
-} from "antd";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  SearchOutlined,
-  PlusOutlined,
-  CarOutlined,
-} from "@ant-design/icons";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { message, Modal } from "antd";
 import { auth } from "@/utils/firebase";
-
-const { Text } = Typography;
+import { AdminTopBar, MobileCard, RowMenu, Thumb, useIsMobile } from "../adminUi";
+import styles from "../admin.module.css";
 
 export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
   const [motorcycles, setMotorcycles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [total, setTotal] = useState(0);
-  const [searchText, setSearchText] = useState("");
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [brands, setBrands] = useState([]);
-  const [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
+  const [search, setSearch] = useState("");
+  const isMobile = useIsMobile();
 
   const fetchMotorcycles = useCallback(async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (searchText) params.set("search", searchText);
-      if (selectedBrand) params.set("brand", selectedBrand);
-      params.set("sortField", "createdAt");
-      params.set("sortOrder", "desc");
-
-      const res = await fetch(`/api/motorcycles?${params}`);
+      const res = await fetch(
+        "/api/motorcycles?sortField=createdAt&sortOrder=desc"
+      );
       const data = await res.json();
       setMotorcycles(data.motorcycles || []);
-      setTotal(data.total || 0);
     } catch {
       message.error("Failed to load motorcycles");
     } finally {
       setLoading(false);
     }
-  }, [searchText, selectedBrand]);
-
-  const fetchBrands = async () => {
-    try {
-      const res = await fetch("/api/motorcycles/brands");
-      const data = await res.json();
-      setBrands(data.brands || []);
-    } catch {
-      // Brands filter is non-critical
-    }
-  };
+  }, []);
 
   useEffect(() => {
     fetchMotorcycles();
   }, [fetchMotorcycles]);
-
-  useEffect(() => {
-    fetchBrands();
-  }, []);
 
   const handleDelete = (motorcycle) => {
     Modal.confirm({
@@ -96,151 +53,161 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
     });
   };
 
-  const columns = [
-    {
-      title: "Image",
-      dataIndex: "imageUrl",
-      key: "image",
-      width: 80,
-      render: (url) => (
-        <Image
-          src={url}
-          alt="motorcycle"
-          width={60}
-          height={45}
-          style={{ objectFit: "cover", borderRadius: 4 }}
-          fallback="/images/no-image.svg"
-          preview={false}
-        />
-      ),
-    },
-    {
-      title: "Brand",
-      dataIndex: "brand",
-      key: "brand",
-      sorter: (a, b) => a.brand.localeCompare(b.brand),
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (name, record) => (
-        <div>
-          <Text strong>{name}</Text>
-          <br />
-          <Text type="secondary" style={{ fontSize: 12 }}>
-            {record.model}
-          </Text>
-        </div>
-      ),
-    },
-    {
-      title: "Year",
-      dataIndex: "year",
-      key: "year",
-      width: 80,
-      sorter: (a, b) => a.year.localeCompare(b.year),
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
-      width: 120,
-      sorter: (a, b) => a.price - b.price,
-      render: (price) => `RM ${Number(price).toLocaleString()}`,
-    },
-    {
-      title: "Actions",
-      key: "actions",
-      width: 120,
-      render: (_, record) => (
-        <Space>
-          <Button
-            type="primary"
-            size="small"
-            icon={<EditOutlined />}
-            onClick={() => onEdit(record.id)}
-          />
-          <Button
-            danger
-            size="small"
-            icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record)}
-          />
-        </Space>
-      ),
-    },
-  ];
+  // Only metrics we can honestly derive from the current data model.
+  const stats = useMemo(() => {
+    const now = new Date();
+    const addedThisMonth = motorcycles.filter((m) => {
+      const d = new Date(m.createdAt);
+      return (
+        d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()
+      );
+    }).length;
+    const brands = new Set(motorcycles.map((m) => m.brand)).size;
+    const avg =
+      motorcycles.length > 0
+        ? Math.round(
+            motorcycles.reduce((sum, m) => sum + Number(m.price || 0), 0) /
+              motorcycles.length
+          )
+        : 0;
+    return [
+      { label: "Total inventory", value: motorcycles.length, hint: "live on site" },
+      { label: "Added this month", value: addedThisMonth },
+      { label: "Brands", value: brands },
+      { label: "Avg price", value: `RM ${avg.toLocaleString()}` },
+    ];
+  }, [motorcycles]);
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return motorcycles;
+    return motorcycles.filter(
+      (m) =>
+        m.name?.toLowerCase().includes(q) ||
+        m.brand?.toLowerCase().includes(q) ||
+        m.model?.toLowerCase().includes(q)
+    );
+  }, [motorcycles, search]);
 
   return (
-    <div>
-      <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
-        <Col xs={12} sm={8}>
-          <Card size="small">
-            <Statistic
-              title="Total Motorcycles"
-              value={total}
-              prefix={<CarOutlined style={{ color: "#1890ff" }} />}
-            />
-          </Card>
-        </Col>
-      </Row>
+    <>
+      <AdminTopBar
+        title="Listings"
+        searchPlaceholder="Search bikes..."
+        searchValue={search}
+        onSearchChange={setSearch}
+        actionLabel="Add bike"
+        onAction={onCreateNew}
+      />
 
-      <Card
-        title="Motorcycle Inventory"
-        extra={
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={onCreateNew}
-          >
-            Add Motorcycle
-          </Button>
-        }
-      >
-        <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
-          <Col xs={24} sm={12} md={8}>
-            <Input
-              placeholder="Search by name, brand, model..."
-              prefix={<SearchOutlined />}
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              allowClear
-            />
-          </Col>
-          <Col xs={24} sm={12} md={6}>
-            <Select
-              placeholder="Filter by brand"
-              value={selectedBrand || undefined}
-              onChange={(val) => setSelectedBrand(val || "")}
-              allowClear
-              style={{ width: "100%" }}
-            >
-              {brands.map((brand) => (
-                <Select.Option key={brand} value={brand}>
-                  {brand}
-                </Select.Option>
-              ))}
-            </Select>
-          </Col>
-        </Row>
+      <div className={styles.content}>
+        <h1 className={styles.pageHeading}>Listings</h1>
+        <p className={styles.pageSubtitle}>
+          Your motorcycle inventory — what shows on the website.
+        </p>
 
-        <Table
-          columns={columns}
-          dataSource={motorcycles}
-          rowKey="id"
-          loading={loading}
-          pagination={{
-            ...pagination,
-            total,
-            showSizeChanger: true,
-            showTotal: (t) => `Total ${t} motorcycles`,
-            onChange: (page, pageSize) =>
-              setPagination({ current: page, pageSize }),
-          }}
-          scroll={{ x: 800 }}
-        />
-      </Card>
-    </div>
+        <div className={styles.statGrid}>
+          {stats.map((s) => (
+            <div key={s.label} className={styles.statCard}>
+              <div className={styles.statLabel}>{s.label}</div>
+              <div className={styles.statValueRow}>
+                <span className={styles.statValue}>{s.value}</span>
+                {s.hint && <span className={styles.statHintMuted}>{s.hint}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.tableCard}>
+          {isMobile ? (
+            <div className={styles.mobileList}>
+              {loading ? (
+                <div className={styles.emptyState}>Loading…</div>
+              ) : filtered.length === 0 ? (
+                <div className={styles.emptyState}>No motorcycles found.</div>
+              ) : (
+                filtered.map((m) => (
+                  <MobileCard
+                    key={m.id}
+                    onClick={() => onEdit(m.id)}
+                    onEdit={() => onEdit(m.id)}
+                    onDelete={() => handleDelete(m)}
+                    thumb={<Thumb src={m.imageUrl} alt={m.name} />}
+                    pill={
+                      <span className={styles.numStrong}>
+                        RM {Number(m.price).toLocaleString()}
+                      </span>
+                    }
+                    title={`${m.brand} ${m.name}`}
+                    meta={`${m.engineCapacity ? `${m.engineCapacity}cc · ` : ""}${m.year} · ${m.model}`}
+                  />
+                ))
+              )}
+            </div>
+          ) : (
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Motorcycle</th>
+                    <th style={{ width: 120 }}>Year</th>
+                    <th style={{ width: 160 }}>Price</th>
+                    <th style={{ width: 60 }} />
+                  </tr>
+                </thead>
+                <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={4} className={styles.emptyState}>
+                      Loading…
+                    </td>
+                  </tr>
+                ) : filtered.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className={styles.emptyState}>
+                      No motorcycles found.
+                    </td>
+                  </tr>
+                ) : (
+                  filtered.map((m) => (
+                    <tr
+                      key={m.id}
+                      className={styles.rowClickable}
+                      onClick={() => onEdit(m.id)}
+                    >
+                      <td>
+                        <div className={styles.offerCell}>
+                          <Thumb src={m.imageUrl} alt={m.name} />
+                          <div>
+                            <div className={styles.offerTitle}>
+                              {m.brand} {m.name}
+                            </div>
+                            <div className={styles.offerMeta}>
+                              {m.engineCapacity ? `${m.engineCapacity}cc · ` : ""}
+                              {m.model}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className={styles.muted}>{m.year}</td>
+                      <td className={styles.numStrong}>
+                        RM {Number(m.price).toLocaleString()}
+                      </td>
+                      <td style={{ textAlign: "right" }}>
+                        <RowMenu
+                          onEdit={() => onEdit(m.id)}
+                          onDelete={() => handleDelete(m)}
+                        />
+                      </td>
+                    </tr>
+                  ))
+                )}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   );
 }
