@@ -54,6 +54,14 @@ Firebase Google Sign-In → check email against Firestore whitelist (`config/ema
 
 Hybrid: Bootstrap 5 (grid/utilities), Ant Design (admin components), SCSS (`public/scss/`), CSS Modules for scoped styles, Styled Components for wrappers.
 
+### Admin / app design system
+
+New **admin / dashboard / internal-tool / app-style** pages must follow the theme in
+**`DESIGN_SYSTEM.md`** (tokens, typography, components — sourced from `app/components/admin/admin.module.css`
+and helpers in `app/components/admin/adminUi.js`). Accent is orange `#f2622e`; wrap AntD in the themed
+`ConfigProvider`; lists get mobile card fallbacks (no horizontal-scroll tables); only show metrics backed
+by real data. The public storefront keeps its legacy Bootstrap/SCSS marketing styling — don't mix them.
+
 ## Path Alias
 
 `@/*` maps to project root (e.g., `@/utils/dbPg`, `@/app/components/...`).

@@ -1,337 +1,202 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Menu, Avatar, Button, Typography, Dropdown, Drawer } from "antd";
+import { useState, useEffect, useCallback } from "react";
+import { ConfigProvider } from "antd";
 import {
-  FileTextOutlined,
-  UnorderedListOutlined,
-  SettingOutlined,
-  UserOutlined,
-  LogoutOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  MenuOutlined,
+  AppstoreOutlined,
   CarOutlined,
-  TagsOutlined,
+  TagOutlined,
+  MailOutlined,
+  StarOutlined,
+  SettingOutlined,
+  MoreOutlined,
 } from "@ant-design/icons";
 import { useAuth } from "../auth/AuthProvider";
-import CashSalesInterface from "../cash-sales/CashSalesInterface";
-import ReceiptManagementInterface from "../receipt-management/ReceiptManagementInterface";
+import { auth } from "@/utils/firebase";
 import MotorcycleManagement from "./motorcycle/MotorcycleManagement";
 import PromotionManagement from "./promotions/PromotionManagement";
-import Footer from "../common/Footer";
-import DefaultHeader from "../common/DefaultHeader";
-import HeaderTop from "../common/HeaderTop";
-import MobileMenu from "../common/MobileMenu";
+import styles from "./admin.module.css";
 
-const { Text } = Typography;
+const antdTheme = {
+  token: {
+    colorPrimary: "#f2622e",
+    colorInfo: "#f2622e",
+    borderRadius: 10,
+    controlHeight: 40,
+    fontFamily: "var(--font-display, Inter, system-ui, sans-serif)",
+  },
+};
+
+const NAV = [
+  { key: "dashboard", label: "Dashboard", icon: <AppstoreOutlined />, disabled: true },
+  { key: "motorcycles", label: "Listings", icon: <CarOutlined /> },
+  { key: "promotions", label: "Promotions", icon: <TagOutlined /> },
+  { key: "enquiries", label: "Enquiries", icon: <MailOutlined />, disabled: true },
+  { key: "reviews", label: "Reviews", icon: <StarOutlined />, disabled: true },
+  { section: "System" },
+  { key: "settings", label: "Settings", icon: <SettingOutlined />, disabled: true },
+];
+
+// Bottom nav (mobile) — a compact subset of the sidebar.
+const MOBILE_NAV = ["dashboard", "motorcycles", "promotions", "enquiries"];
+
+const COMPONENTS = {
+  motorcycles: <MotorcycleManagement />,
+  promotions: <PromotionManagement />,
+};
 
 const AdminDashboard = () => {
   const { user, signOut } = useAuth();
-  const [collapsed, setCollapsed] = useState(false);
-  const [selectedMenuItem, setSelectedMenuItem] = useState("cash-sales");
-  const [isMobile, setIsMobile] = useState(false);
-  const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const [selected, setSelected] = useState("motorcycles");
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [counts, setCounts] = useState({ motorcycles: null, promotions: null });
 
-  useEffect(() => {
-    const checkScreenSize = () => {
-      const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
-      if (mobile) {
-        setCollapsed(true);
-      }
-    };
-
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
+  const fetchCounts = useCallback(async () => {
+    try {
+      const res = await fetch("/api/motorcycles?pageSize=1");
+      const data = await res.json();
+      setCounts((c) => ({ ...c, motorcycles: data.total ?? null }));
+    } catch {
+      /* badge is non-critical */
+    }
+    try {
+      const token = await auth.currentUser?.getIdToken();
+      const res = await fetch("/api/promotions?all=true", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setCounts((c) => ({ ...c, promotions: data.promotions?.length ?? null }));
+    } catch {
+      /* badge is non-critical */
+    }
   }, []);
 
-  const menuItems = [
-    {
-      key: "cash-sales",
-      icon: <FileTextOutlined />,
-      label: "Create Receipt",
-      component: <CashSalesInterface />,
-    },
-    {
-      key: "receipt-management",
-      icon: <UnorderedListOutlined />,
-      label: "Receipt List",
-      component: <ReceiptManagementInterface />,
-    },
-    {
-      key: "motorcycles",
-      icon: <CarOutlined />,
-      label: "Motorcycles",
-      component: <MotorcycleManagement />,
-    },
-    {
-      key: "promotions",
-      icon: <TagsOutlined />,
-      label: "Promotions",
-      component: <PromotionManagement />,
-    },
-  ];
+  useEffect(() => {
+    fetchCounts();
+  }, [fetchCounts]);
 
-  const handleMenuClick = ({ key }) => {
-    setSelectedMenuItem(key);
-  };
+  const badgeFor = (key) =>
+    key === "motorcycles" ? counts.motorcycles : key === "promotions" ? counts.promotions : null;
 
-  const handleSignOut = async () => {
-    await signOut();
-  };
+  const initials = (user?.displayName || user?.email || "A")
+    .split(/[\s@.]/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((s) => s[0]?.toUpperCase())
+    .join("");
 
-  const handleMobileMenuClick = ({ key }) => {
-    setSelectedMenuItem(key);
-    setMobileMenuVisible(false);
-  };
-
-  const currentComponent = menuItems.find(
-    (item) => item.key === selectedMenuItem
-  )?.component;
-
-  const renderSidebarContent = () => (
-    <div
-      style={{
-        background: "#fff",
-        borderRadius: isMobile ? "0" : "8px",
-        boxShadow: isMobile ? "none" : "0 4px 12px rgba(0,0,0,0.1)",
-        minHeight: isMobile ? "100vh" : "70vh",
-        position: isMobile ? "relative" : "sticky",
-        top: isMobile ? "0" : "20px",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      {/* Sidebar Header */}
-      <div
-        style={{
-          padding: "24px 16px",
-          borderBottom: "1px solid #f0f0f0",
-          textAlign: "center",
-          position: "relative",
-        }}
-      >
-        {!isMobile && (
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              position: "absolute",
-              right: "8px",
-              top: "8px",
-              fontSize: "16px",
-            }}
-          />
-        )}
-
-        {/* User Profile Section */}
-        <div style={{ marginBottom: "16px" }}>
-          <Avatar
-            size={collapsed && !isMobile ? 32 : 48}
-            src={user?.photoURL}
-            icon={<UserOutlined />}
-            style={{ margin: "0 auto 8px" }}
-          />
-          {(!collapsed || isMobile) && (
-            <>
-              <Text
-                strong
-                style={{
-                  display: "block",
-                  fontSize: "14px",
-                  color: "#333",
-                  marginBottom: "4px",
-                  wordBreak: "break-word",
-                }}
-              >
-                {user?.displayName || user?.email?.split("@")[0] || "Admin"}
-              </Text>
-              <Text
-                type="secondary"
-                style={{
-                  fontSize: "11px",
-                  display: "block",
-                  wordBreak: "break-word",
-                }}
-              >
-                {user?.email}
-              </Text>
-            </>
-          )}
+  const renderNavItem = (item) => {
+    if (item.section) {
+      return (
+        <div key={item.section} className={styles.navLabel}>
+          {item.section}
         </div>
-      </div>
-
-      {/* Menu */}
-      <div style={{ flex: 1, paddingTop: "16px" }}>
-        <Menu
-          mode="inline"
-          selectedKeys={[selectedMenuItem]}
-          onClick={isMobile ? handleMobileMenuClick : handleMenuClick}
-          style={{
-            border: "none",
-          }}
-          items={menuItems.map((item) => ({
-            key: item.key,
-            icon: item.icon,
-            label: collapsed && !isMobile ? null : item.label,
-            title: collapsed && !isMobile ? item.label : undefined,
-          }))}
-        />
-      </div>
-
-      {/* Sign Out Section */}
-      <div
-        style={{
-          padding: "16px",
-          borderTop: "1px solid #f0f0f0",
-          marginTop: "auto",
-        }}
+      );
+    }
+    const isActive = selected === item.key;
+    const badge = badgeFor(item.key);
+    return (
+      <button
+        key={item.key}
+        type="button"
+        disabled={item.disabled}
+        title={item.disabled ? "Coming soon" : undefined}
+        className={`${styles.navItem} ${isActive ? styles.navItemActive : ""} ${
+          item.disabled ? styles.navItemDisabled : ""
+        }`}
+        onClick={() => !item.disabled && setSelected(item.key)}
       >
-        <Button
-          type="text"
-          icon={<LogoutOutlined />}
-          onClick={handleSignOut}
-          style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: collapsed && !isMobile ? "center" : "flex-start",
-            padding: "8px 12px",
-            borderRadius: "6px",
-            color: "#666",
-            transition: "all 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "#f5f5f5";
-            e.currentTarget.style.color = "#1890ff";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "transparent";
-            e.currentTarget.style.color = "#666";
-          }}
-        >
-          {(!collapsed || isMobile) && "Sign Out"}
-        </Button>
-      </div>
-    </div>
-  );
+        <span className={styles.navIcon}>{item.icon}</span>
+        <span className={styles.navText}>{item.label}</span>
+        {badge != null && <span className={styles.navBadge}>{badge}</span>}
+      </button>
+    );
+  };
 
   return (
-    <div className="wrapper">
-      <HeaderTop />
-      <DefaultHeader />
-      <MobileMenu />
-
-      <section className="inner_page_breadcrumb">
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="breadcrumb_content">
-                <div>
-                  <h2 className="breadcrumb_title">Admin Panel</h2>
-                  <p className="subtitle">Admin Panel</p>
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <a href="/#">Home</a>
-                    </li>
-                    <li className="breadcrumb-item active" aria-current="page">
-                      <a href="#">Admin</a>
-                    </li>
-                  </ol>
-                </div>
-              </div>
+    <ConfigProvider theme={antdTheme}>
+      <div className={styles.shell}>
+        {/* Sidebar (desktop) */}
+        <aside className={styles.sidebar}>
+          <div className={styles.brand}>
+            <div className={styles.brandMark}>K</div>
+            <div>
+              <div className={styles.brandName}>Kekal</div>
+              <div className={styles.brandRole}>Admin</div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Admin mobile menu section - below hero/breadcrumb section */}
-      {isMobile && (
-        <section
-          style={{
-            background: "#f8f9fa",
-            borderBottom: "1px solid #dee2e6",
-            padding: "12px 0",
-          }}
-        >
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <div style={{ textAlign: "center" }}>
-                  <Button
-                    type="primary"
-                    icon={<MenuOutlined />}
-                    onClick={() => setMobileMenuVisible(true)}
-                    style={{
-                      background: "#1890ff",
-                      borderColor: "#1890ff",
-                      borderRadius: "8px",
-                      fontSize: "16px",
-                      padding: "8px 24px",
-                      height: "auto",
-                      boxShadow: "0 2px 4px rgba(24, 144, 255, 0.2)",
+          <nav className={styles.nav}>{NAV.map(renderNavItem)}</nav>
+
+          <div className={styles.userCard}>
+            <div className={styles.userAvatar}>
+              {user?.photoURL ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={user.photoURL} alt="" />
+              ) : (
+                initials || "A"
+              )}
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <div className={styles.userName}>
+                {user?.displayName || user?.email?.split("@")[0] || "Admin"}
+              </div>
+              <div className={styles.userRole}>Owner</div>
+            </div>
+            <div style={{ marginLeft: "auto", position: "relative" }}>
+              <button
+                type="button"
+                className={styles.userMenuBtn}
+                aria-label="Account menu"
+                onClick={() => setUserMenuOpen((v) => !v)}
+              >
+                <MoreOutlined />
+              </button>
+              {userMenuOpen && (
+                <div className={styles.rowMenu} style={{ bottom: "100%", top: "auto", right: 0 }}>
+                  <button
+                    type="button"
+                    className={styles.rowMenuItem}
+                    onClick={() => {
+                      setUserMenuOpen(false);
+                      signOut();
                     }}
                   >
-                    Admin Menu
-                  </Button>
+                    Sign out
+                  </button>
                 </div>
-              </div>
+              )}
             </div>
           </div>
-        </section>
-      )}
+        </aside>
 
-      <div className="container-fluid" style={{ paddingTop: 24, paddingBottom: 24 }}>
-        <div className="row" style={{ margin: "0 -15px" }}>
-          {!isMobile && (
-            <div
-              className={`col-md-${collapsed ? "1" : "3"} col-lg-${
-                collapsed ? "1" : "2"
-              }`}
-              style={{ transition: "all 0.3s ease", padding: "0 15px" }}
-            >
-              {renderSidebarContent()}
-            </div>
-          )}
+        {/* Main content — the active section renders its own top bar */}
+        <main className={styles.main}>{COMPONENTS[selected]}</main>
 
-          {/* Mobile Drawer */}
-          {isMobile && (
-            <Drawer
-              title="Navigation"
-              placement="left"
-              onClose={() => setMobileMenuVisible(false)}
-              open={mobileMenuVisible}
-              bodyStyle={{ padding: 0 }}
-              width={280}
-            >
-              {renderSidebarContent()}
-            </Drawer>
-          )}
-
-          {/* Main Content */}
-          <div
-            className={
-              isMobile
-                ? "col-12"
-                : `col-md-${collapsed ? "11" : "9"} col-lg-${
-                    collapsed ? "11" : "10"
-                  }`
-            }
-            style={{
-              transition: "all 0.3s ease",
-              padding: isMobile ? "0 15px" : "0 15px",
-              marginTop: isMobile ? "20px" : "0",
-            }}
-          >
-            {currentComponent}
-          </div>
-        </div>
+        {/* Bottom nav (mobile) */}
+        <nav className={styles.bottomNav}>
+          {MOBILE_NAV.map((key) => {
+            const item = NAV.find((n) => n.key === key);
+            if (!item) return null;
+            const isActive = selected === key;
+            return (
+              <button
+                key={key}
+                type="button"
+                disabled={item.disabled}
+                className={`${styles.bottomNavItem} ${
+                  isActive ? styles.bottomNavItemActive : ""
+                }`}
+                onClick={() => !item.disabled && setSelected(key)}
+                style={item.disabled ? { opacity: 0.45 } : undefined}
+              >
+                <span className={styles.bottomNavIcon}>{item.icon}</span>
+                {item.label}
+              </button>
+            );
+          })}
+        </nav>
       </div>
-
-      <Footer />
-    </div>
+    </ConfigProvider>
   );
 };
 
