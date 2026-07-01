@@ -1,20 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import {
-  Card,
   Form,
   Input,
   InputNumber,
   Select,
-  Button,
-  Row,
-  Col,
-  Upload,
   message,
-  Space,
-  Typography,
   Spin,
-  Image,
   AutoComplete,
 } from "antd";
 import {
@@ -26,9 +18,9 @@ import {
 } from "@ant-design/icons";
 import { uploadMotorcycleImage } from "@/utils/motorcycleImageUpload";
 import { auth } from "@/utils/firebase";
+import styles from "../admin.module.css";
 
 const { TextArea } = Input;
-const { Text } = Typography;
 
 const currentYear = new Date().getFullYear();
 const yearOptions = Array.from({ length: currentYear - 2014 + 2 }, (_, i) => ({
@@ -43,6 +35,7 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
   const [images, setImages] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [brandOptions, setBrandOptions] = useState([]);
+  const [heading, setHeading] = useState({ name: "", brand: "", year: "" });
 
   const isEdit = !!motorcycleId;
 
@@ -51,9 +44,7 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
       try {
         const res = await fetch("/api/motorcycles/brands");
         const data = await res.json();
-        setBrandOptions(
-          (data.brands || []).map((b) => ({ value: b, label: b }))
-        );
+        setBrandOptions((data.brands || []).map((b) => ({ value: b, label: b })));
       } catch {
         // Non-critical
       }
@@ -81,6 +72,7 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
             ? JSON.stringify(data.specification, null, 2)
             : "",
         });
+        setHeading({ name: data.name, brand: data.brand, year: data.year });
         setImages(
           (data.images || []).map((img) => ({
             url: img.url,
@@ -98,40 +90,35 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
     if (isEdit) loadMotorcycle();
   }, [motorcycleId, isEdit, form]);
 
-  const handleImageUpload = async (file) => {
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
     setUploading(true);
     try {
       const id = motorcycleId || "new";
       const url = await uploadMotorcycleImage(file, id);
-      setImages((prev) => [
-        ...prev,
-        { url, displayOrder: prev.length },
-      ]);
+      setImages((prev) => [...prev, { url, displayOrder: prev.length }]);
       message.success("Image uploaded");
     } catch {
       message.error("Failed to upload image");
     } finally {
       setUploading(false);
     }
-    return false; // Prevent antd default upload
   };
 
   const handleRemoveImage = (index) => {
-    setImages((prev) => {
-      const updated = prev.filter((_, i) => i !== index);
-      return updated.map((img, i) => ({ ...img, displayOrder: i }));
-    });
+    setImages((prev) =>
+      prev.filter((_, i) => i !== index).map((img, i) => ({ ...img, displayOrder: i }))
+    );
   };
 
   const handleMoveImage = (index, direction) => {
     setImages((prev) => {
       const updated = [...prev];
-      const targetIndex = index + direction;
-      if (targetIndex < 0 || targetIndex >= updated.length) return prev;
-      [updated[index], updated[targetIndex]] = [
-        updated[targetIndex],
-        updated[index],
-      ];
+      const target = index + direction;
+      if (target < 0 || target >= updated.length) return prev;
+      [updated[index], updated[target]] = [updated[target], updated[index]];
       return updated.map((img, i) => ({ ...img, displayOrder: i }));
     });
   };
@@ -163,17 +150,11 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
         tags: values.tags || null,
         description: values.description || null,
         specification,
-        images: images.map((img, i) => ({
-          url: img.url,
-          displayOrder: i,
-        })),
+        images: images.map((img, i) => ({ url: img.url, displayOrder: i })),
       };
 
-      const url = isEdit
-        ? `/api/motorcycles/${motorcycleId}`
-        : "/api/motorcycles";
+      const url = isEdit ? `/api/motorcycles/${motorcycleId}` : "/api/motorcycles";
       const method = isEdit ? "PUT" : "POST";
-
       const token = await auth.currentUser?.getIdToken();
       const res = await fetch(url, {
         method,
@@ -190,9 +171,7 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
       }
 
       message.success(
-        isEdit
-          ? "Motorcycle updated successfully"
-          : "Motorcycle created successfully"
+        isEdit ? "Motorcycle updated successfully" : "Motorcycle created successfully"
       );
       onBack();
     } catch (error) {
@@ -204,287 +183,237 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
 
   if (loading) {
     return (
-      <div style={{ textAlign: "center", padding: 60 }}>
+      <div style={{ textAlign: "center", padding: 80 }}>
         <Spin size="large" />
       </div>
     );
   }
 
-  return (
-    <div>
-      <Button
-        icon={<ArrowLeftOutlined />}
-        onClick={onBack}
-        style={{ marginBottom: 16 }}
-      >
-        Back to List
-      </Button>
+  const title = isEdit ? `${heading.brand} ${heading.name}`.trim() || "Motorcycle" : "New motorcycle";
 
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleSubmit}
-        initialValues={{}}
-      >
-        {/* Basic Info */}
-        <Card
-          title="Basic Information"
-          style={{ marginBottom: 16 }}
-          size="small"
+  return (
+    <Form
+      form={form}
+      layout="vertical"
+      onFinish={handleSubmit}
+      className={styles.adminForm}
+      initialValues={{}}
+    >
+      {/* Sticky action bar */}
+      <div className={styles.formTopbar}>
+        <div className={styles.breadcrumb}>
+          <button type="button" className={styles.breadcrumbLink} onClick={onBack}>
+            Listings
+          </button>
+          <span>›</span>
+          <span className={styles.breadcrumbCurrent}>{isEdit ? "Edit bike" : "New bike"}</span>
+        </div>
+        <span className={styles.topbarSpacer} />
+        <button type="button" className={styles.ghostBtn} onClick={onBack}>
+          Discard
+        </button>
+        <button
+          type="submit"
+          className={styles.primaryBtn}
+          disabled={submitting || uploading}
         >
-          <Row gutter={16}>
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="brand"
-                label="Brand"
-                rules={[{ required: true, message: "Brand is required" }]}
-              >
-                <AutoComplete
-                  options={brandOptions}
-                  placeholder="e.g. Honda"
-                  filterOption={(input, option) =>
-                    option.value.toLowerCase().includes(input.toLowerCase())
-                  }
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
+          {submitting ? "Saving…" : "Save bike"}
+        </button>
+      </div>
+
+      <div className={styles.content}>
+        <div className={styles.formHeader}>
+          <button type="button" className={styles.backBtn} onClick={onBack}>
+            <ArrowLeftOutlined />
+          </button>
+          <div>
+            <h1 className={styles.formTitle}>{title}</h1>
+            {isEdit && (
+              <div className={styles.formTitleMeta}>
+                {heading.brand} · {heading.year}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className={styles.formLayout}>
+          {/* Main column */}
+          <div className={styles.formMain}>
+            {/* Photos */}
+            <div className={styles.panel}>
+              <div className={styles.panelTitle}>
+                Photos
+                <span className={styles.panelHint}>Drag order · first is cover</span>
+              </div>
+              <div className={styles.mediaRow}>
+                {images.map((img, index) => (
+                  <div key={img.url} className={styles.mediaTile}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={img.url} alt={`Photo ${index + 1}`} />
+                    <div className={styles.mediaOverlay}>
+                      <button
+                        type="button"
+                        className={styles.mediaBtn}
+                        disabled={index === 0}
+                        onClick={() => handleMoveImage(index, -1)}
+                      >
+                        <ArrowUpOutlined />
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.mediaBtn}
+                        disabled={index === images.length - 1}
+                        onClick={() => handleMoveImage(index, 1)}
+                      >
+                        <ArrowDownOutlined />
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.mediaBtn}
+                        onClick={() => handleRemoveImage(index)}
+                      >
+                        <DeleteOutlined />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                <label className={`${styles.mediaTile} ${styles.mediaAdd}`}>
+                  <PlusOutlined />
+                  {uploading ? "Uploading…" : "Add photo"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    onChange={handleImageUpload}
+                  />
+                </label>
+              </div>
+            </div>
+
+            {/* Basics */}
+            <div className={styles.panel}>
+              <div className={styles.panelTitle}>Basics</div>
               <Form.Item
                 name="name"
-                label="Name"
+                label="Model name"
                 rules={[{ required: true, message: "Name is required" }]}
               >
-                <Input placeholder="e.g. Wave 125i" />
+                <Input placeholder="e.g. Y15ZR V2" />
               </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
+              <div className={styles.grid3}>
+                <Form.Item
+                  name="brand"
+                  label="Brand"
+                  rules={[{ required: true, message: "Brand is required" }]}
+                >
+                  <AutoComplete
+                    options={brandOptions}
+                    placeholder="e.g. Yamaha"
+                    filterOption={(input, option) =>
+                      option.value.toLowerCase().includes(input.toLowerCase())
+                    }
+                  />
+                </Form.Item>
+                <Form.Item
+                  name="year"
+                  label="Year"
+                  rules={[{ required: true, message: "Year is required" }]}
+                >
+                  <Select options={yearOptions} placeholder="Select" />
+                </Form.Item>
+                <Form.Item
+                  name="model"
+                  label="Model code"
+                  rules={[{ required: true, message: "Model is required" }]}
+                >
+                  <Input placeholder="e.g. Y15-24" />
+                </Form.Item>
+              </div>
+              <Form.Item name="description" label="Description">
+                <TextArea rows={3} placeholder="Short description shown on the listing…" />
+              </Form.Item>
+            </div>
+
+            {/* Specifications */}
+            <div className={styles.panel}>
+              <div className={styles.panelTitle}>Specifications</div>
+              <div className={styles.grid2}>
+                <Form.Item
+                  name="engine"
+                  label="Engine"
+                  rules={[{ required: true, message: "Engine is required" }]}
+                >
+                  <Input placeholder="e.g. Single Cylinder 4-Stroke" />
+                </Form.Item>
+                <Form.Item
+                  name="engineCapacity"
+                  label="Engine capacity (cc)"
+                  rules={[{ required: true, message: "Engine capacity is required" }]}
+                >
+                  <InputNumber min={1} style={{ width: "100%" }} placeholder="e.g. 150" />
+                </Form.Item>
+                <Form.Item
+                  name="gear"
+                  label="Transmission"
+                  rules={[{ required: true, message: "Gear is required" }]}
+                >
+                  <Input placeholder="e.g. 5-Speed" />
+                </Form.Item>
+                <Form.Item
+                  name="color"
+                  label="Color"
+                  rules={[{ required: true, message: "Color is required" }]}
+                >
+                  <Input placeholder="e.g. Matte Blue" />
+                </Form.Item>
+              </div>
               <Form.Item
-                name="model"
-                label="Model"
-                rules={[{ required: true, message: "Model is required" }]}
+                name="specification"
+                label="Detailed specs (JSON)"
+                help='Structured specs, e.g. { "General": { "Weight": "100kg" } }'
               >
-                <Input placeholder="e.g. Wave125i-2024" />
+                <TextArea
+                  rows={6}
+                  placeholder='{ "General": { "Weight": "100kg" } }'
+                  style={{ fontFamily: "monospace" }}
+                />
               </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
-              <Form.Item
-                name="year"
-                label="Year"
-                rules={[{ required: true, message: "Year is required" }]}
-              >
-                <Select options={yearOptions} placeholder="Select year" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} md={6}>
+            </div>
+          </div>
+
+          {/* Side rail */}
+          <div className={styles.formSide}>
+            <div className={styles.panel}>
+              <div className={styles.panelTitle}>Pricing</div>
               <Form.Item
                 name="price"
-                label="Price (RM)"
+                label="Selling price (RM)"
                 rules={[{ required: true, message: "Price is required" }]}
               >
                 <InputNumber
                   min={0}
                   step={100}
                   style={{ width: "100%" }}
-                  formatter={(v) =>
-                    `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }
+                  formatter={(v) => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   parser={(v) => v.replace(/\$\s?|(,*)/g, "")}
-                  placeholder="e.g. 5800"
+                  placeholder="e.g. 8998"
                 />
               </Form.Item>
-            </Col>
-          </Row>
-        </Card>
+            </div>
 
-        {/* Technical Specs */}
-        <Card
-          title="Technical Specifications"
-          style={{ marginBottom: 16 }}
-          size="small"
-        >
-          <Row gutter={16}>
-            <Col xs={24} sm={12} md={8}>
+            <div className={styles.panel}>
+              <div className={styles.panelTitle}>Merchandising</div>
               <Form.Item
-                name="engine"
-                label="Engine"
-                rules={[{ required: true, message: "Engine is required" }]}
+                name="tags"
+                label="Tags"
+                help="Comma-separated, e.g. popular, new arrival"
               >
-                <Input placeholder="e.g. Single Cylinder 4-Stroke" />
+                <Input placeholder="popular, new arrival" />
               </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="engineCapacity"
-                label="Engine Capacity (cc)"
-                rules={[
-                  { required: true, message: "Engine capacity is required" },
-                ]}
-              >
-                <InputNumber
-                  min={1}
-                  style={{ width: "100%" }}
-                  placeholder="e.g. 125"
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="gear"
-                label="Gear / Transmission"
-                rules={[{ required: true, message: "Gear is required" }]}
-              >
-                <Input placeholder="e.g. 4-Speed Rotary" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} md={8}>
-              <Form.Item
-                name="color"
-                label="Color"
-                rules={[{ required: true, message: "Color is required" }]}
-              >
-                <Input placeholder="e.g. Pearl White" />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Card>
-
-        {/* Additional Info */}
-        <Card
-          title="Additional Information"
-          style={{ marginBottom: 16 }}
-          size="small"
-        >
-          <Row gutter={16}>
-            <Col xs={24} sm={12}>
-              <Form.Item name="tags" label="Tags">
-                <Input placeholder="Comma-separated, e.g. popular, new arrival" />
-              </Form.Item>
-            </Col>
-            <Col xs={24}>
-              <Form.Item name="description" label="Description">
-                <TextArea rows={4} placeholder="Motorcycle description..." />
-              </Form.Item>
-            </Col>
-            <Col xs={24}>
-              <Form.Item
-                name="specification"
-                label="Specification (JSON)"
-                help="Structured specs as JSON, e.g. { &quot;General&quot;: { &quot;Weight&quot;: &quot;100kg&quot; } }"
-              >
-                <TextArea
-                  rows={6}
-                  placeholder='{ "General": { "Weight": "100kg" }, "Performance": { "Top Speed": "110km/h" } }'
-                  style={{ fontFamily: "monospace" }}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Card>
-
-        {/* Images */}
-        <Card title="Images" style={{ marginBottom: 16 }} size="small">
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-            {images.map((img, index) => (
-              <div
-                key={img.url}
-                style={{
-                  position: "relative",
-                  border: "1px solid #d9d9d9",
-                  borderRadius: 8,
-                  padding: 4,
-                  width: 120,
-                }}
-              >
-                <Image
-                  src={img.url}
-                  alt={`Image ${index + 1}`}
-                  width={110}
-                  height={80}
-                  style={{ objectFit: "cover", borderRadius: 4 }}
-                  fallback="/images/no-image.svg"
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: 4,
-                    marginTop: 4,
-                  }}
-                >
-                  <Button
-                    size="small"
-                    icon={<ArrowUpOutlined />}
-                    disabled={index === 0}
-                    onClick={() => handleMoveImage(index, -1)}
-                  />
-                  <Button
-                    size="small"
-                    icon={<ArrowDownOutlined />}
-                    disabled={index === images.length - 1}
-                    onClick={() => handleMoveImage(index, 1)}
-                  />
-                  <Button
-                    size="small"
-                    danger
-                    icon={<DeleteOutlined />}
-                    onClick={() => handleRemoveImage(index)}
-                  />
-                </div>
-                <Text
-                  type="secondary"
-                  style={{
-                    display: "block",
-                    textAlign: "center",
-                    fontSize: 11,
-                  }}
-                >
-                  #{index + 1}
-                </Text>
-              </div>
-            ))}
-
-            <Upload
-              beforeUpload={handleImageUpload}
-              showUploadList={false}
-              accept="image/*"
-            >
-              <div
-                style={{
-                  width: 120,
-                  height: 120,
-                  border: "1px dashed #d9d9d9",
-                  borderRadius: 8,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                }}
-              >
-                <PlusOutlined style={{ fontSize: 20 }} />
-                <Text type="secondary" style={{ fontSize: 12, marginTop: 4 }}>
-                  {uploading ? "Uploading..." : "Upload"}
-                </Text>
-              </div>
-            </Upload>
+            </div>
           </div>
-        </Card>
-
-        {/* Submit */}
-        <div style={{ textAlign: "right" }}>
-          <Space>
-            <Button onClick={onBack}>Cancel</Button>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={submitting}
-              disabled={uploading}
-            >
-              {isEdit ? "Update Motorcycle" : "Create Motorcycle"}
-            </Button>
-          </Space>
         </div>
-      </Form>
-    </div>
+      </div>
+    </Form>
   );
 }
