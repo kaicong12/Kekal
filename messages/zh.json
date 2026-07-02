@@ -397,6 +397,283 @@
     "offerEnds": "优惠截止 {date}",
     "endedOn": "已于 {date} 结束",
     "claimDeal": "领取优惠",
-    "visitToClaim": "到店参观"
+    "visitToClaim": "到店参观",
+    "allPromotions": "所有促销",
+    "runningOffers": "正在进行的优惠",
+    "viewAllStock": "查看所有库存",
+    "ended": "已结束",
+    "ctaHeading": "看到心仪的优惠了吗？",
+    "ctaBody": "促销每月更新，库存有限。立即用 WhatsApp 联系我们——我们会确认价格并为您保留车辆。",
+    "ctaButton": "WhatsApp 联系 Motor Kekal",
+    "crumbCurrent": "促销"
+  },
+  "mk": {
+    "inStock": "有现货",
+    "home": {
+      "eyebrow": "摩托车店 · 新山",
+      "h1": "<em>轻松</em>选车。<br></br><em>放心</em>购买。",
+      "sub": "Perniagaan Motor Kekal 是新山值得信赖的摩托车店，经营超过 30 年。全新车款、轻松贷款、诚信待客——一站式服务。",
+      "ctaBrowse": "浏览摩托车",
+      "ctaWhatsapp": "WhatsApp 联系我们",
+      "meta": [
+        "4 大品牌经销",
+        "自有维修与保养",
+        "每天营业"
+      ],
+      "heroImageAlt": "Perniagaan Motor Kekal 展示厅",
+      "badgeOpen": "营业中",
+      "dealerLabel": "主要品牌：",
+      "popularEyebrow": "热销",
+      "popularHeading": "热门摩托车",
+      "bestSeller": "热销",
+      "servicesEyebrow": "一站式服务",
+      "servicesHeading": "不只是卖车",
+      "servicesSub": "从贷款到保险、保养——全部由我们处理，让您省心。",
+      "services": [
+        {
+          "icon": "finance",
+          "title": "轻松贷款",
+          "desc": "我们与合作银行对接，提前告知您的批核机会。",
+          "link": "查询资格"
+        },
+        {
+          "icon": "trade",
+          "title": "以旧换新",
+          "desc": "带上旧车，骑走新车。快速获得估价。",
+          "link": "评估您的车"
+        },
+        {
+          "icon": "warranty",
+          "title": "保修与保养",
+          "desc": "在自有维修厂保养，原厂零件，记录在车上。",
+          "link": "查看保修"
+        },
+        {
+          "icon": "insurance",
+          "title": "保险与路税",
+          "desc": "在柜台直接续保和路税——无需排队。",
+          "link": "立即续保"
+        }
+      ],
+      "stats": [
+        {
+          "value": "4",
+          "label": "主要品牌"
+        },
+        {
+          "value": "30+",
+          "label": "经验年数"
+        },
+        {
+          "value": "3,000+",
+          "label": "满意车主"
+        },
+        {
+          "value": "4.9★",
+          "label": "Google 平均评分"
+        }
+      ],
+      "splitEyebrow": "为何选择 Motor Kekal",
+      "splitHeading": "买车不该让人紧张",
+      "splitBody": "尤其是您的第一辆车。我们用您听得懂的语言解释每个步骤——没有压力，没有意外。",
+      "splitTicks": [
+        "诚实报价。在您决定前，明确告知实际价格、订金与分期。",
+        "营业时间内 WhatsApp 快速回复。",
+        "自有维修厂。保养与保修同一地点完成。"
+      ],
+      "splitCta": "认识我们",
+      "splitImageAlt": "车主与摩托车",
+      "testimonialsEyebrow": "车主心声",
+      "testimonialsHeading": "深受新山人信赖",
+      "findUsEyebrow": "找到我们",
+      "findUsHeading": "新山的摩托车店",
+      "napPhone": "WhatsApp 与电话",
+      "napHoursLabel": "每天营业",
+      "napWhatsappLocation": "WhatsApp 位置",
+      "ctaBandHeading": "准备好找您的车了吗？",
+      "ctaBandBody": "把您想要的车款用 WhatsApp 告诉我们——我们立即报价、订金与分期。缺货？我们可在几天内调货。",
+      "ctaBandButton": "WhatsApp Motor Kekal"
+    },
+    "listings": {
+      "eyebrow": "最新库存 · 新山",
+      "subtitle": "全部新车，价格清晰。店内有现货，或我们可在几天内调货。",
+      "all": "全部",
+      "cantFindTitle": "找不到想要的车？",
+      "cantFindBody": "大部分品牌我们可在几天内调货。把车款用 WhatsApp 告诉我们，我们为您报价。",
+      "cantFindCta": "WhatsApp 您的车款"
+    },
+    "services": {
+      "crumbHome": "首页",
+      "crumbCurrent": "服务",
+      "eyebrow": "一站式服务",
+      "heading": "Motor Kekal 服务",
+      "sub": "买车只是开始。从贷款到保险、保修与保养——全部由我们处理，让您省心。",
+      "financing": {
+        "badge": "最受欢迎",
+        "title": "轻松贷款",
+        "body": "我们与多家银行合作。告诉我们您的薪资与职业——我们提前告知批核机会，让您不必浪费时间填写无法批核的表格。",
+        "ticks": [
+          "指定车款订金低至 RM500",
+          "3–5 年期 · 灵活分期",
+          "欢迎首次购车者与 e-hailing 骑手"
+        ],
+        "cta": "在 WhatsApp 查询资格"
+      },
+      "tradein": {
+        "eyebrow": "以旧换新",
+        "title": "带上旧车，骑走新车",
+        "body": "我们收购您的旧车，并直接从新车价格中扣除。快速获得估价——只需在 WhatsApp 发送照片和车款。",
+        "steps": [
+          {
+            "title": "发送详情",
+            "desc": "在 WhatsApp 提供车款、年份、里程（km）和旧车照片。"
+          },
+          {
+            "title": "获得估价",
+            "desc": "我们快速给出估价。"
+          },
+          {
+            "title": "带来店里",
+            "desc": "我们确认车况并敲定价格。"
+          },
+          {
+            "title": "骑走新车",
+            "desc": "以旧换新的价值从您的新车中扣除。"
+          }
+        ],
+        "cta": "评估您的车"
+      },
+      "warranty": {
+        "eyebrow": "保修与保养",
+        "title": "自有维修厂，原厂零件",
+        "body": "保养在我们自有的维修厂进行——不外包给第三方。每次保养都记录在您的车上。",
+        "ticks": [
+          "按保养手册定期保养",
+          "原厂零件 · 保留厂方保修",
+          "新山市区内大型维修可上门取车"
+        ],
+        "cta": "预约保养"
+      },
+      "insurance": {
+        "badge": "柜台续保",
+        "title": "保险与路税",
+        "body": "在柜台直接续保和路税。无需在邮政局排队——我们当场打印，几分钟完成。",
+        "ticks": [
+          "所有品牌摩托车保险",
+          "当场打印路税",
+          "续保提醒——到期前我们会 WhatsApp 通知"
+        ],
+        "cta": "立即续保"
+      },
+      "faqEyebrow": "常见问题",
+      "faqTitle": "我们每天都会被问到的问题",
+      "faq": [
+        {
+          "q": "需要在线支付订金吗？",
+          "a": "不需要。我们不收取在线付款。请先 WhatsApp 我们，再到店内或通过银行转账付款。"
+        },
+        {
+          "q": "首次购车者可以贷款吗？",
+          "a": "可以。我们与多家银行合作，并提前告知您的批核机会，包括首次购车和 e-hailing 骑手。"
+        },
+        {
+          "q": "以旧换新需要多久？",
+          "a": "通过 WhatsApp 快速估价。最终价值在我们到店检查车辆后确定。"
+        },
+        {
+          "q": "可以在店里续保和路税吗？",
+          "a": "可以。我们在柜台直接打印保险和路税——无需在邮政局排队。"
+        },
+        {
+          "q": "缺货的话多久能拿到车？",
+          "a": "大部分品牌我们可在几天内调货。把车款用 WhatsApp 告诉我们，我们确认并报价。"
+        }
+      ],
+      "ctaHeading": "还有其他问题吗？",
+      "ctaBody": "WhatsApp 我们——营业时间内我们会快速回复。",
+      "ctaButton": "WhatsApp Motor Kekal"
+    },
+    "about": {
+      "crumbHome": "首页",
+      "crumbCurrent": "关于我们",
+      "eyebrow": "关于我们",
+      "heading": "新山的家族摩托车店",
+      "sub": "Perniagaan Motor Kekal 起步于新山的一家小店。三十多年后，我们依然在这里——以我们希望被对待的方式卖车：诚实、简单、没有压力。",
+      "bannerAlt": "Perniagaan Motor Kekal 店面",
+      "storyEyebrow": "我们的故事",
+      "storyHeading": "从小店到值得信赖的名字",
+      "storyPara1": "我们从一个简单的目标开始——成为新山人可以信赖的摩托车店。在这里，您不会感到压力，价格就是价格，卖车给您的人也是日后为您保养的人。",
+      "storyPara2": "如今我们销售 Yamaha、Kawasaki、Honda 和 KTM，拥有自己的维修厂和保险柜台，一站式服务。但我们的做事方式始终如一。",
+      "storyImageAlt": "Motor Kekal 维修厂",
+      "valuesEyebrow": "我们坚持的",
+      "valuesHeading": "Motor Kekal 之道",
+      "values": [
+        {
+          "icon": "shield",
+          "title": "诚信为先",
+          "desc": "在您决定前，明确告知实际价格、订金与分期。若您不符合贷款资格，我们会如实相告——不浪费您的时间。"
+        },
+        {
+          "icon": "users",
+          "title": "像邻居一样对待",
+          "desc": "我们许多顾客都住在新山一带。我们认得脸孔、了解车辆——不只是一笔交易。"
+        },
+        {
+          "icon": "tools",
+          "title": "从头到尾包办",
+          "desc": "贷款、保险、路税、保养——全部由我们处理，让您不必到处奔波。"
+        },
+        {
+          "icon": "spark",
+          "title": "快速回复",
+          "desc": "WhatsApp 我们，营业时间内快速回复。无需等待数日。"
+        }
+      ],
+      "stats": [
+        {
+          "value": "30+",
+          "label": "扎根新山年数"
+        },
+        {
+          "value": "4",
+          "label": "主要品牌"
+        },
+        {
+          "value": "3,000+",
+          "label": "满意车主"
+        },
+        {
+          "value": "4.9★",
+          "label": "Google 平均评分"
+        }
+      ],
+      "teamEyebrow": "我们的团队",
+      "teamHeading": "您会见到的人",
+      "team": [
+        {
+          "name": "销售团队",
+          "role": "销售与贷款"
+        },
+        {
+          "name": "维修主管",
+          "role": "保养与保修"
+        },
+        {
+          "name": "前台",
+          "role": "保险与路税"
+        }
+      ],
+      "findEyebrow": "找到我们",
+      "findHeading": "欢迎到店",
+      "phoneNote": "电话",
+      "hoursLabel": "每天营业",
+      "whatsappUs": "WhatsApp 我们"
+    },
+    "footer": {
+      "about": "柔佛新山的家族电单车商行。Yamaha、Honda、Kawasaki 与 KTM — 价格诚实、贷款轻松，还有自家维修厂，一站式服务。",
+      "contactHeading": "联系我们",
+      "seo": "永恒摩托贸易公司 — 位于柔佛新山的电单车商行。全新电单车、轻松贷款、以旧换新、保险、路税更新及自家维修服务。",
+      "rights": "© 2026 永恒摩托贸易公司。版权所有。"
+    }
   }
 }

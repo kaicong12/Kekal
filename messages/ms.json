@@ -397,6 +397,283 @@
     "offerEnds": "Tawaran tamat {date}",
     "endedOn": "Tamat {date}",
     "claimDeal": "Claim tawaran ini",
-    "visitToClaim": "Lawati Kami"
+    "visitToClaim": "Lawati Kami",
+    "allPromotions": "Semua promosi",
+    "runningOffers": "Offer yang sedang berjalan",
+    "viewAllStock": "Lihat semua stok",
+    "ended": "Tamat",
+    "ctaHeading": "Nampak offer yang berkenan?",
+    "ctaBody": "Promosi berubah setiap bulan dan stok terhad. WhatsApp kami sekarang — kami sahkan harga dan tahan unit untuk anda.",
+    "ctaButton": "WhatsApp Motor Kekal",
+    "crumbCurrent": "Promosi"
+  },
+  "mk": {
+    "inStock": "Ada stok",
+    "home": {
+      "eyebrow": "Kedai Motor · Johor Bahru",
+      "h1": "Cari motor <em>senang</em>.<br></br>Beli dengan <em>yakin</em>.",
+      "sub": "Perniagaan Motor Kekal ialah kedai motor dipercayai di Johor Bahru sejak lebih 30 tahun. Stok baru, pembiayaan mudah lulus, dan orang yang jujur — semua bawah satu bumbung.",
+      "ctaBrowse": "Lihat Motosikal",
+      "ctaWhatsapp": "WhatsApp Kami",
+      "meta": [
+        "Pengedar 4 jenama utama",
+        "Servis & waranti sendiri",
+        "Buka setiap hari"
+      ],
+      "heroImageAlt": "Showroom Perniagaan Motor Kekal",
+      "badgeOpen": "Buka sekarang",
+      "dealerLabel": "Jenama utama:",
+      "popularEyebrow": "Paling laris",
+      "popularHeading": "Motosikal popular",
+      "bestSeller": "Paling laris",
+      "servicesEyebrow": "Semua bawah satu bumbung",
+      "servicesHeading": "Bukan sekadar jual motor",
+      "servicesSub": "Dari pinjaman sampai insurans dan servis — kami uruskan semua supaya anda tak perlu berlari ke sana sini.",
+      "services": [
+        {
+          "icon": "finance",
+          "title": "Pembiayaan mudah lulus",
+          "desc": "Kami kerja dengan bank rakan kongsi dan beritahu awal-awal peluang anda lulus.",
+          "link": "Semak kelayakan"
+        },
+        {
+          "icon": "trade",
+          "title": "Tukar-beli (trade-in)",
+          "desc": "Bawa motor lama, balik naik yang baru. Dapat harga anggaran cepat.",
+          "link": "Nilai motor anda"
+        },
+        {
+          "icon": "warranty",
+          "title": "Waranti & servis",
+          "desc": "Servis di bengkel kami sendiri. Alat ganti asli, direkod pada motor anda.",
+          "link": "Lihat waranti"
+        },
+        {
+          "icon": "insurance",
+          "title": "Insurans & cukai jalan",
+          "desc": "Renew insurans dan road tax terus di kaunter — tak payah beratur.",
+          "link": "Renew sekarang"
+        }
+      ],
+      "stats": [
+        {
+          "value": "4",
+          "label": "Jenama utama"
+        },
+        {
+          "value": "30+",
+          "label": "Tahun pengalaman"
+        },
+        {
+          "value": "3,000+",
+          "label": "Penunggang gembira"
+        },
+        {
+          "value": "4.9★",
+          "label": "Purata rating Google"
+        }
+      ],
+      "splitEyebrow": "Kenapa Motor Kekal",
+      "splitHeading": "Beli motor tak patut menakutkan",
+      "splitBody": "Terutama kalau ini motor pertama anda. Kami terangkan setiap langkah dalam bahasa yang anda faham — tiada tekanan, tiada surprise.",
+      "splitTicks": [
+        "Harga jujur. Kami cakap harga sebenar, termasuk deposit dan ansuran, sebelum anda commit.",
+        "Balas cepat di WhatsApp waktu kerja.",
+        "Bengkel sendiri. Servis dan waranti di tempat yang sama."
+      ],
+      "splitCta": "Kenali kami",
+      "splitImageAlt": "Penunggang dan motor",
+      "testimonialsEyebrow": "Kata penunggang",
+      "testimonialsHeading": "Dipercayai orang Johor Bahru",
+      "findUsEyebrow": "Jumpa kami",
+      "findUsHeading": "Kedai motor di Johor Bahru",
+      "napPhone": "WhatsApp & panggilan",
+      "napHoursLabel": "Buka setiap hari",
+      "napWhatsappLocation": "WhatsApp lokasi",
+      "ctaBandHeading": "Sedia untuk cari motor anda?",
+      "ctaBandBody": "WhatsApp kami nama model yang anda nak — kami quote harga, deposit dan ansuran terus. Kalau takde stok, kami boleh source dalam beberapa hari.",
+      "ctaBandButton": "WhatsApp Motor Kekal"
+    },
+    "listings": {
+      "eyebrow": "Stok terkini · Johor Bahru",
+      "subtitle": "Semua motor baru dengan harga jelas. Ada stok di kedai atau boleh kami source dalam beberapa hari.",
+      "all": "Semua",
+      "cantFindTitle": "Tak jumpa motor yang anda nak?",
+      "cantFindBody": "Kami boleh source kebanyakan jenama dalam beberapa hari. WhatsApp nama model, kami quote.",
+      "cantFindCta": "WhatsApp model anda"
+    },
+    "services": {
+      "crumbHome": "Utama",
+      "crumbCurrent": "Perkhidmatan",
+      "eyebrow": "Semua bawah satu bumbung",
+      "heading": "Perkhidmatan Motor Kekal",
+      "sub": "Beli motor cuma permulaan. Dari pinjaman sampai insurans, waranti dan servis — kami uruskan semua supaya anda senang.",
+      "financing": {
+        "badge": "Paling popular",
+        "title": "Pembiayaan mudah lulus",
+        "body": "Kami kerja dengan beberapa bank. Beritahu kami gaji dan pekerjaan anda — kami cakap awal-awal peluang lulus, jadi anda tak buang masa isi borang yang takkan diluluskan.",
+        "ticks": [
+          "Deposit serendah RM500 untuk model terpilih",
+          "Tempoh 3–5 tahun · ansuran fleksibel",
+          "Pembeli kali pertama & e-hailing dialu-alukan"
+        ],
+        "cta": "Semak kelayakan di WhatsApp"
+      },
+      "tradein": {
+        "eyebrow": "Tukar-beli",
+        "title": "Bawa motor lama, balik naik baru",
+        "body": "Kami beli motor lama anda dan tolak terus dari harga motor baru. Dapat anggaran harga cepat — cuma hantar gambar dan model di WhatsApp.",
+        "steps": [
+          {
+            "title": "Hantar butiran",
+            "desc": "Model, tahun, jarak (km) dan gambar motor lama di WhatsApp."
+          },
+          {
+            "title": "Terima anggaran",
+            "desc": "Kami bagi harga anggaran dengan pantas."
+          },
+          {
+            "title": "Bawa masuk kedai",
+            "desc": "Kami sahkan keadaan dan finalkan harga."
+          },
+          {
+            "title": "Naik yang baru",
+            "desc": "Nilai trade-in ditolak dari motor baru anda."
+          }
+        ],
+        "cta": "Nilai motor anda"
+      },
+      "warranty": {
+        "eyebrow": "Waranti & servis",
+        "title": "Bengkel sendiri, alat ganti asli",
+        "body": "Servis dibuat di bengkel kami sendiri — tiada hantar ke pihak ketiga. Setiap servis direkod pada motor anda.",
+        "ticks": [
+          "Servis berjadual mengikut buku servis",
+          "Alat ganti asli · waranti pengeluar dikekalkan",
+          "Ambil motor dalam Johor Bahru untuk kerosakan besar"
+        ],
+        "cta": "Book servis"
+      },
+      "insurance": {
+        "badge": "Renew di kaunter",
+        "title": "Insurans & cukai jalan",
+        "body": "Renew insurans dan road tax terus di kaunter. Tiada beratur di Pos Malaysia — kami print di tempat, siap dalam beberapa minit.",
+        "ticks": [
+          "Insurans motosikal semua jenama",
+          "Road tax (cukai jalan) siap di tempat",
+          "Peringatan renew — kami WhatsApp sebelum tamat tempoh"
+        ],
+        "cta": "Renew sekarang"
+      },
+      "faqEyebrow": "Soalan lazim",
+      "faqTitle": "Soalan yang kami dengar setiap hari",
+      "faq": [
+        {
+          "q": "Perlu ke bayar deposit online?",
+          "a": "Tidak. Kami tak kutip bayaran online. WhatsApp kami dulu, kemudian bayar di kedai atau melalui pindahan bank."
+        },
+        {
+          "q": "Boleh buat pembiayaan untuk pembeli kali pertama?",
+          "a": "Boleh. Kami kerja dengan beberapa bank dan beritahu awal-awal peluang anda lulus, termasuk untuk motor pertama dan pemandu e-hailing."
+        },
+        {
+          "q": "Berapa lama proses trade-in?",
+          "a": "Anggaran harga cepat melalui WhatsApp. Nilai muktamad ditentukan bila kami tengok motor di kedai."
+        },
+        {
+          "q": "Boleh renew insurans dan cukai jalan di kedai?",
+          "a": "Ya. Kami print insurans dan road tax terus di kaunter — tak payah beratur di Pos Malaysia."
+        },
+        {
+          "q": "Berapa lama untuk dapat motor kalau takde stok?",
+          "a": "Kebanyakan jenama boleh kami source dalam beberapa hari. WhatsApp nama model, kami sahkan dan quote."
+        }
+      ],
+      "ctaHeading": "Ada soalan lain?",
+      "ctaBody": "WhatsApp kami — kami balas dengan pantas waktu kerja.",
+      "ctaButton": "WhatsApp Motor Kekal"
+    },
+    "about": {
+      "crumbHome": "Utama",
+      "crumbCurrent": "Tentang Kami",
+      "eyebrow": "Tentang kami",
+      "heading": "Kedai motor keluarga di Johor Bahru",
+      "sub": "Perniagaan Motor Kekal bermula sebagai kedai kecil di Johor Bahru. Lebih 30 tahun kemudian, kami masih di sini — jual motor cara yang kami sendiri suka dilayan: jujur, mudah, tanpa tekanan.",
+      "bannerAlt": "Kedai Perniagaan Motor Kekal",
+      "storyEyebrow": "Kisah kami",
+      "storyHeading": "Dari kedai kecil ke nama yang dipercayai",
+      "storyPara1": "Kami mula dengan satu matlamat mudah — jadi kedai motor yang orang JB boleh percaya. Tempat di mana anda tak rasa tertekan, di mana harga adalah harga, dan di mana orang yang jual motor kepada anda ialah orang yang sama yang servis motor itu kemudian.",
+      "storyPara2": "Hari ini kami menjual Yamaha, Kawasaki, Honda dan KTM, dengan bengkel sendiri dan kaunter insurans di bawah satu bumbung. Tapi cara kami masih sama.",
+      "storyImageAlt": "Bengkel Motor Kekal",
+      "valuesEyebrow": "Apa yang kami pegang",
+      "valuesHeading": "Cara Motor Kekal",
+      "values": [
+        {
+          "icon": "shield",
+          "title": "Jujur dahulu",
+          "desc": "Harga sebenar, termasuk deposit dan ansuran, sebelum anda commit. Kami beritahu kalau anda tak layak loan — tak buang masa anda."
+        },
+        {
+          "icon": "users",
+          "title": "Layan macam jiran",
+          "desc": "Ramai pelanggan kami tinggal sekitar Johor Bahru. Kami kenal muka, kenal motor — bukan sekadar transaksi."
+        },
+        {
+          "icon": "tools",
+          "title": "Uruskan sampai habis",
+          "desc": "Loan, insurans, cukai jalan, servis — kami buat semua supaya anda tak perlu berlari ke sana sini."
+        },
+        {
+          "icon": "spark",
+          "title": "Balas cepat",
+          "desc": "WhatsApp kami dan kami balas dengan pantas waktu kerja. Tiada tunggu berhari-hari."
+        }
+      ],
+      "stats": [
+        {
+          "value": "30+",
+          "label": "Tahun di Johor Bahru"
+        },
+        {
+          "value": "4",
+          "label": "Jenama utama"
+        },
+        {
+          "value": "3,000+",
+          "label": "Penunggang gembira"
+        },
+        {
+          "value": "4.9★",
+          "label": "Purata rating Google"
+        }
+      ],
+      "teamEyebrow": "Pasukan kami",
+      "teamHeading": "Orang yang anda akan jumpa",
+      "team": [
+        {
+          "name": "Pasukan Jualan",
+          "role": "Jualan & pembiayaan"
+        },
+        {
+          "name": "Ketua Bengkel",
+          "role": "Servis & waranti"
+        },
+        {
+          "name": "Kaunter",
+          "role": "Insurans & cukai jalan"
+        }
+      ],
+      "findEyebrow": "Jumpa kami",
+      "findHeading": "Singgah ke kedai",
+      "phoneNote": "panggilan",
+      "hoursLabel": "Buka setiap hari",
+      "whatsappUs": "WhatsApp kami"
+    },
+    "footer": {
+      "about": "Kedai motor keluarga di Johor Bahru. Yamaha, Honda, Kawasaki & KTM — harga jujur, pembiayaan mudah dan bengkel sendiri, semua bawah satu bumbung.",
+      "contactHeading": "Hubungi kami",
+      "seo": "Perniagaan Motor Kekal — kedai motor & pengedar motosikal di Johor Bahru, Johor. Motosikal baharu, loan mudah lulus, tukar-beli, insurans, renew cukai jalan dan servis bengkel sendiri.",
+      "rights": "© 2026 Perniagaan Motor Kekal. Hak cipta terpelihara."
+    }
   }
 }

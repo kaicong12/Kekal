@@ -1,8 +1,6 @@
-import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "@/app/components/common/DefaultHeader";
-import HeaderTop from "@/app/components/common/HeaderTop";
-import MobileMenu from "@/app/components/common/MobileMenu";
-import BreadCrumb from "@/app/components/listing/listing-single/BreadCrumb";
+import SiteHeader from "@/app/components/motorkekal/SiteHeader";
+import SiteFooter from "@/app/components/motorkekal/SiteFooter";
+import Breadcrumb from "@/app/components/motorkekal/Breadcrumb";
 import ProductGallery from "@/app/components/listing/listing-single/listing-single-v1/ProductGallery";
 import Overview from "@/app/components/listing/listing-single/Overview";
 import LoanCalculator from "@/app/components/listing/LoanCalculator";
@@ -117,29 +115,24 @@ const MotorcyclePage = async ({ params }) => {
           { name: motorcycleData.name },
         ]}
       />
-      {/* header top */}
-      <HeaderTop />
-      {/* End header top */}
-
-      {/* Main Header Nav */}
-      <DefaultHeader />
+      {/* Main Header Nav (redesigned storefront chrome) */}
+      <div className="mk-site" style={{ display: "contents" }}>
+        <SiteHeader />
+        <div className="wrap">
+          <Breadcrumb
+            items={[
+              { label: t("breadcrumbHome"), href: "/" },
+              { label: t("breadcrumbMotorcycles"), href: "/listing" },
+              { label: motorcycleData.name },
+            ]}
+          />
+        </div>
+      </div>
       {/* End Main Header Nav */}
-
-      {/* Main Header Nav For Mobile */}
-      <MobileMenu />
-      {/* End Main Header Nav For Mobile */}
 
       {/* Agent Single Grid View */}
       <section className="our-agent-single bgc-f9 pb90 mt70-992 pt30">
         <div className="container">
-          <div className="row mb30">
-            <div className="col-xl-12">
-              <div className="breadcrumb_content style2">
-                <BreadCrumb />
-              </div>
-            </div>
-          </div>
-          {/* End .row bradcrumb */}
 
           <div className="row mb30">
             <div className="col-lg-7 col-xl-8">
@@ -271,7 +264,9 @@ const MotorcyclePage = async ({ params }) => {
       {/* End Car For Rent */}
 
       {/* Our Footer */}
-      <Footer />
+      <div className="mk-site" style={{ display: "contents" }}>
+        <SiteFooter />
+      </div>
       {/* End Our Footer */}
 
       {/* Sticky Price + WhatsApp CTA */}

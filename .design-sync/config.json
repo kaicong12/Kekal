@@ -1,0 +1,9 @@
+{
+  "pkg": "@kekal/ui",
+  "globalName": "KekalUI",
+  "projectId": "842fca95-0e41-4d62-a7fc-e32a5ca2d2e9",
+  "shape": "package",
+  "buildCmd": "npm run build --prefix packages/kekal-ui",
+  "cssEntry": "dist/styles.css",
+  "readmeHeader": ".design-sync/conventions.md"
+}
