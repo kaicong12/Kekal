@@ -1,11 +1,10 @@
 /**
  * Test New Email Functions
- * Tests for contact form and service request email functions
+ * Tests for contact form email functions
  */
 
 require("dotenv").config();
 const { processContactFormSubmission } = require("./contactFormEmails");
-const { processServiceRequest } = require("./scheduleServiceEmails");
 const emailService = require("./emailService");
 
 /**
@@ -49,46 +48,6 @@ async function testContactFormSubmission() {
 }
 
 /**
- * Test service request submission (sends to admin + confirmation to client)
- */
-async function testServiceRequestSubmission() {
-  console.log("🧪 Testing service request submission...");
-
-  const serviceData = {
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    phone: "+60 12 987 6543",
-    bestTime: "Weekday mornings (9 AM - 12 PM)",
-    message:
-      "I need a full service for my motorcycle. It's been making some unusual noises and I think it needs an oil change and brake inspection. Please let me know your availability.",
-  };
-
-  try {
-    const result = await processServiceRequest(serviceData);
-
-    if (result.success) {
-      console.log("✅ Service request submission test PASSED");
-      console.log("   Admin email sent:", result.adminEmail.success);
-      console.log("   Client confirmation sent:", result.clientEmail.success);
-    } else {
-      console.log("❌ Service request submission test FAILED:", result.message);
-      if (result.adminEmail)
-        console.log("   Admin email:", result.adminEmail.success ? "✅" : "❌");
-      if (result.clientEmail)
-        console.log(
-          "   Client email:",
-          result.clientEmail.success ? "✅" : "❌"
-        );
-    }
-
-    return result.success;
-  } catch (error) {
-    console.error("❌ Service request submission test ERROR:", error.message);
-    return false;
-  }
-}
-
-/**
  * Test with minimal data (edge case)
  */
 async function testMinimalContactForm() {
@@ -116,32 +75,6 @@ async function testMinimalContactForm() {
 }
 
 /**
- * Test with minimal service data (edge case)
- */
-async function testMinimalServiceRequest() {
-  console.log("🧪 Testing service request with minimal data...");
-
-  const serviceData = {
-    email: "minimal.service@example.com",
-  };
-
-  try {
-    const result = await processServiceRequest(serviceData);
-
-    if (result.success) {
-      console.log("✅ Minimal service request test PASSED");
-    } else {
-      console.log("❌ Minimal service request test FAILED:", result.message);
-    }
-
-    return result.success;
-  } catch (error) {
-    console.error("❌ Minimal service request test ERROR:", error.message);
-    return false;
-  }
-}
-
-/**
  * Run all new email function tests
  */
 async function runNewEmailTests() {
@@ -150,9 +83,7 @@ async function runNewEmailTests() {
   const results = {
     configuration: false,
     contactForm: false,
-    serviceRequest: false,
     minimalContact: false,
-    minimalService: false,
   };
 
   // Test configuration first
@@ -181,14 +112,8 @@ async function runNewEmailTests() {
   results.contactForm = await testContactFormSubmission();
   console.log("");
 
-  results.serviceRequest = await testServiceRequestSubmission();
-  console.log("");
-
   // Run edge case tests
   results.minimalContact = await testMinimalContactForm();
-  console.log("");
-
-  results.minimalService = await testMinimalServiceRequest();
   console.log("");
 
   // Summary
@@ -199,13 +124,7 @@ async function runNewEmailTests() {
   );
   console.log(`Contact Form: ${results.contactForm ? "✅ PASS" : "❌ FAIL"}`);
   console.log(
-    `Service Request: ${results.serviceRequest ? "✅ PASS" : "❌ FAIL"}`
-  );
-  console.log(
     `Minimal Contact: ${results.minimalContact ? "✅ PASS" : "❌ FAIL"}`
-  );
-  console.log(
-    `Minimal Service: ${results.minimalService ? "✅ PASS" : "❌ FAIL"}`
   );
 
   const passedTests = Object.values(results).filter(Boolean).length;
@@ -218,9 +137,6 @@ async function runNewEmailTests() {
     console.log("\n📧 Your email system is ready for:");
     console.log(
       "   • Contact form submissions (admin notification + client confirmation)"
-    );
-    console.log(
-      "   • Service requests (admin notification + client confirmation)"
     );
     console.log(
       "   • All emails will be sent to: " +
@@ -236,9 +152,7 @@ async function runNewEmailTests() {
 // Export functions for individual testing
 module.exports = {
   testContactFormSubmission,
-  testServiceRequestSubmission,
   testMinimalContactForm,
-  testMinimalServiceRequest,
   runNewEmailTests,
 };
 

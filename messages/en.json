@@ -12,8 +12,8 @@
     "promotions": "Promotions"
   },
   "headerTop": {
-    "hours": "Mon - Sun 8:00 - 18:00",
-    "mobileHours": "Mon - Thurs 8:30 - 19:30"
+    "hours": "Mon - Sun 9:00AM - 7:00PM (Fri Closed)",
+    "mobileHours": "9AM - 7PM (Fri Closed)"
   },
   "languageSwitcher": {
     "label": "Language",
@@ -294,7 +294,7 @@
     "subtext": "We get these questions every day. If we miss one, WhatsApp us — Faiz answers in ~5 min.",
     "categoryQuestions": "{category} · {count} QUESTIONS",
     "stillQuestions": "Still got questions?",
-    "stillQuestionsSubtext": "Faiz from sales replies in ~5 min during business hours (9–7 daily)",
+    "stillQuestionsSubtext": "Faiz from sales replies in ~5 min during business hours (9AM–7PM, closed Fri)",
     "categories": {
       "Financing": "Financing",
       "Delivery": "Delivery",
@@ -418,7 +418,7 @@
       "meta": [
         "Dealer of 4 major brands",
         "Own service & warranty",
-        "Open every day"
+        "Open daily (except Fri)"
       ],
       "heroImageAlt": "Perniagaan Motor Kekal showroom",
       "badgeOpen": "Open now",
@@ -488,7 +488,7 @@
       "findUsEyebrow": "Find us",
       "findUsHeading": "Motorcycle shop in Johor Bahru",
       "napPhone": "WhatsApp & call",
-      "napHoursLabel": "Open every day",
+      "napHoursLabel": "Open daily (except Fri)",
       "napWhatsappLocation": "WhatsApp location",
       "ctaBandHeading": "Ready to find your bike?",
       "ctaBandBody": "WhatsApp us the model you want — we quote the price, deposit and instalments right away. Out of stock? We can source it in a few days.",
@@ -666,7 +666,7 @@
       "findEyebrow": "Find us",
       "findHeading": "Drop by the shop",
       "phoneNote": "call",
-      "hoursLabel": "Open every day",
+      "hoursLabel": "Open daily (except Fri)",
       "whatsappUs": "WhatsApp us"
     },
     "footer": {
@@ -674,6 +674,26 @@
       "contactHeading": "Get in touch",
       "seo": "Perniagaan Motor Kekal — kedai motor & motorcycle dealer in Johor Bahru, Johor. New motorcycles, easy loan approval, trade-in, insurance, road tax renewal and in-house servicing.",
       "rights": "© 2026 Perniagaan Motor Kekal. All rights reserved."
-    }
+    },
+    "detail": {
+      "aboutHeading": "Overview",
+      "specifications": "Specifications",
+      "specCc": "Engine capacity",
+      "specEngine": "Engine",
+      "specYear": "Year",
+      "specModel": "Model",
+      "specTransmission": "Transmission",
+      "reassure1": "Trusted dealer in Johor Bahru",
+      "reassure2": "Flexible financing available",
+      "reassure3": "Fast response on WhatsApp",
+      "fromMonthly": "or from RM {amount}/month",
+      "orderWhatsApp": "WhatsApp to order",
+      "calcInstallment": "Calculate installment",
+      "mayLike": "You might also like",
+      "ctaTitle": "Want to see it in person?",
+      "ctaText": "Come to our Johor Bahru shop for a test ride, or WhatsApp us to reserve a unit and get exact installment figures.",
+      "ctaWhatsApp": "WhatsApp Motor Kekal"
+    },
+    "visitFacebook": "Visit our Facebook"
   }
 }

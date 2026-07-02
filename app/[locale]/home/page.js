@@ -8,7 +8,7 @@ import MobileBar from "@/app/components/motorkekal/MobileBar";
 import PopularBikes from "@/app/components/motorkekal/PopularBikes";
 import Pill from "@/app/components/motorkekal/Pill";
 import Map from "@/app/components/common/Map";
-import { waLink, WaIcon, MAPS_QUERY_URL, ADDRESS, PHONE_DISPLAY } from "@/app/components/motorkekal/waLink";
+import { waLink, WaIcon, FbIcon, FACEBOOK_URL, MAPS_QUERY_URL, ADDRESS, PHONE_DISPLAY } from "@/app/components/motorkekal/waLink";
 
 const HERO_IMG =
   "https://images.unsplash.com/photo-1694274855681-1b12cd585066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
@@ -243,6 +243,16 @@ const Home = ({ params }) => {
                   rel="noopener noreferrer"
                 >
                   {t("mk.home.napWhatsappLocation")}
+                </a>
+                <a
+                  className="btn"
+                  style={{ background: "#1877f2", color: "#fff" }}
+                  href={FACEBOOK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FbIcon />
+                  {t("mk.visitFacebook")}
                 </a>
               </div>
             </div>

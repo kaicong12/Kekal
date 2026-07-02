@@ -1264,3 +1264,367 @@
   cursor: pointer;
   color: var(--kk-text);
 }
+
+/* ============================================================
+   Detail page (motorcycle/[slug]) — ported from the Claude
+   "MotorKekal Motorcycle Ecommerce" design. Scoped to .mk-site.
+   ============================================================ */
+.mk-site .detail-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ---- Gallery ---- */
+.mk-site .gallery__main {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--kk-border);
+  background: #f0ede8;
+}
+.mk-site .gallery__main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mk-site .gallery__tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  background: var(--kk-ink);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+.mk-site .gallery__thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+.mk-site .gallery__thumb {
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--kk-border);
+  background: #f0ede8;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.15s;
+}
+.mk-site .gallery__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mk-site .gallery__thumb--active {
+  border-color: var(--kk-orange);
+  box-shadow: 0 0 0 1px var(--kk-orange);
+}
+
+/* ---- Buy box ---- */
+.mk-site .buybox {
+  position: sticky;
+  top: 90px;
+}
+.mk-site .buybox__brand {
+  font-size: 14px;
+  color: var(--kk-text-muted);
+  font-weight: 500;
+}
+.mk-site .buybox h1 {
+  font-size: clamp(26px, 3.2vw, 34px);
+  margin-top: 4px;
+}
+.mk-site .buybox__rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: var(--kk-text-muted);
+}
+.mk-site .buybox__price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 20px;
+}
+.mk-site .buybox__price b {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.mk-site .buybox__fin {
+  font-size: 14px;
+  color: var(--kk-text-muted);
+  margin-top: 6px;
+}
+.mk-site .buybox__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 22px;
+}
+.mk-site .buybox__reassure {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--kk-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mk-site .buybox__reassure li {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  font-size: 14px;
+}
+.mk-site .buybox__reassure svg {
+  width: 19px;
+  height: 19px;
+  color: var(--kk-green);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ---- Quick specs ---- */
+.mk-site .quickspec {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 30px;
+}
+.mk-site .quickspec__item {
+  padding: 16px;
+  text-align: center;
+}
+.mk-site .quickspec__item svg {
+  width: 22px;
+  height: 22px;
+  color: var(--kk-orange);
+}
+.mk-site .quickspec__item b {
+  display: block;
+  font-size: 16px;
+  margin-top: 8px;
+}
+.mk-site .quickspec__item span {
+  font-size: 12px;
+  color: var(--kk-text-muted);
+}
+
+/* ---- Spec table ---- */
+.mk-site .spec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.mk-site .spec-table th {
+  text-align: left;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kk-text-muted);
+  padding: 18px 0 10px;
+}
+.mk-site .spec-table td {
+  padding: 13px 0;
+  border-top: 1px solid var(--kk-border);
+  font-size: 15px;
+  vertical-align: top;
+}
+.mk-site .spec-table td:first-child {
+  color: var(--kk-text-muted);
+  width: 42%;
+}
+.mk-site .spec-table td:last-child {
+  font-weight: 500;
+}
+
+/* Keep the spec panel from running very long — scroll the rows instead,
+   with the "Specifications" heading pinned at the top. */
+.mk-site .spec-scroll {
+  max-height: 460px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* room so the scrollbar doesn't sit on top of the values */
+  margin-right: -8px;
+  padding-right: 8px;
+}
+.mk-site .spec-scroll .spec-table th {
+  position: sticky;
+  top: 0;
+  background: var(--kk-card);
+  z-index: 1;
+}
+.mk-site .spec-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.mk-site .spec-scroll::-webkit-scrollbar-thumb {
+  background: var(--kk-border-strong);
+  border-radius: 8px;
+}
+.mk-site .spec-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- Finance box ---- */
+.mk-site .finance-box {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--kk-border);
+}
+.mk-site .finance-box__form {
+  padding: 34px;
+  background: var(--kk-card);
+}
+.mk-site .finance-box__out {
+  padding: 34px;
+  background: var(--kk-ink);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mk-site .finance-box__out span {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.mk-site .finance-box__out b {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--kk-orange);
+  line-height: 1.1;
+}
+.mk-site .field {
+  margin-bottom: 18px;
+}
+.mk-site .field label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.mk-site .field label b {
+  font-weight: 700;
+}
+.mk-site .field input[type="range"] {
+  width: 100%;
+  accent-color: var(--kk-orange);
+}
+.mk-site .field select {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 11px;
+  border: 1px solid var(--kk-border-strong);
+  background: #fff;
+  font-family: var(--kk-font);
+  font-size: 15px;
+  color: var(--kk-text);
+}
+.mk-site .term-buttons {
+  display: flex;
+  gap: 8px;
+}
+.mk-site .term-buttons button {
+  flex: 1;
+  height: 44px;
+  border-radius: 11px;
+  border: 1px solid var(--kk-border-strong);
+  background: #fff;
+  font-family: var(--kk-font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--kk-text);
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.mk-site .term-buttons button:hover {
+  border-color: var(--kk-ink);
+}
+.mk-site .term-buttons button[aria-pressed="true"] {
+  background: var(--kk-ink);
+  border-color: var(--kk-ink);
+  color: #fff;
+}
+
+/* ---- Facebook link button ---- */
+.mk-site .btn--fb {
+  background: #1877f2;
+  color: #fff;
+}
+.mk-site .btn--fb:hover {
+  background: #1567d8;
+}
+.mk-site .fb-ico {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ---- Icon-only action button (header social link) ---- */
+.mk-site .icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--kk-border-strong);
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--kk-text);
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s;
+}
+.mk-site .icon-btn:hover {
+  border-color: #1877f2;
+  color: #1877f2;
+}
+.mk-site .icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---- Detail responsive ---- */
+@media (max-width: 860px) {
+  .mk-site .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .mk-site .buybox {
+    position: static;
+  }
+  .mk-site .quickspec {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mk-site .finance-box {
+    grid-template-columns: 1fr;
+  }
+  .mk-site .finance-box__out {
+    order: -1;
+  }
+}
+@media (max-width: 560px) {
+  .mk-site .gallery__thumbs {
+    gap: 8px;
+  }
+  .mk-site .finance-box__form,
+  .mk-site .finance-box__out {
+    padding: 24px;
+  }
+}

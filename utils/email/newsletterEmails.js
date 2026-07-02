@@ -103,7 +103,7 @@ async function sendNewsletterConfirmation(subscriptionData) {
         <div style="margin-top: 30px; text-align: center;">
           <p style="color: #666; margin: 0; font-size: 14px;">
             You can unsubscribe at any time by replying to any newsletter email.<br>
-            Visit our website: <a href="https://kekal.com" style="color: #6f42c1;">kekal.com</a>
+            Visit our website: <a href="https://motorkekal.com" style="color: #6f42c1;">motorkekal.com</a>
           </p>
         </div>
       </div>

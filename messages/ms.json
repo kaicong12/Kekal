@@ -12,8 +12,8 @@
     "promotions": "Promosi"
   },
   "headerTop": {
-    "hours": "Isnin - Ahad 8:00 - 18:00",
-    "mobileHours": "Isnin - Khamis 8:30 - 19:30"
+    "hours": "Isnin - Ahad 9:00AM - 7:00PM (Jumaat Tutup)",
+    "mobileHours": "9AM - 7PM (Jumaat Tutup)"
   },
   "languageSwitcher": {
     "label": "Bahasa",
@@ -294,7 +294,7 @@
     "subtext": "Kami menerima soalan ini setiap hari. Jika ada yang tertinggal, WhatsApp kami — Faiz menjawab dalam ~5 minit.",
     "categoryQuestions": "{category} · {count} SOALAN",
     "stillQuestions": "Masih ada soalan?",
-    "stillQuestionsSubtext": "Faiz dari jualan membalas dalam ~5 minit pada waktu operasi (9–7 setiap hari)",
+    "stillQuestionsSubtext": "Faiz dari jualan membalas dalam ~5 minit pada waktu operasi (9AM–7PM, Jumaat tutup)",
     "categories": {
       "Financing": "Pembiayaan",
       "Delivery": "Penghantaran",
@@ -418,7 +418,7 @@
       "meta": [
         "Pengedar 4 jenama utama",
         "Servis & waranti sendiri",
-        "Buka setiap hari"
+        "Buka setiap hari (kecuali Jumaat)"
       ],
       "heroImageAlt": "Showroom Perniagaan Motor Kekal",
       "badgeOpen": "Buka sekarang",
@@ -488,7 +488,7 @@
       "findUsEyebrow": "Jumpa kami",
       "findUsHeading": "Kedai motor di Johor Bahru",
       "napPhone": "WhatsApp & panggilan",
-      "napHoursLabel": "Buka setiap hari",
+      "napHoursLabel": "Buka setiap hari (kecuali Jumaat)",
       "napWhatsappLocation": "WhatsApp lokasi",
       "ctaBandHeading": "Sedia untuk cari motor anda?",
       "ctaBandBody": "WhatsApp kami nama model yang anda nak — kami quote harga, deposit dan ansuran terus. Kalau takde stok, kami boleh source dalam beberapa hari.",
@@ -666,7 +666,7 @@
       "findEyebrow": "Jumpa kami",
       "findHeading": "Singgah ke kedai",
       "phoneNote": "panggilan",
-      "hoursLabel": "Buka setiap hari",
+      "hoursLabel": "Buka setiap hari (kecuali Jumaat)",
       "whatsappUs": "WhatsApp kami"
     },
     "footer": {
@@ -674,6 +674,26 @@
       "contactHeading": "Hubungi kami",
       "seo": "Perniagaan Motor Kekal — kedai motor & pengedar motosikal di Johor Bahru, Johor. Motosikal baharu, loan mudah lulus, tukar-beli, insurans, renew cukai jalan dan servis bengkel sendiri.",
       "rights": "© 2026 Perniagaan Motor Kekal. Hak cipta terpelihara."
-    }
+    },
+    "detail": {
+      "aboutHeading": "Gambaran keseluruhan",
+      "specifications": "Spesifikasi",
+      "specCc": "Kapasiti enjin",
+      "specEngine": "Enjin",
+      "specYear": "Tahun",
+      "specModel": "Model",
+      "specTransmission": "Transmisi",
+      "reassure1": "Pengedar dipercayai di Johor Bahru",
+      "reassure2": "Pembiayaan mudah tersedia",
+      "reassure3": "Respons pantas di WhatsApp",
+      "fromMonthly": "atau dari RM {amount}/bulan",
+      "orderWhatsApp": "WhatsApp untuk tempah",
+      "calcInstallment": "Kira ansuran",
+      "mayLike": "Mungkin anda suka",
+      "ctaTitle": "Nak tengok sendiri?",
+      "ctaText": "Datang ke kedai Johor Bahru kami untuk test rasa, atau WhatsApp kami untuk tahan unit dan dapatkan angka ansuran tepat.",
+      "ctaWhatsApp": "WhatsApp Motor Kekal"
+    },
+    "visitFacebook": "Lawati Facebook kami"
   }
 }

@@ -6,6 +6,7 @@ import {
   PHONE_DISPLAY,
   ADDRESS,
   MAPS_URL,
+  FACEBOOK_URL,
 } from "./waLink";
 
 const SiteFooter = () => {
@@ -52,6 +53,9 @@ const SiteFooter = () => {
             </a>
             <a href={waLink("Hi Motor Kekal!")} target="_blank" rel="noopener noreferrer">
               WhatsApp: {PHONE_DISPLAY}
+            </a>
+            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer">
+              {t("mk.visitFacebook")}
             </a>
             <span
               style={{

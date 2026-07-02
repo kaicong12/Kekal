@@ -6,28 +6,28 @@ const CarType = () => {
     {
       imgSrc: "/images/listing/YamahaLogo.png",
       title: "Yamaha",
-      numListings: "12 Listings",
+      numListings: "",
       colClasses: "col-md-6 col-lg-4",
       delay: "100",
     },
     {
       imgSrc: "/images/listing/HondaLogo.png",
       title: "Honda",
-      numListings: "59 Listings",
+      numListings: "",
       colClasses: "col-md-6",
       delay: "200",
     },
     {
       imgSrc: "/images/listing/suzukiLogo.png",
       title: "Suzuki",
-      numListings: "8912 Listings",
+      numListings: "",
       colClasses: "col-md-6",
       delay: "300",
     },
     {
       imgSrc: "/images/listing/SYMLogo.png",
-      title: "SUV",
-      numListings: "775 Listings",
+      title: "SYM",
+      numListings: "",
       colClasses: "col-md-6 col-lg-4",
       delay: "400",
     }

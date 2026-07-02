@@ -5,10 +5,13 @@ import { auth } from "@/utils/firebase";
 import { AdminTopBar, MobileCard, RowMenu, Thumb, useIsMobile } from "../adminUi";
 import styles from "../admin.module.css";
 
+const PAGE_SIZE = 10;
+
 export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
   const [motorcycles, setMotorcycles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const isMobile = useIsMobile();
 
   const fetchMotorcycles = useCallback(async () => {
@@ -89,6 +92,26 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
     );
   }, [motorcycles, search]);
 
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+
+  // Keep the current page in range as the filtered set changes.
+  useEffect(() => {
+    setPage((p) => Math.min(p, totalPages));
+  }, [totalPages]);
+
+  // Reset to the first page whenever the search query changes.
+  useEffect(() => {
+    setPage(1);
+  }, [search]);
+
+  const paged = useMemo(
+    () => filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+    [filtered, page]
+  );
+
+  const rangeStart = filtered.length === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
+  const rangeEnd = Math.min(page * PAGE_SIZE, filtered.length);
+
   return (
     <>
       <AdminTopBar
@@ -126,7 +149,7 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
               ) : filtered.length === 0 ? (
                 <div className={styles.emptyState}>No motorcycles found.</div>
               ) : (
-                filtered.map((m) => (
+                paged.map((m) => (
                   <MobileCard
                     key={m.id}
                     onClick={() => onEdit(m.id)}
@@ -169,7 +192,7 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
                     </td>
                   </tr>
                 ) : (
-                  filtered.map((m) => (
+                  paged.map((m) => (
                     <tr
                       key={m.id}
                       className={styles.rowClickable}
@@ -204,6 +227,35 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
                 )}
                 </tbody>
               </table>
+            </div>
+          )}
+
+          {!loading && filtered.length > 0 && (
+            <div className={styles.pagination}>
+              <span className={styles.pageInfo}>
+                Showing {rangeStart}–{rangeEnd} of {filtered.length}
+              </span>
+              <div className={styles.pageControls}>
+                <button
+                  type="button"
+                  className={styles.pageBtn}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page <= 1}
+                >
+                  Prev
+                </button>
+                <span className={styles.pageCurrent}>
+                  Page {page} of {totalPages}
+                </span>
+                <button
+                  type="button"
+                  className={styles.pageBtn}
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page >= totalPages}
+                >
+                  Next
+                </button>
+              </div>
             </div>
           )}
         </div>
