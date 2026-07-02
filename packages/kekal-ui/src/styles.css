@@ -1,0 +1,286 @@
+/* ============================================================
+   @kekal/ui — design tokens + component styles
+   Tokens are on :root so every component renders styled without
+   a wrapper. Class names are global (kk-*).
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --kk-orange: #f2622e;
+  --kk-orange-strong: #e2551f;
+  --kk-orange-soft: #fdeadf;
+  --kk-ink: #17181c;
+  --kk-ink-soft: #202228;
+  --kk-bg: #f6f4f1;
+  --kk-card: #ffffff;
+  --kk-border: #ece9e4;
+  --kk-border-strong: #ded9d1;
+  --kk-text: #191a1c;
+  --kk-text-muted: #6b7280;
+  --kk-green: #12b76a;
+  --kk-amber: #d9880f;
+  --kk-red: #d1503c;
+  --kk-font: "Space Grotesk", Inter, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+}
+
+/* ---- Status pill ---- */
+.kk-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: var(--kk-font);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.kk-pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.kk-pill--live {
+  background: #e7f8ef;
+  color: #0a7a48;
+}
+.kk-pill--live .kk-pill__dot {
+  background: var(--kk-green);
+}
+.kk-pill--scheduled {
+  background: #fdf3e2;
+  color: #a9700a;
+}
+.kk-pill--scheduled .kk-pill__dot {
+  background: var(--kk-amber);
+}
+.kk-pill--draft {
+  background: #f0eee9;
+  color: #6b7280;
+}
+.kk-pill--draft .kk-pill__dot {
+  background: #9aa0a6;
+}
+.kk-pill--ended {
+  background: #f7e9e7;
+  color: #b23b2c;
+}
+.kk-pill--ended .kk-pill__dot {
+  background: var(--kk-red);
+}
+
+/* ---- Breadcrumb ---- */
+.kk-crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: var(--kk-font);
+  font-size: 13px;
+  color: var(--kk-text-muted);
+}
+.kk-crumbs__link {
+  color: var(--kk-text-muted);
+  text-decoration: none;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.kk-crumbs__link:hover {
+  color: var(--kk-orange);
+}
+.kk-crumbs__sep {
+  margin-inline: 5px;
+  opacity: 0.5;
+}
+.kk-crumbs__current {
+  color: var(--kk-text);
+  font-weight: 600;
+  padding: 2px 4px;
+}
+
+/* ---- Thumbnail ---- */
+.kk-thumb {
+  width: 52px;
+  height: 40px;
+  border-radius: 8px;
+  background: #f0ede8;
+  border: 1px solid var(--kk-border);
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+.kk-thumb--placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--kk-font);
+  font-size: 10px;
+  line-height: 1.1;
+  color: #b3ada3;
+  text-align: center;
+}
+
+/* ---- Row overflow menu ---- */
+.kk-rowmenu {
+  position: relative;
+  display: inline-block;
+}
+.kk-rowmenu__btn {
+  border: none;
+  background: transparent;
+  color: var(--kk-text-muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.kk-rowmenu__btn:hover {
+  background: #f2efe9;
+}
+.kk-rowmenu__menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 30;
+  min-width: 150px;
+  background: #fff;
+  border: 1px solid var(--kk-border-strong);
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  padding: 6px;
+}
+.kk-rowmenu__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  font-family: var(--kk-font);
+  font-size: 13px;
+  color: var(--kk-text);
+  cursor: pointer;
+  text-align: left;
+}
+.kk-rowmenu__item:hover {
+  background: #f6f4f1;
+}
+.kk-rowmenu__item--danger {
+  color: #c0392b;
+}
+
+/* ---- Mobile stacked card ---- */
+.kk-mcard {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--kk-border);
+  border-radius: 12px;
+  background: #fff;
+  font-family: var(--kk-font);
+  cursor: pointer;
+}
+.kk-mcard:active {
+  background: #fbf9f6;
+}
+.kk-mcard__body {
+  flex: 1;
+  min-width: 0;
+}
+.kk-mcard__pillrow {
+  margin-bottom: 6px;
+}
+.kk-mcard__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--kk-text);
+}
+.kk-mcard__meta {
+  font-size: 12px;
+  color: var(--kk-text-muted);
+  margin-top: 3px;
+}
+.kk-mcard__action {
+  flex-shrink: 0;
+  margin: -4px -4px 0 0;
+}
+
+/* ---- Admin top bar ---- */
+.kk-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 28px;
+  background: rgba(246, 244, 241, 0.85);
+  border-bottom: 1px solid var(--kk-border);
+  font-family: var(--kk-font);
+}
+.kk-topbar__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--kk-text);
+}
+.kk-topbar__spacer {
+  flex: 1;
+}
+.kk-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px;
+  width: 260px;
+  max-width: 32vw;
+  background: #fff;
+  border: 1px solid var(--kk-border-strong);
+  border-radius: 10px;
+  color: var(--kk-text-muted);
+}
+.kk-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--kk-font);
+  font-size: 14px;
+  width: 100%;
+  color: var(--kk-text);
+}
+.kk-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 10px;
+  background: var(--kk-orange);
+  color: #fff;
+  font-family: var(--kk-font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.kk-btn-primary:hover {
+  background: var(--kk-orange-strong);
+}
+
+@media (max-width: 860px) {
+  .kk-topbar {
+    padding: 12px 16px;
+  }
+  .kk-search {
+    display: none;
+  }
+}
