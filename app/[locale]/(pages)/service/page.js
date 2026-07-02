@@ -1,125 +1,228 @@
-import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "@/app/components/common/DefaultHeader";
-import HeaderTop from "@/app/components/common/HeaderTop";
-import MobileMenu from "@/app/components/common/MobileMenu";
-import ListWithImage from "@/app/components/pages/service/ListWithImage";
-import ServiceBlock from "@/app/components/pages/service/ServiceBlock";
-import ScheduleService from "@/app/components/pages/service/ScheduleService";
-import ServiceHours from "@/app/components/pages/service/ServiceHours";
-import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
+import Image from "next/image";
 import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
+import SiteHeader from "@/app/components/motorkekal/SiteHeader";
+import SiteFooter from "@/app/components/motorkekal/SiteFooter";
+import MobileBar from "@/app/components/motorkekal/MobileBar";
+import Pill from "@/app/components/motorkekal/Pill";
+import { waLink } from "@/app/components/motorkekal/waLink";
 
 export const metadata = {
   title: "Servis Motor Johor Bahru - Yamaha, Kawasaki Service Center",
   description:
-    "Pusat servis motor di Johor Jaya, JB. Kawasaki service center, Yamaha service center, bengkel motor untuk semua jenama. Servis berkualiti, harga berpatutan. Book sekarang.",
+    "Pusat servis motor di Johor Bahru. Pembiayaan mudah lulus, tukar-beli, waranti & servis bengkel sendiri, insurans & renew cukai jalan. Semua bawah satu bumbung.",
   keywords: [
-    "kawasaki service center johor bahru",
-    "yamaha service center johor bahru",
+    "pembiayaan motosikal johor bahru",
+    "loan motor mudah lulus",
+    "trade-in motor johor bahru",
     "servis motor johor bahru",
-    "bengkel motor johor jaya",
-    "motorcycle service near me",
-    "service motor",
-    "bengkel motor near me",
-    "jb motorcycle service center",
-    "servis motor yamaha near me",
+    "insurans motor",
+    "renew cukai jalan johor",
   ],
-  alternates: {
-    canonical: "/service",
-  },
+  alternates: { canonical: "/service" },
 };
+
+const IMG_A =
+  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
+const IMG_B =
+  "https://images.unsplash.com/photo-1694274855681-1b12cd585066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";
+
+const Check = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const Media = ({ src, alt }) => (
+  <div className="split__media">
+    <Image width={560} height={420} src={src} alt={alt} />
+  </div>
+);
+
+const Ticks = ({ items }) => (
+  <ul className="ticks">
+    {items.map((item, i) => (
+      <li key={i}>
+        <Check />
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+);
 
 const Service = ({ params: { locale } }) => {
   setRequestLocale(locale);
-  const t = useTranslations("service");
+  const t = useTranslations("mk.services");
+
+  const fin = t.raw("financing");
+  const trade = t.raw("tradein");
+  const warranty = t.raw("warranty");
+  const insurance = t.raw("insurance");
+  const faq = t.raw("faq");
+
   return (
-    <div className="wrapper">
-      {/* header top */}
-      <HeaderTop />
-      {/* End header top */}
+    <div className="mk-site">
+      <SiteHeader />
 
-      {/* Main Header Nav */}
-      <DefaultHeader />
-      {/* End Main Header Nav */}
+      <main>
+        <div className="wrap">
+          <nav className="crumbs" aria-label="Breadcrumb">
+            <a href="/">{t("crumbHome")}</a>
+            <span>›</span>
+            {t("crumbCurrent")}
+          </nav>
+        </div>
 
-      {/* Main Header Nav For Mobile */}
-      <MobileMenu />
-      {/* End Main Header Nav For Mobile */}
+        <section className="page-hero wrap">
+          <p className="eyebrow">{t("eyebrow")}</p>
+          <h1>{t("heading")}</h1>
+          <p>{t("sub")}</p>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 24 }}>
+            <a className="chip" href="#financing">{fin.title}</a>
+            <a className="chip" href="#tradein">{trade.title}</a>
+            <a className="chip" href="#warranty">{warranty.title}</a>
+            <a className="chip" href="#insurance">{insurance.title}</a>
+          </div>
+        </section>
 
-      {/* <!-- Inner Page Breadcrumb --> */}
-      <section className="inner_page_breadcrumb style2 bgc-f9 bt1">
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="breadcrumb_content style2">
-                <h2 className="breadcrumb_title">{t("breadcrumbTitle")}</h2>
-                <p className="subtitle">{t("breadcrumbSubtitle")}</p>
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="#">{t("breadcrumbHome")}</a>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    {t("breadcrumbCurrent")}
-                  </li>
-                </ol>
+        {/* Financing */}
+        <section className="section wrap" id="financing" style={{ scrollMarginTop: 90 }}>
+          <div className="split">
+            <div>
+              <Pill status="live">{fin.badge}</Pill>
+              <h2 style={{ fontSize: "clamp(26px,3.4vw,36px)", marginTop: 14 }}>{fin.title}</h2>
+              <p className="muted" style={{ marginTop: 14, fontSize: "16.5px" }}>{fin.body}</p>
+              <Ticks items={fin.ticks} />
+              <a
+                className="btn btn--wa btn--lg"
+                style={{ marginTop: 24 }}
+                href={waLink("Hi Motor Kekal, saya nak semak kelayakan loan motor.")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {fin.cta}
+              </a>
+            </div>
+            <Media src={IMG_A} alt={fin.title} />
+          </div>
+        </section>
+
+        <hr className="divider" />
+
+        {/* Trade-in */}
+        <section className="section wrap" id="tradein" style={{ scrollMarginTop: 90 }}>
+          <div className="split">
+            <Media src={IMG_B} alt={trade.title} />
+            <div>
+              <p className="eyebrow">{trade.eyebrow}</p>
+              <h2 style={{ fontSize: "clamp(26px,3.4vw,36px)", marginTop: 10 }}>{trade.title}</h2>
+              <p className="muted" style={{ marginTop: 14, fontSize: "16.5px" }}>{trade.body}</p>
+              <div className="steps" style={{ gridTemplateColumns: "1fr 1fr", marginTop: 24 }}>
+                {trade.steps.map((step, i) => (
+                  <div className="step" key={i}>
+                    <div className="step__n">{i + 1}</div>
+                    <h3>{step.title}</h3>
+                    <p>{step.desc}</p>
+                  </div>
+                ))}
               </div>
+              <a
+                className="btn btn--wa btn--lg"
+                style={{ marginTop: 24 }}
+                href={waLink("Hi Motor Kekal, saya nak trade-in motor saya. Model ____ tahun ____.")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {trade.cta}
+              </a>
             </div>
           </div>
-        </div>
-      </section>
-      {/* <!-- Inner Page Breadcrumb --> */}
+        </section>
 
-      {/* Service Section Area */}
-      <section className="our-service bgc-f9 pb90 pt0">
-        <div className="container">
-          <ListWithImage />
-        </div>
-      </section>
-      {/* End Service Section Area */}
+        <hr className="divider" />
 
-      {/* Service Section Area */}
-      <div className="our-service">
-        <ServiceBlock />
-      </div>
-      {/* Service Section Area */}
-
-      {/* Service Forms Section Area */}
-      <section className="service-forms bgc-f9">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-7 col-xl-8">
-              <div className="service_form mb30-sm">
-                <h5 className="title">{t("scheduleService")}</h5>
-                <ScheduleService />
-              </div>
+        {/* Warranty & service */}
+        <section className="section wrap" id="warranty" style={{ scrollMarginTop: 90 }}>
+          <div className="split">
+            <div>
+              <p className="eyebrow">{warranty.eyebrow}</p>
+              <h2 style={{ fontSize: "clamp(26px,3.4vw,36px)", marginTop: 10 }}>{warranty.title}</h2>
+              <p className="muted" style={{ marginTop: 14, fontSize: "16.5px" }}>{warranty.body}</p>
+              <Ticks items={warranty.ticks} />
+              <a
+                className="btn btn--ink btn--lg"
+                style={{ marginTop: 24 }}
+                href={waLink("Hi Motor Kekal, saya nak book servis motor.")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {warranty.cta}
+              </a>
             </div>
-            {/* End .col */}
-
-            <div className="col-md-5 col-xl-4">
-              <div className="opening_hour_widgets">
-                <div className="wrapper">
-                  <h4 className="title">{t("openingHours")}</h4>
-                  <ServiceHours />
-                </div>
-              </div>
-            </div>
-            {/* End .col */}
+            <Media src={IMG_A} alt={warranty.title} />
           </div>
-          {/* End .row */}
-        </div>
-        {/* End .container */}
-      </section>
-      {/* End Service Forms Section Area */}
+        </section>
 
-      {/* Our Footer */}
-      <Footer />
-      {/* End Our Footer */}
+        <hr className="divider" />
 
-      {/* Sticky CTA */}
-      <StickyHomeCTA />
+        {/* Insurance & road tax */}
+        <section className="section wrap" id="insurance" style={{ scrollMarginTop: 90 }}>
+          <div className="split">
+            <Media src={IMG_B} alt={insurance.title} />
+            <div>
+              <Pill status="scheduled">{insurance.badge}</Pill>
+              <h2 style={{ fontSize: "clamp(26px,3.4vw,36px)", marginTop: 14 }}>{insurance.title}</h2>
+              <p className="muted" style={{ marginTop: 14, fontSize: "16.5px" }}>{insurance.body}</p>
+              <Ticks items={insurance.ticks} />
+              <a
+                className="btn btn--wa btn--lg"
+                style={{ marginTop: 24 }}
+                href={waLink("Hi Motor Kekal, saya nak renew insurans & cukai jalan. No. plat ____.")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {insurance.cta}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="section--tight wrap">
+          <div className="section-head">
+            <p className="eyebrow">{t("faqEyebrow")}</p>
+            <h2>{t("faqTitle")}</h2>
+          </div>
+          <div className="faq">
+            {faq.map((item, i) => (
+              <details key={i} open={i === 0}>
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA band */}
+        <section className="section--tight wrap">
+          <div className="cta-band">
+            <h2>{t("ctaHeading")}</h2>
+            <p>{t("ctaBody")}</p>
+            <a
+              className="btn btn--wa btn--lg"
+              href={waLink("Hi Motor Kekal, saya ada soalan pasal perkhidmatan.")}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("ctaButton")}
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <SiteFooter />
+      <MobileBar waMessage="Hi Motor Kekal, saya nak tanya pasal perkhidmatan." />
     </div>
-    // End wrapper
   );
 };
 

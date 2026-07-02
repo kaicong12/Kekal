@@ -661,6 +661,60 @@
   font-size: 14px;
 }
 
+/* List pagination footer */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--admin-border);
+  flex-wrap: wrap;
+}
+
+.pageInfo {
+  font-size: 13px;
+  color: var(--admin-text-muted);
+}
+
+.pageControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pageBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-card);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--admin-text);
+  cursor: pointer;
+}
+
+.pageBtn:hover:not(:disabled) {
+  border-color: var(--admin-orange);
+  color: var(--admin-orange);
+}
+
+.pageBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pageCurrent {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--admin-text);
+  min-width: 72px;
+  text-align: center;
+}
+
 /* Mobile stacked cards (list screens) */
 .mobileList {
   display: flex;

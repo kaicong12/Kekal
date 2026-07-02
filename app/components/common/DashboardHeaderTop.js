@@ -25,7 +25,7 @@ const DashboardHeaderTop = () => {
     },
     {
       icon: "flaticon-clock",
-      text: "Mon - Sun 8:00 - 18:00",
+      text: "Mon - Sun 9:00AM - 7:00PM (Fri Closed)",
     },
   ];
 

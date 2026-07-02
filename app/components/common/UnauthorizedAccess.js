@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import {
+  ConfigProvider,
   Spin,
   Result,
   Button,
@@ -15,12 +16,47 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 import { useAuth } from "../auth/AuthProvider";
-import Footer from "./Footer";
-import DefaultHeader from "./DefaultHeader";
-import HeaderTop from "./HeaderTop";
-import MobileMenu from "./MobileMenu";
 
 const { Title, Text } = Typography;
+
+// Mirrors the admin dashboard theme so the sign-in gate matches the app shell
+// (orange accent, Space Grotesk) — never the public storefront chrome.
+const antdTheme = {
+  token: {
+    colorPrimary: "#f2622e",
+    colorInfo: "#f2622e",
+    borderRadius: 10,
+    controlHeight: 40,
+    fontFamily: "var(--font-display, Inter, system-ui, sans-serif)",
+  },
+};
+
+const pageStyle = {
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 22,
+  padding: 24,
+  background: "#f6f4f1",
+  fontFamily: "var(--font-display, Inter, system-ui, sans-serif)",
+};
+
+const cardStyle = {
+  width: "100%",
+  maxWidth: 440,
+  borderRadius: 16,
+  border: "1px solid #ece9e4",
+  boxShadow: "0 18px 44px -30px rgba(23,24,28,0.45)",
+};
+
+const LockIcon = () => (
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="4" y="10" width="16" height="10" rx="2" />
+    <path d="M8 10V7a4 4 0 018 0v3" strokeLinecap="round" />
+  </svg>
+);
 
 export default function UnauthorizedAccess({
   pageTitle = "Admin Access",
@@ -72,195 +108,120 @@ export default function UnauthorizedAccess({
     }
   };
 
-  // Loading state
+  const brand = (
+    <div style={{ textAlign: "center" }}>
+      <div
+        style={{
+          fontFamily: "var(--font-display, Inter, system-ui, sans-serif)",
+          fontWeight: 700,
+          fontSize: 16,
+          letterSpacing: "-0.02em",
+          color: "#17181c",
+        }}
+      >
+        Perniagaan Motor Kekal
+      </div>
+      <div style={{ fontSize: 12.5, color: "#6b7280", marginTop: 2 }}>
+        {systemName}
+      </div>
+    </div>
+  );
+
+  let content;
+
   if (loading) {
-    return (
-      <div className="wrapper">
-        <HeaderTop />
-        <DefaultHeader />
-        <MobileMenu />
-
-        <div
-          style={{
-            minHeight: "70vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#f5f5f5",
-          }}
-        >
-          <Spin
-            size="large"
-            indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />}
-          />
-        </div>
-
-        <Footer />
-      </div>
+    content = (
+      <Spin
+        indicator={<LoadingOutlined style={{ fontSize: 44, color: "#f2622e" }} spin />}
+      />
     );
+  } else if (!isAuthenticated) {
+    content = (
+      <>
+        {brand}
+        <Card style={cardStyle} bodyStyle={{ padding: "40px 32px" }}>
+          <Space direction="vertical" size="large" style={{ width: "100%" }}>
+            <div style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: 13,
+                  background: "#fdeadf",
+                  color: "#f2622e",
+                  display: "grid",
+                  placeItems: "center",
+                  margin: "0 auto 16px",
+                }}
+              >
+                <LockIcon />
+              </div>
+              <Title level={3} style={{ marginBottom: 8 }}>
+                {pageTitle}
+              </Title>
+              <Text type="secondary">
+                Please sign in with your authorized Google account to access the{" "}
+                {systemName.toLowerCase()}.
+              </Text>
+            </div>
+
+            <Button
+              type="primary"
+              size="large"
+              icon={<GoogleOutlined />}
+              loading={signingIn}
+              onClick={handleSignIn}
+              style={{ width: "100%", height: "48px" }}
+            >
+              {signingIn ? "Signing in..." : "Sign in with Google"}
+            </Button>
+
+            <Text type="secondary" style={{ fontSize: "12px", textAlign: "center", display: "block" }}>
+              Only authorized accounts can access this system.
+            </Text>
+          </Space>
+        </Card>
+      </>
+    );
+  } else if (isAuthenticated && !isAuthorized) {
+    content = (
+      <>
+        {brand}
+        <Card style={cardStyle} bodyStyle={{ padding: "24px 24px 32px" }}>
+          <Result
+            status="error"
+            icon={<UserDeleteOutlined style={{ color: "#d1503c" }} />}
+            title="Access Denied"
+            subTitle={`Your email address (${
+              user?.email
+            }) is not authorized to access the ${systemName.toLowerCase()}. Please contact the administrator for access.`}
+            extra={[
+              <Button key="signout" onClick={signOut}>
+                Sign Out
+              </Button>,
+            ]}
+          >
+            <Card
+              size="small"
+              style={{ background: "#f6f4f1", border: "none", marginTop: "8px" }}
+            >
+              <Text type="secondary" style={{ fontSize: "12px" }}>
+                <strong>Note:</strong> Only pre-authorized email addresses can
+                access the {systemName.toLowerCase()}. If you believe you should
+                have access, please contact the system administrator.
+              </Text>
+            </Card>
+          </Result>
+        </Card>
+      </>
+    );
+  } else {
+    content = null;
   }
 
-  // Not authenticated state
-  if (!isAuthenticated) {
-    return (
-      <div className="wrapper">
-        <HeaderTop />
-        <DefaultHeader />
-        <MobileMenu />
-
-        <section className="inner_page_breadcrumb">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-12">
-                <div className="breadcrumb_content">
-                  <h2 className="breadcrumb_title">{pageTitle}</h2>
-                  <p className="subtitle">{pageSubtitle}</p>
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <a href="/#">Home</a>
-                    </li>
-                    <li className="breadcrumb-item active" aria-current="page">
-                      <a href="#">{pageTitle}</a>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div style={{ padding: "80px 0", background: "#f5f5f5" }}>
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-md-6 col-lg-4">
-                <Card
-                  style={{
-                    textAlign: "center",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                  }}
-                  bodyStyle={{ padding: "40px 32px" }}
-                >
-                  <Space
-                    direction="vertical"
-                    size="large"
-                    style={{ width: "100%" }}
-                  >
-                    <div>
-                      <div
-                        style={{
-                          fontSize: "48px",
-                          color: "#faad14",
-                          marginBottom: "16px",
-                        }}
-                      >
-                        📋
-                      </div>
-                      <Title level={3} style={{ marginBottom: "8px" }}>
-                        {systemName}
-                      </Title>
-                      <Text type="secondary">
-                        Please sign in with your authorized Google account to
-                        access the {systemName.toLowerCase()}.
-                      </Text>
-                    </div>
-
-                    <Button
-                      type="primary"
-                      size="large"
-                      icon={<GoogleOutlined />}
-                      loading={signingIn}
-                      onClick={handleSignIn}
-                      style={{ width: "100%", height: "48px" }}
-                    >
-                      {signingIn ? "Signing in..." : "Sign in with Google"}
-                    </Button>
-
-                    <Text type="secondary" style={{ fontSize: "12px" }}>
-                      Only authorized accounts can access this system.
-                    </Text>
-                  </Space>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <Footer />
-      </div>
-    );
-  }
-
-  // Authenticated but not authorized
-  if (isAuthenticated && !isAuthorized) {
-    return (
-      <div className="wrapper">
-        <HeaderTop />
-        <DefaultHeader />
-        <MobileMenu />
-
-        <section className="inner_page_breadcrumb">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-12">
-                <div className="breadcrumb_content">
-                  <h2 className="breadcrumb_title">Access Denied</h2>
-                  <p className="subtitle">Unauthorized Access</p>
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <a href="/#">Home</a>
-                    </li>
-                    <li className="breadcrumb-item active" aria-current="page">
-                      <a href="#">Access Denied</a>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div style={{ padding: "80px 0", background: "#f5f5f5" }}>
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-md-8 col-lg-6">
-                <Result
-                  icon={<UserDeleteOutlined style={{ color: "#ff4d4f" }} />}
-                  title="Access Denied"
-                  subTitle={`Your email address (${
-                    user?.email
-                  }) is not authorized to access the ${systemName.toLowerCase()}. Please contact the administrator for access.`}
-                  extra={[
-                    <Button key="signout" onClick={signOut}>
-                      Sign Out
-                    </Button>,
-                  ]}
-                >
-                  <Card
-                    size="small"
-                    style={{
-                      background: "#f6f6f6",
-                      border: "none",
-                      marginTop: "24px",
-                    }}
-                  >
-                    <Text type="secondary" style={{ fontSize: "12px" }}>
-                      <strong>Note:</strong> Only pre-authorized email addresses
-                      can access the {systemName.toLowerCase()}. If you believe
-                      you should have access, please contact the system
-                      administrator.
-                    </Text>
-                  </Card>
-                </Result>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <Footer />
-      </div>
-    );
-  }
-
-  // This should not happen in normal flow, but return null as fallback
-  return null;
+  return (
+    <ConfigProvider theme={antdTheme}>
+      <div style={pageStyle}>{content}</div>
+    </ConfigProvider>
+  );
 }

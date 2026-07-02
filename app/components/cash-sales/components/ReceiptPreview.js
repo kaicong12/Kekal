@@ -412,11 +412,10 @@ const ReceiptPreview = React.memo(
                     <Text strong>Perniagaan Motor Kekal</Text>
                   </div>
                   <div>永恒摩托贸易公司</div>
-                  <div>No. 123, Jalan Dato Sulaiman</div>
-                  <div>Taman Abad, 80250</div>
-                  <div>Johor Bahru, Johor</div>
-                  <div>Tel: +60 7-123 4567</div>
-                  <div>Email: info@motorkekal.com</div>
+                  <div>5, Jln Seroja 49, Taman Johor Jaya</div>
+                  <div>81100 Johor Bahru, Johor</div>
+                  <div>Tel: +60 12-712 6128</div>
+                  <div>Email: motorkekal@gmail.com</div>
                 </Card>
               </Col>
               <Col span={12}>

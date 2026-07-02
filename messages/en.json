@@ -12,8 +12,8 @@
     "promotions": "Promotions"
   },
   "headerTop": {
-    "hours": "Mon - Sun 8:00 - 18:00",
-    "mobileHours": "Mon - Thurs 8:30 - 19:30"
+    "hours": "Mon - Sun 9:00AM - 7:00PM (Fri Closed)",
+    "mobileHours": "9AM - 7PM (Fri Closed)"
   },
   "languageSwitcher": {
     "label": "Language",
@@ -294,7 +294,7 @@
     "subtext": "We get these questions every day. If we miss one, WhatsApp us — Faiz answers in ~5 min.",
     "categoryQuestions": "{category} · {count} QUESTIONS",
     "stillQuestions": "Still got questions?",
-    "stillQuestionsSubtext": "Faiz from sales replies in ~5 min during business hours (9–7 daily)",
+    "stillQuestionsSubtext": "Faiz from sales replies in ~5 min during business hours (9AM–7PM, closed Fri)",
     "categories": {
       "Financing": "Financing",
       "Delivery": "Delivery",
@@ -397,6 +397,303 @@
     "offerEnds": "Offer ends {date}",
     "endedOn": "Ended {date}",
     "claimDeal": "Claim this deal",
-    "visitToClaim": "Visit Us"
+    "visitToClaim": "Visit Us",
+    "allPromotions": "All promotions",
+    "runningOffers": "Offers running now",
+    "viewAllStock": "View all stock",
+    "ended": "Ended",
+    "ctaHeading": "See an offer you like?",
+    "ctaBody": "Promotions change every month and stock is limited. WhatsApp us now — we will confirm the price and hold a unit for you.",
+    "ctaButton": "WhatsApp Motor Kekal",
+    "crumbCurrent": "Promotions"
+  },
+  "mk": {
+    "inStock": "In stock",
+    "home": {
+      "eyebrow": "Motorcycle Shop · Johor Bahru",
+      "h1": "Find a bike the <em>easy</em> way.<br></br>Buy with <em>confidence</em>.",
+      "sub": "Perniagaan Motor Kekal is a trusted motorcycle shop in Johor Bahru for over 30 years. New stock, easy financing, and honest people — all under one roof.",
+      "ctaBrowse": "View Motorcycles",
+      "ctaWhatsapp": "WhatsApp Us",
+      "meta": [
+        "Dealer of 4 major brands",
+        "Own service & warranty",
+        "Open daily (except Fri)"
+      ],
+      "heroImageAlt": "Perniagaan Motor Kekal showroom",
+      "badgeOpen": "Open now",
+      "dealerLabel": "Major brands:",
+      "popularEyebrow": "Best sellers",
+      "popularHeading": "Popular motorcycles",
+      "bestSeller": "Best seller",
+      "servicesEyebrow": "Everything under one roof",
+      "servicesHeading": "More than just selling bikes",
+      "servicesSub": "From financing to insurance and servicing — we handle it all so you don't have to run around.",
+      "services": [
+        {
+          "icon": "finance",
+          "title": "Easy financing",
+          "desc": "We work with partner banks and tell you your approval odds upfront.",
+          "link": "Check eligibility"
+        },
+        {
+          "icon": "trade",
+          "title": "Trade-in",
+          "desc": "Bring your old bike, ride home a new one. Get a quick estimate.",
+          "link": "Value your bike"
+        },
+        {
+          "icon": "warranty",
+          "title": "Warranty & service",
+          "desc": "Serviced at our own workshop. Genuine parts, recorded on your bike.",
+          "link": "See warranty"
+        },
+        {
+          "icon": "insurance",
+          "title": "Insurance & road tax",
+          "desc": "Renew insurance and road tax right at the counter — no queues.",
+          "link": "Renew now"
+        }
+      ],
+      "stats": [
+        {
+          "value": "4",
+          "label": "Major brands"
+        },
+        {
+          "value": "30+",
+          "label": "Years of experience"
+        },
+        {
+          "value": "3,000+",
+          "label": "Happy riders"
+        },
+        {
+          "value": "4.9★",
+          "label": "Average Google rating"
+        }
+      ],
+      "splitEyebrow": "Why Motor Kekal",
+      "splitHeading": "Buying a bike shouldn't be scary",
+      "splitBody": "Especially if it's your first bike. We explain every step in plain language — no pressure, no surprises.",
+      "splitTicks": [
+        "Honest pricing. We tell you the real price, deposit and instalments before you commit.",
+        "Fast replies on WhatsApp during working hours.",
+        "Our own workshop. Service and warranty in the same place."
+      ],
+      "splitCta": "Get to know us",
+      "splitImageAlt": "Rider and motorcycle",
+      "testimonialsEyebrow": "Rider stories",
+      "testimonialsHeading": "Trusted by Johor Bahru",
+      "findUsEyebrow": "Find us",
+      "findUsHeading": "Motorcycle shop in Johor Bahru",
+      "napPhone": "WhatsApp & call",
+      "napHoursLabel": "Open daily (except Fri)",
+      "napWhatsappLocation": "WhatsApp location",
+      "ctaBandHeading": "Ready to find your bike?",
+      "ctaBandBody": "WhatsApp us the model you want — we quote the price, deposit and instalments right away. Out of stock? We can source it in a few days.",
+      "ctaBandButton": "WhatsApp Motor Kekal"
+    },
+    "listings": {
+      "eyebrow": "Latest stock · Johor Bahru",
+      "subtitle": "All new bikes with clear pricing. In stock at the shop, or we can source it in a few days.",
+      "all": "All",
+      "cantFindTitle": "Can't find the bike you want?",
+      "cantFindBody": "We can source most brands in a few days. WhatsApp us the model name and we'll quote you.",
+      "cantFindCta": "WhatsApp your model"
+    },
+    "services": {
+      "crumbHome": "Home",
+      "crumbCurrent": "Services",
+      "eyebrow": "Everything under one roof",
+      "heading": "Motor Kekal Services",
+      "sub": "Buying a bike is just the start. From financing to insurance, warranty and servicing — we handle it all so it's easy for you.",
+      "financing": {
+        "badge": "Most popular",
+        "title": "Easy financing",
+        "body": "We work with several banks. Tell us your salary and job — we tell you your approval odds upfront, so you don't waste time on forms that won't be approved.",
+        "ticks": [
+          "Deposit as low as RM500 on selected models",
+          "3–5 year terms · flexible instalments",
+          "First-time buyers & e-hailing riders welcome"
+        ],
+        "cta": "Check eligibility on WhatsApp"
+      },
+      "tradein": {
+        "eyebrow": "Trade-in",
+        "title": "Bring your old bike, ride home a new one",
+        "body": "We buy your old bike and deduct it straight off the new bike's price. Get a quick estimate — just send photos and the model on WhatsApp.",
+        "steps": [
+          {
+            "title": "Send details",
+            "desc": "Model, year, mileage (km) and photos of your old bike on WhatsApp."
+          },
+          {
+            "title": "Get an estimate",
+            "desc": "We give you an estimated price quickly."
+          },
+          {
+            "title": "Bring it to the shop",
+            "desc": "We confirm the condition and finalise the price."
+          },
+          {
+            "title": "Ride the new one",
+            "desc": "The trade-in value is deducted from your new bike."
+          }
+        ],
+        "cta": "Value your bike"
+      },
+      "warranty": {
+        "eyebrow": "Warranty & service",
+        "title": "Our own workshop, genuine parts",
+        "body": "Servicing is done at our own workshop — nothing sent to third parties. Every service is recorded on your bike.",
+        "ticks": [
+          "Scheduled servicing per the service book",
+          "Genuine parts · manufacturer warranty kept intact",
+          "Pickup within Johor Bahru for major repairs"
+        ],
+        "cta": "Book a service"
+      },
+      "insurance": {
+        "badge": "Renew at the counter",
+        "title": "Insurance & road tax",
+        "body": "Renew insurance and road tax right at the counter. No queues at Pos Malaysia — we print on the spot, done in minutes.",
+        "ticks": [
+          "Motorcycle insurance for all brands",
+          "Road tax printed on the spot",
+          "Renewal reminders — we WhatsApp before it expires"
+        ],
+        "cta": "Renew now"
+      },
+      "faqEyebrow": "FAQ",
+      "faqTitle": "Questions we hear every day",
+      "faq": [
+        {
+          "q": "Do I need to pay a deposit online?",
+          "a": "No. We don't collect online payments. WhatsApp us first, then pay at the shop or by bank transfer."
+        },
+        {
+          "q": "Can first-time buyers get financing?",
+          "a": "Yes. We work with several banks and tell you your approval odds upfront, including for first bikes and e-hailing riders."
+        },
+        {
+          "q": "How long does a trade-in take?",
+          "a": "A quick estimate over WhatsApp. The final value is set once we inspect the bike at the shop."
+        },
+        {
+          "q": "Can I renew insurance and road tax at the shop?",
+          "a": "Yes. We print insurance and road tax right at the counter — no queuing at Pos Malaysia."
+        },
+        {
+          "q": "How long to get a bike if it's out of stock?",
+          "a": "We can source most brands in a few days. WhatsApp the model name and we'll confirm and quote."
+        }
+      ],
+      "ctaHeading": "Got another question?",
+      "ctaBody": "WhatsApp us — we reply quickly during working hours.",
+      "ctaButton": "WhatsApp Motor Kekal"
+    },
+    "about": {
+      "crumbHome": "Home",
+      "crumbCurrent": "About Us",
+      "eyebrow": "About us",
+      "heading": "A family motorcycle shop in Johor Bahru",
+      "sub": "Perniagaan Motor Kekal started as a small shop in Johor Bahru. Over 30 years later, we're still here — selling bikes the way we'd want to be treated: honest, easy, no pressure.",
+      "bannerAlt": "Perniagaan Motor Kekal shop",
+      "storyEyebrow": "Our story",
+      "storyHeading": "From a small shop to a name people trust",
+      "storyPara1": "We started with one simple goal — to be a motorcycle shop that JB people can trust. A place where you don't feel pressured, where the price is the price, and where the person who sells you the bike is the same one who services it later.",
+      "storyPara2": "Today we sell Yamaha, Kawasaki, Honda and KTM, with our own workshop and insurance counter under one roof. But our way of doing things is still the same.",
+      "storyImageAlt": "Motor Kekal workshop",
+      "valuesEyebrow": "What we stand for",
+      "valuesHeading": "The Motor Kekal way",
+      "values": [
+        {
+          "icon": "shield",
+          "title": "Honesty first",
+          "desc": "The real price, including deposit and instalments, before you commit. We'll tell you if you don't qualify for a loan — no wasting your time."
+        },
+        {
+          "icon": "users",
+          "title": "Treated like a neighbour",
+          "desc": "Many of our customers live around Johor Bahru. We know the faces, we know the bikes — not just a transaction."
+        },
+        {
+          "icon": "tools",
+          "title": "Handled end to end",
+          "desc": "Loan, insurance, road tax, servicing — we do it all so you don't have to run around."
+        },
+        {
+          "icon": "spark",
+          "title": "Fast replies",
+          "desc": "WhatsApp us and we reply quickly during working hours. No waiting for days."
+        }
+      ],
+      "stats": [
+        {
+          "value": "30+",
+          "label": "Years in Johor Bahru"
+        },
+        {
+          "value": "4",
+          "label": "Major brands"
+        },
+        {
+          "value": "3,000+",
+          "label": "Happy riders"
+        },
+        {
+          "value": "4.9★",
+          "label": "Average Google rating"
+        }
+      ],
+      "teamEyebrow": "Our team",
+      "teamHeading": "The people you'll meet",
+      "team": [
+        {
+          "name": "Sales team",
+          "role": "Sales & financing"
+        },
+        {
+          "name": "Head mechanic",
+          "role": "Service & warranty"
+        },
+        {
+          "name": "Front counter",
+          "role": "Insurance & road tax"
+        }
+      ],
+      "findEyebrow": "Find us",
+      "findHeading": "Drop by the shop",
+      "phoneNote": "call",
+      "hoursLabel": "Open daily (except Fri)",
+      "whatsappUs": "WhatsApp us"
+    },
+    "footer": {
+      "about": "Family-run motorcycle dealer in Johor Bahru. Yamaha, Honda, Kawasaki & KTM — honest pricing, easy financing and our own workshop, all under one roof.",
+      "contactHeading": "Get in touch",
+      "seo": "Perniagaan Motor Kekal — kedai motor & motorcycle dealer in Johor Bahru, Johor. New motorcycles, easy loan approval, trade-in, insurance, road tax renewal and in-house servicing.",
+      "rights": "© 2026 Perniagaan Motor Kekal. All rights reserved."
+    },
+    "detail": {
+      "aboutHeading": "Overview",
+      "specifications": "Specifications",
+      "specCc": "Engine capacity",
+      "specEngine": "Engine",
+      "specYear": "Year",
+      "specModel": "Model",
+      "specTransmission": "Transmission",
+      "reassure1": "Trusted dealer in Johor Bahru",
+      "reassure2": "Flexible financing available",
+      "reassure3": "Fast response on WhatsApp",
+      "fromMonthly": "or from RM {amount}/month",
+      "orderWhatsApp": "WhatsApp to order",
+      "calcInstallment": "Calculate installment",
+      "mayLike": "You might also like",
+      "ctaTitle": "Want to see it in person?",
+      "ctaText": "Come to our Johor Bahru shop for a test ride, or WhatsApp us to reserve a unit and get exact installment figures.",
+      "ctaWhatsApp": "WhatsApp Motor Kekal"
+    },
+    "visitFacebook": "Visit our Facebook"
   }
 }
