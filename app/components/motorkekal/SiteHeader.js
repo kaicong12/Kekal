@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LanguageSwitcher from "@/app/components/common/LanguageSwitcher";
-import { waLink, WaIcon } from "./waLink";
+import { waLink, WaIcon, FbIcon, FACEBOOK_URL } from "./waLink";
 
 const NAV = [
   { href: "/", key: "home" },
@@ -18,6 +18,7 @@ const NAV = [
 
 const SiteHeader = () => {
   const t = useTranslations("nav");
+  const tMk = useTranslations("mk");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -57,6 +58,15 @@ const SiteHeader = () => {
 
           <div className="header-actions">
             <LanguageSwitcher />
+            <a
+              className="icon-btn"
+              href={FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={tMk("visitFacebook")}
+            >
+              <FbIcon />
+            </a>
             <a
               className="btn btn--wa btn--sm"
               href={waLink("Hi Motor Kekal, saya nak tanya pasal motosikal.")}
@@ -111,6 +121,16 @@ const SiteHeader = () => {
           >
             <WaIcon />
             WhatsApp
+          </a>
+          <a
+            className="btn btn--block"
+            style={{ marginTop: 10, background: "#1877f2", color: "#fff" }}
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FbIcon />
+            {tMk("visitFacebook")}
           </a>
         </div>
       </div>
