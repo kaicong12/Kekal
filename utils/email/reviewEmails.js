@@ -115,7 +115,7 @@ async function sendReviewConfirmation(reviewData) {
         <div style="margin-top: 30px; text-align: center;">
           <p style="color: #666; margin: 0;">
             Thank you for choosing Kekal for your motorcycle needs!<br>
-            Visit our website: <a href="https://kekal.com" style="color: #007bff;">kekal.com</a>
+            Visit our website: <a href="https://motorkekal.com" style="color: #007bff;">motorkekal.com</a>
           </p>
         </div>
       </div>

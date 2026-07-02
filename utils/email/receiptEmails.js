@@ -146,8 +146,8 @@ async function sendReceiptEmail({
         <p><strong>Perniagaan Motor Kekal | 永恒摩托贸易公司</strong></p>
         <p>Your One Stop Motorcycle Dealer in Johor Bahru</p>
         <div class="company-info">
-            <p>No. 123, Jalan Dato Sulaiman, Taman Abad, 80250 Johor Bahru, Johor</p>
-            <p>Tel: +60 7-123 4567 | Email: info@motorkekal.com</p>
+            <p>5, Jln Seroja 49, Taman Johor Jaya, 81100 Johor Bahru, Johor</p>
+            <p>Tel: +60 12-712 6128 | Email: motorkekal@gmail.com</p>
             <p>Ride with Confidence, Ride with Us. Serving Johor Bahru's Riders for Over 30 Years.</p>
         </div>
     </div>

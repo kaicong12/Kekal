@@ -12,8 +12,8 @@
     "promotions": "促销"
   },
   "headerTop": {
-    "hours": "周一至周日 8:00 - 18:00",
-    "mobileHours": "周一至周四 8:30 - 19:30"
+    "hours": "周一至周日 9:00AM - 7:00PM (周五休息)",
+    "mobileHours": "9AM - 7PM (周五休息)"
   },
   "languageSwitcher": {
     "label": "语言",
@@ -294,7 +294,7 @@
     "subtext": "我们每天都会收到这些问题。如果有遗漏，请 WhatsApp 联系我们 — Faiz 约5分钟内回复。",
     "categoryQuestions": "{category} · {count} 个问题",
     "stillQuestions": "还有问题吗？",
-    "stillQuestionsSubtext": "销售部的 Faiz 在营业时间内（每天9–7点）约5分钟内回复",
+    "stillQuestionsSubtext": "销售部的 Faiz 在营业时间内（9AM–7PM，周五休息）约5分钟内回复",
     "categories": {
       "Financing": "贷款融资",
       "Delivery": "交付",
@@ -418,7 +418,7 @@
       "meta": [
         "4 大品牌经销",
         "自有维修与保养",
-        "每天营业"
+        "每天营业（周五休息）"
       ],
       "heroImageAlt": "Perniagaan Motor Kekal 展示厅",
       "badgeOpen": "营业中",
@@ -488,7 +488,7 @@
       "findUsEyebrow": "找到我们",
       "findUsHeading": "新山的摩托车店",
       "napPhone": "WhatsApp 与电话",
-      "napHoursLabel": "每天营业",
+      "napHoursLabel": "每天营业（周五休息）",
       "napWhatsappLocation": "WhatsApp 位置",
       "ctaBandHeading": "准备好找您的车了吗？",
       "ctaBandBody": "把您想要的车款用 WhatsApp 告诉我们——我们立即报价、订金与分期。缺货？我们可在几天内调货。",
@@ -666,7 +666,7 @@
       "findEyebrow": "找到我们",
       "findHeading": "欢迎到店",
       "phoneNote": "电话",
-      "hoursLabel": "每天营业",
+      "hoursLabel": "每天营业（周五休息）",
       "whatsappUs": "WhatsApp 我们"
     },
     "footer": {

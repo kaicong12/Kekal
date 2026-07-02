@@ -12,8 +12,8 @@
     "promotions": "Promotions"
   },
   "headerTop": {
-    "hours": "Mon - Sun 8:00 - 18:00",
-    "mobileHours": "Mon - Thurs 8:30 - 19:30"
+    "hours": "Mon - Sun 9:00AM - 7:00PM (Fri Closed)",
+    "mobileHours": "9AM - 7PM (Fri Closed)"
   },
   "languageSwitcher": {
     "label": "Language",
@@ -294,7 +294,7 @@
     "subtext": "We get these questions every day. If we miss one, WhatsApp us — Faiz answers in ~5 min.",
     "categoryQuestions": "{category} · {count} QUESTIONS",
     "stillQuestions": "Still got questions?",
-    "stillQuestionsSubtext": "Faiz from sales replies in ~5 min during business hours (9–7 daily)",
+    "stillQuestionsSubtext": "Faiz from sales replies in ~5 min during business hours (9AM–7PM, closed Fri)",
     "categories": {
       "Financing": "Financing",
       "Delivery": "Delivery",
@@ -418,7 +418,7 @@
       "meta": [
         "Dealer of 4 major brands",
         "Own service & warranty",
-        "Open every day"
+        "Open daily (except Fri)"
       ],
       "heroImageAlt": "Perniagaan Motor Kekal showroom",
       "badgeOpen": "Open now",
@@ -488,7 +488,7 @@
       "findUsEyebrow": "Find us",
       "findUsHeading": "Motorcycle shop in Johor Bahru",
       "napPhone": "WhatsApp & call",
-      "napHoursLabel": "Open every day",
+      "napHoursLabel": "Open daily (except Fri)",
       "napWhatsappLocation": "WhatsApp location",
       "ctaBandHeading": "Ready to find your bike?",
       "ctaBandBody": "WhatsApp us the model you want — we quote the price, deposit and instalments right away. Out of stock? We can source it in a few days.",
@@ -666,7 +666,7 @@
       "findEyebrow": "Find us",
       "findHeading": "Drop by the shop",
       "phoneNote": "call",
-      "hoursLabel": "Open every day",
+      "hoursLabel": "Open daily (except Fri)",
       "whatsappUs": "WhatsApp us"
     },
     "footer": {

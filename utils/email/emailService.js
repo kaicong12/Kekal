@@ -46,7 +46,7 @@ class EmailService {
   ) {
     try {
       const mailOptions = {
-        from: senderEmail || process.env.EMAIL_USER || "noreply@kekal.com",
+        from: senderEmail || process.env.EMAIL_USER || "motorkekal@gmail.com",
         to: recipientEmail,
         subject: subject,
         html: messageBody, // Supports HTML content
