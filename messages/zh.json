@@ -674,6 +674,26 @@
       "contactHeading": "联系我们",
       "seo": "永恒摩托贸易公司 — 位于柔佛新山的电单车商行。全新电单车、轻松贷款、以旧换新、保险、路税更新及自家维修服务。",
       "rights": "© 2026 永恒摩托贸易公司。版权所有。"
-    }
+    },
+    "detail": {
+      "aboutHeading": "概览",
+      "specifications": "规格",
+      "specCc": "引擎容量",
+      "specEngine": "引擎",
+      "specYear": "年份",
+      "specModel": "型号",
+      "specTransmission": "变速",
+      "reassure1": "柔佛新山值得信赖的车行",
+      "reassure2": "提供灵活贷款方案",
+      "reassure3": "WhatsApp 快速回复",
+      "fromMonthly": "或每月 RM {amount} 起",
+      "orderWhatsApp": "WhatsApp 下单",
+      "calcInstallment": "计算分期",
+      "mayLike": "您可能也喜欢",
+      "ctaTitle": "想亲自看车？",
+      "ctaText": "欢迎到我们新山的店试骑，或通过 WhatsApp 预留车辆并获取准确的分期金额。",
+      "ctaWhatsApp": "WhatsApp Motor Kekal"
+    },
+    "visitFacebook": "访问我们的 Facebook"
   }
 }

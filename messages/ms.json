@@ -674,6 +674,26 @@
       "contactHeading": "Hubungi kami",
       "seo": "Perniagaan Motor Kekal — kedai motor & pengedar motosikal di Johor Bahru, Johor. Motosikal baharu, loan mudah lulus, tukar-beli, insurans, renew cukai jalan dan servis bengkel sendiri.",
       "rights": "© 2026 Perniagaan Motor Kekal. Hak cipta terpelihara."
-    }
+    },
+    "detail": {
+      "aboutHeading": "Gambaran keseluruhan",
+      "specifications": "Spesifikasi",
+      "specCc": "Kapasiti enjin",
+      "specEngine": "Enjin",
+      "specYear": "Tahun",
+      "specModel": "Model",
+      "specTransmission": "Transmisi",
+      "reassure1": "Pengedar dipercayai di Johor Bahru",
+      "reassure2": "Pembiayaan mudah tersedia",
+      "reassure3": "Respons pantas di WhatsApp",
+      "fromMonthly": "atau dari RM {amount}/bulan",
+      "orderWhatsApp": "WhatsApp untuk tempah",
+      "calcInstallment": "Kira ansuran",
+      "mayLike": "Mungkin anda suka",
+      "ctaTitle": "Nak tengok sendiri?",
+      "ctaText": "Datang ke kedai Johor Bahru kami untuk test rasa, atau WhatsApp kami untuk tahan unit dan dapatkan angka ansuran tepat.",
+      "ctaWhatsApp": "WhatsApp Motor Kekal"
+    },
+    "visitFacebook": "Lawati Facebook kami"
   }
 }

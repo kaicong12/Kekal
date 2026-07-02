@@ -674,6 +674,26 @@
       "contactHeading": "Get in touch",
       "seo": "Perniagaan Motor Kekal — kedai motor & motorcycle dealer in Johor Bahru, Johor. New motorcycles, easy loan approval, trade-in, insurance, road tax renewal and in-house servicing.",
       "rights": "© 2026 Perniagaan Motor Kekal. All rights reserved."
-    }
+    },
+    "detail": {
+      "aboutHeading": "Overview",
+      "specifications": "Specifications",
+      "specCc": "Engine capacity",
+      "specEngine": "Engine",
+      "specYear": "Year",
+      "specModel": "Model",
+      "specTransmission": "Transmission",
+      "reassure1": "Trusted dealer in Johor Bahru",
+      "reassure2": "Flexible financing available",
+      "reassure3": "Fast response on WhatsApp",
+      "fromMonthly": "or from RM {amount}/month",
+      "orderWhatsApp": "WhatsApp to order",
+      "calcInstallment": "Calculate installment",
+      "mayLike": "You might also like",
+      "ctaTitle": "Want to see it in person?",
+      "ctaText": "Come to our Johor Bahru shop for a test ride, or WhatsApp us to reserve a unit and get exact installment figures.",
+      "ctaWhatsApp": "WhatsApp Motor Kekal"
+    },
+    "visitFacebook": "Visit our Facebook"
   }
 }
