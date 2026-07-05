@@ -21,7 +21,7 @@ module.exports = defineConfig({
     },
     {
       name: "mobile",
-      use: { ...devices["iPhone 14"] },
+      use: { ...devices["Pixel 7"] },
     },
   ],
 

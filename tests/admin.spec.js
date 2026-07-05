@@ -1,9 +1,11 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
 const { mockAdminAuth } = require("./auth-mock");
+const { mockApiRoutes } = require("./mocks");
 
 test.describe("Admin Panel - Desktop", () => {
   test.beforeEach(async ({ page }) => {
+    await mockApiRoutes(page);
     await mockAdminAuth(page);
     await page.goto("/admin");
   });
@@ -35,6 +37,7 @@ test.describe("Admin Panel - Mobile", () => {
   test.use({ viewport: { width: 375, height: 812 } });
 
   test.beforeEach(async ({ page }) => {
+    await mockApiRoutes(page);
     await mockAdminAuth(page);
     await page.goto("/admin");
   });

@@ -1,8 +1,10 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
+const { mockApiRoutes } = require("./mocks");
 
 test.describe("Home Page", () => {
   test.beforeEach(async ({ page }) => {
+    await mockApiRoutes(page);
     await page.goto("/");
   });
 
@@ -11,7 +13,7 @@ test.describe("Home Page", () => {
   });
 
   test("should display site header with logo", async ({ page }) => {
-    const logo = page.locator('img[alt="Perniagaan Motor Kekal logo"]');
+    const logo = page.locator('header img[alt="Perniagaan Motor Kekal"]');
     await expect(logo).toBeVisible();
   });
 
@@ -41,11 +43,11 @@ test.describe("Home Page", () => {
   test("should display footer with business info", async ({ page }) => {
     const footer = page.locator("footer");
     await expect(footer).toBeVisible();
-    await expect(footer.getByText("Perniagaan Motor Kekal")).toBeVisible();
+    await expect(footer.getByText("Perniagaan Motor Kekal").first()).toBeVisible();
   });
 
   test("should have WhatsApp CTA link", async ({ page }) => {
-    const waLink = page.locator('a[href*="wa.me"]').first();
+    const waLink = page.locator('main a[href*="wa.me"]').first();
     await expect(waLink).toBeVisible();
   });
 
@@ -59,11 +61,12 @@ test.describe("Home Page - Mobile", () => {
   test.use({ viewport: { width: 375, height: 812 } });
 
   test.beforeEach(async ({ page }) => {
+    await mockApiRoutes(page);
     await page.goto("/");
   });
 
   test("should show mobile navigation bar at bottom", async ({ page }) => {
-    const mobileBar = page.locator('[class*="mobileBar"]');
+    const mobileBar = page.locator('.mobile-bar');
     await expect(mobileBar).toBeVisible();
   });
 
@@ -84,7 +87,7 @@ test.describe("Home Page - Mobile", () => {
   test("should display sticky WhatsApp CTA on mobile", async ({ page }) => {
     await page.evaluate(() => window.scrollBy(0, 500));
     await page.waitForTimeout(300);
-    const stickyCta = page.locator('[class*="mobileBar"]');
+    const stickyCta = page.locator('.mobile-bar');
     await expect(stickyCta).toBeVisible();
   });
 });

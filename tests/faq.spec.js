@@ -1,8 +1,10 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
+const { mockApiRoutes } = require("./mocks");
 
 test.describe("FAQ Page - Desktop", () => {
   test.beforeEach(async ({ page }) => {
+    await mockApiRoutes(page);
     await page.goto("/faq");
   });
 
@@ -28,9 +30,10 @@ test.describe("FAQ Page - Desktop", () => {
   });
 
   test("should expand/collapse FAQ answers", async ({ page }) => {
-    const firstQuestion = page.locator('[class*="accordionHeader"], [class*="accordion"] button').first();
-    await expect(firstQuestion).toBeVisible();
-    await firstQuestion.click();
+    // The first item is already open by default, so click the second one to expand it
+    const secondQuestion = page.locator('[class*="accordionHeader"], [class*="accordion"] button').nth(1);
+    await expect(secondQuestion).toBeVisible();
+    await secondQuestion.click();
     await page.waitForTimeout(300);
     const answer = page.locator('[class*="accordionBody"], [class*="answer"]').first();
     await expect(answer).toBeVisible();
@@ -42,7 +45,7 @@ test.describe("FAQ Page - Desktop", () => {
   });
 
   test("should have header and footer", async ({ page }) => {
-    const logo = page.locator('img[alt="Perniagaan Motor Kekal logo"]');
+    const logo = page.locator('header img[alt="Perniagaan Motor Kekal"]');
     await expect(logo).toBeVisible();
     const footer = page.locator("footer");
     await expect(footer).toBeVisible();
@@ -53,24 +56,28 @@ test.describe("FAQ Page - Mobile", () => {
   test.use({ viewport: { width: 375, height: 812 } });
 
   test("should display FAQ page correctly on mobile", async ({ page }) => {
+    await mockApiRoutes(page);
     await page.goto("/faq");
     const heading = page.getByRole("heading", { level: 1 });
     await expect(heading).toBeVisible();
   });
 
   test("should be able to interact with accordion on mobile", async ({ page }) => {
+    await mockApiRoutes(page);
     await page.goto("/faq");
-    const firstQuestion = page.locator('[class*="accordionHeader"], [class*="accordion"] button').first();
-    await expect(firstQuestion).toBeVisible();
-    await firstQuestion.click();
+    // The first item is already open by default, so click the second one to expand it
+    const secondQuestion = page.locator('[class*="accordionHeader"], [class*="accordion"] button').nth(1);
+    await expect(secondQuestion).toBeVisible();
+    await secondQuestion.click();
     await page.waitForTimeout(300);
     const answer = page.locator('[class*="accordionBody"], [class*="answer"]').first();
     await expect(answer).toBeVisible();
   });
 
   test("should show mobile bottom bar", async ({ page }) => {
+    await mockApiRoutes(page);
     await page.goto("/faq");
-    const mobileBar = page.locator('[class*="mobileBar"]');
+    const mobileBar = page.locator('.mobile-bar');
     await expect(mobileBar).toBeVisible();
   });
 });
