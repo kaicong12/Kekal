@@ -63,7 +63,12 @@ const EmptyState = ({ searchTerm, selectedBrand }) => {
         <div className="help-section">
           <p className="help-text">
             {t("needHelp")}
-            <a href="/contact" className="help-link">
+            <a
+              href="https://wa.me/60127126128"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="help-link"
+            >
               {" "}
               {t("contactExperts")}
             </a>
