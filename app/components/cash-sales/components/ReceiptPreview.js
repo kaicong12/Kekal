@@ -17,7 +17,6 @@ import {
 import {
   ArrowLeftOutlined,
   DownloadOutlined,
-  MailOutlined,
   StarFilled,
   SaveOutlined,
 } from "@ant-design/icons";
@@ -31,7 +30,6 @@ const ReceiptPreview = React.memo(
   ({ open, onClose, onResetForm, receiptData, calculateTotal, isManagement = false }) => {
     const receiptRef = useRef(null);
     const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
-    const [isSendingEmail, setIsSendingEmail] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [showSaveConfirmation, setShowSaveConfirmation] = useState(false);
 
@@ -109,86 +107,6 @@ const ReceiptPreview = React.memo(
       }
     };
 
-
-    // Send Email function
-    const handleSendEmail = async () => {
-      if (!receiptData.customer.email) {
-        message.error("Customer email is required to send receipt.");
-        return;
-      }
-
-      try {
-        setIsSendingEmail(true);
-        message.loading("Sending email...", 0);
-
-        // Hide action buttons and back button for screenshot
-        const actionButtons =
-          receiptRef.current.querySelector(".receipt-actions");
-        const backButton =
-          receiptRef.current.querySelector(".back-to-edit-button");
-        
-        if (actionButtons) {
-          actionButtons.style.display = "none";
-        }
-        if (backButton) {
-          backButton.style.display = "none";
-        }
-
-        // Generate canvas for email attachment
-        const canvas = await html2canvas(receiptRef.current, {
-          scale: 2,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: "#ffffff",
-        });
-
-        // Show action buttons and back button again
-        if (actionButtons) {
-          actionButtons.style.display = "block";
-        }
-        if (backButton) {
-          backButton.style.display = "block";
-        }
-
-        const imgData = canvas.toDataURL("image/png");
-
-        const emailData = {
-          to: receiptData.customer.email,
-          customerName: receiptData.customer.name,
-          receiptNumber: receiptData.receiptNumber,
-          receiptDate: receiptData.purchaseDate.format("DD MMM YYYY"),
-          total: calculateTotal().toFixed(2),
-          receiptImage: imgData,
-        };
-
-        const response = await fetch("/api/email/receipt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(emailData),
-        });
-
-        if (response.ok) {
-          message.success(
-            `Receipt sent successfully to ${receiptData.customer.email}!`
-          );
-          
-          // Reset form after successful email send if onResetForm is provided
-          if (onResetForm) {
-            setTimeout(() => onResetForm(), 1000);
-          }
-        } else {
-          throw new Error("Failed to send email");
-        }
-      } catch (error) {
-        console.error("Error sending email:", error);
-        message.error("Failed to send email. Please try again.");
-      } finally {
-        setIsSendingEmail(false);
-        message.destroy();
-      }
-    };
 
     // Show save warning first
     const handleSaveReceipt = () => {
@@ -549,14 +467,6 @@ const ReceiptPreview = React.memo(
                   style={{ minWidth: "140px" }}
                 >
                   Download PDF
-                </Button>
-                <Button
-                  icon={<MailOutlined />}
-                  loading={isSendingEmail}
-                  onClick={handleSendEmail}
-                  style={{ minWidth: "120px" }}
-                >
-                  Send Email
                 </Button>
                 {!isManagement && (
                   <Button

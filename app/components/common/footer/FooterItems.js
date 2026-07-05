@@ -1,4 +1,3 @@
-import NewsletterSignup from "./NewsletterSignup";
 import { useTranslations } from "next-intl";
 
 const FooterItems = () => {
@@ -17,7 +16,6 @@ const FooterItems = () => {
           </p>
         </div>
       </div>
-      {/* End .col */}
 
       <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_contact_widget">
@@ -26,7 +24,6 @@ const FooterItems = () => {
           <p>motorkekal@gmail.com</p>
         </div>
       </div>
-      {/* End .col */}
 
       <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
         <div className="footer_contact_widget">
@@ -38,12 +35,6 @@ const FooterItems = () => {
           </p>
         </div>
       </div>
-      {/* End .col */}
-
-      <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
-        <NewsletterSignup />
-      </div>
-      {/* End .col */}
     </div>
   );
 };

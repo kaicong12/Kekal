@@ -25,7 +25,7 @@ Motorcycle ecommerce platform for Perniagaan Motor Kekal, a motorcycle dealer in
 git clone https://github.com/kaicong12/Kekal.git
 cd Kekal
 yarn install
-cp .env.example .env   # Fill in Firebase config, DATABASE_URL, Gmail OAuth credentials
+cp .env.example .env   # Fill in DATABASE_URL and Firebase config
 npx prisma generate
 npx prisma migrate dev
 yarn dev                # http://localhost:3000
@@ -83,10 +83,11 @@ app/
   (listing)/           # Motorcycle listing (filters, pagination)
   motorcycle/[slug]/   # Motorcycle detail page
   (pages)/admin/       # Admin dashboard (auth-protected)
-  api/                 # REST API (motorcycles, email)
+  api/                 # REST API (motorcycles, promotions)
   components/          # Shared UI components
   generated/           # Generated Prisma client
 prisma/                # Schema and migrations
-utils/                 # DB helpers, hooks, email service, slug utils
+utils/                 # DB helpers, hooks, slug utils, Firebase upload
+tests/                 # Playwright E2E tests (desktop + mobile)
 public/                # Static assets and SCSS
 ```
