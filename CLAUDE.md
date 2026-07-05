@@ -31,12 +31,12 @@ npx prisma studio      # Open database GUI
 - `app/motorcycle/[slug]/` — Detail page (slug format: `{brand}-{name}-{id}`)
 - `app/(pages)/admin/` — Admin dashboard (Firebase Google Auth protected)
 - `app/api/motorcycles/` — REST endpoints for search, filter, pagination
-- `app/api/email/` — Email endpoints (contact, receipt, newsletter, review, service)
+- `app/api/promotions/` — REST endpoints for promotions CRUD
 
 ### Data Layer
 
 - **Database:** PostgreSQL accessed via Prisma singleton (`utils/dbPg.js`)
-- **Key models:** Motorcycle (with unique constraint on brand+name+year), MotorcycleImage, GeneratedReceipt, ReceiptCustomer, ReceiptItem
+- **Key models:** Motorcycle (with unique constraint on brand+name+year), MotorcycleImage, Promotion, GeneratedReceipt, ReceiptCustomer, ReceiptItem
 - **Firebase:** Google Auth for admin access, Cloud Storage for scraped JSON and images, Firestore for auth email whitelist (`config/emailConfig`)
 
 ### Key Utilities
@@ -44,7 +44,6 @@ npx prisma studio      # Open database GUI
 - `utils/dbPg.js` — Prisma client singleton + query helpers (listMotorcyclesPg, queryMotorcyclePg, etc.)
 - `utils/slug.js` — SEO slug generation/parsing; extracts 25-char CUID from slug end
 - `utils/hooks/useMotorcyclesPg.js` — React hook managing listing state (search, filters, sort, pagination)
-- `utils/email/emailService.js` — Nodemailer singleton with Gmail OAuth2
 
 ### Auth Flow
 
@@ -52,7 +51,7 @@ Firebase Google Sign-In → check email against Firestore whitelist (`config/ema
 
 ### Styling
 
-Hybrid: Bootstrap 5 (grid/utilities), Ant Design (admin components), SCSS (`public/scss/`), CSS Modules for scoped styles, Styled Components for wrappers.
+Storefront uses scoped CSS (`.mk-site` tokens in `app/components/motorkekal/motorkekal.css`) with Bootstrap 5 for grid/utilities. Admin uses CSS Modules (`admin.module.css`) with Ant Design themed via ConfigProvider.
 
 ### Admin / app design system
 
@@ -68,7 +67,16 @@ by real data. The public storefront keeps its legacy Bootstrap/SCSS marketing st
 
 ## Environment Variables
 
-See `.env.example` for required variables: Firebase config, DATABASE_URL, Gmail OAuth credentials.
+See `.env.example` for required variables: DATABASE_URL, Firebase config (`NEXT_PUBLIC_FIREBASE_*`).
+
+## Testing
+
+```bash
+yarn test:e2e          # Run Playwright E2E tests (desktop + mobile)
+```
+
+Tests seed deterministic data (`E2E_TEST_` prefix) via `tests/seed.js` and clean up after.
+Config runs two projects: `desktop` (Chrome 1280x720) and `mobile` (iPhone 14 viewport).
 
 ## Playwright / Dev Server Verification
 

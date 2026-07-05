@@ -3,29 +3,31 @@ const { defineConfig, devices } = require("@playwright/test");
 
 module.exports = defineConfig({
   testDir: "./tests",
-  /* Run tests in files in parallel */
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Reporter to use */
-  reporter: "html",
-  /* Shared settings for all the projects below */
+  reporter: process.env.CI ? "github" : "html",
+  timeout: 30000,
   use: {
     baseURL: "http://localhost:3000",
-    /* Collect trace when retrying the failed test */
     trace: "on-first-retry",
+    screenshot: "only-on-failure",
   },
 
   projects: [
     {
-      name: "chromium",
+      name: "desktop",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "mobile",
+      use: { ...devices["iPhone 14"] },
     },
   ],
 
-  /* Run your local dev server before starting the tests */
+  globalSetup: "./tests/global-setup.js",
+  globalTeardown: "./tests/global-teardown.js",
+
   webServer: {
     command: "yarn dev",
     url: "http://localhost:3000",

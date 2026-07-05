@@ -54,7 +54,7 @@ const CarType = () => {
             </div>
             <div className="details">
               <h4 className="title">
-                <Link href="/listing-v1">{listing.title}</Link>
+                <Link href="/listing">{listing.title}</Link>
               </h4>
               <p>{listing.numListings}</p>
             </div>

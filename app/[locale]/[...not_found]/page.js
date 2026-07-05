@@ -1,7 +1,6 @@
-import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "@/app/components/common/DefaultHeader";
-import HeaderTop from "@/app/components/common/HeaderTop";
-import MobileMenu from "@/app/components/common/MobileMenu";
+import SiteHeader from "@/app/components/motorkekal/SiteHeader";
+import SiteFooter from "@/app/components/motorkekal/SiteFooter";
+import MobileBar from "@/app/components/motorkekal/MobileBar";
 import { Link } from "@/i18n/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
@@ -20,19 +19,8 @@ const NotFound = ({ params: { locale } }) => {
   const t = useTranslations("notFound");
   return (
     <div className="wrapper" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      {/* header top */}
-      <HeaderTop />
-      {/* End header top */}
+      <SiteHeader />
 
-      {/* Main Header Nav */}
-      <DefaultHeader />
-      {/* End Main Header Nav */}
-
-      {/* Main Header Nav For Mobile */}
-      <MobileMenu />
-      {/* End Main Header Nav For Mobile */}
-
-      {/* Error Page */}
       <section className="our-error bgc-f9" style={{ flex: 1 }}>
         <div className="container">
           <div className="row">
@@ -60,13 +48,10 @@ const NotFound = ({ params: { locale } }) => {
           </div>
         </div>
       </section>
-      {/* End Error Page */}
 
-      {/* Our Footer */}
-      <Footer />
-      {/* End Our Footer */}
+      <SiteFooter />
+      <MobileBar />
     </div>
-    // End wrapper
   );
 };
 

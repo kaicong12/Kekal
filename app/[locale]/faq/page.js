@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import DefaultHeader from "@/app/components/common/DefaultHeader";
-import HeaderTop from "@/app/components/common/HeaderTop";
-import MobileMenu from "@/app/components/common/MobileMenu";
-import Footer from "@/app/components/common/Footer";
-import StickyHomeCTA from "@/app/components/common/StickyHomeCTA";
+import SiteHeader from "@/app/components/motorkekal/SiteHeader";
+import SiteFooter from "@/app/components/motorkekal/SiteFooter";
+import MobileBar from "@/app/components/motorkekal/MobileBar";
 import styles from "./faq.module.css";
 
 // Category ids map to message-catalog keys (data arrays + display label).
@@ -48,9 +46,7 @@ export default function FAQPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }}
       />
-      <HeaderTop />
-      <DefaultHeader />
-      <MobileMenu />
+      <SiteHeader />
 
       <section className={styles.faqSection}>
         <div className="container">
@@ -125,10 +121,8 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <Footer />
-
-      {/* Sticky CTA */}
-      <StickyHomeCTA />
+      <SiteFooter />
+      <MobileBar />
     </div>
   );
 }
