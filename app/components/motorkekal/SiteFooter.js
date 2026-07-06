@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import {
@@ -18,13 +17,10 @@ const SiteFooter = () => {
         <div className="footer-grid">
           <div>
             <div className="footer-brand brand">
-              <Image
-                className="brand__logo brand__logo--footer"
-                src="/images/logoBlack.svg"
-                alt="Perniagaan Motor Kekal"
-                width={367}
-                height={66}
-              />
+              <span className="brand__mark" aria-hidden="true">
+                M<span>K</span>
+              </span>
+              <span className="brand__name">Perniagaan Motor Kekal</span>
             </div>
             <p className="footer-about">{t("mk.footer.about")}</p>
           </div>

@@ -13,7 +13,7 @@ test.describe("Home Page", () => {
   });
 
   test("should display site header with logo", async ({ page }) => {
-    const logo = page.locator('header img[alt="Perniagaan Motor Kekal"]');
+    const logo = page.locator('header a[aria-label="Perniagaan Motor Kekal"]');
     await expect(logo).toBeVisible();
   });
 

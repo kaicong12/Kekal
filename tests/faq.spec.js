@@ -45,7 +45,7 @@ test.describe("FAQ Page - Desktop", () => {
   });
 
   test("should have header and footer", async ({ page }) => {
-    const logo = page.locator('header img[alt="Perniagaan Motor Kekal"]');
+    const logo = page.locator('header a[aria-label="Perniagaan Motor Kekal"]');
     await expect(logo).toBeVisible();
     const footer = page.locator("footer");
     await expect(footer).toBeVisible();

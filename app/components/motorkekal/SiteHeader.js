@@ -2,7 +2,6 @@
 
 import "./motorkekal.css";
 import { useState } from "react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LanguageSwitcher from "@/app/components/common/LanguageSwitcher";
@@ -26,14 +25,15 @@ const SiteHeader = () => {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const brand = (
-    <Image
-      className="brand__logo"
-      src="/images/logoBlack.svg"
-      alt="Perniagaan Motor Kekal"
-      width={367}
-      height={66}
-      priority
-    />
+    <>
+      <span className="brand__mark" aria-hidden="true">
+        M<span>K</span>
+      </span>
+      <span>
+        <span className="brand__name">Motor Kekal</span>
+        <span className="brand__loc">Kedai Motor · Johor Bahru</span>
+      </span>
+    </>
   );
 
   return (
