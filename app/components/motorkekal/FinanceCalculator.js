@@ -22,12 +22,19 @@ function monthly(price, downPct, years) {
 const FinanceCalculator = ({ motorcycle }) => {
   const t = useTranslations("loanCalculator");
   const td = useTranslations("mk.detail");
-  const price = Number(motorcycle.price) || 0;
+  const price = Math.round(Number(motorcycle.price)) || 0;
 
-  const [downPct, setDownPct] = useState(10);
+  // Down payment in RM is the source of truth (raw digits only; the input
+  // renders it with thousand separators). The % slider reads/writes it too.
+  const [downRaw, setDownRaw] = useState(
+    price ? String(Math.round(price * 0.1)) : ""
+  );
   const [years, setYears] = useState(5);
 
-  const downAmount = Math.round((price * downPct) / 100);
+  const downAmount = Number(downRaw) || 0;
+  const downPct = price > 0 ? (downAmount / price) * 100 : 0;
+  const pctLabel = Math.round(downPct);
+
   const payment = useMemo(
     () => Math.round(monthly(price, downPct, years)),
     [price, downPct, years]
@@ -36,22 +43,46 @@ const FinanceCalculator = ({ motorcycle }) => {
 
   const fmt = (n) => `RM ${Math.round(n).toLocaleString("en-MY")}`;
 
-  const waMessage = `Hi Motor Kekal, saya nak kira ansuran ${motorcycle.brand} ${motorcycle.name} (${fmt(price)}). Deposit ${downPct}% (${fmt(downAmount)}), ${years} tahun. Boleh bagi kadar sebenar?`;
+  const setDownFromInput = (raw) => {
+    let n = Number(raw.replace(/\D/g, "").slice(0, 7)) || 0;
+    if (price > 0 && n > price) n = price; // can't put down more than the bike
+    setDownRaw(n ? String(n) : "");
+  };
+
+  const waMessage = `Hi Motor Kekal, saya nak kira ansuran ${motorcycle.brand} ${motorcycle.name} (${fmt(price)}). Deposit ${pctLabel}% (${fmt(downAmount)}), ${years} tahun. Boleh bagi kadar sebenar?`;
 
   return (
     <div className="finance-box">
       <div className="finance-box__form">
         <div className="field">
-          <label>
-            {t("downPayment", { percent: downPct })} <b>{fmt(downAmount)}</b>
+          <label htmlFor="finance-down">
+            {t("downPayment", { percent: pctLabel })}
           </label>
+          <div className="amount-input">
+            <span>RM</span>
+            <input
+              id="finance-down"
+              type="text"
+              inputMode="numeric"
+              autoComplete="off"
+              placeholder={price ? Math.round(price * 0.1).toLocaleString("en-MY") : "0"}
+              value={downRaw ? Number(downRaw).toLocaleString("en-MY") : ""}
+              onChange={(e) => setDownFromInput(e.target.value)}
+            />
+          </div>
           <input
             type="range"
             min="5"
             max="50"
             step="1"
-            value={downPct}
-            onChange={(e) => setDownPct(Number(e.target.value))}
+            aria-label={t("downPayment", { percent: pctLabel })}
+            style={{ marginTop: 10 }}
+            value={Math.min(Math.max(pctLabel, 5), 50)}
+            onChange={(e) =>
+              setDownRaw(
+                String(Math.round((price * Number(e.target.value)) / 100))
+              )
+            }
           />
         </div>
 

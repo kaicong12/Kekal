@@ -210,15 +210,6 @@
   gap: 11px;
   flex-shrink: 0;
 }
-.mk-site .brand__logo {
-  height: 40px;
-  width: auto;
-}
-@media (max-width: 560px) {
-  .mk-site .brand__logo {
-    height: 34px;
-  }
-}
 .mk-site .brand__mark {
   width: 38px;
   height: 38px;
@@ -952,10 +943,13 @@
   align-items: center;
   gap: 11px;
 }
-.mk-site .brand__logo--footer {
-  height: 44px;
-  /* logo artwork is dark ink — flip it white for the dark footer */
-  filter: brightness(0) invert(1);
+/* Dark-footer variant of the mark: white tile, ink M, orange K */
+.mk-site .site-footer .brand__mark {
+  background: #fff;
+  color: var(--kk-ink);
+}
+.mk-site .site-footer .brand__name {
+  color: #fff;
 }
 .mk-site .footer-seo {
   font-size: 12.5px;
@@ -1535,6 +1529,36 @@
   background: #fff;
   font-family: var(--kk-font);
   font-size: 15px;
+  color: var(--kk-text);
+}
+.mk-site .field .amount-input {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 11px;
+  border: 1px solid var(--kk-border-strong);
+  background: #fff;
+  transition: border-color 0.12s;
+}
+.mk-site .field .amount-input:focus-within {
+  border-color: var(--kk-orange);
+}
+.mk-site .field .amount-input span {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--kk-text-muted);
+}
+.mk-site .field .amount-input input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--kk-font);
+  font-size: 15px;
+  font-weight: 600;
   color: var(--kk-text);
 }
 .mk-site .term-buttons {
