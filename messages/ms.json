@@ -348,9 +348,18 @@
     ]
   },
   "notFound": {
-    "title": "Halaman Tidak Dijumpai",
-    "description": "Halaman yang anda cari mungkin telah dialih keluar atau tidak tersedia buat sementara waktu.",
-    "backHome": "Kembali ke Laman Utama"
+    "eyebrow": "Halaman tidak dijumpai",
+    "title": "Alamak - jalan mati.",
+    "description": "Halaman yang anda cari dah dipindahkan atau tak wujud. Tapi jangan risau — motor yang anda cari mungkin masih ada.",
+    "caption": "Halaman ini dah tukar lorong.",
+    "linkBikes": "Lihat semua motosikal",
+    "linkBikesSub": "Y15ZR, RS150R, NMAX, PCX160 & lagi",
+    "linkPromos": "Promosi bulan ini",
+    "linkPromosSub": "Rebat tunai, deposit rendah, hadiah percuma",
+    "linkServices": "Perkhidmatan",
+    "linkServicesSub": "Pembiayaan, tukar-beli, waranti & insurans",
+    "backHome": "Balik ke laman utama",
+    "askUs": "Tanya kami terus"
   },
   "listing": {
     "breadcrumbTitle": "Motosikal Untuk Dijual",
