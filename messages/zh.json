@@ -348,9 +348,18 @@
     ]
   },
   "notFound": {
-    "title": "找不到页面",
-    "description": "您所查找的页面可能已被移除或暂时无法使用。",
-    "backHome": "返回首页"
+    "eyebrow": "找不到页面",
+    "title": "哎呀，此路不通。",
+    "description": "您要找的页面已被移动或不存在。别担心——您想找的摩托车可能还在。",
+    "caption": "这个页面换车道了。",
+    "linkBikes": "查看所有摩托车",
+    "linkBikesSub": "Y15ZR、RS150R、NMAX、PCX160 等",
+    "linkPromos": "本月促销",
+    "linkPromosSub": "现金回扣、低首付、免费礼品",
+    "linkServices": "服务项目",
+    "linkServicesSub": "贷款、以旧换新、保修与保险",
+    "backHome": "返回主页",
+    "askUs": "直接问我们"
   },
   "listing": {
     "breadcrumbTitle": "待售摩托车",
