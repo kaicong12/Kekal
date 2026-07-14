@@ -703,6 +703,26 @@
       "ctaText": "Come to our Johor Bahru shop for a test ride, or WhatsApp us to reserve a unit and get exact installment figures.",
       "ctaWhatsApp": "WhatsApp Motor Kekal"
     },
-    "visitFacebook": "Visit our Facebook"
+    "visitFacebook": "Visit our Facebook",
+    "contact": {
+      "crumbCurrent": "Contact",
+      "eyebrow": "Contact us",
+      "heading": "Drop by the shop — or WhatsApp us first",
+      "sub": "We're in Taman Johor Bahru, right by Johor Jaya. Call, message or just come by — no appointment needed.",
+      "callTitle": "Call us",
+      "callDesc": "Talk to us directly about bikes, loans or servicing.",
+      "waTitle": "WhatsApp us",
+      "waDesc": "Fastest way to reach us — send photos, get quotes, check loan eligibility.",
+      "waCta": "Start a chat",
+      "visitTitle": "Visit the showroom",
+      "visitDesc": "Free parking right in front of the shop.",
+      "visitCta": "Get directions",
+      "hoursTitle": "Opening hours",
+      "hoursValue": "9:00 AM – 7:00 PM, daily (closed Friday)",
+      "hoursNote": "Closed on some public holidays — WhatsApp us before coming.",
+      "findEyebrow": "Find us",
+      "findHeading": "Perniagaan Motor Kekal, Johor Bahru",
+      "waPrefill": "Hi Motor Kekal, I'd like to ask about a motorcycle."
+    }
   }
 }

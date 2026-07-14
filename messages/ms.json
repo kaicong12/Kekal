@@ -703,6 +703,26 @@
       "ctaText": "Datang ke kedai Johor Bahru kami untuk test rasa, atau WhatsApp kami untuk tahan unit dan dapatkan angka ansuran tepat.",
       "ctaWhatsApp": "WhatsApp Motor Kekal"
     },
-    "visitFacebook": "Lawati Facebook kami"
+    "visitFacebook": "Lawati Facebook kami",
+    "contact": {
+      "crumbCurrent": "Hubungi",
+      "eyebrow": "Hubungi kami",
+      "heading": "Singgah kedai — atau WhatsApp kami dulu",
+      "sub": "Kami di Taman Johor Bahru, sebelah Johor Jaya. Call, mesej atau terus datang — tak perlu appointment.",
+      "callTitle": "Call kami",
+      "callDesc": "Cakap terus dengan kami pasal motor, loan atau servis.",
+      "waTitle": "WhatsApp kami",
+      "waDesc": "Cara paling cepat hubungi kami — hantar gambar, dapatkan harga, semak kelayakan loan.",
+      "waCta": "Mula chat",
+      "visitTitle": "Datang ke showroom",
+      "visitDesc": "Parking percuma betul-betul depan kedai.",
+      "visitCta": "Dapatkan arah",
+      "hoursTitle": "Waktu operasi",
+      "hoursValue": "9:00 pagi – 7:00 malam, setiap hari (Jumaat tutup)",
+      "hoursNote": "Tutup pada sesetengah cuti umum — WhatsApp kami sebelum datang.",
+      "findEyebrow": "Cari kami",
+      "findHeading": "Perniagaan Motor Kekal, Johor Bahru",
+      "waPrefill": "Hi Motor Kekal, saya nak tanya pasal motosikal."
+    }
   }
 }

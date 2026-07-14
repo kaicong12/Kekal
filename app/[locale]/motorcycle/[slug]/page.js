@@ -15,6 +15,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 
 import { getMotorcycleByIdPg as getMotorcycleById } from "@/utils/dbPg";
 import { extractIdFromSlug, toMotorcycleSlug } from "@/utils/slug";
+import { localeAlternates } from "@/utils/seoAlternates";
 import ProductSchema from "@/app/components/seo/ProductSchema";
 import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
 
@@ -61,9 +62,7 @@ export async function generateMetadata({ params }) {
         "kedai motor johor jaya",
         `${motorcycleData.brand} dealer`,
       ],
-      alternates: {
-        canonical: `/motorcycle/${slug}`,
-      },
+      alternates: localeAlternates(`/motorcycle/${slug}`, params.locale),
       openGraph: {
         title: `${motorcycleData.name} - RM${motorcycleData.price}`,
         description: `${motorcycleData.name} for sale at RM${motorcycleData.price}. Trusted motorcycle dealer in Johor Bahru.`,

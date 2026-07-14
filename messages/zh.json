@@ -703,6 +703,26 @@
       "ctaText": "欢迎到我们新山的店试骑，或通过 WhatsApp 预留车辆并获取准确的分期金额。",
       "ctaWhatsApp": "WhatsApp Motor Kekal"
     },
-    "visitFacebook": "访问我们的 Facebook"
+    "visitFacebook": "访问我们的 Facebook",
+    "contact": {
+      "crumbCurrent": "联系我们",
+      "eyebrow": "联系我们",
+      "heading": "欢迎到店参观 — 或先 WhatsApp 我们",
+      "sub": "我们位于 Taman Johor Bahru，就在柔佛再也旁边。打电话、发信息或直接过来——无需预约。",
+      "callTitle": "打电话",
+      "callDesc": "直接与我们聊摩托车、贷款或维修保养。",
+      "waTitle": "WhatsApp 我们",
+      "waDesc": "最快的联系方式——发照片、询价、查贷款资格。",
+      "waCta": "开始聊天",
+      "visitTitle": "到店参观",
+      "visitDesc": "店门口有免费停车位。",
+      "visitCta": "获取路线",
+      "hoursTitle": "营业时间",
+      "hoursValue": "每天上午9点 – 晚上7点（周五休息）",
+      "hoursNote": "部分公共假期休息——来之前请先 WhatsApp 我们。",
+      "findEyebrow": "找到我们",
+      "findHeading": "Perniagaan Motor Kekal 新山",
+      "waPrefill": "Hi Motor Kekal, 我想询问摩托车。"
+    }
   }
 }

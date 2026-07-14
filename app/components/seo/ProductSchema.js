@@ -1,8 +1,14 @@
+import { toMotorcycleSlug } from "@/utils/slug";
+
 const ProductSchema = ({ motorcycle }) => {
+  const url = `https://www.motorkekal.com/motorcycle/${toMotorcycleSlug(
+    motorcycle
+  )}`;
   const productData = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: motorcycle.name,
+    url,
     description:
       motorcycle.description ||
       `${motorcycle.name} for sale at Perniagaan Motor Kekal, Johor Bahru.`,
@@ -13,9 +19,11 @@ const ProductSchema = ({ motorcycle }) => {
     image: motorcycle.images?.[0]?.url || motorcycle.imageUrl,
     offers: {
       "@type": "Offer",
+      url,
       price: motorcycle.price,
       priceCurrency: "MYR",
       availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
       seller: {
         "@type": "Organization",
         name: "Perniagaan Motor Kekal",

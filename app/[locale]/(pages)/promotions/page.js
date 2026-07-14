@@ -7,25 +7,26 @@ import PromotionSchema from "@/app/components/seo/PromotionSchema";
 import { waLink, WaIcon } from "@/app/components/motorkekal/waLink";
 import { listLivePromotionsPg, listPastPromotionsPg } from "@/utils/dbPg";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { localeAlternates } from "@/utils/seoAlternates";
 
 // Promotions are time-sensitive; always render the current live set.
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Promosi Motor Johor Bahru - Tawaran & Diskaun Kekal Motor",
-  description:
-    "Tawaran terhad motor baru, servis & trade-in di Johor Jaya, JB. Lihat promosi terkini Kekal Motor dengan kira detik — datang showroom untuk claim.",
-  keywords: [
-    "promosi motor johor bahru",
-    "tawaran motor johor jaya",
-    "diskaun motor yamaha",
-    "promosi motor baru",
-    "motorcycle promotion johor bahru",
-  ],
-  alternates: {
-    canonical: "/promotions",
-  },
-};
+export function generateMetadata({ params: { locale } }) {
+  return {
+    title: "Promosi Motor Johor Bahru - Tawaran & Diskaun Kekal Motor",
+    description:
+      "Tawaran terhad motor baru, servis & trade-in di Johor Jaya, JB. Lihat promosi terkini Kekal Motor dengan kira detik — datang showroom untuk claim.",
+    keywords: [
+      "promosi motor johor bahru",
+      "tawaran motor johor jaya",
+      "diskaun motor yamaha",
+      "promosi motor baru",
+      "motorcycle promotion johor bahru",
+    ],
+    alternates: localeAlternates("/promotions", locale),
+  };
+}
 
 const Promotions = async ({ params: { locale } }) => {
   setRequestLocale(locale);

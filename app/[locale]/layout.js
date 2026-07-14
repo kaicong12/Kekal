@@ -25,8 +25,7 @@ export function generateStaticParams() {
 
 export const metadata = {
   title: {
-    default:
-      "Kedai Motor Johor Jaya | Perniagaan Motor Kekal - Motorcycle Dealer JB",
+    default: "Kedai Motor Johor Jaya & JB | Perniagaan Motor Kekal",
     template: "%s | Perniagaan Motor Kekal",
   },
   description:
@@ -56,18 +55,12 @@ export const metadata = {
     telephone: false,
   },
   metadataBase: new URL("https://www.motorkekal.com"),
-  alternates: {
-    canonical: "/",
-    languages: {
-      en: "/",
-      ms: "/ms",
-      zh: "/zh",
-      "x-default": "/",
-    },
-  },
+  // NOTE: no `alternates` here on purpose — a layout-level canonical is
+  // inherited by every page that doesn't define its own, which made subpages
+  // (e.g. /faq) claim the homepage as their canonical. Every page sets its
+  // own canonical + hreflang via localeAlternates() instead.
   openGraph: {
-    title:
-      "Kedai Motor Johor Jaya | Perniagaan Motor Kekal - Motorcycle Dealer JB",
+    title: "Kedai Motor Johor Jaya & JB | Perniagaan Motor Kekal",
     description:
       "Kedai motor Johor Jaya & Johor Bahru yang dipercayai. Jual motor baru Yamaha, Kawasaki, Honda, KTM. Servis & repair. Harga terbaik di JB.",
     url: "https://www.motorkekal.com",
@@ -85,8 +78,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Kedai Motor Johor Jaya | Perniagaan Motor Kekal - Motorcycle Dealer JB",
+    title: "Kedai Motor Johor Jaya & JB | Perniagaan Motor Kekal",
     description:
       "Kedai motor Johor Jaya & Johor Bahru yang dipercayai. Jual motor baru Yamaha, Kawasaki, Honda, KTM. Servis & repair. Harga terbaik di JB.",
     images: ["/images/background/website-screenshot.jpeg"],
