@@ -103,10 +103,10 @@ const Home = ({ params }) => {
         <div className="wrap">
           <div className="brandstrip card" style={{ borderRadius: 16 }}>
             <span className="brandstrip__label">{t("mk.home.dealerLabel")}</span>
-            <span className="brandstrip__logo">Yamaha</span>
-            <span className="brandstrip__logo">Honda</span>
-            <span className="brandstrip__logo">Kawasaki</span>
-            <span className="brandstrip__logo">KTM</span>
+            <Link href="/brands/yamaha" className="brandstrip__logo">Yamaha</Link>
+            <Link href="/brands/honda" className="brandstrip__logo">Honda</Link>
+            <Link href="/brands/kawasaki" className="brandstrip__logo">Kawasaki</Link>
+            <Link href="/brands/ktm" className="brandstrip__logo">KTM</Link>
           </div>
         </div>
 

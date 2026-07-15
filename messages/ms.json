@@ -724,5 +724,17 @@
       "findHeading": "Perniagaan Motor Kekal, Johor Bahru",
       "waPrefill": "Hi Motor Kekal, saya nak tanya pasal motosikal."
     }
+  },
+  "brands": {
+    "breadcrumbBrands": "Jenama",
+    "indexHeading": "Jenama Motosikal Kami",
+    "indexSub": "Dealer rasmi untuk jenama motosikal terkemuka di Johor Bahru",
+    "motorcyclesAvailable": "{count} motosikal tersedia",
+    "noStock": "Tiada motosikal {brand} dalam stok ketika ini",
+    "noStockBody": "Kami restock motosikal {brand} secara berkala. WhatsApp kami untuk semak ketersediaan terkini atau buat tempahan.",
+    "ctaWhatsApp": "Tanya tentang {brand}",
+    "viewAll": "Lihat semua motosikal",
+    "exploreOtherBrands": "Terokai jenama lain",
+    "eyebrow": "Dealer Rasmi · Johor Bahru"
   }
 }

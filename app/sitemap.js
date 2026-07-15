@@ -1,6 +1,7 @@
 import { listMotorcyclesPg as listMotorcycles } from "@/utils/dbPg";
 import { toMotorcycleSlug } from "@/utils/slug";
 import { routing } from "@/i18n/routing";
+import { BRAND_SLUGS } from "@/utils/brandContent";
 
 const URL = "https://www.motorkekal.com";
 
@@ -22,6 +23,7 @@ const STATIC_ROUTES = [
   ["/", { changeFrequency: "daily", priority: 1.0 }],
   ["/listing", { changeFrequency: "daily", priority: 0.9 }],
   ["/promotions", { changeFrequency: "daily", priority: 0.8 }],
+  ["/brands", { changeFrequency: "weekly", priority: 0.8 }],
   ["/about-us", { changeFrequency: "monthly", priority: 0.7 }],
   ["/contact", { changeFrequency: "monthly", priority: 0.6 }],
   ["/service", { changeFrequency: "monthly", priority: 0.6 }],
@@ -46,7 +48,14 @@ export default async function sitemap() {
       })
     );
 
-    return [...staticEntries(), ...motorcycles];
+    const brandPages = BRAND_SLUGS.flatMap((slug) =>
+      localeEntries(`/brands/${slug}`, {
+        changeFrequency: "weekly",
+        priority: 0.8,
+      })
+    );
+
+    return [...staticEntries(), ...brandPages, ...motorcycles];
   } catch (error) {
     console.error("Error generating sitemap:", error);
     // Return basic routes if database fails

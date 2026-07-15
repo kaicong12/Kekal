@@ -724,5 +724,17 @@
       "findHeading": "Perniagaan Motor Kekal, Johor Bahru",
       "waPrefill": "Hi Motor Kekal, I'd like to ask about a motorcycle."
     }
+  },
+  "brands": {
+    "breadcrumbBrands": "Brands",
+    "indexHeading": "Our Motorcycle Brands",
+    "indexSub": "Authorized dealer for leading motorcycle brands in Johor Bahru",
+    "motorcyclesAvailable": "{count} motorcycles available",
+    "noStock": "No {brand} motorcycles currently in stock",
+    "noStockBody": "We restock {brand} motorcycles regularly. WhatsApp us to check the latest availability or place an order.",
+    "ctaWhatsApp": "Ask about {brand}",
+    "viewAll": "View all motorcycles",
+    "exploreOtherBrands": "Explore other brands",
+    "eyebrow": "Authorized Dealer · Johor Bahru"
   }
 }
