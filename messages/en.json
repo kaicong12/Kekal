@@ -12,7 +12,7 @@
     "promotions": "Promotions"
   },
   "headerTop": {
-    "hours": "Mon - Sun 9:00AM - 7:00PM (Fri Closed)",
+    "hours": "Mon – Thu, Sat – Sun 9AM - 7PM (Fri Closed)",
     "mobileHours": "9AM - 7PM (Fri Closed)"
   },
   "languageSwitcher": {
@@ -65,7 +65,7 @@
     "showroom": "SHOWROOM",
     "needHelp": "NEED HELP",
     "openingHours": "OPENING HOURS",
-    "openingHoursValue": "Monday – Sunday: 09:00AM – 07:00PM",
+    "openingHoursValue": "Mon – Thu, Sat – Sun: 09:00AM – 07:00PM (Fri Closed)",
     "fridayClosed": "Friday: Closed",
     "keepInTouch": "KEEP IN TOUCH",
     "emailPlaceholder": "Enter your email...",

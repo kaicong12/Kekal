@@ -12,7 +12,7 @@
     "promotions": "促销"
   },
   "headerTop": {
-    "hours": "周一至周日 9:00AM - 7:00PM (周五休息)",
+    "hours": "周一至周四、周六至周日 9AM - 7PM（周五休息）",
     "mobileHours": "9AM - 7PM (周五休息)"
   },
   "languageSwitcher": {
@@ -65,7 +65,7 @@
     "showroom": "展示厅",
     "needHelp": "需要帮助",
     "openingHours": "营业时间",
-    "openingHoursValue": "周一 – 周日：上午09:00 – 晚上07:00",
+    "openingHoursValue": "周一至周四、周六至周日：09:00AM – 07:00PM（周五休息）",
     "fridayClosed": "周五：休息",
     "keepInTouch": "保持联系",
     "emailPlaceholder": "输入您的电子邮件...",
