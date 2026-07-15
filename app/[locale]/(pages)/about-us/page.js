@@ -6,20 +6,23 @@ import SiteFooter from "@/app/components/motorkekal/SiteFooter";
 import MobileBar from "@/app/components/motorkekal/MobileBar";
 import Map from "@/app/components/common/Map";
 import { waLink, MAPS_QUERY_URL, ADDRESS, PHONE_DISPLAY } from "@/app/components/motorkekal/waLink";
+import { localeAlternates } from "@/utils/seoAlternates";
 
-export const metadata = {
-  title: "Tentang Kami - Kedai Motor Johor Bahru | Perniagaan Motor Kekal",
-  description:
-    "Perniagaan Motor Kekal, kedai motor keluarga di Johor Bahru sejak lebih 30 tahun. Pengedar Yamaha, Kawasaki, Honda, KTM — jujur, mesra dan dipercayai orang JB.",
-  keywords: [
-    "perniagaan motor kekal",
-    "tentang motor kekal",
-    "kedai motor johor bahru",
-    "kedai motor near me",
-    "pengedar motosikal jb",
-  ],
-  alternates: { canonical: "/about-us" },
-};
+export function generateMetadata({ params: { locale } }) {
+  return {
+    title: "Tentang Kami - Kedai Motor Johor Bahru | Perniagaan Motor Kekal",
+    description:
+      "Perniagaan Motor Kekal, kedai motor keluarga di Johor Bahru sejak lebih 30 tahun. Pengedar Yamaha, Kawasaki, Honda, KTM — jujur, mesra dan dipercayai orang JB.",
+    keywords: [
+      "perniagaan motor kekal",
+      "tentang motor kekal",
+      "kedai motor johor bahru",
+      "kedai motor near me",
+      "pengedar motosikal jb",
+    ],
+    alternates: localeAlternates("/about-us", locale),
+  };
+}
 
 const BANNER_IMG =
   "https://images.unsplash.com/photo-1694274855681-1b12cd585066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1400";
