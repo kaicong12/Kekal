@@ -70,7 +70,7 @@ export const metadata = {
         url: "/images/background/website-screenshot.jpeg",
         width: 1200,
         height: 630,
-        alt: "Perniagaan Motor Kekal - Motorcycle Dealer Storefront",
+        alt: "Perniagaan Motor Kekal - Motorcycle Dealer Johor Bahru",
       },
     ],
     locale: "en_MY",
