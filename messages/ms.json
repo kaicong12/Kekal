@@ -12,7 +12,7 @@
     "promotions": "Promosi"
   },
   "headerTop": {
-    "hours": "Isnin - Ahad 9:00AM - 7:00PM (Jumaat Tutup)",
+    "hours": "Isn – Kha, Sab – Ahd 9AM - 7PM (Jumaat Tutup)",
     "mobileHours": "9AM - 7PM (Jumaat Tutup)"
   },
   "languageSwitcher": {
@@ -65,7 +65,7 @@
     "showroom": "BILIK PAMERAN",
     "needHelp": "PERLUKAN BANTUAN",
     "openingHours": "WAKTU OPERASI",
-    "openingHoursValue": "Isnin – Ahad: 09:00AM – 07:00PM",
+    "openingHoursValue": "Isn – Kha, Sab – Ahd: 09:00AM – 07:00PM (Jumaat Tutup)",
     "fridayClosed": "Jumaat: Tutup",
     "keepInTouch": "KEKAL BERHUBUNG",
     "emailPlaceholder": "Masukkan e-mel anda...",
@@ -703,6 +703,38 @@
       "ctaText": "Datang ke kedai Johor Bahru kami untuk test rasa, atau WhatsApp kami untuk tahan unit dan dapatkan angka ansuran tepat.",
       "ctaWhatsApp": "WhatsApp Motor Kekal"
     },
-    "visitFacebook": "Lawati Facebook kami"
+    "visitFacebook": "Lawati Facebook kami",
+    "contact": {
+      "crumbCurrent": "Hubungi",
+      "eyebrow": "Hubungi kami",
+      "heading": "Singgah kedai — atau WhatsApp kami dulu",
+      "sub": "Kami di Taman Johor Bahru, sebelah Johor Jaya. Call, mesej atau terus datang — tak perlu appointment.",
+      "callTitle": "Call kami",
+      "callDesc": "Cakap terus dengan kami pasal motor, loan atau servis.",
+      "waTitle": "WhatsApp kami",
+      "waDesc": "Cara paling cepat hubungi kami — hantar gambar, dapatkan harga, semak kelayakan loan.",
+      "waCta": "Mula chat",
+      "visitTitle": "Datang ke showroom",
+      "visitDesc": "Parking percuma betul-betul depan kedai.",
+      "visitCta": "Dapatkan arah",
+      "hoursTitle": "Waktu operasi",
+      "hoursValue": "9:00 pagi – 7:00 malam, setiap hari (Jumaat tutup)",
+      "hoursNote": "Tutup pada sesetengah cuti umum — WhatsApp kami sebelum datang.",
+      "findEyebrow": "Cari kami",
+      "findHeading": "Perniagaan Motor Kekal, Johor Bahru",
+      "waPrefill": "Hi Motor Kekal, saya nak tanya pasal motosikal."
+    }
+  },
+  "brands": {
+    "breadcrumbBrands": "Jenama",
+    "indexHeading": "Jenama Motosikal Kami",
+    "indexSub": "Dealer rasmi untuk jenama motosikal terkemuka di Johor Bahru",
+    "motorcyclesAvailable": "{count} motosikal tersedia",
+    "noStock": "Tiada motosikal {brand} dalam stok ketika ini",
+    "noStockBody": "Kami restock motosikal {brand} secara berkala. WhatsApp kami untuk semak ketersediaan terkini atau buat tempahan.",
+    "ctaWhatsApp": "Tanya tentang {brand}",
+    "viewAll": "Lihat semua motosikal",
+    "exploreOtherBrands": "Terokai jenama lain",
+    "eyebrow": "Dealer Rasmi · Johor Bahru"
   }
 }

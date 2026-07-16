@@ -6,21 +6,24 @@ import SiteFooter from "@/app/components/motorkekal/SiteFooter";
 import MobileBar from "@/app/components/motorkekal/MobileBar";
 import Pill from "@/app/components/motorkekal/Pill";
 import { waLink } from "@/app/components/motorkekal/waLink";
+import { localeAlternates } from "@/utils/seoAlternates";
 
-export const metadata = {
-  title: "Servis Motor Johor Bahru - Yamaha, Kawasaki Service Center",
-  description:
-    "Pusat servis motor di Johor Bahru. Pembiayaan mudah lulus, tukar-beli, waranti & servis bengkel sendiri, insurans & renew cukai jalan. Semua bawah satu bumbung.",
-  keywords: [
-    "pembiayaan motosikal johor bahru",
-    "loan motor mudah lulus",
-    "trade-in motor johor bahru",
-    "servis motor johor bahru",
-    "insurans motor",
-    "renew cukai jalan johor",
-  ],
-  alternates: { canonical: "/service" },
-};
+export function generateMetadata({ params: { locale } }) {
+  return {
+    title: "Servis Motor Johor Bahru - Yamaha, Kawasaki Service Center",
+    description:
+      "Pusat servis motor di Johor Bahru. Pembiayaan mudah lulus, tukar-beli, waranti & servis bengkel sendiri, insurans & renew cukai jalan. Semua bawah satu bumbung.",
+    keywords: [
+      "pembiayaan motosikal johor bahru",
+      "loan motor mudah lulus",
+      "trade-in motor johor bahru",
+      "servis motor johor bahru",
+      "insurans motor",
+      "renew cukai jalan johor",
+    ],
+    alternates: localeAlternates("/service", locale),
+  };
+}
 
 const IMG_A =
   "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080";

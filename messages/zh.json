@@ -12,7 +12,7 @@
     "promotions": "促销"
   },
   "headerTop": {
-    "hours": "周一至周日 9:00AM - 7:00PM (周五休息)",
+    "hours": "周一至周四、周六至周日 9AM - 7PM（周五休息）",
     "mobileHours": "9AM - 7PM (周五休息)"
   },
   "languageSwitcher": {
@@ -65,7 +65,7 @@
     "showroom": "展示厅",
     "needHelp": "需要帮助",
     "openingHours": "营业时间",
-    "openingHoursValue": "周一 – 周日：上午09:00 – 晚上07:00",
+    "openingHoursValue": "周一至周四、周六至周日：09:00AM – 07:00PM（周五休息）",
     "fridayClosed": "周五：休息",
     "keepInTouch": "保持联系",
     "emailPlaceholder": "输入您的电子邮件...",
@@ -703,6 +703,38 @@
       "ctaText": "欢迎到我们新山的店试骑，或通过 WhatsApp 预留车辆并获取准确的分期金额。",
       "ctaWhatsApp": "WhatsApp Motor Kekal"
     },
-    "visitFacebook": "访问我们的 Facebook"
+    "visitFacebook": "访问我们的 Facebook",
+    "contact": {
+      "crumbCurrent": "联系我们",
+      "eyebrow": "联系我们",
+      "heading": "欢迎到店参观 — 或先 WhatsApp 我们",
+      "sub": "我们位于 Taman Johor Bahru，就在柔佛再也旁边。打电话、发信息或直接过来——无需预约。",
+      "callTitle": "打电话",
+      "callDesc": "直接与我们聊摩托车、贷款或维修保养。",
+      "waTitle": "WhatsApp 我们",
+      "waDesc": "最快的联系方式——发照片、询价、查贷款资格。",
+      "waCta": "开始聊天",
+      "visitTitle": "到店参观",
+      "visitDesc": "店门口有免费停车位。",
+      "visitCta": "获取路线",
+      "hoursTitle": "营业时间",
+      "hoursValue": "每天上午9点 – 晚上7点（周五休息）",
+      "hoursNote": "部分公共假期休息——来之前请先 WhatsApp 我们。",
+      "findEyebrow": "找到我们",
+      "findHeading": "Perniagaan Motor Kekal 新山",
+      "waPrefill": "Hi Motor Kekal, 我想询问摩托车。"
+    }
+  },
+  "brands": {
+    "breadcrumbBrands": "品牌",
+    "indexHeading": "我们的摩托车品牌",
+    "indexSub": "新山领先摩托车品牌的授权经销商",
+    "motorcyclesAvailable": "{count} 辆摩托车可选",
+    "noStock": "目前暂无 {brand} 摩托车库存",
+    "noStockBody": "我们定期补货 {brand} 摩托车。WhatsApp 我们查询最新库存或预订。",
+    "ctaWhatsApp": "咨询 {brand}",
+    "viewAll": "查看所有摩托车",
+    "exploreOtherBrands": "探索其他品牌",
+    "eyebrow": "授权经销商 · 新山"
   }
 }
