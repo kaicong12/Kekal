@@ -27,7 +27,6 @@ export function AuthProvider({ children }) {
         const data = docSnap.data();
         // Assuming the document contains an array field called 'emails'
         const emails = data.authorizedReceiptEmails || [];
-        console.log({ emails });
         setAuthorizedEmails(emails);
         return emails;
       } else {

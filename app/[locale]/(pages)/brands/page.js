@@ -10,22 +10,27 @@ import { localeAlternates } from "@/utils/seoAlternates";
 import brandContent, { BRAND_SLUGS } from "@/utils/brandContent";
 import { queryMotorcyclePg } from "@/utils/dbPg";
 
-export const dynamic = "force-dynamic";
+// ISR instead of force-dynamic: force-dynamic crashes dev under the static
+// [locale] layout (Next 13.4 "Dynamic server usage" error) and the build
+// ignored it anyway — counts were frozen at deploy time. Refreshes hourly.
+export const revalidate = 3600;
 
 export function generateMetadata({ params: { locale } }) {
+  // Brand name is appended by the layout's "%s | Perniagaan Motor Kekal"
+  // title template — don't repeat it here.
   const meta = {
     en: {
-      title: "Motorcycle Brands | Perniagaan Motor Kekal Johor Bahru",
+      title: "Motorcycle Brands in Johor Bahru",
       description:
         "Authorized dealer for Yamaha, Honda, Kawasaki & KTM motorcycles in Johor Bahru. Browse all brands and find your next bike at Motor Kekal.",
     },
     ms: {
-      title: "Jenama Motosikal | Perniagaan Motor Kekal Johor Bahru",
+      title: "Jenama Motosikal di Johor Bahru",
       description:
         "Dealer rasmi motosikal Yamaha, Honda, Kawasaki & KTM di Johor Bahru. Lihat semua jenama dan cari motosikal anda di Motor Kekal.",
     },
     zh: {
-      title: "摩托车品牌 | Perniagaan Motor Kekal 新山",
+      title: "新山摩托车品牌",
       description:
         "新山 Yamaha、Honda、Kawasaki 及 KTM 摩托车授权经销商。浏览所有品牌，在 Motor Kekal 找到您的下一辆摩托车。",
     },
@@ -92,7 +97,16 @@ function BrandsIndexContent({ locale, counts }) {
                   className="card card--hover svc-card"
                   style={{ textDecoration: "none" }}
                 >
-                  <div className="svc-card__ico">
+                  <div
+                    className="svc-card__ico"
+                    // Text fallback ("Kawasaki") is wider than the 52px
+                    // chip — let it grow into a pill instead of overflowing.
+                    style={
+                      brand.logo
+                        ? undefined
+                        : { width: "auto", minWidth: 52, paddingInline: 12 }
+                    }
+                  >
                     {brand.logo ? (
                       <Image
                         src={brand.logo}
@@ -102,7 +116,7 @@ function BrandsIndexContent({ locale, counts }) {
                         style={{ objectFit: "contain" }}
                       />
                     ) : (
-                      <span style={{ fontSize: 20, fontWeight: 700 }}>
+                      <span style={{ fontSize: 18, fontWeight: 700 }}>
                         {brand.displayName}
                       </span>
                     )}

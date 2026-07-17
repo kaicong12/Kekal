@@ -9,7 +9,8 @@
     "ourServices": "Servis Kami",
     "faq": "Soalan Lazim",
     "menu": "Menu",
-    "promotions": "Promosi"
+    "promotions": "Promosi",
+    "brands": "Jenama"
   },
   "headerTop": {
     "hours": "Isn – Kha, Sab – Ahd 9AM - 7PM (Jumaat Tutup)",
@@ -735,6 +736,8 @@
     "ctaWhatsApp": "Tanya tentang {brand}",
     "viewAll": "Lihat semua motosikal",
     "exploreOtherBrands": "Terokai jenama lain",
-    "eyebrow": "Dealer Rasmi · Johor Bahru"
+    "eyebrow": "Dealer Rasmi · Johor Bahru",
+    "breadcrumbHome": "Utama",
+    "detailHeading": "Motosikal {brand}"
   }
 }

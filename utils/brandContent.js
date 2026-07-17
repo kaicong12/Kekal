@@ -5,7 +5,7 @@ const brandContent = {
     displayName: "Yamaha",
     logo: "/images/listing/YamahaLogo.png",
     en: {
-      title: "Yamaha Dealer Johor Bahru | Perniagaan Motor Kekal",
+      title: "Yamaha Dealer Johor Bahru",
       description:
         "Authorized Yamaha motorcycle dealer in Johor Bahru. Browse new Yamaha bikes — NMax, Y16ZR, YZF-R15 & more. Best price, easy financing, genuine parts.",
       intro:
@@ -20,7 +20,7 @@ const brandContent = {
       ],
     },
     ms: {
-      title: "Dealer Yamaha Johor Bahru | Perniagaan Motor Kekal",
+      title: "Dealer Yamaha Johor Bahru",
       description:
         "Dealer rasmi motosikal Yamaha di Johor Bahru. Lihat stok Yamaha terkini — NMax, Y16ZR, YZF-R15 & lain-lain. Harga terbaik, pembiayaan mudah.",
       intro:
@@ -34,7 +34,7 @@ const brandContent = {
       ],
     },
     zh: {
-      title: "新山 Yamaha 经销商 | Perniagaan Motor Kekal",
+      title: "新山 Yamaha 经销商",
       description:
         "新山授权 Yamaha 摩托车经销商。浏览最新 Yamaha 车型 — NMax、Y16ZR、YZF-R15 等。最优价格，轻松融资，原厂配件。",
       intro:
@@ -50,7 +50,7 @@ const brandContent = {
     displayName: "Honda",
     logo: "/images/listing/HondaLogo.png",
     en: {
-      title: "Honda Dealer Johor Bahru | Perniagaan Motor Kekal",
+      title: "Honda Dealer Johor Bahru",
       description:
         "Authorized Honda motorcycle dealer in Johor Bahru. New Honda bikes — Wave, EX5, RS150R, ADV & more. Competitive pricing with flexible financing.",
       intro:
@@ -65,7 +65,7 @@ const brandContent = {
       ],
     },
     ms: {
-      title: "Dealer Honda Johor Bahru | Perniagaan Motor Kekal",
+      title: "Dealer Honda Johor Bahru",
       description:
         "Dealer rasmi motosikal Honda di Johor Bahru. Stok Honda terkini — Wave, EX5, RS150R, ADV & lain-lain. Harga berpatutan, pembiayaan fleksibel.",
       intro:
@@ -79,7 +79,7 @@ const brandContent = {
       ],
     },
     zh: {
-      title: "新山 Honda 经销商 | Perniagaan Motor Kekal",
+      title: "新山 Honda 经销商",
       description:
         "新山授权 Honda 摩托车经销商。最新 Honda 车型 — Wave、EX5、RS150R、ADV 等。价格优惠，灵活融资。",
       intro:
@@ -95,7 +95,7 @@ const brandContent = {
     displayName: "Kawasaki",
     logo: null,
     en: {
-      title: "Kawasaki Dealer Johor Bahru | Perniagaan Motor Kekal",
+      title: "Kawasaki Dealer Johor Bahru",
       description:
         "Kawasaki motorcycle dealer in Johor Bahru. Browse Ninja, Z series, Versys & more. Sport bikes and adventure motorcycles with full service support.",
       intro:
@@ -110,7 +110,7 @@ const brandContent = {
       ],
     },
     ms: {
-      title: "Dealer Kawasaki Johor Bahru | Perniagaan Motor Kekal",
+      title: "Dealer Kawasaki Johor Bahru",
       description:
         "Dealer motosikal Kawasaki di Johor Bahru. Lihat Ninja, siri Z, Versys & lain-lain. Motor sukan dan pengembaraan dengan sokongan servis penuh.",
       intro:
@@ -124,7 +124,7 @@ const brandContent = {
       ],
     },
     zh: {
-      title: "新山 Kawasaki 经销商 | Perniagaan Motor Kekal",
+      title: "新山 Kawasaki 经销商",
       description:
         "新山 Kawasaki 摩托车经销商。Ninja、Z系列、Versys 等运动及探险摩托车，提供全面售后服务。",
       intro:
@@ -140,7 +140,7 @@ const brandContent = {
     displayName: "KTM",
     logo: null,
     en: {
-      title: "KTM Dealer Johor Bahru | Perniagaan Motor Kekal",
+      title: "KTM Dealer Johor Bahru",
       description:
         "KTM motorcycle dealer in Johor Bahru. Duke, RC & Adventure series available. Ready-to-race performance with genuine KTM parts and service.",
       intro:
@@ -155,7 +155,7 @@ const brandContent = {
       ],
     },
     ms: {
-      title: "Dealer KTM Johor Bahru | Perniagaan Motor Kekal",
+      title: "Dealer KTM Johor Bahru",
       description:
         "Dealer motosikal KTM di Johor Bahru. Siri Duke, RC & Adventure tersedia. Prestasi siap-lumba dengan alat ganti asli KTM.",
       intro:
@@ -169,7 +169,7 @@ const brandContent = {
       ],
     },
     zh: {
-      title: "新山 KTM 经销商 | Perniagaan Motor Kekal",
+      title: "新山 KTM 经销商",
       description:
         "新山 KTM 摩托车经销商。Duke、RC 及 Adventure 系列。欧洲工程性能，原厂 KTM 配件及服务。",
       intro:
