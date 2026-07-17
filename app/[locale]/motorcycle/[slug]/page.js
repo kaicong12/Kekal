@@ -222,15 +222,7 @@ const MotorcyclePage = async ({ params }) => {
           <div className="cta-band">
             <h2>{t("ctaTitle")}</h2>
             <p>{t("ctaText")}</p>
-            <div
-              style={{
-                display: "flex",
-                gap: 12,
-                justifyContent: "center",
-                flexWrap: "wrap",
-                marginTop: 26,
-              }}
-            >
+            <div className="cta-band__actions">
               <a
                 className="btn btn--wa btn--lg"
                 href={waLink(ctaMessage)}

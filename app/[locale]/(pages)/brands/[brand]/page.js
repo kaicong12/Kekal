@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import SiteHeader from "@/app/components/motorkekal/SiteHeader";
 import SiteFooter from "@/app/components/motorkekal/SiteFooter";
 import MobileBar from "@/app/components/motorkekal/MobileBar";
-import BikeCard from "@/app/components/motorkekal/BikeCard";
+import BrandBikeGrid from "@/app/components/motorkekal/BrandBikeGrid";
 import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
 import BrandCollectionSchema from "@/app/components/seo/BrandCollectionSchema";
 import { localeAlternates } from "@/utils/seoAlternates";
@@ -13,7 +13,10 @@ import { queryMotorcyclePg } from "@/utils/dbPg";
 import brandContent, { BRAND_SLUGS } from "@/utils/brandContent";
 import { waLink, WaIcon } from "@/app/components/motorkekal/waLink";
 
-export const dynamic = "force-dynamic";
+// ISR instead of force-dynamic: force-dynamic crashes dev under the static
+// [locale] layout (Next 13.4 "Dynamic server usage" error) and the build
+// ignored it anyway. Stock changes show up within the hour.
+export const revalidate = 3600;
 
 export function generateMetadata({ params: { locale, brand } }) {
   const content = brandContent[brand];
@@ -79,17 +82,17 @@ function BrandDetailContent({ locale, brand, content, motorcycles }) {
       <main>
         {/* Hero */}
         <section className="section wrap">
-          <nav className="breadcrumb" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
-            <span aria-hidden="true"> / </span>
+          <nav className="crumbs" aria-label="Breadcrumb">
+            <Link href="/">{t("breadcrumbHome")}</Link>
+            <span>›</span>
             <Link href="/brands">{t("breadcrumbBrands")}</Link>
-            <span aria-hidden="true"> / </span>
-            <span>{content.displayName}</span>
+            <span>›</span>
+            {content.displayName}
           </nav>
 
           <div className="section-head" style={{ marginTop: 24 }}>
             <p className="eyebrow">{t("eyebrow")}</p>
-            <h1>{content.displayName} Motorcycles</h1>
+            <h1>{t("detailHeading", { brand: content.displayName })}</h1>
             <p className="hero__sub">{loc.intro}</p>
           </div>
         </section>
@@ -97,11 +100,7 @@ function BrandDetailContent({ locale, brand, content, motorcycles }) {
         {/* Bike grid */}
         <section className="section wrap">
           {motorcycles.length > 0 ? (
-            <div className="bike-grid">
-              {motorcycles.map((moto) => (
-                <BikeCard key={moto.id} motorcycle={moto} />
-              ))}
-            </div>
+            <BrandBikeGrid motorcycles={motorcycles} />
           ) : (
             <div className="card" style={{ padding: 32, textAlign: "center" }}>
               <h2 style={{ marginBottom: 8 }}>{t("noStock", { brand: content.displayName })}</h2>
@@ -127,7 +126,7 @@ function BrandDetailContent({ locale, brand, content, motorcycles }) {
             <h2>
               {t("ctaWhatsApp", { brand: content.displayName })}
             </h2>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+            <div className="cta-band__actions">
               <a
                 className="btn btn--wa btn--lg"
                 href={waLink(`Hi Motor Kekal, saya berminat dengan motosikal ${content.displayName}. Boleh bagi info lanjut?`)}

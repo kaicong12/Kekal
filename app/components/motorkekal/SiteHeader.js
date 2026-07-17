@@ -10,6 +10,7 @@ import { waLink, WaIcon, FbIcon, FACEBOOK_URL } from "./waLink";
 const NAV = [
   { href: "/", key: "home" },
   { href: "/listing", key: "listings" },
+  { href: "/brands", key: "brands" },
   { href: "/promotions", key: "promotions" },
   { href: "/service", key: "ourServices" },
   { href: "/about-us", key: "aboutUs" },

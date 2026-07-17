@@ -9,7 +9,8 @@
     "ourServices": "Our Services",
     "faq": "FAQ",
     "menu": "Menu",
-    "promotions": "Promotions"
+    "promotions": "Promotions",
+    "brands": "Brands"
   },
   "headerTop": {
     "hours": "Mon – Thu, Sat – Sun 9AM - 7PM (Fri Closed)",
@@ -735,6 +736,8 @@
     "ctaWhatsApp": "Ask about {brand}",
     "viewAll": "View all motorcycles",
     "exploreOtherBrands": "Explore other brands",
-    "eyebrow": "Authorized Dealer · Johor Bahru"
+    "eyebrow": "Authorized Dealer · Johor Bahru",
+    "breadcrumbHome": "Home",
+    "detailHeading": "{brand} Motorcycles"
   }
 }
