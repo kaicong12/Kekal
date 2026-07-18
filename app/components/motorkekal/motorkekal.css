@@ -901,7 +901,18 @@
   max-width: 34em;
   margin-inline: auto;
 }
-.mk-site .cta-band .btn--wa {
+/* Direct child only: bands with a single CTA. Bands with several buttons
+   wrap them in .cta-band__actions, which carries the spacing instead —
+   otherwise only the WA button picked up the margin and sat 26px lower
+   than its siblings. */
+.mk-site .cta-band > .btn--wa {
+  margin-top: 26px;
+}
+.mk-site .cta-band__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-top: 26px;
 }
 
