@@ -10,7 +10,8 @@
     "faq": "Soalan Lazim",
     "menu": "Menu",
     "promotions": "Promosi",
-    "brands": "Jenama"
+    "brands": "Jenama",
+    "allMotorcyclesIndex": "Semua Motosikal"
   },
   "headerTop": {
     "hours": "Isn – Kha, Sab – Ahd 9AM - 7PM (Jumaat Tutup)",
@@ -724,6 +725,11 @@
       "findEyebrow": "Cari kami",
       "findHeading": "Perniagaan Motor Kekal, Johor Bahru",
       "waPrefill": "Hi Motor Kekal, saya nak tanya pasal motosikal."
+    },
+    "motorcyclesIndex": {
+      "title": "Semua Motosikal",
+      "heading": "Semua Motosikal",
+      "intro": "Lihat semua motosikal yang ada di Perniagaan Motor Kekal, Johor Bahru. Yamaha, Honda, Kawasaki, KTM dan banyak lagi — motor baru dengan pembiayaan mudah dan servis sendiri."
     }
   },
   "brands": {
