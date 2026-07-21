@@ -13,8 +13,5 @@ Allow: /contact
 Allow: /service
 Allow: /about-us
 
-# Crawl delay to be respectful
-Crawl-delay: 1
-
 # Sitemap location
 Sitemap: https://www.motorkekal.com/sitemap.xml

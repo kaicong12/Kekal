@@ -10,7 +10,8 @@
     "faq": "常见问题",
     "menu": "菜单",
     "promotions": "促销",
-    "brands": "品牌"
+    "brands": "品牌",
+    "allMotorcyclesIndex": "所有摩托车"
   },
   "headerTop": {
     "hours": "周一至周四、周六至周日 9AM - 7PM（周五休息）",
@@ -724,6 +725,11 @@
       "findEyebrow": "找到我们",
       "findHeading": "Perniagaan Motor Kekal 新山",
       "waPrefill": "Hi Motor Kekal, 我想询问摩托车。"
+    },
+    "motorcyclesIndex": {
+      "title": "所有摩托车",
+      "heading": "所有摩托车",
+      "intro": "浏览柔佛新山 Perniagaan Motor Kekal 提供的所有摩托车。Yamaha、Honda、Kawasaki、KTM 等品牌——全新车款，轻松贷款，自设维修中心。"
     }
   },
   "brands": {

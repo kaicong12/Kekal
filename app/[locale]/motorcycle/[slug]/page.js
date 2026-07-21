@@ -13,11 +13,36 @@ import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 
-import { getMotorcycleByIdPg as getMotorcycleById } from "@/utils/dbPg";
+import { getMotorcycleByIdPg as getMotorcycleById, listMotorcyclesPg } from "@/utils/dbPg";
 import { extractIdFromSlug, toMotorcycleSlug } from "@/utils/slug";
 import { localeAlternates } from "@/utils/seoAlternates";
+import { routing } from "@/i18n/routing";
 import ProductSchema from "@/app/components/seo/ProductSchema";
 import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
+
+// Pre-render every motorcycle detail page as static HTML at build time (one
+// entry per locale × slug), then refresh in the background daily. Served from
+// the edge with near-instant TTFB — this is what lets Googlebot crawl these
+// pages fast enough to index them (fixes "Discovered - currently not indexed").
+export const revalidate = 86400; // 24 hours
+
+export async function generateStaticParams() {
+  try {
+    const motorcycles = await listMotorcyclesPg();
+    return routing.locales.flatMap((locale) =>
+      motorcycles.map((motorcycle) => ({
+        locale,
+        slug: toMotorcycleSlug(motorcycle),
+      }))
+    );
+  } catch (error) {
+    // If the DB is unreachable at build time, don't fail the whole deploy —
+    // fall back to on-demand rendering (dynamicParams defaults to true), and
+    // pages still get cached via `revalidate` on first request.
+    console.error("Error in generateStaticParams for motorcycles:", error);
+    return [];
+  }
+}
 
 export async function generateMetadata({ params }) {
   try {
