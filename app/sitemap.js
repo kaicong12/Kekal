@@ -22,6 +22,7 @@ function localeEntries(path, opts) {
 const STATIC_ROUTES = [
   ["/", { changeFrequency: "daily", priority: 1.0 }],
   ["/listing", { changeFrequency: "daily", priority: 0.9 }],
+  ["/motorcycles", { changeFrequency: "daily", priority: 0.9 }],
   ["/promotions", { changeFrequency: "daily", priority: 0.8 }],
   ["/brands", { changeFrequency: "weekly", priority: 0.8 }],
   ["/about-us", { changeFrequency: "monthly", priority: 0.7 }],

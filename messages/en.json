@@ -10,7 +10,8 @@
     "faq": "FAQ",
     "menu": "Menu",
     "promotions": "Promotions",
-    "brands": "Brands"
+    "brands": "Brands",
+    "allMotorcyclesIndex": "All Motorcycles"
   },
   "headerTop": {
     "hours": "Mon – Thu, Sat – Sun 9AM - 7PM (Fri Closed)",
@@ -724,6 +725,11 @@
       "findEyebrow": "Find us",
       "findHeading": "Perniagaan Motor Kekal, Johor Bahru",
       "waPrefill": "Hi Motor Kekal, I'd like to ask about a motorcycle."
+    },
+    "motorcyclesIndex": {
+      "title": "All Motorcycles",
+      "heading": "All Motorcycles",
+      "intro": "Browse every motorcycle available at Perniagaan Motor Kekal, Johor Bahru. Yamaha, Honda, Kawasaki, KTM and more — new bikes with easy financing and in-house servicing."
     }
   },
   "brands": {

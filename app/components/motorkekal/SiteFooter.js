@@ -29,6 +29,7 @@ const SiteFooter = () => {
             <h4>{t("nav.menu")}</h4>
             <Link href="/">{t("nav.home")}</Link>
             <Link href="/listing">{t("nav.listings")}</Link>
+            <Link href="/motorcycles">{t("nav.allMotorcyclesIndex")}</Link>
             <Link href="/promotions">{t("nav.promotions")}</Link>
             <Link href="/service">{t("nav.ourServices")}</Link>
             <Link href="/about-us">{t("nav.aboutUs")}</Link>

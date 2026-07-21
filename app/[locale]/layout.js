@@ -1,4 +1,4 @@
-import { Inter, Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -9,11 +9,22 @@ import LocalBusinessSchema from "@/app/components/seo/LocalBusinessSchema";
 import WebSiteSchema from "@/app/components/seo/WebSiteSchema";
 import { routing } from "@/i18n/routing";
 
-const inter = Inter({ subsets: ["latin"] });
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
+// Self-hosted so the production build never fetches from fonts.gstatic.com
+// (that network call intermittently times out on the build machine —
+// FetchError ETIMEDOUT — and fails the deploy). These are the same Google
+// fonts, downloaded as variable woff2 (latin subset) into app/fonts.
+const inter = localFont({
+  src: "../fonts/Inter-latin.woff2",
+  weight: "100 900",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
+});
+const spaceGrotesk = localFont({
+  src: "../fonts/SpaceGrotesk-latin.woff2",
+  weight: "300 700",
   variable: "--font-display",
   display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 // OpenGraph locale codes keyed by our locale slugs.
