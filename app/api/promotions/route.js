@@ -21,7 +21,13 @@ export async function GET(request) {
     const promotions = await listLivePromotionsPg();
     return NextResponse.json({ promotions });
   } catch (error) {
-    console.error("Error fetching promotions:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to fetch promotions",
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to fetch promotions" },
       { status: 500 }
@@ -85,9 +91,27 @@ export async function POST(request) {
     }
 
     const promotion = await createPromotionPg(data);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "promotion created",
+        actor: auth.decoded.email,
+        promotionId: promotion.id,
+        title: data.title,
+      })
+    );
+
     return NextResponse.json(promotion, { status: 201 });
   } catch (error) {
-    console.error("Error creating promotion:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to create promotion",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to create promotion" },
       { status: 500 }

@@ -26,7 +26,13 @@ export async function GET(request) {
     const count = await prisma.motorcycle.count({ where });
     return NextResponse.json({ count });
   } catch (error) {
-    console.error("Error counting motorcycles:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to count motorcycles",
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json({ error: "Failed to count" }, { status: 500 });
   }
 }
