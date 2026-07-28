@@ -46,6 +46,25 @@ model Motorcycle {
   @@map("motorcycles")
 }
 
+// NONE covers non-price offers (free helmet, free service): they still run a
+// countdown, they just leave the price alone.
+enum DiscountType {
+  NONE
+  FIXED_AMOUNT // discountValue = ringgit off the base price
+  PERCENTAGE // discountValue = percent off, 0-100
+  OVERRIDE_PRICE // discountValue = the final price, ignore the base
+}
+
+// Ordered least- to most-specific; the resolver relies on that ordering to pick
+// a single winner per bike.
+enum PromotionScope {
+  ALL // every bike in the catalogue
+  TAG // Motorcycle.tags contains value
+  BRAND // Motorcycle.brand equals value
+  MODEL // Motorcycle.model equals value
+  MOTORCYCLE // Motorcycle.id equals value
+}
+
 model Promotion {
   id              String   @id @default(cuid())
   title           String
@@ -60,14 +79,38 @@ model Promotion {
   endDate         DateTime
   displayOrder    Int      @default(0)
 
+  discountType  DiscountType @default(NONE)
+  discountValue Decimal?
+
+  // Presentational only: fronts the promo card when the promotion has no image
+  // of its own. Not targeting — see `targets`.
   motorcycleId String?
   motorcycle   Motorcycle? @relation(fields: [motorcycleId], references: [id], onDelete: SetNull)
+
+  targets PromotionTarget[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([isActive, startDate, endDate])
   @@map("promotions")
+}
+
+// A promotion applies to a bike if any non-exclusion row matches and no
+// exclusion row does. A new targeting dimension later is one enum value, not a
+// migration of existing data.
+model PromotionTarget {
+  id          String         @id @default(cuid())
+  scope       PromotionScope
+  value       String? // null only for ALL
+  isExclusion Boolean        @default(false)
+
+  promotionId String
+  promotion   Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
+
+  @@unique([promotionId, scope, value])
+  @@index([scope, value])
+  @@map("promotionTargets")
 }
 
 model ProductSyncFile {

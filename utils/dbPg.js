@@ -1,4 +1,5 @@
 import prisma from "@/utils/prisma";
+import { isPromotionLive, withPromotion } from "@/utils/promotions";
 
 const notFoundPlaceholder = "/images/no-image.svg";
 
@@ -147,6 +148,11 @@ export const deleteMotorcyclePg = async (id) => {
 function formatPromotion(promotion) {
   return {
     ...promotion,
+    discountValue:
+      promotion.discountValue === null || promotion.discountValue === undefined
+        ? null
+        : Number(promotion.discountValue),
+    targets: promotion.targets ?? [],
     motorcycle: promotion.motorcycle
       ? formatMotorcycle(promotion.motorcycle)
       : null,
@@ -157,16 +163,19 @@ const promotionInclude = {
   motorcycle: {
     include: { images: { orderBy: { displayOrder: "asc" }, take: 1 } },
   },
+  targets: true,
 };
 
-// Live = manually active AND within the start/end window.
+// The DB filter is deliberately loose (±1 day) because stored instants are day
+// boundaries in MYT, not UTC; isPromotionLive does the exact check.
 export const listLivePromotionsPg = async () => {
   const now = new Date();
+  const slack = 36 * 60 * 60 * 1000;
   const promotions = await prisma.promotion.findMany({
     where: {
       isActive: true,
-      startDate: { lte: now },
-      endDate: { gte: now },
+      startDate: { lte: new Date(now.getTime() + slack) },
+      endDate: { gte: new Date(now.getTime() - slack) },
     },
     orderBy: [
       { isFeatured: "desc" },
@@ -175,7 +184,7 @@ export const listLivePromotionsPg = async () => {
     ],
     include: promotionInclude,
   });
-  return promotions.map(formatPromotion);
+  return promotions.map(formatPromotion).filter((p) => isPromotionLive(p, now));
 };
 
 // Recently expired promos kept for the public "Past deals" SEO section.
@@ -187,7 +196,10 @@ export const listPastPromotionsPg = async ({ limit = 6 } = {}) => {
     take: limit,
     include: promotionInclude,
   });
-  return promotions.map(formatPromotion);
+  return promotions
+    .map(formatPromotion)
+    .filter((p) => !isPromotionLive(p, now))
+    .slice(0, limit);
 };
 
 // Admin view: every promotion, newest first.
@@ -227,4 +239,23 @@ export const updatePromotionPg = async (id, data) => {
 
 export const deletePromotionPg = async (id) => {
   return prisma.promotion.delete({ where: { id } });
+};
+
+// Returns the bike unchanged (null promotion, base pricing) when nothing targets
+// it, so callers never need to branch.
+export const getMotorcycleWithPromotionPg = async (motorcycle) => {
+  if (!motorcycle) return motorcycle;
+  const promotions = await listLivePromotionsPg();
+  return withPromotion(motorcycle, promotions);
+};
+
+// Fetches the promotion pool once and resolves in memory: a 24-bike listing page
+// costs one extra query, not 24.
+export const withPromotionsPg = async (motorcycles = []) => {
+  if (motorcycles.length === 0) return [];
+  const promotions = await listLivePromotionsPg();
+  const now = new Date();
+  return motorcycles.map((motorcycle) =>
+    withPromotion(motorcycle, promotions, now)
+  );
 };

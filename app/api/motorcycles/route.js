@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { queryMotorcyclePg, createMotorcyclePg } from "@/utils/dbPg";
+import {
+  queryMotorcyclePg,
+  createMotorcyclePg,
+  withPromotionsPg,
+} from "@/utils/dbPg";
 import { verifyAuthToken } from "@/utils/firebaseAdmin";
 
 export async function GET(request) {
@@ -81,6 +85,9 @@ export async function GET(request) {
       search: search || undefined,
     });
 
+    // So the client-rendered grids show the same figures as the detail page.
+    const motorcycles = await withPromotionsPg(result.motorcycles);
+
     console.log(
       JSON.stringify({
         level: "info",
@@ -92,7 +99,7 @@ export async function GET(request) {
       })
     );
 
-    return NextResponse.json(result);
+    return NextResponse.json({ ...result, motorcycles });
   } catch (error) {
     console.error(
       JSON.stringify({

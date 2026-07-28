@@ -29,6 +29,11 @@ export type Motorcycle = $Result.DefaultSelection<Prisma.$MotorcyclePayload>
  */
 export type Promotion = $Result.DefaultSelection<Prisma.$PromotionPayload>
 /**
+ * Model PromotionTarget
+ * 
+ */
+export type PromotionTarget = $Result.DefaultSelection<Prisma.$PromotionTargetPayload>
+/**
  * Model ProductSyncFile
  * 
  */
@@ -53,6 +58,40 @@ export type ReceiptCustomer = $Result.DefaultSelection<Prisma.$ReceiptCustomerPa
  * 
  */
 export type ReceiptItem = $Result.DefaultSelection<Prisma.$ReceiptItemPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const DiscountType: {
+  NONE: 'NONE',
+  FIXED_AMOUNT: 'FIXED_AMOUNT',
+  PERCENTAGE: 'PERCENTAGE',
+  OVERRIDE_PRICE: 'OVERRIDE_PRICE'
+};
+
+export type DiscountType = (typeof DiscountType)[keyof typeof DiscountType]
+
+
+export const PromotionScope: {
+  ALL: 'ALL',
+  TAG: 'TAG',
+  BRAND: 'BRAND',
+  MODEL: 'MODEL',
+  MOTORCYCLE: 'MOTORCYCLE'
+};
+
+export type PromotionScope = (typeof PromotionScope)[keyof typeof PromotionScope]
+
+}
+
+export type DiscountType = $Enums.DiscountType
+
+export const DiscountType: typeof $Enums.DiscountType
+
+export type PromotionScope = $Enums.PromotionScope
+
+export const PromotionScope: typeof $Enums.PromotionScope
 
 /**
  * ##  Prisma Client ʲˢ
@@ -204,6 +243,16 @@ export class PrismaClient<
     * ```
     */
   get promotion(): Prisma.PromotionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.promotionTarget`: Exposes CRUD operations for the **PromotionTarget** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PromotionTargets
+    * const promotionTargets = await prisma.promotionTarget.findMany()
+    * ```
+    */
+  get promotionTarget(): Prisma.PromotionTargetDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.productSyncFile`: Exposes CRUD operations for the **ProductSyncFile** model.
@@ -691,6 +740,7 @@ export namespace Prisma {
     AuthorizedReceiptEmail: 'AuthorizedReceiptEmail',
     Motorcycle: 'Motorcycle',
     Promotion: 'Promotion',
+    PromotionTarget: 'PromotionTarget',
     ProductSyncFile: 'ProductSyncFile',
     MotorcycleImage: 'MotorcycleImage',
     GeneratedReceipt: 'GeneratedReceipt',
@@ -711,7 +761,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "authorizedReceiptEmail" | "motorcycle" | "promotion" | "productSyncFile" | "motorcycleImage" | "generatedReceipt" | "receiptCustomer" | "receiptItem"
+      modelProps: "authorizedReceiptEmail" | "motorcycle" | "promotion" | "promotionTarget" | "productSyncFile" | "motorcycleImage" | "generatedReceipt" | "receiptCustomer" | "receiptItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -934,6 +984,80 @@ export namespace Prisma {
           count: {
             args: Prisma.PromotionCountArgs<ExtArgs>
             result: $Utils.Optional<PromotionCountAggregateOutputType> | number
+          }
+        }
+      }
+      PromotionTarget: {
+        payload: Prisma.$PromotionTargetPayload<ExtArgs>
+        fields: Prisma.PromotionTargetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PromotionTargetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PromotionTargetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          findFirst: {
+            args: Prisma.PromotionTargetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PromotionTargetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          findMany: {
+            args: Prisma.PromotionTargetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>[]
+          }
+          create: {
+            args: Prisma.PromotionTargetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          createMany: {
+            args: Prisma.PromotionTargetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PromotionTargetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>[]
+          }
+          delete: {
+            args: Prisma.PromotionTargetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          update: {
+            args: Prisma.PromotionTargetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          deleteMany: {
+            args: Prisma.PromotionTargetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PromotionTargetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PromotionTargetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>[]
+          }
+          upsert: {
+            args: Prisma.PromotionTargetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          aggregate: {
+            args: Prisma.PromotionTargetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePromotionTarget>
+          }
+          groupBy: {
+            args: Prisma.PromotionTargetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PromotionTargetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PromotionTargetCountArgs<ExtArgs>
+            result: $Utils.Optional<PromotionTargetCountAggregateOutputType> | number
           }
         }
       }
@@ -1418,6 +1542,7 @@ export namespace Prisma {
     authorizedReceiptEmail?: AuthorizedReceiptEmailOmit
     motorcycle?: MotorcycleOmit
     promotion?: PromotionOmit
+    promotionTarget?: PromotionTargetOmit
     productSyncFile?: ProductSyncFileOmit
     motorcycleImage?: MotorcycleImageOmit
     generatedReceipt?: GeneratedReceiptOmit
@@ -1535,6 +1660,37 @@ export namespace Prisma {
    */
   export type MotorcycleCountOutputTypeCountPromotionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PromotionWhereInput
+  }
+
+
+  /**
+   * Count Type PromotionCountOutputType
+   */
+
+  export type PromotionCountOutputType = {
+    targets: number
+  }
+
+  export type PromotionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    targets?: boolean | PromotionCountOutputTypeCountTargetsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PromotionCountOutputType without action
+   */
+  export type PromotionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionCountOutputType
+     */
+    select?: PromotionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PromotionCountOutputType without action
+   */
+  export type PromotionCountOutputTypeCountTargetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromotionTargetWhereInput
   }
 
 
@@ -3802,10 +3958,12 @@ export namespace Prisma {
 
   export type PromotionAvgAggregateOutputType = {
     displayOrder: number | null
+    discountValue: Decimal | null
   }
 
   export type PromotionSumAggregateOutputType = {
     displayOrder: number | null
+    discountValue: Decimal | null
   }
 
   export type PromotionMinAggregateOutputType = {
@@ -3821,6 +3979,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     displayOrder: number | null
+    discountType: $Enums.DiscountType | null
+    discountValue: Decimal | null
     motorcycleId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3839,6 +3999,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     displayOrder: number | null
+    discountType: $Enums.DiscountType | null
+    discountValue: Decimal | null
     motorcycleId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3857,6 +4019,8 @@ export namespace Prisma {
     startDate: number
     endDate: number
     displayOrder: number
+    discountType: number
+    discountValue: number
     motorcycleId: number
     createdAt: number
     updatedAt: number
@@ -3866,10 +4030,12 @@ export namespace Prisma {
 
   export type PromotionAvgAggregateInputType = {
     displayOrder?: true
+    discountValue?: true
   }
 
   export type PromotionSumAggregateInputType = {
     displayOrder?: true
+    discountValue?: true
   }
 
   export type PromotionMinAggregateInputType = {
@@ -3885,6 +4051,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     displayOrder?: true
+    discountType?: true
+    discountValue?: true
     motorcycleId?: true
     createdAt?: true
     updatedAt?: true
@@ -3903,6 +4071,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     displayOrder?: true
+    discountType?: true
+    discountValue?: true
     motorcycleId?: true
     createdAt?: true
     updatedAt?: true
@@ -3921,6 +4091,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     displayOrder?: true
+    discountType?: true
+    discountValue?: true
     motorcycleId?: true
     createdAt?: true
     updatedAt?: true
@@ -4026,6 +4198,8 @@ export namespace Prisma {
     startDate: Date
     endDate: Date
     displayOrder: number
+    discountType: $Enums.DiscountType
+    discountValue: Decimal | null
     motorcycleId: string | null
     createdAt: Date
     updatedAt: Date
@@ -4063,10 +4237,14 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     displayOrder?: boolean
+    discountType?: boolean
+    discountValue?: boolean
     motorcycleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     motorcycle?: boolean | Promotion$motorcycleArgs<ExtArgs>
+    targets?: boolean | Promotion$targetsArgs<ExtArgs>
+    _count?: boolean | PromotionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["promotion"]>
 
   export type PromotionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4082,6 +4260,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     displayOrder?: boolean
+    discountType?: boolean
+    discountValue?: boolean
     motorcycleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4101,6 +4281,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     displayOrder?: boolean
+    discountType?: boolean
+    discountValue?: boolean
     motorcycleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4120,14 +4302,18 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     displayOrder?: boolean
+    discountType?: boolean
+    discountValue?: boolean
     motorcycleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PromotionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subtitle" | "description" | "imageUrl" | "ctaText" | "whatsappMessage" | "isFeatured" | "isActive" | "startDate" | "endDate" | "displayOrder" | "motorcycleId" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
+  export type PromotionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subtitle" | "description" | "imageUrl" | "ctaText" | "whatsappMessage" | "isFeatured" | "isActive" | "startDate" | "endDate" | "displayOrder" | "discountType" | "discountValue" | "motorcycleId" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
   export type PromotionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     motorcycle?: boolean | Promotion$motorcycleArgs<ExtArgs>
+    targets?: boolean | Promotion$targetsArgs<ExtArgs>
+    _count?: boolean | PromotionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PromotionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     motorcycle?: boolean | Promotion$motorcycleArgs<ExtArgs>
@@ -4140,6 +4326,7 @@ export namespace Prisma {
     name: "Promotion"
     objects: {
       motorcycle: Prisma.$MotorcyclePayload<ExtArgs> | null
+      targets: Prisma.$PromotionTargetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4154,6 +4341,8 @@ export namespace Prisma {
       startDate: Date
       endDate: Date
       displayOrder: number
+      discountType: $Enums.DiscountType
+      discountValue: Prisma.Decimal | null
       motorcycleId: string | null
       createdAt: Date
       updatedAt: Date
@@ -4552,6 +4741,7 @@ export namespace Prisma {
   export interface Prisma__PromotionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     motorcycle<T extends Promotion$motorcycleArgs<ExtArgs> = {}>(args?: Subset<T, Promotion$motorcycleArgs<ExtArgs>>): Prisma__MotorcycleClient<$Result.GetResult<Prisma.$MotorcyclePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    targets<T extends Promotion$targetsArgs<ExtArgs> = {}>(args?: Subset<T, Promotion$targetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4593,6 +4783,8 @@ export namespace Prisma {
     readonly startDate: FieldRef<"Promotion", 'DateTime'>
     readonly endDate: FieldRef<"Promotion", 'DateTime'>
     readonly displayOrder: FieldRef<"Promotion", 'Int'>
+    readonly discountType: FieldRef<"Promotion", 'DiscountType'>
+    readonly discountValue: FieldRef<"Promotion", 'Decimal'>
     readonly motorcycleId: FieldRef<"Promotion", 'String'>
     readonly createdAt: FieldRef<"Promotion", 'DateTime'>
     readonly updatedAt: FieldRef<"Promotion", 'DateTime'>
@@ -5016,6 +5208,30 @@ export namespace Prisma {
   }
 
   /**
+   * Promotion.targets
+   */
+  export type Promotion$targetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    where?: PromotionTargetWhereInput
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    cursor?: PromotionTargetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PromotionTargetScalarFieldEnum | PromotionTargetScalarFieldEnum[]
+  }
+
+  /**
    * Promotion without action
    */
   export type PromotionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5031,6 +5247,1069 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PromotionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PromotionTarget
+   */
+
+  export type AggregatePromotionTarget = {
+    _count: PromotionTargetCountAggregateOutputType | null
+    _min: PromotionTargetMinAggregateOutputType | null
+    _max: PromotionTargetMaxAggregateOutputType | null
+  }
+
+  export type PromotionTargetMinAggregateOutputType = {
+    id: string | null
+    scope: $Enums.PromotionScope | null
+    value: string | null
+    isExclusion: boolean | null
+    promotionId: string | null
+  }
+
+  export type PromotionTargetMaxAggregateOutputType = {
+    id: string | null
+    scope: $Enums.PromotionScope | null
+    value: string | null
+    isExclusion: boolean | null
+    promotionId: string | null
+  }
+
+  export type PromotionTargetCountAggregateOutputType = {
+    id: number
+    scope: number
+    value: number
+    isExclusion: number
+    promotionId: number
+    _all: number
+  }
+
+
+  export type PromotionTargetMinAggregateInputType = {
+    id?: true
+    scope?: true
+    value?: true
+    isExclusion?: true
+    promotionId?: true
+  }
+
+  export type PromotionTargetMaxAggregateInputType = {
+    id?: true
+    scope?: true
+    value?: true
+    isExclusion?: true
+    promotionId?: true
+  }
+
+  export type PromotionTargetCountAggregateInputType = {
+    id?: true
+    scope?: true
+    value?: true
+    isExclusion?: true
+    promotionId?: true
+    _all?: true
+  }
+
+  export type PromotionTargetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PromotionTarget to aggregate.
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromotionTargets to fetch.
+     */
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PromotionTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromotionTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromotionTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PromotionTargets
+    **/
+    _count?: true | PromotionTargetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PromotionTargetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PromotionTargetMaxAggregateInputType
+  }
+
+  export type GetPromotionTargetAggregateType<T extends PromotionTargetAggregateArgs> = {
+        [P in keyof T & keyof AggregatePromotionTarget]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePromotionTarget[P]>
+      : GetScalarType<T[P], AggregatePromotionTarget[P]>
+  }
+
+
+
+
+  export type PromotionTargetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromotionTargetWhereInput
+    orderBy?: PromotionTargetOrderByWithAggregationInput | PromotionTargetOrderByWithAggregationInput[]
+    by: PromotionTargetScalarFieldEnum[] | PromotionTargetScalarFieldEnum
+    having?: PromotionTargetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PromotionTargetCountAggregateInputType | true
+    _min?: PromotionTargetMinAggregateInputType
+    _max?: PromotionTargetMaxAggregateInputType
+  }
+
+  export type PromotionTargetGroupByOutputType = {
+    id: string
+    scope: $Enums.PromotionScope
+    value: string | null
+    isExclusion: boolean
+    promotionId: string
+    _count: PromotionTargetCountAggregateOutputType | null
+    _min: PromotionTargetMinAggregateOutputType | null
+    _max: PromotionTargetMaxAggregateOutputType | null
+  }
+
+  type GetPromotionTargetGroupByPayload<T extends PromotionTargetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PromotionTargetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PromotionTargetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PromotionTargetGroupByOutputType[P]>
+            : GetScalarType<T[P], PromotionTargetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PromotionTargetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scope?: boolean
+    value?: boolean
+    isExclusion?: boolean
+    promotionId?: boolean
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promotionTarget"]>
+
+  export type PromotionTargetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scope?: boolean
+    value?: boolean
+    isExclusion?: boolean
+    promotionId?: boolean
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promotionTarget"]>
+
+  export type PromotionTargetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scope?: boolean
+    value?: boolean
+    isExclusion?: boolean
+    promotionId?: boolean
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promotionTarget"]>
+
+  export type PromotionTargetSelectScalar = {
+    id?: boolean
+    scope?: boolean
+    value?: boolean
+    isExclusion?: boolean
+    promotionId?: boolean
+  }
+
+  export type PromotionTargetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "scope" | "value" | "isExclusion" | "promotionId", ExtArgs["result"]["promotionTarget"]>
+  export type PromotionTargetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }
+  export type PromotionTargetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }
+  export type PromotionTargetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }
+
+  export type $PromotionTargetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PromotionTarget"
+    objects: {
+      promotion: Prisma.$PromotionPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      scope: $Enums.PromotionScope
+      value: string | null
+      isExclusion: boolean
+      promotionId: string
+    }, ExtArgs["result"]["promotionTarget"]>
+    composites: {}
+  }
+
+  type PromotionTargetGetPayload<S extends boolean | null | undefined | PromotionTargetDefaultArgs> = $Result.GetResult<Prisma.$PromotionTargetPayload, S>
+
+  type PromotionTargetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PromotionTargetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PromotionTargetCountAggregateInputType | true
+    }
+
+  export interface PromotionTargetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PromotionTarget'], meta: { name: 'PromotionTarget' } }
+    /**
+     * Find zero or one PromotionTarget that matches the filter.
+     * @param {PromotionTargetFindUniqueArgs} args - Arguments to find a PromotionTarget
+     * @example
+     * // Get one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PromotionTargetFindUniqueArgs>(args: SelectSubset<T, PromotionTargetFindUniqueArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PromotionTarget that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PromotionTargetFindUniqueOrThrowArgs} args - Arguments to find a PromotionTarget
+     * @example
+     * // Get one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PromotionTargetFindUniqueOrThrowArgs>(args: SelectSubset<T, PromotionTargetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PromotionTarget that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetFindFirstArgs} args - Arguments to find a PromotionTarget
+     * @example
+     * // Get one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PromotionTargetFindFirstArgs>(args?: SelectSubset<T, PromotionTargetFindFirstArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PromotionTarget that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetFindFirstOrThrowArgs} args - Arguments to find a PromotionTarget
+     * @example
+     * // Get one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PromotionTargetFindFirstOrThrowArgs>(args?: SelectSubset<T, PromotionTargetFindFirstOrThrowArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PromotionTargets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PromotionTargets
+     * const promotionTargets = await prisma.promotionTarget.findMany()
+     * 
+     * // Get first 10 PromotionTargets
+     * const promotionTargets = await prisma.promotionTarget.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const promotionTargetWithIdOnly = await prisma.promotionTarget.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PromotionTargetFindManyArgs>(args?: SelectSubset<T, PromotionTargetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PromotionTarget.
+     * @param {PromotionTargetCreateArgs} args - Arguments to create a PromotionTarget.
+     * @example
+     * // Create one PromotionTarget
+     * const PromotionTarget = await prisma.promotionTarget.create({
+     *   data: {
+     *     // ... data to create a PromotionTarget
+     *   }
+     * })
+     * 
+     */
+    create<T extends PromotionTargetCreateArgs>(args: SelectSubset<T, PromotionTargetCreateArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PromotionTargets.
+     * @param {PromotionTargetCreateManyArgs} args - Arguments to create many PromotionTargets.
+     * @example
+     * // Create many PromotionTargets
+     * const promotionTarget = await prisma.promotionTarget.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PromotionTargetCreateManyArgs>(args?: SelectSubset<T, PromotionTargetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PromotionTargets and returns the data saved in the database.
+     * @param {PromotionTargetCreateManyAndReturnArgs} args - Arguments to create many PromotionTargets.
+     * @example
+     * // Create many PromotionTargets
+     * const promotionTarget = await prisma.promotionTarget.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PromotionTargets and only return the `id`
+     * const promotionTargetWithIdOnly = await prisma.promotionTarget.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PromotionTargetCreateManyAndReturnArgs>(args?: SelectSubset<T, PromotionTargetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PromotionTarget.
+     * @param {PromotionTargetDeleteArgs} args - Arguments to delete one PromotionTarget.
+     * @example
+     * // Delete one PromotionTarget
+     * const PromotionTarget = await prisma.promotionTarget.delete({
+     *   where: {
+     *     // ... filter to delete one PromotionTarget
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PromotionTargetDeleteArgs>(args: SelectSubset<T, PromotionTargetDeleteArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PromotionTarget.
+     * @param {PromotionTargetUpdateArgs} args - Arguments to update one PromotionTarget.
+     * @example
+     * // Update one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PromotionTargetUpdateArgs>(args: SelectSubset<T, PromotionTargetUpdateArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PromotionTargets.
+     * @param {PromotionTargetDeleteManyArgs} args - Arguments to filter PromotionTargets to delete.
+     * @example
+     * // Delete a few PromotionTargets
+     * const { count } = await prisma.promotionTarget.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PromotionTargetDeleteManyArgs>(args?: SelectSubset<T, PromotionTargetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PromotionTargets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PromotionTargets
+     * const promotionTarget = await prisma.promotionTarget.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PromotionTargetUpdateManyArgs>(args: SelectSubset<T, PromotionTargetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PromotionTargets and returns the data updated in the database.
+     * @param {PromotionTargetUpdateManyAndReturnArgs} args - Arguments to update many PromotionTargets.
+     * @example
+     * // Update many PromotionTargets
+     * const promotionTarget = await prisma.promotionTarget.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PromotionTargets and only return the `id`
+     * const promotionTargetWithIdOnly = await prisma.promotionTarget.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PromotionTargetUpdateManyAndReturnArgs>(args: SelectSubset<T, PromotionTargetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PromotionTarget.
+     * @param {PromotionTargetUpsertArgs} args - Arguments to update or create a PromotionTarget.
+     * @example
+     * // Update or create a PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.upsert({
+     *   create: {
+     *     // ... data to create a PromotionTarget
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PromotionTarget we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PromotionTargetUpsertArgs>(args: SelectSubset<T, PromotionTargetUpsertArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PromotionTargets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetCountArgs} args - Arguments to filter PromotionTargets to count.
+     * @example
+     * // Count the number of PromotionTargets
+     * const count = await prisma.promotionTarget.count({
+     *   where: {
+     *     // ... the filter for the PromotionTargets we want to count
+     *   }
+     * })
+    **/
+    count<T extends PromotionTargetCountArgs>(
+      args?: Subset<T, PromotionTargetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PromotionTargetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PromotionTarget.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PromotionTargetAggregateArgs>(args: Subset<T, PromotionTargetAggregateArgs>): Prisma.PrismaPromise<GetPromotionTargetAggregateType<T>>
+
+    /**
+     * Group by PromotionTarget.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PromotionTargetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PromotionTargetGroupByArgs['orderBy'] }
+        : { orderBy?: PromotionTargetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PromotionTargetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPromotionTargetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PromotionTarget model
+   */
+  readonly fields: PromotionTargetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PromotionTarget.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PromotionTargetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    promotion<T extends PromotionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PromotionDefaultArgs<ExtArgs>>): Prisma__PromotionClient<$Result.GetResult<Prisma.$PromotionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PromotionTarget model
+   */
+  interface PromotionTargetFieldRefs {
+    readonly id: FieldRef<"PromotionTarget", 'String'>
+    readonly scope: FieldRef<"PromotionTarget", 'PromotionScope'>
+    readonly value: FieldRef<"PromotionTarget", 'String'>
+    readonly isExclusion: FieldRef<"PromotionTarget", 'Boolean'>
+    readonly promotionId: FieldRef<"PromotionTarget", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PromotionTarget findUnique
+   */
+  export type PromotionTargetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTarget to fetch.
+     */
+    where: PromotionTargetWhereUniqueInput
+  }
+
+  /**
+   * PromotionTarget findUniqueOrThrow
+   */
+  export type PromotionTargetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTarget to fetch.
+     */
+    where: PromotionTargetWhereUniqueInput
+  }
+
+  /**
+   * PromotionTarget findFirst
+   */
+  export type PromotionTargetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTarget to fetch.
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromotionTargets to fetch.
+     */
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PromotionTargets.
+     */
+    cursor?: PromotionTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromotionTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromotionTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromotionTargets.
+     */
+    distinct?: PromotionTargetScalarFieldEnum | PromotionTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PromotionTarget findFirstOrThrow
+   */
+  export type PromotionTargetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTarget to fetch.
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromotionTargets to fetch.
+     */
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PromotionTargets.
+     */
+    cursor?: PromotionTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromotionTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromotionTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromotionTargets.
+     */
+    distinct?: PromotionTargetScalarFieldEnum | PromotionTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PromotionTarget findMany
+   */
+  export type PromotionTargetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTargets to fetch.
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromotionTargets to fetch.
+     */
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PromotionTargets.
+     */
+    cursor?: PromotionTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromotionTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromotionTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromotionTargets.
+     */
+    distinct?: PromotionTargetScalarFieldEnum | PromotionTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PromotionTarget create
+   */
+  export type PromotionTargetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PromotionTarget.
+     */
+    data: XOR<PromotionTargetCreateInput, PromotionTargetUncheckedCreateInput>
+  }
+
+  /**
+   * PromotionTarget createMany
+   */
+  export type PromotionTargetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PromotionTargets.
+     */
+    data: PromotionTargetCreateManyInput | PromotionTargetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PromotionTarget createManyAndReturn
+   */
+  export type PromotionTargetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * The data used to create many PromotionTargets.
+     */
+    data: PromotionTargetCreateManyInput | PromotionTargetCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PromotionTarget update
+   */
+  export type PromotionTargetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PromotionTarget.
+     */
+    data: XOR<PromotionTargetUpdateInput, PromotionTargetUncheckedUpdateInput>
+    /**
+     * Choose, which PromotionTarget to update.
+     */
+    where: PromotionTargetWhereUniqueInput
+  }
+
+  /**
+   * PromotionTarget updateMany
+   */
+  export type PromotionTargetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PromotionTargets.
+     */
+    data: XOR<PromotionTargetUpdateManyMutationInput, PromotionTargetUncheckedUpdateManyInput>
+    /**
+     * Filter which PromotionTargets to update
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * Limit how many PromotionTargets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PromotionTarget updateManyAndReturn
+   */
+  export type PromotionTargetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * The data used to update PromotionTargets.
+     */
+    data: XOR<PromotionTargetUpdateManyMutationInput, PromotionTargetUncheckedUpdateManyInput>
+    /**
+     * Filter which PromotionTargets to update
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * Limit how many PromotionTargets to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PromotionTarget upsert
+   */
+  export type PromotionTargetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PromotionTarget to update in case it exists.
+     */
+    where: PromotionTargetWhereUniqueInput
+    /**
+     * In case the PromotionTarget found by the `where` argument doesn't exist, create a new PromotionTarget with this data.
+     */
+    create: XOR<PromotionTargetCreateInput, PromotionTargetUncheckedCreateInput>
+    /**
+     * In case the PromotionTarget was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PromotionTargetUpdateInput, PromotionTargetUncheckedUpdateInput>
+  }
+
+  /**
+   * PromotionTarget delete
+   */
+  export type PromotionTargetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter which PromotionTarget to delete.
+     */
+    where: PromotionTargetWhereUniqueInput
+  }
+
+  /**
+   * PromotionTarget deleteMany
+   */
+  export type PromotionTargetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PromotionTargets to delete
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * Limit how many PromotionTargets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PromotionTarget without action
+   */
+  export type PromotionTargetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
   }
 
 
@@ -10538,12 +11817,25 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     displayOrder: 'displayOrder',
+    discountType: 'discountType',
+    discountValue: 'discountValue',
     motorcycleId: 'motorcycleId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type PromotionScalarFieldEnum = (typeof PromotionScalarFieldEnum)[keyof typeof PromotionScalarFieldEnum]
+
+
+  export const PromotionTargetScalarFieldEnum: {
+    id: 'id',
+    scope: 'scope',
+    value: 'value',
+    isExclusion: 'isExclusion',
+    promotionId: 'promotionId'
+  };
+
+  export type PromotionTargetScalarFieldEnum = (typeof PromotionTargetScalarFieldEnum)[keyof typeof PromotionTargetScalarFieldEnum]
 
 
   export const ProductSyncFileScalarFieldEnum: {
@@ -10729,6 +12021,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DiscountType'
+   */
+  export type EnumDiscountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DiscountType'>
+    
+
+
+  /**
+   * Reference to a field of type 'DiscountType[]'
+   */
+  export type ListEnumDiscountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DiscountType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PromotionScope'
+   */
+  export type EnumPromotionScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionScope'>
+    
+
+
+  /**
+   * Reference to a field of type 'PromotionScope[]'
+   */
+  export type ListEnumPromotionScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionScope[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -10904,10 +12224,13 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Promotion"> | Date | string
     endDate?: DateTimeFilter<"Promotion"> | Date | string
     displayOrder?: IntFilter<"Promotion"> | number
+    discountType?: EnumDiscountTypeFilter<"Promotion"> | $Enums.DiscountType
+    discountValue?: DecimalNullableFilter<"Promotion"> | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: StringNullableFilter<"Promotion"> | string | null
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
     motorcycle?: XOR<MotorcycleNullableScalarRelationFilter, MotorcycleWhereInput> | null
+    targets?: PromotionTargetListRelationFilter
   }
 
   export type PromotionOrderByWithRelationInput = {
@@ -10923,10 +12246,13 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrderInput | SortOrder
     motorcycleId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     motorcycle?: MotorcycleOrderByWithRelationInput
+    targets?: PromotionTargetOrderByRelationAggregateInput
   }
 
   export type PromotionWhereUniqueInput = Prisma.AtLeast<{
@@ -10945,10 +12271,13 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Promotion"> | Date | string
     endDate?: DateTimeFilter<"Promotion"> | Date | string
     displayOrder?: IntFilter<"Promotion"> | number
+    discountType?: EnumDiscountTypeFilter<"Promotion"> | $Enums.DiscountType
+    discountValue?: DecimalNullableFilter<"Promotion"> | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: StringNullableFilter<"Promotion"> | string | null
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
     motorcycle?: XOR<MotorcycleNullableScalarRelationFilter, MotorcycleWhereInput> | null
+    targets?: PromotionTargetListRelationFilter
   }, "id">
 
   export type PromotionOrderByWithAggregationInput = {
@@ -10964,6 +12293,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrderInput | SortOrder
     motorcycleId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -10990,9 +12321,67 @@ export namespace Prisma {
     startDate?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     endDate?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     displayOrder?: IntWithAggregatesFilter<"Promotion"> | number
+    discountType?: EnumDiscountTypeWithAggregatesFilter<"Promotion"> | $Enums.DiscountType
+    discountValue?: DecimalNullableWithAggregatesFilter<"Promotion"> | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: StringNullableWithAggregatesFilter<"Promotion"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
+  }
+
+  export type PromotionTargetWhereInput = {
+    AND?: PromotionTargetWhereInput | PromotionTargetWhereInput[]
+    OR?: PromotionTargetWhereInput[]
+    NOT?: PromotionTargetWhereInput | PromotionTargetWhereInput[]
+    id?: StringFilter<"PromotionTarget"> | string
+    scope?: EnumPromotionScopeFilter<"PromotionTarget"> | $Enums.PromotionScope
+    value?: StringNullableFilter<"PromotionTarget"> | string | null
+    isExclusion?: BoolFilter<"PromotionTarget"> | boolean
+    promotionId?: StringFilter<"PromotionTarget"> | string
+    promotion?: XOR<PromotionScalarRelationFilter, PromotionWhereInput>
+  }
+
+  export type PromotionTargetOrderByWithRelationInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrderInput | SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+    promotion?: PromotionOrderByWithRelationInput
+  }
+
+  export type PromotionTargetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    promotionId_scope_value?: PromotionTargetPromotionIdScopeValueCompoundUniqueInput
+    AND?: PromotionTargetWhereInput | PromotionTargetWhereInput[]
+    OR?: PromotionTargetWhereInput[]
+    NOT?: PromotionTargetWhereInput | PromotionTargetWhereInput[]
+    scope?: EnumPromotionScopeFilter<"PromotionTarget"> | $Enums.PromotionScope
+    value?: StringNullableFilter<"PromotionTarget"> | string | null
+    isExclusion?: BoolFilter<"PromotionTarget"> | boolean
+    promotionId?: StringFilter<"PromotionTarget"> | string
+    promotion?: XOR<PromotionScalarRelationFilter, PromotionWhereInput>
+  }, "id" | "promotionId_scope_value">
+
+  export type PromotionTargetOrderByWithAggregationInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrderInput | SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+    _count?: PromotionTargetCountOrderByAggregateInput
+    _max?: PromotionTargetMaxOrderByAggregateInput
+    _min?: PromotionTargetMinOrderByAggregateInput
+  }
+
+  export type PromotionTargetScalarWhereWithAggregatesInput = {
+    AND?: PromotionTargetScalarWhereWithAggregatesInput | PromotionTargetScalarWhereWithAggregatesInput[]
+    OR?: PromotionTargetScalarWhereWithAggregatesInput[]
+    NOT?: PromotionTargetScalarWhereWithAggregatesInput | PromotionTargetScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PromotionTarget"> | string
+    scope?: EnumPromotionScopeWithAggregatesFilter<"PromotionTarget"> | $Enums.PromotionScope
+    value?: StringNullableWithAggregatesFilter<"PromotionTarget"> | string | null
+    isExclusion?: BoolWithAggregatesFilter<"PromotionTarget"> | boolean
+    promotionId?: StringWithAggregatesFilter<"PromotionTarget"> | string
   }
 
   export type ProductSyncFileWhereInput = {
@@ -11471,9 +12860,12 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     motorcycle?: MotorcycleCreateNestedOneWithoutPromotionsInput
+    targets?: PromotionTargetCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUncheckedCreateInput = {
@@ -11489,9 +12881,12 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     motorcycleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    targets?: PromotionTargetUncheckedCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUpdateInput = {
@@ -11507,9 +12902,12 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     motorcycle?: MotorcycleUpdateOneWithoutPromotionsNestedInput
+    targets?: PromotionTargetUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateInput = {
@@ -11525,9 +12923,12 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targets?: PromotionTargetUncheckedUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionCreateManyInput = {
@@ -11543,6 +12944,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     motorcycleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11561,6 +12964,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11578,9 +12983,66 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromotionTargetCreateInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+    promotion: PromotionCreateNestedOneWithoutTargetsInput
+  }
+
+  export type PromotionTargetUncheckedCreateInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+    promotionId: string
+  }
+
+  export type PromotionTargetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+    promotion?: PromotionUpdateOneRequiredWithoutTargetsNestedInput
+  }
+
+  export type PromotionTargetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+    promotionId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PromotionTargetCreateManyInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+    promotionId: string
+  }
+
+  export type PromotionTargetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PromotionTargetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+    promotionId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductSyncFileCreateInput = {
@@ -12200,9 +13662,37 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumDiscountTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DiscountType | EnumDiscountTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDiscountTypeFilter<$PrismaModel> | $Enums.DiscountType
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type MotorcycleNullableScalarRelationFilter = {
     is?: MotorcycleWhereInput | null
     isNot?: MotorcycleWhereInput | null
+  }
+
+  export type PromotionTargetListRelationFilter = {
+    every?: PromotionTargetWhereInput
+    some?: PromotionTargetWhereInput
+    none?: PromotionTargetWhereInput
+  }
+
+  export type PromotionTargetOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type PromotionCountOrderByAggregateInput = {
@@ -12218,6 +13708,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
     motorcycleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12225,6 +13717,7 @@ export namespace Prisma {
 
   export type PromotionAvgOrderByAggregateInput = {
     displayOrder?: SortOrder
+    discountValue?: SortOrder
   }
 
   export type PromotionMaxOrderByAggregateInput = {
@@ -12240,6 +13733,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
     motorcycleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12258,6 +13753,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
     motorcycleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12265,6 +13762,7 @@ export namespace Prisma {
 
   export type PromotionSumOrderByAggregateInput = {
     displayOrder?: SortOrder
+    discountValue?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -12273,6 +13771,84 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumDiscountTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DiscountType | EnumDiscountTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDiscountTypeWithAggregatesFilter<$PrismaModel> | $Enums.DiscountType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDiscountTypeFilter<$PrismaModel>
+    _max?: NestedEnumDiscountTypeFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type EnumPromotionScopeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PromotionScope | EnumPromotionScopeFieldRefInput<$PrismaModel>
+    in?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPromotionScopeFilter<$PrismaModel> | $Enums.PromotionScope
+  }
+
+  export type PromotionScalarRelationFilter = {
+    is?: PromotionWhereInput
+    isNot?: PromotionWhereInput
+  }
+
+  export type PromotionTargetPromotionIdScopeValueCompoundUniqueInput = {
+    promotionId: string
+    scope: $Enums.PromotionScope
+    value: string
+  }
+
+  export type PromotionTargetCountOrderByAggregateInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+  }
+
+  export type PromotionTargetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+  }
+
+  export type PromotionTargetMinOrderByAggregateInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+  }
+
+  export type EnumPromotionScopeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PromotionScope | EnumPromotionScopeFieldRefInput<$PrismaModel>
+    in?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel> | $Enums.PromotionScope
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPromotionScopeFilter<$PrismaModel>
+    _max?: NestedEnumPromotionScopeFilter<$PrismaModel>
   }
 
   export type ProductSyncFileCountOrderByAggregateInput = {
@@ -12578,8 +14154,34 @@ export namespace Prisma {
     connect?: MotorcycleWhereUniqueInput
   }
 
+  export type PromotionTargetCreateNestedManyWithoutPromotionInput = {
+    create?: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput> | PromotionTargetCreateWithoutPromotionInput[] | PromotionTargetUncheckedCreateWithoutPromotionInput[]
+    connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
+    createMany?: PromotionTargetCreateManyPromotionInputEnvelope
+    connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+  }
+
+  export type PromotionTargetUncheckedCreateNestedManyWithoutPromotionInput = {
+    create?: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput> | PromotionTargetCreateWithoutPromotionInput[] | PromotionTargetUncheckedCreateWithoutPromotionInput[]
+    connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
+    createMany?: PromotionTargetCreateManyPromotionInputEnvelope
+    connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type EnumDiscountTypeFieldUpdateOperationsInput = {
+    set?: $Enums.DiscountType
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type MotorcycleUpdateOneWithoutPromotionsNestedInput = {
@@ -12590,6 +14192,52 @@ export namespace Prisma {
     delete?: MotorcycleWhereInput | boolean
     connect?: MotorcycleWhereUniqueInput
     update?: XOR<XOR<MotorcycleUpdateToOneWithWhereWithoutPromotionsInput, MotorcycleUpdateWithoutPromotionsInput>, MotorcycleUncheckedUpdateWithoutPromotionsInput>
+  }
+
+  export type PromotionTargetUpdateManyWithoutPromotionNestedInput = {
+    create?: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput> | PromotionTargetCreateWithoutPromotionInput[] | PromotionTargetUncheckedCreateWithoutPromotionInput[]
+    connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
+    upsert?: PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput | PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput[]
+    createMany?: PromotionTargetCreateManyPromotionInputEnvelope
+    set?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    disconnect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    delete?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    update?: PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput | PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput[]
+    updateMany?: PromotionTargetUpdateManyWithWhereWithoutPromotionInput | PromotionTargetUpdateManyWithWhereWithoutPromotionInput[]
+    deleteMany?: PromotionTargetScalarWhereInput | PromotionTargetScalarWhereInput[]
+  }
+
+  export type PromotionTargetUncheckedUpdateManyWithoutPromotionNestedInput = {
+    create?: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput> | PromotionTargetCreateWithoutPromotionInput[] | PromotionTargetUncheckedCreateWithoutPromotionInput[]
+    connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
+    upsert?: PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput | PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput[]
+    createMany?: PromotionTargetCreateManyPromotionInputEnvelope
+    set?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    disconnect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    delete?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    update?: PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput | PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput[]
+    updateMany?: PromotionTargetUpdateManyWithWhereWithoutPromotionInput | PromotionTargetUpdateManyWithWhereWithoutPromotionInput[]
+    deleteMany?: PromotionTargetScalarWhereInput | PromotionTargetScalarWhereInput[]
+  }
+
+  export type PromotionCreateNestedOneWithoutTargetsInput = {
+    create?: XOR<PromotionCreateWithoutTargetsInput, PromotionUncheckedCreateWithoutTargetsInput>
+    connectOrCreate?: PromotionCreateOrConnectWithoutTargetsInput
+    connect?: PromotionWhereUniqueInput
+  }
+
+  export type EnumPromotionScopeFieldUpdateOperationsInput = {
+    set?: $Enums.PromotionScope
+  }
+
+  export type PromotionUpdateOneRequiredWithoutTargetsNestedInput = {
+    create?: XOR<PromotionCreateWithoutTargetsInput, PromotionUncheckedCreateWithoutTargetsInput>
+    connectOrCreate?: PromotionCreateOrConnectWithoutTargetsInput
+    upsert?: PromotionUpsertWithoutTargetsInput
+    connect?: PromotionWhereUniqueInput
+    update?: XOR<XOR<PromotionUpdateToOneWithWhereWithoutTargetsInput, PromotionUpdateWithoutTargetsInput>, PromotionUncheckedUpdateWithoutTargetsInput>
   }
 
   export type MotorcycleCreateNestedOneWithoutImagesInput = {
@@ -12899,12 +14547,73 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumDiscountTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DiscountType | EnumDiscountTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDiscountTypeFilter<$PrismaModel> | $Enums.DiscountType
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDiscountTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DiscountType | EnumDiscountTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDiscountTypeWithAggregatesFilter<$PrismaModel> | $Enums.DiscountType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDiscountTypeFilter<$PrismaModel>
+    _max?: NestedEnumDiscountTypeFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPromotionScopeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PromotionScope | EnumPromotionScopeFieldRefInput<$PrismaModel>
+    in?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPromotionScopeFilter<$PrismaModel> | $Enums.PromotionScope
+  }
+
+  export type NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PromotionScope | EnumPromotionScopeFieldRefInput<$PrismaModel>
+    in?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel> | $Enums.PromotionScope
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPromotionScopeFilter<$PrismaModel>
+    _max?: NestedEnumPromotionScopeFilter<$PrismaModel>
   }
 
   export type MotorcycleImageCreateWithoutMotorcycleInput = {
@@ -12942,8 +14651,11 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    targets?: PromotionTargetCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUncheckedCreateWithoutMotorcycleInput = {
@@ -12959,8 +14671,11 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    targets?: PromotionTargetUncheckedCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionCreateOrConnectWithoutMotorcycleInput = {
@@ -13031,6 +14746,8 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Promotion"> | Date | string
     endDate?: DateTimeFilter<"Promotion"> | Date | string
     displayOrder?: IntFilter<"Promotion"> | number
+    discountType?: EnumDiscountTypeFilter<"Promotion"> | $Enums.DiscountType
+    discountValue?: DecimalNullableFilter<"Promotion"> | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: StringNullableFilter<"Promotion"> | string | null
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
@@ -13077,6 +14794,30 @@ export namespace Prisma {
   export type MotorcycleCreateOrConnectWithoutPromotionsInput = {
     where: MotorcycleWhereUniqueInput
     create: XOR<MotorcycleCreateWithoutPromotionsInput, MotorcycleUncheckedCreateWithoutPromotionsInput>
+  }
+
+  export type PromotionTargetCreateWithoutPromotionInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+  }
+
+  export type PromotionTargetUncheckedCreateWithoutPromotionInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+  }
+
+  export type PromotionTargetCreateOrConnectWithoutPromotionInput = {
+    where: PromotionTargetWhereUniqueInput
+    create: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput>
+  }
+
+  export type PromotionTargetCreateManyPromotionInputEnvelope = {
+    data: PromotionTargetCreateManyPromotionInput | PromotionTargetCreateManyPromotionInput[]
+    skipDuplicates?: boolean
   }
 
   export type MotorcycleUpsertWithoutPromotionsInput = {
@@ -13126,6 +14867,129 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: MotorcycleImageUncheckedUpdateManyWithoutMotorcycleNestedInput
+  }
+
+  export type PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput = {
+    where: PromotionTargetWhereUniqueInput
+    update: XOR<PromotionTargetUpdateWithoutPromotionInput, PromotionTargetUncheckedUpdateWithoutPromotionInput>
+    create: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput>
+  }
+
+  export type PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput = {
+    where: PromotionTargetWhereUniqueInput
+    data: XOR<PromotionTargetUpdateWithoutPromotionInput, PromotionTargetUncheckedUpdateWithoutPromotionInput>
+  }
+
+  export type PromotionTargetUpdateManyWithWhereWithoutPromotionInput = {
+    where: PromotionTargetScalarWhereInput
+    data: XOR<PromotionTargetUpdateManyMutationInput, PromotionTargetUncheckedUpdateManyWithoutPromotionInput>
+  }
+
+  export type PromotionTargetScalarWhereInput = {
+    AND?: PromotionTargetScalarWhereInput | PromotionTargetScalarWhereInput[]
+    OR?: PromotionTargetScalarWhereInput[]
+    NOT?: PromotionTargetScalarWhereInput | PromotionTargetScalarWhereInput[]
+    id?: StringFilter<"PromotionTarget"> | string
+    scope?: EnumPromotionScopeFilter<"PromotionTarget"> | $Enums.PromotionScope
+    value?: StringNullableFilter<"PromotionTarget"> | string | null
+    isExclusion?: BoolFilter<"PromotionTarget"> | boolean
+    promotionId?: StringFilter<"PromotionTarget"> | string
+  }
+
+  export type PromotionCreateWithoutTargetsInput = {
+    id?: string
+    title: string
+    subtitle?: string | null
+    description?: string | null
+    imageUrl?: string | null
+    ctaText?: string
+    whatsappMessage?: string | null
+    isFeatured?: boolean
+    isActive?: boolean
+    startDate: Date | string
+    endDate: Date | string
+    displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    motorcycle?: MotorcycleCreateNestedOneWithoutPromotionsInput
+  }
+
+  export type PromotionUncheckedCreateWithoutTargetsInput = {
+    id?: string
+    title: string
+    subtitle?: string | null
+    description?: string | null
+    imageUrl?: string | null
+    ctaText?: string
+    whatsappMessage?: string | null
+    isFeatured?: boolean
+    isActive?: boolean
+    startDate: Date | string
+    endDate: Date | string
+    displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
+    motorcycleId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PromotionCreateOrConnectWithoutTargetsInput = {
+    where: PromotionWhereUniqueInput
+    create: XOR<PromotionCreateWithoutTargetsInput, PromotionUncheckedCreateWithoutTargetsInput>
+  }
+
+  export type PromotionUpsertWithoutTargetsInput = {
+    update: XOR<PromotionUpdateWithoutTargetsInput, PromotionUncheckedUpdateWithoutTargetsInput>
+    create: XOR<PromotionCreateWithoutTargetsInput, PromotionUncheckedCreateWithoutTargetsInput>
+    where?: PromotionWhereInput
+  }
+
+  export type PromotionUpdateToOneWithWhereWithoutTargetsInput = {
+    where?: PromotionWhereInput
+    data: XOR<PromotionUpdateWithoutTargetsInput, PromotionUncheckedUpdateWithoutTargetsInput>
+  }
+
+  export type PromotionUpdateWithoutTargetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: StringFieldUpdateOperationsInput | string
+    whatsappMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    motorcycle?: MotorcycleUpdateOneWithoutPromotionsNestedInput
+  }
+
+  export type PromotionUncheckedUpdateWithoutTargetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: StringFieldUpdateOperationsInput | string
+    whatsappMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    motorcycleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MotorcycleCreateWithoutImagesInput = {
@@ -13473,6 +15337,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13508,8 +15374,11 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targets?: PromotionTargetUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateWithoutMotorcycleInput = {
@@ -13525,8 +15394,11 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targets?: PromotionTargetUncheckedUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateManyWithoutMotorcycleInput = {
@@ -13542,8 +15414,38 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromotionTargetCreateManyPromotionInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+  }
+
+  export type PromotionTargetUpdateWithoutPromotionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PromotionTargetUncheckedUpdateWithoutPromotionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PromotionTargetUncheckedUpdateManyWithoutPromotionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ReceiptItemCreateManyReceiptInput = {

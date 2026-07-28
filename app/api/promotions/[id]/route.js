@@ -5,6 +5,11 @@ import {
   deletePromotionPg,
 } from "@/utils/dbPg";
 import { verifyAuthToken } from "@/utils/firebaseAdmin";
+import {
+  parseDiscount,
+  parseTargets,
+  revalidatePromotionSurfaces,
+} from "@/utils/promotionPayload";
 
 export async function GET(request, { params }) {
   try {
@@ -67,6 +72,29 @@ export async function PUT(request, { params }) {
     if (body.motorcycleId !== undefined)
       data.motorcycleId = body.motorcycleId || null;
 
+    if (body.discountType !== undefined || body.discountValue !== undefined) {
+      const discount = parseDiscount({
+        discountType: body.discountType ?? existing.discountType,
+        discountValue: body.discountValue ?? existing.discountValue,
+      });
+      if (discount.error) {
+        return NextResponse.json({ error: discount.error }, { status: 400 });
+      }
+      Object.assign(data, discount.data);
+    }
+
+    // Replaced wholesale rather than diffed: the form always submits the full set.
+    const targets = parseTargets(body);
+    if (targets.error) {
+      return NextResponse.json({ error: targets.error }, { status: 400 });
+    }
+    if (targets.data !== undefined) {
+      data.targets = {
+        deleteMany: {},
+        ...(targets.data.length ? { create: targets.data } : {}),
+      };
+    }
+
     if (body.startDate !== undefined) {
       const start = new Date(body.startDate);
       if (Number.isNaN(start.getTime())) {
@@ -109,6 +137,7 @@ export async function PUT(request, { params }) {
       })
     );
 
+    revalidatePromotionSurfaces();
     return NextResponse.json(promotion);
   } catch (error) {
     console.error(
@@ -153,6 +182,7 @@ export async function DELETE(request, { params }) {
       })
     );
 
+    revalidatePromotionSurfaces();
     return NextResponse.json({ message: "Promotion deleted successfully" });
   } catch (error) {
     console.error(
