@@ -377,6 +377,8 @@
     "priceLowToHigh": "价格（从低到高）",
     "priceHighToLow": "价格（从高到低）",
     "allBrands": "所有品牌",
+    "brandsPrev": "上一组品牌",
+    "brandsNext": "更多品牌",
     "empty": {
       "title": "没有摩托车符合您的搜索",
       "subtitle": "我们找不到符合您条件的摩托车。",
