@@ -20,7 +20,13 @@ export async function GET(request, { params }) {
 
     return NextResponse.json(promotion);
   } catch (error) {
-    console.error("Error fetching promotion:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to fetch promotion",
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to fetch promotion" },
       { status: 500 }
@@ -92,9 +98,27 @@ export async function PUT(request, { params }) {
     }
 
     const promotion = await updatePromotionPg(id, data);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "promotion updated",
+        actor: auth.decoded.email,
+        promotionId: id,
+        fields: Object.keys(data),
+      })
+    );
+
     return NextResponse.json(promotion);
   } catch (error) {
-    console.error("Error updating promotion:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to update promotion",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to update promotion" },
       { status: 500 }
@@ -118,9 +142,27 @@ export async function DELETE(request, { params }) {
     }
 
     await deletePromotionPg(id);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "promotion deleted",
+        actor: auth.decoded.email,
+        promotionId: id,
+        title: existing.title,
+      })
+    );
+
     return NextResponse.json({ message: "Promotion deleted successfully" });
   } catch (error) {
-    console.error("Error deleting promotion:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to delete promotion",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to delete promotion" },
       { status: 500 }
