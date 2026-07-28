@@ -389,7 +389,8 @@
       "browseAll": "Browse all brands",
       "needHelp": "Need help finding the right motorcycle?",
       "contactExperts": "Contact our experts"
-    }
+    },
+    "clearSearch": "Clear search"
   },
   "promotions": {
     "thisMonth": "This Month",
