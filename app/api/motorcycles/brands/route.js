@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { fetchUniqueBrandSetPg } from "@/utils/dbPg";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const brandSet = await fetchUniqueBrandSetPg();
