@@ -135,18 +135,25 @@ async function mockApiRoutes(page) {
     route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify(MOCK_BRANDS),
+      body: JSON.stringify({ brands: MOCK_BRANDS }),
     });
   });
 
   await page.route("**/api/motorcycles?*", (route) => {
     const url = new URL(route.request().url());
     const brand = url.searchParams.get("brand");
+    const search = url.searchParams.get("search");
 
     let filtered = MOCK_MOTORCYCLES;
     if (brand) {
-      filtered = MOCK_MOTORCYCLES.filter(
+      filtered = filtered.filter(
         (m) => m.brand.toLowerCase() === brand.toLowerCase()
+      );
+    }
+    if (search) {
+      const q = search.toLowerCase();
+      filtered = filtered.filter((m) =>
+        `${m.brand} ${m.name} ${m.model}`.toLowerCase().includes(q)
       );
     }
 
