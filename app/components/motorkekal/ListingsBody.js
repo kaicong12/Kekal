@@ -1,14 +1,23 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Spin } from "antd";
 import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
+import { useDebounce } from "@/utils/hooks/useDebounce";
 import Pagination from "@/app/components/common/Pagination";
 import BikeCard from "./BikeCard";
 import { waLink } from "./waLink";
 
 const SORTS = ["Price: lowest first", "Price: highest first"];
+
+const SearchIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <circle cx="11" cy="11" r="7" />
+    <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
+  </svg>
+);
 
 const ListingsBody = () => {
   const t = useTranslations("mk");
@@ -29,8 +38,10 @@ const ListingsBody = () => {
     brandOptions,
     selectedSort,
     selectedBrand,
+    searchTerm,
     onSortOptionChange,
     onBrandOptionChange,
+    onSearchChange,
     motorcycles,
     paginatedMotorcycles,
     loading,
@@ -45,6 +56,14 @@ const ListingsBody = () => {
   });
 
   const isAll = !selectedBrand;
+
+  // Keep typing responsive locally and only hit the API once the user pauses.
+  const [query, setQuery] = useState(searchFromHome ?? "");
+  const debouncedQuery = useDebounce(query, 300);
+
+  useEffect(() => {
+    if (debouncedQuery !== searchTerm) onSearchChange(debouncedQuery);
+  }, [debouncedQuery, searchTerm, onSearchChange]);
 
   return (
     <main>
@@ -63,8 +82,31 @@ const ListingsBody = () => {
       </section>
 
       <section className="wrap" style={{ paddingBottom: 76 }}>
-        {/* Brand filter chips */}
-        <div className="chips" style={{ marginBottom: 22 }}>
+        {/* Search */}
+        <div className="listing-search">
+          <SearchIcon />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={tl("searchPlaceholder")}
+            aria-label={tl("searchPlaceholder")}
+          />
+          {query ? (
+            <button
+              type="button"
+              className="listing-search__clear"
+              onClick={() => setQuery("")}
+              aria-label={tl("clearSearch")}
+            >
+              &times;
+            </button>
+          ) : null}
+        </div>
+
+        {/* Brand filter chips — one scrollable row, since the brand list keeps
+            growing and wrapping it swallowed the top of the grid. */}
+        <div className="chips chips--scroll" role="group" aria-label={tl("allBrands")}>
           <button
             className={`chip${isAll ? " chip--on" : ""}`}
             onClick={() => onBrandOptionChange(null)}

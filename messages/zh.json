@@ -389,7 +389,8 @@
       "browseAll": "浏览所有品牌",
       "needHelp": "需要帮助找到合适的摩托车吗？",
       "contactExperts": "联系我们的专家"
-    }
+    },
+    "clearSearch": "清除搜索"
   },
   "promotions": {
     "thisMonth": "本月",

@@ -1021,6 +1021,113 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+
+/* Single-row variant for the brand filter. The brand list grows over time and
+   wrapping it pushed the bike grid below the fold, so it scrolls sideways
+   instead. Edge fades hint that there is more to the right. */
+.mk-site .chips--scroll {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Room for the focus ring, which overflow would otherwise clip. */
+  padding: 3px 0;
+  margin-bottom: 22px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  /* Fade the trailing edge only, so the first chip is never clipped at rest. */
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent 100%);
+}
+.mk-site .chips--scroll::-webkit-scrollbar {
+  display: none;
+}
+.mk-site .chips--scroll > .chip {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+/* Bleed to the viewport edges on small screens so the row reads as scrollable
+   rather than as a clipped block inside the page gutter. Values track the
+   .wrap gutter: 24px, dropping to 18px under 560px. */
+@media (max-width: 860px) {
+  .mk-site .chips--scroll {
+    margin-inline: -24px;
+    padding-inline: 24px;
+  }
+}
+@media (max-width: 560px) {
+  .mk-site .chips--scroll {
+    margin-inline: -18px;
+    padding-inline: 18px;
+  }
+}
+
+/* ---- Listing search ---------------------------------------------------- */
+.mk-site .listing-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  max-width: 520px;
+}
+.mk-site .listing-search > svg {
+  position: absolute;
+  left: 15px;
+  width: 18px;
+  height: 18px;
+  color: var(--kk-text-muted);
+  pointer-events: none;
+}
+.mk-site .listing-search input {
+  width: 100%;
+  height: 48px;
+  padding: 0 44px;
+  border-radius: 12px;
+  border: 1px solid var(--kk-border-strong);
+  background: #fff;
+  font-family: var(--kk-font);
+  font-size: 15px;
+  color: var(--kk-text);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.mk-site .listing-search input::placeholder {
+  color: var(--kk-text-muted);
+}
+.mk-site .listing-search input:focus {
+  border-color: var(--kk-ink);
+  box-shadow: 0 0 0 3px rgba(23, 24, 28, 0.08);
+}
+/* Suppress the native clear affordance; we render our own. */
+.mk-site .listing-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.mk-site .listing-search__clear {
+  position: absolute;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--kk-text-muted);
+}
+.mk-site .listing-search__clear:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--kk-text);
+}
+@media (max-width: 700px) {
+  .mk-site .listing-search {
+    max-width: none;
+  }
+}
 .mk-site .chip {
   height: 38px;
   padding: 0 15px;
