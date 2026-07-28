@@ -1,4 +1,4 @@
-import { queryMotorcyclePg } from "@/utils/dbPg";
+import { queryMotorcyclePg, withPromotionsPg } from "@/utils/dbPg";
 import BikeCard from "./BikeCard";
 
 // Related motorcycles shown on the detail page in the design's bike-grid.
@@ -13,7 +13,9 @@ const RelatedBikes = async ({ brand, currentId }) => {
     limitResult: 5,
   });
 
-  const bikes = motorcycles.filter((m) => m.id !== currentId).slice(0, 4);
+  const bikes = await withPromotionsPg(
+    motorcycles.filter((m) => m.id !== currentId).slice(0, 4)
+  );
 
   if (bikes.length === 0) return null;
 

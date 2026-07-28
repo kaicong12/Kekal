@@ -19,6 +19,8 @@ import dayjs from "dayjs";
 import { uploadPromotionImage } from "@/utils/promotionImageUpload";
 import { auth } from "@/utils/firebase";
 import { StatusPill } from "../adminUi";
+import PromotionTargets from "./PromotionTargets";
+import PromotionDiscount from "./PromotionDiscount";
 import styles from "../admin.module.css";
 
 const { TextArea } = Input;
@@ -43,21 +45,64 @@ export default function PromotionFormInterface({ promotionId, onBack }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [motorcycleOptions, setMotorcycleOptions] = useState([]);
+  const [bikesById, setBikesById] = useState({});
+  const [brandOptions, setBrandOptions] = useState([]);
+  const [modelOptions, setModelOptions] = useState([]);
+  const [tagOptions, setTagOptions] = useState([]);
   const [visibility, setVisibility] = useState("live");
   const [title, setTitle] = useState("");
 
   const isEdit = !!promotionId;
+
+  // An exact before/after preview only makes sense for a single-bike target.
+  const watchedTargets = Form.useWatch("targets", form);
+  const previewBike =
+    bikesById[
+      (watchedTargets || []).find(
+        (target) => target?.scope === "MOTORCYCLE" && !target?.isExclusion
+      )?.value
+    ] ?? null;
 
   useEffect(() => {
     const loadMotorcycles = async () => {
       try {
         const res = await fetch("/api/motorcycles?sortField=brand&sortOrder=asc");
         const data = await res.json();
+        const bikes = data.motorcycles || [];
+
         setMotorcycleOptions(
-          (data.motorcycles || []).map((m) => ({
+          bikes.map((m) => ({
             value: m.id,
             label: `${m.brand} ${m.name} (${m.year})`,
           }))
+        );
+        setBikesById(
+          Object.fromEntries(
+            bikes.map((m) => [
+              m.id,
+              // Undiscounted price: a live promo may already have reduced it.
+              { label: `${m.brand} ${m.name}`, price: m.pricing?.basePrice ?? m.price },
+            ])
+          )
+        );
+
+        const uniqueSorted = (values) =>
+          Array.from(new Set(values.filter(Boolean))).sort();
+
+        setBrandOptions(
+          uniqueSorted(bikes.map((m) => m.brand)).map((v) => ({ value: v, label: v }))
+        );
+        setModelOptions(
+          uniqueSorted(bikes.map((m) => m.model)).map((v) => ({ value: v, label: v }))
+        );
+        setTagOptions(
+          uniqueSorted(
+            bikes.flatMap((m) =>
+              String(m.tags || "")
+                .split(",")
+                .map((tag) => tag.trim())
+            )
+          ).map((v) => ({ value: v, label: v }))
         );
       } catch {
         // Non-critical
@@ -79,6 +124,16 @@ export default function PromotionFormInterface({ promotionId, onBack }) {
           isFeatured: data.isFeatured,
           displayOrder: data.displayOrder ?? 0,
           motorcycleId: data.motorcycleId || undefined,
+          discountType: data.discountType || "NONE",
+          discountValue:
+            data.discountValue === null || data.discountValue === undefined
+              ? undefined
+              : Number(data.discountValue),
+          targets: (data.targets || []).map((target) => ({
+            scope: target.scope,
+            value: target.value ?? null,
+            isExclusion: !!target.isExclusion,
+          })),
           startDate: dayjs(data.startDate),
           endDate: dayjs(data.endDate),
         });
@@ -126,6 +181,18 @@ export default function PromotionFormInterface({ promotionId, onBack }) {
         isActive: visibility !== "draft",
         displayOrder: values.displayOrder ?? 0,
         motorcycleId: values.motorcycleId || null,
+        discountType: values.discountType || "NONE",
+        discountValue:
+          values.discountType && values.discountType !== "NONE"
+            ? Number(values.discountValue)
+            : null,
+        targets: (values.targets || [])
+          .filter((target) => target?.scope)
+          .map((target) => ({
+            scope: target.scope,
+            value: target.scope === "ALL" ? null : target.value || null,
+            isExclusion: !!target.isExclusion,
+          })),
         startDate: values.startDate ? values.startDate.toISOString() : null,
         endDate: values.endDate ? values.endDate.toISOString() : null,
       };
@@ -176,6 +243,8 @@ export default function PromotionFormInterface({ promotionId, onBack }) {
         isFeatured: false,
         displayOrder: 0,
         ctaText: "Claim this deal",
+        discountType: "NONE",
+        targets: [],
       }}
     >
       {/* Sticky action bar */}
@@ -282,14 +351,26 @@ export default function PromotionFormInterface({ promotionId, onBack }) {
               </div>
             </div>
 
-            {/* Linked motorcycle */}
+            {/* Who the promotion applies to */}
+            <PromotionTargets
+              brandOptions={brandOptions}
+              modelOptions={modelOptions}
+              motorcycleOptions={motorcycleOptions}
+              tagOptions={tagOptions}
+            />
+            <PromotionDiscount previewBike={previewBike} />
+
+            {/* Card presentation */}
             <div className={styles.panel}>
-              <div className={styles.panelTitle}>Linked motorcycle</div>
+              <div className={styles.panelTitle}>
+                Promotions page card
+                <span className={styles.panelHint}>Presentation only</span>
+              </div>
               <div className={styles.grid2}>
                 <Form.Item
                   name="motorcycleId"
-                  label="Attach a bike (optional)"
-                  tooltip="Attach a catalogue bike, e.g. for the featured hero"
+                  label="Fallback card image (optional)"
+                  tooltip="Borrows this bike's photo for the promo card when the promotion has no hero image. Does not affect who the promotion applies to — use the rules above for that."
                 >
                   <Select
                     allowClear

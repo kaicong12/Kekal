@@ -1894,3 +1894,185 @@
     gap: 34px;
   }
 }
+
+/* ---- Promotion urgency (detail page buy box) --------------------------- */
+/* Ported from the Claude Design mockup (motor-kekal-motorcycle.html). Shown
+   only when a live promotion targets the bike — there is no "no promo"
+   fallback state, since without inventory tracking there's nothing honest to
+   claim when nothing is on offer. */
+.mk-site .buybox__price {
+  flex-wrap: wrap;
+}
+.mk-site .buybox__price b {
+  white-space: nowrap;
+}
+.mk-site .buybox__was {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.mk-site .buybox__price s {
+  opacity: 0.8;
+  color: var(--kk-text-muted);
+  font-size: 17px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.mk-site .save-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 7px;
+  background: var(--kk-orange-soft);
+  color: var(--kk-orange-strong);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.mk-site .urg {
+  margin-top: 16px;
+}
+.mk-site .urg-count {
+  background: var(--kk-ink);
+  color: #fff;
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+}
+.mk-site .urg-count__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+.mk-site .urg-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--kk-orange);
+  flex-shrink: 0;
+  animation: urg-pulse 1.8s ease-in-out infinite;
+}
+.mk-site .urg-count--hot .urg-dot {
+  background: var(--kk-red);
+}
+.mk-site .urg-count--hot .urg-count__head {
+  color: #fff;
+}
+@keyframes urg-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mk-site .urg-dot {
+    animation: none;
+  }
+}
+.mk-site .urg-count__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 12px;
+}
+.mk-site .urg-count__grid > div {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9px;
+  padding: 8px 4px;
+  text-align: center;
+}
+.mk-site .urg-count__grid b {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.mk-site .urg-count--hot .urg-count__grid b {
+  color: var(--kk-orange);
+}
+.mk-site .urg-count__grid span {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+}
+.mk-site .urg-count__foot {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 10px;
+}
+.mk-site .urg-note {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--kk-text-muted);
+  margin-top: 12px;
+}
+
+.mk-site .urg-terms {
+  margin-top: 12px;
+}
+.mk-site .urg-terms__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: var(--kk-font);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--kk-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mk-site .urg-terms__toggle:hover {
+  color: var(--kk-text);
+}
+.mk-site .urg-terms__body {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--kk-text-muted);
+  margin-top: 8px;
+}
+
+/* Promo flag + struck-through price on listing / related bike cards */
+.mk-site .bike-card__promo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: var(--kk-orange);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 9px;
+  border-radius: 7px;
+  text-transform: uppercase;
+}
+.mk-site .bike-card__price s {
+  font-size: 12.5px;
+  color: var(--kk-text-muted);
+  margin-right: 5px;
+  font-weight: 500;
+}
+
+@media (max-width: 860px) {
+  .mk-site .urg-count__grid b {
+    font-size: 20px;
+  }
+}

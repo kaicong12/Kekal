@@ -731,6 +731,17 @@
       "title": "Semua Motosikal",
       "heading": "Semua Motosikal",
       "intro": "Lihat semua motosikal yang ada di Perniagaan Motor Kekal, Johor Bahru. Yamaha, Honda, Kawasaki, KTM dan banyak lagi — motor baru dengan pembiayaan mudah dan servis sendiri."
+    },
+    "promo": {
+      "days": "HARI",
+      "hours": "JAM",
+      "minutes": "MINIT",
+      "seconds": "SAAT",
+      "lastDay": "Hari terakhir · {name}",
+      "validUntil": "Harga promo sah sehingga {date}.",
+      "save": "Jimat {amount}",
+      "terms": "Terma & Syarat",
+      "badge": "Promosi"
     }
   },
   "brands": {

@@ -22,7 +22,9 @@ function monthly(price, downPct, years) {
 const FinanceCalculator = ({ motorcycle }) => {
   const t = useTranslations("loanCalculator");
   const td = useTranslations("mk.detail");
-  const price = Math.round(Number(motorcycle.price)) || 0;
+  // Promotional price when one is live, so this matches the buy box above it.
+  const price =
+    Math.round(Number(motorcycle.pricing?.price ?? motorcycle.price)) || 0;
 
   // Down payment in RM is the source of truth (raw digits only; the input
   // renders it with thousand separators). The % slider reads/writes it too.

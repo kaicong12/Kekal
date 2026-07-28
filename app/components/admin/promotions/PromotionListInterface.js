@@ -13,6 +13,7 @@ import {
   getPromotionStatus,
   useIsMobile,
 } from "../adminUi";
+import { summariseTargets, summariseDiscount } from "@/utils/promotions";
 import styles from "../admin.module.css";
 
 // Re-exported for backwards compatibility with older imports.
@@ -189,11 +190,15 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
                         {p.title}
                       </span>
                     }
-                    meta={
+                    meta={[
                       p._status.key === "draft"
                         ? "Not scheduled"
-                        : `${formatDate(p.startDate)} → ${formatDate(p.endDate)}`
-                    }
+                        : `${formatDate(p.startDate)} → ${formatDate(p.endDate)}`,
+                      summariseTargets(p.targets),
+                      summariseDiscount(p),
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
                   />
                 ))
               )}
@@ -205,6 +210,7 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
                   <tr>
                     <th>Offer</th>
                     <th style={{ width: 130 }}>Status</th>
+                    <th style={{ width: 180 }}>Applies to</th>
                     <th style={{ width: 200 }}>Schedule</th>
                     <th style={{ width: 60 }} />
                   </tr>
@@ -212,13 +218,13 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
                 <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={4} className={styles.emptyState}>
+                    <td colSpan={5} className={styles.emptyState}>
                       Loading…
                     </td>
                   </tr>
                 ) : filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className={styles.emptyState}>
+                    <td colSpan={5} className={styles.emptyState}>
                       No offers found.
                     </td>
                   </tr>
@@ -247,6 +253,14 @@ export default function PromotionListInterface({ onCreateNew, onEdit }) {
                       </td>
                       <td>
                         <StatusPill statusKey={p._status.key} label={p._status.label} />
+                      </td>
+                      <td className={styles.muted}>
+                        {summariseTargets(p.targets)}
+                        {summariseDiscount(p) && (
+                          <div className={styles.offerMeta}>
+                            {summariseDiscount(p)}
+                          </div>
+                        )}
                       </td>
                       <td className={styles.muted}>
                         {p._status.key === "draft"

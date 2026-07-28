@@ -731,6 +731,17 @@
       "title": "所有摩托车",
       "heading": "所有摩托车",
       "intro": "浏览柔佛新山 Perniagaan Motor Kekal 提供的所有摩托车。Yamaha、Honda、Kawasaki、KTM 等品牌——全新车款，轻松贷款，自设维修中心。"
+    },
+    "promo": {
+      "days": "天",
+      "hours": "小时",
+      "minutes": "分",
+      "seconds": "秒",
+      "lastDay": "最后一天 · {name}",
+      "validUntil": "促销价有效期至 {date}。",
+      "save": "省 {amount}",
+      "terms": "条款与细则",
+      "badge": "促销"
     }
   },
   "brands": {

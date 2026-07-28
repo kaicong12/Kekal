@@ -8,10 +8,16 @@ import Pill from "./Pill";
 // motorcycle records from the database.
 const BikeCard = ({ motorcycle, tag }) => {
   const t = useTranslations("mk");
+  const tPromo = useTranslations("mk.promo");
 
   const spec = motorcycle.engineCapacity
     ? `${motorcycle.engineCapacity}cc${motorcycle.engine ? ` · ${motorcycle.engine}` : ""}`
     : motorcycle.engine || "";
+
+  // Present when the caller resolved promotions (see withPromotionsPg).
+  const pricing = motorcycle.pricing;
+  const onPromo = Boolean(pricing?.hasDiscount);
+  const price = pricing?.price ?? motorcycle.price;
 
   return (
     <article className="card card--hover bike-card">
@@ -29,6 +35,9 @@ const BikeCard = ({ motorcycle, tag }) => {
             />
           ) : null}
           {tag ? <span className="bike-card__tag">{tag}</span> : null}
+          {onPromo ? (
+            <span className="bike-card__promo">{tPromo("badge")}</span>
+          ) : null}
         </div>
         <div className="bike-card__body">
           {motorcycle.brand ? (
@@ -38,7 +47,8 @@ const BikeCard = ({ motorcycle, tag }) => {
           {spec ? <p className="bike-card__spec">{spec}</p> : null}
           <div className="bike-card__foot">
             <div className="bike-card__price">
-              <b>RM {motorcycle.price?.toLocaleString()}</b>
+              {onPromo ? <s>RM {pricing.basePrice.toLocaleString()}</s> : null}
+              <b>RM {price?.toLocaleString()}</b>
             </div>
             <Pill status="live">{t("inStock")}</Pill>
           </div>

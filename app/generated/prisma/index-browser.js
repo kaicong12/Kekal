@@ -155,9 +155,19 @@ exports.Prisma.PromotionScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   displayOrder: 'displayOrder',
+  discountType: 'discountType',
+  discountValue: 'discountValue',
   motorcycleId: 'motorcycleId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PromotionTargetScalarFieldEnum = {
+  id: 'id',
+  scope: 'scope',
+  value: 'value',
+  isExclusion: 'isExclusion',
+  promotionId: 'promotionId'
 };
 
 exports.Prisma.ProductSyncFileScalarFieldEnum = {
@@ -229,12 +239,26 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.DiscountType = exports.$Enums.DiscountType = {
+  NONE: 'NONE',
+  FIXED_AMOUNT: 'FIXED_AMOUNT',
+  PERCENTAGE: 'PERCENTAGE',
+  OVERRIDE_PRICE: 'OVERRIDE_PRICE'
+};
 
+exports.PromotionScope = exports.$Enums.PromotionScope = {
+  ALL: 'ALL',
+  TAG: 'TAG',
+  BRAND: 'BRAND',
+  MODEL: 'MODEL',
+  MOTORCYCLE: 'MOTORCYCLE'
+};
 
 exports.Prisma.ModelName = {
   AuthorizedReceiptEmail: 'AuthorizedReceiptEmail',
   Motorcycle: 'Motorcycle',
   Promotion: 'Promotion',
+  PromotionTarget: 'PromotionTarget',
   ProductSyncFile: 'ProductSyncFile',
   MotorcycleImage: 'MotorcycleImage',
   GeneratedReceipt: 'GeneratedReceipt',

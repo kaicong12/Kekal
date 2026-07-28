@@ -5,6 +5,11 @@ import {
   createPromotionPg,
 } from "@/utils/dbPg";
 import { verifyAuthToken } from "@/utils/firebaseAdmin";
+import {
+  parseDiscount,
+  parseTargets,
+  revalidatePromotionSurfaces,
+} from "@/utils/promotionPayload";
 
 export async function GET(request) {
   try {
@@ -48,6 +53,9 @@ function buildPromotionData(body) {
     return { error: "End date must be after start date" };
   }
 
+  const discount = parseDiscount(body);
+  if (discount.error) return { error: discount.error };
+
   return {
     data: {
       title: body.title,
@@ -64,6 +72,7 @@ function buildPromotionData(body) {
         ? parseInt(body.displayOrder, 10)
         : 0,
       motorcycleId: body.motorcycleId || null,
+      ...discount.data,
     },
   };
 }
@@ -90,7 +99,15 @@ export async function POST(request) {
       return NextResponse.json({ error }, { status: 400 });
     }
 
-    const promotion = await createPromotionPg(data);
+    const targets = parseTargets(body);
+    if (targets.error) {
+      return NextResponse.json({ error: targets.error }, { status: 400 });
+    }
+
+    const promotion = await createPromotionPg({
+      ...data,
+      ...(targets.data?.length ? { targets: { create: targets.data } } : {}),
+    });
 
     console.log(
       JSON.stringify({
@@ -99,9 +116,11 @@ export async function POST(request) {
         actor: auth.decoded.email,
         promotionId: promotion.id,
         title: data.title,
+        targets: targets.data?.length ?? 0,
       })
     );
 
+    revalidatePromotionSurfaces();
     return NextResponse.json(promotion, { status: 201 });
   } catch (error) {
     console.error(

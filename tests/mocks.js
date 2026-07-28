@@ -81,6 +81,33 @@ const MOCK_MOTORCYCLES = [
 
 const MOCK_BRANDS = ["Honda", "Kawasaki", "KTM", "Yamaha"];
 
+// `pricing` / `promotion` mirror what /api/motorcycles returns once the
+// promotion resolver has run. Only the Yamaha is discounted.
+const MOCK_PRICING = {
+  mock_moto_001_cuid25chars: {
+    pricing: { basePrice: 12500, price: 11500, savings: 1000, hasDiscount: true },
+    promotion: {
+      id: "mock_promo_001",
+      title: "Year End Sale",
+      subtitle: "Up to RM 2000 off",
+      endDate: "2027-12-31T00:00:00.000Z",
+      discountType: "FIXED_AMOUNT",
+      discountValue: 1000,
+    },
+  },
+};
+
+function withPricing(motorcycle) {
+  const extra = MOCK_PRICING[motorcycle.id];
+  if (extra) return { ...motorcycle, ...extra };
+  const price = motorcycle.price;
+  return {
+    ...motorcycle,
+    promotion: null,
+    pricing: { basePrice: price, price, savings: 0, hasDiscount: false },
+  };
+}
+
 const MOCK_PROMOTIONS = [
   {
     id: "mock_promo_001",
@@ -108,18 +135,25 @@ async function mockApiRoutes(page) {
     route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify(MOCK_BRANDS),
+      body: JSON.stringify({ brands: MOCK_BRANDS }),
     });
   });
 
   await page.route("**/api/motorcycles?*", (route) => {
     const url = new URL(route.request().url());
     const brand = url.searchParams.get("brand");
+    const search = url.searchParams.get("search");
 
     let filtered = MOCK_MOTORCYCLES;
     if (brand) {
-      filtered = MOCK_MOTORCYCLES.filter(
+      filtered = filtered.filter(
         (m) => m.brand.toLowerCase() === brand.toLowerCase()
+      );
+    }
+    if (search) {
+      const q = search.toLowerCase();
+      filtered = filtered.filter((m) =>
+        `${m.brand} ${m.name} ${m.model}`.toLowerCase().includes(q)
       );
     }
 
@@ -127,7 +161,7 @@ async function mockApiRoutes(page) {
       status: 200,
       contentType: "application/json",
       body: JSON.stringify({
-        motorcycles: filtered,
+        motorcycles: filtered.map(withPricing),
         total: filtered.length,
         page: 1,
         limit: 12,
@@ -141,7 +175,7 @@ async function mockApiRoutes(page) {
       status: 200,
       contentType: "application/json",
       body: JSON.stringify({
-        motorcycles: MOCK_MOTORCYCLES,
+        motorcycles: MOCK_MOTORCYCLES.map(withPricing),
         total: MOCK_MOTORCYCLES.length,
         page: 1,
         limit: 12,
@@ -158,4 +192,10 @@ async function mockApiRoutes(page) {
   });
 }
 
-module.exports = { mockApiRoutes, MOCK_MOTORCYCLES, MOCK_BRANDS, MOCK_PROMOTIONS };
+module.exports = {
+  mockApiRoutes,
+  withPricing,
+  MOCK_MOTORCYCLES,
+  MOCK_BRANDS,
+  MOCK_PROMOTIONS,
+};
