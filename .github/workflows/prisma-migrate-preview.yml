@@ -4,6 +4,15 @@ on:
   pull_request:
     paths:
       - "prisma/**"
+  workflow_dispatch:
+    inputs:
+      neon_branch:
+        description: "Neon branch to migrate, e.g. preview/staging. Created from the parent if it doesn't exist."
+        required: true
+      dry_run:
+        description: "Only report pending migrations, don't apply them"
+        type: boolean
+        default: false
 
 jobs:
   migrate-preview:
@@ -23,13 +32,19 @@ jobs:
         uses: neondatabase/create-branch-action@v5
         with:
           project_id: ${{ secrets.NEON_PROJECT_ID }}
-          branch_name: preview/${{ github.head_ref }}
+          branch_name: ${{ inputs.neon_branch || format('preview/{0}', github.head_ref) }}
           database: verceldb
           api_key: ${{ secrets.NEON_API_KEY }}
 
       - run: yarn install --frozen-lockfile
 
+      - name: Show pending migrations
+        run: npx prisma migrate status || true
+        env:
+          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
+
       - name: Apply migrations to preview branch database
+        if: ${{ !inputs.dry_run }}
         run: npx prisma migrate deploy
         env:
           DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
