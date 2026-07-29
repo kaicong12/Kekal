@@ -57,6 +57,10 @@ test.describe("Listing - brand filter chips on a narrow viewport", () => {
 });
 
 test.describe("Listing - search", () => {
+  // Both search boxes are in the DOM; CSS shows the standalone one on mobile and
+  // the toolbar one on desktop, so drive whichever is visible.
+  const SEARCH = ".listing-search:visible";
+
   test.beforeEach(async ({ page }) => {
     await mockApiRoutes(page);
     await page.goto("/listing");
@@ -64,7 +68,7 @@ test.describe("Listing - search", () => {
   });
 
   test("narrows results to the typed query", async ({ page }) => {
-    await page.fill(".listing-search input", "Yamaha");
+    await page.fill(`${SEARCH} input`, "Yamaha");
     await expect(page.locator(".bike-card")).toHaveCount(1);
     await expect(page.locator(".bike-card").first()).toContainText("YZF-R15");
   });
@@ -72,17 +76,21 @@ test.describe("Listing - search", () => {
   test("restores the full list when cleared", async ({ page }) => {
     const total = await page.locator(".bike-card").count();
 
-    await page.fill(".listing-search input", "Yamaha");
+    await page.fill(`${SEARCH} input`, "Yamaha");
     await expect(page.locator(".bike-card")).toHaveCount(1);
 
-    await page.click(".listing-search__clear");
-    await expect(page.locator(".listing-search input")).toHaveValue("");
+    await page.click(`${SEARCH} .listing-search__clear`);
+    await expect(page.locator(`${SEARCH} input`)).toHaveValue("");
     await expect(page.locator(".bike-card")).toHaveCount(total);
   });
 
   test("shows the empty state when nothing matches", async ({ page }) => {
-    await page.fill(".listing-search input", "definitelynotabike");
+    await page.fill(`${SEARCH} input`, "definitelynotabike");
     await expect(page.locator(".bike-card")).toHaveCount(0);
+  });
+
+  test("exposes exactly one search box per viewport", async ({ page }) => {
+    await expect(page.locator(SEARCH)).toHaveCount(1);
   });
 });
 
