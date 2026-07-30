@@ -1,5 +1,6 @@
 import prisma from "@/utils/prisma";
 import { isPromotionLive, withPromotion } from "@/utils/promotions";
+import { memoDuringBuild } from "@/utils/buildCache";
 
 const notFoundPlaceholder = "/images/no-image.svg";
 
@@ -12,25 +13,27 @@ function formatMotorcycle(motorcycle) {
   };
 }
 
-export const listMotorcyclesPg = async ({ includeImages = false } = {}) => {
-  const motorcycles = await prisma.motorcycle.findMany({
-    include: includeImages
-      ? { images: { orderBy: { displayOrder: "asc" } } }
-      : undefined,
-  });
-  return motorcycles.map(formatMotorcycle);
-};
+export const listMotorcyclesPg = memoDuringBuild(
+  async ({ includeImages = false } = {}) => {
+    const motorcycles = await prisma.motorcycle.findMany({
+      include: includeImages
+        ? { images: { orderBy: { displayOrder: "asc" } } }
+        : undefined,
+    });
+    return motorcycles.map(formatMotorcycle);
+  }
+);
 
-export const getMotorcycleByIdPg = async (motorcycleId) => {
+export const getMotorcycleByIdPg = memoDuringBuild(async (motorcycleId) => {
   const motorcycle = await prisma.motorcycle.findUnique({
     where: { id: motorcycleId },
     include: { images: { orderBy: { displayOrder: "asc" } } },
   });
   if (!motorcycle) return null;
   return formatMotorcycle(motorcycle);
-};
+});
 
-export const queryMotorcyclePg = async ({
+export const queryMotorcyclePg = memoDuringBuild(async ({
   sortedBy = [],
   filterOpt = [],
   limitResult,
@@ -88,16 +91,16 @@ export const queryMotorcyclePg = async ({
     motorcycles: motorcycles.map(formatMotorcycle),
     total,
   };
-};
+});
 
-export const fetchUniqueBrandSetPg = async () => {
+export const fetchUniqueBrandSetPg = memoDuringBuild(async () => {
   const brands = await prisma.motorcycle.findMany({
     select: { brand: true },
     distinct: ["brand"],
     orderBy: { brand: "asc" },
   });
   return new Set(brands.map((b) => b.brand));
-};
+});
 
 export const createMotorcyclePg = async (data) => {
   const { images, ...fields } = data;
@@ -168,7 +171,7 @@ const promotionInclude = {
 
 // The DB filter is deliberately loose (±1 day) because stored instants are day
 // boundaries in MYT, not UTC; isPromotionLive does the exact check.
-export const listLivePromotionsPg = async () => {
+export const listLivePromotionsPg = memoDuringBuild(async () => {
   const now = new Date();
   const slack = 36 * 60 * 60 * 1000;
   const promotions = await prisma.promotion.findMany({
@@ -185,10 +188,10 @@ export const listLivePromotionsPg = async () => {
     include: promotionInclude,
   });
   return promotions.map(formatPromotion).filter((p) => isPromotionLive(p, now));
-};
+});
 
 // Recently expired promos kept for the public "Past deals" SEO section.
-export const listPastPromotionsPg = async ({ limit = 6 } = {}) => {
+export const listPastPromotionsPg = memoDuringBuild(async ({ limit = 6 } = {}) => {
   const now = new Date();
   const promotions = await prisma.promotion.findMany({
     where: { endDate: { lt: now } },
@@ -200,7 +203,7 @@ export const listPastPromotionsPg = async ({ limit = 6 } = {}) => {
     .map(formatPromotion)
     .filter((p) => !isPromotionLive(p, now))
     .slice(0, limit);
-};
+});
 
 // Admin view: every promotion, newest first.
 export const listAllPromotionsPg = async () => {

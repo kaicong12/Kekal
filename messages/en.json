@@ -377,6 +377,8 @@
     "priceLowToHigh": "Price (Low to High)",
     "priceHighToLow": "Price (High to Low)",
     "allBrands": "All Brands",
+    "brandsPrev": "Previous brands",
+    "brandsNext": "More brands",
     "empty": {
       "title": "No motorcycles match your search",
       "subtitle": "We couldn't find any motorcycles matching your criteria.",

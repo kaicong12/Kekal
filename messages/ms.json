@@ -377,6 +377,8 @@
     "priceLowToHigh": "Harga (Rendah ke Tinggi)",
     "priceHighToLow": "Harga (Tinggi ke Rendah)",
     "allBrands": "Semua Jenama",
+    "brandsPrev": "Jenama sebelumnya",
+    "brandsNext": "Lagi jenama",
     "empty": {
       "title": "Tiada motosikal sepadan dengan carian anda",
       "subtitle": "Kami tidak dapat menemui sebarang motosikal yang sepadan dengan kriteria anda.",
