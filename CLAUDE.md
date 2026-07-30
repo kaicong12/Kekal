@@ -36,7 +36,7 @@ npx prisma studio      # Open database GUI
 ### Data Layer
 
 - **Database:** PostgreSQL accessed via Prisma singleton (`utils/dbPg.js`)
-- **Key models:** Motorcycle (with unique constraint on brand+name+year), MotorcycleImage, Promotion, GeneratedReceipt, ReceiptCustomer, ReceiptItem
+- **Key models:** Motorcycle (with unique constraint on brand+name+year), MotorcycleImage, Promotion, PromotionTarget
 - **Firebase:** Google Auth for admin access, Cloud Storage for scraped JSON and images, Firestore for auth email whitelist (`config/emailConfig`)
 
 ### Key Utilities

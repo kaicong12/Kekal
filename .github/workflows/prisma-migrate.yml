@@ -5,11 +5,28 @@ on:
     branches: [main, staging]
     paths:
       - "prisma/**"
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Which database to migrate"
+        type: choice
+        options:
+          - staging
+          - production
+        default: staging
+      dry_run:
+        description: "Only report pending migrations, don't apply them"
+        type: boolean
+        default: false
 
 jobs:
   migrate:
     name: Run Prisma Migrations
     runs-on: ubuntu-latest
+
+    # On push the branch picks the database; on dispatch the operator does.
+    env:
+      TARGET: ${{ inputs.target || (github.ref_name == 'staging' && 'staging' || 'production') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +38,13 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
-      - name: Apply migrations to database
+      - name: Show pending migrations
+        run: npx prisma migrate status || true
+        env:
+          DATABASE_URL: ${{ env.TARGET == 'staging' && secrets.STAGING_DATABASE_URL || secrets.DATABASE_URL }}
+
+      - name: Apply migrations
+        if: ${{ !inputs.dry_run }}
         run: npx prisma migrate deploy
         env:
-          DATABASE_URL: ${{ github.ref_name == 'staging' && secrets.STAGING_DATABASE_URL || secrets.DATABASE_URL }}
+          DATABASE_URL: ${{ env.TARGET == 'staging' && secrets.STAGING_DATABASE_URL || secrets.DATABASE_URL }}

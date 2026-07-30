@@ -46,9 +46,8 @@ model Motorcycle {
   @@map("motorcycles")
 }
 
-// How a promotion changes the price, if at all. NONE covers non-price offers
-// (free helmet, free first service) — those still run a countdown, they just
-// leave the price alone.
+// NONE covers non-price offers (free helmet, free service): they still run a
+// countdown, they just leave the price alone.
 enum DiscountType {
   NONE
   FIXED_AMOUNT // discountValue = ringgit off the base price
@@ -56,8 +55,8 @@ enum DiscountType {
   OVERRIDE_PRICE // discountValue = the final price, ignore the base
 }
 
-// Which bikes a promotion applies to. Ordered least- to most-specific; the
-// resolver relies on that ordering to pick a single winner per bike.
+// Ordered least- to most-specific; the resolver relies on that ordering to pick
+// a single winner per bike.
 enum PromotionScope {
   ALL // every bike in the catalogue
   TAG // Motorcycle.tags contains value
@@ -83,8 +82,8 @@ model Promotion {
   discountType  DiscountType @default(NONE)
   discountValue Decimal?
 
-  // Purely presentational: the bike whose photo fronts the promo card when the
-  // promotion has no image of its own. NOT targeting — see `targets`.
+  // Presentational only: fronts the promo card when the promotion has no image
+  // of its own. Not targeting — see `targets`.
   motorcycleId String?
   motorcycle   Motorcycle? @relation(fields: [motorcycleId], references: [id], onDelete: SetNull)
 
@@ -97,9 +96,8 @@ model Promotion {
   @@map("promotions")
 }
 
-// One row per targeting rule. A promotion applies to a bike if any non-exclusion
-// row matches it and no exclusion row does ("all Yamaha except the R15" is two
-// rows). Adding a new targeting dimension later is one enum value, not a
+// A promotion applies to a bike if any non-exclusion row matches and no
+// exclusion row does. A new targeting dimension later is one enum value, not a
 // migration of existing data.
 model PromotionTarget {
   id          String         @id @default(cuid())
@@ -133,47 +131,4 @@ model MotorcycleImage {
   motorcycle   Motorcycle @relation(fields: [motorcycleId], references: [id], onDelete: Cascade)
 
   @@map("motorcycleImages")
-}
-
-model GeneratedReceipt {
-  id              String   @id @default(cuid())
-  receiptNumber   String   @unique
-  purchaseDate    DateTime
-  paymentMethod   String
-  additionalNotes String?
-  total           Decimal
-  pdfUrl          String
-  createdAt       DateTime @default(now())
-
-  customer ReceiptCustomer?
-  items    ReceiptItem[]
-
-  @@map("generatedReceipts")
-}
-
-model ReceiptCustomer {
-  id         String  @id @default(cuid())
-  name       String
-  email      String?
-  address    String?
-  cityPostal String?
-  phone      String?
-
-  receiptId String           @unique
-  receipt   GeneratedReceipt @relation(fields: [receiptId], references: [id], onDelete: Cascade)
-
-  @@map("receiptCustomers")
-}
-
-model ReceiptItem {
-  id          String  @id @default(cuid())
-  description String
-  quantity    Int
-  unitPrice   Decimal
-  amount      Decimal
-
-  receiptId String
-  receipt   GeneratedReceipt @relation(fields: [receiptId], references: [id], onDelete: Cascade)
-
-  @@map("receiptItems")
 }
