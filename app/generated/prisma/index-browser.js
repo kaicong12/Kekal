@@ -184,36 +184,6 @@ exports.Prisma.MotorcycleImageScalarFieldEnum = {
   motorcycleId: 'motorcycleId'
 };
 
-exports.Prisma.GeneratedReceiptScalarFieldEnum = {
-  id: 'id',
-  receiptNumber: 'receiptNumber',
-  purchaseDate: 'purchaseDate',
-  paymentMethod: 'paymentMethod',
-  additionalNotes: 'additionalNotes',
-  total: 'total',
-  pdfUrl: 'pdfUrl',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.ReceiptCustomerScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  address: 'address',
-  cityPostal: 'cityPostal',
-  phone: 'phone',
-  receiptId: 'receiptId'
-};
-
-exports.Prisma.ReceiptItemScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  quantity: 'quantity',
-  unitPrice: 'unitPrice',
-  amount: 'amount',
-  receiptId: 'receiptId'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -260,10 +230,7 @@ exports.Prisma.ModelName = {
   Promotion: 'Promotion',
   PromotionTarget: 'PromotionTarget',
   ProductSyncFile: 'ProductSyncFile',
-  MotorcycleImage: 'MotorcycleImage',
-  GeneratedReceipt: 'GeneratedReceipt',
-  ReceiptCustomer: 'ReceiptCustomer',
-  ReceiptItem: 'ReceiptItem'
+  MotorcycleImage: 'MotorcycleImage'
 };
 
 /**
