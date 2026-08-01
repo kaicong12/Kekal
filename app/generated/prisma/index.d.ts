@@ -29,6 +29,11 @@ export type Motorcycle = $Result.DefaultSelection<Prisma.$MotorcyclePayload>
  */
 export type Promotion = $Result.DefaultSelection<Prisma.$PromotionPayload>
 /**
+ * Model PromotionTarget
+ * 
+ */
+export type PromotionTarget = $Result.DefaultSelection<Prisma.$PromotionTargetPayload>
+/**
  * Model ProductSyncFile
  * 
  */
@@ -38,21 +43,40 @@ export type ProductSyncFile = $Result.DefaultSelection<Prisma.$ProductSyncFilePa
  * 
  */
 export type MotorcycleImage = $Result.DefaultSelection<Prisma.$MotorcycleImagePayload>
+
 /**
- * Model GeneratedReceipt
- * 
+ * Enums
  */
-export type GeneratedReceipt = $Result.DefaultSelection<Prisma.$GeneratedReceiptPayload>
-/**
- * Model ReceiptCustomer
- * 
- */
-export type ReceiptCustomer = $Result.DefaultSelection<Prisma.$ReceiptCustomerPayload>
-/**
- * Model ReceiptItem
- * 
- */
-export type ReceiptItem = $Result.DefaultSelection<Prisma.$ReceiptItemPayload>
+export namespace $Enums {
+  export const DiscountType: {
+  NONE: 'NONE',
+  FIXED_AMOUNT: 'FIXED_AMOUNT',
+  PERCENTAGE: 'PERCENTAGE',
+  OVERRIDE_PRICE: 'OVERRIDE_PRICE'
+};
+
+export type DiscountType = (typeof DiscountType)[keyof typeof DiscountType]
+
+
+export const PromotionScope: {
+  ALL: 'ALL',
+  TAG: 'TAG',
+  BRAND: 'BRAND',
+  MODEL: 'MODEL',
+  MOTORCYCLE: 'MOTORCYCLE'
+};
+
+export type PromotionScope = (typeof PromotionScope)[keyof typeof PromotionScope]
+
+}
+
+export type DiscountType = $Enums.DiscountType
+
+export const DiscountType: typeof $Enums.DiscountType
+
+export type PromotionScope = $Enums.PromotionScope
+
+export const PromotionScope: typeof $Enums.PromotionScope
 
 /**
  * ##  Prisma Client ʲˢ
@@ -206,6 +230,16 @@ export class PrismaClient<
   get promotion(): Prisma.PromotionDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.promotionTarget`: Exposes CRUD operations for the **PromotionTarget** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PromotionTargets
+    * const promotionTargets = await prisma.promotionTarget.findMany()
+    * ```
+    */
+  get promotionTarget(): Prisma.PromotionTargetDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.productSyncFile`: Exposes CRUD operations for the **ProductSyncFile** model.
     * Example usage:
     * ```ts
@@ -224,36 +258,6 @@ export class PrismaClient<
     * ```
     */
   get motorcycleImage(): Prisma.MotorcycleImageDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.generatedReceipt`: Exposes CRUD operations for the **GeneratedReceipt** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more GeneratedReceipts
-    * const generatedReceipts = await prisma.generatedReceipt.findMany()
-    * ```
-    */
-  get generatedReceipt(): Prisma.GeneratedReceiptDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.receiptCustomer`: Exposes CRUD operations for the **ReceiptCustomer** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more ReceiptCustomers
-    * const receiptCustomers = await prisma.receiptCustomer.findMany()
-    * ```
-    */
-  get receiptCustomer(): Prisma.ReceiptCustomerDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.receiptItem`: Exposes CRUD operations for the **ReceiptItem** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more ReceiptItems
-    * const receiptItems = await prisma.receiptItem.findMany()
-    * ```
-    */
-  get receiptItem(): Prisma.ReceiptItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -691,11 +695,9 @@ export namespace Prisma {
     AuthorizedReceiptEmail: 'AuthorizedReceiptEmail',
     Motorcycle: 'Motorcycle',
     Promotion: 'Promotion',
+    PromotionTarget: 'PromotionTarget',
     ProductSyncFile: 'ProductSyncFile',
-    MotorcycleImage: 'MotorcycleImage',
-    GeneratedReceipt: 'GeneratedReceipt',
-    ReceiptCustomer: 'ReceiptCustomer',
-    ReceiptItem: 'ReceiptItem'
+    MotorcycleImage: 'MotorcycleImage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -711,7 +713,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "authorizedReceiptEmail" | "motorcycle" | "promotion" | "productSyncFile" | "motorcycleImage" | "generatedReceipt" | "receiptCustomer" | "receiptItem"
+      modelProps: "authorizedReceiptEmail" | "motorcycle" | "promotion" | "promotionTarget" | "productSyncFile" | "motorcycleImage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -937,6 +939,80 @@ export namespace Prisma {
           }
         }
       }
+      PromotionTarget: {
+        payload: Prisma.$PromotionTargetPayload<ExtArgs>
+        fields: Prisma.PromotionTargetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PromotionTargetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PromotionTargetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          findFirst: {
+            args: Prisma.PromotionTargetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PromotionTargetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          findMany: {
+            args: Prisma.PromotionTargetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>[]
+          }
+          create: {
+            args: Prisma.PromotionTargetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          createMany: {
+            args: Prisma.PromotionTargetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PromotionTargetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>[]
+          }
+          delete: {
+            args: Prisma.PromotionTargetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          update: {
+            args: Prisma.PromotionTargetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          deleteMany: {
+            args: Prisma.PromotionTargetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PromotionTargetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PromotionTargetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>[]
+          }
+          upsert: {
+            args: Prisma.PromotionTargetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromotionTargetPayload>
+          }
+          aggregate: {
+            args: Prisma.PromotionTargetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePromotionTarget>
+          }
+          groupBy: {
+            args: Prisma.PromotionTargetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PromotionTargetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PromotionTargetCountArgs<ExtArgs>
+            result: $Utils.Optional<PromotionTargetCountAggregateOutputType> | number
+          }
+        }
+      }
       ProductSyncFile: {
         payload: Prisma.$ProductSyncFilePayload<ExtArgs>
         fields: Prisma.ProductSyncFileFieldRefs
@@ -1085,228 +1161,6 @@ export namespace Prisma {
           }
         }
       }
-      GeneratedReceipt: {
-        payload: Prisma.$GeneratedReceiptPayload<ExtArgs>
-        fields: Prisma.GeneratedReceiptFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.GeneratedReceiptFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.GeneratedReceiptFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>
-          }
-          findFirst: {
-            args: Prisma.GeneratedReceiptFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.GeneratedReceiptFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>
-          }
-          findMany: {
-            args: Prisma.GeneratedReceiptFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>[]
-          }
-          create: {
-            args: Prisma.GeneratedReceiptCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>
-          }
-          createMany: {
-            args: Prisma.GeneratedReceiptCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.GeneratedReceiptCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>[]
-          }
-          delete: {
-            args: Prisma.GeneratedReceiptDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>
-          }
-          update: {
-            args: Prisma.GeneratedReceiptUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>
-          }
-          deleteMany: {
-            args: Prisma.GeneratedReceiptDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.GeneratedReceiptUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.GeneratedReceiptUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>[]
-          }
-          upsert: {
-            args: Prisma.GeneratedReceiptUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GeneratedReceiptPayload>
-          }
-          aggregate: {
-            args: Prisma.GeneratedReceiptAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateGeneratedReceipt>
-          }
-          groupBy: {
-            args: Prisma.GeneratedReceiptGroupByArgs<ExtArgs>
-            result: $Utils.Optional<GeneratedReceiptGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.GeneratedReceiptCountArgs<ExtArgs>
-            result: $Utils.Optional<GeneratedReceiptCountAggregateOutputType> | number
-          }
-        }
-      }
-      ReceiptCustomer: {
-        payload: Prisma.$ReceiptCustomerPayload<ExtArgs>
-        fields: Prisma.ReceiptCustomerFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ReceiptCustomerFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ReceiptCustomerFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>
-          }
-          findFirst: {
-            args: Prisma.ReceiptCustomerFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ReceiptCustomerFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>
-          }
-          findMany: {
-            args: Prisma.ReceiptCustomerFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>[]
-          }
-          create: {
-            args: Prisma.ReceiptCustomerCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>
-          }
-          createMany: {
-            args: Prisma.ReceiptCustomerCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ReceiptCustomerCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>[]
-          }
-          delete: {
-            args: Prisma.ReceiptCustomerDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>
-          }
-          update: {
-            args: Prisma.ReceiptCustomerUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>
-          }
-          deleteMany: {
-            args: Prisma.ReceiptCustomerDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ReceiptCustomerUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ReceiptCustomerUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>[]
-          }
-          upsert: {
-            args: Prisma.ReceiptCustomerUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptCustomerPayload>
-          }
-          aggregate: {
-            args: Prisma.ReceiptCustomerAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateReceiptCustomer>
-          }
-          groupBy: {
-            args: Prisma.ReceiptCustomerGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ReceiptCustomerGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ReceiptCustomerCountArgs<ExtArgs>
-            result: $Utils.Optional<ReceiptCustomerCountAggregateOutputType> | number
-          }
-        }
-      }
-      ReceiptItem: {
-        payload: Prisma.$ReceiptItemPayload<ExtArgs>
-        fields: Prisma.ReceiptItemFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ReceiptItemFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ReceiptItemFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>
-          }
-          findFirst: {
-            args: Prisma.ReceiptItemFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ReceiptItemFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>
-          }
-          findMany: {
-            args: Prisma.ReceiptItemFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>[]
-          }
-          create: {
-            args: Prisma.ReceiptItemCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>
-          }
-          createMany: {
-            args: Prisma.ReceiptItemCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ReceiptItemCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>[]
-          }
-          delete: {
-            args: Prisma.ReceiptItemDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>
-          }
-          update: {
-            args: Prisma.ReceiptItemUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>
-          }
-          deleteMany: {
-            args: Prisma.ReceiptItemDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ReceiptItemUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ReceiptItemUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>[]
-          }
-          upsert: {
-            args: Prisma.ReceiptItemUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceiptItemPayload>
-          }
-          aggregate: {
-            args: Prisma.ReceiptItemAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateReceiptItem>
-          }
-          groupBy: {
-            args: Prisma.ReceiptItemGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ReceiptItemGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ReceiptItemCountArgs<ExtArgs>
-            result: $Utils.Optional<ReceiptItemCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1418,11 +1272,9 @@ export namespace Prisma {
     authorizedReceiptEmail?: AuthorizedReceiptEmailOmit
     motorcycle?: MotorcycleOmit
     promotion?: PromotionOmit
+    promotionTarget?: PromotionTargetOmit
     productSyncFile?: ProductSyncFileOmit
     motorcycleImage?: MotorcycleImageOmit
-    generatedReceipt?: GeneratedReceiptOmit
-    receiptCustomer?: ReceiptCustomerOmit
-    receiptItem?: ReceiptItemOmit
   }
 
   /* Types for Logging */
@@ -1539,33 +1391,33 @@ export namespace Prisma {
 
 
   /**
-   * Count Type GeneratedReceiptCountOutputType
+   * Count Type PromotionCountOutputType
    */
 
-  export type GeneratedReceiptCountOutputType = {
-    items: number
+  export type PromotionCountOutputType = {
+    targets: number
   }
 
-  export type GeneratedReceiptCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    items?: boolean | GeneratedReceiptCountOutputTypeCountItemsArgs
+  export type PromotionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    targets?: boolean | PromotionCountOutputTypeCountTargetsArgs
   }
 
   // Custom InputTypes
   /**
-   * GeneratedReceiptCountOutputType without action
+   * PromotionCountOutputType without action
    */
-  export type GeneratedReceiptCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PromotionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GeneratedReceiptCountOutputType
+     * Select specific fields to fetch from the PromotionCountOutputType
      */
-    select?: GeneratedReceiptCountOutputTypeSelect<ExtArgs> | null
+    select?: PromotionCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * GeneratedReceiptCountOutputType without action
+   * PromotionCountOutputType without action
    */
-  export type GeneratedReceiptCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReceiptItemWhereInput
+  export type PromotionCountOutputTypeCountTargetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromotionTargetWhereInput
   }
 
 
@@ -3802,10 +3654,12 @@ export namespace Prisma {
 
   export type PromotionAvgAggregateOutputType = {
     displayOrder: number | null
+    discountValue: Decimal | null
   }
 
   export type PromotionSumAggregateOutputType = {
     displayOrder: number | null
+    discountValue: Decimal | null
   }
 
   export type PromotionMinAggregateOutputType = {
@@ -3821,6 +3675,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     displayOrder: number | null
+    discountType: $Enums.DiscountType | null
+    discountValue: Decimal | null
     motorcycleId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3839,6 +3695,8 @@ export namespace Prisma {
     startDate: Date | null
     endDate: Date | null
     displayOrder: number | null
+    discountType: $Enums.DiscountType | null
+    discountValue: Decimal | null
     motorcycleId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3857,6 +3715,8 @@ export namespace Prisma {
     startDate: number
     endDate: number
     displayOrder: number
+    discountType: number
+    discountValue: number
     motorcycleId: number
     createdAt: number
     updatedAt: number
@@ -3866,10 +3726,12 @@ export namespace Prisma {
 
   export type PromotionAvgAggregateInputType = {
     displayOrder?: true
+    discountValue?: true
   }
 
   export type PromotionSumAggregateInputType = {
     displayOrder?: true
+    discountValue?: true
   }
 
   export type PromotionMinAggregateInputType = {
@@ -3885,6 +3747,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     displayOrder?: true
+    discountType?: true
+    discountValue?: true
     motorcycleId?: true
     createdAt?: true
     updatedAt?: true
@@ -3903,6 +3767,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     displayOrder?: true
+    discountType?: true
+    discountValue?: true
     motorcycleId?: true
     createdAt?: true
     updatedAt?: true
@@ -3921,6 +3787,8 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     displayOrder?: true
+    discountType?: true
+    discountValue?: true
     motorcycleId?: true
     createdAt?: true
     updatedAt?: true
@@ -4026,6 +3894,8 @@ export namespace Prisma {
     startDate: Date
     endDate: Date
     displayOrder: number
+    discountType: $Enums.DiscountType
+    discountValue: Decimal | null
     motorcycleId: string | null
     createdAt: Date
     updatedAt: Date
@@ -4063,10 +3933,14 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     displayOrder?: boolean
+    discountType?: boolean
+    discountValue?: boolean
     motorcycleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     motorcycle?: boolean | Promotion$motorcycleArgs<ExtArgs>
+    targets?: boolean | Promotion$targetsArgs<ExtArgs>
+    _count?: boolean | PromotionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["promotion"]>
 
   export type PromotionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4082,6 +3956,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     displayOrder?: boolean
+    discountType?: boolean
+    discountValue?: boolean
     motorcycleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4101,6 +3977,8 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     displayOrder?: boolean
+    discountType?: boolean
+    discountValue?: boolean
     motorcycleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4120,14 +3998,18 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     displayOrder?: boolean
+    discountType?: boolean
+    discountValue?: boolean
     motorcycleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PromotionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subtitle" | "description" | "imageUrl" | "ctaText" | "whatsappMessage" | "isFeatured" | "isActive" | "startDate" | "endDate" | "displayOrder" | "motorcycleId" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
+  export type PromotionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subtitle" | "description" | "imageUrl" | "ctaText" | "whatsappMessage" | "isFeatured" | "isActive" | "startDate" | "endDate" | "displayOrder" | "discountType" | "discountValue" | "motorcycleId" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
   export type PromotionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     motorcycle?: boolean | Promotion$motorcycleArgs<ExtArgs>
+    targets?: boolean | Promotion$targetsArgs<ExtArgs>
+    _count?: boolean | PromotionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PromotionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     motorcycle?: boolean | Promotion$motorcycleArgs<ExtArgs>
@@ -4140,6 +4022,7 @@ export namespace Prisma {
     name: "Promotion"
     objects: {
       motorcycle: Prisma.$MotorcyclePayload<ExtArgs> | null
+      targets: Prisma.$PromotionTargetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4154,6 +4037,8 @@ export namespace Prisma {
       startDate: Date
       endDate: Date
       displayOrder: number
+      discountType: $Enums.DiscountType
+      discountValue: Prisma.Decimal | null
       motorcycleId: string | null
       createdAt: Date
       updatedAt: Date
@@ -4552,6 +4437,7 @@ export namespace Prisma {
   export interface Prisma__PromotionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     motorcycle<T extends Promotion$motorcycleArgs<ExtArgs> = {}>(args?: Subset<T, Promotion$motorcycleArgs<ExtArgs>>): Prisma__MotorcycleClient<$Result.GetResult<Prisma.$MotorcyclePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    targets<T extends Promotion$targetsArgs<ExtArgs> = {}>(args?: Subset<T, Promotion$targetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4593,6 +4479,8 @@ export namespace Prisma {
     readonly startDate: FieldRef<"Promotion", 'DateTime'>
     readonly endDate: FieldRef<"Promotion", 'DateTime'>
     readonly displayOrder: FieldRef<"Promotion", 'Int'>
+    readonly discountType: FieldRef<"Promotion", 'DiscountType'>
+    readonly discountValue: FieldRef<"Promotion", 'Decimal'>
     readonly motorcycleId: FieldRef<"Promotion", 'String'>
     readonly createdAt: FieldRef<"Promotion", 'DateTime'>
     readonly updatedAt: FieldRef<"Promotion", 'DateTime'>
@@ -5016,6 +4904,30 @@ export namespace Prisma {
   }
 
   /**
+   * Promotion.targets
+   */
+  export type Promotion$targetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    where?: PromotionTargetWhereInput
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    cursor?: PromotionTargetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PromotionTargetScalarFieldEnum | PromotionTargetScalarFieldEnum[]
+  }
+
+  /**
    * Promotion without action
    */
   export type PromotionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5031,6 +4943,1069 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PromotionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PromotionTarget
+   */
+
+  export type AggregatePromotionTarget = {
+    _count: PromotionTargetCountAggregateOutputType | null
+    _min: PromotionTargetMinAggregateOutputType | null
+    _max: PromotionTargetMaxAggregateOutputType | null
+  }
+
+  export type PromotionTargetMinAggregateOutputType = {
+    id: string | null
+    scope: $Enums.PromotionScope | null
+    value: string | null
+    isExclusion: boolean | null
+    promotionId: string | null
+  }
+
+  export type PromotionTargetMaxAggregateOutputType = {
+    id: string | null
+    scope: $Enums.PromotionScope | null
+    value: string | null
+    isExclusion: boolean | null
+    promotionId: string | null
+  }
+
+  export type PromotionTargetCountAggregateOutputType = {
+    id: number
+    scope: number
+    value: number
+    isExclusion: number
+    promotionId: number
+    _all: number
+  }
+
+
+  export type PromotionTargetMinAggregateInputType = {
+    id?: true
+    scope?: true
+    value?: true
+    isExclusion?: true
+    promotionId?: true
+  }
+
+  export type PromotionTargetMaxAggregateInputType = {
+    id?: true
+    scope?: true
+    value?: true
+    isExclusion?: true
+    promotionId?: true
+  }
+
+  export type PromotionTargetCountAggregateInputType = {
+    id?: true
+    scope?: true
+    value?: true
+    isExclusion?: true
+    promotionId?: true
+    _all?: true
+  }
+
+  export type PromotionTargetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PromotionTarget to aggregate.
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromotionTargets to fetch.
+     */
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PromotionTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromotionTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromotionTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PromotionTargets
+    **/
+    _count?: true | PromotionTargetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PromotionTargetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PromotionTargetMaxAggregateInputType
+  }
+
+  export type GetPromotionTargetAggregateType<T extends PromotionTargetAggregateArgs> = {
+        [P in keyof T & keyof AggregatePromotionTarget]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePromotionTarget[P]>
+      : GetScalarType<T[P], AggregatePromotionTarget[P]>
+  }
+
+
+
+
+  export type PromotionTargetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromotionTargetWhereInput
+    orderBy?: PromotionTargetOrderByWithAggregationInput | PromotionTargetOrderByWithAggregationInput[]
+    by: PromotionTargetScalarFieldEnum[] | PromotionTargetScalarFieldEnum
+    having?: PromotionTargetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PromotionTargetCountAggregateInputType | true
+    _min?: PromotionTargetMinAggregateInputType
+    _max?: PromotionTargetMaxAggregateInputType
+  }
+
+  export type PromotionTargetGroupByOutputType = {
+    id: string
+    scope: $Enums.PromotionScope
+    value: string | null
+    isExclusion: boolean
+    promotionId: string
+    _count: PromotionTargetCountAggregateOutputType | null
+    _min: PromotionTargetMinAggregateOutputType | null
+    _max: PromotionTargetMaxAggregateOutputType | null
+  }
+
+  type GetPromotionTargetGroupByPayload<T extends PromotionTargetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PromotionTargetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PromotionTargetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PromotionTargetGroupByOutputType[P]>
+            : GetScalarType<T[P], PromotionTargetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PromotionTargetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scope?: boolean
+    value?: boolean
+    isExclusion?: boolean
+    promotionId?: boolean
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promotionTarget"]>
+
+  export type PromotionTargetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scope?: boolean
+    value?: boolean
+    isExclusion?: boolean
+    promotionId?: boolean
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promotionTarget"]>
+
+  export type PromotionTargetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scope?: boolean
+    value?: boolean
+    isExclusion?: boolean
+    promotionId?: boolean
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promotionTarget"]>
+
+  export type PromotionTargetSelectScalar = {
+    id?: boolean
+    scope?: boolean
+    value?: boolean
+    isExclusion?: boolean
+    promotionId?: boolean
+  }
+
+  export type PromotionTargetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "scope" | "value" | "isExclusion" | "promotionId", ExtArgs["result"]["promotionTarget"]>
+  export type PromotionTargetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }
+  export type PromotionTargetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }
+  export type PromotionTargetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
+  }
+
+  export type $PromotionTargetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PromotionTarget"
+    objects: {
+      promotion: Prisma.$PromotionPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      scope: $Enums.PromotionScope
+      value: string | null
+      isExclusion: boolean
+      promotionId: string
+    }, ExtArgs["result"]["promotionTarget"]>
+    composites: {}
+  }
+
+  type PromotionTargetGetPayload<S extends boolean | null | undefined | PromotionTargetDefaultArgs> = $Result.GetResult<Prisma.$PromotionTargetPayload, S>
+
+  type PromotionTargetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PromotionTargetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PromotionTargetCountAggregateInputType | true
+    }
+
+  export interface PromotionTargetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PromotionTarget'], meta: { name: 'PromotionTarget' } }
+    /**
+     * Find zero or one PromotionTarget that matches the filter.
+     * @param {PromotionTargetFindUniqueArgs} args - Arguments to find a PromotionTarget
+     * @example
+     * // Get one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PromotionTargetFindUniqueArgs>(args: SelectSubset<T, PromotionTargetFindUniqueArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PromotionTarget that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PromotionTargetFindUniqueOrThrowArgs} args - Arguments to find a PromotionTarget
+     * @example
+     * // Get one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PromotionTargetFindUniqueOrThrowArgs>(args: SelectSubset<T, PromotionTargetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PromotionTarget that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetFindFirstArgs} args - Arguments to find a PromotionTarget
+     * @example
+     * // Get one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PromotionTargetFindFirstArgs>(args?: SelectSubset<T, PromotionTargetFindFirstArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PromotionTarget that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetFindFirstOrThrowArgs} args - Arguments to find a PromotionTarget
+     * @example
+     * // Get one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PromotionTargetFindFirstOrThrowArgs>(args?: SelectSubset<T, PromotionTargetFindFirstOrThrowArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PromotionTargets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PromotionTargets
+     * const promotionTargets = await prisma.promotionTarget.findMany()
+     * 
+     * // Get first 10 PromotionTargets
+     * const promotionTargets = await prisma.promotionTarget.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const promotionTargetWithIdOnly = await prisma.promotionTarget.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PromotionTargetFindManyArgs>(args?: SelectSubset<T, PromotionTargetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PromotionTarget.
+     * @param {PromotionTargetCreateArgs} args - Arguments to create a PromotionTarget.
+     * @example
+     * // Create one PromotionTarget
+     * const PromotionTarget = await prisma.promotionTarget.create({
+     *   data: {
+     *     // ... data to create a PromotionTarget
+     *   }
+     * })
+     * 
+     */
+    create<T extends PromotionTargetCreateArgs>(args: SelectSubset<T, PromotionTargetCreateArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PromotionTargets.
+     * @param {PromotionTargetCreateManyArgs} args - Arguments to create many PromotionTargets.
+     * @example
+     * // Create many PromotionTargets
+     * const promotionTarget = await prisma.promotionTarget.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PromotionTargetCreateManyArgs>(args?: SelectSubset<T, PromotionTargetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PromotionTargets and returns the data saved in the database.
+     * @param {PromotionTargetCreateManyAndReturnArgs} args - Arguments to create many PromotionTargets.
+     * @example
+     * // Create many PromotionTargets
+     * const promotionTarget = await prisma.promotionTarget.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PromotionTargets and only return the `id`
+     * const promotionTargetWithIdOnly = await prisma.promotionTarget.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PromotionTargetCreateManyAndReturnArgs>(args?: SelectSubset<T, PromotionTargetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PromotionTarget.
+     * @param {PromotionTargetDeleteArgs} args - Arguments to delete one PromotionTarget.
+     * @example
+     * // Delete one PromotionTarget
+     * const PromotionTarget = await prisma.promotionTarget.delete({
+     *   where: {
+     *     // ... filter to delete one PromotionTarget
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PromotionTargetDeleteArgs>(args: SelectSubset<T, PromotionTargetDeleteArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PromotionTarget.
+     * @param {PromotionTargetUpdateArgs} args - Arguments to update one PromotionTarget.
+     * @example
+     * // Update one PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PromotionTargetUpdateArgs>(args: SelectSubset<T, PromotionTargetUpdateArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PromotionTargets.
+     * @param {PromotionTargetDeleteManyArgs} args - Arguments to filter PromotionTargets to delete.
+     * @example
+     * // Delete a few PromotionTargets
+     * const { count } = await prisma.promotionTarget.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PromotionTargetDeleteManyArgs>(args?: SelectSubset<T, PromotionTargetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PromotionTargets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PromotionTargets
+     * const promotionTarget = await prisma.promotionTarget.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PromotionTargetUpdateManyArgs>(args: SelectSubset<T, PromotionTargetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PromotionTargets and returns the data updated in the database.
+     * @param {PromotionTargetUpdateManyAndReturnArgs} args - Arguments to update many PromotionTargets.
+     * @example
+     * // Update many PromotionTargets
+     * const promotionTarget = await prisma.promotionTarget.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PromotionTargets and only return the `id`
+     * const promotionTargetWithIdOnly = await prisma.promotionTarget.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PromotionTargetUpdateManyAndReturnArgs>(args: SelectSubset<T, PromotionTargetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PromotionTarget.
+     * @param {PromotionTargetUpsertArgs} args - Arguments to update or create a PromotionTarget.
+     * @example
+     * // Update or create a PromotionTarget
+     * const promotionTarget = await prisma.promotionTarget.upsert({
+     *   create: {
+     *     // ... data to create a PromotionTarget
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PromotionTarget we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PromotionTargetUpsertArgs>(args: SelectSubset<T, PromotionTargetUpsertArgs<ExtArgs>>): Prisma__PromotionTargetClient<$Result.GetResult<Prisma.$PromotionTargetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PromotionTargets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetCountArgs} args - Arguments to filter PromotionTargets to count.
+     * @example
+     * // Count the number of PromotionTargets
+     * const count = await prisma.promotionTarget.count({
+     *   where: {
+     *     // ... the filter for the PromotionTargets we want to count
+     *   }
+     * })
+    **/
+    count<T extends PromotionTargetCountArgs>(
+      args?: Subset<T, PromotionTargetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PromotionTargetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PromotionTarget.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PromotionTargetAggregateArgs>(args: Subset<T, PromotionTargetAggregateArgs>): Prisma.PrismaPromise<GetPromotionTargetAggregateType<T>>
+
+    /**
+     * Group by PromotionTarget.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromotionTargetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PromotionTargetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PromotionTargetGroupByArgs['orderBy'] }
+        : { orderBy?: PromotionTargetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PromotionTargetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPromotionTargetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PromotionTarget model
+   */
+  readonly fields: PromotionTargetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PromotionTarget.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PromotionTargetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    promotion<T extends PromotionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PromotionDefaultArgs<ExtArgs>>): Prisma__PromotionClient<$Result.GetResult<Prisma.$PromotionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PromotionTarget model
+   */
+  interface PromotionTargetFieldRefs {
+    readonly id: FieldRef<"PromotionTarget", 'String'>
+    readonly scope: FieldRef<"PromotionTarget", 'PromotionScope'>
+    readonly value: FieldRef<"PromotionTarget", 'String'>
+    readonly isExclusion: FieldRef<"PromotionTarget", 'Boolean'>
+    readonly promotionId: FieldRef<"PromotionTarget", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PromotionTarget findUnique
+   */
+  export type PromotionTargetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTarget to fetch.
+     */
+    where: PromotionTargetWhereUniqueInput
+  }
+
+  /**
+   * PromotionTarget findUniqueOrThrow
+   */
+  export type PromotionTargetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTarget to fetch.
+     */
+    where: PromotionTargetWhereUniqueInput
+  }
+
+  /**
+   * PromotionTarget findFirst
+   */
+  export type PromotionTargetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTarget to fetch.
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromotionTargets to fetch.
+     */
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PromotionTargets.
+     */
+    cursor?: PromotionTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromotionTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromotionTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromotionTargets.
+     */
+    distinct?: PromotionTargetScalarFieldEnum | PromotionTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PromotionTarget findFirstOrThrow
+   */
+  export type PromotionTargetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTarget to fetch.
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromotionTargets to fetch.
+     */
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PromotionTargets.
+     */
+    cursor?: PromotionTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromotionTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromotionTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromotionTargets.
+     */
+    distinct?: PromotionTargetScalarFieldEnum | PromotionTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PromotionTarget findMany
+   */
+  export type PromotionTargetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PromotionTargets to fetch.
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromotionTargets to fetch.
+     */
+    orderBy?: PromotionTargetOrderByWithRelationInput | PromotionTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PromotionTargets.
+     */
+    cursor?: PromotionTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromotionTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromotionTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromotionTargets.
+     */
+    distinct?: PromotionTargetScalarFieldEnum | PromotionTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PromotionTarget create
+   */
+  export type PromotionTargetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PromotionTarget.
+     */
+    data: XOR<PromotionTargetCreateInput, PromotionTargetUncheckedCreateInput>
+  }
+
+  /**
+   * PromotionTarget createMany
+   */
+  export type PromotionTargetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PromotionTargets.
+     */
+    data: PromotionTargetCreateManyInput | PromotionTargetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PromotionTarget createManyAndReturn
+   */
+  export type PromotionTargetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * The data used to create many PromotionTargets.
+     */
+    data: PromotionTargetCreateManyInput | PromotionTargetCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PromotionTarget update
+   */
+  export type PromotionTargetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PromotionTarget.
+     */
+    data: XOR<PromotionTargetUpdateInput, PromotionTargetUncheckedUpdateInput>
+    /**
+     * Choose, which PromotionTarget to update.
+     */
+    where: PromotionTargetWhereUniqueInput
+  }
+
+  /**
+   * PromotionTarget updateMany
+   */
+  export type PromotionTargetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PromotionTargets.
+     */
+    data: XOR<PromotionTargetUpdateManyMutationInput, PromotionTargetUncheckedUpdateManyInput>
+    /**
+     * Filter which PromotionTargets to update
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * Limit how many PromotionTargets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PromotionTarget updateManyAndReturn
+   */
+  export type PromotionTargetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * The data used to update PromotionTargets.
+     */
+    data: XOR<PromotionTargetUpdateManyMutationInput, PromotionTargetUncheckedUpdateManyInput>
+    /**
+     * Filter which PromotionTargets to update
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * Limit how many PromotionTargets to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PromotionTarget upsert
+   */
+  export type PromotionTargetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PromotionTarget to update in case it exists.
+     */
+    where: PromotionTargetWhereUniqueInput
+    /**
+     * In case the PromotionTarget found by the `where` argument doesn't exist, create a new PromotionTarget with this data.
+     */
+    create: XOR<PromotionTargetCreateInput, PromotionTargetUncheckedCreateInput>
+    /**
+     * In case the PromotionTarget was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PromotionTargetUpdateInput, PromotionTargetUncheckedUpdateInput>
+  }
+
+  /**
+   * PromotionTarget delete
+   */
+  export type PromotionTargetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
+    /**
+     * Filter which PromotionTarget to delete.
+     */
+    where: PromotionTargetWhereUniqueInput
+  }
+
+  /**
+   * PromotionTarget deleteMany
+   */
+  export type PromotionTargetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PromotionTargets to delete
+     */
+    where?: PromotionTargetWhereInput
+    /**
+     * Limit how many PromotionTargets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PromotionTarget without action
+   */
+  export type PromotionTargetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromotionTarget
+     */
+    select?: PromotionTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromotionTarget
+     */
+    omit?: PromotionTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionTargetInclude<ExtArgs> | null
   }
 
 
@@ -7106,3384 +8081,6 @@ export namespace Prisma {
 
 
   /**
-   * Model GeneratedReceipt
-   */
-
-  export type AggregateGeneratedReceipt = {
-    _count: GeneratedReceiptCountAggregateOutputType | null
-    _avg: GeneratedReceiptAvgAggregateOutputType | null
-    _sum: GeneratedReceiptSumAggregateOutputType | null
-    _min: GeneratedReceiptMinAggregateOutputType | null
-    _max: GeneratedReceiptMaxAggregateOutputType | null
-  }
-
-  export type GeneratedReceiptAvgAggregateOutputType = {
-    total: Decimal | null
-  }
-
-  export type GeneratedReceiptSumAggregateOutputType = {
-    total: Decimal | null
-  }
-
-  export type GeneratedReceiptMinAggregateOutputType = {
-    id: string | null
-    receiptNumber: string | null
-    purchaseDate: Date | null
-    paymentMethod: string | null
-    additionalNotes: string | null
-    total: Decimal | null
-    pdfUrl: string | null
-    createdAt: Date | null
-  }
-
-  export type GeneratedReceiptMaxAggregateOutputType = {
-    id: string | null
-    receiptNumber: string | null
-    purchaseDate: Date | null
-    paymentMethod: string | null
-    additionalNotes: string | null
-    total: Decimal | null
-    pdfUrl: string | null
-    createdAt: Date | null
-  }
-
-  export type GeneratedReceiptCountAggregateOutputType = {
-    id: number
-    receiptNumber: number
-    purchaseDate: number
-    paymentMethod: number
-    additionalNotes: number
-    total: number
-    pdfUrl: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type GeneratedReceiptAvgAggregateInputType = {
-    total?: true
-  }
-
-  export type GeneratedReceiptSumAggregateInputType = {
-    total?: true
-  }
-
-  export type GeneratedReceiptMinAggregateInputType = {
-    id?: true
-    receiptNumber?: true
-    purchaseDate?: true
-    paymentMethod?: true
-    additionalNotes?: true
-    total?: true
-    pdfUrl?: true
-    createdAt?: true
-  }
-
-  export type GeneratedReceiptMaxAggregateInputType = {
-    id?: true
-    receiptNumber?: true
-    purchaseDate?: true
-    paymentMethod?: true
-    additionalNotes?: true
-    total?: true
-    pdfUrl?: true
-    createdAt?: true
-  }
-
-  export type GeneratedReceiptCountAggregateInputType = {
-    id?: true
-    receiptNumber?: true
-    purchaseDate?: true
-    paymentMethod?: true
-    additionalNotes?: true
-    total?: true
-    pdfUrl?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type GeneratedReceiptAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which GeneratedReceipt to aggregate.
-     */
-    where?: GeneratedReceiptWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GeneratedReceipts to fetch.
-     */
-    orderBy?: GeneratedReceiptOrderByWithRelationInput | GeneratedReceiptOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: GeneratedReceiptWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GeneratedReceipts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GeneratedReceipts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned GeneratedReceipts
-    **/
-    _count?: true | GeneratedReceiptCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: GeneratedReceiptAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: GeneratedReceiptSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: GeneratedReceiptMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: GeneratedReceiptMaxAggregateInputType
-  }
-
-  export type GetGeneratedReceiptAggregateType<T extends GeneratedReceiptAggregateArgs> = {
-        [P in keyof T & keyof AggregateGeneratedReceipt]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateGeneratedReceipt[P]>
-      : GetScalarType<T[P], AggregateGeneratedReceipt[P]>
-  }
-
-
-
-
-  export type GeneratedReceiptGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GeneratedReceiptWhereInput
-    orderBy?: GeneratedReceiptOrderByWithAggregationInput | GeneratedReceiptOrderByWithAggregationInput[]
-    by: GeneratedReceiptScalarFieldEnum[] | GeneratedReceiptScalarFieldEnum
-    having?: GeneratedReceiptScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: GeneratedReceiptCountAggregateInputType | true
-    _avg?: GeneratedReceiptAvgAggregateInputType
-    _sum?: GeneratedReceiptSumAggregateInputType
-    _min?: GeneratedReceiptMinAggregateInputType
-    _max?: GeneratedReceiptMaxAggregateInputType
-  }
-
-  export type GeneratedReceiptGroupByOutputType = {
-    id: string
-    receiptNumber: string
-    purchaseDate: Date
-    paymentMethod: string
-    additionalNotes: string | null
-    total: Decimal
-    pdfUrl: string
-    createdAt: Date
-    _count: GeneratedReceiptCountAggregateOutputType | null
-    _avg: GeneratedReceiptAvgAggregateOutputType | null
-    _sum: GeneratedReceiptSumAggregateOutputType | null
-    _min: GeneratedReceiptMinAggregateOutputType | null
-    _max: GeneratedReceiptMaxAggregateOutputType | null
-  }
-
-  type GetGeneratedReceiptGroupByPayload<T extends GeneratedReceiptGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<GeneratedReceiptGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof GeneratedReceiptGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], GeneratedReceiptGroupByOutputType[P]>
-            : GetScalarType<T[P], GeneratedReceiptGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type GeneratedReceiptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    receiptNumber?: boolean
-    purchaseDate?: boolean
-    paymentMethod?: boolean
-    additionalNotes?: boolean
-    total?: boolean
-    pdfUrl?: boolean
-    createdAt?: boolean
-    customer?: boolean | GeneratedReceipt$customerArgs<ExtArgs>
-    items?: boolean | GeneratedReceipt$itemsArgs<ExtArgs>
-    _count?: boolean | GeneratedReceiptCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["generatedReceipt"]>
-
-  export type GeneratedReceiptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    receiptNumber?: boolean
-    purchaseDate?: boolean
-    paymentMethod?: boolean
-    additionalNotes?: boolean
-    total?: boolean
-    pdfUrl?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["generatedReceipt"]>
-
-  export type GeneratedReceiptSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    receiptNumber?: boolean
-    purchaseDate?: boolean
-    paymentMethod?: boolean
-    additionalNotes?: boolean
-    total?: boolean
-    pdfUrl?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["generatedReceipt"]>
-
-  export type GeneratedReceiptSelectScalar = {
-    id?: boolean
-    receiptNumber?: boolean
-    purchaseDate?: boolean
-    paymentMethod?: boolean
-    additionalNotes?: boolean
-    total?: boolean
-    pdfUrl?: boolean
-    createdAt?: boolean
-  }
-
-  export type GeneratedReceiptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "receiptNumber" | "purchaseDate" | "paymentMethod" | "additionalNotes" | "total" | "pdfUrl" | "createdAt", ExtArgs["result"]["generatedReceipt"]>
-  export type GeneratedReceiptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    customer?: boolean | GeneratedReceipt$customerArgs<ExtArgs>
-    items?: boolean | GeneratedReceipt$itemsArgs<ExtArgs>
-    _count?: boolean | GeneratedReceiptCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type GeneratedReceiptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type GeneratedReceiptIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $GeneratedReceiptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "GeneratedReceipt"
-    objects: {
-      customer: Prisma.$ReceiptCustomerPayload<ExtArgs> | null
-      items: Prisma.$ReceiptItemPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      receiptNumber: string
-      purchaseDate: Date
-      paymentMethod: string
-      additionalNotes: string | null
-      total: Prisma.Decimal
-      pdfUrl: string
-      createdAt: Date
-    }, ExtArgs["result"]["generatedReceipt"]>
-    composites: {}
-  }
-
-  type GeneratedReceiptGetPayload<S extends boolean | null | undefined | GeneratedReceiptDefaultArgs> = $Result.GetResult<Prisma.$GeneratedReceiptPayload, S>
-
-  type GeneratedReceiptCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<GeneratedReceiptFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: GeneratedReceiptCountAggregateInputType | true
-    }
-
-  export interface GeneratedReceiptDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GeneratedReceipt'], meta: { name: 'GeneratedReceipt' } }
-    /**
-     * Find zero or one GeneratedReceipt that matches the filter.
-     * @param {GeneratedReceiptFindUniqueArgs} args - Arguments to find a GeneratedReceipt
-     * @example
-     * // Get one GeneratedReceipt
-     * const generatedReceipt = await prisma.generatedReceipt.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends GeneratedReceiptFindUniqueArgs>(args: SelectSubset<T, GeneratedReceiptFindUniqueArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one GeneratedReceipt that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {GeneratedReceiptFindUniqueOrThrowArgs} args - Arguments to find a GeneratedReceipt
-     * @example
-     * // Get one GeneratedReceipt
-     * const generatedReceipt = await prisma.generatedReceipt.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends GeneratedReceiptFindUniqueOrThrowArgs>(args: SelectSubset<T, GeneratedReceiptFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first GeneratedReceipt that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GeneratedReceiptFindFirstArgs} args - Arguments to find a GeneratedReceipt
-     * @example
-     * // Get one GeneratedReceipt
-     * const generatedReceipt = await prisma.generatedReceipt.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends GeneratedReceiptFindFirstArgs>(args?: SelectSubset<T, GeneratedReceiptFindFirstArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first GeneratedReceipt that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GeneratedReceiptFindFirstOrThrowArgs} args - Arguments to find a GeneratedReceipt
-     * @example
-     * // Get one GeneratedReceipt
-     * const generatedReceipt = await prisma.generatedReceipt.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends GeneratedReceiptFindFirstOrThrowArgs>(args?: SelectSubset<T, GeneratedReceiptFindFirstOrThrowArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more GeneratedReceipts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GeneratedReceiptFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all GeneratedReceipts
-     * const generatedReceipts = await prisma.generatedReceipt.findMany()
-     * 
-     * // Get first 10 GeneratedReceipts
-     * const generatedReceipts = await prisma.generatedReceipt.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const generatedReceiptWithIdOnly = await prisma.generatedReceipt.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends GeneratedReceiptFindManyArgs>(args?: SelectSubset<T, GeneratedReceiptFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a GeneratedReceipt.
-     * @param {GeneratedReceiptCreateArgs} args - Arguments to create a GeneratedReceipt.
-     * @example
-     * // Create one GeneratedReceipt
-     * const GeneratedReceipt = await prisma.generatedReceipt.create({
-     *   data: {
-     *     // ... data to create a GeneratedReceipt
-     *   }
-     * })
-     * 
-     */
-    create<T extends GeneratedReceiptCreateArgs>(args: SelectSubset<T, GeneratedReceiptCreateArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many GeneratedReceipts.
-     * @param {GeneratedReceiptCreateManyArgs} args - Arguments to create many GeneratedReceipts.
-     * @example
-     * // Create many GeneratedReceipts
-     * const generatedReceipt = await prisma.generatedReceipt.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends GeneratedReceiptCreateManyArgs>(args?: SelectSubset<T, GeneratedReceiptCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many GeneratedReceipts and returns the data saved in the database.
-     * @param {GeneratedReceiptCreateManyAndReturnArgs} args - Arguments to create many GeneratedReceipts.
-     * @example
-     * // Create many GeneratedReceipts
-     * const generatedReceipt = await prisma.generatedReceipt.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many GeneratedReceipts and only return the `id`
-     * const generatedReceiptWithIdOnly = await prisma.generatedReceipt.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends GeneratedReceiptCreateManyAndReturnArgs>(args?: SelectSubset<T, GeneratedReceiptCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a GeneratedReceipt.
-     * @param {GeneratedReceiptDeleteArgs} args - Arguments to delete one GeneratedReceipt.
-     * @example
-     * // Delete one GeneratedReceipt
-     * const GeneratedReceipt = await prisma.generatedReceipt.delete({
-     *   where: {
-     *     // ... filter to delete one GeneratedReceipt
-     *   }
-     * })
-     * 
-     */
-    delete<T extends GeneratedReceiptDeleteArgs>(args: SelectSubset<T, GeneratedReceiptDeleteArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one GeneratedReceipt.
-     * @param {GeneratedReceiptUpdateArgs} args - Arguments to update one GeneratedReceipt.
-     * @example
-     * // Update one GeneratedReceipt
-     * const generatedReceipt = await prisma.generatedReceipt.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends GeneratedReceiptUpdateArgs>(args: SelectSubset<T, GeneratedReceiptUpdateArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more GeneratedReceipts.
-     * @param {GeneratedReceiptDeleteManyArgs} args - Arguments to filter GeneratedReceipts to delete.
-     * @example
-     * // Delete a few GeneratedReceipts
-     * const { count } = await prisma.generatedReceipt.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends GeneratedReceiptDeleteManyArgs>(args?: SelectSubset<T, GeneratedReceiptDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more GeneratedReceipts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GeneratedReceiptUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many GeneratedReceipts
-     * const generatedReceipt = await prisma.generatedReceipt.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends GeneratedReceiptUpdateManyArgs>(args: SelectSubset<T, GeneratedReceiptUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more GeneratedReceipts and returns the data updated in the database.
-     * @param {GeneratedReceiptUpdateManyAndReturnArgs} args - Arguments to update many GeneratedReceipts.
-     * @example
-     * // Update many GeneratedReceipts
-     * const generatedReceipt = await prisma.generatedReceipt.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more GeneratedReceipts and only return the `id`
-     * const generatedReceiptWithIdOnly = await prisma.generatedReceipt.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends GeneratedReceiptUpdateManyAndReturnArgs>(args: SelectSubset<T, GeneratedReceiptUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one GeneratedReceipt.
-     * @param {GeneratedReceiptUpsertArgs} args - Arguments to update or create a GeneratedReceipt.
-     * @example
-     * // Update or create a GeneratedReceipt
-     * const generatedReceipt = await prisma.generatedReceipt.upsert({
-     *   create: {
-     *     // ... data to create a GeneratedReceipt
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the GeneratedReceipt we want to update
-     *   }
-     * })
-     */
-    upsert<T extends GeneratedReceiptUpsertArgs>(args: SelectSubset<T, GeneratedReceiptUpsertArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of GeneratedReceipts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GeneratedReceiptCountArgs} args - Arguments to filter GeneratedReceipts to count.
-     * @example
-     * // Count the number of GeneratedReceipts
-     * const count = await prisma.generatedReceipt.count({
-     *   where: {
-     *     // ... the filter for the GeneratedReceipts we want to count
-     *   }
-     * })
-    **/
-    count<T extends GeneratedReceiptCountArgs>(
-      args?: Subset<T, GeneratedReceiptCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], GeneratedReceiptCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a GeneratedReceipt.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GeneratedReceiptAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends GeneratedReceiptAggregateArgs>(args: Subset<T, GeneratedReceiptAggregateArgs>): Prisma.PrismaPromise<GetGeneratedReceiptAggregateType<T>>
-
-    /**
-     * Group by GeneratedReceipt.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GeneratedReceiptGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends GeneratedReceiptGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: GeneratedReceiptGroupByArgs['orderBy'] }
-        : { orderBy?: GeneratedReceiptGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, GeneratedReceiptGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGeneratedReceiptGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the GeneratedReceipt model
-   */
-  readonly fields: GeneratedReceiptFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for GeneratedReceipt.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__GeneratedReceiptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    customer<T extends GeneratedReceipt$customerArgs<ExtArgs> = {}>(args?: Subset<T, GeneratedReceipt$customerArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    items<T extends GeneratedReceipt$itemsArgs<ExtArgs> = {}>(args?: Subset<T, GeneratedReceipt$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the GeneratedReceipt model
-   */
-  interface GeneratedReceiptFieldRefs {
-    readonly id: FieldRef<"GeneratedReceipt", 'String'>
-    readonly receiptNumber: FieldRef<"GeneratedReceipt", 'String'>
-    readonly purchaseDate: FieldRef<"GeneratedReceipt", 'DateTime'>
-    readonly paymentMethod: FieldRef<"GeneratedReceipt", 'String'>
-    readonly additionalNotes: FieldRef<"GeneratedReceipt", 'String'>
-    readonly total: FieldRef<"GeneratedReceipt", 'Decimal'>
-    readonly pdfUrl: FieldRef<"GeneratedReceipt", 'String'>
-    readonly createdAt: FieldRef<"GeneratedReceipt", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * GeneratedReceipt findUnique
-   */
-  export type GeneratedReceiptFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * Filter, which GeneratedReceipt to fetch.
-     */
-    where: GeneratedReceiptWhereUniqueInput
-  }
-
-  /**
-   * GeneratedReceipt findUniqueOrThrow
-   */
-  export type GeneratedReceiptFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * Filter, which GeneratedReceipt to fetch.
-     */
-    where: GeneratedReceiptWhereUniqueInput
-  }
-
-  /**
-   * GeneratedReceipt findFirst
-   */
-  export type GeneratedReceiptFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * Filter, which GeneratedReceipt to fetch.
-     */
-    where?: GeneratedReceiptWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GeneratedReceipts to fetch.
-     */
-    orderBy?: GeneratedReceiptOrderByWithRelationInput | GeneratedReceiptOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for GeneratedReceipts.
-     */
-    cursor?: GeneratedReceiptWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GeneratedReceipts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GeneratedReceipts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GeneratedReceipts.
-     */
-    distinct?: GeneratedReceiptScalarFieldEnum | GeneratedReceiptScalarFieldEnum[]
-  }
-
-  /**
-   * GeneratedReceipt findFirstOrThrow
-   */
-  export type GeneratedReceiptFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * Filter, which GeneratedReceipt to fetch.
-     */
-    where?: GeneratedReceiptWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GeneratedReceipts to fetch.
-     */
-    orderBy?: GeneratedReceiptOrderByWithRelationInput | GeneratedReceiptOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for GeneratedReceipts.
-     */
-    cursor?: GeneratedReceiptWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GeneratedReceipts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GeneratedReceipts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GeneratedReceipts.
-     */
-    distinct?: GeneratedReceiptScalarFieldEnum | GeneratedReceiptScalarFieldEnum[]
-  }
-
-  /**
-   * GeneratedReceipt findMany
-   */
-  export type GeneratedReceiptFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * Filter, which GeneratedReceipts to fetch.
-     */
-    where?: GeneratedReceiptWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GeneratedReceipts to fetch.
-     */
-    orderBy?: GeneratedReceiptOrderByWithRelationInput | GeneratedReceiptOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing GeneratedReceipts.
-     */
-    cursor?: GeneratedReceiptWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GeneratedReceipts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GeneratedReceipts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GeneratedReceipts.
-     */
-    distinct?: GeneratedReceiptScalarFieldEnum | GeneratedReceiptScalarFieldEnum[]
-  }
-
-  /**
-   * GeneratedReceipt create
-   */
-  export type GeneratedReceiptCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * The data needed to create a GeneratedReceipt.
-     */
-    data: XOR<GeneratedReceiptCreateInput, GeneratedReceiptUncheckedCreateInput>
-  }
-
-  /**
-   * GeneratedReceipt createMany
-   */
-  export type GeneratedReceiptCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many GeneratedReceipts.
-     */
-    data: GeneratedReceiptCreateManyInput | GeneratedReceiptCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * GeneratedReceipt createManyAndReturn
-   */
-  export type GeneratedReceiptCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * The data used to create many GeneratedReceipts.
-     */
-    data: GeneratedReceiptCreateManyInput | GeneratedReceiptCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * GeneratedReceipt update
-   */
-  export type GeneratedReceiptUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * The data needed to update a GeneratedReceipt.
-     */
-    data: XOR<GeneratedReceiptUpdateInput, GeneratedReceiptUncheckedUpdateInput>
-    /**
-     * Choose, which GeneratedReceipt to update.
-     */
-    where: GeneratedReceiptWhereUniqueInput
-  }
-
-  /**
-   * GeneratedReceipt updateMany
-   */
-  export type GeneratedReceiptUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update GeneratedReceipts.
-     */
-    data: XOR<GeneratedReceiptUpdateManyMutationInput, GeneratedReceiptUncheckedUpdateManyInput>
-    /**
-     * Filter which GeneratedReceipts to update
-     */
-    where?: GeneratedReceiptWhereInput
-    /**
-     * Limit how many GeneratedReceipts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * GeneratedReceipt updateManyAndReturn
-   */
-  export type GeneratedReceiptUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * The data used to update GeneratedReceipts.
-     */
-    data: XOR<GeneratedReceiptUpdateManyMutationInput, GeneratedReceiptUncheckedUpdateManyInput>
-    /**
-     * Filter which GeneratedReceipts to update
-     */
-    where?: GeneratedReceiptWhereInput
-    /**
-     * Limit how many GeneratedReceipts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * GeneratedReceipt upsert
-   */
-  export type GeneratedReceiptUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * The filter to search for the GeneratedReceipt to update in case it exists.
-     */
-    where: GeneratedReceiptWhereUniqueInput
-    /**
-     * In case the GeneratedReceipt found by the `where` argument doesn't exist, create a new GeneratedReceipt with this data.
-     */
-    create: XOR<GeneratedReceiptCreateInput, GeneratedReceiptUncheckedCreateInput>
-    /**
-     * In case the GeneratedReceipt was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<GeneratedReceiptUpdateInput, GeneratedReceiptUncheckedUpdateInput>
-  }
-
-  /**
-   * GeneratedReceipt delete
-   */
-  export type GeneratedReceiptDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-    /**
-     * Filter which GeneratedReceipt to delete.
-     */
-    where: GeneratedReceiptWhereUniqueInput
-  }
-
-  /**
-   * GeneratedReceipt deleteMany
-   */
-  export type GeneratedReceiptDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which GeneratedReceipts to delete
-     */
-    where?: GeneratedReceiptWhereInput
-    /**
-     * Limit how many GeneratedReceipts to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * GeneratedReceipt.customer
-   */
-  export type GeneratedReceipt$customerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    where?: ReceiptCustomerWhereInput
-  }
-
-  /**
-   * GeneratedReceipt.items
-   */
-  export type GeneratedReceipt$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    where?: ReceiptItemWhereInput
-    orderBy?: ReceiptItemOrderByWithRelationInput | ReceiptItemOrderByWithRelationInput[]
-    cursor?: ReceiptItemWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReceiptItemScalarFieldEnum | ReceiptItemScalarFieldEnum[]
-  }
-
-  /**
-   * GeneratedReceipt without action
-   */
-  export type GeneratedReceiptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GeneratedReceipt
-     */
-    select?: GeneratedReceiptSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GeneratedReceipt
-     */
-    omit?: GeneratedReceiptOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GeneratedReceiptInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model ReceiptCustomer
-   */
-
-  export type AggregateReceiptCustomer = {
-    _count: ReceiptCustomerCountAggregateOutputType | null
-    _min: ReceiptCustomerMinAggregateOutputType | null
-    _max: ReceiptCustomerMaxAggregateOutputType | null
-  }
-
-  export type ReceiptCustomerMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    address: string | null
-    cityPostal: string | null
-    phone: string | null
-    receiptId: string | null
-  }
-
-  export type ReceiptCustomerMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    address: string | null
-    cityPostal: string | null
-    phone: string | null
-    receiptId: string | null
-  }
-
-  export type ReceiptCustomerCountAggregateOutputType = {
-    id: number
-    name: number
-    email: number
-    address: number
-    cityPostal: number
-    phone: number
-    receiptId: number
-    _all: number
-  }
-
-
-  export type ReceiptCustomerMinAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    address?: true
-    cityPostal?: true
-    phone?: true
-    receiptId?: true
-  }
-
-  export type ReceiptCustomerMaxAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    address?: true
-    cityPostal?: true
-    phone?: true
-    receiptId?: true
-  }
-
-  export type ReceiptCustomerCountAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    address?: true
-    cityPostal?: true
-    phone?: true
-    receiptId?: true
-    _all?: true
-  }
-
-  export type ReceiptCustomerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ReceiptCustomer to aggregate.
-     */
-    where?: ReceiptCustomerWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceiptCustomers to fetch.
-     */
-    orderBy?: ReceiptCustomerOrderByWithRelationInput | ReceiptCustomerOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ReceiptCustomerWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceiptCustomers from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceiptCustomers.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned ReceiptCustomers
-    **/
-    _count?: true | ReceiptCustomerCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ReceiptCustomerMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ReceiptCustomerMaxAggregateInputType
-  }
-
-  export type GetReceiptCustomerAggregateType<T extends ReceiptCustomerAggregateArgs> = {
-        [P in keyof T & keyof AggregateReceiptCustomer]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateReceiptCustomer[P]>
-      : GetScalarType<T[P], AggregateReceiptCustomer[P]>
-  }
-
-
-
-
-  export type ReceiptCustomerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReceiptCustomerWhereInput
-    orderBy?: ReceiptCustomerOrderByWithAggregationInput | ReceiptCustomerOrderByWithAggregationInput[]
-    by: ReceiptCustomerScalarFieldEnum[] | ReceiptCustomerScalarFieldEnum
-    having?: ReceiptCustomerScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ReceiptCustomerCountAggregateInputType | true
-    _min?: ReceiptCustomerMinAggregateInputType
-    _max?: ReceiptCustomerMaxAggregateInputType
-  }
-
-  export type ReceiptCustomerGroupByOutputType = {
-    id: string
-    name: string
-    email: string | null
-    address: string | null
-    cityPostal: string | null
-    phone: string | null
-    receiptId: string
-    _count: ReceiptCustomerCountAggregateOutputType | null
-    _min: ReceiptCustomerMinAggregateOutputType | null
-    _max: ReceiptCustomerMaxAggregateOutputType | null
-  }
-
-  type GetReceiptCustomerGroupByPayload<T extends ReceiptCustomerGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ReceiptCustomerGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ReceiptCustomerGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ReceiptCustomerGroupByOutputType[P]>
-            : GetScalarType<T[P], ReceiptCustomerGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ReceiptCustomerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    address?: boolean
-    cityPostal?: boolean
-    phone?: boolean
-    receiptId?: boolean
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["receiptCustomer"]>
-
-  export type ReceiptCustomerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    address?: boolean
-    cityPostal?: boolean
-    phone?: boolean
-    receiptId?: boolean
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["receiptCustomer"]>
-
-  export type ReceiptCustomerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    address?: boolean
-    cityPostal?: boolean
-    phone?: boolean
-    receiptId?: boolean
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["receiptCustomer"]>
-
-  export type ReceiptCustomerSelectScalar = {
-    id?: boolean
-    name?: boolean
-    email?: boolean
-    address?: boolean
-    cityPostal?: boolean
-    phone?: boolean
-    receiptId?: boolean
-  }
-
-  export type ReceiptCustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "address" | "cityPostal" | "phone" | "receiptId", ExtArgs["result"]["receiptCustomer"]>
-  export type ReceiptCustomerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }
-  export type ReceiptCustomerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }
-  export type ReceiptCustomerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }
-
-  export type $ReceiptCustomerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ReceiptCustomer"
-    objects: {
-      receipt: Prisma.$GeneratedReceiptPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      email: string | null
-      address: string | null
-      cityPostal: string | null
-      phone: string | null
-      receiptId: string
-    }, ExtArgs["result"]["receiptCustomer"]>
-    composites: {}
-  }
-
-  type ReceiptCustomerGetPayload<S extends boolean | null | undefined | ReceiptCustomerDefaultArgs> = $Result.GetResult<Prisma.$ReceiptCustomerPayload, S>
-
-  type ReceiptCustomerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ReceiptCustomerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ReceiptCustomerCountAggregateInputType | true
-    }
-
-  export interface ReceiptCustomerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReceiptCustomer'], meta: { name: 'ReceiptCustomer' } }
-    /**
-     * Find zero or one ReceiptCustomer that matches the filter.
-     * @param {ReceiptCustomerFindUniqueArgs} args - Arguments to find a ReceiptCustomer
-     * @example
-     * // Get one ReceiptCustomer
-     * const receiptCustomer = await prisma.receiptCustomer.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ReceiptCustomerFindUniqueArgs>(args: SelectSubset<T, ReceiptCustomerFindUniqueArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one ReceiptCustomer that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ReceiptCustomerFindUniqueOrThrowArgs} args - Arguments to find a ReceiptCustomer
-     * @example
-     * // Get one ReceiptCustomer
-     * const receiptCustomer = await prisma.receiptCustomer.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ReceiptCustomerFindUniqueOrThrowArgs>(args: SelectSubset<T, ReceiptCustomerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first ReceiptCustomer that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptCustomerFindFirstArgs} args - Arguments to find a ReceiptCustomer
-     * @example
-     * // Get one ReceiptCustomer
-     * const receiptCustomer = await prisma.receiptCustomer.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ReceiptCustomerFindFirstArgs>(args?: SelectSubset<T, ReceiptCustomerFindFirstArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first ReceiptCustomer that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptCustomerFindFirstOrThrowArgs} args - Arguments to find a ReceiptCustomer
-     * @example
-     * // Get one ReceiptCustomer
-     * const receiptCustomer = await prisma.receiptCustomer.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ReceiptCustomerFindFirstOrThrowArgs>(args?: SelectSubset<T, ReceiptCustomerFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more ReceiptCustomers that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptCustomerFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all ReceiptCustomers
-     * const receiptCustomers = await prisma.receiptCustomer.findMany()
-     * 
-     * // Get first 10 ReceiptCustomers
-     * const receiptCustomers = await prisma.receiptCustomer.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const receiptCustomerWithIdOnly = await prisma.receiptCustomer.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ReceiptCustomerFindManyArgs>(args?: SelectSubset<T, ReceiptCustomerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a ReceiptCustomer.
-     * @param {ReceiptCustomerCreateArgs} args - Arguments to create a ReceiptCustomer.
-     * @example
-     * // Create one ReceiptCustomer
-     * const ReceiptCustomer = await prisma.receiptCustomer.create({
-     *   data: {
-     *     // ... data to create a ReceiptCustomer
-     *   }
-     * })
-     * 
-     */
-    create<T extends ReceiptCustomerCreateArgs>(args: SelectSubset<T, ReceiptCustomerCreateArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many ReceiptCustomers.
-     * @param {ReceiptCustomerCreateManyArgs} args - Arguments to create many ReceiptCustomers.
-     * @example
-     * // Create many ReceiptCustomers
-     * const receiptCustomer = await prisma.receiptCustomer.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ReceiptCustomerCreateManyArgs>(args?: SelectSubset<T, ReceiptCustomerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many ReceiptCustomers and returns the data saved in the database.
-     * @param {ReceiptCustomerCreateManyAndReturnArgs} args - Arguments to create many ReceiptCustomers.
-     * @example
-     * // Create many ReceiptCustomers
-     * const receiptCustomer = await prisma.receiptCustomer.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many ReceiptCustomers and only return the `id`
-     * const receiptCustomerWithIdOnly = await prisma.receiptCustomer.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ReceiptCustomerCreateManyAndReturnArgs>(args?: SelectSubset<T, ReceiptCustomerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a ReceiptCustomer.
-     * @param {ReceiptCustomerDeleteArgs} args - Arguments to delete one ReceiptCustomer.
-     * @example
-     * // Delete one ReceiptCustomer
-     * const ReceiptCustomer = await prisma.receiptCustomer.delete({
-     *   where: {
-     *     // ... filter to delete one ReceiptCustomer
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ReceiptCustomerDeleteArgs>(args: SelectSubset<T, ReceiptCustomerDeleteArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one ReceiptCustomer.
-     * @param {ReceiptCustomerUpdateArgs} args - Arguments to update one ReceiptCustomer.
-     * @example
-     * // Update one ReceiptCustomer
-     * const receiptCustomer = await prisma.receiptCustomer.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ReceiptCustomerUpdateArgs>(args: SelectSubset<T, ReceiptCustomerUpdateArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more ReceiptCustomers.
-     * @param {ReceiptCustomerDeleteManyArgs} args - Arguments to filter ReceiptCustomers to delete.
-     * @example
-     * // Delete a few ReceiptCustomers
-     * const { count } = await prisma.receiptCustomer.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ReceiptCustomerDeleteManyArgs>(args?: SelectSubset<T, ReceiptCustomerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ReceiptCustomers.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptCustomerUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many ReceiptCustomers
-     * const receiptCustomer = await prisma.receiptCustomer.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ReceiptCustomerUpdateManyArgs>(args: SelectSubset<T, ReceiptCustomerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ReceiptCustomers and returns the data updated in the database.
-     * @param {ReceiptCustomerUpdateManyAndReturnArgs} args - Arguments to update many ReceiptCustomers.
-     * @example
-     * // Update many ReceiptCustomers
-     * const receiptCustomer = await prisma.receiptCustomer.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more ReceiptCustomers and only return the `id`
-     * const receiptCustomerWithIdOnly = await prisma.receiptCustomer.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends ReceiptCustomerUpdateManyAndReturnArgs>(args: SelectSubset<T, ReceiptCustomerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one ReceiptCustomer.
-     * @param {ReceiptCustomerUpsertArgs} args - Arguments to update or create a ReceiptCustomer.
-     * @example
-     * // Update or create a ReceiptCustomer
-     * const receiptCustomer = await prisma.receiptCustomer.upsert({
-     *   create: {
-     *     // ... data to create a ReceiptCustomer
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the ReceiptCustomer we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ReceiptCustomerUpsertArgs>(args: SelectSubset<T, ReceiptCustomerUpsertArgs<ExtArgs>>): Prisma__ReceiptCustomerClient<$Result.GetResult<Prisma.$ReceiptCustomerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of ReceiptCustomers.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptCustomerCountArgs} args - Arguments to filter ReceiptCustomers to count.
-     * @example
-     * // Count the number of ReceiptCustomers
-     * const count = await prisma.receiptCustomer.count({
-     *   where: {
-     *     // ... the filter for the ReceiptCustomers we want to count
-     *   }
-     * })
-    **/
-    count<T extends ReceiptCustomerCountArgs>(
-      args?: Subset<T, ReceiptCustomerCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ReceiptCustomerCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a ReceiptCustomer.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptCustomerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ReceiptCustomerAggregateArgs>(args: Subset<T, ReceiptCustomerAggregateArgs>): Prisma.PrismaPromise<GetReceiptCustomerAggregateType<T>>
-
-    /**
-     * Group by ReceiptCustomer.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptCustomerGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ReceiptCustomerGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ReceiptCustomerGroupByArgs['orderBy'] }
-        : { orderBy?: ReceiptCustomerGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ReceiptCustomerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReceiptCustomerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ReceiptCustomer model
-   */
-  readonly fields: ReceiptCustomerFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for ReceiptCustomer.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ReceiptCustomerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    receipt<T extends GeneratedReceiptDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GeneratedReceiptDefaultArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the ReceiptCustomer model
-   */
-  interface ReceiptCustomerFieldRefs {
-    readonly id: FieldRef<"ReceiptCustomer", 'String'>
-    readonly name: FieldRef<"ReceiptCustomer", 'String'>
-    readonly email: FieldRef<"ReceiptCustomer", 'String'>
-    readonly address: FieldRef<"ReceiptCustomer", 'String'>
-    readonly cityPostal: FieldRef<"ReceiptCustomer", 'String'>
-    readonly phone: FieldRef<"ReceiptCustomer", 'String'>
-    readonly receiptId: FieldRef<"ReceiptCustomer", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * ReceiptCustomer findUnique
-   */
-  export type ReceiptCustomerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptCustomer to fetch.
-     */
-    where: ReceiptCustomerWhereUniqueInput
-  }
-
-  /**
-   * ReceiptCustomer findUniqueOrThrow
-   */
-  export type ReceiptCustomerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptCustomer to fetch.
-     */
-    where: ReceiptCustomerWhereUniqueInput
-  }
-
-  /**
-   * ReceiptCustomer findFirst
-   */
-  export type ReceiptCustomerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptCustomer to fetch.
-     */
-    where?: ReceiptCustomerWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceiptCustomers to fetch.
-     */
-    orderBy?: ReceiptCustomerOrderByWithRelationInput | ReceiptCustomerOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ReceiptCustomers.
-     */
-    cursor?: ReceiptCustomerWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceiptCustomers from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceiptCustomers.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ReceiptCustomers.
-     */
-    distinct?: ReceiptCustomerScalarFieldEnum | ReceiptCustomerScalarFieldEnum[]
-  }
-
-  /**
-   * ReceiptCustomer findFirstOrThrow
-   */
-  export type ReceiptCustomerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptCustomer to fetch.
-     */
-    where?: ReceiptCustomerWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceiptCustomers to fetch.
-     */
-    orderBy?: ReceiptCustomerOrderByWithRelationInput | ReceiptCustomerOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ReceiptCustomers.
-     */
-    cursor?: ReceiptCustomerWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceiptCustomers from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceiptCustomers.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ReceiptCustomers.
-     */
-    distinct?: ReceiptCustomerScalarFieldEnum | ReceiptCustomerScalarFieldEnum[]
-  }
-
-  /**
-   * ReceiptCustomer findMany
-   */
-  export type ReceiptCustomerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptCustomers to fetch.
-     */
-    where?: ReceiptCustomerWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceiptCustomers to fetch.
-     */
-    orderBy?: ReceiptCustomerOrderByWithRelationInput | ReceiptCustomerOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing ReceiptCustomers.
-     */
-    cursor?: ReceiptCustomerWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceiptCustomers from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceiptCustomers.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ReceiptCustomers.
-     */
-    distinct?: ReceiptCustomerScalarFieldEnum | ReceiptCustomerScalarFieldEnum[]
-  }
-
-  /**
-   * ReceiptCustomer create
-   */
-  export type ReceiptCustomerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * The data needed to create a ReceiptCustomer.
-     */
-    data: XOR<ReceiptCustomerCreateInput, ReceiptCustomerUncheckedCreateInput>
-  }
-
-  /**
-   * ReceiptCustomer createMany
-   */
-  export type ReceiptCustomerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many ReceiptCustomers.
-     */
-    data: ReceiptCustomerCreateManyInput | ReceiptCustomerCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ReceiptCustomer createManyAndReturn
-   */
-  export type ReceiptCustomerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * The data used to create many ReceiptCustomers.
-     */
-    data: ReceiptCustomerCreateManyInput | ReceiptCustomerCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * ReceiptCustomer update
-   */
-  export type ReceiptCustomerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * The data needed to update a ReceiptCustomer.
-     */
-    data: XOR<ReceiptCustomerUpdateInput, ReceiptCustomerUncheckedUpdateInput>
-    /**
-     * Choose, which ReceiptCustomer to update.
-     */
-    where: ReceiptCustomerWhereUniqueInput
-  }
-
-  /**
-   * ReceiptCustomer updateMany
-   */
-  export type ReceiptCustomerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update ReceiptCustomers.
-     */
-    data: XOR<ReceiptCustomerUpdateManyMutationInput, ReceiptCustomerUncheckedUpdateManyInput>
-    /**
-     * Filter which ReceiptCustomers to update
-     */
-    where?: ReceiptCustomerWhereInput
-    /**
-     * Limit how many ReceiptCustomers to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * ReceiptCustomer updateManyAndReturn
-   */
-  export type ReceiptCustomerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * The data used to update ReceiptCustomers.
-     */
-    data: XOR<ReceiptCustomerUpdateManyMutationInput, ReceiptCustomerUncheckedUpdateManyInput>
-    /**
-     * Filter which ReceiptCustomers to update
-     */
-    where?: ReceiptCustomerWhereInput
-    /**
-     * Limit how many ReceiptCustomers to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * ReceiptCustomer upsert
-   */
-  export type ReceiptCustomerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * The filter to search for the ReceiptCustomer to update in case it exists.
-     */
-    where: ReceiptCustomerWhereUniqueInput
-    /**
-     * In case the ReceiptCustomer found by the `where` argument doesn't exist, create a new ReceiptCustomer with this data.
-     */
-    create: XOR<ReceiptCustomerCreateInput, ReceiptCustomerUncheckedCreateInput>
-    /**
-     * In case the ReceiptCustomer was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ReceiptCustomerUpdateInput, ReceiptCustomerUncheckedUpdateInput>
-  }
-
-  /**
-   * ReceiptCustomer delete
-   */
-  export type ReceiptCustomerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-    /**
-     * Filter which ReceiptCustomer to delete.
-     */
-    where: ReceiptCustomerWhereUniqueInput
-  }
-
-  /**
-   * ReceiptCustomer deleteMany
-   */
-  export type ReceiptCustomerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ReceiptCustomers to delete
-     */
-    where?: ReceiptCustomerWhereInput
-    /**
-     * Limit how many ReceiptCustomers to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * ReceiptCustomer without action
-   */
-  export type ReceiptCustomerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptCustomer
-     */
-    select?: ReceiptCustomerSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptCustomer
-     */
-    omit?: ReceiptCustomerOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptCustomerInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model ReceiptItem
-   */
-
-  export type AggregateReceiptItem = {
-    _count: ReceiptItemCountAggregateOutputType | null
-    _avg: ReceiptItemAvgAggregateOutputType | null
-    _sum: ReceiptItemSumAggregateOutputType | null
-    _min: ReceiptItemMinAggregateOutputType | null
-    _max: ReceiptItemMaxAggregateOutputType | null
-  }
-
-  export type ReceiptItemAvgAggregateOutputType = {
-    quantity: number | null
-    unitPrice: Decimal | null
-    amount: Decimal | null
-  }
-
-  export type ReceiptItemSumAggregateOutputType = {
-    quantity: number | null
-    unitPrice: Decimal | null
-    amount: Decimal | null
-  }
-
-  export type ReceiptItemMinAggregateOutputType = {
-    id: string | null
-    description: string | null
-    quantity: number | null
-    unitPrice: Decimal | null
-    amount: Decimal | null
-    receiptId: string | null
-  }
-
-  export type ReceiptItemMaxAggregateOutputType = {
-    id: string | null
-    description: string | null
-    quantity: number | null
-    unitPrice: Decimal | null
-    amount: Decimal | null
-    receiptId: string | null
-  }
-
-  export type ReceiptItemCountAggregateOutputType = {
-    id: number
-    description: number
-    quantity: number
-    unitPrice: number
-    amount: number
-    receiptId: number
-    _all: number
-  }
-
-
-  export type ReceiptItemAvgAggregateInputType = {
-    quantity?: true
-    unitPrice?: true
-    amount?: true
-  }
-
-  export type ReceiptItemSumAggregateInputType = {
-    quantity?: true
-    unitPrice?: true
-    amount?: true
-  }
-
-  export type ReceiptItemMinAggregateInputType = {
-    id?: true
-    description?: true
-    quantity?: true
-    unitPrice?: true
-    amount?: true
-    receiptId?: true
-  }
-
-  export type ReceiptItemMaxAggregateInputType = {
-    id?: true
-    description?: true
-    quantity?: true
-    unitPrice?: true
-    amount?: true
-    receiptId?: true
-  }
-
-  export type ReceiptItemCountAggregateInputType = {
-    id?: true
-    description?: true
-    quantity?: true
-    unitPrice?: true
-    amount?: true
-    receiptId?: true
-    _all?: true
-  }
-
-  export type ReceiptItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ReceiptItem to aggregate.
-     */
-    where?: ReceiptItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceiptItems to fetch.
-     */
-    orderBy?: ReceiptItemOrderByWithRelationInput | ReceiptItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ReceiptItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceiptItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceiptItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned ReceiptItems
-    **/
-    _count?: true | ReceiptItemCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ReceiptItemAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ReceiptItemSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ReceiptItemMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ReceiptItemMaxAggregateInputType
-  }
-
-  export type GetReceiptItemAggregateType<T extends ReceiptItemAggregateArgs> = {
-        [P in keyof T & keyof AggregateReceiptItem]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateReceiptItem[P]>
-      : GetScalarType<T[P], AggregateReceiptItem[P]>
-  }
-
-
-
-
-  export type ReceiptItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReceiptItemWhereInput
-    orderBy?: ReceiptItemOrderByWithAggregationInput | ReceiptItemOrderByWithAggregationInput[]
-    by: ReceiptItemScalarFieldEnum[] | ReceiptItemScalarFieldEnum
-    having?: ReceiptItemScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ReceiptItemCountAggregateInputType | true
-    _avg?: ReceiptItemAvgAggregateInputType
-    _sum?: ReceiptItemSumAggregateInputType
-    _min?: ReceiptItemMinAggregateInputType
-    _max?: ReceiptItemMaxAggregateInputType
-  }
-
-  export type ReceiptItemGroupByOutputType = {
-    id: string
-    description: string
-    quantity: number
-    unitPrice: Decimal
-    amount: Decimal
-    receiptId: string
-    _count: ReceiptItemCountAggregateOutputType | null
-    _avg: ReceiptItemAvgAggregateOutputType | null
-    _sum: ReceiptItemSumAggregateOutputType | null
-    _min: ReceiptItemMinAggregateOutputType | null
-    _max: ReceiptItemMaxAggregateOutputType | null
-  }
-
-  type GetReceiptItemGroupByPayload<T extends ReceiptItemGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ReceiptItemGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ReceiptItemGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ReceiptItemGroupByOutputType[P]>
-            : GetScalarType<T[P], ReceiptItemGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ReceiptItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    description?: boolean
-    quantity?: boolean
-    unitPrice?: boolean
-    amount?: boolean
-    receiptId?: boolean
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["receiptItem"]>
-
-  export type ReceiptItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    description?: boolean
-    quantity?: boolean
-    unitPrice?: boolean
-    amount?: boolean
-    receiptId?: boolean
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["receiptItem"]>
-
-  export type ReceiptItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    description?: boolean
-    quantity?: boolean
-    unitPrice?: boolean
-    amount?: boolean
-    receiptId?: boolean
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["receiptItem"]>
-
-  export type ReceiptItemSelectScalar = {
-    id?: boolean
-    description?: boolean
-    quantity?: boolean
-    unitPrice?: boolean
-    amount?: boolean
-    receiptId?: boolean
-  }
-
-  export type ReceiptItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "description" | "quantity" | "unitPrice" | "amount" | "receiptId", ExtArgs["result"]["receiptItem"]>
-  export type ReceiptItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }
-  export type ReceiptItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }
-  export type ReceiptItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    receipt?: boolean | GeneratedReceiptDefaultArgs<ExtArgs>
-  }
-
-  export type $ReceiptItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ReceiptItem"
-    objects: {
-      receipt: Prisma.$GeneratedReceiptPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      description: string
-      quantity: number
-      unitPrice: Prisma.Decimal
-      amount: Prisma.Decimal
-      receiptId: string
-    }, ExtArgs["result"]["receiptItem"]>
-    composites: {}
-  }
-
-  type ReceiptItemGetPayload<S extends boolean | null | undefined | ReceiptItemDefaultArgs> = $Result.GetResult<Prisma.$ReceiptItemPayload, S>
-
-  type ReceiptItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ReceiptItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ReceiptItemCountAggregateInputType | true
-    }
-
-  export interface ReceiptItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReceiptItem'], meta: { name: 'ReceiptItem' } }
-    /**
-     * Find zero or one ReceiptItem that matches the filter.
-     * @param {ReceiptItemFindUniqueArgs} args - Arguments to find a ReceiptItem
-     * @example
-     * // Get one ReceiptItem
-     * const receiptItem = await prisma.receiptItem.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ReceiptItemFindUniqueArgs>(args: SelectSubset<T, ReceiptItemFindUniqueArgs<ExtArgs>>): Prisma__ReceiptItemClient<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one ReceiptItem that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ReceiptItemFindUniqueOrThrowArgs} args - Arguments to find a ReceiptItem
-     * @example
-     * // Get one ReceiptItem
-     * const receiptItem = await prisma.receiptItem.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ReceiptItemFindUniqueOrThrowArgs>(args: SelectSubset<T, ReceiptItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReceiptItemClient<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first ReceiptItem that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptItemFindFirstArgs} args - Arguments to find a ReceiptItem
-     * @example
-     * // Get one ReceiptItem
-     * const receiptItem = await prisma.receiptItem.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ReceiptItemFindFirstArgs>(args?: SelectSubset<T, ReceiptItemFindFirstArgs<ExtArgs>>): Prisma__ReceiptItemClient<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first ReceiptItem that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptItemFindFirstOrThrowArgs} args - Arguments to find a ReceiptItem
-     * @example
-     * // Get one ReceiptItem
-     * const receiptItem = await prisma.receiptItem.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ReceiptItemFindFirstOrThrowArgs>(args?: SelectSubset<T, ReceiptItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReceiptItemClient<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more ReceiptItems that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptItemFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all ReceiptItems
-     * const receiptItems = await prisma.receiptItem.findMany()
-     * 
-     * // Get first 10 ReceiptItems
-     * const receiptItems = await prisma.receiptItem.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const receiptItemWithIdOnly = await prisma.receiptItem.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ReceiptItemFindManyArgs>(args?: SelectSubset<T, ReceiptItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a ReceiptItem.
-     * @param {ReceiptItemCreateArgs} args - Arguments to create a ReceiptItem.
-     * @example
-     * // Create one ReceiptItem
-     * const ReceiptItem = await prisma.receiptItem.create({
-     *   data: {
-     *     // ... data to create a ReceiptItem
-     *   }
-     * })
-     * 
-     */
-    create<T extends ReceiptItemCreateArgs>(args: SelectSubset<T, ReceiptItemCreateArgs<ExtArgs>>): Prisma__ReceiptItemClient<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many ReceiptItems.
-     * @param {ReceiptItemCreateManyArgs} args - Arguments to create many ReceiptItems.
-     * @example
-     * // Create many ReceiptItems
-     * const receiptItem = await prisma.receiptItem.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ReceiptItemCreateManyArgs>(args?: SelectSubset<T, ReceiptItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many ReceiptItems and returns the data saved in the database.
-     * @param {ReceiptItemCreateManyAndReturnArgs} args - Arguments to create many ReceiptItems.
-     * @example
-     * // Create many ReceiptItems
-     * const receiptItem = await prisma.receiptItem.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many ReceiptItems and only return the `id`
-     * const receiptItemWithIdOnly = await prisma.receiptItem.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ReceiptItemCreateManyAndReturnArgs>(args?: SelectSubset<T, ReceiptItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a ReceiptItem.
-     * @param {ReceiptItemDeleteArgs} args - Arguments to delete one ReceiptItem.
-     * @example
-     * // Delete one ReceiptItem
-     * const ReceiptItem = await prisma.receiptItem.delete({
-     *   where: {
-     *     // ... filter to delete one ReceiptItem
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ReceiptItemDeleteArgs>(args: SelectSubset<T, ReceiptItemDeleteArgs<ExtArgs>>): Prisma__ReceiptItemClient<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one ReceiptItem.
-     * @param {ReceiptItemUpdateArgs} args - Arguments to update one ReceiptItem.
-     * @example
-     * // Update one ReceiptItem
-     * const receiptItem = await prisma.receiptItem.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ReceiptItemUpdateArgs>(args: SelectSubset<T, ReceiptItemUpdateArgs<ExtArgs>>): Prisma__ReceiptItemClient<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more ReceiptItems.
-     * @param {ReceiptItemDeleteManyArgs} args - Arguments to filter ReceiptItems to delete.
-     * @example
-     * // Delete a few ReceiptItems
-     * const { count } = await prisma.receiptItem.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ReceiptItemDeleteManyArgs>(args?: SelectSubset<T, ReceiptItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ReceiptItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptItemUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many ReceiptItems
-     * const receiptItem = await prisma.receiptItem.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ReceiptItemUpdateManyArgs>(args: SelectSubset<T, ReceiptItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ReceiptItems and returns the data updated in the database.
-     * @param {ReceiptItemUpdateManyAndReturnArgs} args - Arguments to update many ReceiptItems.
-     * @example
-     * // Update many ReceiptItems
-     * const receiptItem = await prisma.receiptItem.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more ReceiptItems and only return the `id`
-     * const receiptItemWithIdOnly = await prisma.receiptItem.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends ReceiptItemUpdateManyAndReturnArgs>(args: SelectSubset<T, ReceiptItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one ReceiptItem.
-     * @param {ReceiptItemUpsertArgs} args - Arguments to update or create a ReceiptItem.
-     * @example
-     * // Update or create a ReceiptItem
-     * const receiptItem = await prisma.receiptItem.upsert({
-     *   create: {
-     *     // ... data to create a ReceiptItem
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the ReceiptItem we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ReceiptItemUpsertArgs>(args: SelectSubset<T, ReceiptItemUpsertArgs<ExtArgs>>): Prisma__ReceiptItemClient<$Result.GetResult<Prisma.$ReceiptItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of ReceiptItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptItemCountArgs} args - Arguments to filter ReceiptItems to count.
-     * @example
-     * // Count the number of ReceiptItems
-     * const count = await prisma.receiptItem.count({
-     *   where: {
-     *     // ... the filter for the ReceiptItems we want to count
-     *   }
-     * })
-    **/
-    count<T extends ReceiptItemCountArgs>(
-      args?: Subset<T, ReceiptItemCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ReceiptItemCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a ReceiptItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ReceiptItemAggregateArgs>(args: Subset<T, ReceiptItemAggregateArgs>): Prisma.PrismaPromise<GetReceiptItemAggregateType<T>>
-
-    /**
-     * Group by ReceiptItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceiptItemGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ReceiptItemGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ReceiptItemGroupByArgs['orderBy'] }
-        : { orderBy?: ReceiptItemGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ReceiptItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReceiptItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ReceiptItem model
-   */
-  readonly fields: ReceiptItemFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for ReceiptItem.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ReceiptItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    receipt<T extends GeneratedReceiptDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GeneratedReceiptDefaultArgs<ExtArgs>>): Prisma__GeneratedReceiptClient<$Result.GetResult<Prisma.$GeneratedReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the ReceiptItem model
-   */
-  interface ReceiptItemFieldRefs {
-    readonly id: FieldRef<"ReceiptItem", 'String'>
-    readonly description: FieldRef<"ReceiptItem", 'String'>
-    readonly quantity: FieldRef<"ReceiptItem", 'Int'>
-    readonly unitPrice: FieldRef<"ReceiptItem", 'Decimal'>
-    readonly amount: FieldRef<"ReceiptItem", 'Decimal'>
-    readonly receiptId: FieldRef<"ReceiptItem", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * ReceiptItem findUnique
-   */
-  export type ReceiptItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptItem to fetch.
-     */
-    where: ReceiptItemWhereUniqueInput
-  }
-
-  /**
-   * ReceiptItem findUniqueOrThrow
-   */
-  export type ReceiptItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptItem to fetch.
-     */
-    where: ReceiptItemWhereUniqueInput
-  }
-
-  /**
-   * ReceiptItem findFirst
-   */
-  export type ReceiptItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptItem to fetch.
-     */
-    where?: ReceiptItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceiptItems to fetch.
-     */
-    orderBy?: ReceiptItemOrderByWithRelationInput | ReceiptItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ReceiptItems.
-     */
-    cursor?: ReceiptItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceiptItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceiptItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ReceiptItems.
-     */
-    distinct?: ReceiptItemScalarFieldEnum | ReceiptItemScalarFieldEnum[]
-  }
-
-  /**
-   * ReceiptItem findFirstOrThrow
-   */
-  export type ReceiptItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptItem to fetch.
-     */
-    where?: ReceiptItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceiptItems to fetch.
-     */
-    orderBy?: ReceiptItemOrderByWithRelationInput | ReceiptItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ReceiptItems.
-     */
-    cursor?: ReceiptItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceiptItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceiptItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ReceiptItems.
-     */
-    distinct?: ReceiptItemScalarFieldEnum | ReceiptItemScalarFieldEnum[]
-  }
-
-  /**
-   * ReceiptItem findMany
-   */
-  export type ReceiptItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * Filter, which ReceiptItems to fetch.
-     */
-    where?: ReceiptItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceiptItems to fetch.
-     */
-    orderBy?: ReceiptItemOrderByWithRelationInput | ReceiptItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing ReceiptItems.
-     */
-    cursor?: ReceiptItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceiptItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceiptItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ReceiptItems.
-     */
-    distinct?: ReceiptItemScalarFieldEnum | ReceiptItemScalarFieldEnum[]
-  }
-
-  /**
-   * ReceiptItem create
-   */
-  export type ReceiptItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * The data needed to create a ReceiptItem.
-     */
-    data: XOR<ReceiptItemCreateInput, ReceiptItemUncheckedCreateInput>
-  }
-
-  /**
-   * ReceiptItem createMany
-   */
-  export type ReceiptItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many ReceiptItems.
-     */
-    data: ReceiptItemCreateManyInput | ReceiptItemCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ReceiptItem createManyAndReturn
-   */
-  export type ReceiptItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * The data used to create many ReceiptItems.
-     */
-    data: ReceiptItemCreateManyInput | ReceiptItemCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * ReceiptItem update
-   */
-  export type ReceiptItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * The data needed to update a ReceiptItem.
-     */
-    data: XOR<ReceiptItemUpdateInput, ReceiptItemUncheckedUpdateInput>
-    /**
-     * Choose, which ReceiptItem to update.
-     */
-    where: ReceiptItemWhereUniqueInput
-  }
-
-  /**
-   * ReceiptItem updateMany
-   */
-  export type ReceiptItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update ReceiptItems.
-     */
-    data: XOR<ReceiptItemUpdateManyMutationInput, ReceiptItemUncheckedUpdateManyInput>
-    /**
-     * Filter which ReceiptItems to update
-     */
-    where?: ReceiptItemWhereInput
-    /**
-     * Limit how many ReceiptItems to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * ReceiptItem updateManyAndReturn
-   */
-  export type ReceiptItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * The data used to update ReceiptItems.
-     */
-    data: XOR<ReceiptItemUpdateManyMutationInput, ReceiptItemUncheckedUpdateManyInput>
-    /**
-     * Filter which ReceiptItems to update
-     */
-    where?: ReceiptItemWhereInput
-    /**
-     * Limit how many ReceiptItems to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * ReceiptItem upsert
-   */
-  export type ReceiptItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * The filter to search for the ReceiptItem to update in case it exists.
-     */
-    where: ReceiptItemWhereUniqueInput
-    /**
-     * In case the ReceiptItem found by the `where` argument doesn't exist, create a new ReceiptItem with this data.
-     */
-    create: XOR<ReceiptItemCreateInput, ReceiptItemUncheckedCreateInput>
-    /**
-     * In case the ReceiptItem was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ReceiptItemUpdateInput, ReceiptItemUncheckedUpdateInput>
-  }
-
-  /**
-   * ReceiptItem delete
-   */
-  export type ReceiptItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-    /**
-     * Filter which ReceiptItem to delete.
-     */
-    where: ReceiptItemWhereUniqueInput
-  }
-
-  /**
-   * ReceiptItem deleteMany
-   */
-  export type ReceiptItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ReceiptItems to delete
-     */
-    where?: ReceiptItemWhereInput
-    /**
-     * Limit how many ReceiptItems to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * ReceiptItem without action
-   */
-  export type ReceiptItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceiptItem
-     */
-    select?: ReceiptItemSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceiptItem
-     */
-    omit?: ReceiptItemOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReceiptItemInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -10538,12 +8135,25 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     displayOrder: 'displayOrder',
+    discountType: 'discountType',
+    discountValue: 'discountValue',
     motorcycleId: 'motorcycleId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type PromotionScalarFieldEnum = (typeof PromotionScalarFieldEnum)[keyof typeof PromotionScalarFieldEnum]
+
+
+  export const PromotionTargetScalarFieldEnum: {
+    id: 'id',
+    scope: 'scope',
+    value: 'value',
+    isExclusion: 'isExclusion',
+    promotionId: 'promotionId'
+  };
+
+  export type PromotionTargetScalarFieldEnum = (typeof PromotionTargetScalarFieldEnum)[keyof typeof PromotionTargetScalarFieldEnum]
 
 
   export const ProductSyncFileScalarFieldEnum: {
@@ -10564,45 +8174,6 @@ export namespace Prisma {
   };
 
   export type MotorcycleImageScalarFieldEnum = (typeof MotorcycleImageScalarFieldEnum)[keyof typeof MotorcycleImageScalarFieldEnum]
-
-
-  export const GeneratedReceiptScalarFieldEnum: {
-    id: 'id',
-    receiptNumber: 'receiptNumber',
-    purchaseDate: 'purchaseDate',
-    paymentMethod: 'paymentMethod',
-    additionalNotes: 'additionalNotes',
-    total: 'total',
-    pdfUrl: 'pdfUrl',
-    createdAt: 'createdAt'
-  };
-
-  export type GeneratedReceiptScalarFieldEnum = (typeof GeneratedReceiptScalarFieldEnum)[keyof typeof GeneratedReceiptScalarFieldEnum]
-
-
-  export const ReceiptCustomerScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    email: 'email',
-    address: 'address',
-    cityPostal: 'cityPostal',
-    phone: 'phone',
-    receiptId: 'receiptId'
-  };
-
-  export type ReceiptCustomerScalarFieldEnum = (typeof ReceiptCustomerScalarFieldEnum)[keyof typeof ReceiptCustomerScalarFieldEnum]
-
-
-  export const ReceiptItemScalarFieldEnum: {
-    id: 'id',
-    description: 'description',
-    quantity: 'quantity',
-    unitPrice: 'unitPrice',
-    amount: 'amount',
-    receiptId: 'receiptId'
-  };
-
-  export type ReceiptItemScalarFieldEnum = (typeof ReceiptItemScalarFieldEnum)[keyof typeof ReceiptItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10725,6 +8296,34 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'DiscountType'
+   */
+  export type EnumDiscountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DiscountType'>
+    
+
+
+  /**
+   * Reference to a field of type 'DiscountType[]'
+   */
+  export type ListEnumDiscountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DiscountType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PromotionScope'
+   */
+  export type EnumPromotionScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionScope'>
+    
+
+
+  /**
+   * Reference to a field of type 'PromotionScope[]'
+   */
+  export type ListEnumPromotionScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PromotionScope[]'>
     
 
 
@@ -10904,10 +8503,13 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Promotion"> | Date | string
     endDate?: DateTimeFilter<"Promotion"> | Date | string
     displayOrder?: IntFilter<"Promotion"> | number
+    discountType?: EnumDiscountTypeFilter<"Promotion"> | $Enums.DiscountType
+    discountValue?: DecimalNullableFilter<"Promotion"> | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: StringNullableFilter<"Promotion"> | string | null
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
     motorcycle?: XOR<MotorcycleNullableScalarRelationFilter, MotorcycleWhereInput> | null
+    targets?: PromotionTargetListRelationFilter
   }
 
   export type PromotionOrderByWithRelationInput = {
@@ -10923,10 +8525,13 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrderInput | SortOrder
     motorcycleId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     motorcycle?: MotorcycleOrderByWithRelationInput
+    targets?: PromotionTargetOrderByRelationAggregateInput
   }
 
   export type PromotionWhereUniqueInput = Prisma.AtLeast<{
@@ -10945,10 +8550,13 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Promotion"> | Date | string
     endDate?: DateTimeFilter<"Promotion"> | Date | string
     displayOrder?: IntFilter<"Promotion"> | number
+    discountType?: EnumDiscountTypeFilter<"Promotion"> | $Enums.DiscountType
+    discountValue?: DecimalNullableFilter<"Promotion"> | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: StringNullableFilter<"Promotion"> | string | null
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
     motorcycle?: XOR<MotorcycleNullableScalarRelationFilter, MotorcycleWhereInput> | null
+    targets?: PromotionTargetListRelationFilter
   }, "id">
 
   export type PromotionOrderByWithAggregationInput = {
@@ -10964,6 +8572,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrderInput | SortOrder
     motorcycleId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -10990,9 +8600,67 @@ export namespace Prisma {
     startDate?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     endDate?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     displayOrder?: IntWithAggregatesFilter<"Promotion"> | number
+    discountType?: EnumDiscountTypeWithAggregatesFilter<"Promotion"> | $Enums.DiscountType
+    discountValue?: DecimalNullableWithAggregatesFilter<"Promotion"> | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: StringNullableWithAggregatesFilter<"Promotion"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Promotion"> | Date | string
+  }
+
+  export type PromotionTargetWhereInput = {
+    AND?: PromotionTargetWhereInput | PromotionTargetWhereInput[]
+    OR?: PromotionTargetWhereInput[]
+    NOT?: PromotionTargetWhereInput | PromotionTargetWhereInput[]
+    id?: StringFilter<"PromotionTarget"> | string
+    scope?: EnumPromotionScopeFilter<"PromotionTarget"> | $Enums.PromotionScope
+    value?: StringNullableFilter<"PromotionTarget"> | string | null
+    isExclusion?: BoolFilter<"PromotionTarget"> | boolean
+    promotionId?: StringFilter<"PromotionTarget"> | string
+    promotion?: XOR<PromotionScalarRelationFilter, PromotionWhereInput>
+  }
+
+  export type PromotionTargetOrderByWithRelationInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrderInput | SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+    promotion?: PromotionOrderByWithRelationInput
+  }
+
+  export type PromotionTargetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    promotionId_scope_value?: PromotionTargetPromotionIdScopeValueCompoundUniqueInput
+    AND?: PromotionTargetWhereInput | PromotionTargetWhereInput[]
+    OR?: PromotionTargetWhereInput[]
+    NOT?: PromotionTargetWhereInput | PromotionTargetWhereInput[]
+    scope?: EnumPromotionScopeFilter<"PromotionTarget"> | $Enums.PromotionScope
+    value?: StringNullableFilter<"PromotionTarget"> | string | null
+    isExclusion?: BoolFilter<"PromotionTarget"> | boolean
+    promotionId?: StringFilter<"PromotionTarget"> | string
+    promotion?: XOR<PromotionScalarRelationFilter, PromotionWhereInput>
+  }, "id" | "promotionId_scope_value">
+
+  export type PromotionTargetOrderByWithAggregationInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrderInput | SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+    _count?: PromotionTargetCountOrderByAggregateInput
+    _max?: PromotionTargetMaxOrderByAggregateInput
+    _min?: PromotionTargetMinOrderByAggregateInput
+  }
+
+  export type PromotionTargetScalarWhereWithAggregatesInput = {
+    AND?: PromotionTargetScalarWhereWithAggregatesInput | PromotionTargetScalarWhereWithAggregatesInput[]
+    OR?: PromotionTargetScalarWhereWithAggregatesInput[]
+    NOT?: PromotionTargetScalarWhereWithAggregatesInput | PromotionTargetScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PromotionTarget"> | string
+    scope?: EnumPromotionScopeWithAggregatesFilter<"PromotionTarget"> | $Enums.PromotionScope
+    value?: StringNullableWithAggregatesFilter<"PromotionTarget"> | string | null
+    isExclusion?: BoolWithAggregatesFilter<"PromotionTarget"> | boolean
+    promotionId?: StringWithAggregatesFilter<"PromotionTarget"> | string
   }
 
   export type ProductSyncFileWhereInput = {
@@ -11092,208 +8760,6 @@ export namespace Prisma {
     url?: StringWithAggregatesFilter<"MotorcycleImage"> | string
     displayOrder?: IntWithAggregatesFilter<"MotorcycleImage"> | number
     motorcycleId?: StringWithAggregatesFilter<"MotorcycleImage"> | string
-  }
-
-  export type GeneratedReceiptWhereInput = {
-    AND?: GeneratedReceiptWhereInput | GeneratedReceiptWhereInput[]
-    OR?: GeneratedReceiptWhereInput[]
-    NOT?: GeneratedReceiptWhereInput | GeneratedReceiptWhereInput[]
-    id?: StringFilter<"GeneratedReceipt"> | string
-    receiptNumber?: StringFilter<"GeneratedReceipt"> | string
-    purchaseDate?: DateTimeFilter<"GeneratedReceipt"> | Date | string
-    paymentMethod?: StringFilter<"GeneratedReceipt"> | string
-    additionalNotes?: StringNullableFilter<"GeneratedReceipt"> | string | null
-    total?: DecimalFilter<"GeneratedReceipt"> | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFilter<"GeneratedReceipt"> | string
-    createdAt?: DateTimeFilter<"GeneratedReceipt"> | Date | string
-    customer?: XOR<ReceiptCustomerNullableScalarRelationFilter, ReceiptCustomerWhereInput> | null
-    items?: ReceiptItemListRelationFilter
-  }
-
-  export type GeneratedReceiptOrderByWithRelationInput = {
-    id?: SortOrder
-    receiptNumber?: SortOrder
-    purchaseDate?: SortOrder
-    paymentMethod?: SortOrder
-    additionalNotes?: SortOrderInput | SortOrder
-    total?: SortOrder
-    pdfUrl?: SortOrder
-    createdAt?: SortOrder
-    customer?: ReceiptCustomerOrderByWithRelationInput
-    items?: ReceiptItemOrderByRelationAggregateInput
-  }
-
-  export type GeneratedReceiptWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    receiptNumber?: string
-    AND?: GeneratedReceiptWhereInput | GeneratedReceiptWhereInput[]
-    OR?: GeneratedReceiptWhereInput[]
-    NOT?: GeneratedReceiptWhereInput | GeneratedReceiptWhereInput[]
-    purchaseDate?: DateTimeFilter<"GeneratedReceipt"> | Date | string
-    paymentMethod?: StringFilter<"GeneratedReceipt"> | string
-    additionalNotes?: StringNullableFilter<"GeneratedReceipt"> | string | null
-    total?: DecimalFilter<"GeneratedReceipt"> | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFilter<"GeneratedReceipt"> | string
-    createdAt?: DateTimeFilter<"GeneratedReceipt"> | Date | string
-    customer?: XOR<ReceiptCustomerNullableScalarRelationFilter, ReceiptCustomerWhereInput> | null
-    items?: ReceiptItemListRelationFilter
-  }, "id" | "receiptNumber">
-
-  export type GeneratedReceiptOrderByWithAggregationInput = {
-    id?: SortOrder
-    receiptNumber?: SortOrder
-    purchaseDate?: SortOrder
-    paymentMethod?: SortOrder
-    additionalNotes?: SortOrderInput | SortOrder
-    total?: SortOrder
-    pdfUrl?: SortOrder
-    createdAt?: SortOrder
-    _count?: GeneratedReceiptCountOrderByAggregateInput
-    _avg?: GeneratedReceiptAvgOrderByAggregateInput
-    _max?: GeneratedReceiptMaxOrderByAggregateInput
-    _min?: GeneratedReceiptMinOrderByAggregateInput
-    _sum?: GeneratedReceiptSumOrderByAggregateInput
-  }
-
-  export type GeneratedReceiptScalarWhereWithAggregatesInput = {
-    AND?: GeneratedReceiptScalarWhereWithAggregatesInput | GeneratedReceiptScalarWhereWithAggregatesInput[]
-    OR?: GeneratedReceiptScalarWhereWithAggregatesInput[]
-    NOT?: GeneratedReceiptScalarWhereWithAggregatesInput | GeneratedReceiptScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"GeneratedReceipt"> | string
-    receiptNumber?: StringWithAggregatesFilter<"GeneratedReceipt"> | string
-    purchaseDate?: DateTimeWithAggregatesFilter<"GeneratedReceipt"> | Date | string
-    paymentMethod?: StringWithAggregatesFilter<"GeneratedReceipt"> | string
-    additionalNotes?: StringNullableWithAggregatesFilter<"GeneratedReceipt"> | string | null
-    total?: DecimalWithAggregatesFilter<"GeneratedReceipt"> | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringWithAggregatesFilter<"GeneratedReceipt"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"GeneratedReceipt"> | Date | string
-  }
-
-  export type ReceiptCustomerWhereInput = {
-    AND?: ReceiptCustomerWhereInput | ReceiptCustomerWhereInput[]
-    OR?: ReceiptCustomerWhereInput[]
-    NOT?: ReceiptCustomerWhereInput | ReceiptCustomerWhereInput[]
-    id?: StringFilter<"ReceiptCustomer"> | string
-    name?: StringFilter<"ReceiptCustomer"> | string
-    email?: StringNullableFilter<"ReceiptCustomer"> | string | null
-    address?: StringNullableFilter<"ReceiptCustomer"> | string | null
-    cityPostal?: StringNullableFilter<"ReceiptCustomer"> | string | null
-    phone?: StringNullableFilter<"ReceiptCustomer"> | string | null
-    receiptId?: StringFilter<"ReceiptCustomer"> | string
-    receipt?: XOR<GeneratedReceiptScalarRelationFilter, GeneratedReceiptWhereInput>
-  }
-
-  export type ReceiptCustomerOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrderInput | SortOrder
-    address?: SortOrderInput | SortOrder
-    cityPostal?: SortOrderInput | SortOrder
-    phone?: SortOrderInput | SortOrder
-    receiptId?: SortOrder
-    receipt?: GeneratedReceiptOrderByWithRelationInput
-  }
-
-  export type ReceiptCustomerWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    receiptId?: string
-    AND?: ReceiptCustomerWhereInput | ReceiptCustomerWhereInput[]
-    OR?: ReceiptCustomerWhereInput[]
-    NOT?: ReceiptCustomerWhereInput | ReceiptCustomerWhereInput[]
-    name?: StringFilter<"ReceiptCustomer"> | string
-    email?: StringNullableFilter<"ReceiptCustomer"> | string | null
-    address?: StringNullableFilter<"ReceiptCustomer"> | string | null
-    cityPostal?: StringNullableFilter<"ReceiptCustomer"> | string | null
-    phone?: StringNullableFilter<"ReceiptCustomer"> | string | null
-    receipt?: XOR<GeneratedReceiptScalarRelationFilter, GeneratedReceiptWhereInput>
-  }, "id" | "receiptId">
-
-  export type ReceiptCustomerOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrderInput | SortOrder
-    address?: SortOrderInput | SortOrder
-    cityPostal?: SortOrderInput | SortOrder
-    phone?: SortOrderInput | SortOrder
-    receiptId?: SortOrder
-    _count?: ReceiptCustomerCountOrderByAggregateInput
-    _max?: ReceiptCustomerMaxOrderByAggregateInput
-    _min?: ReceiptCustomerMinOrderByAggregateInput
-  }
-
-  export type ReceiptCustomerScalarWhereWithAggregatesInput = {
-    AND?: ReceiptCustomerScalarWhereWithAggregatesInput | ReceiptCustomerScalarWhereWithAggregatesInput[]
-    OR?: ReceiptCustomerScalarWhereWithAggregatesInput[]
-    NOT?: ReceiptCustomerScalarWhereWithAggregatesInput | ReceiptCustomerScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"ReceiptCustomer"> | string
-    name?: StringWithAggregatesFilter<"ReceiptCustomer"> | string
-    email?: StringNullableWithAggregatesFilter<"ReceiptCustomer"> | string | null
-    address?: StringNullableWithAggregatesFilter<"ReceiptCustomer"> | string | null
-    cityPostal?: StringNullableWithAggregatesFilter<"ReceiptCustomer"> | string | null
-    phone?: StringNullableWithAggregatesFilter<"ReceiptCustomer"> | string | null
-    receiptId?: StringWithAggregatesFilter<"ReceiptCustomer"> | string
-  }
-
-  export type ReceiptItemWhereInput = {
-    AND?: ReceiptItemWhereInput | ReceiptItemWhereInput[]
-    OR?: ReceiptItemWhereInput[]
-    NOT?: ReceiptItemWhereInput | ReceiptItemWhereInput[]
-    id?: StringFilter<"ReceiptItem"> | string
-    description?: StringFilter<"ReceiptItem"> | string
-    quantity?: IntFilter<"ReceiptItem"> | number
-    unitPrice?: DecimalFilter<"ReceiptItem"> | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFilter<"ReceiptItem"> | Decimal | DecimalJsLike | number | string
-    receiptId?: StringFilter<"ReceiptItem"> | string
-    receipt?: XOR<GeneratedReceiptScalarRelationFilter, GeneratedReceiptWhereInput>
-  }
-
-  export type ReceiptItemOrderByWithRelationInput = {
-    id?: SortOrder
-    description?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    amount?: SortOrder
-    receiptId?: SortOrder
-    receipt?: GeneratedReceiptOrderByWithRelationInput
-  }
-
-  export type ReceiptItemWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ReceiptItemWhereInput | ReceiptItemWhereInput[]
-    OR?: ReceiptItemWhereInput[]
-    NOT?: ReceiptItemWhereInput | ReceiptItemWhereInput[]
-    description?: StringFilter<"ReceiptItem"> | string
-    quantity?: IntFilter<"ReceiptItem"> | number
-    unitPrice?: DecimalFilter<"ReceiptItem"> | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFilter<"ReceiptItem"> | Decimal | DecimalJsLike | number | string
-    receiptId?: StringFilter<"ReceiptItem"> | string
-    receipt?: XOR<GeneratedReceiptScalarRelationFilter, GeneratedReceiptWhereInput>
-  }, "id">
-
-  export type ReceiptItemOrderByWithAggregationInput = {
-    id?: SortOrder
-    description?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    amount?: SortOrder
-    receiptId?: SortOrder
-    _count?: ReceiptItemCountOrderByAggregateInput
-    _avg?: ReceiptItemAvgOrderByAggregateInput
-    _max?: ReceiptItemMaxOrderByAggregateInput
-    _min?: ReceiptItemMinOrderByAggregateInput
-    _sum?: ReceiptItemSumOrderByAggregateInput
-  }
-
-  export type ReceiptItemScalarWhereWithAggregatesInput = {
-    AND?: ReceiptItemScalarWhereWithAggregatesInput | ReceiptItemScalarWhereWithAggregatesInput[]
-    OR?: ReceiptItemScalarWhereWithAggregatesInput[]
-    NOT?: ReceiptItemScalarWhereWithAggregatesInput | ReceiptItemScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"ReceiptItem"> | string
-    description?: StringWithAggregatesFilter<"ReceiptItem"> | string
-    quantity?: IntWithAggregatesFilter<"ReceiptItem"> | number
-    unitPrice?: DecimalWithAggregatesFilter<"ReceiptItem"> | Decimal | DecimalJsLike | number | string
-    amount?: DecimalWithAggregatesFilter<"ReceiptItem"> | Decimal | DecimalJsLike | number | string
-    receiptId?: StringWithAggregatesFilter<"ReceiptItem"> | string
   }
 
   export type AuthorizedReceiptEmailCreateInput = {
@@ -11471,9 +8937,12 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     motorcycle?: MotorcycleCreateNestedOneWithoutPromotionsInput
+    targets?: PromotionTargetCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUncheckedCreateInput = {
@@ -11489,9 +8958,12 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     motorcycleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    targets?: PromotionTargetUncheckedCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUpdateInput = {
@@ -11507,9 +8979,12 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     motorcycle?: MotorcycleUpdateOneWithoutPromotionsNestedInput
+    targets?: PromotionTargetUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateInput = {
@@ -11525,9 +9000,12 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targets?: PromotionTargetUncheckedUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionCreateManyInput = {
@@ -11543,6 +9021,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     motorcycleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11561,6 +9041,8 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11578,9 +9060,66 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromotionTargetCreateInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+    promotion: PromotionCreateNestedOneWithoutTargetsInput
+  }
+
+  export type PromotionTargetUncheckedCreateInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+    promotionId: string
+  }
+
+  export type PromotionTargetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+    promotion?: PromotionUpdateOneRequiredWithoutTargetsNestedInput
+  }
+
+  export type PromotionTargetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+    promotionId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PromotionTargetCreateManyInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+    promotionId: string
+  }
+
+  export type PromotionTargetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PromotionTargetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
+    promotionId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductSyncFileCreateInput = {
@@ -11678,222 +9217,6 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     displayOrder?: IntFieldUpdateOperationsInput | number
     motorcycleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GeneratedReceiptCreateInput = {
-    id?: string
-    receiptNumber: string
-    purchaseDate: Date | string
-    paymentMethod: string
-    additionalNotes?: string | null
-    total: Decimal | DecimalJsLike | number | string
-    pdfUrl: string
-    createdAt?: Date | string
-    customer?: ReceiptCustomerCreateNestedOneWithoutReceiptInput
-    items?: ReceiptItemCreateNestedManyWithoutReceiptInput
-  }
-
-  export type GeneratedReceiptUncheckedCreateInput = {
-    id?: string
-    receiptNumber: string
-    purchaseDate: Date | string
-    paymentMethod: string
-    additionalNotes?: string | null
-    total: Decimal | DecimalJsLike | number | string
-    pdfUrl: string
-    createdAt?: Date | string
-    customer?: ReceiptCustomerUncheckedCreateNestedOneWithoutReceiptInput
-    items?: ReceiptItemUncheckedCreateNestedManyWithoutReceiptInput
-  }
-
-  export type GeneratedReceiptUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    receiptNumber?: StringFieldUpdateOperationsInput | string
-    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    paymentMethod?: StringFieldUpdateOperationsInput | string
-    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    customer?: ReceiptCustomerUpdateOneWithoutReceiptNestedInput
-    items?: ReceiptItemUpdateManyWithoutReceiptNestedInput
-  }
-
-  export type GeneratedReceiptUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    receiptNumber?: StringFieldUpdateOperationsInput | string
-    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    paymentMethod?: StringFieldUpdateOperationsInput | string
-    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    customer?: ReceiptCustomerUncheckedUpdateOneWithoutReceiptNestedInput
-    items?: ReceiptItemUncheckedUpdateManyWithoutReceiptNestedInput
-  }
-
-  export type GeneratedReceiptCreateManyInput = {
-    id?: string
-    receiptNumber: string
-    purchaseDate: Date | string
-    paymentMethod: string
-    additionalNotes?: string | null
-    total: Decimal | DecimalJsLike | number | string
-    pdfUrl: string
-    createdAt?: Date | string
-  }
-
-  export type GeneratedReceiptUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    receiptNumber?: StringFieldUpdateOperationsInput | string
-    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    paymentMethod?: StringFieldUpdateOperationsInput | string
-    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type GeneratedReceiptUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    receiptNumber?: StringFieldUpdateOperationsInput | string
-    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    paymentMethod?: StringFieldUpdateOperationsInput | string
-    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReceiptCustomerCreateInput = {
-    id?: string
-    name: string
-    email?: string | null
-    address?: string | null
-    cityPostal?: string | null
-    phone?: string | null
-    receipt: GeneratedReceiptCreateNestedOneWithoutCustomerInput
-  }
-
-  export type ReceiptCustomerUncheckedCreateInput = {
-    id?: string
-    name: string
-    email?: string | null
-    address?: string | null
-    cityPostal?: string | null
-    phone?: string | null
-    receiptId: string
-  }
-
-  export type ReceiptCustomerUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    cityPostal?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    receipt?: GeneratedReceiptUpdateOneRequiredWithoutCustomerNestedInput
-  }
-
-  export type ReceiptCustomerUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    cityPostal?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    receiptId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ReceiptCustomerCreateManyInput = {
-    id?: string
-    name: string
-    email?: string | null
-    address?: string | null
-    cityPostal?: string | null
-    phone?: string | null
-    receiptId: string
-  }
-
-  export type ReceiptCustomerUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    cityPostal?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ReceiptCustomerUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    cityPostal?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    receiptId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ReceiptItemCreateInput = {
-    id?: string
-    description: string
-    quantity: number
-    unitPrice: Decimal | DecimalJsLike | number | string
-    amount: Decimal | DecimalJsLike | number | string
-    receipt: GeneratedReceiptCreateNestedOneWithoutItemsInput
-  }
-
-  export type ReceiptItemUncheckedCreateInput = {
-    id?: string
-    description: string
-    quantity: number
-    unitPrice: Decimal | DecimalJsLike | number | string
-    amount: Decimal | DecimalJsLike | number | string
-    receiptId: string
-  }
-
-  export type ReceiptItemUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    receipt?: GeneratedReceiptUpdateOneRequiredWithoutItemsNestedInput
-  }
-
-  export type ReceiptItemUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    receiptId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ReceiptItemCreateManyInput = {
-    id?: string
-    description: string
-    quantity: number
-    unitPrice: Decimal | DecimalJsLike | number | string
-    amount: Decimal | DecimalJsLike | number | string
-    receiptId: string
-  }
-
-  export type ReceiptItemUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
-  export type ReceiptItemUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    receiptId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -12200,9 +9523,37 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumDiscountTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DiscountType | EnumDiscountTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDiscountTypeFilter<$PrismaModel> | $Enums.DiscountType
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type MotorcycleNullableScalarRelationFilter = {
     is?: MotorcycleWhereInput | null
     isNot?: MotorcycleWhereInput | null
+  }
+
+  export type PromotionTargetListRelationFilter = {
+    every?: PromotionTargetWhereInput
+    some?: PromotionTargetWhereInput
+    none?: PromotionTargetWhereInput
+  }
+
+  export type PromotionTargetOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type PromotionCountOrderByAggregateInput = {
@@ -12218,6 +9569,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
     motorcycleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12225,6 +9578,7 @@ export namespace Prisma {
 
   export type PromotionAvgOrderByAggregateInput = {
     displayOrder?: SortOrder
+    discountValue?: SortOrder
   }
 
   export type PromotionMaxOrderByAggregateInput = {
@@ -12240,6 +9594,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
     motorcycleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12258,6 +9614,8 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     displayOrder?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
     motorcycleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12265,6 +9623,7 @@ export namespace Prisma {
 
   export type PromotionSumOrderByAggregateInput = {
     displayOrder?: SortOrder
+    discountValue?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -12273,6 +9632,84 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumDiscountTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DiscountType | EnumDiscountTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDiscountTypeWithAggregatesFilter<$PrismaModel> | $Enums.DiscountType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDiscountTypeFilter<$PrismaModel>
+    _max?: NestedEnumDiscountTypeFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type EnumPromotionScopeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PromotionScope | EnumPromotionScopeFieldRefInput<$PrismaModel>
+    in?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPromotionScopeFilter<$PrismaModel> | $Enums.PromotionScope
+  }
+
+  export type PromotionScalarRelationFilter = {
+    is?: PromotionWhereInput
+    isNot?: PromotionWhereInput
+  }
+
+  export type PromotionTargetPromotionIdScopeValueCompoundUniqueInput = {
+    promotionId: string
+    scope: $Enums.PromotionScope
+    value: string
+  }
+
+  export type PromotionTargetCountOrderByAggregateInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+  }
+
+  export type PromotionTargetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+  }
+
+  export type PromotionTargetMinOrderByAggregateInput = {
+    id?: SortOrder
+    scope?: SortOrder
+    value?: SortOrder
+    isExclusion?: SortOrder
+    promotionId?: SortOrder
+  }
+
+  export type EnumPromotionScopeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PromotionScope | EnumPromotionScopeFieldRefInput<$PrismaModel>
+    in?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel> | $Enums.PromotionScope
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPromotionScopeFilter<$PrismaModel>
+    _max?: NestedEnumPromotionScopeFilter<$PrismaModel>
   }
 
   export type ProductSyncFileCountOrderByAggregateInput = {
@@ -12328,136 +9765,6 @@ export namespace Prisma {
 
   export type MotorcycleImageSumOrderByAggregateInput = {
     displayOrder?: SortOrder
-  }
-
-  export type ReceiptCustomerNullableScalarRelationFilter = {
-    is?: ReceiptCustomerWhereInput | null
-    isNot?: ReceiptCustomerWhereInput | null
-  }
-
-  export type ReceiptItemListRelationFilter = {
-    every?: ReceiptItemWhereInput
-    some?: ReceiptItemWhereInput
-    none?: ReceiptItemWhereInput
-  }
-
-  export type ReceiptItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type GeneratedReceiptCountOrderByAggregateInput = {
-    id?: SortOrder
-    receiptNumber?: SortOrder
-    purchaseDate?: SortOrder
-    paymentMethod?: SortOrder
-    additionalNotes?: SortOrder
-    total?: SortOrder
-    pdfUrl?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type GeneratedReceiptAvgOrderByAggregateInput = {
-    total?: SortOrder
-  }
-
-  export type GeneratedReceiptMaxOrderByAggregateInput = {
-    id?: SortOrder
-    receiptNumber?: SortOrder
-    purchaseDate?: SortOrder
-    paymentMethod?: SortOrder
-    additionalNotes?: SortOrder
-    total?: SortOrder
-    pdfUrl?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type GeneratedReceiptMinOrderByAggregateInput = {
-    id?: SortOrder
-    receiptNumber?: SortOrder
-    purchaseDate?: SortOrder
-    paymentMethod?: SortOrder
-    additionalNotes?: SortOrder
-    total?: SortOrder
-    pdfUrl?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type GeneratedReceiptSumOrderByAggregateInput = {
-    total?: SortOrder
-  }
-
-  export type GeneratedReceiptScalarRelationFilter = {
-    is?: GeneratedReceiptWhereInput
-    isNot?: GeneratedReceiptWhereInput
-  }
-
-  export type ReceiptCustomerCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    address?: SortOrder
-    cityPostal?: SortOrder
-    phone?: SortOrder
-    receiptId?: SortOrder
-  }
-
-  export type ReceiptCustomerMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    address?: SortOrder
-    cityPostal?: SortOrder
-    phone?: SortOrder
-    receiptId?: SortOrder
-  }
-
-  export type ReceiptCustomerMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    address?: SortOrder
-    cityPostal?: SortOrder
-    phone?: SortOrder
-    receiptId?: SortOrder
-  }
-
-  export type ReceiptItemCountOrderByAggregateInput = {
-    id?: SortOrder
-    description?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    amount?: SortOrder
-    receiptId?: SortOrder
-  }
-
-  export type ReceiptItemAvgOrderByAggregateInput = {
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    amount?: SortOrder
-  }
-
-  export type ReceiptItemMaxOrderByAggregateInput = {
-    id?: SortOrder
-    description?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    amount?: SortOrder
-    receiptId?: SortOrder
-  }
-
-  export type ReceiptItemMinOrderByAggregateInput = {
-    id?: SortOrder
-    description?: SortOrder
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    amount?: SortOrder
-    receiptId?: SortOrder
-  }
-
-  export type ReceiptItemSumOrderByAggregateInput = {
-    quantity?: SortOrder
-    unitPrice?: SortOrder
-    amount?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12578,8 +9885,34 @@ export namespace Prisma {
     connect?: MotorcycleWhereUniqueInput
   }
 
+  export type PromotionTargetCreateNestedManyWithoutPromotionInput = {
+    create?: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput> | PromotionTargetCreateWithoutPromotionInput[] | PromotionTargetUncheckedCreateWithoutPromotionInput[]
+    connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
+    createMany?: PromotionTargetCreateManyPromotionInputEnvelope
+    connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+  }
+
+  export type PromotionTargetUncheckedCreateNestedManyWithoutPromotionInput = {
+    create?: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput> | PromotionTargetCreateWithoutPromotionInput[] | PromotionTargetUncheckedCreateWithoutPromotionInput[]
+    connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
+    createMany?: PromotionTargetCreateManyPromotionInputEnvelope
+    connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type EnumDiscountTypeFieldUpdateOperationsInput = {
+    set?: $Enums.DiscountType
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type MotorcycleUpdateOneWithoutPromotionsNestedInput = {
@@ -12590,6 +9923,52 @@ export namespace Prisma {
     delete?: MotorcycleWhereInput | boolean
     connect?: MotorcycleWhereUniqueInput
     update?: XOR<XOR<MotorcycleUpdateToOneWithWhereWithoutPromotionsInput, MotorcycleUpdateWithoutPromotionsInput>, MotorcycleUncheckedUpdateWithoutPromotionsInput>
+  }
+
+  export type PromotionTargetUpdateManyWithoutPromotionNestedInput = {
+    create?: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput> | PromotionTargetCreateWithoutPromotionInput[] | PromotionTargetUncheckedCreateWithoutPromotionInput[]
+    connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
+    upsert?: PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput | PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput[]
+    createMany?: PromotionTargetCreateManyPromotionInputEnvelope
+    set?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    disconnect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    delete?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    update?: PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput | PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput[]
+    updateMany?: PromotionTargetUpdateManyWithWhereWithoutPromotionInput | PromotionTargetUpdateManyWithWhereWithoutPromotionInput[]
+    deleteMany?: PromotionTargetScalarWhereInput | PromotionTargetScalarWhereInput[]
+  }
+
+  export type PromotionTargetUncheckedUpdateManyWithoutPromotionNestedInput = {
+    create?: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput> | PromotionTargetCreateWithoutPromotionInput[] | PromotionTargetUncheckedCreateWithoutPromotionInput[]
+    connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
+    upsert?: PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput | PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput[]
+    createMany?: PromotionTargetCreateManyPromotionInputEnvelope
+    set?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    disconnect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    delete?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
+    update?: PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput | PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput[]
+    updateMany?: PromotionTargetUpdateManyWithWhereWithoutPromotionInput | PromotionTargetUpdateManyWithWhereWithoutPromotionInput[]
+    deleteMany?: PromotionTargetScalarWhereInput | PromotionTargetScalarWhereInput[]
+  }
+
+  export type PromotionCreateNestedOneWithoutTargetsInput = {
+    create?: XOR<PromotionCreateWithoutTargetsInput, PromotionUncheckedCreateWithoutTargetsInput>
+    connectOrCreate?: PromotionCreateOrConnectWithoutTargetsInput
+    connect?: PromotionWhereUniqueInput
+  }
+
+  export type EnumPromotionScopeFieldUpdateOperationsInput = {
+    set?: $Enums.PromotionScope
+  }
+
+  export type PromotionUpdateOneRequiredWithoutTargetsNestedInput = {
+    create?: XOR<PromotionCreateWithoutTargetsInput, PromotionUncheckedCreateWithoutTargetsInput>
+    connectOrCreate?: PromotionCreateOrConnectWithoutTargetsInput
+    upsert?: PromotionUpsertWithoutTargetsInput
+    connect?: PromotionWhereUniqueInput
+    update?: XOR<XOR<PromotionUpdateToOneWithWhereWithoutTargetsInput, PromotionUpdateWithoutTargetsInput>, PromotionUncheckedUpdateWithoutTargetsInput>
   }
 
   export type MotorcycleCreateNestedOneWithoutImagesInput = {
@@ -12604,108 +9983,6 @@ export namespace Prisma {
     upsert?: MotorcycleUpsertWithoutImagesInput
     connect?: MotorcycleWhereUniqueInput
     update?: XOR<XOR<MotorcycleUpdateToOneWithWhereWithoutImagesInput, MotorcycleUpdateWithoutImagesInput>, MotorcycleUncheckedUpdateWithoutImagesInput>
-  }
-
-  export type ReceiptCustomerCreateNestedOneWithoutReceiptInput = {
-    create?: XOR<ReceiptCustomerCreateWithoutReceiptInput, ReceiptCustomerUncheckedCreateWithoutReceiptInput>
-    connectOrCreate?: ReceiptCustomerCreateOrConnectWithoutReceiptInput
-    connect?: ReceiptCustomerWhereUniqueInput
-  }
-
-  export type ReceiptItemCreateNestedManyWithoutReceiptInput = {
-    create?: XOR<ReceiptItemCreateWithoutReceiptInput, ReceiptItemUncheckedCreateWithoutReceiptInput> | ReceiptItemCreateWithoutReceiptInput[] | ReceiptItemUncheckedCreateWithoutReceiptInput[]
-    connectOrCreate?: ReceiptItemCreateOrConnectWithoutReceiptInput | ReceiptItemCreateOrConnectWithoutReceiptInput[]
-    createMany?: ReceiptItemCreateManyReceiptInputEnvelope
-    connect?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-  }
-
-  export type ReceiptCustomerUncheckedCreateNestedOneWithoutReceiptInput = {
-    create?: XOR<ReceiptCustomerCreateWithoutReceiptInput, ReceiptCustomerUncheckedCreateWithoutReceiptInput>
-    connectOrCreate?: ReceiptCustomerCreateOrConnectWithoutReceiptInput
-    connect?: ReceiptCustomerWhereUniqueInput
-  }
-
-  export type ReceiptItemUncheckedCreateNestedManyWithoutReceiptInput = {
-    create?: XOR<ReceiptItemCreateWithoutReceiptInput, ReceiptItemUncheckedCreateWithoutReceiptInput> | ReceiptItemCreateWithoutReceiptInput[] | ReceiptItemUncheckedCreateWithoutReceiptInput[]
-    connectOrCreate?: ReceiptItemCreateOrConnectWithoutReceiptInput | ReceiptItemCreateOrConnectWithoutReceiptInput[]
-    createMany?: ReceiptItemCreateManyReceiptInputEnvelope
-    connect?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-  }
-
-  export type ReceiptCustomerUpdateOneWithoutReceiptNestedInput = {
-    create?: XOR<ReceiptCustomerCreateWithoutReceiptInput, ReceiptCustomerUncheckedCreateWithoutReceiptInput>
-    connectOrCreate?: ReceiptCustomerCreateOrConnectWithoutReceiptInput
-    upsert?: ReceiptCustomerUpsertWithoutReceiptInput
-    disconnect?: ReceiptCustomerWhereInput | boolean
-    delete?: ReceiptCustomerWhereInput | boolean
-    connect?: ReceiptCustomerWhereUniqueInput
-    update?: XOR<XOR<ReceiptCustomerUpdateToOneWithWhereWithoutReceiptInput, ReceiptCustomerUpdateWithoutReceiptInput>, ReceiptCustomerUncheckedUpdateWithoutReceiptInput>
-  }
-
-  export type ReceiptItemUpdateManyWithoutReceiptNestedInput = {
-    create?: XOR<ReceiptItemCreateWithoutReceiptInput, ReceiptItemUncheckedCreateWithoutReceiptInput> | ReceiptItemCreateWithoutReceiptInput[] | ReceiptItemUncheckedCreateWithoutReceiptInput[]
-    connectOrCreate?: ReceiptItemCreateOrConnectWithoutReceiptInput | ReceiptItemCreateOrConnectWithoutReceiptInput[]
-    upsert?: ReceiptItemUpsertWithWhereUniqueWithoutReceiptInput | ReceiptItemUpsertWithWhereUniqueWithoutReceiptInput[]
-    createMany?: ReceiptItemCreateManyReceiptInputEnvelope
-    set?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-    disconnect?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-    delete?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-    connect?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-    update?: ReceiptItemUpdateWithWhereUniqueWithoutReceiptInput | ReceiptItemUpdateWithWhereUniqueWithoutReceiptInput[]
-    updateMany?: ReceiptItemUpdateManyWithWhereWithoutReceiptInput | ReceiptItemUpdateManyWithWhereWithoutReceiptInput[]
-    deleteMany?: ReceiptItemScalarWhereInput | ReceiptItemScalarWhereInput[]
-  }
-
-  export type ReceiptCustomerUncheckedUpdateOneWithoutReceiptNestedInput = {
-    create?: XOR<ReceiptCustomerCreateWithoutReceiptInput, ReceiptCustomerUncheckedCreateWithoutReceiptInput>
-    connectOrCreate?: ReceiptCustomerCreateOrConnectWithoutReceiptInput
-    upsert?: ReceiptCustomerUpsertWithoutReceiptInput
-    disconnect?: ReceiptCustomerWhereInput | boolean
-    delete?: ReceiptCustomerWhereInput | boolean
-    connect?: ReceiptCustomerWhereUniqueInput
-    update?: XOR<XOR<ReceiptCustomerUpdateToOneWithWhereWithoutReceiptInput, ReceiptCustomerUpdateWithoutReceiptInput>, ReceiptCustomerUncheckedUpdateWithoutReceiptInput>
-  }
-
-  export type ReceiptItemUncheckedUpdateManyWithoutReceiptNestedInput = {
-    create?: XOR<ReceiptItemCreateWithoutReceiptInput, ReceiptItemUncheckedCreateWithoutReceiptInput> | ReceiptItemCreateWithoutReceiptInput[] | ReceiptItemUncheckedCreateWithoutReceiptInput[]
-    connectOrCreate?: ReceiptItemCreateOrConnectWithoutReceiptInput | ReceiptItemCreateOrConnectWithoutReceiptInput[]
-    upsert?: ReceiptItemUpsertWithWhereUniqueWithoutReceiptInput | ReceiptItemUpsertWithWhereUniqueWithoutReceiptInput[]
-    createMany?: ReceiptItemCreateManyReceiptInputEnvelope
-    set?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-    disconnect?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-    delete?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-    connect?: ReceiptItemWhereUniqueInput | ReceiptItemWhereUniqueInput[]
-    update?: ReceiptItemUpdateWithWhereUniqueWithoutReceiptInput | ReceiptItemUpdateWithWhereUniqueWithoutReceiptInput[]
-    updateMany?: ReceiptItemUpdateManyWithWhereWithoutReceiptInput | ReceiptItemUpdateManyWithWhereWithoutReceiptInput[]
-    deleteMany?: ReceiptItemScalarWhereInput | ReceiptItemScalarWhereInput[]
-  }
-
-  export type GeneratedReceiptCreateNestedOneWithoutCustomerInput = {
-    create?: XOR<GeneratedReceiptCreateWithoutCustomerInput, GeneratedReceiptUncheckedCreateWithoutCustomerInput>
-    connectOrCreate?: GeneratedReceiptCreateOrConnectWithoutCustomerInput
-    connect?: GeneratedReceiptWhereUniqueInput
-  }
-
-  export type GeneratedReceiptUpdateOneRequiredWithoutCustomerNestedInput = {
-    create?: XOR<GeneratedReceiptCreateWithoutCustomerInput, GeneratedReceiptUncheckedCreateWithoutCustomerInput>
-    connectOrCreate?: GeneratedReceiptCreateOrConnectWithoutCustomerInput
-    upsert?: GeneratedReceiptUpsertWithoutCustomerInput
-    connect?: GeneratedReceiptWhereUniqueInput
-    update?: XOR<XOR<GeneratedReceiptUpdateToOneWithWhereWithoutCustomerInput, GeneratedReceiptUpdateWithoutCustomerInput>, GeneratedReceiptUncheckedUpdateWithoutCustomerInput>
-  }
-
-  export type GeneratedReceiptCreateNestedOneWithoutItemsInput = {
-    create?: XOR<GeneratedReceiptCreateWithoutItemsInput, GeneratedReceiptUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: GeneratedReceiptCreateOrConnectWithoutItemsInput
-    connect?: GeneratedReceiptWhereUniqueInput
-  }
-
-  export type GeneratedReceiptUpdateOneRequiredWithoutItemsNestedInput = {
-    create?: XOR<GeneratedReceiptCreateWithoutItemsInput, GeneratedReceiptUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: GeneratedReceiptCreateOrConnectWithoutItemsInput
-    upsert?: GeneratedReceiptUpsertWithoutItemsInput
-    connect?: GeneratedReceiptWhereUniqueInput
-    update?: XOR<XOR<GeneratedReceiptUpdateToOneWithWhereWithoutItemsInput, GeneratedReceiptUpdateWithoutItemsInput>, GeneratedReceiptUncheckedUpdateWithoutItemsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12899,12 +10176,73 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumDiscountTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DiscountType | EnumDiscountTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDiscountTypeFilter<$PrismaModel> | $Enums.DiscountType
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDiscountTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DiscountType | EnumDiscountTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DiscountType[] | ListEnumDiscountTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDiscountTypeWithAggregatesFilter<$PrismaModel> | $Enums.DiscountType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDiscountTypeFilter<$PrismaModel>
+    _max?: NestedEnumDiscountTypeFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPromotionScopeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PromotionScope | EnumPromotionScopeFieldRefInput<$PrismaModel>
+    in?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPromotionScopeFilter<$PrismaModel> | $Enums.PromotionScope
+  }
+
+  export type NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PromotionScope | EnumPromotionScopeFieldRefInput<$PrismaModel>
+    in?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PromotionScope[] | ListEnumPromotionScopeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPromotionScopeWithAggregatesFilter<$PrismaModel> | $Enums.PromotionScope
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPromotionScopeFilter<$PrismaModel>
+    _max?: NestedEnumPromotionScopeFilter<$PrismaModel>
   }
 
   export type MotorcycleImageCreateWithoutMotorcycleInput = {
@@ -12942,8 +10280,11 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    targets?: PromotionTargetCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUncheckedCreateWithoutMotorcycleInput = {
@@ -12959,8 +10300,11 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    targets?: PromotionTargetUncheckedCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionCreateOrConnectWithoutMotorcycleInput = {
@@ -13031,6 +10375,8 @@ export namespace Prisma {
     startDate?: DateTimeFilter<"Promotion"> | Date | string
     endDate?: DateTimeFilter<"Promotion"> | Date | string
     displayOrder?: IntFilter<"Promotion"> | number
+    discountType?: EnumDiscountTypeFilter<"Promotion"> | $Enums.DiscountType
+    discountValue?: DecimalNullableFilter<"Promotion"> | Decimal | DecimalJsLike | number | string | null
     motorcycleId?: StringNullableFilter<"Promotion"> | string | null
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
@@ -13077,6 +10423,30 @@ export namespace Prisma {
   export type MotorcycleCreateOrConnectWithoutPromotionsInput = {
     where: MotorcycleWhereUniqueInput
     create: XOR<MotorcycleCreateWithoutPromotionsInput, MotorcycleUncheckedCreateWithoutPromotionsInput>
+  }
+
+  export type PromotionTargetCreateWithoutPromotionInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+  }
+
+  export type PromotionTargetUncheckedCreateWithoutPromotionInput = {
+    id?: string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
+  }
+
+  export type PromotionTargetCreateOrConnectWithoutPromotionInput = {
+    where: PromotionTargetWhereUniqueInput
+    create: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput>
+  }
+
+  export type PromotionTargetCreateManyPromotionInputEnvelope = {
+    data: PromotionTargetCreateManyPromotionInput | PromotionTargetCreateManyPromotionInput[]
+    skipDuplicates?: boolean
   }
 
   export type MotorcycleUpsertWithoutPromotionsInput = {
@@ -13126,6 +10496,129 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: MotorcycleImageUncheckedUpdateManyWithoutMotorcycleNestedInput
+  }
+
+  export type PromotionTargetUpsertWithWhereUniqueWithoutPromotionInput = {
+    where: PromotionTargetWhereUniqueInput
+    update: XOR<PromotionTargetUpdateWithoutPromotionInput, PromotionTargetUncheckedUpdateWithoutPromotionInput>
+    create: XOR<PromotionTargetCreateWithoutPromotionInput, PromotionTargetUncheckedCreateWithoutPromotionInput>
+  }
+
+  export type PromotionTargetUpdateWithWhereUniqueWithoutPromotionInput = {
+    where: PromotionTargetWhereUniqueInput
+    data: XOR<PromotionTargetUpdateWithoutPromotionInput, PromotionTargetUncheckedUpdateWithoutPromotionInput>
+  }
+
+  export type PromotionTargetUpdateManyWithWhereWithoutPromotionInput = {
+    where: PromotionTargetScalarWhereInput
+    data: XOR<PromotionTargetUpdateManyMutationInput, PromotionTargetUncheckedUpdateManyWithoutPromotionInput>
+  }
+
+  export type PromotionTargetScalarWhereInput = {
+    AND?: PromotionTargetScalarWhereInput | PromotionTargetScalarWhereInput[]
+    OR?: PromotionTargetScalarWhereInput[]
+    NOT?: PromotionTargetScalarWhereInput | PromotionTargetScalarWhereInput[]
+    id?: StringFilter<"PromotionTarget"> | string
+    scope?: EnumPromotionScopeFilter<"PromotionTarget"> | $Enums.PromotionScope
+    value?: StringNullableFilter<"PromotionTarget"> | string | null
+    isExclusion?: BoolFilter<"PromotionTarget"> | boolean
+    promotionId?: StringFilter<"PromotionTarget"> | string
+  }
+
+  export type PromotionCreateWithoutTargetsInput = {
+    id?: string
+    title: string
+    subtitle?: string | null
+    description?: string | null
+    imageUrl?: string | null
+    ctaText?: string
+    whatsappMessage?: string | null
+    isFeatured?: boolean
+    isActive?: boolean
+    startDate: Date | string
+    endDate: Date | string
+    displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    motorcycle?: MotorcycleCreateNestedOneWithoutPromotionsInput
+  }
+
+  export type PromotionUncheckedCreateWithoutTargetsInput = {
+    id?: string
+    title: string
+    subtitle?: string | null
+    description?: string | null
+    imageUrl?: string | null
+    ctaText?: string
+    whatsappMessage?: string | null
+    isFeatured?: boolean
+    isActive?: boolean
+    startDate: Date | string
+    endDate: Date | string
+    displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
+    motorcycleId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PromotionCreateOrConnectWithoutTargetsInput = {
+    where: PromotionWhereUniqueInput
+    create: XOR<PromotionCreateWithoutTargetsInput, PromotionUncheckedCreateWithoutTargetsInput>
+  }
+
+  export type PromotionUpsertWithoutTargetsInput = {
+    update: XOR<PromotionUpdateWithoutTargetsInput, PromotionUncheckedUpdateWithoutTargetsInput>
+    create: XOR<PromotionCreateWithoutTargetsInput, PromotionUncheckedCreateWithoutTargetsInput>
+    where?: PromotionWhereInput
+  }
+
+  export type PromotionUpdateToOneWithWhereWithoutTargetsInput = {
+    where?: PromotionWhereInput
+    data: XOR<PromotionUpdateWithoutTargetsInput, PromotionUncheckedUpdateWithoutTargetsInput>
+  }
+
+  export type PromotionUpdateWithoutTargetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: StringFieldUpdateOperationsInput | string
+    whatsappMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    motorcycle?: MotorcycleUpdateOneWithoutPromotionsNestedInput
+  }
+
+  export type PromotionUncheckedUpdateWithoutTargetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ctaText?: StringFieldUpdateOperationsInput | string
+    whatsappMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    motorcycleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MotorcycleCreateWithoutImagesInput = {
@@ -13220,240 +10713,6 @@ export namespace Prisma {
     promotions?: PromotionUncheckedUpdateManyWithoutMotorcycleNestedInput
   }
 
-  export type ReceiptCustomerCreateWithoutReceiptInput = {
-    id?: string
-    name: string
-    email?: string | null
-    address?: string | null
-    cityPostal?: string | null
-    phone?: string | null
-  }
-
-  export type ReceiptCustomerUncheckedCreateWithoutReceiptInput = {
-    id?: string
-    name: string
-    email?: string | null
-    address?: string | null
-    cityPostal?: string | null
-    phone?: string | null
-  }
-
-  export type ReceiptCustomerCreateOrConnectWithoutReceiptInput = {
-    where: ReceiptCustomerWhereUniqueInput
-    create: XOR<ReceiptCustomerCreateWithoutReceiptInput, ReceiptCustomerUncheckedCreateWithoutReceiptInput>
-  }
-
-  export type ReceiptItemCreateWithoutReceiptInput = {
-    id?: string
-    description: string
-    quantity: number
-    unitPrice: Decimal | DecimalJsLike | number | string
-    amount: Decimal | DecimalJsLike | number | string
-  }
-
-  export type ReceiptItemUncheckedCreateWithoutReceiptInput = {
-    id?: string
-    description: string
-    quantity: number
-    unitPrice: Decimal | DecimalJsLike | number | string
-    amount: Decimal | DecimalJsLike | number | string
-  }
-
-  export type ReceiptItemCreateOrConnectWithoutReceiptInput = {
-    where: ReceiptItemWhereUniqueInput
-    create: XOR<ReceiptItemCreateWithoutReceiptInput, ReceiptItemUncheckedCreateWithoutReceiptInput>
-  }
-
-  export type ReceiptItemCreateManyReceiptInputEnvelope = {
-    data: ReceiptItemCreateManyReceiptInput | ReceiptItemCreateManyReceiptInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ReceiptCustomerUpsertWithoutReceiptInput = {
-    update: XOR<ReceiptCustomerUpdateWithoutReceiptInput, ReceiptCustomerUncheckedUpdateWithoutReceiptInput>
-    create: XOR<ReceiptCustomerCreateWithoutReceiptInput, ReceiptCustomerUncheckedCreateWithoutReceiptInput>
-    where?: ReceiptCustomerWhereInput
-  }
-
-  export type ReceiptCustomerUpdateToOneWithWhereWithoutReceiptInput = {
-    where?: ReceiptCustomerWhereInput
-    data: XOR<ReceiptCustomerUpdateWithoutReceiptInput, ReceiptCustomerUncheckedUpdateWithoutReceiptInput>
-  }
-
-  export type ReceiptCustomerUpdateWithoutReceiptInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    cityPostal?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ReceiptCustomerUncheckedUpdateWithoutReceiptInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    cityPostal?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ReceiptItemUpsertWithWhereUniqueWithoutReceiptInput = {
-    where: ReceiptItemWhereUniqueInput
-    update: XOR<ReceiptItemUpdateWithoutReceiptInput, ReceiptItemUncheckedUpdateWithoutReceiptInput>
-    create: XOR<ReceiptItemCreateWithoutReceiptInput, ReceiptItemUncheckedCreateWithoutReceiptInput>
-  }
-
-  export type ReceiptItemUpdateWithWhereUniqueWithoutReceiptInput = {
-    where: ReceiptItemWhereUniqueInput
-    data: XOR<ReceiptItemUpdateWithoutReceiptInput, ReceiptItemUncheckedUpdateWithoutReceiptInput>
-  }
-
-  export type ReceiptItemUpdateManyWithWhereWithoutReceiptInput = {
-    where: ReceiptItemScalarWhereInput
-    data: XOR<ReceiptItemUpdateManyMutationInput, ReceiptItemUncheckedUpdateManyWithoutReceiptInput>
-  }
-
-  export type ReceiptItemScalarWhereInput = {
-    AND?: ReceiptItemScalarWhereInput | ReceiptItemScalarWhereInput[]
-    OR?: ReceiptItemScalarWhereInput[]
-    NOT?: ReceiptItemScalarWhereInput | ReceiptItemScalarWhereInput[]
-    id?: StringFilter<"ReceiptItem"> | string
-    description?: StringFilter<"ReceiptItem"> | string
-    quantity?: IntFilter<"ReceiptItem"> | number
-    unitPrice?: DecimalFilter<"ReceiptItem"> | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFilter<"ReceiptItem"> | Decimal | DecimalJsLike | number | string
-    receiptId?: StringFilter<"ReceiptItem"> | string
-  }
-
-  export type GeneratedReceiptCreateWithoutCustomerInput = {
-    id?: string
-    receiptNumber: string
-    purchaseDate: Date | string
-    paymentMethod: string
-    additionalNotes?: string | null
-    total: Decimal | DecimalJsLike | number | string
-    pdfUrl: string
-    createdAt?: Date | string
-    items?: ReceiptItemCreateNestedManyWithoutReceiptInput
-  }
-
-  export type GeneratedReceiptUncheckedCreateWithoutCustomerInput = {
-    id?: string
-    receiptNumber: string
-    purchaseDate: Date | string
-    paymentMethod: string
-    additionalNotes?: string | null
-    total: Decimal | DecimalJsLike | number | string
-    pdfUrl: string
-    createdAt?: Date | string
-    items?: ReceiptItemUncheckedCreateNestedManyWithoutReceiptInput
-  }
-
-  export type GeneratedReceiptCreateOrConnectWithoutCustomerInput = {
-    where: GeneratedReceiptWhereUniqueInput
-    create: XOR<GeneratedReceiptCreateWithoutCustomerInput, GeneratedReceiptUncheckedCreateWithoutCustomerInput>
-  }
-
-  export type GeneratedReceiptUpsertWithoutCustomerInput = {
-    update: XOR<GeneratedReceiptUpdateWithoutCustomerInput, GeneratedReceiptUncheckedUpdateWithoutCustomerInput>
-    create: XOR<GeneratedReceiptCreateWithoutCustomerInput, GeneratedReceiptUncheckedCreateWithoutCustomerInput>
-    where?: GeneratedReceiptWhereInput
-  }
-
-  export type GeneratedReceiptUpdateToOneWithWhereWithoutCustomerInput = {
-    where?: GeneratedReceiptWhereInput
-    data: XOR<GeneratedReceiptUpdateWithoutCustomerInput, GeneratedReceiptUncheckedUpdateWithoutCustomerInput>
-  }
-
-  export type GeneratedReceiptUpdateWithoutCustomerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    receiptNumber?: StringFieldUpdateOperationsInput | string
-    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    paymentMethod?: StringFieldUpdateOperationsInput | string
-    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: ReceiptItemUpdateManyWithoutReceiptNestedInput
-  }
-
-  export type GeneratedReceiptUncheckedUpdateWithoutCustomerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    receiptNumber?: StringFieldUpdateOperationsInput | string
-    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    paymentMethod?: StringFieldUpdateOperationsInput | string
-    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: ReceiptItemUncheckedUpdateManyWithoutReceiptNestedInput
-  }
-
-  export type GeneratedReceiptCreateWithoutItemsInput = {
-    id?: string
-    receiptNumber: string
-    purchaseDate: Date | string
-    paymentMethod: string
-    additionalNotes?: string | null
-    total: Decimal | DecimalJsLike | number | string
-    pdfUrl: string
-    createdAt?: Date | string
-    customer?: ReceiptCustomerCreateNestedOneWithoutReceiptInput
-  }
-
-  export type GeneratedReceiptUncheckedCreateWithoutItemsInput = {
-    id?: string
-    receiptNumber: string
-    purchaseDate: Date | string
-    paymentMethod: string
-    additionalNotes?: string | null
-    total: Decimal | DecimalJsLike | number | string
-    pdfUrl: string
-    createdAt?: Date | string
-    customer?: ReceiptCustomerUncheckedCreateNestedOneWithoutReceiptInput
-  }
-
-  export type GeneratedReceiptCreateOrConnectWithoutItemsInput = {
-    where: GeneratedReceiptWhereUniqueInput
-    create: XOR<GeneratedReceiptCreateWithoutItemsInput, GeneratedReceiptUncheckedCreateWithoutItemsInput>
-  }
-
-  export type GeneratedReceiptUpsertWithoutItemsInput = {
-    update: XOR<GeneratedReceiptUpdateWithoutItemsInput, GeneratedReceiptUncheckedUpdateWithoutItemsInput>
-    create: XOR<GeneratedReceiptCreateWithoutItemsInput, GeneratedReceiptUncheckedCreateWithoutItemsInput>
-    where?: GeneratedReceiptWhereInput
-  }
-
-  export type GeneratedReceiptUpdateToOneWithWhereWithoutItemsInput = {
-    where?: GeneratedReceiptWhereInput
-    data: XOR<GeneratedReceiptUpdateWithoutItemsInput, GeneratedReceiptUncheckedUpdateWithoutItemsInput>
-  }
-
-  export type GeneratedReceiptUpdateWithoutItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    receiptNumber?: StringFieldUpdateOperationsInput | string
-    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    paymentMethod?: StringFieldUpdateOperationsInput | string
-    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    customer?: ReceiptCustomerUpdateOneWithoutReceiptNestedInput
-  }
-
-  export type GeneratedReceiptUncheckedUpdateWithoutItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    receiptNumber?: StringFieldUpdateOperationsInput | string
-    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    paymentMethod?: StringFieldUpdateOperationsInput | string
-    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    pdfUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    customer?: ReceiptCustomerUncheckedUpdateOneWithoutReceiptNestedInput
-  }
-
   export type MotorcycleImageCreateManyMotorcycleInput = {
     id?: string
     url: string
@@ -13473,6 +10732,8 @@ export namespace Prisma {
     startDate: Date | string
     endDate: Date | string
     displayOrder?: number
+    discountType?: $Enums.DiscountType
+    discountValue?: Decimal | DecimalJsLike | number | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13508,8 +10769,11 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targets?: PromotionTargetUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateWithoutMotorcycleInput = {
@@ -13525,8 +10789,11 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targets?: PromotionTargetUncheckedUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateManyWithoutMotorcycleInput = {
@@ -13542,40 +10809,38 @@ export namespace Prisma {
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     displayOrder?: IntFieldUpdateOperationsInput | number
+    discountType?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    discountValue?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ReceiptItemCreateManyReceiptInput = {
+  export type PromotionTargetCreateManyPromotionInput = {
     id?: string
-    description: string
-    quantity: number
-    unitPrice: Decimal | DecimalJsLike | number | string
-    amount: Decimal | DecimalJsLike | number | string
+    scope: $Enums.PromotionScope
+    value?: string | null
+    isExclusion?: boolean
   }
 
-  export type ReceiptItemUpdateWithoutReceiptInput = {
+  export type PromotionTargetUpdateWithoutPromotionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type ReceiptItemUncheckedUpdateWithoutReceiptInput = {
+  export type PromotionTargetUncheckedUpdateWithoutPromotionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type ReceiptItemUncheckedUpdateManyWithoutReceiptInput = {
+  export type PromotionTargetUncheckedUpdateManyWithoutPromotionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    scope?: EnumPromotionScopeFieldUpdateOperationsInput | $Enums.PromotionScope
+    value?: NullableStringFieldUpdateOperationsInput | string | null
+    isExclusion?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

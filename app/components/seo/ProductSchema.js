@@ -20,7 +20,9 @@ const ProductSchema = ({ motorcycle }) => {
     offers: {
       "@type": "Offer",
       url,
-      price: motorcycle.price,
+      // If structured data and the visible price disagree, Google can suppress
+      // the rich result.
+      price: motorcycle.pricing?.price ?? motorcycle.price,
       priceCurrency: "MYR",
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
@@ -34,6 +36,13 @@ const ProductSchema = ({ motorcycle }) => {
   if (motorcycle.year) {
     productData.model = motorcycle.model;
     productData.productionDate = motorcycle.year;
+  }
+
+  // Stops Google showing a stale discount after the promotion ends.
+  if (motorcycle.pricing?.hasDiscount && motorcycle.promotion?.endDate) {
+    productData.offers.priceValidUntil = new Date(motorcycle.promotion.endDate)
+      .toISOString()
+      .slice(0, 10);
   }
 
   return (

@@ -6,6 +6,8 @@ import {
 } from "@/utils/dbPg";
 import { verifyAuthToken } from "@/utils/firebaseAdmin";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request, { params }) {
   try {
     const { id } = await params;
@@ -20,7 +22,13 @@ export async function GET(request, { params }) {
 
     return NextResponse.json(motorcycle);
   } catch (error) {
-    console.error("Error fetching motorcycle:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to fetch motorcycle",
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to fetch motorcycle" },
       { status: 500 }
@@ -69,6 +77,17 @@ export async function PUT(request, { params }) {
     }
 
     const motorcycle = await updateMotorcyclePg(id, data);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "motorcycle updated",
+        actor: auth.decoded.email,
+        motorcycleId: id,
+        fields: Object.keys(data),
+      })
+    );
+
     return NextResponse.json(motorcycle);
   } catch (error) {
     if (error.code === "P2002") {
@@ -77,7 +96,14 @@ export async function PUT(request, { params }) {
         { status: 409 }
       );
     }
-    console.error("Error updating motorcycle:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to update motorcycle",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to update motorcycle" },
       { status: 500 }
@@ -101,9 +127,29 @@ export async function DELETE(request, { params }) {
     }
 
     await deleteMotorcyclePg(id);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "motorcycle deleted",
+        actor: auth.decoded.email,
+        motorcycleId: id,
+        brand: existing.brand,
+        name: existing.name,
+        year: existing.year,
+      })
+    );
+
     return NextResponse.json({ message: "Motorcycle deleted successfully" });
   } catch (error) {
-    console.error("Error deleting motorcycle:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to delete motorcycle",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to delete motorcycle" },
       { status: 500 }

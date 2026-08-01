@@ -45,6 +45,13 @@ export async function verifyAuthToken(request) {
     });
     decoded = payload;
   } catch {
+    console.warn(
+      JSON.stringify({
+        level: "warn",
+        msg: "auth token rejected",
+        path: new URL(request.url).pathname,
+      })
+    );
     return {
       error: NextResponse.json(
         { error: "Invalid or expired token" },
@@ -56,12 +63,26 @@ export async function verifyAuthToken(request) {
   try {
     const authorizedEmails = await getAuthorizedEmails();
     if (!decoded.email || !authorizedEmails.includes(decoded.email)) {
+      console.warn(
+        JSON.stringify({
+          level: "warn",
+          msg: "unauthorized email rejected",
+          email: decoded.email || null,
+          path: new URL(request.url).pathname,
+        })
+      );
       return {
         error: NextResponse.json({ error: "Unauthorized" }, { status: 403 }),
       };
     }
   } catch (error) {
-    console.error("Failed to load authorized emails:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to load authorized emails",
+        err: { message: error.message, stack: error.stack },
+      })
+    );
     return {
       error: NextResponse.json(
         { error: "Failed to verify authorization" },

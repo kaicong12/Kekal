@@ -13,36 +13,16 @@ import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 
-import { getMotorcycleByIdPg as getMotorcycleById, listMotorcyclesPg } from "@/utils/dbPg";
+import {
+  getMotorcycleByIdPg as getMotorcycleById,
+  getMotorcycleWithPromotionPg,
+} from "@/utils/dbPg";
 import { extractIdFromSlug, toMotorcycleSlug } from "@/utils/slug";
 import { localeAlternates } from "@/utils/seoAlternates";
-import { routing } from "@/i18n/routing";
 import ProductSchema from "@/app/components/seo/ProductSchema";
 import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
 
-// Pre-render every motorcycle detail page as static HTML at build time (one
-// entry per locale × slug), then refresh in the background daily. Served from
-// the edge with near-instant TTFB — this is what lets Googlebot crawl these
-// pages fast enough to index them (fixes "Discovered - currently not indexed").
 export const revalidate = 86400; // 24 hours
-
-export async function generateStaticParams() {
-  try {
-    const motorcycles = await listMotorcyclesPg();
-    return routing.locales.flatMap((locale) =>
-      motorcycles.map((motorcycle) => ({
-        locale,
-        slug: toMotorcycleSlug(motorcycle),
-      }))
-    );
-  } catch (error) {
-    // If the DB is unreachable at build time, don't fail the whole deploy —
-    // fall back to on-demand rendering (dynamicParams defaults to true), and
-    // pages still get cached via `revalidate` on first request.
-    console.error("Error in generateStaticParams for motorcycles:", error);
-    return [];
-  }
-}
 
 export async function generateMetadata({ params }) {
   try {
@@ -53,7 +33,9 @@ export async function generateMetadata({ params }) {
         description: "The requested motorcycle listing could not be found.",
       };
     }
-    const motorcycleData = await getMotorcycleById(id);
+    const motorcycleData = await getMotorcycleWithPromotionPg(
+      await getMotorcycleById(id)
+    );
 
     if (!motorcycleData) {
       return {
@@ -65,12 +47,12 @@ export async function generateMetadata({ params }) {
     const slug = toMotorcycleSlug(motorcycleData);
 
     const firstImage = motorcycleData.images?.[0]?.url;
+    // So the search-result title never contradicts the price on the page.
+    const price = motorcycleData.pricing?.price ?? motorcycleData.price;
 
     return {
-      title: `${motorcycleData.name} - RM${motorcycleData.price}`,
-      description: `${motorcycleData.name} for sale at RM${
-        motorcycleData.price
-      }. ${
+      title: `${motorcycleData.name} - RM${price}`,
+      description: `${motorcycleData.name} for sale at RM${price}. ${
         motorcycleData.description ||
         "Quality motorcycle from trusted dealer in Johor Bahru, Johor Jaya."
       }`,
@@ -89,8 +71,8 @@ export async function generateMetadata({ params }) {
       ],
       alternates: localeAlternates(`/motorcycle/${slug}`, params.locale),
       openGraph: {
-        title: `${motorcycleData.name} - RM${motorcycleData.price}`,
-        description: `${motorcycleData.name} for sale at RM${motorcycleData.price}. Trusted motorcycle dealer in Johor Bahru.`,
+        title: `${motorcycleData.name} - RM${price}`,
+        description: `${motorcycleData.name} for sale at RM${price}. Trusted motorcycle dealer in Johor Bahru.`,
         url: `https://www.motorkekal.com/motorcycle/${slug}`,
         siteName: "Perniagaan Motor Kekal",
         type: "website",
@@ -133,8 +115,11 @@ const MotorcyclePage = async ({ params }) => {
 
   const id = extractIdFromSlug(params.slug);
   if (!id) notFound();
-  const motorcycleData = await getMotorcycleById(id);
-  if (!motorcycleData) notFound();
+  const bike = await getMotorcycleById(id);
+  if (!bike) notFound();
+
+  // Every price on this page reads from `pricing`.
+  const motorcycleData = await getMotorcycleWithPromotionPg(bike);
 
   const tags = (motorcycleData.tags || "")
     .split(",")

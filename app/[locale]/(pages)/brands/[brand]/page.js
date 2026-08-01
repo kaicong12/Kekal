@@ -9,7 +9,7 @@ import BrandBikeGrid from "@/app/components/motorkekal/BrandBikeGrid";
 import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
 import BrandCollectionSchema from "@/app/components/seo/BrandCollectionSchema";
 import { localeAlternates } from "@/utils/seoAlternates";
-import { queryMotorcyclePg } from "@/utils/dbPg";
+import { queryMotorcyclePg, withPromotionsPg } from "@/utils/dbPg";
 import brandContent, { BRAND_SLUGS } from "@/utils/brandContent";
 import { waLink, WaIcon } from "@/app/components/motorkekal/waLink";
 
@@ -54,7 +54,7 @@ export default async function BrandDetailPage({ params: { locale, brand } }) {
       locale={locale}
       brand={brand}
       content={content}
-      motorcycles={motorcycles}
+      motorcycles={await withPromotionsPg(motorcycles)}
     />
   );
 }

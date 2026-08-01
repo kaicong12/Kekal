@@ -5,6 +5,13 @@ import {
   deletePromotionPg,
 } from "@/utils/dbPg";
 import { verifyAuthToken } from "@/utils/firebaseAdmin";
+import {
+  parseDiscount,
+  parseTargets,
+  revalidatePromotionSurfaces,
+} from "@/utils/promotionPayload";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request, { params }) {
   try {
@@ -20,7 +27,13 @@ export async function GET(request, { params }) {
 
     return NextResponse.json(promotion);
   } catch (error) {
-    console.error("Error fetching promotion:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to fetch promotion",
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to fetch promotion" },
       { status: 500 }
@@ -61,6 +74,29 @@ export async function PUT(request, { params }) {
     if (body.motorcycleId !== undefined)
       data.motorcycleId = body.motorcycleId || null;
 
+    if (body.discountType !== undefined || body.discountValue !== undefined) {
+      const discount = parseDiscount({
+        discountType: body.discountType ?? existing.discountType,
+        discountValue: body.discountValue ?? existing.discountValue,
+      });
+      if (discount.error) {
+        return NextResponse.json({ error: discount.error }, { status: 400 });
+      }
+      Object.assign(data, discount.data);
+    }
+
+    // Replaced wholesale rather than diffed: the form always submits the full set.
+    const targets = parseTargets(body);
+    if (targets.error) {
+      return NextResponse.json({ error: targets.error }, { status: 400 });
+    }
+    if (targets.data !== undefined) {
+      data.targets = {
+        deleteMany: {},
+        ...(targets.data.length ? { create: targets.data } : {}),
+      };
+    }
+
     if (body.startDate !== undefined) {
       const start = new Date(body.startDate);
       if (Number.isNaN(start.getTime())) {
@@ -92,9 +128,28 @@ export async function PUT(request, { params }) {
     }
 
     const promotion = await updatePromotionPg(id, data);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "promotion updated",
+        actor: auth.decoded.email,
+        promotionId: id,
+        fields: Object.keys(data),
+      })
+    );
+
+    revalidatePromotionSurfaces();
     return NextResponse.json(promotion);
   } catch (error) {
-    console.error("Error updating promotion:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to update promotion",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to update promotion" },
       { status: 500 }
@@ -118,9 +173,28 @@ export async function DELETE(request, { params }) {
     }
 
     await deletePromotionPg(id);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "promotion deleted",
+        actor: auth.decoded.email,
+        promotionId: id,
+        title: existing.title,
+      })
+    );
+
+    revalidatePromotionSurfaces();
     return NextResponse.json({ message: "Promotion deleted successfully" });
   } catch (error) {
-    console.error("Error deleting promotion:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to delete promotion",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to delete promotion" },
       { status: 500 }

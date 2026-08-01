@@ -377,6 +377,8 @@
     "priceLowToHigh": "Harga (Rendah ke Tinggi)",
     "priceHighToLow": "Harga (Tinggi ke Rendah)",
     "allBrands": "Semua Jenama",
+    "brandsPrev": "Jenama sebelumnya",
+    "brandsNext": "Lagi jenama",
     "empty": {
       "title": "Tiada motosikal sepadan dengan carian anda",
       "subtitle": "Kami tidak dapat menemui sebarang motosikal yang sepadan dengan kriteria anda.",
@@ -389,7 +391,8 @@
       "browseAll": "Lihat semua jenama",
       "needHelp": "Perlukan bantuan mencari motosikal yang sesuai?",
       "contactExperts": "Hubungi pakar kami"
-    }
+    },
+    "clearSearch": "Kosongkan carian"
   },
   "promotions": {
     "thisMonth": "Bulan Ini",
@@ -730,6 +733,17 @@
       "title": "Semua Motosikal",
       "heading": "Semua Motosikal",
       "intro": "Lihat semua motosikal yang ada di Perniagaan Motor Kekal, Johor Bahru. Yamaha, Honda, Kawasaki, KTM dan banyak lagi — motor baru dengan pembiayaan mudah dan servis sendiri."
+    },
+    "promo": {
+      "days": "HARI",
+      "hours": "JAM",
+      "minutes": "MINIT",
+      "seconds": "SAAT",
+      "lastDay": "Hari terakhir · {name}",
+      "validUntil": "Harga promo sah sehingga {date}.",
+      "save": "Jimat {amount}",
+      "terms": "Terma & Syarat",
+      "badge": "Promosi"
     }
   },
   "brands": {

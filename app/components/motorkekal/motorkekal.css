@@ -1021,6 +1021,178 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+
+/* Single-row variant for the brand filter. The brand list grows over time and
+   wrapping it pushed the bike grid below the fold, so it scrolls sideways
+   instead. Edge fades hint that there is more to the right. */
+.mk-site .chip-rail {
+  position: relative;
+  margin-bottom: 22px;
+}
+.mk-site .chip-rail__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--kk-border-strong);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--kk-text);
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(23, 24, 28, 0.14);
+  transition: background 0.12s, transform 0.12s;
+}
+.mk-site .chip-rail__nav svg {
+  width: 17px;
+  height: 17px;
+}
+.mk-site .chip-rail__nav:hover {
+  background: rgba(23, 24, 28, 0.05);
+}
+.mk-site .chip-rail__nav--prev {
+  left: -8px;
+}
+.mk-site .chip-rail__nav--next {
+  right: -8px;
+}
+/* Below 700px the row bleeds to the viewport edges, so an overlaid arrow would
+   cover a chip. Touch swipe plus the edge fade carries it there instead. */
+@media (max-width: 699.98px) {
+  .mk-site .chip-rail__nav {
+    display: none;
+  }
+}
+
+.mk-site .chips--scroll {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Room for the focus ring, which overflow would otherwise clip. */
+  padding: 3px 0;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+}
+/* Fade only the edges that actually have more chips behind them, so a row that
+   fits entirely is never clipped. */
+.mk-site .chips--scroll.is-end {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent 100%);
+}
+.mk-site .chips--scroll.is-start {
+  -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to left, #000 calc(100% - 28px), transparent 100%);
+}
+.mk-site .chips--scroll.is-start.is-end {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 28px,
+    #000 calc(100% - 28px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 28px,
+    #000 calc(100% - 28px),
+    transparent 100%
+  );
+}
+.mk-site .chips--scroll::-webkit-scrollbar {
+  display: none;
+}
+.mk-site .chips--scroll > .chip {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+/* Bleed to the viewport edges on small screens so the row reads as scrollable
+   rather than as a clipped block inside the page gutter. Values track the
+   .wrap gutter: 24px, dropping to 18px under 560px. */
+@media (max-width: 860px) {
+  .mk-site .chips--scroll {
+    margin-inline: -24px;
+    padding-inline: 24px;
+  }
+}
+@media (max-width: 560px) {
+  .mk-site .chips--scroll {
+    margin-inline: -18px;
+    padding-inline: 18px;
+  }
+}
+
+/* ---- Listing search ---------------------------------------------------- */
+.mk-site .listing-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  max-width: 520px;
+}
+.mk-site .listing-search > svg {
+  position: absolute;
+  left: 15px;
+  width: 18px;
+  height: 18px;
+  color: var(--kk-text-muted);
+  pointer-events: none;
+}
+.mk-site .listing-search input {
+  width: 100%;
+  height: 48px;
+  padding: 0 44px;
+  border-radius: 12px;
+  border: 1px solid var(--kk-border-strong);
+  background: #fff;
+  font-family: var(--kk-font);
+  font-size: 15px;
+  color: var(--kk-text);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.mk-site .listing-search input::placeholder {
+  color: var(--kk-text-muted);
+}
+.mk-site .listing-search input:focus {
+  border-color: var(--kk-ink);
+  box-shadow: 0 0 0 3px rgba(23, 24, 28, 0.08);
+}
+/* Suppress the native clear affordance; we render our own. */
+.mk-site .listing-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.mk-site .listing-search__clear {
+  position: absolute;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--kk-text-muted);
+}
+.mk-site .listing-search__clear:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--kk-text);
+}
+@media (max-width: 700px) {
+  .mk-site .listing-search {
+    max-width: none;
+  }
+}
 .mk-site .chip {
   height: 38px;
   padding: 0 15px;
@@ -1053,6 +1225,47 @@
   gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 26px;
+}
+.mk-site .listing-toolbar__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Sized down from the standalone search so it sits level with the sort chip. */
+.mk-site .listing-toolbar .listing-search {
+  margin-bottom: 0;
+  width: 260px;
+}
+.mk-site .listing-toolbar .listing-search input {
+  height: 38px;
+  padding: 0 34px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.mk-site .listing-toolbar .listing-search > svg {
+  left: 11px;
+  width: 16px;
+  height: 16px;
+}
+.mk-site .listing-toolbar .listing-search__clear {
+  right: 3px;
+  width: 30px;
+  height: 30px;
+  font-size: 19px;
+}
+/* Below 700px the search keeps its own full-width row above the chips; from
+   700px up it moves into the toolbar beside the sort dropdown. Both are in the
+   DOM, only one is ever displayed. */
+.mk-site .listing-toolbar .listing-search {
+  display: none;
+}
+@media (min-width: 700px) {
+  .mk-site .listing-search--standalone {
+    display: none;
+  }
+  .mk-site .listing-toolbar .listing-search {
+    display: flex;
+  }
 }
 .mk-site .count {
   font-size: 15px;
@@ -1785,5 +1998,187 @@
   .mk-site .nf__grid {
     grid-template-columns: 1fr;
     gap: 34px;
+  }
+}
+
+/* ---- Promotion urgency (detail page buy box) --------------------------- */
+/* Ported from the Claude Design mockup (motor-kekal-motorcycle.html). Shown
+   only when a live promotion targets the bike — there is no "no promo"
+   fallback state, since without inventory tracking there's nothing honest to
+   claim when nothing is on offer. */
+.mk-site .buybox__price {
+  flex-wrap: wrap;
+}
+.mk-site .buybox__price b {
+  white-space: nowrap;
+}
+.mk-site .buybox__was {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.mk-site .buybox__price s {
+  opacity: 0.8;
+  color: var(--kk-text-muted);
+  font-size: 17px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.mk-site .save-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: 7px;
+  background: var(--kk-orange-soft);
+  color: var(--kk-orange-strong);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.mk-site .urg {
+  margin-top: 16px;
+}
+.mk-site .urg-count {
+  background: var(--kk-ink);
+  color: #fff;
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+}
+.mk-site .urg-count__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+.mk-site .urg-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--kk-orange);
+  flex-shrink: 0;
+  animation: urg-pulse 1.8s ease-in-out infinite;
+}
+.mk-site .urg-count--hot .urg-dot {
+  background: var(--kk-red);
+}
+.mk-site .urg-count--hot .urg-count__head {
+  color: #fff;
+}
+@keyframes urg-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mk-site .urg-dot {
+    animation: none;
+  }
+}
+.mk-site .urg-count__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 12px;
+}
+.mk-site .urg-count__grid > div {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9px;
+  padding: 8px 4px;
+  text-align: center;
+}
+.mk-site .urg-count__grid b {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.mk-site .urg-count--hot .urg-count__grid b {
+  color: var(--kk-orange);
+}
+.mk-site .urg-count__grid span {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+}
+.mk-site .urg-count__foot {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 10px;
+}
+.mk-site .urg-note {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--kk-text-muted);
+  margin-top: 12px;
+}
+
+.mk-site .urg-terms {
+  margin-top: 12px;
+}
+.mk-site .urg-terms__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: var(--kk-font);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--kk-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mk-site .urg-terms__toggle:hover {
+  color: var(--kk-text);
+}
+.mk-site .urg-terms__body {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--kk-text-muted);
+  margin-top: 8px;
+}
+
+/* Promo flag + struck-through price on listing / related bike cards */
+.mk-site .bike-card__promo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: var(--kk-orange);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 9px;
+  border-radius: 7px;
+  text-transform: uppercase;
+}
+.mk-site .bike-card__price s {
+  font-size: 12.5px;
+  color: var(--kk-text-muted);
+  margin-right: 5px;
+  font-weight: 500;
+}
+
+@media (max-width: 860px) {
+  .mk-site .urg-count__grid b {
+    font-size: 20px;
   }
 }

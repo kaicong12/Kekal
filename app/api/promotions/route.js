@@ -5,6 +5,13 @@ import {
   createPromotionPg,
 } from "@/utils/dbPg";
 import { verifyAuthToken } from "@/utils/firebaseAdmin";
+import {
+  parseDiscount,
+  parseTargets,
+  revalidatePromotionSurfaces,
+} from "@/utils/promotionPayload";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request) {
   try {
@@ -21,7 +28,13 @@ export async function GET(request) {
     const promotions = await listLivePromotionsPg();
     return NextResponse.json({ promotions });
   } catch (error) {
-    console.error("Error fetching promotions:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to fetch promotions",
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to fetch promotions" },
       { status: 500 }
@@ -42,6 +55,9 @@ function buildPromotionData(body) {
     return { error: "End date must be after start date" };
   }
 
+  const discount = parseDiscount(body);
+  if (discount.error) return { error: discount.error };
+
   return {
     data: {
       title: body.title,
@@ -58,6 +74,7 @@ function buildPromotionData(body) {
         ? parseInt(body.displayOrder, 10)
         : 0,
       motorcycleId: body.motorcycleId || null,
+      ...discount.data,
     },
   };
 }
@@ -84,10 +101,38 @@ export async function POST(request) {
       return NextResponse.json({ error }, { status: 400 });
     }
 
-    const promotion = await createPromotionPg(data);
+    const targets = parseTargets(body);
+    if (targets.error) {
+      return NextResponse.json({ error: targets.error }, { status: 400 });
+    }
+
+    const promotion = await createPromotionPg({
+      ...data,
+      ...(targets.data?.length ? { targets: { create: targets.data } } : {}),
+    });
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "promotion created",
+        actor: auth.decoded.email,
+        promotionId: promotion.id,
+        title: data.title,
+        targets: targets.data?.length ?? 0,
+      })
+    );
+
+    revalidatePromotionSurfaces();
     return NextResponse.json(promotion, { status: 201 });
   } catch (error) {
-    console.error("Error creating promotion:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to create promotion",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to create promotion" },
       { status: 500 }

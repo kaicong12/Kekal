@@ -377,6 +377,8 @@
     "priceLowToHigh": "Price (Low to High)",
     "priceHighToLow": "Price (High to Low)",
     "allBrands": "All Brands",
+    "brandsPrev": "Previous brands",
+    "brandsNext": "More brands",
     "empty": {
       "title": "No motorcycles match your search",
       "subtitle": "We couldn't find any motorcycles matching your criteria.",
@@ -389,7 +391,8 @@
       "browseAll": "Browse all brands",
       "needHelp": "Need help finding the right motorcycle?",
       "contactExperts": "Contact our experts"
-    }
+    },
+    "clearSearch": "Clear search"
   },
   "promotions": {
     "thisMonth": "This Month",
@@ -730,6 +733,17 @@
       "title": "All Motorcycles",
       "heading": "All Motorcycles",
       "intro": "Browse every motorcycle available at Perniagaan Motor Kekal, Johor Bahru. Yamaha, Honda, Kawasaki, KTM and more — new bikes with easy financing and in-house servicing."
+    },
+    "promo": {
+      "days": "DAYS",
+      "hours": "HRS",
+      "minutes": "MIN",
+      "seconds": "SEC",
+      "lastDay": "Last day · {name}",
+      "validUntil": "Promo price valid until {date}.",
+      "save": "Save {amount}",
+      "terms": "Terms & Conditions",
+      "badge": "Promo"
     }
   },
   "brands": {

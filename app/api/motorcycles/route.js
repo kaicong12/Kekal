@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
-import { queryMotorcyclePg, createMotorcyclePg } from "@/utils/dbPg";
+import {
+  queryMotorcyclePg,
+  createMotorcyclePg,
+  withPromotionsPg,
+} from "@/utils/dbPg";
 import { verifyAuthToken } from "@/utils/firebaseAdmin";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request) {
+  const startedAt = Date.now();
   try {
     const { searchParams } = new URL(request.url);
 
@@ -80,9 +87,29 @@ export async function GET(request) {
       search: search || undefined,
     });
 
-    return NextResponse.json(result);
+    // So the client-rendered grids show the same figures as the detail page.
+    const motorcycles = await withPromotionsPg(result.motorcycles);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "motorcycle search",
+        params: Object.fromEntries(searchParams),
+        resultCount: result.motorcycles.length,
+        total: result.total,
+        durationMs: Date.now() - startedAt,
+      })
+    );
+
+    return NextResponse.json({ ...result, motorcycles });
   } catch (error) {
-    console.error("Error fetching motorcycles:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to fetch motorcycles",
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to fetch motorcycles" },
       { status: 500 }
@@ -137,15 +164,42 @@ export async function POST(request) {
     };
 
     const motorcycle = await createMotorcyclePg(data);
+
+    console.log(
+      JSON.stringify({
+        level: "info",
+        msg: "motorcycle created",
+        actor: auth.decoded.email,
+        motorcycleId: motorcycle.id,
+        brand: data.brand,
+        name: data.name,
+        year: data.year,
+      })
+    );
+
     return NextResponse.json(motorcycle, { status: 201 });
   } catch (error) {
     if (error.code === "P2002") {
+      console.warn(
+        JSON.stringify({
+          level: "warn",
+          msg: "duplicate motorcycle rejected",
+          actor: auth.decoded.email,
+        })
+      );
       return NextResponse.json(
         { error: "A motorcycle with this brand, name, and year already exists" },
         { status: 409 }
       );
     }
-    console.error("Error creating motorcycle:", error);
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "failed to create motorcycle",
+        actor: auth.decoded.email,
+        err: { message: error.message, code: error.code, stack: error.stack },
+      })
+    );
     return NextResponse.json(
       { error: "Failed to create motorcycle" },
       { status: 500 }

@@ -155,9 +155,19 @@ exports.Prisma.PromotionScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   displayOrder: 'displayOrder',
+  discountType: 'discountType',
+  discountValue: 'discountValue',
   motorcycleId: 'motorcycleId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PromotionTargetScalarFieldEnum = {
+  id: 'id',
+  scope: 'scope',
+  value: 'value',
+  isExclusion: 'isExclusion',
+  promotionId: 'promotionId'
 };
 
 exports.Prisma.ProductSyncFileScalarFieldEnum = {
@@ -172,36 +182,6 @@ exports.Prisma.MotorcycleImageScalarFieldEnum = {
   url: 'url',
   displayOrder: 'displayOrder',
   motorcycleId: 'motorcycleId'
-};
-
-exports.Prisma.GeneratedReceiptScalarFieldEnum = {
-  id: 'id',
-  receiptNumber: 'receiptNumber',
-  purchaseDate: 'purchaseDate',
-  paymentMethod: 'paymentMethod',
-  additionalNotes: 'additionalNotes',
-  total: 'total',
-  pdfUrl: 'pdfUrl',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.ReceiptCustomerScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  address: 'address',
-  cityPostal: 'cityPostal',
-  phone: 'phone',
-  receiptId: 'receiptId'
-};
-
-exports.Prisma.ReceiptItemScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  quantity: 'quantity',
-  unitPrice: 'unitPrice',
-  amount: 'amount',
-  receiptId: 'receiptId'
 };
 
 exports.Prisma.SortOrder = {
@@ -229,17 +209,28 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.DiscountType = exports.$Enums.DiscountType = {
+  NONE: 'NONE',
+  FIXED_AMOUNT: 'FIXED_AMOUNT',
+  PERCENTAGE: 'PERCENTAGE',
+  OVERRIDE_PRICE: 'OVERRIDE_PRICE'
+};
 
+exports.PromotionScope = exports.$Enums.PromotionScope = {
+  ALL: 'ALL',
+  TAG: 'TAG',
+  BRAND: 'BRAND',
+  MODEL: 'MODEL',
+  MOTORCYCLE: 'MOTORCYCLE'
+};
 
 exports.Prisma.ModelName = {
   AuthorizedReceiptEmail: 'AuthorizedReceiptEmail',
   Motorcycle: 'Motorcycle',
   Promotion: 'Promotion',
+  PromotionTarget: 'PromotionTarget',
   ProductSyncFile: 'ProductSyncFile',
-  MotorcycleImage: 'MotorcycleImage',
-  GeneratedReceipt: 'GeneratedReceipt',
-  ReceiptCustomer: 'ReceiptCustomer',
-  ReceiptItem: 'ReceiptItem'
+  MotorcycleImage: 'MotorcycleImage'
 };
 
 /**

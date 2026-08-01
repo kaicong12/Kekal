@@ -377,6 +377,8 @@
     "priceLowToHigh": "价格（从低到高）",
     "priceHighToLow": "价格（从高到低）",
     "allBrands": "所有品牌",
+    "brandsPrev": "上一组品牌",
+    "brandsNext": "更多品牌",
     "empty": {
       "title": "没有摩托车符合您的搜索",
       "subtitle": "我们找不到符合您条件的摩托车。",
@@ -389,7 +391,8 @@
       "browseAll": "浏览所有品牌",
       "needHelp": "需要帮助找到合适的摩托车吗？",
       "contactExperts": "联系我们的专家"
-    }
+    },
+    "clearSearch": "清除搜索"
   },
   "promotions": {
     "thisMonth": "本月",
@@ -730,6 +733,17 @@
       "title": "所有摩托车",
       "heading": "所有摩托车",
       "intro": "浏览柔佛新山 Perniagaan Motor Kekal 提供的所有摩托车。Yamaha、Honda、Kawasaki、KTM 等品牌——全新车款，轻松贷款，自设维修中心。"
+    },
+    "promo": {
+      "days": "天",
+      "hours": "小时",
+      "minutes": "分",
+      "seconds": "秒",
+      "lastDay": "最后一天 · {name}",
+      "validUntil": "促销价有效期至 {date}。",
+      "save": "省 {amount}",
+      "terms": "条款与细则",
+      "badge": "促销"
     }
   },
   "brands": {
