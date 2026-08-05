@@ -3,17 +3,17 @@ import { localeAlternates } from "@/utils/seoAlternates";
 
 const META = {
   en: {
-    title: "Motorcycles For Sale Johor Bahru - Yamaha, Honda, KTM",
+    title: "Motorcycles For Sale Johor Bahru",
     description:
       "New motorcycles for sale at Perniagaan Motor Kekal, Johor Jaya. Yamaha, Kawasaki, Honda, KTM, Modenas & more. Affordable prices with in-house financing. Motorcycle shop in JB.",
   },
   ms: {
-    title: "Jual Motor Baru Johor Bahru - Yamaha, Kawasaki, Honda, KTM",
+    title: "Jual Motor Baru Johor Bahru",
     description:
       "Senarai motor baru untuk dijual di Perniagaan Motor Kekal, Johor Jaya. Yamaha, Kawasaki, Honda, KTM, Modenas & lain-lain. Harga motor murah, loan kedai tersedia. Kedai motor JB.",
   },
   zh: {
-    title: "新山摩托车出售 - Yamaha、Kawasaki、Honda、KTM",
+    title: "新山摩托车出售 - Yamaha、Honda",
     description:
       "新山 Johor Jaya 摩托车专卖店 Perniagaan Motor Kekal 全新摩托车出售，Yamaha、Kawasaki、Honda、KTM、Modenas 等品牌，价格实惠，提供店内贷款。",
   },

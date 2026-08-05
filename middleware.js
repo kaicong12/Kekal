@@ -26,7 +26,11 @@ export function middleware(request) {
   if (pathname === "/en" || pathname.startsWith("/en/")) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.slice(3) || "/";
-    return NextResponse.redirect(url, 301);
+    const res = NextResponse.redirect(url, 301);
+    // Bypassing next-intl skips its NEXT_LOCALE write, so an existing ms/zh
+    // cookie would bounce the visitor straight back off the English page.
+    res.cookies.set("NEXT_LOCALE", "en", { path: "/" });
+    return res;
   }
 
   // Delegate locale detection / prefixing to next-intl

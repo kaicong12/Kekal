@@ -52,7 +52,9 @@ export async function generateMetadata({ params }) {
     const priceLabel = `RM${Number(price).toLocaleString("en-MY")}`;
     // Nobody searches the model alone ("Demon 150GN") — the brand is what
     // makes the title match the query.
-    const fullName = motorcycleData.name.startsWith(motorcycleData.brand)
+    const fullName = motorcycleData.name
+      .toLowerCase()
+      .startsWith(motorcycleData.brand.toLowerCase())
       ? motorcycleData.name
       : `${motorcycleData.brand} ${motorcycleData.name}`;
 

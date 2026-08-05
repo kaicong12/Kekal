@@ -18,17 +18,17 @@ const META = {
   en: {
     title: "Motorcycle Promotions Johor Bahru",
     description:
-      "Limited-time deals on new motorcycles, servicing and trade-ins in Johor Jaya, JB. See the latest Motor Kekal promotions — visit the showroom to claim.",
+      "Limited-time deals on new motorcycles, servicing and trade-ins in Johor Jaya, JB. See the latest Perniagaan Motor Kekal promotions — visit the showroom.",
   },
   ms: {
     title: "Promosi Motor Johor Bahru - Tawaran & Diskaun",
     description:
-      "Tawaran terhad motor baru, servis & trade-in di Johor Jaya, JB. Lihat promosi terkini Kekal Motor dengan kira detik — datang showroom untuk claim.",
+      "Tawaran terhad motor baru, servis & trade-in di Johor Jaya, JB. Lihat promosi terkini Perniagaan Motor Kekal — datang showroom untuk claim.",
   },
   zh: {
     title: "新山摩托车促销优惠",
     description:
-      "新山 Johor Jaya 全新摩托车、保养与旧车换新限时优惠。查看 Motor Kekal 最新促销倒计时 — 亲临展厅即可领取。",
+      "新山 Johor Jaya 全新摩托车、保养与旧车换新限时优惠。查看 Perniagaan Motor Kekal 最新促销倒计时 — 亲临展厅即可领取。",
   },
 };
 

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import SiteHeader from "@/app/components/motorkekal/SiteHeader";
 import SiteFooter from "@/app/components/motorkekal/SiteFooter";
 import MobileBar from "@/app/components/motorkekal/MobileBar";
@@ -18,7 +19,7 @@ const ListingV1 = ({ params: { locale } }) => {
       <main>
         <div className="wrap">
           <nav className="crumbs" aria-label="Breadcrumb">
-            <a href="/">{tl("breadcrumbHome")}</a>
+            <Link href="/">{tl("breadcrumbHome")}</Link>
             <span>›</span>
             {tl("breadcrumbCurrent")}
           </nav>
