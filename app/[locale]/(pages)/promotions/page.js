@@ -14,11 +14,30 @@ import { localeAlternates } from "@/utils/seoAlternates";
 // ignored by the build anyway (page was fully frozen at deploy time).
 export const revalidate = 300;
 
-export function generateMetadata({ params: { locale } }) {
-  return {
-    title: "Promosi Motor Johor Bahru - Tawaran & Diskaun Kekal Motor",
+const META = {
+  en: {
+    title: "Motorcycle Promotions Johor Bahru",
+    description:
+      "Limited-time deals on new motorcycles, servicing and trade-ins in Johor Jaya, JB. See the latest Motor Kekal promotions — visit the showroom to claim.",
+  },
+  ms: {
+    title: "Promosi Motor Johor Bahru - Tawaran & Diskaun",
     description:
       "Tawaran terhad motor baru, servis & trade-in di Johor Jaya, JB. Lihat promosi terkini Kekal Motor dengan kira detik — datang showroom untuk claim.",
+  },
+  zh: {
+    title: "新山摩托车促销优惠",
+    description:
+      "新山 Johor Jaya 全新摩托车、保养与旧车换新限时优惠。查看 Motor Kekal 最新促销倒计时 — 亲临展厅即可领取。",
+  },
+};
+
+export function generateMetadata({ params: { locale } }) {
+  const meta = META[locale] || META.en;
+
+  return {
+    title: meta.title,
+    description: meta.description,
     keywords: [
       "promosi motor johor bahru",
       "tawaran motor johor jaya",

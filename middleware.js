@@ -19,6 +19,16 @@ export function middleware(request) {
     return NextResponse.redirect(url, 301);
   }
 
+  // next-intl strips the redundant "/en" prefix with a 307, which doesn't pass
+  // ranking signals — and Google has indexed ~60 "/en/..." URLs. Redirect them
+  // permanently instead so they consolidate onto the prefix-free canonical.
+  const { pathname } = request.nextUrl;
+  if (pathname === "/en" || pathname.startsWith("/en/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.slice(3) || "/";
+    return NextResponse.redirect(url, 301);
+  }
+
   // Delegate locale detection / prefixing to next-intl
   return intlMiddleware(request);
 }

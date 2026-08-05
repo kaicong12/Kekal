@@ -8,6 +8,7 @@ const ProductSchema = ({ motorcycle }) => {
     "@context": "https://schema.org",
     "@type": "Product",
     name: motorcycle.name,
+    sku: motorcycle.id,
     url,
     description:
       motorcycle.description ||
