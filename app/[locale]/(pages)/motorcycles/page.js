@@ -14,11 +14,30 @@ import { localeAlternates } from "@/utils/seoAlternates";
 // indexed" by making the pages discoverable, not just present in the sitemap).
 export const revalidate = 86400; // 24 hours
 
-export function generateMetadata({ params: { locale } }) {
-  return {
-    title: "All Motorcycles - Kedai Motor Johor Bahru | Perniagaan Motor Kekal",
+const META = {
+  en: {
+    title: "All Motorcycles - Kedai Motor Johor Bahru",
     description:
       "Browse every motorcycle for sale at Perniagaan Motor Kekal, Johor Bahru — Yamaha, Honda, Kawasaki, KTM and more. New bikes with easy financing and in-house servicing.",
+  },
+  ms: {
+    title: "Senarai Motosikal - Kedai Motor Johor Bahru",
+    description:
+      "Lihat semua motosikal untuk dijual di Perniagaan Motor Kekal, Johor Bahru — Yamaha, Honda, Kawasaki, KTM dan lain-lain. Motor baru, loan mudah lulus & servis bengkel sendiri.",
+  },
+  zh: {
+    title: "全部摩托车 - 新山摩托车行",
+    description:
+      "浏览 Perniagaan Motor Kekal（新山）所有待售摩托车 — Yamaha、Honda、Kawasaki、KTM 等。全新车款，贷款容易批准，并提供自家工作坊保养服务。",
+  },
+};
+
+export function generateMetadata({ params: { locale } }) {
+  const meta = META[locale] || META.en;
+
+  return {
+    title: meta.title,
+    description: meta.description,
     keywords: [
       "all motorcycles johor bahru",
       "senarai motosikal",

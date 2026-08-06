@@ -41,7 +41,7 @@ export default function FAQContent() {
   };
 
   return (
-    <div className="wrapper">
+    <div className="mk-site">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }}

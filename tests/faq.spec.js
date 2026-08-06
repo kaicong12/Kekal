@@ -40,7 +40,9 @@ test.describe("FAQ Page - Desktop", () => {
   });
 
   test("should show WhatsApp CTA at bottom", async ({ page }) => {
-    const waLink = page.locator('a[href*="wa.me"]');
+    // Scoped to the page's own CTA — the header's wa.me button is hidden below
+    // the desktop breakpoint, so an unscoped .first() picks that on mobile.
+    const waLink = page.locator('a[class*="bottomBtn"][href*="wa.me"]');
     await expect(waLink.first()).toBeVisible();
   });
 

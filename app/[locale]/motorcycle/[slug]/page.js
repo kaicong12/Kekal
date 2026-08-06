@@ -49,10 +49,18 @@ export async function generateMetadata({ params }) {
     const firstImage = motorcycleData.images?.[0]?.url;
     // So the search-result title never contradicts the price on the page.
     const price = motorcycleData.pricing?.price ?? motorcycleData.price;
+    const priceLabel = `RM${Number(price).toLocaleString("en-MY")}`;
+    // Nobody searches the model alone ("Demon 150GN") — the brand is what
+    // makes the title match the query.
+    const fullName = motorcycleData.name
+      .toLowerCase()
+      .startsWith(motorcycleData.brand.toLowerCase())
+      ? motorcycleData.name
+      : `${motorcycleData.brand} ${motorcycleData.name}`;
 
     return {
-      title: `${motorcycleData.name} - RM${price}`,
-      description: `${motorcycleData.name} for sale at RM${price}. ${
+      title: `${fullName} - ${priceLabel}`,
+      description: `${fullName} for sale at ${priceLabel}. ${
         motorcycleData.description ||
         "Quality motorcycle from trusted dealer in Johor Bahru, Johor Jaya."
       }`,
@@ -71,8 +79,8 @@ export async function generateMetadata({ params }) {
       ],
       alternates: localeAlternates(`/motorcycle/${slug}`, params.locale),
       openGraph: {
-        title: `${motorcycleData.name} - RM${price}`,
-        description: `${motorcycleData.name} for sale at RM${price}. Trusted motorcycle dealer in Johor Bahru.`,
+        title: `${fullName} - ${priceLabel}`,
+        description: `${fullName} for sale at ${priceLabel}. Trusted motorcycle dealer in Johor Bahru.`,
         url: `https://www.motorkekal.com/motorcycle/${slug}`,
         siteName: "Perniagaan Motor Kekal",
         type: "website",
