@@ -1,0 +1,25 @@
+name: Neon Delete Preview Branch
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - "prisma/**"
+  workflow_dispatch:
+    inputs:
+      neon_branch:
+        description: "Neon branch to delete, e.g. preview/staging"
+        required: true
+
+jobs:
+  delete-preview-branch:
+    name: Delete Neon Preview Branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete branch
+        uses: neondatabase/delete-branch-action@v3
+        with:
+          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          branch: ${{ inputs.neon_branch || format('preview/{0}', github.head_ref) }}
+          api_key: ${{ secrets.NEON_API_KEY }}
