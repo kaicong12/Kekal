@@ -16,7 +16,7 @@ Motorcycle ecommerce platform for Perniagaan Motor Kekal, a motorcycle dealer in
 
 - Node.js 16+
 - Yarn
-- PostgreSQL database
+- Docker (for the local Postgres) or a PostgreSQL database
 - Firebase project
 
 ### Setup
@@ -26,8 +26,10 @@ git clone https://github.com/kaicong12/Kekal.git
 cd Kekal
 yarn install
 cp .env.example .env   # Fill in DATABASE_URL and Firebase config
+docker compose up -d   # Local Postgres on :5433
 npx prisma generate
 npx prisma migrate dev
+node tests/seed.js      # Optional: deterministic sample rows
 yarn dev                # http://localhost:3000
 ```
 
