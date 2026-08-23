@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "./auth/AuthProvider";
+import CtaClickTracker from "./analytics/CtaClickTracker";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -28,6 +29,7 @@ export default function ClientLayout({ children }) {
       <AuthProvider>
         {children}
         <ScrollToTop />
+        <CtaClickTracker />
         <Analytics />
         <SpeedInsights />
       </AuthProvider>
