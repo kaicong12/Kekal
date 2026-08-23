@@ -2,6 +2,14 @@ import "dotenv/config";
 import { createRequire } from "module";
 import { resolveEngineCapacity } from "./lib/engineCapacity.mjs";
 
+// The source lists Kuala Lumpur prices; Johor Bahru runs about 5% higher.
+const JB_PRICE_MULTIPLIER = 1.05;
+
+function toLocalPrice(price) {
+  const parsed = Number(price);
+  return Number.isFinite(parsed) ? Math.round(parsed * JB_PRICE_MULTIPLIER) : 0;
+}
+
 const require = createRequire(import.meta.url);
 const { prisma } = require("../../prisma/client.js");
 
@@ -46,6 +54,7 @@ async function ingestFile(syncFile) {
 
     // Validate engineCapacity: spec.Performance.Displacement wins over the scraped field
     const engineCapacity = resolveEngineCapacity(moto.specification, moto.engineCapacity);
+    const price = toLocalPrice(moto.price);
 
     try {
       // Upsert motorcycle — idempotent via unique constraint (brand, name, year)
@@ -59,7 +68,7 @@ async function ingestFile(syncFile) {
         },
         update: {
           model: moto.model,
-          price: moto.price,
+          price,
           engine: moto.engine,
           engineCapacity,
           gear: moto.gear,
@@ -73,7 +82,7 @@ async function ingestFile(syncFile) {
           name: moto.name,
           model: moto.model,
           year: moto.year,
-          price: moto.price,
+          price,
           engine: moto.engine,
           engineCapacity,
           gear: moto.gear,

@@ -19,6 +19,7 @@ import {
 import { uploadMotorcycleImage } from "@/utils/motorcycleImageUpload";
 import { auth } from "@/utils/firebase";
 import styles from "../admin.module.css";
+import { uncachedUrl } from "@/utils/adminFetch";
 
 const { TextArea } = Input;
 
@@ -53,7 +54,7 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
     const loadMotorcycle = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/motorcycles/${motorcycleId}`);
+        const res = await fetch(uncachedUrl(`/api/motorcycles/${motorcycleId}`));
         if (!res.ok) throw new Error();
         const data = await res.json();
         form.setFieldsValue({

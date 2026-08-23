@@ -15,6 +15,7 @@ import { auth } from "@/utils/firebase";
 import MotorcycleManagement from "./motorcycle/MotorcycleManagement";
 import PromotionManagement from "./promotions/PromotionManagement";
 import styles from "./admin.module.css";
+import { uncachedUrl } from "@/utils/adminFetch";
 
 const antdTheme = {
   token: {
@@ -52,7 +53,7 @@ const AdminDashboard = () => {
 
   const fetchCounts = useCallback(async () => {
     try {
-      const res = await fetch("/api/motorcycles?pageSize=1");
+      const res = await fetch(uncachedUrl("/api/motorcycles?pageSize=1"));
       const data = await res.json();
       setCounts((c) => ({ ...c, motorcycles: data.total ?? null }));
     } catch {
