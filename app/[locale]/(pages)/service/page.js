@@ -8,16 +8,42 @@ import Pill from "@/app/components/motorkekal/Pill";
 import { waLink } from "@/app/components/motorkekal/waLink";
 import { localeAlternates } from "@/utils/seoAlternates";
 
-export function generateMetadata({ params: { locale } }) {
-  return {
-    title: "Servis Motor Johor Bahru - Yamaha, Kawasaki Service Center",
+// The layout appends "| Perniagaan Motor Kekal", so titles stay short enough
+// that the whole thing survives the ~60-char SERP cut.
+const META = {
+  en: {
+    title: "Motorcycle Service Centre Johor Bahru",
     description:
-      "Pusat servis motor di Johor Bahru. Pembiayaan mudah lulus, tukar-beli, waranti & servis bengkel sendiri, insurans & renew cukai jalan. Semua bawah satu bumbung.",
+      "Motorcycle service centre in Johor Bahru — Yamaha, Kawasaki, Honda & KTM. Our own workshop with genuine parts, easy financing, trade-in, insurance & road tax renewal.",
+  },
+  ms: {
+    title: "Servis Motor Johor Bahru - Bengkel Sendiri",
+    description:
+      "Pusat servis motor di Johor Bahru. Bengkel sendiri, alat ganti asli. Pembiayaan mudah lulus, tukar-beli, waranti, insurans & renew cukai jalan bawah satu bumbung.",
+  },
+  zh: {
+    title: "新山摩托车维修保养中心",
+    description:
+      "新山摩托车维修保养中心 — Yamaha、Kawasaki、Honda、KTM。自家工作坊，原厂配件，另有贷款、旧车换新、保险与路税更新服务。",
+  },
+};
+
+export function generateMetadata({ params: { locale } }) {
+  const meta = META[locale] || META.en;
+
+  return {
+    title: meta.title,
+    description: meta.description,
     keywords: [
+      "servis motor johor bahru",
+      "motorcycle service centre johor bahru",
+      "kawasaki service center johor bahru",
+      "yamaha service center near me",
+      "motorcycle repair shop near me",
+      "bengkel motor johor bahru",
       "pembiayaan motosikal johor bahru",
       "loan motor mudah lulus",
       "trade-in motor johor bahru",
-      "servis motor johor bahru",
       "insurans motor",
       "renew cukai jalan johor",
     ],
@@ -63,8 +89,22 @@ const Service = ({ params: { locale } }) => {
   const insurance = t.raw("insurance");
   const faq = t.raw("faq");
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+
   return (
     <div className="mk-site">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <SiteHeader />
 
       <main>

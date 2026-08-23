@@ -5,6 +5,7 @@ import {
   withPromotionsPg,
 } from "@/utils/dbPg";
 import { verifyAuthToken } from "@/utils/firebaseAdmin";
+import { CATALOG_CACHE_HEADERS } from "@/utils/cacheHeaders";
 
 export const dynamic = "force-dynamic";
 
@@ -101,7 +102,10 @@ export async function GET(request) {
       })
     );
 
-    return NextResponse.json({ ...result, motorcycles });
+    return NextResponse.json(
+      { ...result, motorcycles },
+      { headers: CATALOG_CACHE_HEADERS }
+    );
   } catch (error) {
     console.error(
       JSON.stringify({

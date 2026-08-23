@@ -8,11 +8,30 @@ import Map from "@/app/components/common/Map";
 import { waLink, MAPS_QUERY_URL, ADDRESS, PHONE_DISPLAY } from "@/app/components/motorkekal/waLink";
 import { localeAlternates } from "@/utils/seoAlternates";
 
-export function generateMetadata({ params: { locale } }) {
-  return {
-    title: "Tentang Kami - Kedai Motor Johor Bahru | Perniagaan Motor Kekal",
+const META = {
+  en: {
+    title: "About Us - Kedai Motor Johor Bahru",
+    description:
+      "Perniagaan Motor Kekal is a family-run motorcycle shop in Johor Bahru, trusted for over 30 years. Yamaha, Kawasaki, Honda & KTM dealer — honest, friendly, local.",
+  },
+  ms: {
+    title: "Tentang Kami - Kedai Motor Johor Bahru",
     description:
       "Perniagaan Motor Kekal, kedai motor keluarga di Johor Bahru sejak lebih 30 tahun. Pengedar Yamaha, Kawasaki, Honda, KTM — jujur, mesra dan dipercayai orang JB.",
+  },
+  zh: {
+    title: "关于我们 - 新山摩托车行",
+    description:
+      "Perniagaan Motor Kekal 是新山一家超过30年的家族摩托车行。Yamaha、Kawasaki、Honda、KTM 经销商 — 诚信、亲切，深受新山人信赖。",
+  },
+};
+
+export function generateMetadata({ params: { locale } }) {
+  const meta = META[locale] || META.en;
+
+  return {
+    title: meta.title,
+    description: meta.description,
     keywords: [
       "perniagaan motor kekal",
       "tentang motor kekal",

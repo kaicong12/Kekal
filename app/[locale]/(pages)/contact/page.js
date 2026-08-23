@@ -13,11 +13,30 @@ import {
 } from "@/app/components/motorkekal/waLink";
 import { localeAlternates } from "@/utils/seoAlternates";
 
-export function generateMetadata({ params: { locale } }) {
-  return {
+const META = {
+  en: {
+    title: "Contact Us - Kedai Motor Johor Jaya, JB",
+    description:
+      "Contact Perniagaan Motor Kekal by phone or WhatsApp, or visit our shop in Taman Johor Bahru (Johor Jaya). Open daily 9am - 7pm, closed Friday.",
+  },
+  ms: {
     title: "Hubungi Kami - Kedai Motor Johor Jaya, JB",
     description:
       "Hubungi Perniagaan Motor Kekal: telefon, WhatsApp atau datang terus ke kedai kami di Taman Johor Bahru (Johor Jaya). Buka setiap hari 9 pagi - 7 malam, Jumaat tutup.",
+  },
+  zh: {
+    title: "联络我们 - 新山 Johor Jaya 摩托车行",
+    description:
+      "联络 Perniagaan Motor Kekal：电话、WhatsApp，或直接前往我们位于 Taman Johor Bahru（Johor Jaya）的店面。每日营业 9am - 7pm，星期五休息。",
+  },
+};
+
+export function generateMetadata({ params: { locale } }) {
+  const meta = META[locale] || META.en;
+
+  return {
+    title: meta.title,
+    description: meta.description,
     keywords: [
       "kedai motor johor jaya",
       "kedai motor johor bahru contact",

@@ -22,6 +22,7 @@ import { StatusPill } from "../adminUi";
 import PromotionTargets from "./PromotionTargets";
 import PromotionDiscount from "./PromotionDiscount";
 import styles from "../admin.module.css";
+import { uncachedUrl } from "@/utils/adminFetch";
 
 const { TextArea } = Input;
 
@@ -66,7 +67,9 @@ export default function PromotionFormInterface({ promotionId, onBack }) {
   useEffect(() => {
     const loadMotorcycles = async () => {
       try {
-        const res = await fetch("/api/motorcycles?sortField=brand&sortOrder=asc");
+        const res = await fetch(
+          uncachedUrl("/api/motorcycles?sortField=brand&sortOrder=asc")
+        );
         const data = await res.json();
         const bikes = data.motorcycles || [];
 

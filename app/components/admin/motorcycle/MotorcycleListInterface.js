@@ -4,6 +4,7 @@ import { message, Modal } from "antd";
 import { auth } from "@/utils/firebase";
 import { AdminTopBar, MobileCard, RowMenu, Thumb, useIsMobile } from "../adminUi";
 import styles from "../admin.module.css";
+import { uncachedUrl } from "@/utils/adminFetch";
 
 const PAGE_SIZE = 10;
 
@@ -18,7 +19,7 @@ export default function MotorcycleListInterface({ onCreateNew, onEdit }) {
     setLoading(true);
     try {
       const res = await fetch(
-        "/api/motorcycles?sortField=createdAt&sortOrder=desc"
+        uncachedUrl("/api/motorcycles?sortField=createdAt&sortOrder=desc")
       );
       const data = await res.json();
       setMotorcycles(data.motorcycles || []);
