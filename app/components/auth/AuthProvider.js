@@ -10,6 +10,13 @@ import { auth, googleProvider, db } from "../../../utils/firebase";
 
 const AuthContext = createContext({});
 
+// E2E only, and only when the build opted in — the flag is absent from
+// production builds so this branch is dead code there. It bypasses the client
+// gate alone: every mutating API route still calls verifyAuthToken(), which
+// requires a real Firebase JWT checked against Google's JWKS plus the Firestore
+// whitelist, so this grants no data access.
+const E2E_AUTH_MOCK = process.env.NEXT_PUBLIC_E2E_AUTH_MOCK === "1";
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -98,6 +105,15 @@ export function AuthProvider({ children }) {
 
   // Listen to auth state changes
   useEffect(() => {
+    if (E2E_AUTH_MOCK && window.__E2E_MOCK_AUTH__) {
+      const mock = window.__E2E_MOCK_AUTH__;
+      setUser(mock.user);
+      setIsAuthenticated(true);
+      setIsAuthorized(mock.authorized !== false);
+      setLoading(false);
+      return undefined;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setLoading(true);
 

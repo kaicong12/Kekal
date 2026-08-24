@@ -290,9 +290,24 @@
   height: 22px;
 }
 
+/* Six nav items in Malay/Chinese overflow a 1280px bar and clip the WhatsApp
+   CTA, so tighten the row before the hamburger breakpoint takes over. */
+@media (max-width: 1360px) {
+  .mk-site .nav {
+    gap: 0;
+    margin-left: 6px;
+  }
+  .mk-site .nav a {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+}
+
 /* Collapse the desktop nav to the hamburger early enough that the
-   longer Malay / Chinese labels never wrap or overflow the bar. */
-@media (max-width: 1024px) {
+   longer Malay / Chinese labels never wrap or overflow the bar. 1024px was
+   still ~96px too narrow for the Malay row even before Blog was added; six
+   items need ~1180px. */
+@media (max-width: 1180px) {
   .mk-site .nav,
   .mk-site .header-actions {
     display: none;
@@ -2180,5 +2195,171 @@
 @media (max-width: 860px) {
   .mk-site .urg-count__grid b {
     font-size: 20px;
+  }
+}
+
+/* ---- Blog: index cards, article header, prose ---------------------------- */
+.mk-site .post-chip {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--kk-orange-strong);
+  background: var(--kk-orange-soft);
+  border-radius: 7px;
+  padding: 4px 9px;
+}
+
+.mk-site .post-card {
+  overflow: hidden;
+  padding: 0;
+}
+.mk-site .post-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.mk-site .post-card__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.mk-site .post-card__media--empty {
+  background: linear-gradient(135deg, var(--kk-bg), var(--kk-border));
+}
+.mk-site .post-card__body {
+  padding: 16px 18px 18px;
+}
+.mk-site .post-card__title {
+  font-size: 17px;
+  line-height: 1.35;
+  margin-top: 10px;
+}
+.mk-site .post-card__excerpt {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--kk-text-muted);
+  margin-top: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.mk-site .post-card__meta {
+  font-size: 12.5px;
+  margin-top: 12px;
+}
+
+.mk-site .post-head {
+  max-width: 72ch;
+}
+.mk-site .post-head h1 {
+  margin-top: 12px;
+}
+.mk-site .post-meta {
+  font-size: 14px;
+  margin-top: 12px;
+}
+.mk-site .post-hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 460px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-top: 24px;
+}
+.mk-site .post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+  max-width: 72ch;
+}
+
+/* `.mk-site h1-h4` and `.mk-site p` are reset to margin:0, so vertical rhythm
+   has to be re-established here rather than relying on element defaults. */
+.mk-site .prose {
+  max-width: 72ch;
+  margin-top: 28px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--kk-text);
+}
+.mk-site .prose > * + * {
+  margin-top: 1.15em;
+}
+.mk-site .prose h2 {
+  font-size: clamp(21px, 2.6vw, 27px);
+  margin-top: 1.9em;
+}
+.mk-site .prose h3 {
+  font-size: clamp(18px, 2vw, 21px);
+  margin-top: 1.6em;
+}
+.mk-site .prose h2 + *,
+.mk-site .prose h3 + * {
+  margin-top: 0.6em;
+}
+.mk-site .prose a {
+  color: var(--kk-orange-strong);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* The legacy global `ul, ol { list-style: none }` in public/scss/_style.scss
+   removes markers site-wide, so prose has to put them back. */
+.mk-site .prose ul {
+  padding-left: 1.4em;
+  list-style: disc;
+}
+.mk-site .prose ol {
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+.mk-site .prose li {
+  display: list-item;
+}
+.mk-site .prose li + li {
+  margin-top: 0.4em;
+}
+.mk-site .prose blockquote {
+  border-left: 3px solid var(--kk-orange);
+  padding-left: 16px;
+  color: var(--kk-text-muted);
+  font-style: italic;
+}
+.mk-site .prose img {
+  width: 100%;
+  border-radius: 12px;
+  margin-block: 1.6em;
+}
+.mk-site .prose code {
+  background: #f1efec;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 0.9em;
+}
+.mk-site .prose pre {
+  background: var(--kk-ink);
+  color: #eee;
+  padding: 16px;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+.mk-site .prose pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+.mk-site .prose hr {
+  border: 0;
+  border-top: 1px solid var(--kk-border);
+  margin-block: 2em;
+}
+
+@media (max-width: 560px) {
+  .mk-site .prose {
+    font-size: 16px;
   }
 }

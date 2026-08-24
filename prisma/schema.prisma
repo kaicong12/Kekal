@@ -132,3 +132,54 @@ model MotorcycleImage {
 
   @@map("motorcycleImages")
 }
+
+enum BlogPostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+// Slug is shared across locales: one canonical path (/blog/x, /ms/blog/x).
+model BlogPost {
+  id            String         @id @default(cuid())
+  slug          String         @unique
+  category      String // key from BLOG_CATEGORIES; label comes from messages/*.json
+  tags          String? // comma-separated, mirrors Motorcycle.tags
+  coverImageUrl String?
+  status        BlogPostStatus @default(DRAFT)
+  sourceLocale  String         @default("en")
+  publishedAt   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  translations BlogPostTranslation[]
+
+  @@index([status, publishedAt])
+  @@index([category])
+  @@map("blogPosts")
+}
+
+// A locale with no row here is hidden from the index, sitemap and hreflang, and
+// 404s on direct hit. Absence is the "not translated yet" signal.
+model BlogPostTranslation {
+  id              String  @id @default(cuid())
+  locale          String
+  title           String
+  excerpt         String
+  body            Json
+  plainText       String // body flattened; a Json column alone is opaque to SQL
+  metaTitle       String?
+  metaDescription String?
+
+  postId String
+  post   BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  // Compared against the source locale's updatedAt to flag stale translations,
+  // which only works because translations are upserted per locale.
+  updatedAt DateTime @updatedAt
+
+  @@unique([postId, locale])
+  @@index([locale])
+  @@map("blogPostTranslations")
+}

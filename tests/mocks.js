@@ -131,6 +131,11 @@ const MOCK_PROMOTIONS = [
  * Call in beforeEach or at the start of each test.
  */
 async function mockApiRoutes(page) {
+  // The fixtures point at via.placeholder.com, which is not always reachable. A
+  // hanging image request stalls the page `load` event and times the test out,
+  // so never let one leave the browser.
+  await page.route(/via\.placeholder\.com/, (route) => route.abort());
+
   await page.route("**/api/motorcycles/brands", (route) => {
     route.fulfill({
       status: 200,

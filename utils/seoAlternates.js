@@ -17,3 +17,26 @@ export function localeAlternates(path, locale = routing.defaultLocale) {
 
   return { canonical: localePath(locale), languages };
 }
+
+// Same as above, but hreflang lists only the locales that actually have content.
+// Advertising an alternate that 404s is worse than omitting it.
+export function localeAlternatesFor(path, locale, availableLocales) {
+  const available = routing.locales.filter((loc) =>
+    availableLocales?.includes(loc)
+  );
+  if (!available.length) return localeAlternates(path, locale);
+
+  const suffix = path === "/" ? "" : path;
+  const localePath = (loc) =>
+    loc === routing.defaultLocale ? path : `/${loc}${suffix}`;
+
+  const languages = {};
+  for (const loc of available) {
+    languages[loc] = localePath(loc);
+  }
+  if (available.includes(routing.defaultLocale)) {
+    languages["x-default"] = path;
+  }
+
+  return { canonical: localePath(locale), languages };
+}
