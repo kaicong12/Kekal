@@ -87,6 +87,95 @@ const TEST_PROMOTIONS = [
   },
 ];
 
+
+const TEST_SLUG_PREFIX = "e2e-test-";
+
+const body = (heading, lead) => ({
+  type: "doc",
+  content: [
+    { type: "heading", attrs: { level: 2 }, content: [{ type: "text", text: heading }] },
+    {
+      type: "paragraph",
+      content: [
+        { type: "text", text: lead + " " },
+        { type: "text", marks: [{ type: "bold" }], text: "Yamaha R15" },
+        { type: "text", text: " costs RM 12,500 today. " },
+        {
+          type: "text",
+          marks: [{ type: "link", attrs: { href: "/listing" } }],
+          text: "See our stock",
+        },
+      ],
+    },
+    {
+      type: "bulletList",
+      content: [
+        { type: "listItem", content: [{ type: "paragraph", content: [{ type: "text", text: "Light and nimble" }] }] },
+        { type: "listItem", content: [{ type: "paragraph", content: [{ type: "text", text: "Cheap to service" }] }] },
+      ],
+    },
+  ],
+});
+
+// Post 1 is published with en + ms only: the missing zh translation is what the
+// "hidden in untranslated locales" assertions rely on.
+const TEST_BLOG_POSTS = [
+  {
+    id: "e2e_test_post_001_cuid2",
+    slug: `${TEST_SLUG_PREFIX}yamaha-r15-review`,
+    category: "reviews",
+    tags: "yamaha,150cc",
+    // Local asset: an unreachable external host would hang Playwright's load event.
+    coverImageUrl: "/images/no-image.svg",
+    status: "PUBLISHED",
+    sourceLocale: "en",
+    publishedAt: new Date("2026-08-01T02:00:00.000Z"),
+    translations: [
+      {
+        locale: "en",
+        title: "Yamaha R15 review: still the sharpest 150",
+        excerpt: "Our verdict on the R15 after a week of Johor traffic.",
+        body: body("The verdict", "After a week of commuting, the"),
+        plainText:
+          "The verdict After a week of commuting, the Yamaha R15 costs RM 12,500 today. See our stock Light and nimble Cheap to service",
+        metaTitle: "Yamaha R15 Review 2026 | Motor Kekal",
+        metaDescription: "Is the Yamaha R15 still worth buying in 2026? Our honest review.",
+      },
+      {
+        locale: "ms",
+        title: "Ulasan Yamaha R15: masih 150 paling tajam",
+        excerpt: "Pandangan kami tentang R15 selepas seminggu di jalan Johor.",
+        body: body("Keputusan kami", "Selepas seminggu berulang-alik, "),
+        plainText:
+          "Keputusan kami Selepas seminggu berulang-alik, Yamaha R15 costs RM 12,500 today. See our stock Light and nimble Cheap to service",
+        metaTitle: "Ulasan Yamaha R15 2026 | Motor Kekal",
+        metaDescription: "Adakah Yamaha R15 masih berbaloi pada 2026? Ulasan jujur kami.",
+      },
+    ],
+  },
+  {
+    id: "e2e_test_post_002_cuid2",
+    slug: `${TEST_SLUG_PREFIX}unpublished-draft`,
+    category: "news",
+    tags: null,
+    coverImageUrl: null,
+    status: "DRAFT",
+    sourceLocale: "en",
+    publishedAt: null,
+    translations: [
+      {
+        locale: "en",
+        title: "A draft nobody should see",
+        excerpt: "This post is not published.",
+        body: body("Hidden", "This is a draft and"),
+        plainText: "Hidden This is a draft and Yamaha R15 costs RM 12,500 today.",
+        metaTitle: null,
+        metaDescription: null,
+      },
+    ],
+  },
+];
+
 async function seed() {
   console.log("Seeding test data...");
 
@@ -119,6 +208,31 @@ async function seed() {
       throw e;
     }
   }
+
+  try {
+    for (const post of TEST_BLOG_POSTS) {
+      const { translations, ...data } = post;
+      await prisma.blogPost.upsert({
+        where: { id: data.id },
+        update: data,
+        create: data,
+      });
+      for (const translation of translations) {
+        await prisma.blogPostTranslation.upsert({
+          where: { postId_locale: { postId: data.id, locale: translation.locale } },
+          update: translation,
+          create: { ...translation, postId: data.id },
+        });
+      }
+    }
+    console.log(`Seeded ${TEST_BLOG_POSTS.length} blog posts.`);
+  } catch (e) {
+    if (e.code === "P2021") {
+      console.log("Blog tables not available, skipped.");
+    } else {
+      throw e;
+    }
+  }
 }
 
 async function cleanup() {
@@ -127,6 +241,14 @@ async function cleanup() {
   try {
     await prisma.promotion.deleteMany({
       where: { title: { startsWith: TEST_PREFIX } },
+    });
+  } catch (e) {
+    if (e.code !== "P2021") throw e;
+  }
+
+  try {
+    await prisma.blogPost.deleteMany({
+      where: { slug: { startsWith: TEST_SLUG_PREFIX } },
     });
   } catch (e) {
     if (e.code !== "P2021") throw e;

@@ -7,6 +7,7 @@ import {
   TagOutlined,
   MailOutlined,
   StarOutlined,
+  FileTextOutlined,
   SettingOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
@@ -14,6 +15,7 @@ import { useAuth } from "../auth/AuthProvider";
 import { auth } from "@/utils/firebase";
 import MotorcycleManagement from "./motorcycle/MotorcycleManagement";
 import PromotionManagement from "./promotions/PromotionManagement";
+import BlogManagement from "./blog/BlogManagement";
 import styles from "./admin.module.css";
 import { uncachedUrl } from "@/utils/adminFetch";
 
@@ -31,6 +33,7 @@ const NAV = [
   { key: "dashboard", label: "Dashboard", icon: <AppstoreOutlined />, disabled: true },
   { key: "motorcycles", label: "Listings", icon: <CarOutlined /> },
   { key: "promotions", label: "Promotions", icon: <TagOutlined /> },
+  { key: "blog", label: "Blog", icon: <FileTextOutlined /> },
   { key: "enquiries", label: "Enquiries", icon: <MailOutlined />, disabled: true },
   { key: "reviews", label: "Reviews", icon: <StarOutlined />, disabled: true },
   { section: "System" },
@@ -38,18 +41,23 @@ const NAV = [
 ];
 
 // Bottom nav (mobile) — a compact subset of the sidebar.
-const MOBILE_NAV = ["dashboard", "motorcycles", "promotions", "enquiries"];
+const MOBILE_NAV = ["dashboard", "motorcycles", "promotions", "blog"];
 
 const COMPONENTS = {
   motorcycles: <MotorcycleManagement />,
   promotions: <PromotionManagement />,
+  blog: <BlogManagement />,
 };
 
 const AdminDashboard = () => {
   const { user, signOut } = useAuth();
   const [selected, setSelected] = useState("motorcycles");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [counts, setCounts] = useState({ motorcycles: null, promotions: null });
+  const [counts, setCounts] = useState({
+    motorcycles: null,
+    promotions: null,
+    blog: null,
+  });
 
   const fetchCounts = useCallback(async () => {
     try {
@@ -69,14 +77,23 @@ const AdminDashboard = () => {
     } catch {
       /* badge is non-critical */
     }
+    try {
+      const token = await auth.currentUser?.getIdToken();
+      const res = await fetch("/api/blog-posts?all=true", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setCounts((c) => ({ ...c, blog: data.posts?.length ?? null }));
+    } catch {
+      /* badge is non-critical */
+    }
   }, []);
 
   useEffect(() => {
     fetchCounts();
   }, [fetchCounts]);
 
-  const badgeFor = (key) =>
-    key === "motorcycles" ? counts.motorcycles : key === "promotions" ? counts.promotions : null;
+  const badgeFor = (key) => counts[key] ?? null;
 
   const initials = (user?.displayName || user?.email || "A")
     .split(/[\s@.]/)

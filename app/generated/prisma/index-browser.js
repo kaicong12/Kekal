@@ -184,6 +184,33 @@ exports.Prisma.MotorcycleImageScalarFieldEnum = {
   motorcycleId: 'motorcycleId'
 };
 
+exports.Prisma.BlogPostScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  category: 'category',
+  tags: 'tags',
+  coverImageUrl: 'coverImageUrl',
+  status: 'status',
+  sourceLocale: 'sourceLocale',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BlogPostTranslationScalarFieldEnum = {
+  id: 'id',
+  locale: 'locale',
+  title: 'title',
+  excerpt: 'excerpt',
+  body: 'body',
+  plainText: 'plainText',
+  metaTitle: 'metaTitle',
+  metaDescription: 'metaDescription',
+  postId: 'postId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -191,6 +218,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -224,13 +255,20 @@ exports.PromotionScope = exports.$Enums.PromotionScope = {
   MOTORCYCLE: 'MOTORCYCLE'
 };
 
+exports.BlogPostStatus = exports.$Enums.BlogPostStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED'
+};
+
 exports.Prisma.ModelName = {
   AuthorizedReceiptEmail: 'AuthorizedReceiptEmail',
   Motorcycle: 'Motorcycle',
   Promotion: 'Promotion',
   PromotionTarget: 'PromotionTarget',
   ProductSyncFile: 'ProductSyncFile',
-  MotorcycleImage: 'MotorcycleImage'
+  MotorcycleImage: 'MotorcycleImage',
+  BlogPost: 'BlogPost',
+  BlogPostTranslation: 'BlogPostTranslation'
 };
 
 /**
