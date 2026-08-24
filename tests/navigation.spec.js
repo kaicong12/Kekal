@@ -3,17 +3,23 @@ const { test, expect } = require("@playwright/test");
 const { mockApiRoutes } = require("./mocks");
 
 test.describe("Navigation - Desktop", () => {
+  // About Us / Our Services were dropped from the header nav to reduce
+  // crowding; they're still reachable from the footer on every viewport.
   test("should navigate to About Us page", async ({ page }) => {
     await mockApiRoutes(page);
     await page.goto("/");
-    await page.getByRole("link", { name: "About Us" }).first().click();
+    const link = page.locator("footer").getByRole("link", { name: "About Us" });
+    await link.scrollIntoViewIfNeeded();
+    await link.click();
     await expect(page).toHaveURL(/\/about-us/);
   });
 
   test("should navigate to Service page", async ({ page }) => {
     await mockApiRoutes(page);
     await page.goto("/");
-    await page.getByRole("link", { name: /Our Services/i }).first().click();
+    const link = page.locator("footer").getByRole("link", { name: /Our Services/i }).first();
+    await link.scrollIntoViewIfNeeded();
+    await link.click();
     await expect(page).toHaveURL(/\/service/);
   });
 
