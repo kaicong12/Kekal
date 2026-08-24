@@ -31,6 +31,14 @@ const STATUSES = [
 const emptyDocs = () =>
   Object.fromEntries(BLOG_LOCALES.map((locale) => [locale, null]));
 
+const emptyMeta = () =>
+  Object.fromEntries(
+    BLOG_LOCALES.map((locale) => [
+      locale,
+      { title: "", excerpt: "", metaTitle: "", metaDescription: "" },
+    ])
+  );
+
 export default function BlogFormInterface({ postId, onBack }) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -42,6 +50,10 @@ export default function BlogFormInterface({ postId, onBack }) {
   // Bumped whenever a doc is replaced from outside the editor (load, translate,
   // undo) so the editor reloads it. Keystrokes never bump it, so typing is safe.
   const [docVersion, setDocVersion] = useState(0);
+  // Title/excerpt/meta live outside antd's Form store, same as `docs` — a
+  // Form.Item name bound to the active locale silently dropped the inactive
+  // locale's value when the tab switched.
+  const [meta, setMeta] = useState(emptyMeta);
   const [coverImageUrl, setCoverImageUrl] = useState(null);
   const [status, setStatus] = useState("DRAFT");
   const [sourceLocale, setSourceLocale] = useState("en");
@@ -55,8 +67,10 @@ export default function BlogFormInterface({ postId, onBack }) {
   const isEdit = !!postId;
 
   const watchedSlug = Form.useWatch("slug", form);
-  const watchedTranslations = Form.useWatch("translations", form);
-  const activeValues = watchedTranslations?.[activeLocale] || {};
+  const activeValues = meta[activeLocale];
+
+  const setLocaleMeta = (locale, patch) =>
+    setMeta((prev) => ({ ...prev, [locale]: { ...prev[locale], ...patch } }));
 
   useEffect(() => {
     if (!isEdit) return;
@@ -71,12 +85,12 @@ export default function BlogFormInterface({ postId, onBack }) {
         if (!res.ok) throw new Error();
         const data = await res.json();
 
-        const translations = {};
+        const nextMeta = emptyMeta();
         const nextDocs = emptyDocs();
         for (const locale of BLOG_LOCALES) {
           const t = data.translations?.[locale];
           if (!t) continue;
-          translations[locale] = {
+          nextMeta[locale] = {
             title: t.title,
             excerpt: t.excerpt,
             metaTitle: t.metaTitle || "",
@@ -89,8 +103,8 @@ export default function BlogFormInterface({ postId, onBack }) {
           slug: data.slug,
           category: data.category,
           tags: (data.tags || []).join(", "),
-          translations,
         });
+        setMeta(nextMeta);
         setDocs(nextDocs);
         setDocVersion((v) => v + 1);
         setSaved(data.translations || {});
@@ -119,24 +133,26 @@ export default function BlogFormInterface({ postId, onBack }) {
             sourceSaved: saved[sourceLocale]
               ? { ...saved[sourceLocale], locale: sourceLocale }
               : null,
-            values: watchedTranslations?.[locale],
+            values: meta[locale],
             doc: docs[locale],
             dirty: dirty[locale],
           }),
         ])
       ),
-    [saved, sourceLocale, watchedTranslations, docs, dirty]
+    [saved, sourceLocale, meta, docs, dirty]
   );
 
   const markDirty = (locale) =>
     setDirty((prev) => (prev[locale] ? prev : { ...prev, [locale]: true }));
 
-  const handleSourceTitleChange = (event) => {
+  const handleTitleChange = (event) => {
+    const value = event.target.value;
+    setLocaleMeta(activeLocale, { title: value });
     markDirty(activeLocale);
     if (slugTouched || activeLocale !== sourceLocale) return;
     // slugify() returns "" for non-latin scripts, so a zh-sourced post keeps an
     // empty slug and the author fills it in by hand.
-    const next = slugify(event.target.value);
+    const next = slugify(value);
     if (next) form.setFieldValue("slug", next);
   };
 
@@ -185,11 +201,11 @@ export default function BlogFormInterface({ postId, onBack }) {
       // Kept so "Undo translate" can restore the previous draft before saving.
       preTranslate.current = {
         locale: targetLocale,
-        values: form.getFieldValue(["translations", targetLocale]),
+        values: meta[targetLocale],
         doc: docs[targetLocale],
       };
 
-      form.setFieldValue(["translations", targetLocale], {
+      setLocaleMeta(targetLocale, {
         title: result.title,
         excerpt: result.excerpt,
         metaTitle: result.metaTitle || "",
@@ -214,7 +230,7 @@ export default function BlogFormInterface({ postId, onBack }) {
   const undoTranslate = () => {
     const snapshot = preTranslate.current;
     if (!snapshot) return;
-    form.setFieldValue(["translations", snapshot.locale], snapshot.values);
+    setMeta((prev) => ({ ...prev, [snapshot.locale]: snapshot.values }));
     setDocs((prev) => ({ ...prev, [snapshot.locale]: snapshot.doc }));
     setDocVersion((v) => v + 1);
     preTranslate.current = null;
@@ -224,7 +240,7 @@ export default function BlogFormInterface({ postId, onBack }) {
   const handleSubmit = async (values) => {
     const translations = {};
     for (const locale of BLOG_LOCALES) {
-      const entry = values.translations?.[locale] || {};
+      const entry = meta[locale];
       const doc = docs[locale];
       const hasContent =
         String(entry.title || "").trim() || flattenTiptapText(doc);
@@ -289,7 +305,7 @@ export default function BlogFormInterface({ postId, onBack }) {
     );
   }
 
-  const sourceTitle = watchedTranslations?.[sourceLocale]?.title;
+  const sourceTitle = meta[sourceLocale]?.title;
   const activeIsSource = activeLocale === sourceLocale;
 
   return (
@@ -298,7 +314,7 @@ export default function BlogFormInterface({ postId, onBack }) {
       layout="vertical"
       onFinish={handleSubmit}
       className={styles.adminForm}
-      initialValues={{ category: "reviews", translations: {} }}
+      initialValues={{ category: "reviews" }}
     >
       <div className={styles.formTopbar}>
         <div className={styles.breadcrumb}>
@@ -384,37 +400,30 @@ export default function BlogFormInterface({ postId, onBack }) {
                 </button>
               </div>
 
-              {/* Only the source locale is required, so a hidden tab can never
-                  block submit with an error the author cannot see. */}
-              <Form.Item
-                name={["translations", activeLocale, "title"]}
-                label="Title"
-                rules={
-                  activeIsSource
-                    ? [{ required: true, message: "Title is required" }]
-                    : []
-                }
-              >
+              <Form.Item label="Title" htmlFor="blog-title" required={activeIsSource}>
                 <Input
+                  id="blog-title"
+                  value={activeValues.title}
                   placeholder="e.g. 2025 Yamaha R15 — is it worth the upgrade?"
-                  onChange={handleSourceTitleChange}
+                  onChange={handleTitleChange}
                 />
               </Form.Item>
 
               <Form.Item
-                name={["translations", activeLocale, "excerpt"]}
                 label="Excerpt"
+                htmlFor="blog-excerpt"
+                required={activeIsSource}
                 tooltip="One or two sentences. Shown on the blog index and used as the fallback meta description."
-                rules={
-                  activeIsSource
-                    ? [{ required: true, message: "Excerpt is required" }]
-                    : []
-                }
               >
                 <TextArea
+                  id="blog-excerpt"
                   rows={2}
+                  value={activeValues.excerpt}
                   placeholder="Short summary of the post…"
-                  onChange={() => markDirty(activeLocale)}
+                  onChange={(event) => {
+                    setLocaleMeta(activeLocale, { excerpt: event.target.value });
+                    markDirty(activeLocale);
+                  }}
                 />
               </Form.Item>
 
@@ -447,23 +456,27 @@ export default function BlogFormInterface({ postId, onBack }) {
                   Leave blank to use the title and excerpt
                 </span>
               </div>
-              <Form.Item
-                name={["translations", activeLocale, "metaTitle"]}
-                label="Meta title"
-              >
+              <Form.Item label="Meta title" htmlFor="blog-meta-title">
                 <Input
+                  id="blog-meta-title"
+                  value={activeValues.metaTitle}
                   placeholder="Defaults to the post title"
-                  onChange={() => markDirty(activeLocale)}
+                  onChange={(event) => {
+                    setLocaleMeta(activeLocale, { metaTitle: event.target.value });
+                    markDirty(activeLocale);
+                  }}
                 />
               </Form.Item>
-              <Form.Item
-                name={["translations", activeLocale, "metaDescription"]}
-                label="Meta description"
-              >
+              <Form.Item label="Meta description" htmlFor="blog-meta-description">
                 <TextArea
+                  id="blog-meta-description"
                   rows={2}
+                  value={activeValues.metaDescription}
                   placeholder="Defaults to the excerpt"
-                  onChange={() => markDirty(activeLocale)}
+                  onChange={(event) => {
+                    setLocaleMeta(activeLocale, { metaDescription: event.target.value });
+                    markDirty(activeLocale);
+                  }}
                 />
               </Form.Item>
               <SerpPreview
