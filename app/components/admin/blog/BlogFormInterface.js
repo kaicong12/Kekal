@@ -384,39 +384,48 @@ export default function BlogFormInterface({ postId, onBack }) {
                 </button>
               </div>
 
-              {/* Only the source locale is required, so a hidden tab can never
-                  block submit with an error the author cannot see. */}
-              <Form.Item
-                name={["translations", activeLocale, "title"]}
-                label="Title"
-                rules={
-                  activeIsSource
-                    ? [{ required: true, message: "Title is required" }]
-                    : []
-                }
-              >
-                <Input
-                  placeholder="e.g. 2025 Yamaha R15 — is it worth the upgrade?"
-                  onChange={handleSourceTitleChange}
-                />
-              </Form.Item>
+              {BLOG_LOCALES.map((locale) => (
+                <div
+                  key={locale}
+                  style={{ display: locale === activeLocale ? "block" : "none" }}
+                >
+                  <Form.Item
+                    name={["translations", locale, "title"]}
+                    label="Title"
+                    rules={
+                      locale === sourceLocale
+                        ? [{ required: true, message: "Title is required" }]
+                        : []
+                    }
+                  >
+                    <Input
+                      placeholder="e.g. 2025 Yamaha R15 — is it worth the upgrade?"
+                      onChange={
+                        locale === sourceLocale
+                          ? handleSourceTitleChange
+                          : () => markDirty(locale)
+                      }
+                    />
+                  </Form.Item>
 
-              <Form.Item
-                name={["translations", activeLocale, "excerpt"]}
-                label="Excerpt"
-                tooltip="One or two sentences. Shown on the blog index and used as the fallback meta description."
-                rules={
-                  activeIsSource
-                    ? [{ required: true, message: "Excerpt is required" }]
-                    : []
-                }
-              >
-                <TextArea
-                  rows={2}
-                  placeholder="Short summary of the post…"
-                  onChange={() => markDirty(activeLocale)}
-                />
-              </Form.Item>
+                  <Form.Item
+                    name={["translations", locale, "excerpt"]}
+                    label="Excerpt"
+                    tooltip="One or two sentences. Shown on the blog index and used as the fallback meta description."
+                    rules={
+                      locale === sourceLocale
+                        ? [{ required: true, message: "Excerpt is required" }]
+                        : []
+                    }
+                  >
+                    <TextArea
+                      rows={2}
+                      placeholder="Short summary of the post…"
+                      onChange={() => markDirty(locale)}
+                    />
+                  </Form.Item>
+                </div>
+              ))}
 
               <div className={styles.field}>
                 <div className={styles.fieldLabel}>Body</div>
@@ -447,25 +456,32 @@ export default function BlogFormInterface({ postId, onBack }) {
                   Leave blank to use the title and excerpt
                 </span>
               </div>
-              <Form.Item
-                name={["translations", activeLocale, "metaTitle"]}
-                label="Meta title"
-              >
-                <Input
-                  placeholder="Defaults to the post title"
-                  onChange={() => markDirty(activeLocale)}
-                />
-              </Form.Item>
-              <Form.Item
-                name={["translations", activeLocale, "metaDescription"]}
-                label="Meta description"
-              >
-                <TextArea
-                  rows={2}
-                  placeholder="Defaults to the excerpt"
-                  onChange={() => markDirty(activeLocale)}
-                />
-              </Form.Item>
+              {BLOG_LOCALES.map((locale) => (
+                <div
+                  key={locale}
+                  style={{ display: locale === activeLocale ? "block" : "none" }}
+                >
+                  <Form.Item
+                    name={["translations", locale, "metaTitle"]}
+                    label="Meta title"
+                  >
+                    <Input
+                      placeholder="Defaults to the post title"
+                      onChange={() => markDirty(locale)}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    name={["translations", locale, "metaDescription"]}
+                    label="Meta description"
+                  >
+                    <TextArea
+                      rows={2}
+                      placeholder="Defaults to the excerpt"
+                      onChange={() => markDirty(locale)}
+                    />
+                  </Form.Item>
+                </div>
+              ))}
               <SerpPreview
                 slug={watchedSlug}
                 post={{
