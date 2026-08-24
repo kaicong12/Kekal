@@ -11,7 +11,8 @@
     "menu": "Menu",
     "promotions": "Promosi",
     "brands": "Jenama",
-    "allMotorcyclesIndex": "Semua Motosikal"
+    "allMotorcyclesIndex": "Semua Motosikal",
+    "blog": "Blog"
   },
   "headerTop": {
     "hours": "Isn – Kha, Sab – Ahd 9AM - 7PM (Jumaat Tutup)",
@@ -759,5 +760,20 @@
     "eyebrow": "Dealer Rasmi · Johor Bahru",
     "breadcrumbHome": "Utama",
     "detailHeading": "Motosikal {brand}"
+  },
+  "blog": {
+    "heading": "Berita & Ulasan",
+    "intro": "Ulasan motosikal, panduan pembeli dan berita terkini dari bengkel kami di Johor Bahru.",
+    "empty": "Belum ada artikel. Kunjungi semula nanti.",
+    "byline": "Pasukan Motor Kekal",
+    "readingTime": "Bacaan {minutes} minit",
+    "updatedOn": "Dikemas kini {date}",
+    "backToBlog": "Kembali ke semua artikel",
+    "categories": {
+      "reviews": "Ulasan",
+      "news": "Berita",
+      "buying-guides": "Panduan pembeli",
+      "maintenance": "Penyelenggaraan"
+    }
   }
 }

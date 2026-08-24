@@ -31,6 +31,7 @@ const SiteFooter = () => {
             <Link href="/listing">{t("nav.listings")}</Link>
             <Link href="/motorcycles">{t("nav.allMotorcyclesIndex")}</Link>
             <Link href="/promotions">{t("nav.promotions")}</Link>
+            <Link href="/blog">{t("nav.blog")}</Link>
             <Link href="/service">{t("nav.ourServices")}</Link>
             <Link href="/about-us">{t("nav.aboutUs")}</Link>
             <Link href="/brands">{t("brands.breadcrumbBrands")}</Link>

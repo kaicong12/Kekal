@@ -11,9 +11,14 @@ const NAV = [
   { href: "/", key: "home" },
   { href: "/listing", key: "listings" },
   { href: "/promotions", key: "promotions" },
+  { href: "/blog", key: "blog" },
   { href: "/service", key: "ourServices" },
   { href: "/about-us", key: "aboutUs" },
 ];
+
+const DESKTOP_NAV = NAV.filter(
+  (item) => item.key !== "ourServices" && item.key !== "aboutUs"
+);
 
 const SiteHeader = () => {
   const t = useTranslations("nav");
@@ -45,7 +50,7 @@ const SiteHeader = () => {
           </Link>
 
           <nav className="nav" aria-label="Main navigation">
-            {NAV.map((item) => (
+            {DESKTOP_NAV.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

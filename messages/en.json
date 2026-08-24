@@ -11,7 +11,8 @@
     "menu": "Menu",
     "promotions": "Promotions",
     "brands": "Brands",
-    "allMotorcyclesIndex": "All Motorcycles"
+    "allMotorcyclesIndex": "All Motorcycles",
+    "blog": "Blog"
   },
   "headerTop": {
     "hours": "Mon – Thu, Sat – Sun 9AM - 7PM (Fri Closed)",
@@ -759,5 +760,20 @@
     "eyebrow": "Authorized Dealer · Johor Bahru",
     "breadcrumbHome": "Home",
     "detailHeading": "{brand} Motorcycles"
+  },
+  "blog": {
+    "heading": "News & Reviews",
+    "intro": "Motorcycle reviews, buying guides and news from our workshop floor in Johor Bahru.",
+    "empty": "No posts yet. Check back soon.",
+    "byline": "Motor Kekal Team",
+    "readingTime": "{minutes} min read",
+    "updatedOn": "Updated {date}",
+    "backToBlog": "Back to all posts",
+    "categories": {
+      "reviews": "Reviews",
+      "news": "News",
+      "buying-guides": "Buying guides",
+      "maintenance": "Maintenance"
+    }
   }
 }

@@ -6,6 +6,9 @@
  */
 
 async function mockAdminAuth(page) {
+  // Requires the dev server to run with NEXT_PUBLIC_E2E_AUTH_MOCK=1 (set by the
+  // test:e2e script); AuthProvider ignores this otherwise. It bypasses only the
+  // client gate — mutating API routes still verify a real Firebase token.
   await page.addInitScript(() => {
     // Override Firebase's onAuthStateChanged to immediately return a mock user
     window.__E2E_MOCK_AUTH__ = {

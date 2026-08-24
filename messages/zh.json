@@ -11,7 +11,8 @@
     "menu": "菜单",
     "promotions": "促销",
     "brands": "品牌",
-    "allMotorcyclesIndex": "所有摩托车"
+    "allMotorcyclesIndex": "所有摩托车",
+    "blog": "博客"
   },
   "headerTop": {
     "hours": "周一至周四、周六至周日 9AM - 7PM（周五休息）",
@@ -759,5 +760,20 @@
     "eyebrow": "授权经销商 · 新山",
     "breadcrumbHome": "首页",
     "detailHeading": "{brand} 摩托车"
+  },
+  "blog": {
+    "heading": "资讯与评测",
+    "intro": "来自我们新山工作坊的摩托车评测、购车指南与最新资讯。",
+    "empty": "暂无文章，敬请期待。",
+    "byline": "Motor Kekal 团队",
+    "readingTime": "阅读约 {minutes} 分钟",
+    "updatedOn": "更新于 {date}",
+    "backToBlog": "返回所有文章",
+    "categories": {
+      "reviews": "评测",
+      "news": "资讯",
+      "buying-guides": "购车指南",
+      "maintenance": "保养"
+    }
   }
 }
