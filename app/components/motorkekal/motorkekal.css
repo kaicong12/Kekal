@@ -2363,3 +2363,256 @@
     font-size: 16px;
   }
 }
+
+/* ---- Blog: category nav, featured post, article footer modules ----------- */
+
+/* Three across, not the bike grid's four: post cards carry an excerpt. */
+.mk-site .post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.mk-site .post-catnav {
+  margin-bottom: 26px;
+}
+.mk-site .post-catnav .chip {
+  text-decoration: none;
+}
+
+.mk-site .post-chip--plain {
+  color: var(--kk-text-muted);
+  background: var(--kk-bg);
+}
+.mk-site .post-chip--link {
+  text-decoration: none;
+  transition: filter 0.12s;
+}
+.mk-site .post-chip--link:hover {
+  filter: brightness(0.96);
+}
+
+.mk-site .post-featured {
+  margin-bottom: 24px;
+}
+.mk-site .post-featured__link {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  color: inherit;
+  text-decoration: none;
+}
+.mk-site .post-featured__media {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  display: block;
+}
+.mk-site .post-featured__body {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mk-site .post-featured__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.mk-site .post-featured__title {
+  font-size: clamp(22px, 2.6vw, 31px);
+  line-height: 1.25;
+  margin-top: 14px;
+}
+.mk-site .post-featured__excerpt {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--kk-text-muted);
+  margin-top: 12px;
+  max-width: 44ch;
+}
+
+.mk-site .post-empty {
+  margin-top: 4px;
+}
+
+.mk-site .post-cta {
+  max-width: 72ch;
+  margin-top: 40px;
+  background: var(--kk-orange-soft);
+  border-color: #f7d3bf;
+}
+.mk-site .post-cta__title {
+  font-size: 21px;
+}
+.mk-site .post-cta__body {
+  color: var(--kk-text);
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin-top: 10px;
+  margin-bottom: 18px;
+  max-width: 52ch;
+}
+/* Bootstrap's bare `.card` is display:flex, so children stretch by default. */
+.mk-site .post-cta .btn {
+  align-self: flex-start;
+}
+
+.mk-site .post-about {
+  max-width: 72ch;
+  margin-top: 20px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.mk-site .post-about__mark {
+  flex: none;
+}
+.mk-site .post-about__title {
+  font-size: 17px;
+}
+.mk-site .post-about__body {
+  color: var(--kk-text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+.mk-site .post-about__link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--kk-orange-strong);
+  text-decoration: none;
+}
+.mk-site .post-about__link:hover {
+  text-decoration: underline;
+}
+
+.mk-site .post-back {
+  max-width: 72ch;
+  margin-top: 32px;
+  font-size: 15px;
+}
+.mk-site .post-back a {
+  color: var(--kk-text-muted);
+  text-decoration: none;
+}
+.mk-site .post-back a:hover {
+  color: var(--kk-ink);
+}
+
+.mk-site .post-stock__cta {
+  margin-top: 24px;
+}
+
+/* ---- Article sidebar ----------------------------------------------------- */
+/* Mobile-first on purpose: below the breakpoint there is no grid and no rail,
+   so .post-body stays the plain single-column article it was before. */
+.mk-site .post-toc {
+  display: none;
+}
+
+@media (min-width: 1080px) {
+  .mk-site .post-body {
+    display: grid;
+    /* Matches .prose's 72ch so the reading measure is unchanged. */
+    grid-template-columns: minmax(0, 72ch) minmax(260px, 1fr);
+    column-gap: 44px;
+    align-items: start;
+  }
+  .mk-site .post-body__main {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .mk-site .post-body__foot {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .mk-site .post-body__side {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    position: sticky;
+    /* Clears the 69px sticky site header. */
+    top: 89px;
+    /* Clears the hero; flush against it reads as cramped. */
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mk-site .post-toc {
+    display: block;
+  }
+
+  .mk-site .post-body__side .post-cta {
+    max-width: none;
+    margin-top: 0;
+  }
+
+  .mk-site .prose h2,
+  .mk-site .prose h3 {
+    scroll-margin-top: 85px;
+  }
+}
+
+.mk-site .post-toc__title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kk-text-muted);
+}
+.mk-site .post-toc__list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  border-left: 2px solid var(--kk-border);
+}
+.mk-site .post-toc__list li + li {
+  margin-top: 2px;
+}
+.mk-site .post-toc__list a {
+  display: block;
+  padding: 6px 0 6px 14px;
+  margin-left: -2px;
+  border-left: 2px solid transparent;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--kk-text-muted);
+  text-decoration: none;
+}
+.mk-site .post-toc__list a:hover {
+  color: var(--kk-ink);
+  border-left-color: var(--kk-orange-strong);
+}
+
+@media (max-width: 1000px) {
+  .mk-site .post-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mk-site .post-featured__link {
+    grid-template-columns: 1fr;
+  }
+  .mk-site .post-featured__media {
+    min-height: 220px;
+    aspect-ratio: 16 / 9;
+  }
+  .mk-site .post-featured__body {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mk-site .post-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .mk-site .post-about {
+    gap: 14px;
+  }
+  .mk-site .post-cta .btn {
+    align-self: stretch;
+  }
+}

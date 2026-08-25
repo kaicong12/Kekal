@@ -94,6 +94,26 @@ export const getPublishedBlogPostBySlugPg = memoDuringBuild(
   }
 );
 
+// Same-category first, topped up with recent so the rail is never half-empty.
+export const getRelatedBlogPostsPg = memoDuringBuild(
+  async ({ locale, category, excludeId, limit = 3 } = {}) => {
+    const pick = (posts) =>
+      posts.filter((post) => post && post.id !== excludeId);
+
+    const sameCategory = pick(
+      await listPublishedBlogPostsPg({ locale, category, limit: limit + 1 })
+    );
+    if (sameCategory.length >= limit) return sameCategory.slice(0, limit);
+
+    const seen = new Set(sameCategory.map((post) => post.id));
+    const recent = pick(
+      await listPublishedBlogPostsPg({ locale, limit: limit + sameCategory.length + 1 })
+    ).filter((post) => !seen.has(post.id));
+
+    return [...sameCategory, ...recent].slice(0, limit);
+  }
+);
+
 // Explicit select so the sitemap never pulls every post's body JSON.
 export const listBlogSitemapEntriesPg = memoDuringBuild(async () => {
   const posts = await prisma.blogPost.findMany({

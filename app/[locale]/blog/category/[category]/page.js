@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import SiteHeader from "@/app/components/motorkekal/SiteHeader";
 import SiteFooter from "@/app/components/motorkekal/SiteFooter";
@@ -8,55 +9,53 @@ import BlogIndexBody from "@/app/components/blog/BlogIndexBody";
 import StockRail from "@/app/components/blog/StockRail";
 import { listPublishedBlogPostsPg } from "@/utils/blogPg";
 import { localeAlternates } from "@/utils/seoAlternates";
+import { BLOG_CATEGORIES } from "@/utils/blogContent";
 
-// revalidateBlogSurfaces() pushes saves out immediately; this is the safety net.
 export const revalidate = 3600;
 
 const SITE = "https://www.motorkekal.com";
 
-const META = {
-  en: {
-    title: "Motorcycle News & Reviews - Motor Kekal Johor Bahru",
-    description:
-      "Motorcycle reviews, buying guides and news from Perniagaan Motor Kekal, Johor Bahru. Honest takes on the bikes we sell and service.",
-  },
-  ms: {
-    title: "Berita & Ulasan Motosikal - Motor Kekal Johor Bahru",
-    description:
-      "Ulasan motosikal, panduan pembeli dan berita terkini daripada Perniagaan Motor Kekal, Johor Bahru. Pandangan jujur tentang motor yang kami jual dan servis.",
-  },
-  zh: {
-    title: "摩托车资讯与评测 - 新山 Motor Kekal",
-    description:
-      "来自新山 Perniagaan Motor Kekal 的摩托车评测、购车指南与最新资讯。真实分享我们销售与保养的车款。",
-  },
-};
+// Four fixed keys, so unlike the post pages these are cheap to prerender.
+export function generateStaticParams() {
+  return BLOG_CATEGORIES.map((category) => ({ category }));
+}
 
-export function generateMetadata({ params: { locale } }) {
-  const meta = META[locale] || META.en;
+export async function generateMetadata({ params: { locale, category } }) {
+  if (!BLOG_CATEGORIES.includes(category)) {
+    return { title: "Not Found", robots: { index: false, follow: true } };
+  }
+
+  const t = await getTranslations({ locale, namespace: "blog" });
+  const path = `/blog/category/${category}`;
+  const title = t(`categoryMeta.${category}.metaTitle`);
+  const description = t(`categoryMeta.${category}.metaDescription`);
+
   return {
-    title: meta.title,
-    description: meta.description,
-    alternates: localeAlternates("/blog", locale),
+    title,
+    description,
+    alternates: localeAlternates(path, locale),
     openGraph: {
-      title: meta.title,
-      description: meta.description,
-      url: `${SITE}${locale === "en" ? "" : `/${locale}`}/blog`,
+      title,
+      description,
+      url: `${SITE}${locale === "en" ? "" : `/${locale}`}${path}`,
       type: "website",
     },
   };
 }
 
-export default async function BlogIndexPage({ params: { locale } }) {
+export default async function BlogCategoryPage({ params: { locale, category } }) {
   setRequestLocale(locale);
+  if (!BLOG_CATEGORIES.includes(category)) notFound();
+
   const t = await getTranslations("blog");
   const tDetail = await getTranslations("detail");
+  const heading = t(`categoryMeta.${category}.heading`);
 
   let posts = [];
   try {
-    posts = await listPublishedBlogPostsPg({ locale });
+    posts = await listPublishedBlogPostsPg({ locale, category });
   } catch (error) {
-    console.error("Failed to load blog posts:", error);
+    console.error("Failed to load blog category posts:", error);
   }
 
   return (
@@ -64,7 +63,8 @@ export default async function BlogIndexPage({ params: { locale } }) {
       <BreadcrumbSchema
         items={[
           { name: tDetail("breadcrumbHome"), url: SITE },
-          { name: t("heading") },
+          { name: t("heading"), url: `${SITE}/blog` },
+          { name: heading },
         ]}
       />
       <SiteHeader />
@@ -74,15 +74,17 @@ export default async function BlogIndexPage({ params: { locale } }) {
           <Breadcrumb
             items={[
               { label: tDetail("breadcrumbHome"), href: "/" },
-              { label: t("heading") },
+              { label: t("heading"), href: "/blog" },
+              { label: t(`categories.${category}`) },
             ]}
           />
         </div>
 
         <BlogIndexBody
-          heading={t("heading")}
-          intro={t("intro")}
+          heading={heading}
+          intro={t(`categoryMeta.${category}.intro`)}
           posts={posts}
+          activeCategory={category}
         />
 
         <StockRail />
