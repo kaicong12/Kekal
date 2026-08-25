@@ -153,6 +153,85 @@ const TEST_BLOG_POSTS = [
       },
     ],
   },
+  // Posts 3 and 4 give the index a grid below the featured card, and give
+  // category filtering a post to exclude.
+  {
+    id: "e2e_test_post_003_cuid2",
+    slug: `${TEST_SLUG_PREFIX}cbr250rr-review`,
+    category: "reviews",
+    tags: "honda,250cc",
+    coverImageUrl: "/images/no-image.svg",
+    status: "PUBLISHED",
+    sourceLocale: "en",
+    publishedAt: new Date("2026-07-20T02:00:00.000Z"),
+    translations: [
+      {
+        locale: "en",
+        title: "Honda CBR250RR review: the twin-cylinder question",
+        excerpt: "Smoother than a 150, but is the price gap justified?",
+        body: body("The verdict", "After two weeks on the CBR,"),
+        plainText:
+          "The verdict After two weeks on the CBR, Yamaha R15 costs RM 12,500 today. See our stock Light and nimble Cheap to service",
+        metaTitle: "Honda CBR250RR Review | Motor Kekal",
+        metaDescription: "Our honest take on the Honda CBR250RR in 2026.",
+      },
+    ],
+  },
+  {
+    id: "e2e_test_post_004_cuid2",
+    slug: `${TEST_SLUG_PREFIX}chain-maintenance`,
+    category: "maintenance",
+    tags: "maintenance",
+    coverImageUrl: "/images/no-image.svg",
+    status: "PUBLISHED",
+    sourceLocale: "en",
+    publishedAt: new Date("2026-07-10T02:00:00.000Z"),
+    translations: [
+      {
+        locale: "en",
+        title: "Chain care: the ten-minute job that saves money",
+        excerpt: "Most sprocket replacements we do were avoidable.",
+        body: body("The routine", "Every fortnight in the wet season,"),
+        plainText:
+          "The routine Every fortnight in the wet season, Yamaha R15 costs RM 12,500 today. See our stock Light and nimble Cheap to service",
+        metaTitle: "Motorcycle Chain Care | Motor Kekal",
+        metaDescription: "How to look after your motorcycle chain and sprockets.",
+      },
+    ],
+  },
+  // Three h2s: the minimum PostToc renders for.
+  {
+    id: "e2e_test_post_005_cuid2",
+    slug: `${TEST_SLUG_PREFIX}monsoon-checklist`,
+    category: "maintenance",
+    tags: "maintenance",
+    coverImageUrl: "/images/no-image.svg",
+    status: "PUBLISHED",
+    sourceLocale: "en",
+    publishedAt: new Date("2026-07-05T02:00:00.000Z"),
+    translations: [
+      {
+        locale: "en",
+        title: "Monsoon checklist: five things to look at",
+        excerpt: "What actually fails on a bike in the wet.",
+        body: {
+          type: "doc",
+          content: [
+            { type: "heading", attrs: { level: 2 }, content: [{ type: "text", text: "Tyres first" }] },
+            { type: "paragraph", content: [{ type: "text", text: "Tread moves water out from under the contact patch." }] },
+            { type: "heading", attrs: { level: 2 }, content: [{ type: "text", text: "Then the brakes" }] },
+            { type: "paragraph", content: [{ type: "text", text: "You need the lever to feel predictable." }] },
+            { type: "heading", attrs: { level: 2 }, content: [{ type: "text", text: "Lights and battery" }] },
+            { type: "paragraph", content: [{ type: "text", text: "Being seen matters more than seeing." }] },
+          ],
+        },
+        plainText:
+          "Tyres first Tread moves water out from under the contact patch. Then the brakes You need the lever to feel predictable. Lights and battery Being seen matters more than seeing.",
+        metaTitle: "Monsoon Motorcycle Checklist | Motor Kekal",
+        metaDescription: "Five wet-season checks for your motorcycle.",
+      },
+    ],
+  },
   {
     id: "e2e_test_post_002_cuid2",
     slug: `${TEST_SLUG_PREFIX}unpublished-draft`,

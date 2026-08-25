@@ -769,11 +769,51 @@
     "readingTime": "{minutes} min read",
     "updatedOn": "Updated {date}",
     "backToBlog": "Back to all posts",
+    "onThisPage": "On this page",
+    "featured": "Latest",
+    "allCategories": "All posts",
+    "relatedHeading": "More from the blog",
+    "stockHeading": "Bikes at our shop",
+    "stockIntro": "Ready to ride away, with financing and road tax sorted here.",
+    "stockCta": "Browse all listings",
+    "ctaHeading": "Questions about this?",
+    "ctaBody": "We are a family-run shop, not a call centre. Message us and you will get a straight answer from someone who works on these bikes.",
+    "ctaButton": "Ask us on WhatsApp",
+    "ctaWaMessage": "Hi Motor Kekal, I read your article \"{title}\". Can you help me?",
+    "aboutHeading": "About Motor Kekal",
+    "aboutBody": "Perniagaan Motor Kekal is a family-run motorcycle dealer in Taman Johor Bahru. We sell Yamaha, Honda, Kawasaki and KTM, handle financing, trade-ins, insurance and road tax, and service every bike in our own workshop. Everything we write here comes off that workshop floor.",
+    "aboutCta": "More about us",
     "categories": {
       "reviews": "Reviews",
       "news": "News",
       "buying-guides": "Buying guides",
       "maintenance": "Maintenance"
+    },
+    "categoryMeta": {
+      "reviews": {
+        "heading": "Motorcycle Reviews",
+        "intro": "Honest verdicts on the bikes we sell and service, written after real time in Johor traffic.",
+        "metaTitle": "Motorcycle Reviews - Motor Kekal Johor Bahru",
+        "metaDescription": "Honest motorcycle reviews from Perniagaan Motor Kekal, Johor Bahru. Real verdicts on the bikes we sell and service in our own workshop."
+      },
+      "news": {
+        "heading": "Motorcycle News",
+        "intro": "Rebates, road tax, new launches and the rule changes that affect Malaysian riders.",
+        "metaTitle": "Motorcycle News Malaysia - Motor Kekal Johor Bahru",
+        "metaDescription": "Motorcycle news for Malaysian riders: rebates, road tax, insurance and new model launches, explained by Motor Kekal in Johor Bahru."
+      },
+      "buying-guides": {
+        "heading": "Motorcycle Buying Guides",
+        "intro": "Licences, budgets, financing and which bike actually suits how you ride.",
+        "metaTitle": "Motorcycle Buying Guides - Motor Kekal Johor Bahru",
+        "metaDescription": "Motorcycle buying guides for Johor Bahru riders: licences, budgets, financing, trade-ins and choosing your first bike. From Motor Kekal."
+      },
+      "maintenance": {
+        "heading": "Motorcycle Maintenance",
+        "intro": "Servicing routines and small jobs that keep repair bills down, straight from our workshop.",
+        "metaTitle": "Motorcycle Maintenance Tips - Motor Kekal Johor Bahru",
+        "metaDescription": "Motorcycle maintenance and servicing tips from the Motor Kekal workshop in Johor Bahru. Simple routines that prevent expensive repairs."
+      }
     }
   }
 }

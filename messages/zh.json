@@ -769,11 +769,51 @@
     "readingTime": "阅读约 {minutes} 分钟",
     "updatedOn": "更新于 {date}",
     "backToBlog": "返回所有文章",
+    "onThisPage": "本文目录",
+    "featured": "最新",
+    "allCategories": "全部文章",
+    "relatedHeading": "更多文章",
+    "stockHeading": "本店现车",
+    "stockIntro": "随时可以骑走，贷款与路税我们一并办好。",
+    "stockCta": "查看全部车款",
+    "ctaHeading": "对这篇有疑问？",
+    "ctaBody": "我们是家族经营的车行，不是客服中心。WhatsApp 我们，回答你的就是每天在修这些车的人。",
+    "ctaButton": "WhatsApp 咨询我们",
+    "ctaWaMessage": "你好 Motor Kekal，我看了《{title}》这篇文章，可以帮我吗？",
+    "aboutHeading": "关于 Motor Kekal",
+    "aboutBody": "Perniagaan Motor Kekal 是位于新山 Taman Johor Bahru 的家族摩托车行。我们销售 Yamaha、Honda、Kawasaki 与 KTM，代办贷款、旧车折抵、保险与路税，并在自家工作坊保养每一辆车。这里写的每一篇，都来自那个工作坊。",
+    "aboutCta": "更多关于我们",
     "categories": {
       "reviews": "评测",
       "news": "资讯",
       "buying-guides": "购车指南",
       "maintenance": "保养"
+    },
+    "categoryMeta": {
+      "reviews": {
+        "heading": "摩托车评测",
+        "intro": "真实骑过新山路况之后，对我们销售与保养车款的诚实评价。",
+        "metaTitle": "摩托车评测 - 新山 Motor Kekal",
+        "metaDescription": "来自新山 Perniagaan Motor Kekal 的诚实摩托车评测。对我们销售并在自家工作坊保养的车款的真实评价。"
+      },
+      "news": {
+        "heading": "摩托车资讯",
+        "intro": "补贴、路税、新车发布，以及影响马来西亚骑士的法规变动。",
+        "metaTitle": "马来西亚摩托车资讯 - 新山 Motor Kekal",
+        "metaDescription": "马来西亚骑士的摩托车资讯：补贴、路税、保险与新车发布，由新山 Motor Kekal 为你解读。"
+      },
+      "buying-guides": {
+        "heading": "摩托车购车指南",
+        "intro": "驾照、预算、贷款，以及哪一款车真正适合你的骑行方式。",
+        "metaTitle": "摩托车购车指南 - 新山 Motor Kekal",
+        "metaDescription": "为新山骑士准备的摩托车购车指南：驾照、预算、贷款、旧车折抵与第一辆车的选择。来自 Motor Kekal。"
+      },
+      "maintenance": {
+        "heading": "摩托车保养",
+        "intro": "来自我们工作坊的保养流程与小工序，帮你压低维修费。",
+        "metaTitle": "摩托车保养技巧 - 新山 Motor Kekal",
+        "metaDescription": "来自新山 Motor Kekal 工作坊的摩托车保养与维修技巧。简单的日常流程，避免昂贵维修。"
+      }
     }
   }
 }

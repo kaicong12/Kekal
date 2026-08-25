@@ -769,11 +769,51 @@
     "readingTime": "Bacaan {minutes} minit",
     "updatedOn": "Dikemas kini {date}",
     "backToBlog": "Kembali ke semua artikel",
+    "onThisPage": "Dalam artikel ini",
+    "featured": "Terkini",
+    "allCategories": "Semua artikel",
+    "relatedHeading": "Artikel lain",
+    "stockHeading": "Motor di kedai kami",
+    "stockIntro": "Sedia untuk dibawa balik, pembiayaan dan cukai jalan kami uruskan di sini.",
+    "stockCta": "Lihat semua senarai",
+    "ctaHeading": "Ada soalan tentang ini?",
+    "ctaBody": "Kami kedai keluarga, bukan pusat panggilan. WhatsApp kami dan anda akan dapat jawapan terus daripada orang yang betul-betul kerja dengan motor ini.",
+    "ctaButton": "Tanya kami di WhatsApp",
+    "ctaWaMessage": "Hi Motor Kekal, saya baca artikel \"{title}\". Boleh bantu saya?",
+    "aboutHeading": "Tentang Motor Kekal",
+    "aboutBody": "Perniagaan Motor Kekal ialah kedai motosikal milik keluarga di Taman Johor Bahru. Kami menjual Yamaha, Honda, Kawasaki dan KTM, menguruskan pembiayaan, tukar beli, insurans dan cukai jalan, serta menyelenggara setiap motor di bengkel kami sendiri. Semua yang kami tulis di sini datang dari bengkel itu.",
+    "aboutCta": "Lanjut tentang kami",
     "categories": {
       "reviews": "Ulasan",
       "news": "Berita",
       "buying-guides": "Panduan pembeli",
       "maintenance": "Penyelenggaraan"
+    },
+    "categoryMeta": {
+      "reviews": {
+        "heading": "Ulasan Motosikal",
+        "intro": "Pandangan jujur tentang motor yang kami jual dan servis, selepas benar-benar menunggangnya di Johor.",
+        "metaTitle": "Ulasan Motosikal - Motor Kekal Johor Bahru",
+        "metaDescription": "Ulasan motosikal jujur daripada Perniagaan Motor Kekal, Johor Bahru. Pandangan sebenar tentang motor yang kami jual dan servis di bengkel sendiri."
+      },
+      "news": {
+        "heading": "Berita Motosikal",
+        "intro": "Rebat, cukai jalan, pelancaran baharu dan perubahan peraturan yang memberi kesan kepada penunggang Malaysia.",
+        "metaTitle": "Berita Motosikal Malaysia - Motor Kekal Johor Bahru",
+        "metaDescription": "Berita motosikal untuk penunggang Malaysia: rebat, cukai jalan, insurans dan pelancaran model baharu, dijelaskan oleh Motor Kekal di Johor Bahru."
+      },
+      "buying-guides": {
+        "heading": "Panduan Pembeli Motosikal",
+        "intro": "Lesen, bajet, pembiayaan dan motor yang benar-benar sesuai dengan cara anda menunggang.",
+        "metaTitle": "Panduan Pembeli Motosikal - Motor Kekal Johor Bahru",
+        "metaDescription": "Panduan pembeli motosikal untuk penunggang Johor Bahru: lesen, bajet, pembiayaan, tukar beli dan memilih motor pertama anda. Daripada Motor Kekal."
+      },
+      "maintenance": {
+        "heading": "Penyelenggaraan Motosikal",
+        "intro": "Rutin servis dan kerja kecil yang mengurangkan bil pembaikan, terus dari bengkel kami.",
+        "metaTitle": "Tip Penyelenggaraan Motosikal - Motor Kekal Johor Bahru",
+        "metaDescription": "Tip penyelenggaraan dan servis motosikal daripada bengkel Motor Kekal di Johor Bahru. Rutin mudah yang mengelakkan pembaikan mahal."
+      }
     }
   }
 }
