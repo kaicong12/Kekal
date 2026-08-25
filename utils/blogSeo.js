@@ -44,6 +44,13 @@ export const META_LIMITS = {
   description: MAX_META_DESCRIPTION_LENGTH,
 };
 
+export const formatPostDate = (value, locale, month = "short") =>
+  new Date(value).toLocaleDateString(locale === "en" ? "en-GB" : locale, {
+    day: "numeric",
+    month,
+    year: "numeric",
+  });
+
 // Rough across three locales — Chinese runs far fewer characters per minute.
 export function readingMinutes(bodyOrText) {
   const text =

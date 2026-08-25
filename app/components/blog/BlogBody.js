@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "@/i18n/navigation";
+import { blogHeadings } from "@/utils/blogToc";
 
 // Renders the stored Tiptap JSON as JSX rather than via generateHTML +
 // dangerouslySetInnerHTML. Two reasons that matter: internal links go through
@@ -48,11 +49,11 @@ function renderText(node, key) {
   return <Fragment key={key}>{content}</Fragment>;
 }
 
-function renderNode(node, key) {
+function renderNode(node, key, ids) {
   if (!node || typeof node !== "object") return null;
 
   const children = (node.content || []).map((child, i) =>
-    renderNode(child, `${key}-${i}`)
+    renderNode(child, `${key}-${i}`, ids)
   );
 
   switch (node.type) {
@@ -60,12 +61,19 @@ function renderNode(node, key) {
       return renderText(node, key);
     case "paragraph":
       return <p key={key}>{children}</p>;
-    case "heading":
+    case "heading": {
+      // From blogHeadings, so the ToC can't link to an anchor we never emit.
+      const id = ids?.get(node);
       return node.attrs?.level === 3 ? (
-        <h3 key={key}>{children}</h3>
+        <h3 key={key} id={id}>
+          {children}
+        </h3>
       ) : (
-        <h2 key={key}>{children}</h2>
+        <h2 key={key} id={id}>
+          {children}
+        </h2>
       );
+    }
     case "bulletList":
       return <ul key={key}>{children}</ul>;
     case "orderedList":
@@ -108,5 +116,6 @@ function renderNode(node, key) {
 
 export default function BlogBody({ doc }) {
   if (!doc?.content) return null;
-  return <>{doc.content.map((node, i) => renderNode(node, `n${i}`))}</>;
+  const ids = new Map(blogHeadings(doc).map(({ node, id }) => [node, id]));
+  return <>{doc.content.map((node, i) => renderNode(node, `n${i}`, ids))}</>;
 }

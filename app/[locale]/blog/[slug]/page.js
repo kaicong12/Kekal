@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import SiteHeader from "@/app/components/motorkekal/SiteHeader";
 import SiteFooter from "@/app/components/motorkekal/SiteFooter";
 import MobileBar from "@/app/components/motorkekal/MobileBar";
@@ -7,9 +8,18 @@ import Breadcrumb from "@/app/components/motorkekal/Breadcrumb";
 import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
 import BlogPostingSchema from "@/app/components/seo/BlogPostingSchema";
 import BlogBody from "@/app/components/blog/BlogBody";
+import PostCta from "@/app/components/blog/PostCta";
+import PostToc from "@/app/components/blog/PostToc";
+import AboutShop from "@/app/components/blog/AboutShop";
+import StockRail from "@/app/components/blog/StockRail";
+import RelatedPosts from "@/app/components/blog/RelatedPosts";
 import { getPublishedBlogPostBySlugPg } from "@/utils/blogPg";
 import { localeAlternatesFor } from "@/utils/seoAlternates";
-import { resolveBlogMeta, readingMinutes } from "@/utils/blogSeo";
+import {
+  resolveBlogMeta,
+  readingMinutes,
+  formatPostDate,
+} from "@/utils/blogSeo";
 
 // No generateStaticParams, matching the motorcycle detail page: rendering on
 // demand avoids prerendering posts × 3 locales on every build.
@@ -52,12 +62,7 @@ export async function generateMetadata({ params: { locale, slug } }) {
   }
 }
 
-const formatDate = (value, locale) =>
-  new Date(value).toLocaleDateString(locale === "en" ? "en-GB" : locale, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+const formatDate = (value, locale) => formatPostDate(value, locale, "long");
 
 export default async function BlogPostPage({ params: { locale, slug } }) {
   setRequestLocale(locale);
@@ -89,6 +94,10 @@ export default async function BlogPostPage({ params: { locale, slug } }) {
         items={[
           { name: tDetail("breadcrumbHome"), url: SITE },
           { name: t("heading"), url: `${SITE}/blog` },
+          {
+            name: categoryLabel,
+            url: `${SITE}/blog/category/${post.category}`,
+          },
           { name: post.title },
         ]}
       />
@@ -100,6 +109,10 @@ export default async function BlogPostPage({ params: { locale, slug } }) {
             items={[
               { label: tDetail("breadcrumbHome"), href: "/" },
               { label: t("heading"), href: "/blog" },
+              {
+                label: categoryLabel,
+                href: `/blog/category/${post.category}`,
+              },
               { label: post.title },
             ]}
           />
@@ -107,7 +120,12 @@ export default async function BlogPostPage({ params: { locale, slug } }) {
 
         <article className="section wrap">
           <header className="post-head">
-            <span className="post-chip">{categoryLabel}</span>
+            <Link
+              href={`/blog/category/${post.category}`}
+              className="post-chip post-chip--link"
+            >
+              {categoryLabel}
+            </Link>
             <h1>{post.title}</h1>
             <p className="post-meta muted">
               {t("byline")} · {formatDate(post.publishedAt, locale)} ·{" "}
@@ -128,20 +146,47 @@ export default async function BlogPostPage({ params: { locale, slug } }) {
             />
           )}
 
-          <div className="prose">
-            <BlogBody doc={post.body} />
-          </div>
+          {/* One source order; the grid turns the aside into a sticky rail on
+              desktop and collapses it back inline below 1080px. */}
+          <div className="post-body">
+            <div className="post-body__main">
+              <div className="prose">
+                <BlogBody doc={post.body} />
+              </div>
 
-          {post.tags.length > 0 && (
-            <div className="post-tags">
-              {post.tags.map((tag) => (
-                <span key={tag} className="post-chip">
-                  {tag}
-                </span>
-              ))}
+              {post.tags.length > 0 && (
+                <div className="post-tags">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className="post-chip">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-          )}
+
+            <aside className="post-body__side">
+              <PostToc doc={post.body} />
+              <PostCta title={post.title} />
+            </aside>
+
+            <div className="post-body__foot">
+              <AboutShop />
+
+              <p className="post-back">
+                <Link href="/blog">← {t("backToBlog")}</Link>
+              </p>
+            </div>
+          </div>
         </article>
+
+        <StockRail tags={post.tags} />
+
+        <RelatedPosts
+          locale={locale}
+          category={post.category}
+          currentId={post.id}
+        />
       </main>
 
       <SiteFooter />
