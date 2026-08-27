@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Spin } from "antd";
 import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
 import BikeCard from "./BikeCard";
 
@@ -14,7 +13,7 @@ const PopularBikes = () => {
   if (loading) {
     return (
       <div className="mk-center">
-        <Spin size="large" />
+        <div className="mk-spinner" role="status" aria-label={t("loading")} />
       </div>
     );
   }

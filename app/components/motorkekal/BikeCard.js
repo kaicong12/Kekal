@@ -32,6 +32,9 @@ const BikeCard = ({ motorcycle, tag }) => {
               height={240}
               src={motorcycle.imageUrl}
               alt={motorcycle.name}
+              // Bikes with no images fall back to /images/no-image.svg
+              // (utils/dbPg.js), which the optimizer refuses to process.
+              unoptimized={motorcycle.imageUrl.endsWith(".svg")}
             />
           ) : null}
           {tag ? <span className="bike-card__tag">{tag}</span> : null}

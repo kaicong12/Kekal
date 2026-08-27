@@ -1,7 +1,26 @@
 :root {
   --primary-color: #f5c34b;
 }
-@import "~bootstrap/scss/bootstrap";
-@import "./style";
-@import "./responsive.scss";
-@import "./custom_voiture";
+
+// Bootstrap, trimmed. The full `bootstrap` entrypoint compiled every component
+// and the whole utilities API — 222KB of the old 676KB bundle — while the only
+// Bootstrap classes in any markup are .container/.row/.col-* on the FAQ page.
+//
+// Config layers first (these emit no CSS):
+$enable-dark-mode: false;
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark"; // still required: _maps/_root read its maps
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+
+// Then only what is used. `root` is mandatory alongside `reboot` — reboot
+// consumes ~16 --bs-* custom properties that root defines. `reboot` itself is
+// load-bearing: it supplies `body { margin: 0 }` and the global box-sizing
+// reset, neither of which exists outside .mk-site.
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+
+@import "./legacy";

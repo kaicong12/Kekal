@@ -424,6 +424,7 @@
   },
   "mk": {
     "inStock": "Ada stok",
+    "loading": "Memuatkan",
     "home": {
       "eyebrow": "Kedai Motor · Johor Bahru",
       "h1": "Cari motor <em>senang</em>.<br></br>Beli dengan <em>yakin</em>.",
