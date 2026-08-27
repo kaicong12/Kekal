@@ -1,38 +1,19 @@
 "use client";
-import Aos from "aos";
-import { useEffect } from "react";
+// Stays a client component: ScrollToTop and the analytics trackers are hooks-based
+// and have no "use client" of their own, so they rely on this boundary.
 import ScrollToTop from "./common/ScrollTop";
-import styled from "styled-components";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { AuthProvider } from "./auth/AuthProvider";
 import CtaClickTracker from "./analytics/CtaClickTracker";
 
-if (typeof window !== "undefined") {
-  import("bootstrap");
-}
-
-const StyledDiv = styled.div`
-  margin: 0;
-  padding: 0;
-`;
-
 export default function ClientLayout({ children }) {
-  useEffect(() => {
-    Aos.init({
-      duration: 1200,
-    });
-  }, []);
-
   return (
-    <StyledDiv>
-      <AuthProvider>
-        {children}
-        <ScrollToTop />
-        <CtaClickTracker />
-        <Analytics />
-        <SpeedInsights />
-      </AuthProvider>
-    </StyledDiv>
+    <>
+      {children}
+      <ScrollToTop />
+      <CtaClickTracker />
+      <Analytics />
+      <SpeedInsights />
+    </>
   );
 }

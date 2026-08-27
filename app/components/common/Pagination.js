@@ -1,3 +1,21 @@
+// Inline rather than Font Awesome: these two arrows were the only reason the
+// 216KB fontawesome.css was pulled into the global bundle.
+const Arrow = ({ dir }) => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d={dir === "left" ? "M19 12H5M11 6l-6 6 6 6" : "M5 12h14M13 6l6 6-6 6"} />
+  </svg>
+);
+
 const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
   const buttonsToShow = 3
   const getVisiblePages = () => {
@@ -30,7 +48,7 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
         onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
       >
         <span className="page-link">
-          <span className="fa fa-arrow-left" />
+          <Arrow dir="left" />
         </span>
       </li>
 
@@ -51,7 +69,7 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
         onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
       >
         <span className="page-link">
-          <span className="fa fa-arrow-right" />
+          <Arrow dir="right" />
         </span>
       </li>
     </ul>

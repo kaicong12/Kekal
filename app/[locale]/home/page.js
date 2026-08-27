@@ -177,7 +177,8 @@ const Home = ({ params }) => {
                 <p>{t(`commonTestimonials.${item.textKey}`)}</p>
                 <div className="quote__by">
                   <span className="quote__av">
-                    <Image width={40} height={40} src={item.avatar} alt={item.name} />
+                    {/* Avatars are SVG, which the image optimizer rejects. */}
+                    <Image width={40} height={40} src={item.avatar} alt={item.name} unoptimized />
                   </span>
                   <span>
                     <b>{item.name}</b>

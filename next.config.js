@@ -22,7 +22,13 @@ const nextConfig = {
     ];
   },
   images: {
-    unoptimized: true,
+    // Optimization is ON: it emits WebP/AVIF and a real srcset, which is the
+    // single biggest LCP win available. SVG sources are NOT optimizable without
+    // `dangerouslyAllowSVG` (the optimizer 400s on image/svg+xml), so the few
+    // SVG call sites opt out individually with `unoptimized` instead of opening
+    // that flag site-wide. See app/[locale]/home/page.js (avatars) and the
+    // `/images/no-image.svg` placeholder from utils/dbPg.js.
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: "https",

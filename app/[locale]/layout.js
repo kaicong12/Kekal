@@ -2,7 +2,6 @@ import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
-import "aos/dist/aos.css";
 import "@/public/scss/main.scss";
 import ClientLayout from "@/app/components/ClientLayout";
 import LocalBusinessSchema from "@/app/components/seo/LocalBusinessSchema";

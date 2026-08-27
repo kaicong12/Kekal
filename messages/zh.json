@@ -424,6 +424,7 @@
   },
   "mk": {
     "inStock": "有现货",
+    "loading": "加载中",
     "home": {
       "eyebrow": "摩托车店 · 新山",
       "h1": "<em>轻松</em>选车。<br></br><em>放心</em>购买。",
