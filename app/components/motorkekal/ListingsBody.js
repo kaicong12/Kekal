@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Spin } from "antd";
 import { useMotorcyclesPg as useMotorcycles } from "@/utils/hooks/useMotorcyclesPg";
 import { useDebounce } from "@/utils/hooks/useDebounce";
 import Pagination from "@/app/components/common/Pagination";
@@ -219,7 +218,7 @@ const ListingsBody = () => {
 
       {loading ? (
         <div className="mk-center">
-          <Spin size="large" />
+          <div className="mk-spinner" role="status" aria-label={t("loading")} />
         </div>
       ) : motorcycles.length === 0 ? (
         <div

@@ -1,0 +1,283 @@
+/* ============================================================
+   Legacy theme remnants.
+
+   This replaces _style.scss (11,736 lines), _responsive.scss (4,623)
+   and _custom_voiture.scss (208), which came from the original
+   "Voiture" template. 1,611 of their 1,733 class selectors matched
+   nothing in the app; the compiled bundle was 676KB of blocking CSS,
+   216KB of which was Font Awesome serving three arrow icons (now
+   inline SVG in Pagination.js / ScrollTop.jsx).
+
+   Everything below is the subset that is still live, copied verbatim.
+   The storefront proper is styled by app/components/motorkekal/motorkekal.css
+   (scoped to .mk-site) and admin by admin.module.css; these rules are the
+   global element defaults both of those still sit on top of.
+   ============================================================ */
+
+/*== Typography ==*/
+
+html {
+  font-size: 100%;
+  /* Suppresses Bootstrap reboot's `:root { scroll-behavior: smooth }`, which
+     would otherwise animate every in-page anchor jump (blog TOC, FAQ). */
+  scroll-behavior: auto !important;
+}
+
+body {
+  background-attachment: fixed;
+  background-color: #ffffff;
+  color: #5f6973;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: inherit;
+  transition: all 0.4s ease;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  color: #5f6973;
+  font-weight: 400;
+}
+b {
+  font-weight: 600;
+}
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #1a3760;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+}
+a:hover,
+a:focus {
+  color: #1a3760;
+  text-decoration: none;
+  outline: none;
+}
+a img {
+  border: none;
+}
+
+::selection {
+  background: #1a3760;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  /* Firefox */
+  background: #1a3760;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+::-webkit-selection {
+  /* Safari */
+  background: #1a3760;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+h1 small,
+h1 .small,
+h2 small,
+h2 .small,
+h3 small,
+h3 .small,
+h4 small,
+h4 .small,
+h5 small,
+h5 .small,
+h6 small,
+h6 .small,
+.h1 small,
+.h1 .small,
+.h2 small,
+.h2 .small,
+.h3 small,
+.h3 .small,
+.h4 small,
+.h4 .small,
+.h5 small,
+.h5 .small,
+.h6 small,
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a,
+.h1 a,
+.h2 a,
+.h3 a,
+.h4 a,
+.h5 a,
+p,
+ul,
+ol,
+dl,
+dt,
+dd,
+blockquote,
+address {
+  margin: 0 0 10px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #adb5bd;
+  font-size: 14px;
+}
+
+/* Scroll-to-top button — rendered on every page by ClientLayout via ScrollTop.jsx */
+.scrollToHome:hover {
+  color: #ffffff;
+}
+.scrollToHome {
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  bottom: 15px;
+  color: #ffffff;
+  font-size: 18px;
+  height: 45px;
+  /* SVG icon replaced a font glyph, so centre it explicitly instead of
+     relying on line-height against the text baseline. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  position: fixed;
+  right: 20px;
+  text-align: center;
+  width: 45px;
+  z-index: 99999;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 767px) {
+  .scrollToHome {
+    display: none;
+  }
+}
+
+/* Pagination — Pagination.js, used by ListingsBody and BrandBikeGrid */
+.page_navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.page_navigation .page-item {
+  display: inline-flex;
+}
+.page_navigation .page-item .page-link {
+  /* Bootstrap-parity: from its `.page-link` rule (see note below). */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #eaeaea;
+  background-color: #fff;
+  color: #5f6973;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.page_navigation .page-item .page-link:hover {
+  background-color: #f0f0f0;
+  border-color: #d4a76a;
+  color: #1a3760;
+}
+.page_navigation .page-item.active .page-link {
+  background-color: #d4a76a;
+  border-color: #d4a76a;
+  color: #fff;
+}
+.page_navigation .page-item.disabled .page-link {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+/* Bootstrap-parity: Bootstrap's own `.page-link` / `.active > .page-link` rules
+   were also matching these elements. The negative margin is its border-collapse
+   trick, largely pointless next to `gap: 8px`, and the z-index is inert since
+   nothing overlaps — both kept so the diff against the old bundle is clean. */
+.page_navigation .page-item:not(:first-child) .page-link {
+  margin-left: -1px;
+}
+.page_navigation .page-item.active .page-link {
+  z-index: 3;
+}
+
+/* Bootstrap's utilities API is no longer compiled; this is its only usage,
+   on the FAQ page (app/[locale]/faq/FAQContent.js). */
+.justify-content-center {
+  justify-content: center !important;
+}
+
+/* ---------------------------------------------------------------
+   Bootstrap component parity.
+
+   The storefront reuses Bootstrap's class names (.card, .btn, .nav) under its
+   own styling in motorkekal.css, and was silently inheriting these declarations
+   from the Bootstrap component partials that main.scss no longer compiles.
+   They're reproduced here with Bootstrap's ORIGINAL bare selectors on purpose:
+   at specificity (0,1,0) they keep losing to every `.mk-site .x` rule exactly
+   as before. Scoping them to `.mk-site .card` instead would raise them to
+   (0,2,0) and start overriding rules like `.mk-site .brandstrip`.
+
+   Each of these is a latent bug rather than intent — the storefront never asked
+   for them. Two are worth fixing deliberately, once you want the visual change:
+     - `.card { flex-direction: column }` fights `.mk-site .svc-card`, whose
+       52px `flex-shrink: 0` icon and 18px gap were written for a row. Dropping
+       it puts the icon beside the text instead of above it.
+     - `.card { color: #212529 }` is Bootstrap's body colour overriding the
+       inherited `--kk-text` (#191a1c) on every card.
+   --------------------------------------------------------------- */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  color: #212529;
+}
+.btn {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5;
+  user-select: none;
+}
+.nav {
+  list-style: none;
+}
