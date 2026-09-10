@@ -245,11 +245,15 @@
   /* Floor keeps the label readable, and makes the button wrap below rather
      than crushing this column. */
   min-width: 90px;
+  /* Pin to the right edge so the state sits in the same place on every row;
+     the locale names differ in width, so a left-aligned state looks ragged. */
+  text-align: right;
 }
 /* The button is white-space:nowrap and widens with its label ("Translating…",
    "Retranslate"), which overflowed the panel. Let it keep its width and drop
    to its own line, right-aligned as in the single-line case.
-   Last child, not button, because Tooltip wraps a disabled child in a span. */
+   Matched as last child rather than `button` so it survives Tooltip gaining a
+   wrapper element; today it renders the button directly, disabled or not. */
 .localeRow > *:last-child {
   flex: 0 0 auto;
   margin-left: auto;
