@@ -1,11 +1,9 @@
 .page {
   max-width: 640px;
   margin: 0 auto;
-  /* Top padding clears the fixed site header (same approach as the FAQ page). */
   padding: 100px 20px 120px;
 }
 
-/* ---------------------------------- Intro --------------------------------- */
 .eyebrow {
   color: #ff6a13;
   font-size: 12px;
@@ -30,7 +28,6 @@
   margin: 0 0 28px;
 }
 
-/* ------------------------------ Featured card ----------------------------- */
 .featuredCard {
   border-radius: 18px;
   overflow: hidden;
@@ -98,7 +95,6 @@
   margin: 0;
 }
 
-/* ------------------------------ Countdown bar ----------------------------- */
 .countdownBar {
   background: #1b1c1f;
   padding: 16px 20px 18px;
@@ -147,7 +143,6 @@
   margin-top: 5px;
 }
 
-/* --------------------------------- CTA ------------------------------------ */
 .featuredCta {
   background: #fff;
   padding: 16px;
@@ -175,7 +170,6 @@
   transform: translateY(-1px);
 }
 
-/* ------------------------------- Promo list ------------------------------- */
 .sectionTitle {
   font-size: 18px;
   font-weight: 800;
@@ -249,7 +243,6 @@
   opacity: 0.62;
 }
 
-/* ------------------------------- Empty state ------------------------------ */
 .emptyState {
   text-align: center;
   padding: 48px 20px;
@@ -271,7 +264,6 @@
   margin: 0;
 }
 
-/* ------------------------------- Sticky CTA ------------------------------- */
 .stickyBar {
   position: fixed;
   left: 0;
