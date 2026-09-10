@@ -44,10 +44,14 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
+      # Migrations must use the direct endpoint, not the pooler. Prisma guards
+      # migrate with a session-scoped advisory lock, and PgBouncer returns the
+      # connection to the pool while that lock is still held, so the next run
+      # blocks on a lock nothing will release and fails with P1002.
       - name: Apply migrations
         run: npx prisma migrate deploy
         env:
-          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
+          DATABASE_URL: ${{ steps.neon.outputs.db_url }}
 
       - name: Seed test data
         run: node tests/seed.js
