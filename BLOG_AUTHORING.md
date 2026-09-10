@@ -149,13 +149,37 @@ Different rules apply to images placed within the text:
 |---|---|
 | **Category** | Exactly one of: Reviews, News, Buying guides, Maintenance. This decides which section page the post shows up on. |
 | **Slug** (the web address) | Lowercase, words joined by hyphens. Include the model and the hook: `yamaha-xsr155-malaysia-rm12998`. **Never change or reuse the slug of an already-published post** — it breaks every existing link and loses the Google ranking. |
-| **Tags** | Comma-separated, lowercase. **Always include the brand** (`yamaha`, `honda`, `kawasaki`). The brand tag is what makes the article automatically show matching bikes from our stock — get it wrong and it shows unrelated bikes. |
+| **Tags** | Comma-separated, lowercase. **If the post is about a particular bike or brand, include the brand** (`yamaha`, `honda`, `kawasaki`) — that's what makes the article show matching bikes from our stock. Not every post has a brand; see below. |
 | **Excerpt** | One or two sentences, around 140–180 characters. It appears on the cards, so it must make sense on its own, away from the article. |
 | **Meta title** | 60 characters maximum. Include the model, and the price if there is one. |
 | **Meta description** | 160 characters maximum. Say what the reader will learn. Not "click here to read more". |
 
 The editor shows a live Google-result preview with length warnings as you type.
 Use it — if it's showing a warning, the text is too long and Google will cut it off.
+
+### Posts that aren't about a brand
+
+Plenty of good posts have no brand at all: petrol prices, road tax, insurance, JPJ rules,
+licensing, riding in the rain, what to check before a long trip. **Don't invent a brand tag for
+these.** Tag the subject instead — `petrol`, `road-tax`, `insurance`, `trade-in`, `safety`.
+
+Every post shows a row of four bikes from our stock near the bottom. Here is what actually
+decides which four, so you don't worry about it:
+
+- **Brand tag that matches a brand we stock** → the row leads with that brand, and tops up from
+  general stock if we don't have four of them.
+- **No brand tag, or a brand we don't stock** → the row fills with four bikes from general
+  stock. It is never empty, so a post with no brand tag is not broken.
+
+The catch: that fallback row is **not sorted or curated**. It's whatever four bikes come back
+first, so a post about saving fuel can end up sitting above a RM68,000 maxi-scooter. Nothing
+breaks, but it means **you cannot use that row to make a point.** If a post is arguing for cheap
+commuters, name them in the text and link to `/listing` yourself. Treat the row as decoration,
+not as part of your argument.
+
+And don't tag a brand the post isn't really about just to steer that row. Tags are also how
+readers and Google understand the topic, so a fuel-price post tagged `yamaha` is simply wrong
+about itself.
 
 ### Headings
 
@@ -218,7 +242,7 @@ appear in that language, which is better than showing English there.
 
 **Content**
 
-- [ ] Category chosen; brand included in the tags
+- [ ] Category chosen; brand in the tags **if the post is about a brand**, subject tags otherwise
 - [ ] Slug includes the model, and is not one that's been used before
 - [ ] Excerpt reads well on its own
 - [ ] Meta title and description within the limits, no warnings showing
