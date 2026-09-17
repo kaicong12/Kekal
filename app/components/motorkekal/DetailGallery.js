@@ -23,6 +23,7 @@ const DetailGallery = ({ brand, modelName, images = [], tag }) => {
             alt={alt}
             width={856}
             height={642}
+            sizes="(max-width: 860px) 100vw, (max-width: 1180px) 62vw, 737px"
             priority
             style={{ objectFit: "cover", width: "100%", height: "100%" }}
           />
@@ -44,6 +45,7 @@ const DetailGallery = ({ brand, modelName, images = [], tag }) => {
                 alt={`${alt} thumbnail ${i + 1}`}
                 width={200}
                 height={150}
+                sizes="(max-width: 860px) 25vw, 175px"
                 style={{ objectFit: "cover", width: "100%", height: "100%" }}
               />
             </button>
