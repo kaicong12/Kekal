@@ -13,6 +13,11 @@ and it wins any disagreement with this skill.
 recommendation with reasoning → blog draft → Facebook draft. Never skip the sources; they vet
 the facts and pick the images themselves.
 
+**Then put them where they are used, not in a scratch file.** The blog draft goes into the CMS
+as a real draft and the Facebook post into a real Facebook draft — see §6. Both need a sign-in
+you cannot do yourself, so **ask for it**; do not silently downgrade to handing over a markdown
+file. A dated `.md` alongside is fine as a working copy, never as the delivery.
+
 ## 1. What has already been published
 
 Use the **public API**, not the admin panel. Admin is behind Google Auth and not worth the round trip:
@@ -153,6 +158,28 @@ so you cannot hit **Publish** by accident.
 **Order matters:** the blog post must be published before the Facebook post goes out, or the
 `Baca penuh` link 404s.
 
+## 6. Getting it into the CMS and Facebook
+
+Both need a human sign-in. Prompt for it and wait — never guess a token, never publish.
+
+**Blog.** `POST /api/blog-posts` calls `verifyAuthToken` first, so it needs a Firebase ID token
+from a Google sign-in on the whitelisted account. Two ways in, ask which:
+
+1. Drive `/admin` in the browser and have them complete the Google sign-in **in that window** —
+   a sign-in in their own Chrome does not carry over to a Playwright profile.
+2. Have them paste a fresh ID token, then `POST` directly. Faster, no browser.
+
+`BlogPost.status` defaults to `DRAFT` and `coverImageUrl` is nullable, so **create the draft with
+no cover and leave it as a draft.** They add the images and press publish. That satisfies
+`BLOG_AUTHORING.md`'s two rules — you never choose images, and nothing ships without a cover.
+Once the draft exists, `POST /api/blog-posts/{id}/translate` fills Malay and Chinese; tell them
+to read both before publishing.
+
+**Facebook.** See §5 — save with **Finish later**, never Publish, never Schedule.
+
+**Order:** blog published → then the Facebook post, or `Baca penuh` 404s. They control both
+publishes; your job ends at two reviewable drafts.
+
 ## Common mistakes
 
 | Mistake | Fix |
@@ -163,5 +190,6 @@ so you cannot hit **Publish** by accident.
 | Presenting a converted foreign price as Malaysian | Label it as a conversion, or leave it out |
 | Calling a proposed subsidy a real one | Say "under consideration" |
 | Picking images | Hand over sources and an image brief instead |
+| Leaving the drafts in a markdown file | Create a real CMS draft and a real FB draft; ask for the sign-in |
 | Writing the FB post in English then translating | Write it in BM from the start |
 | Dropping the website from the FB suffix | The suffix drives blog traffic — keep all four lines |
