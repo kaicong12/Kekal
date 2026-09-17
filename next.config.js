@@ -47,6 +47,13 @@ const nextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    // Narrowed from Next's 8+8 defaults. Every (image, width, format) pair is a
+    // billed Vercel transformation, and ~200 bikes × several photos each blows
+    // the 5k/month free cap once `sizes` makes call sites request real widths.
+    // These four cover the actual layout slots (~86 / 175 / 374 / 737 CSS px)
+    // at 1-3x DPR; a device just rounds up to the next one.
+    deviceSizes: [640, 828, 1200, 1920],
+    imageSizes: [96, 256, 384],
     minimumCacheTTL: 1500000,
   },
 };

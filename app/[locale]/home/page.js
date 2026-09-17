@@ -90,7 +90,14 @@ const Home = ({ params }) => {
               </div>
             </div>
             <div className="hero__media">
-              <Image width={720} height={576} priority src={HERO_IMG} alt={t("mk.home.heroImageAlt")} />
+              <Image
+                width={720}
+                height={576}
+                sizes="(max-width: 860px) 100vw, (max-width: 1180px) 45vw, 512px"
+                priority
+                src={HERO_IMG}
+                alt={t("mk.home.heroImageAlt")}
+              />
               <div className="hero__badge">
                 <Pill status="live">{t("mk.home.badgeOpen")}</Pill>
                 <span style={{ fontSize: 13, fontWeight: 600 }}>Johor Bahru</span>
