@@ -1,0 +1,4 @@
+internal_ref,brand,model,year,mileage_km,asking_price_rm,colour,condition_notes,defects,photo_folder,plate_status,loan_available,site_slug
+MK-0001,Yamaha,NVX 155,2021,18400,8800,Matte Blue,"New tyres Jun 2026; full service record","Minor scratch on right fairing",/photos/MK-0001/,"On the road, geran ready",Yes,
+MK-0002,Honda,RS150R,2019,32100,6500,Red,"Serviced Jul 2026; new battery",None,/photos/MK-0002/,"On the road, geran ready",Yes,
+MK-0003,Yamaha,Y15ZR,2020,24700,7200,Blue,"Original condition, single owner","Slight dent on exhaust guard",/photos/MK-0003/,"On the road, geran ready",Yes,
