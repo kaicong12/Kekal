@@ -19,6 +19,8 @@ const nextConfig = {
         destination: "/listing",
         permanent: true,
       },
+      { source: "/home", destination: "/", permanent: true },
+      { source: "/:locale(en|ms|zh)/home", destination: "/:locale", permanent: true },
     ];
   },
   images: {

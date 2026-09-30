@@ -1,3 +1,4 @@
+import { DEALER_REF } from "./LocalBusinessSchema";
 import { toMotorcycleSlug } from "@/utils/slug";
 
 const ProductSchema = ({ motorcycle }) => {
@@ -27,10 +28,7 @@ const ProductSchema = ({ motorcycle }) => {
       priceCurrency: "MYR",
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
-      seller: {
-        "@type": "Organization",
-        name: "Perniagaan Motor Kekal",
-      },
+      seller: DEALER_REF,
     },
   };
 

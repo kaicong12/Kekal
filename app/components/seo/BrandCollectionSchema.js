@@ -1,3 +1,4 @@
+import { DEALER_REF } from "./LocalBusinessSchema";
 import { toMotorcycleSlug } from "@/utils/slug";
 
 const BASE_URL = "https://www.motorkekal.com";
@@ -19,19 +20,7 @@ const BrandCollectionSchema = ({ brand, motorcycles, brandSlug }) => {
         name: `${moto.brand} ${moto.name}`,
       })),
     },
-    provider: {
-      "@type": "MotorcycleDealer",
-      name: "Perniagaan Motor Kekal",
-      url: BASE_URL,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "5, Jalan Seroja 49, Taman Johor Bahru",
-        addressLocality: "Johor Bahru",
-        addressRegion: "Johor",
-        postalCode: "81100",
-        addressCountry: "MY",
-      },
-    },
+    provider: DEALER_REF,
   };
 
   return (
