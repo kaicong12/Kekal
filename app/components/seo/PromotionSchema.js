@@ -1,11 +1,6 @@
-const SITE_URL = "https://www.motorkekal.com";
+import { DEALER_REF } from "./LocalBusinessSchema";
 
-const seller = {
-  "@type": "MotorcycleDealer",
-  name: "Perniagaan Motor Kekal",
-  url: SITE_URL,
-  telephone: "+60127126128",
-};
+const SITE_URL = "https://www.motorkekal.com";
 
 const PromotionSchema = ({ promotions = [] }) => {
   if (!promotions.length) return null;
@@ -27,7 +22,7 @@ const PromotionSchema = ({ promotions = [] }) => {
         availabilityEnds: new Date(promotion.endDate).toISOString(),
         priceValidUntil: new Date(promotion.endDate).toISOString(),
         ...(promotion.imageUrl ? { image: promotion.imageUrl } : {}),
-        seller,
+        seller: DEALER_REF,
       },
     })),
   };
