@@ -38,13 +38,17 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
+      # Both steps use the direct endpoint, not the pooler. Prisma guards migrate
+      # with a session-scoped advisory lock, and PgBouncer returns the connection
+      # to the pool while that lock is still held, so a later run blocks on a lock
+      # nothing will release and fails with P1002.
       - name: Show pending migrations
         run: npx prisma migrate status || true
         env:
-          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
+          DATABASE_URL: ${{ steps.neon.outputs.db_url }}
 
       - name: Apply migrations to preview branch database
         if: ${{ !inputs.dry_run }}
         run: npx prisma migrate deploy
         env:
-          DATABASE_URL: ${{ steps.neon.outputs.db_url_with_pooler }}
+          DATABASE_URL: ${{ steps.neon.outputs.db_url }}

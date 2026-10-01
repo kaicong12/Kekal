@@ -1,8 +1,3 @@
-/* ============================================================
-   Kekal Admin — redesigned app shell & screens
-   Design tokens are scoped to .shell so they never leak into
-   the public site.
-   ============================================================ */
 
 .shell {
   --admin-orange: #f2622e;
@@ -20,7 +15,6 @@
   --admin-side-muted: #7d818b;
   --admin-green: #12b76a;
   --admin-amber: #d9880f;
-
   display: flex;
   min-height: 100vh;
   background: var(--admin-bg);
@@ -28,9 +22,6 @@
   font-family: var(--font-display, Inter, system-ui, sans-serif);
 }
 
-/* ------------------------------------------------------------
-   Sidebar
-   ------------------------------------------------------------ */
 .sidebar {
   position: sticky;
   top: 0;
@@ -217,9 +208,6 @@
   padding: 4px;
 }
 
-/* ------------------------------------------------------------
-   Main / topbar
-   ------------------------------------------------------------ */
 .main {
   flex: 1;
   min-width: 0;
@@ -334,9 +322,6 @@
   width: 100%;
 }
 
-/* ------------------------------------------------------------
-   Page heading
-   ------------------------------------------------------------ */
 .pageHeading {
   font-size: 30px;
   font-weight: 700;
@@ -351,9 +336,6 @@
   margin: 6px 0 22px;
 }
 
-/* ------------------------------------------------------------
-   Stat cards
-   ------------------------------------------------------------ */
 .statGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -402,9 +384,6 @@
   color: var(--admin-amber);
 }
 
-/* ------------------------------------------------------------
-   Table card
-   ------------------------------------------------------------ */
 .tableCard {
   background: var(--admin-card);
   border: 1px solid var(--admin-border);
@@ -540,7 +519,6 @@
   font-weight: 600;
 }
 
-/* Status pills */
 .pill {
   display: inline-flex;
   align-items: center;
@@ -598,7 +576,6 @@
   color: var(--admin-text);
 }
 
-/* Row action menu */
 .rowMenuWrap {
   position: relative;
 }
@@ -661,7 +638,6 @@
   font-size: 14px;
 }
 
-/* List pagination footer */
 .pagination {
   display: flex;
   align-items: center;
@@ -715,7 +691,6 @@
   text-align: center;
 }
 
-/* Mobile stacked cards (list screens) */
 .mobileList {
   display: flex;
   flex-direction: column;
@@ -764,9 +739,6 @@
   margin: -4px -4px 0 0;
 }
 
-/* ------------------------------------------------------------
-   Form (edit) screens
-   ------------------------------------------------------------ */
 .formTopbar {
   position: sticky;
   top: 0;
@@ -949,7 +921,6 @@
   justify-content: center;
 }
 
-/* Status radio list (visibility) */
 .radioList {
   display: flex;
   flex-direction: column;
@@ -1024,7 +995,6 @@
   font-weight: 500;
 }
 
-/* Field primitives (wrap AntD-free inputs) */
 .field {
   margin-bottom: 16px;
 }
@@ -1063,7 +1033,6 @@
   gap: 16px;
 }
 
-/* AntD form overrides scoped to admin forms */
 .adminForm :global(.ant-form-item) {
   margin-bottom: 16px;
 }
@@ -1087,9 +1056,6 @@
   border-radius: 10px !important;
 }
 
-/* ------------------------------------------------------------
-   Mobile
-   ------------------------------------------------------------ */
 .mobileTopbar {
   display: none;
 }

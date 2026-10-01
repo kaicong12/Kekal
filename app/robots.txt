@@ -2,8 +2,8 @@ User-agent: *
 Allow: /
 
 # Disallow admin and API routes
+Allow: /api/motorcycles
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/
 
 # Allow important pages

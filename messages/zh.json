@@ -306,7 +306,7 @@
     "financing": [
       {
         "question": "第一次购车者可以申请摩托车贷款吗？",
-        "answer": "可以。我们与 MBSB、Hong Leong 和 RHB 合作 — 它们都为月收入 RM 1,800 起的首次购车者提供融资。审批通常需要1–2个工作日。请先使用我们的60秒预审，在决定前了解您的通过几率。"
+        "answer": "可以。我们与 MBSB、Hong Leong 和 RHB 合作 — 它们都为月收入 RM 1,800 起的首次购车者提供融资。审批通常需要1–2个工作日。"
       },
       {
         "question": "我需要哪些文件？",
@@ -715,7 +715,7 @@
       "crumbCurrent": "联系我们",
       "eyebrow": "联系我们",
       "heading": "欢迎到店参观 — 或先 WhatsApp 我们",
-      "sub": "我们位于 Taman Johor Bahru，就在柔佛再也旁边。打电话、发信息或直接过来——无需预约。",
+      "sub": "我们位于新山 Taman Johor Jaya（柔佛再也）。打电话、发信息或直接过来——无需预约。",
       "callTitle": "打电话",
       "callDesc": "直接与我们聊摩托车、贷款或维修保养。",
       "waTitle": "WhatsApp 我们",
@@ -782,7 +782,7 @@
     "ctaButton": "WhatsApp 咨询我们",
     "ctaWaMessage": "你好 Motor Kekal，我看了《{title}》这篇文章，可以帮我吗？",
     "aboutHeading": "关于 Motor Kekal",
-    "aboutBody": "Perniagaan Motor Kekal 是位于新山 Taman Johor Bahru 的家族摩托车行。我们销售 Yamaha、Honda、Kawasaki 与 KTM，代办贷款、旧车折抵、保险与路税，并在自家工作坊保养每一辆车。这里写的每一篇，都来自那个工作坊。",
+    "aboutBody": "Perniagaan Motor Kekal 是位于新山 Taman Johor Jaya 的家族摩托车行。我们销售 Yamaha、Honda、Kawasaki 与 KTM，代办贷款、旧车折抵、保险与路税，并在自家工作坊保养每一辆车。这里写的每一篇，都来自那个工作坊。",
     "aboutCta": "更多关于我们",
     "categories": {
       "reviews": "评测",
