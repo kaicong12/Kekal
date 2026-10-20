@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateCatalogSurfaces } from "@/utils/catalogRevalidate";
 import {
   getPromotionByIdPg,
   updatePromotionPg,
@@ -8,7 +9,6 @@ import { verifyAuthToken } from "@/utils/firebaseAdmin";
 import {
   parseDiscount,
   parseTargets,
-  revalidatePromotionSurfaces,
 } from "@/utils/promotionPayload";
 
 export const dynamic = "force-dynamic";
@@ -139,7 +139,7 @@ export async function PUT(request, { params }) {
       })
     );
 
-    revalidatePromotionSurfaces();
+    revalidateCatalogSurfaces();
     return NextResponse.json(promotion);
   } catch (error) {
     console.error(
@@ -184,7 +184,7 @@ export async function DELETE(request, { params }) {
       })
     );
 
-    revalidatePromotionSurfaces();
+    revalidateCatalogSurfaces();
     return NextResponse.json({ message: "Promotion deleted successfully" });
   } catch (error) {
     console.error(

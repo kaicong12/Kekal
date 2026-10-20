@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateCatalogSurfaces } from "@/utils/catalogRevalidate";
 import {
   getMotorcycleByIdPg,
   updateMotorcyclePg,
@@ -89,6 +90,8 @@ export async function PUT(request, { params }) {
       })
     );
 
+    revalidateCatalogSurfaces();
+
     return NextResponse.json(motorcycle);
   } catch (error) {
     if (error.code === "P2002") {
@@ -140,6 +143,8 @@ export async function DELETE(request, { params }) {
         year: existing.year,
       })
     );
+
+    revalidateCatalogSurfaces();
 
     return NextResponse.json({ message: "Motorcycle deleted successfully" });
   } catch (error) {
