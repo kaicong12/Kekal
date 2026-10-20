@@ -24,6 +24,10 @@ import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
 
 export const revalidate = 86400; // 24 hours
 
+export function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({ params }) {
   try {
     const id = extractIdFromSlug(params.slug);
