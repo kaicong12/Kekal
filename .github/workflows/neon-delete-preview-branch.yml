@@ -3,8 +3,7 @@ name: Neon Delete Preview Branch
 on:
   pull_request:
     types: [closed]
-    paths:
-      - "prisma/**"
+    branches: [main, staging]
   workflow_dispatch:
     inputs:
       neon_branch:
