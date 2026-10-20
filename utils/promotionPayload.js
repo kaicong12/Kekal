@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import { PROMOTION_SCOPES } from "@/utils/promotions";
 
 const DISCOUNT_TYPES = [
@@ -59,29 +58,4 @@ export function parseTargets(body) {
   }
 
   return { data };
-}
-
-// Detail and listing pages are cached for 24h for crawl performance, so saving a
-// promotion has to push the change out explicitly or it would not surface for up
-// to a day. Revalidating the dynamic route rather than each concrete slug covers
-// brand- and site-wide promotions without enumerating every bike.
-const PROMOTION_SURFACES = [
-  "/[locale]/motorcycle/[slug]",
-  "/[locale]/motorcycles",
-  "/[locale]/listing",
-  "/[locale]/promotions",
-  "/[locale]/brands/[brand]",
-  "/[locale]/home",
-  "/[locale]",
-];
-
-export function revalidatePromotionSurfaces() {
-  for (const path of PROMOTION_SURFACES) {
-    try {
-      revalidatePath(path, "page");
-    } catch (error) {
-      // A bad path shouldn't fail the write that already succeeded.
-      console.error(`Failed to revalidate ${path}:`, error);
-    }
-  }
 }

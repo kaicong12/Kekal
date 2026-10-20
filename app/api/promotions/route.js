@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateCatalogSurfaces } from "@/utils/catalogRevalidate";
 import {
   listLivePromotionsPg,
   listAllPromotionsPg,
@@ -8,7 +9,6 @@ import { verifyAuthToken } from "@/utils/firebaseAdmin";
 import {
   parseDiscount,
   parseTargets,
-  revalidatePromotionSurfaces,
 } from "@/utils/promotionPayload";
 
 export const dynamic = "force-dynamic";
@@ -122,7 +122,7 @@ export async function POST(request) {
       })
     );
 
-    revalidatePromotionSurfaces();
+    revalidateCatalogSurfaces();
     return NextResponse.json(promotion, { status: 201 });
   } catch (error) {
     console.error(
