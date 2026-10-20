@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateCatalogSurfaces } from "@/utils/catalogRevalidate";
 import {
   queryMotorcyclePg,
   createMotorcyclePg,
@@ -180,6 +181,8 @@ export async function POST(request) {
         year: data.year,
       })
     );
+
+    revalidateCatalogSurfaces();
 
     return NextResponse.json(motorcycle, { status: 201 });
   } catch (error) {
