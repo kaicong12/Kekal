@@ -21,9 +21,11 @@ import {
   formatPostDate,
 } from "@/utils/blogSeo";
 
-// No generateStaticParams, matching the motorcycle detail page: rendering on
-// demand avoids prerendering posts × 3 locales on every build.
 export const revalidate = 3600;
+
+export function generateStaticParams() {
+  return [];
+}
 
 const SITE = "https://www.motorkekal.com";
 
