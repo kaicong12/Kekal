@@ -2,6 +2,7 @@ name: Prisma Migrate (Preview Branch)
 
 on:
   pull_request:
+    branches: [main, staging]
     paths:
       - "prisma/**"
   workflow_dispatch:
