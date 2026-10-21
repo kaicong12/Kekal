@@ -5,10 +5,9 @@ import { useTranslations } from "next-intl";
 import { waLink } from "./waLink";
 
 const TERMS = [2, 3, 4, 5];
-const ANNUAL_RATE = 3.5; // flat rate used across the storefront
+const ANNUAL_RATE = 3.5; // rate used across the storefront
 
-// Estimate the monthly instalment with a reducing-balance formula, matching
-// the legacy LoanCalculator so figures stay consistent site-wide.
+// Estimate the monthly instalment with a reducing-balance formula.
 function monthly(price, downPct, years) {
   const principal = (price * (100 - downPct)) / 100;
   const r = ANNUAL_RATE / 12 / 100;

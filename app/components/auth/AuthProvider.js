@@ -32,7 +32,6 @@ export function AuthProvider({ children }) {
 
       if (docSnap.exists()) {
         const data = docSnap.data();
-        // Assuming the document contains an array field called 'emails'
         const emails = data.authorizedReceiptEmails || [];
         setAuthorizedEmails(emails);
         return emails;
@@ -157,7 +156,6 @@ export function AuthProvider({ children }) {
         loading,
         signInWithGoogle,
         signOut,
-        authorizedEmails,
       }}
     >
       {children}

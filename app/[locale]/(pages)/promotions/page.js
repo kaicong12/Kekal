@@ -9,9 +9,7 @@ import { listLivePromotionsPg, listPastPromotionsPg } from "@/utils/dbPg";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { localeAlternates } from "@/utils/seoAlternates";
 
-// Promotions are time-sensitive. ISR every 5 minutes — the previous
-// force-dynamic crashed dev under the static [locale] layout and was
-// ignored by the build anyway (page was fully frozen at deploy time).
+// Promotions are time-sensitive. ISR every 5 minutes; force-dynamic crashes dev under the static [locale] layout.
 export const revalidate = 300;
 
 const META = {

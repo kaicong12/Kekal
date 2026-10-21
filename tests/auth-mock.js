@@ -68,7 +68,6 @@ async function mockAdminAuth(page) {
     if (request.method() === "GET") {
       await route.continue();
     } else {
-      // For POST/PUT/DELETE, continue but the backend won't validate in test
       await route.continue();
     }
   });

@@ -3,7 +3,6 @@ import {
   ref,
   uploadBytes,
   getDownloadURL,
-  deleteObject,
 } from "firebase/storage";
 
 export async function uploadMotorcycleImage(file, motorcycleId) {
@@ -15,13 +14,4 @@ export async function uploadMotorcycleImage(file, motorcycleId) {
   await uploadBytes(storageRef, file);
   const url = await getDownloadURL(storageRef);
   return url;
-}
-
-export async function deleteMotorcycleImage(imageUrl) {
-  try {
-    const storageRef = ref(storage, imageUrl);
-    await deleteObject(storageRef);
-  } catch {
-    // Silently skip non-Firebase URLs or already-deleted images
-  }
 }

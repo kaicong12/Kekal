@@ -7,14 +7,14 @@ Motorcycle ecommerce platform for Perniagaan Motor Kekal, a motorcycle dealer in
 - **Framework:** Next.js 13 (App Router)
 - **Database:** PostgreSQL via Prisma
 - **Auth & Storage:** Firebase (Google Auth, Cloud Storage, Firestore)
-- **Styling:** Bootstrap 5, Ant Design, SCSS, Styled Components
+- **Styling:** Bootstrap 5 (grid), Ant Design, SCSS, CSS Modules
 - **Deployment:** Vercel
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 16+
+- Node.js 20+
 - Yarn
 - Docker (for the local Postgres) or a PostgreSQL database
 - Firebase project
@@ -36,7 +36,7 @@ yarn dev                # http://localhost:3000
 ## Scripts
 
 ```bash
-yarn dev               # Dev server
+yarn dev               # Local Postgres (docker compose) + dev server
 yarn build             # Production build
 yarn start             # Start production server
 yarn lint              # ESLint
@@ -81,11 +81,13 @@ validation runs in both the scraper and the ingester.
 
 ```
 app/
-  home/                # Landing page
-  (listing)/           # Motorcycle listing (filters, pagination)
-  motorcycle/[slug]/   # Motorcycle detail page
-  (pages)/admin/       # Admin dashboard (auth-protected)
-  api/                 # REST API (motorcycles, promotions)
+  [locale]/            # Localized pages (en, ms, zh)
+    home/              # Landing page
+    (listing)/         # Motorcycle listing (filters, pagination)
+    motorcycle/[slug]/ # Motorcycle detail page
+    blog/              # Blog
+    (pages)/admin/     # Admin dashboard (auth-protected)
+  api/                 # REST API (motorcycles, promotions, blog-posts, events)
   components/          # Shared UI components
   generated/           # Generated Prisma client
 prisma/                # Schema and migrations

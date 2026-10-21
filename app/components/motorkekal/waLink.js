@@ -2,7 +2,7 @@
 // redesigned Motor Kekal storefront pages.
 export const PHONE = "60127126128";
 export const PHONE_DISPLAY = "+60 12-712 6128";
-// Business Profile CID; the maps.app.goo.gl short link opens the street-address pin.
+// Business Profile CID.
 export const MAPS_URL = "https://maps.google.com/?cid=2646237431662416862";
 export const MAPS_QUERY_URL =
   "https://maps.google.com/?q=Perniagaan+Motor+Kekal+Johor+Bahru";

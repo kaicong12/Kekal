@@ -87,7 +87,6 @@ const pillClassByKey = {
   draft: styles.pillDraft,
   ended: styles.pillEnded,
   published: styles.pillLive,
-  sold: styles.pillDraft,
 };
 
 export function StatusPill({ statusKey, label }) {

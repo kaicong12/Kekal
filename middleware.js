@@ -8,12 +8,7 @@ export function middleware(request) {
   const { hostname } = request.nextUrl;
 
   // Redirect non-www to www in production
-  if (
-    hostname === "motorkekal.com" &&
-    !hostname.startsWith("www.") &&
-    !hostname.includes("localhost") &&
-    !hostname.includes("vercel.app")
-  ) {
+  if (hostname === "motorkekal.com") {
     const url = request.nextUrl.clone();
     url.hostname = "www.motorkekal.com";
     return NextResponse.redirect(url, 301);
