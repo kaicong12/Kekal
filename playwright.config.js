@@ -31,9 +31,6 @@ module.exports = defineConfig({
     },
   ],
 
-  globalSetup: "./tests/global-setup.js",
-  globalTeardown: "./tests/global-teardown.js",
-
   webServer: {
     // E2E_WEB_SERVER lets a run skip `yarn db:up` when Postgres is already up.
     command: process.env.E2E_WEB_SERVER || `yarn dev --port ${PORT}`,

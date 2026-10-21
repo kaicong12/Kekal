@@ -1,14 +1,6 @@
 /* ============================================================
    Legacy theme remnants.
 
-   This replaces _style.scss (11,736 lines), _responsive.scss (4,623)
-   and _custom_voiture.scss (208), which came from the original
-   "Voiture" template. 1,611 of their 1,733 class selectors matched
-   nothing in the app; the compiled bundle was 676KB of blocking CSS,
-   216KB of which was Font Awesome serving three arrow icons (now
-   inline SVG in Pagination.js / ScrollTop.jsx).
-
-   Everything below is the subset that is still live, copied verbatim.
    The storefront proper is styled by app/components/motorkekal/motorkekal.css
    (scoped to .mk-site) and admin by admin.module.css; these rules are the
    global element defaults both of those still sit on top of.

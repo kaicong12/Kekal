@@ -9,7 +9,7 @@ Kekal is a full-stack Next.js 13 motorcycle ecommerce platform for a Malaysian m
 ## Commands
 
 ```bash
-yarn dev          # Start dev server on localhost:3000
+yarn dev          # Start local Postgres (docker compose) and dev server on localhost:3000
 yarn build        # Production build
 yarn start        # Start production server
 yarn lint         # ESLint via Next.js
@@ -26,10 +26,10 @@ npx prisma studio      # Open database GUI
 
 ### Routing (App Router)
 
-- `app/home/` — Landing page
-- `app/(listing)/` — Motorcycle listing with filters/pagination
-- `app/motorcycle/[slug]/` — Detail page (slug format: `{brand}-{name}-{id}`)
-- `app/(pages)/admin/` — Admin dashboard (Firebase Google Auth protected)
+- `app/[locale]/home/` — Landing page
+- `app/[locale]/(listing)/` — Motorcycle listing with filters/pagination
+- `app/[locale]/motorcycle/[slug]/` — Detail page (slug format: `{brand}-{name}-{id}`)
+- `app/[locale]/(pages)/admin/` — Admin dashboard (Firebase Google Auth protected)
 - `app/api/motorcycles/` — REST endpoints for search, filter, pagination
 - `app/api/promotions/` — REST endpoints for promotions CRUD
 
@@ -51,7 +51,7 @@ Firebase Google Sign-In → check email against Firestore whitelist (`config/ema
 
 ### Styling
 
-Storefront uses scoped CSS (`.mk-site` tokens in `app/components/motorkekal/motorkekal.css`) with Bootstrap 5 for grid/utilities. Admin uses CSS Modules (`admin.module.css`) with Ant Design themed via ConfigProvider.
+Storefront uses scoped CSS (`.mk-site` tokens in `app/components/motorkekal/motorkekal.css`) with Bootstrap 5 for the grid. Admin uses CSS Modules (`admin.module.css`) with Ant Design themed via ConfigProvider.
 
 ### Admin / app design system
 
@@ -59,7 +59,7 @@ New **admin / dashboard / internal-tool / app-style** pages must follow the them
 **`DESIGN_SYSTEM.md`** (tokens, typography, components — sourced from `app/components/admin/admin.module.css`
 and helpers in `app/components/admin/adminUi.js`). Accent is orange `#f2622e`; wrap AntD in the themed
 `ConfigProvider`; lists get mobile card fallbacks (no horizontal-scroll tables); only show metrics backed
-by real data. The public storefront keeps its legacy Bootstrap/SCSS marketing styling — don't mix them.
+by real data. The public storefront keeps its own `.mk-site` styling — don't mix them.
 
 ## Path Alias
 
@@ -75,8 +75,8 @@ See `.env.example` for required variables: DATABASE_URL, Firebase config (`NEXT_
 yarn test:e2e          # Run Playwright E2E tests (desktop + mobile)
 ```
 
-Tests seed deterministic data (`E2E_TEST_` prefix) via `tests/seed.js` and clean up after.
-Config runs two projects: `desktop` (Chrome 1280x720) and `mobile` (iPhone 14 viewport).
+Specs mock API routes via `tests/mocks.js`. Server-rendered blog pages read the DB, so CI first runs `node tests/seed.js` (`E2E_TEST_` prefix rows).
+Config runs two projects: `desktop` (Desktop Chrome) and `mobile` (Pixel 7).
 
 ## Playwright / Dev Server Verification
 

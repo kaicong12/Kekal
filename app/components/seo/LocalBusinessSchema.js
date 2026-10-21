@@ -1,6 +1,6 @@
 import { MAPS_URL } from "@/app/components/motorkekal/waLink";
 
-export const DEALER_ID = "https://www.motorkekal.com/#dealer";
+const DEALER_ID = "https://www.motorkekal.com/#dealer";
 
 export const DEALER_REF = {
   "@type": "MotorcycleDealer",

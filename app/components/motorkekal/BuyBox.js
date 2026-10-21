@@ -19,7 +19,7 @@ const CheckIcon = () => (
 );
 
 // Rough "from RM x/month" teaser using the storefront's default terms
-// (10% deposit, 5 years, 3.5% flat) — clearly labelled as an estimate.
+// (10% deposit, 5 years, 3.5%) — clearly labelled as an estimate.
 function fromMonthly(price) {
   const principal = price * 0.9;
   const r = 3.5 / 12 / 100;

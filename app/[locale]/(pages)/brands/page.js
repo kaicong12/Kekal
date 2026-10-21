@@ -62,10 +62,10 @@ export default async function BrandsIndexPage({ params: { locale } }) {
   setRequestLocale(locale);
   const counts = await getBrandCounts();
 
-  return <BrandsIndexContent locale={locale} counts={counts} />;
+  return <BrandsIndexContent counts={counts} />;
 }
 
-function BrandsIndexContent({ locale, counts }) {
+function BrandsIndexContent({ counts }) {
   const t = useTranslations("brands");
 
   return (

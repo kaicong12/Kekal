@@ -36,7 +36,6 @@ export default function AdminPage() {
     return (
       <UnauthorizedAccess
         pageTitle="Admin Panel"
-        pageSubtitle="永恒摩托车易公司"
         systemName="Admin Panel"
       />
     );

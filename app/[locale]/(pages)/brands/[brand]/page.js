@@ -10,7 +10,7 @@ import BreadcrumbSchema from "@/app/components/seo/BreadcrumbSchema";
 import BrandCollectionSchema from "@/app/components/seo/BrandCollectionSchema";
 import { localeAlternates } from "@/utils/seoAlternates";
 import { queryMotorcyclePg, withPromotionsPg } from "@/utils/dbPg";
-import brandContent, { BRAND_SLUGS } from "@/utils/brandContent";
+import brandContent from "@/utils/brandContent";
 import { waLink, WaIcon } from "@/app/components/motorkekal/waLink";
 
 // ISR instead of force-dynamic: force-dynamic crashes dev under the static

@@ -1,5 +1,3 @@
-// Inline rather than Font Awesome: these two arrows were the only reason the
-// 216KB fontawesome.css was pulled into the global bundle.
 const Arrow = ({ dir }) => (
   <svg
     width="14"
