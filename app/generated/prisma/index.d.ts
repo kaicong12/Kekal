@@ -2633,6 +2633,7 @@ export namespace Prisma {
     color: string | null
     tags: string | null
     description: string | null
+    skipSync: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2650,6 +2651,7 @@ export namespace Prisma {
     color: string | null
     tags: string | null
     description: string | null
+    skipSync: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2668,6 +2670,7 @@ export namespace Prisma {
     tags: number
     description: number
     specification: number
+    skipSync: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2697,6 +2700,7 @@ export namespace Prisma {
     color?: true
     tags?: true
     description?: true
+    skipSync?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2714,6 +2718,7 @@ export namespace Prisma {
     color?: true
     tags?: true
     description?: true
+    skipSync?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2732,6 +2737,7 @@ export namespace Prisma {
     tags?: true
     description?: true
     specification?: true
+    skipSync?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2837,6 +2843,7 @@ export namespace Prisma {
     tags: string | null
     description: string | null
     specification: JsonValue | null
+    skipSync: boolean
     createdAt: Date
     updatedAt: Date
     _count: MotorcycleCountAggregateOutputType | null
@@ -2874,6 +2881,7 @@ export namespace Prisma {
     tags?: boolean
     description?: boolean
     specification?: boolean
+    skipSync?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     images?: boolean | Motorcycle$imagesArgs<ExtArgs>
@@ -2895,6 +2903,7 @@ export namespace Prisma {
     tags?: boolean
     description?: boolean
     specification?: boolean
+    skipSync?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["motorcycle"]>
@@ -2913,6 +2922,7 @@ export namespace Prisma {
     tags?: boolean
     description?: boolean
     specification?: boolean
+    skipSync?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["motorcycle"]>
@@ -2931,11 +2941,12 @@ export namespace Prisma {
     tags?: boolean
     description?: boolean
     specification?: boolean
+    skipSync?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MotorcycleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "brand" | "name" | "model" | "year" | "price" | "engine" | "engineCapacity" | "gear" | "color" | "tags" | "description" | "specification" | "createdAt" | "updatedAt", ExtArgs["result"]["motorcycle"]>
+  export type MotorcycleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "brand" | "name" | "model" | "year" | "price" | "engine" | "engineCapacity" | "gear" | "color" | "tags" | "description" | "specification" | "skipSync" | "createdAt" | "updatedAt", ExtArgs["result"]["motorcycle"]>
   export type MotorcycleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     images?: boolean | Motorcycle$imagesArgs<ExtArgs>
     promotions?: boolean | Motorcycle$promotionsArgs<ExtArgs>
@@ -2964,6 +2975,7 @@ export namespace Prisma {
       tags: string | null
       description: string | null
       specification: Prisma.JsonValue | null
+      skipSync: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["motorcycle"]>
@@ -3404,6 +3416,7 @@ export namespace Prisma {
     readonly tags: FieldRef<"Motorcycle", 'String'>
     readonly description: FieldRef<"Motorcycle", 'String'>
     readonly specification: FieldRef<"Motorcycle", 'Json'>
+    readonly skipSync: FieldRef<"Motorcycle", 'Boolean'>
     readonly createdAt: FieldRef<"Motorcycle", 'DateTime'>
     readonly updatedAt: FieldRef<"Motorcycle", 'DateTime'>
   }
@@ -10617,6 +10630,7 @@ export namespace Prisma {
     tags: 'tags',
     description: 'description',
     specification: 'specification',
+    skipSync: 'skipSync',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10821,6 +10835,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -10831,13 +10852,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -10949,6 +10963,7 @@ export namespace Prisma {
     tags?: StringNullableFilter<"Motorcycle"> | string | null
     description?: StringNullableFilter<"Motorcycle"> | string | null
     specification?: JsonNullableFilter<"Motorcycle">
+    skipSync?: BoolFilter<"Motorcycle"> | boolean
     createdAt?: DateTimeFilter<"Motorcycle"> | Date | string
     updatedAt?: DateTimeFilter<"Motorcycle"> | Date | string
     images?: MotorcycleImageListRelationFilter
@@ -10969,6 +10984,7 @@ export namespace Prisma {
     tags?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     specification?: SortOrderInput | SortOrder
+    skipSync?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     images?: MotorcycleImageOrderByRelationAggregateInput
@@ -10993,6 +11009,7 @@ export namespace Prisma {
     tags?: StringNullableFilter<"Motorcycle"> | string | null
     description?: StringNullableFilter<"Motorcycle"> | string | null
     specification?: JsonNullableFilter<"Motorcycle">
+    skipSync?: BoolFilter<"Motorcycle"> | boolean
     createdAt?: DateTimeFilter<"Motorcycle"> | Date | string
     updatedAt?: DateTimeFilter<"Motorcycle"> | Date | string
     images?: MotorcycleImageListRelationFilter
@@ -11013,6 +11030,7 @@ export namespace Prisma {
     tags?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     specification?: SortOrderInput | SortOrder
+    skipSync?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MotorcycleCountOrderByAggregateInput
@@ -11039,6 +11057,7 @@ export namespace Prisma {
     tags?: StringNullableWithAggregatesFilter<"Motorcycle"> | string | null
     description?: StringNullableWithAggregatesFilter<"Motorcycle"> | string | null
     specification?: JsonNullableWithAggregatesFilter<"Motorcycle">
+    skipSync?: BoolWithAggregatesFilter<"Motorcycle"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Motorcycle"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Motorcycle"> | Date | string
   }
@@ -11526,6 +11545,7 @@ export namespace Prisma {
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     images?: MotorcycleImageCreateNestedManyWithoutMotorcycleInput
@@ -11546,6 +11566,7 @@ export namespace Prisma {
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     images?: MotorcycleImageUncheckedCreateNestedManyWithoutMotorcycleInput
@@ -11566,6 +11587,7 @@ export namespace Prisma {
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: MotorcycleImageUpdateManyWithoutMotorcycleNestedInput
@@ -11586,6 +11608,7 @@ export namespace Prisma {
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: MotorcycleImageUncheckedUpdateManyWithoutMotorcycleNestedInput
@@ -11606,6 +11629,7 @@ export namespace Prisma {
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11624,6 +11648,7 @@ export namespace Prisma {
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11642,6 +11667,7 @@ export namespace Prisma {
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12238,6 +12264,11 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -12294,6 +12325,7 @@ export namespace Prisma {
     tags?: SortOrder
     description?: SortOrder
     specification?: SortOrder
+    skipSync?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12316,6 +12348,7 @@ export namespace Prisma {
     color?: SortOrder
     tags?: SortOrder
     description?: SortOrder
+    skipSync?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12333,6 +12366,7 @@ export namespace Prisma {
     color?: SortOrder
     tags?: SortOrder
     description?: SortOrder
+    skipSync?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12418,6 +12452,14 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -12430,11 +12472,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type EnumDiscountTypeFilter<$PrismaModel = never> = {
@@ -12538,14 +12575,6 @@ export namespace Prisma {
   export type PromotionSumOrderByAggregateInput = {
     displayOrder?: SortOrder
     discountValue?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumDiscountTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -12923,6 +12952,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -13001,10 +13034,6 @@ export namespace Prisma {
     connectOrCreate?: PromotionTargetCreateOrConnectWithoutPromotionInput | PromotionTargetCreateOrConnectWithoutPromotionInput[]
     createMany?: PromotionTargetCreateManyPromotionInputEnvelope
     connect?: PromotionTargetWhereUniqueInput | PromotionTargetWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type EnumDiscountTypeFieldUpdateOperationsInput = {
@@ -13220,6 +13249,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -13325,6 +13359,14 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -13337,11 +13379,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedEnumDiscountTypeFilter<$PrismaModel = never> = {
@@ -13360,14 +13397,6 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumDiscountTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -13629,6 +13658,7 @@ export namespace Prisma {
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     images?: MotorcycleImageCreateNestedManyWithoutMotorcycleInput
@@ -13648,6 +13678,7 @@ export namespace Prisma {
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     images?: MotorcycleImageUncheckedCreateNestedManyWithoutMotorcycleInput
@@ -13707,6 +13738,7 @@ export namespace Prisma {
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: MotorcycleImageUpdateManyWithoutMotorcycleNestedInput
@@ -13726,6 +13758,7 @@ export namespace Prisma {
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: MotorcycleImageUncheckedUpdateManyWithoutMotorcycleNestedInput
@@ -13868,6 +13901,7 @@ export namespace Prisma {
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     promotions?: PromotionCreateNestedManyWithoutMotorcycleInput
@@ -13887,6 +13921,7 @@ export namespace Prisma {
     tags?: string | null
     description?: string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     promotions?: PromotionUncheckedCreateNestedManyWithoutMotorcycleInput
@@ -13922,6 +13957,7 @@ export namespace Prisma {
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     promotions?: PromotionUpdateManyWithoutMotorcycleNestedInput
@@ -13941,6 +13977,7 @@ export namespace Prisma {
     tags?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     specification?: NullableJsonNullValueInput | InputJsonValue
+    skipSync?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     promotions?: PromotionUncheckedUpdateManyWithoutMotorcycleNestedInput

@@ -8,6 +8,7 @@ import {
   message,
   Spin,
   AutoComplete,
+  Switch,
 } from "antd";
 import {
   ArrowLeftOutlined,
@@ -69,6 +70,7 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
           color: data.color,
           tags: data.tags || "",
           description: data.description || "",
+          skipSync: data.skipSync,
           specification: data.specification
             ? JSON.stringify(data.specification, null, 2)
             : "",
@@ -151,6 +153,7 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
         tags: values.tags || null,
         description: values.description || null,
         specification,
+        skipSync: Boolean(values.skipSync),
         images: images.map((img, i) => ({ url: img.url, displayOrder: i })),
       };
 
@@ -410,6 +413,14 @@ export default function MotorcycleFormInterface({ motorcycleId, onBack }) {
                 help="Comma-separated, e.g. popular, new arrival"
               >
                 <Input placeholder="popular, new arrival" />
+              </Form.Item>
+              <Form.Item
+                name="skipSync"
+                label="Lock from weekly sync"
+                valuePropName="checked"
+                help="The weekly scrape won't overwrite this bike's details or images"
+              >
+                <Switch />
               </Form.Item>
             </div>
           </div>

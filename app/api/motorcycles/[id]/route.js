@@ -70,6 +70,7 @@ export async function PUT(request, { params }) {
       data.description = body.description || null;
     if (body.specification !== undefined)
       data.specification = body.specification || null;
+    if (body.skipSync !== undefined) data.skipSync = Boolean(body.skipSync);
 
     if (body.images !== undefined) {
       data.images = body.images.map((img, i) => ({
