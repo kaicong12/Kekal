@@ -1,4 +1,4 @@
-require("dotenv/config");
+require("dotenv").config({ path: require("path").join(__dirname, "../.env") });
 const { PrismaClient } = require('../app/generated/prisma');
 const { PrismaPg } = require('@prisma/adapter-pg');
 
