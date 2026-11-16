@@ -45,6 +45,7 @@ jobs:
 
       - name: Apply migrations
         if: ${{ !inputs.dry_run }}
-        run: npx prisma migrate deploy
+        # Migrate needs Neon's direct endpoint; PgBouncer leaks the advisory lock (P1002).
+        run: DATABASE_URL="${DATABASE_URL/-pooler./.}" npx prisma migrate deploy
         env:
           DATABASE_URL: ${{ env.TARGET == 'staging' && secrets.STAGING_DATABASE_URL || secrets.DATABASE_URL }}
