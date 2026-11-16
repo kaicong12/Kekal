@@ -2,8 +2,8 @@
 
 The visual language established by the redesigned **admin panel** (`app/components/admin/`).
 Use this as the reference theme for **new admin / dashboard / internal-tool / app-style
-pages**. The public storefront (home, listing, motorcycle detail) still uses the legacy
-Bootstrap + SCSS marketing styling — don't mix the two systems on one page.
+pages**. The public storefront (home, listing, motorcycle detail) uses its own `.mk-site`
+styling (`app/components/motorkekal/motorkekal.css`) — don't mix the two systems on one page.
 
 Source of truth: **`app/components/admin/admin.module.css`** (tokens live on `.shell`).
 When in doubt, read that file — this doc summarizes it.

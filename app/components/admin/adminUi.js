@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Dropdown } from "antd";
 import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
 import styles from "./admin.module.css";
 
@@ -87,7 +88,6 @@ const pillClassByKey = {
   draft: styles.pillDraft,
   ended: styles.pillEnded,
   published: styles.pillLive,
-  sold: styles.pillDraft,
 };
 
 export function StatusPill({ statusKey, label }) {
@@ -122,56 +122,22 @@ export function Thumb({ src, alt }) {
 }
 
 export function RowMenu({ onEdit, onDelete }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    if (!open) return undefined;
-    const onDocClick = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
-  }, [open]);
-
   return (
-    <div
-      className={styles.rowMenuWrap}
-      ref={ref}
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button
-        type="button"
-        className={styles.rowMenuBtn}
-        aria-label="Row actions"
-        onClick={() => setOpen((v) => !v)}
+    <div className={styles.rowMenuWrap} onClick={(e) => e.stopPropagation()}>
+      <Dropdown
+        trigger={["click"]}
+        placement="bottomRight"
+        menu={{
+          items: [
+            { key: "edit", label: "Edit", onClick: onEdit },
+            { key: "delete", label: "Delete", danger: true, onClick: onDelete },
+          ],
+        }}
       >
-        &#8943;
-      </button>
-      {open && (
-        <div className={styles.rowMenu}>
-          <button
-            type="button"
-            className={styles.rowMenuItem}
-            onClick={() => {
-              setOpen(false);
-              onEdit();
-            }}
-          >
-            Edit
-          </button>
-          <button
-            type="button"
-            className={`${styles.rowMenuItem} ${styles.rowMenuDanger}`}
-            onClick={() => {
-              setOpen(false);
-              onDelete();
-            }}
-          >
-            Delete
-          </button>
-        </div>
-      )}
+        <button type="button" className={styles.rowMenuBtn} aria-label="Row actions">
+          &#8943;
+        </button>
+      </Dropdown>
     </div>
   );
 }

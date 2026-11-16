@@ -125,7 +125,6 @@ export async function PUT(request, { params }) {
       );
     }
 
-    // A published post must keep content in its source locale.
     const effectiveSource = data.sourceLocale ?? existing.sourceLocale;
     const willHaveSource =
       translations.data?.some((t) => t.locale === effectiveSource) ??

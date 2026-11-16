@@ -60,7 +60,6 @@ const LockIcon = () => (
 
 export default function UnauthorizedAccess({
   pageTitle = "Admin Access",
-  pageSubtitle = "System Access Required",
   systemName = "Admin System",
 }) {
   const {

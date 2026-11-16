@@ -39,6 +39,15 @@ async function ingestFile(syncFile) {
   let upserted = 0;
   let skipped = 0;
 
+  const locked = new Set(
+    (
+      await prisma.motorcycle.findMany({
+        where: { skipSync: true },
+        select: { brand: true, name: true, year: true },
+      })
+    ).map((m) => `${m.brand}|${m.name}|${m.year}`)
+  );
+
   for (const moto of motorcycles) {
     if (!moto.brand || !moto.name || !moto.year) {
       console.warn(
@@ -48,6 +57,12 @@ async function ingestFile(syncFile) {
           year: moto.year,
         })}`
       );
+      skipped++;
+      continue;
+    }
+
+    if (locked.has(`${moto.brand}|${moto.name}|${moto.year}`)) {
+      console.log(`  Skipping locked ${moto.brand} ${moto.name} (${moto.year})`);
       skipped++;
       continue;
     }

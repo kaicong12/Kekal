@@ -4,7 +4,7 @@
  *
  * These pages are server components that read Postgres directly, so nothing here
  * is API-mocked — the assertions cover the real path from row to rendered HTML.
- * Requires `node tests/seed.js` (the Playwright globalSetup does not seed).
+ * Requires `node tests/seed.js`.
  */
 const { test, expect } = require("@playwright/test");
 

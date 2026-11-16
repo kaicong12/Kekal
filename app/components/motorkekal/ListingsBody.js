@@ -133,9 +133,7 @@ const ListingsBody = () => {
     <section className="wrap" style={{ paddingBottom: 76 }}>
       {searchBox("listing-search--standalone")}
 
-      {/* Brand filter chips — one clipped row paged by the arrows, since the
-          brand list keeps growing and wrapping it swallowed the top of the
-          grid. */}
+      {/* Brand filter chips — one clipped row paged by the arrows. */}
       <div className="chip-rail">
         {!atStart ? (
           <button

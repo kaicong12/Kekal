@@ -23,7 +23,7 @@ const GlobeIcon = () => (
   </svg>
 );
 
-const LanguageSwitcher = ({ className = "" }) => {
+const LanguageSwitcher = () => {
   const t = useTranslations("languageSwitcher");
   const locale = useLocale();
   const router = useRouter();
@@ -37,7 +37,7 @@ const LanguageSwitcher = ({ className = "" }) => {
 
   return (
     <label
-      className={`language-switcher ${className}`}
+      className="language-switcher"
       style={{
         display: "inline-flex",
         alignItems: "center",

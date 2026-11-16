@@ -162,6 +162,7 @@ export async function POST(request) {
       tags: body.tags || null,
       description: body.description || null,
       specification: body.specification || null,
+      skipSync: Boolean(body.skipSync),
       images: body.images?.map((img, i) => ({
         url: img.url,
         displayOrder: img.displayOrder ?? i,

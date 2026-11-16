@@ -1,6 +1,5 @@
 "use client";
-// Stays a client component: ScrollToTop and the analytics trackers are hooks-based
-// and have no "use client" of their own, so they rely on this boundary.
+// ScrollToTop has no "use client" of its own and relies on this boundary.
 import ScrollToTop from "./common/ScrollTop";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";

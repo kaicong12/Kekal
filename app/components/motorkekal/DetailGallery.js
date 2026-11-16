@@ -6,7 +6,7 @@ import Image from "next/image";
 // Storefront product gallery matching the design's .gallery__* markup.
 // Driven by the motorcycle's real image records; clicking a thumbnail
 // swaps the main image. Falls back gracefully with 0 or 1 image.
-const DetailGallery = ({ brand, modelName, images = [], tag }) => {
+const DetailGallery = ({ brand, modelName, images = [] }) => {
   const [active, setActive] = useState(0);
   const urls = images.map((img) => img.url).filter(Boolean);
   const mainSrc = urls[active] ?? urls[0];
@@ -15,7 +15,6 @@ const DetailGallery = ({ brand, modelName, images = [], tag }) => {
   return (
     <div>
       <div className="gallery__main">
-        {tag ? <span className="gallery__tag">{tag}</span> : null}
         {mainSrc ? (
           <Image
             key={mainSrc}

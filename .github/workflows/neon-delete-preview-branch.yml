@@ -7,12 +7,13 @@ on:
   workflow_dispatch:
     inputs:
       neon_branch:
-        description: "Neon branch to delete, e.g. preview/staging"
+        description: "Neon branch to delete, e.g. preview/feat-x"
         required: true
 
 jobs:
   delete-preview-branch:
     name: Delete Neon Preview Branch
+    if: ${{ !contains(fromJSON('["preview/main", "preview/staging"]'), inputs.neon_branch || format('preview/{0}', github.head_ref)) }}
     runs-on: ubuntu-latest
 
     steps:

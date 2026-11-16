@@ -197,10 +197,4 @@ async function mockApiRoutes(page) {
   });
 }
 
-module.exports = {
-  mockApiRoutes,
-  withPricing,
-  MOCK_MOTORCYCLES,
-  MOCK_BRANDS,
-  MOCK_PROMOTIONS,
-};
+module.exports = { mockApiRoutes };

@@ -138,6 +138,7 @@ exports.Prisma.MotorcycleScalarFieldEnum = {
   tags: 'tags',
   description: 'description',
   specification: 'specification',
+  skipSync: 'skipSync',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

@@ -542,15 +542,6 @@
   color: var(--kk-text-muted);
   margin-top: 8px;
 }
-.mk-site .svc-card__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--kk-orange);
-}
 
 .mk-site .stats {
   display: grid;
@@ -1481,20 +1472,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.mk-site .gallery__tag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  z-index: 2;
-  background: var(--kk-ink);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 6px 12px;
-  border-radius: 8px;
-  text-transform: uppercase;
 }
 .mk-site .gallery__thumbs {
   display: grid;

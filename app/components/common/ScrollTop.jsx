@@ -36,7 +36,6 @@ export default function ScrollToTop() {
             style={{ cursor: "pointer" }}
             onClick={scrollToTop}
           >
-            {/* Inline rather than Font Awesome — see Pagination.js */}
             <svg
               width="18"
               height="18"

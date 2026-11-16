@@ -16,9 +16,6 @@ import {
 import { summariseTargets, summariseDiscount } from "@/utils/promotions";
 import styles from "../admin.module.css";
 
-// Re-exported for backwards compatibility with older imports.
-export { getPromotionStatus };
-
 const TABS = [
   { key: "all", label: "All" },
   { key: "live", label: "Live" },

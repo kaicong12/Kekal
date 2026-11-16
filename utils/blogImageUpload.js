@@ -1,5 +1,5 @@
 import { storage } from "@/utils/firebase";
-import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export async function uploadBlogImage(file, postId = "new") {
   const timestamp = Date.now();
@@ -9,12 +9,4 @@ export async function uploadBlogImage(file, postId = "new") {
 
   await uploadBytes(storageRef, file);
   return getDownloadURL(storageRef);
-}
-
-export async function deleteBlogImage(imageUrl) {
-  try {
-    await deleteObject(ref(storage, imageUrl));
-  } catch {
-    // Silently skip non-Firebase URLs or already-deleted images
-  }
 }
